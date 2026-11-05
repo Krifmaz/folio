@@ -49,8 +49,7 @@ reqwest = { version = "0.12", default-features = false, features = ["json", "rus
 unicode-normalization = "0.1"
 # Track A (player and reader): sending library files whole or in parts
 tower = { version = "0.5", features = ["util"] }
-# Track C (compatibility): reading EPUBs' contents (KOReader's and Kobo's places) and KOReader's MD5s
-zip = { version = "2", default-features = false, features = ["deflate"] }
+# Track C (compatibility): KOReader's MD5s (EPUBs are read with core's zip above)
 md-5 = "0.10"
 
 [build-dependencies]
