@@ -44,3 +44,8 @@ android {
     }
   }
 }
+
+// Upstream has unit tests but no JUnit to run them; Folio's tests (and the CI's testDebugUnitTest) need it.
+dependencies {
+  testImplementation "junit:junit:$junitVersion"
+}
