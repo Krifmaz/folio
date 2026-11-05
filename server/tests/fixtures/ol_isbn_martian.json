@@ -1,0 +1,11 @@
+{
+  "key": "/books/OL3M",
+  "title": "The Martian",
+  "authors": [{ "key": "/authors/OL7234434A" }],
+  "works": [{ "key": "/works/OL17091839W" }],
+  "publishers": ["Crown"],
+  "publish_date": "2014",
+  "number_of_pages": 387,
+  "languages": [{ "key": "/languages/eng" }],
+  "physical_format": "Ebook"
+}

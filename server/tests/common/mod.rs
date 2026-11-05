@@ -64,7 +64,8 @@ pub async fn serve(router: Router) -> String {
     format!("http://{addr}")
 }
 
-/// The stand-in sources, serving the fixtures for `B08G9PRS1K`, `B003ZWFO7E` and ISBN `9780593135204`; the
+/// The stand-in sources, serving the fixtures (audiobooks by Andy Weir and The Stormlight Archive, the ebooks
+/// Project Hail Mary and The Martian); the
 /// environment that points the settings at them (Hardcover with a token).
 pub async fn sources() -> HashMap<String, String> {
     let found = |name: &'static str| move || async move { Json(fixture(name)) };
@@ -73,6 +74,9 @@ pub async fn sources() -> HashMap<String, String> {
         match asin.as_str() {
             "B08G9PRS1K" => Ok(Json(fixture("audnexus_book.json"))),
             "B003ZWFO7E" => Ok(Json(fixture("audnexus_series_book.json"))),
+            "B0NEWBOOK1" => Ok(Json(fixture("audnexus_next.json"))),
+            "B0SECOND01" => Ok(Json(fixture("audnexus_second.json"))),
+            "B0ABRIDGE1" => Ok(Json(fixture("audnexus_abridged.json"))),
             _ => Err(StatusCode::NOT_FOUND),
         }
     };
@@ -86,6 +90,8 @@ pub async fn sources() -> HashMap<String, String> {
     let isbn = |axum::extract::Path(file): axum::extract::Path<String>| async move {
         if file == "9780593135204.json" {
             Ok(Json(fixture("ol_isbn.json")))
+        } else if file == "9780804139021.json" {
+            Ok(Json(fixture("ol_isbn_martian.json")))
         } else {
             Err(StatusCode::NOT_FOUND)
         }
@@ -107,7 +113,31 @@ pub async fn sources() -> HashMap<String, String> {
             Json(serde_json::json!({ "data": { "editions": [] } }))
         }
     };
+    let catalogue = |axum::extract::Query(q): axum::extract::Query<HashMap<String, String>>| async move {
+        if q.get("author").map(String::as_str) == Some("Andy Weir") {
+            Json(fixture("audible_author.json"))
+        } else {
+            Json(serde_json::json!({ "products": [], "total_results": 0 }))
+        }
+    };
+    let product = |axum::extract::Path(asin): axum::extract::Path<String>| async move {
+        if asin == "B00DA6YEKS" {
+            Ok(Json(fixture("audible_series.json")))
+        } else {
+            Err(StatusCode::NOT_FOUND)
+        }
+    };
+    let editions = |axum::extract::Path(key): axum::extract::Path<String>| async move {
+        match key.as_str() {
+            "OL17091839W" => Ok(Json(fixture("ol_work_editions.json"))),
+            _ => Err(StatusCode::NOT_FOUND),
+        }
+    };
     let r = Router::new()
+        .route("/audible/1.0/catalog/products", get(catalogue))
+        .route("/audible/1.0/catalog/products/{asin}", get(product))
+        .route("/ol/authors/OL7234434A/works.json", get(found("ol_author_works.json")))
+        .route("/ol/works/{key}/editions.json", get(editions))
         .route("/audnexus/books/{asin}", get(book))
         .route("/audnexus/books/{asin}/chapters", get(chapters))
         .route("/ol/isbn/{file}", get(isbn))
@@ -119,6 +149,7 @@ pub async fn sources() -> HashMap<String, String> {
     let base = serve(r).await;
     HashMap::from([
         ("APP_AUDNEXUS_URL".to_string(), format!("{base}/audnexus")),
+        ("APP_AUDIBLE_URL".to_string(), format!("{base}/audible")),
         ("APP_OPENLIBRARY_URL".to_string(), format!("{base}/ol")),
         ("APP_GOOGLEBOOKS_URL".to_string(), format!("{base}/gb")),
         ("APP_HARDCOVER_URL".to_string(), format!("{base}/hc")),

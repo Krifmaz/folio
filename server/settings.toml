@@ -64,6 +64,31 @@ label = "Audnexus address"
 type = "url"
 advanced = true
 
+[keys.audible_url]
+env = "APP_AUDIBLE_URL"
+default = ""
+group = "audiobooks"
+label = "Audible catalogue address"
+help = "Where followed authors' and series' new audiobooks are listed. Empty: the store's own (api.audible.com and so on)."
+type = "url"
+advanced = true
+
+[groups.following]
+section = "metadata"
+title = "Following"
+desc = "How often followed authors and series are checked for new books."
+
+[keys.follow_check_hours]
+env = "APP_FOLLOW_CHECK_HOURS"
+default = 12
+group = "following"
+label = "Check every"
+help = "New books of followed authors and series are added to the wanted list. 0 turns the check off."
+type = "number"
+unit = "hours"
+min = 0
+max = 168
+
 [groups.ebooks]
 section = "metadata"
 title = "Ebooks"

@@ -18,7 +18,8 @@ use serde_json::{json, Value};
 /// The catalogue's tables, step by step (a released step is never changed).
 pub const MIGRATIONS: Migrations = Migrations {
     component: "folio-library",
-    steps: &["CREATE TABLE authors (
+    steps: &[
+        "CREATE TABLE authors (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             sort_name TEXT NOT NULL,
@@ -76,7 +77,11 @@ pub const MIGRATIONS: Migrations = Migrations {
         );
         CREATE INDEX editions_work ON editions (work_id);
         CREATE UNIQUE INDEX editions_asin ON editions (asin) WHERE asin <> '';
-        CREATE UNIQUE INDEX editions_isbn ON editions (format, isbn13) WHERE isbn13 <> '';"],
+        CREATE UNIQUE INDEX editions_isbn ON editions (format, isbn13) WHERE isbn13 <> '';",
+        // 2: followed authors and series ("" not followed, audiobook, ebook or both)
+        "ALTER TABLE authors ADD COLUMN follow TEXT NOT NULL DEFAULT '';
+        ALTER TABLE series ADD COLUMN follow TEXT NOT NULL DEFAULT '';",
+    ],
 };
 
 /// Makes the catalogue's tables (the steps not run yet).
@@ -330,7 +335,7 @@ pub fn authors(db: &SqliteDb) -> Result<Vec<Value>> {
     Ok(db
         .query("SELECT a.*, (SELECT COUNT(*) FROM work_authors wa WHERE wa.author_id=a.id) AS works FROM authors a ORDER BY a.sort_name COLLATE NOCASE", p![])?
         .iter()
-        .map(|r| json!({ "id": r.i("id"), "name": r.s("name"), "sort_name": r.s("sort_name"), "asin": r.s("asin"), "ol_key": r.s("ol_key"), "works": r.i("works") }))
+        .map(|r| json!({ "id": r.i("id"), "name": r.s("name"), "sort_name": r.s("sort_name"), "asin": r.s("asin"), "ol_key": r.s("ol_key"), "works": r.i("works"), "follow": r.s("follow") }))
         .collect())
 }
 
@@ -351,7 +356,7 @@ pub fn series(db: &SqliteDb) -> Result<Vec<Value>> {
             })
             .collect();
         books.sort_by(|a, b| a.0.total_cmp(&b.0).then_with(|| a.1.cmp(&b.1)));
-        out.push(json!({ "id": s.i("id"), "name": s.s("name"), "asin": s.s("asin"), "works": books.into_iter().map(|b| b.2).collect::<Vec<_>>() }));
+        out.push(json!({ "id": s.i("id"), "name": s.s("name"), "asin": s.s("asin"), "follow": s.s("follow"), "works": books.into_iter().map(|b| b.2).collect::<Vec<_>>() }));
     }
     Ok(out)
 }

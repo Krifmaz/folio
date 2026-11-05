@@ -12,3 +12,7 @@ Non-obvious calls, one line each, newest last.
 - 2026-11-05 · Ebook sources are merged in the order Open Library, Hardcover, Google Books (first non-empty field wins); the blurb takes the longest. Hardcover is asked only with a token; one failing source doesn't stop the others.
 - 2026-11-05 · The metadata tests serve hand-written fixtures in each source's shape from a local server: this build environment can't reach Audnexus, Open Library or Hardcover.
 - 2026-11-05 · Adding and removing editions is for admins until users and requests (goal 6) come; reading is for anyone signed in.
+- 2026-11-05 · Wanting is per exact edition, under one preferences profile per format (made at the start, edited on the Wanted page); searching, verifying and importing read the same profile.
+- 2026-11-05 · Followed authors' and series' audiobooks come from Audible's public catalogue (`api.audible.<store>/1.0/catalog`), since Audnexus has no author or series book lists; each ASIN is then read from Audnexus. Ebooks come from Open Library's author works and work editions (Open Library's own ebook editions first).
+- 2026-11-05 · Every offer from a followed author or series is looked at once (`follow_seen`), so a book taken off the wanted list is not added back; an offer whose source couldn't be reached is asked again next time.
+- 2026-11-05 · A language the source doesn't state is let through when wanting; the arriving files are checked for it.

@@ -89,6 +89,70 @@ pub fn parse(ed: &Value, work: Option<&Value>, authors: Vec<Person>) -> Option<E
     })
 }
 
+/// One edition of a work as Open Library lists it: enough to pick the ebook to want.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct EditionRef {
+    /// the ISBN-13
+    pub isbn13: String,
+    /// the language, two letters ("" when not said)
+    pub language: String,
+    /// whether Open Library calls it an ebook
+    pub ebook: bool,
+}
+
+/// The works of the author `key` (`OL7234434A`): `(work key, title)`, up to 100.
+pub async fn author_works(p: &Providers, key: &str) -> Result<Vec<(String, String)>> {
+    let v = get_json("Open Library", p.http.get(format!("{}/authors/{key}/works.json", p.openlibrary_url)).query(&[("limit", "100")]))
+        .await?
+        .unwrap_or(Value::Null);
+    Ok(works_of(&v))
+}
+
+/// The works of an author's works answer.
+pub fn works_of(v: &Value) -> Vec<(String, String)> {
+    v.get("entries")
+        .and_then(Value::as_array)
+        .map(|a| a.iter().map(|w| (key(&js(w, "key")), js(w, "title"))).filter(|(k, t)| !k.is_empty() && !t.is_empty()).collect())
+        .unwrap_or_default()
+}
+
+/// The editions of the work `key` that have an ISBN-13, up to 100.
+pub async fn work_editions(p: &Providers, key: &str) -> Result<Vec<EditionRef>> {
+    let v = get_json("Open Library", p.http.get(format!("{}/works/{key}/editions.json", p.openlibrary_url)).query(&[("limit", "100")]))
+        .await?
+        .unwrap_or(Value::Null);
+    Ok(editions_of(&v))
+}
+
+/// The editions of a work's editions answer.
+pub fn editions_of(v: &Value) -> Vec<EditionRef> {
+    v.get("entries")
+        .and_then(Value::as_array)
+        .map(|a| {
+            a.iter()
+                .filter_map(|e| {
+                    let isbn = e
+                        .get("isbn_13")
+                        .and_then(Value::as_array)
+                        .and_then(|i| i.iter().filter_map(Value::as_str).find_map(crate::library::ids::isbn13))?;
+                    let language = e
+                        .get("languages")
+                        .and_then(Value::as_array)
+                        .and_then(|l| l.first())
+                        .map(|l| text::language(&js(l, "key")))
+                        .unwrap_or_default();
+                    let fmt = js(e, "physical_format").to_lowercase();
+                    Some(EditionRef {
+                        isbn13: isbn,
+                        language,
+                        ebook: fmt.contains("ebook") || fmt.contains("electronic") || fmt.contains("epub") || fmt.contains("kindle"),
+                    })
+                })
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -110,5 +174,15 @@ mod tests {
         assert_eq!(m.cover_url, "https://covers.openlibrary.org/b/id/10521270-L.jpg");
         assert!(m.description.starts_with("A lone astronaut"));
         assert_eq!(m.genres.len(), 3);
+    }
+
+    #[test]
+    fn author_works_and_work_editions_are_listed() {
+        let w: Value = serde_json::from_str(include_str!("../../tests/fixtures/ol_author_works.json")).unwrap();
+        assert_eq!(works_of(&w)[1], ("OL17091839W".to_string(), "The Martian".to_string()));
+        let e: Value = serde_json::from_str(include_str!("../../tests/fixtures/ol_work_editions.json")).unwrap();
+        let e = editions_of(&e);
+        assert_eq!(e.len(), 3);
+        assert_eq!((e[0].language.as_str(), e[2].ebook), ("de", true));
     }
 }
