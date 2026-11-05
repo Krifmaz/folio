@@ -1,0 +1,140 @@
+[
+ {
+  "name": "unauthorized",
+  "path": "/api/v1/author",
+  "auth": false
+ },
+ {
+  "name": "authors_apikey_query",
+  "path": "/api/v1/author?apikey={apikey}",
+  "auth": false
+ },
+ {
+  "name": "authors",
+  "path": "/api/v1/author"
+ },
+ {
+  "name": "author",
+  "path": "/api/v1/author/1"
+ },
+ {
+  "name": "author_ended_unmonitored",
+  "path": "/api/v1/author/2"
+ },
+ {
+  "name": "author_missing",
+  "path": "/api/v1/author/99"
+ },
+ {
+  "name": "books",
+  "path": "/api/v1/book"
+ },
+ {
+  "name": "books_by_author",
+  "path": "/api/v1/book?authorId=1"
+ },
+ {
+  "name": "books_by_author_missing",
+  "path": "/api/v1/book?authorId=99"
+ },
+ {
+  "name": "books_by_ids",
+  "path": "/api/v1/book?bookIds=4&bookIds=1"
+ },
+ {
+  "name": "books_by_slug",
+  "path": "/api/v1/book?titleSlug=64216"
+ },
+ {
+  "name": "books_by_slug_all",
+  "path": "/api/v1/book?titleSlug=64216&includeAllAuthorBooks=true"
+ },
+ {
+  "name": "books_by_slug_missing",
+  "path": "/api/v1/book?titleSlug=nothing"
+ },
+ {
+  "name": "book",
+  "path": "/api/v1/book/1"
+ },
+ {
+  "name": "book_unmonitored",
+  "path": "/api/v1/book/4"
+ },
+ {
+  "name": "book_missing",
+  "path": "/api/v1/book/99"
+ },
+ {
+  "name": "book_overview",
+  "path": "/api/v1/book/1/overview"
+ },
+ {
+  "name": "book_overview_empty",
+  "path": "/api/v1/book/3/overview"
+ },
+ {
+  "name": "book_overview_missing",
+  "path": "/api/v1/book/99/overview"
+ },
+ {
+  "name": "editions",
+  "path": "/api/v1/edition?bookId=1"
+ },
+ {
+  "name": "editions_many",
+  "path": "/api/v1/edition?bookId=2&bookId=1"
+ },
+ {
+  "name": "editions_none",
+  "path": "/api/v1/edition"
+ },
+ {
+  "name": "series",
+  "path": "/api/v1/series?authorId=1"
+ },
+ {
+  "name": "series_other",
+  "path": "/api/v1/series?authorId=2"
+ },
+ {
+  "name": "series_none",
+  "path": "/api/v1/series"
+ },
+ {
+  "name": "bookfiles_no_filter",
+  "path": "/api/v1/bookfile"
+ },
+ {
+  "name": "bookfiles_by_author",
+  "path": "/api/v1/bookfile?authorId=1"
+ },
+ {
+  "name": "bookfiles_by_author_missing",
+  "path": "/api/v1/bookfile?authorId=99"
+ },
+ {
+  "name": "bookfiles_by_book",
+  "path": "/api/v1/bookfile?bookId=1&bookId=2"
+ },
+ {
+  "name": "bookfiles_by_ids",
+  "path": "/api/v1/bookfile?bookFileIds=2&bookFileIds=1"
+ },
+ {
+  "name": "bookfiles_unmapped",
+  "path": "/api/v1/bookfile?unmapped=true"
+ },
+ {
+  "name": "bookfile",
+  "path": "/api/v1/bookfile/1"
+ },
+ {
+  "name": "bookfile_unmapped",
+  "path": "/api/v1/bookfile/2"
+ },
+ {
+  "name": "bookfile_missing",
+  "path": "/api/v1/bookfile/99"
+ }
+]

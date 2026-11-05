@@ -25,6 +25,7 @@ pub mod library;
 pub mod metadata;
 pub mod migration;
 pub mod playback;
+pub mod readarr;
 pub mod verify;
 pub mod wanted;
 
@@ -96,6 +97,8 @@ pub struct AppState {
     pub abs: SqliteDb,
     /// The Audiobookshelf port's connected socket clients.
     pub sockets: abs::socket::Sockets,
+    /// The Readarr port's database (`<data>/readarr.db`, the original's schema).
+    pub readarr: SqliteDb,
 }
 
 impl AppState {
@@ -126,6 +129,7 @@ impl AppState {
         compat::migrate(&db)?;
         migration::migrate(&db)?;
         let abs = abs::open(data)?;
+        let readarr = readarr::open(data)?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -148,6 +152,7 @@ impl AppState {
             http: metadata::http_client(),
             abs,
             sockets: abs::socket::Sockets::default(),
+            readarr,
         })
     }
 
@@ -253,6 +258,7 @@ pub fn app(st: AppState) -> Router {
         .merge(compat::router())
         .merge(migration::router())
         .merge(abs::router())
+        .merge(readarr::router())
         .with_state(st)
         .fallback_service(spa)
         .layer(sockets)

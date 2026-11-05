@@ -1,0 +1,49 @@
+{
+ "body": {
+  "audioTags": {
+   "authors": [],
+   "discCount": 0,
+   "discNumber": 0,
+   "duration": "00:00:00",
+   "quality": {
+    "quality": {
+     "id": 3,
+     "name": "EPUB"
+    },
+    "revision": {
+     "isRepack": false,
+     "real": 0,
+     "version": 1
+    }
+   },
+   "trackNumbers": [],
+   "year": 0
+  },
+  "authorId": 0,
+  "bookId": 0,
+  "dateAdded": "2025-05-04T12:00:00Z",
+  "id": 2,
+  "path": "/books/Unsorted/Mystery Book.epub",
+  "quality": {
+   "quality": {
+    "id": 3,
+    "name": "EPUB"
+   },
+   "revision": {
+    "isRepack": false,
+    "real": 0,
+    "version": 1
+   }
+  },
+  "qualityCutoffNotMet": false,
+  "qualityWeight": 12,
+  "size": 1024
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/bookfile/2"
+ },
+ "status": 200
+}

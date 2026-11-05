@@ -51,6 +51,8 @@ unicode-normalization = "0.1"
 tower = { version = "0.5", features = ["util"] }
 # Track D (migration): reading the other apps' databases
 folio-migrate = { path = "crates/migrate" }
+# Track D (the Readarr port): query strings read the way ASP.NET reads them
+serde_urlencoded = "0.7"
 # Track C (compatibility): KOReader's MD5s (EPUBs are read with core's zip above)
 md-5 = "0.10"
 # Core (the Audiobookshelf port): its socket.io

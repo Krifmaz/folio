@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start
+  rows, and its API v1 for reading authors, books, editions, series and book files, answering exactly like Readarr
+  0.4.19.2811 (checked against 34 recorded answers, errors included). Readarr's API key is Folio's.
 - The base of the Audiobookshelf port: its database with the original's exact schema, a row type for each of its 26
   tables, its socket.io (apps connect, ping, and are told when a token is refused), and recordings of 65 of the
   original's answers that parity tests compare Folio with.
