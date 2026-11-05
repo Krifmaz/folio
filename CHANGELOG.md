@@ -5,6 +5,9 @@
 ### Added
 - Android: Library page (search titles and authors, All, Audiobooks or Ebooks) and a book page with every exact
   edition and its facts: narrator, runtime, abridged or not, language, pages, ASIN or ISBN.
+- OPDS catalogue at `/opds` for e-readers and reading apps (KOReader, Moon+ Reader, Thorium …): new books,
+  audiobooks, ebooks, authors, series and search, with covers and every file to download. Sign in with your
+  Folio username and password. How to set each app up is in `docs/COMPAT.md`.
 - `docs/TRACKS.md`: the parallel tracks, the files each one owns, and the schema and playback API they share. The
   library keeps each book's files (`edition_files`), and the library folder is a setting (Settings → Downloads).
 - `docs/GOALS.md`: the goal, word for word.
