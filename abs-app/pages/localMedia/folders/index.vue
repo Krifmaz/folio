@@ -94,14 +94,11 @@ export default {
       }
     },
     async showLocalFolderMoreInfo() {
-      const confirmResult = await Dialog.confirm({
+      // Folio: no link out to the upstream guide
+      await Dialog.alert({
         title: this.$strings.HeaderLocalFolders,
-        message: this.$strings.MessageLocalFolderDescription,
-        cancelButtonTitle: 'View More'
+        message: this.$strings.MessageLocalFolderDescription
       })
-      if (!confirmResult.value) {
-        window.open('https://www.audiobookshelf.org/guides/android_app_shared_storage', '_blank')
-      }
     },
     async init() {
       const androidSdkVersion = await this.$getAndroidSDKVersion()
