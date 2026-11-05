@@ -1,0 +1,97 @@
+{
+ "body": [
+  {
+   "bookId": 1,
+   "foreignEditionId": "64216-e1",
+   "format": "Kindle Edition",
+   "grabbed": false,
+   "id": 1,
+   "images": [
+    {
+     "coverType": "cover",
+     "extension": ".jpg",
+     "url": "https://images.gr-assets.com/books/1/64216.jpg"
+    }
+   ],
+   "isEbook": true,
+   "isbn13": "9780062237378",
+   "language": "eng",
+   "links": [
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/64216"
+    }
+   ],
+   "manualAdd": false,
+   "monitored": true,
+   "overview": "The eighth Discworld novel.",
+   "pageCount": 416,
+   "publisher": "Harper",
+   "ratings": {
+    "popularity": 4320,
+    "value": 4.32,
+    "votes": 1000
+   },
+   "releaseDate": "2013-08-27T00:00:00Z",
+   "title": "Guards! Guards!",
+   "titleSlug": "64216-e1"
+  },
+  {
+   "asin": "B00XQKXNR8",
+   "bookId": 1,
+   "foreignEditionId": "64216-a1",
+   "format": "Audible Audio",
+   "grabbed": false,
+   "id": 2,
+   "images": [],
+   "isEbook": false,
+   "language": "eng",
+   "links": [],
+   "manualAdd": false,
+   "monitored": false,
+   "overview": "",
+   "pageCount": 0,
+   "publisher": "Isis",
+   "ratings": {
+    "popularity": 45,
+    "value": 4.5,
+    "votes": 10
+   },
+   "releaseDate": "2015-01-01T00:00:00Z",
+   "title": "Guards! Guards!",
+   "titleSlug": "64216-a1"
+  },
+  {
+   "bookId": 2,
+   "foreignEditionId": "1215958-e1",
+   "format": "Paperback",
+   "grabbed": false,
+   "id": 3,
+   "images": [],
+   "isEbook": false,
+   "isbn13": "9780062237378",
+   "language": "eng",
+   "links": [],
+   "manualAdd": false,
+   "monitored": true,
+   "overview": "",
+   "pageCount": 400,
+   "publisher": "Harper",
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "2013-01-01T00:00:00Z",
+   "title": "Small Gods",
+   "titleSlug": "1215958-e1"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/edition?bookId=2&bookId=1"
+ },
+ "status": 200
+}

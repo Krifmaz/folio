@@ -584,11 +584,11 @@ repository at the pinned commit.
 | R0002 | endpoint | `POST /login` (Authentication) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0003 | endpoint | `GET /login` (StaticResource) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0004 | endpoint | `GET /logout` (Authentication) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
-| R0005 | endpoint | `GET /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0005 | endpoint | `GET /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0006 | endpoint | `POST /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0007 | endpoint | `PUT /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0008 | endpoint | `DELETE /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0009 | endpoint | `GET /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0009 | endpoint | `GET /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0010 | endpoint | `PUT /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0011 | endpoint | `DELETE /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0012 | endpoint | `GET /api/v1/author/lookup` (AuthorLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
@@ -599,19 +599,19 @@ repository at the pinned commit.
 | R0017 | endpoint | `GET /api/v1/blocklist` (Blocklist) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
 | R0018 | endpoint | `DELETE /api/v1/blocklist/{id}` (Blocklist) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
 | R0019 | endpoint | `DELETE /api/v1/blocklist/bulk` (Blocklist) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
-| R0020 | endpoint | `GET /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0020 | endpoint | `GET /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0021 | endpoint | `POST /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0022 | endpoint | `GET /api/v1/book/{id}/overview` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0022 | endpoint | `GET /api/v1/book/{id}/overview` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0023 | endpoint | `PUT /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0024 | endpoint | `DELETE /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0025 | endpoint | `GET /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0025 | endpoint | `GET /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0026 | endpoint | `PUT /api/v1/book/monitor` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0027 | endpoint | `PUT /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0028 | endpoint | `DELETE /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0029 | endpoint | `GET /api/v1/bookfile` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0029 | endpoint | `GET /api/v1/bookfile` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | ebook files done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); audio media info with the import |
 | R0030 | endpoint | `PUT /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0031 | endpoint | `DELETE /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0032 | endpoint | `GET /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0032 | endpoint | `GET /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | ebook files done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); real files' tags with the import |
 | R0033 | endpoint | `PUT /api/v1/bookfile/editor` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0034 | endpoint | `DELETE /api/v1/bookfile/bulk` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0035 | endpoint | `GET /api/v1/book/lookup` (BookLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
@@ -660,7 +660,7 @@ repository at the pinned commit.
 | R0078 | endpoint | `GET /api/v1/config/downloadclient` (DownloadClientConfig) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
 | R0079 | endpoint | `PUT /api/v1/config/downloadclient/{id}` (DownloadClientConfig) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
 | R0080 | endpoint | `GET /api/v1/config/downloadclient/{id}` (DownloadClientConfig) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
-| R0081 | endpoint | `GET /api/v1/edition` (Edition) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0081 | endpoint | `GET /api/v1/edition` (Edition) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0082 | endpoint | `GET /api/v1/filesystem` (FileSystem) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0083 | endpoint | `GET /api/v1/filesystem/type` (FileSystem) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0084 | endpoint | `GET /api/v1/filesystem/mediafiles` (FileSystem) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
@@ -790,7 +790,7 @@ repository at the pinned commit.
 | R0208 | endpoint | `DELETE /api/v1/rootfolder/{id}` (RootFolder) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
 | R0209 | endpoint | `GET /api/v1/rootfolder/{id}` (RootFolder) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
 | R0210 | endpoint | `GET /api/v1/search` (Search) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0211 | endpoint | `GET /api/v1/series` (Series) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0211 | endpoint | `GET /api/v1/series` (Series) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0212 | endpoint | `GET /content/{path}` (StaticResource) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0213 | endpoint | `GET /` (StaticResource) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0214 | endpoint | `GET /{path}` (StaticResource) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |

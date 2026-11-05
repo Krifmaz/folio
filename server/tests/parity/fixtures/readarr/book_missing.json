@@ -1,0 +1,15 @@
+{
+ "body": {
+  "status": 404,
+  "title": "Not Found",
+  "traceId": "00-c34864b6c132d6649751abf862bdb8c1-1e051d38531f6c72-00",
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/book/99"
+ },
+ "status": 404
+}

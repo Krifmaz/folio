@@ -1,0 +1,32 @@
+{
+ "body": [
+  {
+   "description": "The Discworld novels.",
+   "id": 1,
+   "links": [
+    {
+     "bookId": 1,
+     "id": 1,
+     "position": "8",
+     "seriesId": 1,
+     "seriesPosition": 8
+    },
+    {
+     "bookId": 2,
+     "id": 2,
+     "position": "13",
+     "seriesId": 1,
+     "seriesPosition": 13
+    }
+   ],
+   "title": "Discworld"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/series?authorId=1"
+ },
+ "status": 200
+}
