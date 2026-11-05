@@ -14,6 +14,9 @@
   formats the preferences don't take are refused. The best result is grabbed (Search now, or every 6 hours);
   Results shows every result with Grab; Downloads follows each grab until its files arrive. Diagnostics checks
   Lantern. The contract is in `docs/LANTERN.md`.
+- Migration reader (`server/crates/migrate`): reads Audiobookshelf, Calibre, Calibre-Web, Readarr, LazyLibrarian
+  and Listenarr databases into one plan (books and files, wanted lists, progress and bookmarks, and what was left out
+  and why) without changing them; the base of the migration dry run.
 - Wanted lists: want an exact edition; Wanted page per format with each book's status. Preferences per format
   (file formats best first: M4B before MP3, EPUB before AZW3 before PDF; languages; unabridged only) refuse
   editions that won't do, in plain words. Follow authors and series in audiobooks, ebooks or both: new books
