@@ -2281,5 +2281,58 @@
   "name": "p6b_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
+ },
+ {
+  "name": "p6l_guest_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "viewer5",
+   "password": "pw",
+   "type": "guest",
+   "isActive": true
+  },
+  "save": {
+   "guest_id": "user.id"
+  }
+ },
+ {
+  "name": "p6l_guest_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "viewer5",
+   "password": "pw"
+  },
+  "save": {
+   "guest_token": "user.accessToken"
+  }
+ },
+ {
+  "name": "settings_log_level",
+  "path": "/api/settings",
+  "method": "PATCH",
+  "body": {
+   "logLevel": 1,
+   "loggerDailyLogsToKeep": 3
+  }
+ },
+ {
+  "name": "settings_log_level_reset",
+  "path": "/api/settings",
+  "method": "PATCH",
+  "body": {
+   "logLevel": 2,
+   "loggerDailyLogsToKeep": 7
+  }
+ },
+ {
+  "name": "p6l_guest_delete",
+  "path": "/api/users/{guest_id}",
+  "method": "DELETE"
  }
 ]

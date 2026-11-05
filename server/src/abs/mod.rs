@@ -18,6 +18,7 @@ pub mod file_utils;
 pub mod html;
 pub mod items;
 pub mod library;
+pub mod logs;
 pub mod metadata_providers;
 pub mod models;
 pub mod notifications;
@@ -81,6 +82,8 @@ pub struct Server {
     pub notifications: Arc<notifications::Manager>,
     /// The backups in the backup folder.
     pub backups: Arc<backups::Manager>,
+    /// The server's logs (`Logger` and its `LogManager`).
+    pub logs: Arc<logs::Logs>,
     /// How the server was installed (`Source`, from `SOURCE`; `docker` by default, like the original's image).
     pub source: String,
 }
@@ -107,7 +110,12 @@ impl Server {
             st.save(db)?;
         }
         let backups = Arc::new(backups::Manager::new(st.str("backupPath")));
+        let logs = Arc::new(logs::Logs::default());
+        logs.apply_settings(&st);
+        logs.init(&metadata_path);
+        logs::install(logs.clone());
         Ok(Server {
+            logs,
             backups,
             settings: Arc::new(RwLock::new(st)),
             tokens: Arc::new(tokens),
@@ -128,10 +136,13 @@ impl Server {
     /// Reads the settings again from the database (after a backup is restored, like the original's reconnect).
     pub fn reload_settings(&self, db: &SqliteDb) {
         match settings::ServerSettings::load(db, &self.metadata_path.display().to_string()) {
-            Ok(new) => match self.settings.write() {
-                Ok(mut s) => *s = new,
-                Err(e) => *e.into_inner() = new,
-            },
+            Ok(new) => {
+                self.logs.apply_settings(&new);
+                match self.settings.write() {
+                    Ok(mut s) => *s = new,
+                    Err(e) => *e.into_inner() = new,
+                }
+            }
             Err(e) => tracing::error!("The settings can't be read again: {}", e.detail),
         }
     }
@@ -139,6 +150,7 @@ impl Server {
     /// Replaces the settings and stores them (`Database.updateServerSettings`).
     pub fn save_settings(&self, db: &dyn Db, new: settings::ServerSettings) -> kit_server_core::Result<()> {
         new.save(db)?;
+        self.logs.apply_settings(&new);
         match self.settings.write() {
             Ok(mut s) => *s = new,
             Err(e) => *e.into_inner() = new,
@@ -196,6 +208,7 @@ pub fn router() -> Router<AppState> {
         .merge(api_keys::router())
         .merge(admin::router())
         .merge(backups::router())
+        .merge(logs::router())
         .merge(metadata_providers::router())
         .merge(email::router())
         .merge(notifications::router())
