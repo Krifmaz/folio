@@ -1645,8 +1645,8 @@
    "urls": [
     "json://localhost"
    ],
-   "titleTemplate": "Test {{version}}",
-   "bodyTemplate": "Body {{ version }} {{missing}}",
+   "titleTemplate": "Test {{ version }}",
+   "bodyTemplate": "Body {{ version}} {{podcastTitle}} {{ version }}",
    "enabled": true,
    "libraryId": ""
   },
