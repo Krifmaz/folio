@@ -56,6 +56,12 @@ def dig(value, path):
     return value
 
 
+def ctx_needed(r):
+    """The {placeholders} a request uses."""
+    import re
+    return set(re.findall(r"\{([a-z0-9_]+)\}", json.dumps(r.get("body")) + r["path"]))
+
+
 def fill(text):
     for k, v in ctx.items():
         text = text.replace("{" + k + "}", str(v))
@@ -93,11 +99,18 @@ time.sleep(3)  # let the scan finish writing authors and series
 with open(os.path.join(here, "requests.json"), encoding="utf-8") as f:
     requests = json.load(f)
 for r in requests:
+    missing = [k for k in ctx_needed(r) if k not in ctx]
+    if missing:
+        print(f"skipped {r['name']}: no {', '.join(missing)} from an earlier answer")
+        continue
     path = fill(r["path"])
     body = json.loads(fill(json.dumps(r["body"]))) if "body" in r else None
     status, ctype, answer = call(r.get("method", "GET"), path, body, auth=r.get("auth", True))
     for key, where in r.get("save", {}).items():
-        ctx[key] = dig(answer, where)
+        try:
+            ctx[key] = dig(answer, where)
+        except (KeyError, IndexError, TypeError, ValueError):
+            print(f"warning: {r['name']} has no {where}; requests that need {{{key}}} are skipped")
     record = {"request": {"method": r.get("method", "GET"), "path": r["path"], "body": r.get("body")},
               "status": status, "content_type": ctype.split(";")[0], "body": answer}
     with open(os.path.join(out, "fixtures", r["name"] + ".json"), "w", encoding="utf-8") as f:
