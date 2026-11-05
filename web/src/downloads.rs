@@ -125,6 +125,9 @@ pub fn grab_label(status: &str) -> &'static str {
         "queued" => "Waiting",
         "downloading" => "Downloading",
         "completed" => "Arrived",
+        "verified" => "Checked",
+        "review" => "Needs a look",
+        "rejected" => "Rejected",
         "failed" => "Failed",
         _ => "Unknown",
     }
