@@ -4,8 +4,9 @@
 //! - **`migration_runs`**: one row per run (dry or real): its source and path, how far it got, and the report.
 //! - **`migration_ids`**: a source's book (`abs:<item>`, `calibre:42`) → the edition it became. A later run uses it,
 //!   so Calibre-Web's progress lands on the books a Calibre run brought in.
-//! - **`migration_files`**: a migrated book's files where the old app keeps them, waiting for the import to verify
-//!   and file them (`waiting`); the source files are never moved or changed.
+//! - **`migration_files`**: a migrated book's files where the old app keeps them. They wait (`waiting`) until the
+//!   run hands them to the import ([`hand_over`]), which checks and files them like a download (`handed`, with its
+//!   grab); files Folio can't see stay `missing` with the reason. The source files are never moved or changed.
 
 use kit_server_core::db::now;
 use kit_server_core::{err, p, Db, Migrations, Result, Row, RowExt, SqliteDb};
@@ -14,7 +15,8 @@ use serde_json::{json, Value};
 /// The migration's tables, step by step (a released step is never changed).
 pub const MIGRATIONS: Migrations = Migrations {
     component: "folio-migration",
-    steps: &["CREATE TABLE migration_runs (
+    steps: &[
+        "CREATE TABLE migration_runs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             source TEXT NOT NULL,
             path TEXT NOT NULL,
@@ -45,7 +47,11 @@ pub const MIGRATIONS: Migrations = Migrations {
             run_id INTEGER NOT NULL,
             created_at REAL NOT NULL
         );
-        CREATE INDEX migration_files_status ON migration_files (status, id);"],
+        CREATE INDEX migration_files_status ON migration_files (status, id);",
+        // 2: what the import made of a book's files: its grab, or why they weren't handed over
+        "ALTER TABLE migration_files ADD COLUMN grab_id INTEGER;
+        ALTER TABLE migration_files ADD COLUMN note TEXT NOT NULL DEFAULT '';",
+    ],
 };
 
 /// Makes the migration's tables (the steps not run yet).
@@ -162,17 +168,17 @@ pub fn queue_files(db: &SqliteDb, book: &migrate::Book, edition_id: i64, run_id:
          VALUES (?,?,?,?,?,?,'waiting',?,?)
          ON CONFLICT (source_id) DO UPDATE SET edition_id=excluded.edition_id, format=excluded.format, folder=excluded.folder,
          files=excluded.files, cover=excluded.cover, run_id=excluded.run_id
-         WHERE migration_files.status='waiting'",
+         WHERE migration_files.status IN ('waiting','missing')",
         p![book.source_id, edition_id, format, text(&book.folder), json!(files).to_string(), text(&book.cover), run_id, now()],
     )?;
     Ok(true)
 }
 
-/// The migrated books whose files wait for the import, oldest first:
-/// `[{id, source_id, edition_id, format, folder, files: [path], cover}]`.
+/// The migrated books whose files haven't gone to the import yet, oldest first, with the reason when Folio can't
+/// see them: `[{id, source_id, edition_id, format, folder, files: [path], cover, status, note}]`.
 pub fn waiting(db: &SqliteDb) -> Result<Vec<Value>> {
     Ok(db
-        .query("SELECT * FROM migration_files WHERE status='waiting' ORDER BY id", p![])?
+        .query("SELECT * FROM migration_files WHERE status IN ('waiting','missing') ORDER BY id", p![])?
         .iter()
         .map(|r| {
             json!({
@@ -183,6 +189,8 @@ pub fn waiting(db: &SqliteDb) -> Result<Vec<Value>> {
                 "folder": r.s("folder"),
                 "files": serde_json::from_str::<Value>(&r.s("files")).unwrap_or(json!([])),
                 "cover": r.s("cover"),
+                "status": r.s("status"),
+                "note": r.s("note"),
             })
         })
         .collect())
@@ -193,4 +201,55 @@ pub fn waiting(db: &SqliteDb) -> Result<Vec<Value>> {
 pub fn set_file_status(db: &SqliteDb, id: i64, status: &str) -> Result<()> {
     db.execute("UPDATE migration_files SET status=? WHERE id=?", p![status, id])?;
     Ok(())
+}
+
+/// What handing the waiting books to the import did.
+#[derive(Debug, Clone, Default, serde::Serialize)]
+pub struct HandOver {
+    /// books handed to the import (it checks them, then files them or puts them in the Review queue)
+    pub handed: usize,
+    /// books left waiting, with the reason in plain words: `(source id, reason)`
+    pub missing: Vec<(String, String)>,
+}
+
+/// Hands every waiting book's files to the import (`import::queue_local`), which checks them like a download and
+/// files them into the library with hardlinks (a copy across disks), leaving the source files where they are.
+/// A book whose files Folio can't see is marked `missing` with the reason; a later run tries it again.
+pub fn hand_over(db: &SqliteDb) -> Result<HandOver> {
+    let mut out = HandOver::default();
+    for r in db.query("SELECT * FROM migration_files WHERE status IN ('waiting','missing') ORDER BY id", p![])? {
+        let id = r.i("id");
+        let source_id = r.s("source_id");
+        let files: Vec<std::path::PathBuf> =
+            serde_json::from_str::<Vec<String>>(&r.s("files")).unwrap_or_default().into_iter().map(std::path::PathBuf::from).collect();
+        let unseen: Vec<String> = files.iter().filter(|f| !f.is_file()).map(|f| f.display().to_string()).collect();
+        let why = if files.is_empty() {
+            Some("This book has no files to bring in.".to_string())
+        } else if !unseen.is_empty() {
+            Some(format!(
+                "Folio can't see {} of this book's files (first: {}). Mount the old app's book folder into Folio at the same place, read-only, then bring it in again.",
+                unseen.len(),
+                unseen[0]
+            ))
+        } else {
+            None
+        };
+        if let Some(why) = why {
+            db.execute("UPDATE migration_files SET status='missing', note=? WHERE id=?", p![why, id])?;
+            out.missing.push((source_id, why));
+            continue;
+        }
+        let from = source_id.split(':').next().and_then(migrate::Source::parse).map(|s| s.name()).unwrap_or("migration");
+        match crate::import::queue_local(db, r.i("edition_id"), &files, from) {
+            Ok(grab) => {
+                db.execute("UPDATE migration_files SET status='handed', grab_id=?, note='' WHERE id=?", p![grab, id])?;
+                out.handed += 1;
+            }
+            Err(e) => {
+                db.execute("UPDATE migration_files SET status='missing', note=? WHERE id=?", p![e.detail, id])?;
+                out.missing.push((source_id, e.detail));
+            }
+        }
+    }
+    Ok(out)
 }

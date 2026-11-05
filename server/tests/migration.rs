@@ -136,9 +136,17 @@ async fn audiobookshelf_is_checked_first_then_brought_in_once() {
 
     let (_, waiting) = call(&app, admin("GET", "/api/migrate/waiting", None)).await;
     let books = waiting["books"].as_array().unwrap();
-    assert_eq!(books.len(), 2);
+    assert_eq!(books.len(), 2, "files Folio can't see stay behind");
     let phm = books.iter().find(|b| b["source_id"] == "abs:li1").unwrap();
     assert_eq!(phm["files"], json!(["/audiobooks/Andy Weir/Project Hail Mary/phm.m4b"]));
+    assert_eq!(phm["status"], "missing");
+    assert!(phm["note"].as_str().unwrap().starts_with("Folio can't see 1 of this book's files"), "{phm}");
+    assert_eq!(real["report"]["counts"]["files_handed"], 0);
+    assert!(real["report"]["skipped"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .any(|s| s["item"] == "abs:li1" && s["reason"].as_str().unwrap().contains("Mount the old app's book folder")));
 
     // again: everything is in Folio already and nothing is added twice
     let again = run(&app, json!({ "source": "abs", "path": db, "dry_run": false })).await;
@@ -195,4 +203,35 @@ async fn wrong_places_and_calibre_web_alone_are_explained() {
     let r = run(&app, json!({ "source": "calibre-web", "path": app_db })).await;
     let skipped = r["report"]["skipped"].as_array().unwrap();
     assert!(skipped[0]["reason"].as_str().unwrap().contains("bring in the Calibre library first"), "{r}");
+}
+
+#[tokio::test]
+async fn files_folio_can_see_go_to_the_import_and_stay_where_they_are() {
+    let (app, st, dir) = server("migrate-handover", sources().await).await;
+    let books = dir.join("books/Andy Weir");
+    std::fs::create_dir_all(&books).unwrap();
+    let epub = books.join("phm.epub");
+    std::fs::write(&epub, b"an ebook").unwrap();
+    let sql = ABS.replace("/audiobooks/Andy Weir/Project Hail Mary/phm.epub", &epub.to_string_lossy());
+    let db = dir.join("abs/absdatabase.sqlite");
+    database(&db, &sql);
+    let real = run(&app, json!({ "source": "abs", "path": db, "dry_run": false })).await;
+    assert_eq!(real["report"]["counts"]["files_handed"], 1, "{real}");
+
+    // the import has it as an arrived download of the edition, to check and file
+    use kit_server_core::{p, Db, RowExt};
+    let ebook = item(&real, "abs:li1:ebook")["edition_id"].as_i64().unwrap();
+    let g = st
+        .db
+        .one("SELECT g.status, g.indexer FROM grabs g JOIN wanted w ON w.id = g.wanted_id WHERE w.edition_id=?", p![ebook])
+        .unwrap()
+        .unwrap();
+    assert_eq!((g.s("status").as_str(), g.s("indexer").as_str()), ("completed", "Audiobookshelf"));
+    let (_, waiting) = call(&app, admin("GET", "/api/migrate/waiting", None)).await;
+    assert!(waiting["books"].as_array().unwrap().iter().all(|b| b["source_id"] != "abs:li1:ebook"), "{waiting}");
+
+    // running it again doesn't hand it over twice
+    run(&app, json!({ "source": "abs", "path": db, "dry_run": false })).await;
+    assert_eq!(count(&st, "grabs"), 1);
+    assert_eq!(std::fs::read(&epub).unwrap(), b"an ebook", "the source file stays where it was, unchanged");
 }

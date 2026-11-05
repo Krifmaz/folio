@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- Move in hands migrated books' files to the import: each is checked like a download, then filed in the library
+  with hardlinks (a copy across disks) or put in the Review queue; the old app's files stay where they are. Files
+  Folio can't see are listed with what to do (mount the book folder read-only) and tried again on the next run.
 - Move in (`#/migrate`, admins; `/api/migrate/*`): check Audiobookshelf, Calibre, Calibre-Web, Readarr,
   LazyLibrarian or Listenarr with a dry run (what is in Folio already, what would be
   added, whose places have an account to go to, what needs you and why), then bring it in. Exact editions by ASIN or

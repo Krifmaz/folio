@@ -51,7 +51,11 @@ pub fn count_rows(counts: &Value, dry: bool) -> Vec<(&'static str, u64)> {
         ("Books and wanted entries read", n(counts, "items")),
         ("Already in Folio", n(counts, "in_folio")),
         (if dry { "To be added" } else { "Added" }, n(counts, "added")),
-        (if dry { "Books whose files will wait for import" } else { "Books whose files wait for import" }, n(counts, "files_queued")),
+        if dry {
+            ("Books whose files will be checked and filed", n(counts, "files_queued"))
+        } else {
+            ("Books handed to the import to be checked and filed", n(counts, "files_handed"))
+        },
         (if dry { "To go on the wanted list" } else { "Put on the wanted list" }, n(counts, "wanted")),
         (if dry { "Places to bring in" } else { "Places brought in" }, n(counts, "progress")),
         (if dry { "Bookmarks to bring in" } else { "Bookmarks brought in" }, n(counts, "bookmarks")),
