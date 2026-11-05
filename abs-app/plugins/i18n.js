@@ -5,6 +5,7 @@ import enUsStrings from '../strings/en-us.json'
 
 const defaultCode = 'en-us'
 let $localStore = null
+let nuxtApp = null // Folio: the app, for its event bus when loadi18n runs without a page
 
 const languageCodeMap = {
   ar: { label: 'عربي', dateFnsLocale: 'ar' },
@@ -134,7 +135,9 @@ async function loadi18n(code) {
   Vue.prototype.$setDateFnsLocale(languageCodeMap[code].dateFnsLocale)
   syncDownloadNotificationStrings()
 
-  this.$eventBus.$emit('change-lang', code)
+  // Folio: loadi18n is also called without a page (at start with a saved language), so tell the app's own event
+  // bus; the open page then shows the new words
+  ;(this || nuxtApp)?.$eventBus?.$emit('change-lang', code)
   return true
 }
 
@@ -170,5 +173,6 @@ async function initialize() {
 
 export default ({ app, store }, inject) => {
   $localStore = app.$localStore
+  nuxtApp = app // Folio
   initialize().finally(syncDownloadNotificationStrings)
 }

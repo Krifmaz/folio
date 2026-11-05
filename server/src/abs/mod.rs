@@ -20,6 +20,7 @@ pub mod metadata_providers;
 pub mod models;
 pub mod notifications;
 pub mod progress;
+pub mod scanner;
 pub mod settings;
 pub mod socket;
 pub mod tasks;
@@ -170,6 +171,7 @@ pub fn router() -> Router<AppState> {
         .merge(bookmarks::router())
         .merge(library::router())
         .merge(items::router())
+        .merge(scanner::router())
         .merge(users::router())
         .merge(api_keys::router())
         .merge(admin::router())
