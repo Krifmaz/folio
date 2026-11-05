@@ -20,7 +20,7 @@ Audiobookshelf-compatible API.
 ## Build
 
 CI builds it on every pull request that touches `abs-app/` (`.github/workflows/abs-app.yml`, through the kit's
-`kit-android.yml`). By hand, with Node 22, Java 17 and the Android SDK:
+`kit-android.yml`). By hand, with Node 22, Java 21 and the Android SDK:
 
 ```sh
 cd abs-app

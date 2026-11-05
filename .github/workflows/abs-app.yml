@@ -26,5 +26,5 @@ jobs:
       project-dir: abs-app/android
       web-dir: abs-app
       web-build: npx nuxt generate && npx cap sync android
-      # the upstream build asks for a Java 17 toolchain
-      java-version: "17"
+      # Capacitor 7 compiles with Java 21, as upstream's own CI does (the app module's Java 17 toolchain comes through foojay)
+      java-version: "21"
