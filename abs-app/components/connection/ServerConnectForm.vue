@@ -161,14 +161,11 @@ export default {
       })
     },
     async showOldAuthWarningDialog() {
-      const confirmResult = await Dialog.confirm({
+      // Folio: no link out to the upstream discussion
+      await Dialog.alert({
         title: 'Old Server Auth Warning',
-        message: this.$strings.MessageOldServerAuthWarningHelp,
-        cancelButtonTitle: this.$strings.ButtonReadMore
+        message: this.$strings.MessageOldServerAuthWarningHelp
       })
-      if (!confirmResult.value) {
-        window.open('https://github.com/advplyr/audiobookshelf/discussions/4460', '_blank')
-      }
     },
     checkIdUuid(userId) {
       return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)

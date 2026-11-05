@@ -1130,6 +1130,8 @@ class PlayerNotificationService : MediaBrowserServiceCompat() {
           mutableListOf(
                   "com.audiobookshelf.app",
                   "com.audiobookshelf.app.debug",
+                  "dev.krifmaz.folio.mobile", // Folio's app id
+                  "dev.krifmaz.folio.mobile.debug",
                   ANDROID_AUTO_PKG_NAME,
                   ANDROID_AUTO_SIMULATOR_PKG_NAME,
                   ANDROID_WEARABLE_PKG_NAME,

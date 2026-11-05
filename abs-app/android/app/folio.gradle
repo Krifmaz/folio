@@ -11,8 +11,14 @@ def folioVersionCode = project.findProperty("appVersionCode")
 def folioKeystore = System.getenv("ANDROID_KEYSTORE_PATH")
 def folioHasKey = folioKeystore != null && !folioKeystore.isEmpty() && file(folioKeystore).isFile()
 
+// Folio's own app id (installs beside the upstream app), and its name, colours and icons: folio-res is laid over the
+// upstream resources for every build type, so the upstream files stay as they are.
+def folioAppId = "dev.krifmaz.folio.mobile"
+
 android {
   defaultConfig {
+    applicationId folioAppId
+    manifestPlaceholders["appAuthRedirectScheme"] = folioAppId
     if (folioVersionName != null) versionName folioVersionName.toString()
     if (folioVersionCode != null) versionCode folioVersionCode.toString().toInteger()
   }
@@ -25,6 +31,10 @@ android {
         keyPassword System.getenv("ANDROID_KEY_PASSWORD")
       }
     }
+  }
+  sourceSets {
+    debug.res.srcDirs += 'folio-res'
+    release.res.srcDirs += 'folio-res'
   }
   buildTypes {
     release {

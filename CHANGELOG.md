@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- The mobile app (`abs-app/`) looks like Folio: the Encore colours and font in its default, Black and Light
+  themes and in the reader, the name Folio with its own app id (it installs beside the Audiobookshelf app), a
+  book icon, and no links out to the upstream project.
 - The mobile app (`abs-app/`, the Audiobookshelf app fork) is built for Android in CI on every change to it;
   its fork changes are listed in `abs-app/FOLIO.md`.
 - The base of the Audiobookshelf port: its database with the original's exact schema, a row type for each of its 26

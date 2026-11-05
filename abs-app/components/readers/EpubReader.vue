@@ -2,7 +2,7 @@
   <div id="epub-frame" class="w-full">
     <div id="viewer" class="h-full w-full"></div>
 
-    <div class="fixed left-0 h-8 w-full px-4 flex items-center" :class="isLightTheme ? 'bg-white text-black' : isDarkTheme ? 'bg-[#232323] text-white/80' : 'bg-black text-white/80'" :style="{ bottom: isPlayerOpen ? '120px' : '0px' }">
+    <div class="fixed left-0 h-8 w-full px-4 flex items-center" :class="isLightTheme ? 'bg-white text-black' : isDarkTheme ? 'bg-[#161617] text-[#f0ead6]/80' : 'bg-black text-white/80'" :style="{ bottom: isPlayerOpen ? '120px' : '0px' }">
       <p v-if="totalLocations" class="text-xs text-slate-600">Location {{ currentLocationNum }} of {{ totalLocations }}</p>
       <div class="flex-grow" />
       <p class="text-xs">{{ progress }}%</p>
@@ -109,8 +109,8 @@ export default {
     themeRules() {
       const isDark = this.ereaderSettings.theme === 'dark'
       const isBlack = this.ereaderSettings.theme === 'black'
-      const fontColor = isDark ? '#fff' : isBlack ? '#fff' : '#000'
-      const backgroundColor = isDark ? 'rgb(35 35 35)' : isBlack ? 'rgb(0 0 0)' : 'rgb(255, 255, 255)'
+      const fontColor = isDark ? '#f0ead6' : isBlack ? '#fff' : '#000'
+      const backgroundColor = isDark ? 'rgb(22 22 23)' : isBlack ? 'rgb(0 0 0)' : 'rgb(255, 255, 255)'
 
       return {
         '*': {

@@ -1,0 +1,71 @@
+/*
+ * Folio's look for the Audiobookshelf app: the kit's Encore theme (charcoal and cream) in the app's own colour
+ * variables, loaded after assets/tailwind.css so it wins. The values are the kit's design tokens
+ * (Krifmaz/kit design/out/tokens.css) as "r g b": the app's default theme is Encore, Black is the kit's OLED theme
+ * and Light the kit's light theme. Keep this file and the tokens in step when the kit's colours change.
+ */
+:root {
+  color: rgb(240 234 214);
+  --color-bg: 22 22 23;               /* --bg (the page) */
+  --color-bg-hover: 42 42 45;         /* --panel-2 */
+  --color-fg: 240 234 214;            /* --text */
+  --color-fg-muted: 170 164 147;      /* --muted */
+  --color-primary: 34 34 36;          /* --panel (bars, cards) */
+  --color-secondary: 42 42 45;        /* --panel-2 */
+  --color-border: 53 53 56;           /* --border */
+  --color-bg-toggle: 34 34 36;        /* --panel */
+  --color-bg-toggle-selected: 42 42 45; /* --panel-2 */
+  --color-track-cursor: 240 234 214;  /* --text */
+  --color-track: 119 114 95;          /* --faint */
+  --color-track-buffered: 53 53 56;   /* --border */
+  --color-accent: 240 234 214;        /* --accent */
+  --gradient-item-page: linear-gradient(169deg, rgba(0, 0, 0, 0.4) 0%, rgba(22, 22, 23, 1) 80%);
+  --gradient-audio-player: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(34, 34, 36, 1) 80%);
+  --gradient-minimized-audio-player: linear-gradient(145deg, rgba(34, 34, 36, 0.5) 0%, rgba(34, 34, 36, 0.9) 20%, rgb(34, 34, 36) 60%);
+  --font-folio: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* --font */
+}
+
+html[data-theme='black'] {
+  color: rgb(236 236 244);
+  --color-bg: 0 0 0;                  /* oled --bg */
+  --color-bg-hover: 23 23 27;         /* oled --panel-2 */
+  --color-fg: 236 236 244;            /* oled --text */
+  --color-fg-muted: 154 154 168;      /* oled --muted */
+  --color-primary: 11 11 13;          /* oled --panel */
+  --color-secondary: 23 23 27;        /* oled --panel-2 */
+  --color-border: 35 35 41;           /* oled --border */
+  --color-bg-toggle: 0 0 0;
+  --color-bg-toggle-selected: 23 23 27;
+  --color-track-cursor: 236 236 244;
+  --color-track: 102 102 111;         /* oled --faint */
+  --color-track-buffered: 35 35 41;
+  --color-accent: 240 234 214;        /* --accent */
+  --gradient-item-page: rgb(0, 0, 0);
+  --gradient-audio-player: rgb(0, 0, 0);
+  --gradient-minimized-audio-player: rgb(0, 0, 0);
+}
+
+html[data-theme='light'] {
+  color: rgb(22 22 31);
+  --color-bg: 246 246 251;            /* light --bg */
+  --color-bg-hover: 240 240 247;      /* light --panel-2 */
+  --color-fg: 22 22 31;               /* light --text */
+  --color-fg-muted: 93 93 117;        /* light --muted */
+  --color-primary: 255 255 255;       /* light --panel */
+  --color-secondary: 240 240 247;     /* light --panel-2 */
+  --color-border: 226 226 238;        /* light --border */
+  --color-bg-toggle: 240 240 247;
+  --color-bg-toggle-selected: 255 255 255;
+  --color-track-cursor: 93 93 117;
+  --color-track: 226 226 238;
+  --color-track-buffered: 141 141 165; /* light --faint */
+  --color-accent: 42 42 45;           /* light --accent */
+  --gradient-item-page: linear-gradient(169deg, rgba(255, 255, 255, 0.4) 0%, rgba(246, 246, 251, 1) 80%);
+  --gradient-audio-player: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 80%);
+  --gradient-minimized-audio-player: linear-gradient(145deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.9) 20%, rgb(255, 255, 255) 60%);
+}
+
+body,
+.font-sans {
+  font-family: var(--font-folio);
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Folio: the app's name and the Encore colours, used in place of the upstream values (see abs-app/FOLIO.md) -->
+<resources>
+    <string name="app_name">Folio</string>
+    <string name="title_activity_main">Folio</string>
+    <string name="package_name">dev.krifmaz.folio.mobile</string>
+    <string name="app_widget_description">Folio playback</string>
+    <color name="background_dark">#161617</color>
+    <style name="MediaPlayerWidgetTheme" parent="Theme.AppCompat.DayNight">
+        <item name="android:colorBackground">#161617</item>
+        <item name="android:colorAccent">#2a2a2d</item>
+        <item name="android:textColor">#f0ead6</item>
+    </style>
+</resources>

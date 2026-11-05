@@ -1,13 +1,13 @@
 {
-  "appId": "com.audiobookshelf.app",
-  "appName": "audiobookshelf-app",
+  "appId": "dev.krifmaz.folio.mobile",
+  "appName": "Folio",
   "webDir": "dist",
   "plugins": {
     "CapacitorHttp": {
       "enabled": false
     },
     "StatusBar": {
-      "backgroundColor": "#232323",
+      "backgroundColor": "#161617",
       "style": "DARK"
     }
   },
