@@ -6,6 +6,10 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- A library's series and authors pages, one series and one author, like Audiobookshelf's
+  (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
+  `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's
+  books grouped by series.
 - The home page shelves of a book library (`/api/libraries/:id/personalized`), as Audiobookshelf's apps show them:
   Continue Listening and Reading, Continue Series, Recently Added, Recent Series, Discover, Listen and Read Again,
   and Newest Authors, each checked against the original's answer on the same data.
