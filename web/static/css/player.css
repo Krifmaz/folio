@@ -1,1 +1,50 @@
 /* The player and the reader (the player and reader track, docs/TRACKS.md). Only the kit's tokens. */
+
+/* ---------- the audiobook player ---------- */
+.player { display: flex; flex-direction: column; gap: 18px; max-width: 920px; margin: 0 auto; }
+.player-head { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
+.player-head h1 { margin-top: 6px; }
+.player-cover { width: 168px; height: 168px; border-radius: var(--radius); object-fit: cover; flex: none; background: var(--panel-2); box-shadow: var(--shadow); }
+.player-cover.cover-blank { display: grid; place-items: center; font-size: 56px; font-weight: 800; color: var(--muted); }
+.player-chapter { margin-top: 10px; font-weight: 650; }
+.player-seek { display: flex; flex-direction: column; gap: 6px; }
+.player-range { width: 100%; accent-color: var(--accent-2); cursor: pointer; }
+.player-controls { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.player-play { min-width: 112px; justify-content: center; }
+.player-options { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.player-options select.input { width: auto; padding-top: 6px; padding-bottom: 6px; }
+.player-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.player-lists h2 { margin-bottom: 10px; }
+.player-list { max-height: 420px; overflow-y: auto; }
+.player-item { width: 100%; border: 0; border-bottom: 1px solid var(--border); background: transparent; text-align: left; cursor: pointer; padding: 8px 10px; gap: 10px; }
+.player-item.on { background: var(--panel-2); box-shadow: inset 3px 0 0 var(--accent); }
+.player-item .input { padding-top: 5px; padding-bottom: 5px; }
+@media (max-width: 760px) {
+  .player-lists { grid-template-columns: 1fr; }
+  .player-cover { width: 120px; height: 120px; }
+}
+
+/* ---------- the EPUB reader ---------- */
+.reader { display: flex; flex-direction: column; gap: 10px; height: calc(100vh - 66px); min-height: 360px; }
+.reader-bar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.reader-bar .btn.on { background: var(--panel-2); }
+.reader-title { font-weight: 650; }
+.reader-body { flex: 1; min-height: 0; display: flex; gap: 12px; }
+.reader-page { position: relative; flex: 1; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+.reader-frame { display: block; width: 100%; height: 100%; border: 0; background: var(--bg); }
+.reader-busy { position: absolute; inset: 0; display: grid; place-items: center; background: var(--bg); }
+.reader-panel { width: 320px; flex: none; overflow-y: auto; padding: 14px; }
+.reader-panel h2 { margin-bottom: 8px; }
+.reader-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+@media (max-width: 760px) {
+  .reader { height: calc(100vh - 46px); }
+  .reader-body { position: relative; }
+  .reader-panel { position: absolute; inset: 0; width: auto; z-index: 5; }
+  .reader-foot .small { text-align: center; }
+}
+@media (max-width: 760px) {
+  .player-controls { flex-wrap: nowrap; gap: 2px; }
+  .player-controls .btn { padding-left: 8px; padding-right: 8px; }
+  .player-play { min-width: 84px; }
+  .reader-bar .grow { flex-basis: 100%; order: -1; }
+}

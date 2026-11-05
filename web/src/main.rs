@@ -18,6 +18,7 @@
 
 mod downloads;
 mod library;
+mod offline_media;
 mod pages;
 mod player;
 mod reader;
