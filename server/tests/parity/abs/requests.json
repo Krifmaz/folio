@@ -1428,6 +1428,14 @@
   "path": "/api/users"
  },
  {
+  "name": "lib_personalized",
+  "path": "/api/libraries/{library}/personalized"
+ },
+ {
+  "name": "lib_personalized_limit",
+  "path": "/api/libraries/{library}/personalized?limit=1&include=rssfeed"
+ },
+ {
   "name": "p6_guest_create",
   "path": "/api/users",
   "method": "POST",
@@ -1929,9 +1937,5 @@
   "name": "p6_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
-  "name": "lib_personalized",
-  "path": "/api/libraries/{library}/personalized"
-  "name": "lib_personalized_limit",
-  "path": "/api/libraries/{library}/personalized?limit=1&include=rssfeed"
  }
 ]
