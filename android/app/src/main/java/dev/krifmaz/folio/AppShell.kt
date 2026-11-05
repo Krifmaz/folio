@@ -38,6 +38,12 @@ sealed interface Page {
 
     /** The server's checks and the phone app's crash reports (admins). */
     data object Diagnostics : Page
+
+    /** Every book on the server, with search and a format filter ([LibraryPage]). */
+    data object Library : Page
+
+    /** One book with its editions ([WorkPage]). */
+    data class Work(val id: Long) : Page
 }
 
 /**
@@ -80,6 +86,10 @@ fun AppShell(app: App) {
         Page.ServerSettings -> ServerSettingsPage(app, onBack = back)
 
         Page.Diagnostics -> DiagnosticsPage(app, onBack = back)
+
+        Page.Library -> LibraryPage(app, onBack = back, onOpen = { open(Page.Work(it)) })
+
+        is Page.Work -> WorkPage(app, page.id, onBack = back)
     }
 }
 
