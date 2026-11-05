@@ -10,6 +10,7 @@ Placeholders always known: {library}, {token} (root's access token) and {legacy_
 3. Writes one JSON file per request to OUT_DIR/fixtures/<name>.json:
    {"request": {...}, "status": 200, "content_type": "...", "body": <JSON or text>, "cookies": [...]}
    (`cookies`: the cookies the answer set, as `name; attributes`, without their values)
+   Also `lib_create.json` (the library made on /media) and `_db_scan.json` (every row right after the first scan).
 4. Copies the database schema (sqlite_master) to OUT_DIR/schema.sql.
 
 Only the standard library is used, so it runs on any CI runner.
@@ -110,8 +111,13 @@ if status != 200:
 token = login["user"].get("accessToken") or login["user"]["token"]
 ctx["token"] = token
 ctx["legacy_token"] = login["user"]["token"]
-status, _, lib = call("POST", "/api/libraries", {"name": "Books", "folders": [{"fullPath": "/media"}], "mediaType": "book"})
+create_body = {"name": "Books", "folders": [{"fullPath": "/media"}], "mediaType": "book"}
+status, ctype, lib = call("POST", "/api/libraries", create_body)
 print("library:", status)
+with open(os.path.join(out, "fixtures", "lib_create.json"), "w", encoding="utf-8") as f:
+    json.dump({"request": {"method": "POST", "path": "/api/libraries", "body": create_body}, "status": status,
+               "content_type": ctype.split(";")[0], "body": lib}, f, indent=1, sort_keys=True, ensure_ascii=False)
+    f.write("\n")
 ctx["library"] = lib["id"]
 call("POST", f"/api/libraries/{ctx['library']}/scan")
 for _ in range(120):
@@ -122,6 +128,24 @@ for _ in range(120):
 else:
     sys.exit("the scan did not find the three test books")
 time.sleep(3)  # let the scan finish writing authors and series
+
+
+def snapshot(name):
+    """Every row of every table, written to OUT_DIR/fixtures/<name>.json."""
+    snap = sqlite3.connect(":memory:")
+    sqlite3.connect(f"file:{db_path}?mode=ro", uri=True).backup(snap)
+    rows = {}
+    for (t,) in snap.execute("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name"):
+        cur = snap.execute(f'SELECT * FROM "{t}" ORDER BY rowid')
+        cols = [d[0] for d in cur.description]
+        rows[t] = [dict(zip(cols, r)) for r in cur]
+    with open(os.path.join(out, "fixtures", name + ".json"), "w", encoding="utf-8") as f:
+        json.dump(rows, f, indent=1, sort_keys=True, ensure_ascii=False)
+        f.write("\n")
+
+
+# The rows right after the first scan, for the scanner's parity test (before any request changes them).
+snapshot("_db_scan")
 
 with open(os.path.join(here, "requests.json"), encoding="utf-8") as f:
     requests = json.load(f)
@@ -156,16 +180,7 @@ with open(os.path.join(out, "context.json"), "w", encoding="utf-8") as f:
 # Every row of every table once all requests ran, so a test can load the original's own data into Folio and
 # replay the last requests (the read-only ones at the end of requests.json) against the same state.
 time.sleep(2)
-snap = sqlite3.connect(":memory:")
-sqlite3.connect(f"file:{db_path}?mode=ro", uri=True).backup(snap)
-rows = {}
-for (t,) in snap.execute("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name"):
-    cur = snap.execute(f'SELECT * FROM "{t}" ORDER BY rowid')
-    cols = [d[0] for d in cur.description]
-    rows[t] = [dict(zip(cols, r)) for r in cur]
-with open(os.path.join(out, "fixtures", "_db_end.json"), "w", encoding="utf-8") as f:
-    json.dump(rows, f, indent=1, sort_keys=True, ensure_ascii=False)
-    f.write("\n")
+snapshot("_db_end")
 print("database rows written")
 con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
 with open(os.path.join(out, "schema.sql"), "w", encoding="utf-8") as f:
