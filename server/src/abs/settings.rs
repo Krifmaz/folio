@@ -44,6 +44,49 @@ const PRIVATE: &[&str] = &[
     "authOpenIDAdvancedPermsClaim",
 ];
 
+/// The sign-in settings, in the original's order (`authenticationSettings` without the sample).
+const AUTH_KEYS: &[&str] = &[
+    "authLoginCustomMessage",
+    "authActiveAuthMethods",
+    "authOpenIDIssuerURL",
+    "authOpenIDAuthorizationURL",
+    "authOpenIDTokenURL",
+    "authOpenIDUserInfoURL",
+    "authOpenIDJwksURL",
+    "authOpenIDLogoutURL",
+    "authOpenIDClientID",
+    "authOpenIDClientSecret",
+    "authOpenIDTokenSigningAlgorithm",
+    "authOpenIDButtonText",
+    "authOpenIDAutoLaunch",
+    "authOpenIDAutoRegister",
+    "authOpenIDMatchExistingBy",
+    "authOpenIDMobileRedirectURIs",
+    "authOpenIDGroupClaim",
+    "authOpenIDAdvancedPermsClaim",
+    "authOpenIDSubfolderForRedirectURLs",
+];
+
+/// The sign-in methods the server knows (`supportedAuthMethods`).
+pub const SUPPORTED_AUTH_METHODS: &[&str] = &["local", "openid"];
+
+/// The example of the OpenID permissions claim the settings page shows (`User.getSampleAbsPermissions`).
+pub const SAMPLE_PERMISSIONS: &str = "{\n  \"canDownload\": false,\n  \"canUpload\": false,\n  \"canDelete\": false,\n  \"canUpdate\": false,\n  \"canAccessExplicitContent\": false,\n  \"canAccessAllLibraries\": false,\n  \"canAccessAllTags\": false,\n  \"canCreateEReader\": false,\n  \"tagsAreDenylist\": false,\n  \"allowedLibraries\": [\n    \"5406ba8a-16e1-451d-96d7-4931b0a0d966\",\n    \"918fd848-7c1d-4a02-818a-847435a879ca\"\n  ],\n  \"allowedTags\": [\n    \"ExampleTag\",\n    \"AnotherTag\",\n    \"ThirdTag\"\n  ]\n}";
+
+/// Whether an app address may receive the OpenID sign-in (`isValidRedirectURI`: `scheme://host/path`, letters,
+/// digits, `_`, `.`, `-` and `/` only).
+pub fn is_redirect_uri(uri: &str) -> bool {
+    let word = |c: char| c.is_ascii_alphanumeric() || c == '_';
+    let Some((scheme, rest)) = uri.split_once("://") else { return false };
+    if scheme.is_empty() || !scheme.chars().all(word) {
+        return false;
+    }
+    let (host, path) = rest.split_once('/').map(|(h, p)| (h, Some(p))).unwrap_or((rest, None));
+    !host.is_empty()
+        && host.chars().all(|c| word(c) || c == '.' || c == '-')
+        && path.is_none_or(|p| p.chars().all(|c| word(c) || c == '.' || c == '/' || c == '-'))
+}
+
 /// The original's default log level (`LogLevel.INFO`).
 pub const LOG_LEVEL_INFO: i64 = 2;
 
@@ -343,6 +386,102 @@ impl ServerSettings {
         changed
     }
 
+    /// The sign-in settings an admin edits (`authenticationSettings`), with the sample of the OpenID permissions
+    /// claim.
+    pub fn authentication_settings(&self) -> Value {
+        let mut m = Map::new();
+        // a setting the original never set is left out of its JSON
+        for k in AUTH_KEYS {
+            if let Some(v) = self.get(k) {
+                m.insert((*k).to_string(), v.clone());
+            }
+        }
+        m.insert("authOpenIDSamplePermissions".into(), json!(SAMPLE_PERMISSIONS));
+        Value::Object(m)
+    }
+
+    /// Applies an admin's change to the sign-in settings (`updateAuthSettings`), checking each value like the
+    /// original: only known sign-in methods, valid app addresses for OpenID, true or false for the OpenID
+    /// switches, text or nothing for the rest (empty text is nothing); the sign-in message is cleaned of unsafe
+    /// HTML. Wrong values are skipped. Answers whether anything changed.
+    pub fn update_auth_settings(&mut self, payload: &Map<String, Value>) -> bool {
+        let mut changed = false;
+        for key in AUTH_KEYS.iter().chain(["authOpenIDSamplePermissions"].iter()) {
+            let Some(new) = payload.get(*key) else { continue };
+            match *key {
+                "authActiveAuthMethods" => {
+                    let mut methods: Vec<String> = new
+                        .as_array()
+                        .map(|a| {
+                            a.iter().filter_map(Value::as_str).filter(|m| SUPPORTED_AUTH_METHODS.contains(m)).map(str::to_string).collect()
+                        })
+                        .unwrap_or_default();
+                    if methods.is_empty() {
+                        tracing::warn!("The sign-in methods sent aren't valid; they were left as they were");
+                        continue;
+                    }
+                    methods.sort();
+                    let mut current = self.active_auth_methods();
+                    current.sort();
+                    self.0.insert((*key).into(), json!(current));
+                    if methods != current {
+                        self.0.insert((*key).into(), json!(methods));
+                        changed = true;
+                    }
+                }
+                "authOpenIDMobileRedirectURIs" => {
+                    let Some(uris) = new.as_array() else { continue };
+                    let star = uris.iter().any(|u| u == "*");
+                    if (star && uris.len() > 1) || uris.iter().any(|u| u != "*" && !u.as_str().is_some_and(is_redirect_uri)) {
+                        tracing::warn!("The app addresses for OpenID sent aren't valid; they were left as they were");
+                        continue;
+                    }
+                    let current = self.get(key).and_then(Value::as_array).cloned().unwrap_or_default();
+                    if current.iter().any(|u| !uris.contains(u)) || uris.iter().any(|u| !current.contains(u)) {
+                        self.0.insert((*key).into(), Value::Array(uris.clone()));
+                        changed = true;
+                    }
+                }
+                _ => {
+                    if ["authOpenIDAutoLaunch", "authOpenIDAutoRegister"].contains(key) {
+                        if !new.is_boolean() {
+                            continue;
+                        }
+                    } else if !new.is_null() && !new.is_string() {
+                        continue;
+                    }
+                    let keeps_empty = *key == "authOpenIDSubfolderForRedirectURLs";
+                    let mut value = new.clone();
+                    if value == json!("") && !keeps_empty {
+                        value = Value::Null;
+                    }
+                    if *key == "authLoginCustomMessage" {
+                        if let Some(text) = value.as_str() {
+                            let clean = crate::abs::html::sanitize(Some(text));
+                            value = if clean.is_empty() { Value::Null } else { json!(clean) };
+                        }
+                    }
+                    let mut current = if *key == "authOpenIDSamplePermissions" {
+                        json!(SAMPLE_PERMISSIONS)
+                    } else {
+                        self.get(key).cloned().unwrap_or(Value::Null)
+                    };
+                    if current == json!("") && !keeps_empty {
+                        current = Value::Null;
+                    }
+                    if value != current {
+                        // the original sets the sample on the settings object, where it is never stored
+                        if *key != "authOpenIDSamplePermissions" {
+                            self.0.insert((*key).into(), value);
+                        }
+                        changed = true;
+                    }
+                }
+            }
+        }
+        changed
+    }
+
     /// Reads the stored settings (`Setting.getOldSettings`), or the defaults when none are stored.
     pub fn load(db: &dyn Db, metadata_path: &str) -> Result<ServerSettings> {
         let row: Option<Setting> = models::find_by(db, "key", "server-settings")?;
@@ -402,6 +541,16 @@ fn device_allowed(device: &Value, u: &models::User) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn app_addresses_for_openid_are_checked_like_the_original() {
+        for ok in ["audiobookshelf://oauth", "folio://cb", "my_app://host.name-1/a/b.c-d/", "x://h/"] {
+            assert!(is_redirect_uri(ok), "{ok}");
+        }
+        for bad in ["", "oauth", "://host", "a b://h", "app://", "app://h?x=1", "app://h/p q", "https://h:8080/"] {
+            assert!(!is_redirect_uri(bad), "{bad}");
+        }
+    }
 
     fn fixture_settings() -> Value {
         crate::abs::tests_support::fixture("authorize")["serverSettings"].clone()

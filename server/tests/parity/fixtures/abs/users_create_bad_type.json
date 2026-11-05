@@ -1,0 +1,14 @@
+{
+ "body": "Invalid account type",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "password": "pw",
+   "type": "root",
+   "username": "other"
+  },
+  "method": "POST",
+  "path": "/api/users"
+ },
+ "status": 400
+}
