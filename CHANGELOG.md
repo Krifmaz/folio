@@ -8,6 +8,25 @@
   added, whose places have an account to go to, what needs you and why), then bring it in. Exact editions by ASIN or
   ISBN only, never guessed; the wanted list; everyone's places and bookmarks (an older place never replaces a newer
   one); migrated books' files wait for the import. Running it again adds nothing twice.
+- Download a book to the browser (Download on the player and the reader): it then opens, plays and reads with no
+  connection, at the place you were; places made offline go to the server when the connection is back.
+- Listen and Read in the web app. The audiobook player plays a book's files as one book with its chapters, speed,
+  a sleep timer (minutes or the end of the chapter), bookmarks with notes, media keys and the lock screen. The EPUB
+  reader shows the book in pages in the app's colours, with its contents, text size, bookmarks and page turns by
+  buttons, keys or a tap on the page's edge; the book's own scripts never run. Both keep your place on the server
+  (every device carries on from it) and keep it in the browser until the server can be reached again.
+- Other apps page (in the sidebar): the addresses for OPDS, Audiobookshelf apps, KOReader and Kobo, each with
+  Copy, the KOReader sync password and the Kobo sync address.
+- Kobo sync: a Kobo e-reader syncs Folio's ebooks over Wi-Fi with covers, series and places kept in step
+  with Folio. Its address is on the Other apps page.
+- Audiobookshelf apps work with Folio (the official app, ShelfPlayer, Plappa …): sign in with your Folio
+  account, browse Audiobooks and Ebooks, play with chapters, and keep your place and bookmarks in step with Folio,
+  offline listening included.
+- KOReader progress sync at `/koreader`: KOReader's place is the book's place in Folio and back (to the
+  chapter), with a KOReader sync password of its own; books outside the library sync between KOReaders too.
+- OPDS catalogue at `/opds` for e-readers and reading apps (KOReader, Moon+ Reader, Thorium …): new books,
+  audiobooks, ebooks, authors, series and search, with covers and every file to download. Sign in with your
+  Folio username and password. How to set each app up is in `docs/COMPAT.md`.
 - Listening and reading on the server: each book's files are sent whole or in parts (so players can jump anywhere)
   with an ETag; each person's place in each book and their bookmarks are kept, and the newest place wins across
   devices (`/api/files`, `/api/progress`, `/api/editions/{id}/bookmarks`).
@@ -25,6 +44,12 @@
   jump, and waits on the phone while the server can't be reached.
 - Android: Library page (search titles and authors, All, Audiobooks or Ebooks) and a book page with every exact
   edition and its facts: narrator, runtime, abridged or not, language, pages, ASIN or ISBN.
+- Import: checked downloads are filed in the library folder as `Author/Series/NN - Title (Year)/`. Audiobooks
+  become one chaptered M4B with the edition's tags, Audnexus chapters (or one per file) and cover; several MP3s
+  are joined into it. EPUBs get the edition's title, authors, language, ISBN, series and cover. With "Clean up
+  files" off (Settings → Downloads) the downloads are hardlinked in unchanged. Lantern's copy is never touched,
+  so it keeps seeding. A download that can't be filed says why and has File again under Downloads. Diagnostics
+  checks the library folder.
 - Verification before import: every download is checked against the edition you asked for. Audiobooks: runtime
   within 3%, narrator, language, chapter count, and nothing marking a sample or an abridged copy (read with
   ffprobe, which the image now carries). Ebooks: a valid EPUB without DRM whose own ISBN, title, author and

@@ -105,6 +105,22 @@ default = "/library"
 group = "library"
 label = "Library folder"
 help = "The folder Folio files books into, for example /library."
+type = "path"
+
+[keys.import_rewrite]
+env = "APP_IMPORT_REWRITE"
+default = true
+group = "library"
+label = "Clean up files"
+help = "Make one chaptered M4B with tags and cover from every audiobook, and write the edition's details into every EPUB. Off: the downloaded files are hardlinked in unchanged."
+type = "bool"
+
+[keys.ffmpeg]
+env = "APP_FFMPEG"
+default = "ffmpeg"
+group = "library"
+label = "ffmpeg program"
+help = "Joins and tags audiobooks. Folio's image has it; elsewhere, its path."
 
 [groups.searching]
 section = "downloads"

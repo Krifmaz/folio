@@ -25,6 +25,8 @@ pub struct AudioFile {
     pub duration_ms: u64,
     /// the chapters it carries
     pub chapters: usize,
+    /// those chapters: title, start and end in ms from the start of this file
+    pub chapter_list: Vec<(String, u64, u64)>,
     /// its tags, by lower-case name
     pub tags: BTreeMap<String, String>,
     /// the audio stream's language tag (`eng`), "" when it has none
@@ -94,10 +96,18 @@ pub fn parse(path: PathBuf, v: &Value) -> AudioFile {
             }
         }
     }
+    let ms = |c: &Value, k: &str| (c[k].as_str().and_then(|s| s.parse::<f64>().ok()).unwrap_or(0.0) * 1000.0).round() as u64;
+    let chapter_list: Vec<(String, u64, u64)> = v["chapters"]
+        .as_array()
+        .map(|a| {
+            a.iter().map(|c| (c["tags"]["title"].as_str().unwrap_or("").to_string(), ms(c, "start_time"), ms(c, "end_time"))).collect()
+        })
+        .unwrap_or_default();
     AudioFile {
         path,
         duration_ms: (secs * 1000.0).round() as u64,
-        chapters: v["chapters"].as_array().map(Vec::len).unwrap_or(0),
+        chapters: chapter_list.len(),
+        chapter_list,
         language: audio["tags"]["language"].as_str().unwrap_or("").to_lowercase(),
         tags,
     }
@@ -295,6 +305,7 @@ mod tests {
             chapters,
             tags: tags.iter().map(|(k, v)| (k.to_string(), v.to_string())).collect(),
             language: lang.into(),
+            ..Default::default()
         }])
     }
 
@@ -344,10 +355,11 @@ mod tests {
         let v: Value = serde_json::json!({
             "format": {"duration": "61.500", "tags": {"ALBUM": "Book", "composer": "Ray Porter"}},
             "streams": [{"codec_type": "audio", "tags": {"language": "eng"}}],
-            "chapters": [{}, {}]
+            "chapters": [{"start_time": "0.000", "end_time": "30.000", "tags": {"title": "One"}}, {"start_time": "30.000", "end_time": "61.500"}]
         });
         let f = parse("x.m4b".into(), &v);
         assert_eq!((f.duration_ms, f.chapters, f.language.as_str()), (61_500, 2, "eng"));
         assert_eq!(f.tags.get("album").map(String::as_str), Some("Book"));
+        assert_eq!(f.chapter_list[0], ("One".to_string(), 0, 30_000));
     }
 }

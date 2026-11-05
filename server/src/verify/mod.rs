@@ -262,7 +262,9 @@ async fn accept(State(st): State<AppState>, Admin(a): Admin, Path(id): Path<i64>
     let g = in_review(&st.db, id)?;
     st.db.execute("UPDATE grabs SET status='verified', updated_at=? WHERE id=?", p![now(), id])?;
     wanted::set_status(&st.db, g.i("wanted_id"), "verified", &format!("{} checked \"{}\" and accepted it.", a.username, g.s("title")))?;
-    item(&st.db, id).map(Json)
+    let answer = item(&st.db, id)?;
+    crate::import::spawn_pending(&st);
+    Ok(Json(answer))
 }
 
 /// A rejection's reason.

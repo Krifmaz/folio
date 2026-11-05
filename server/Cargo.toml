@@ -51,6 +51,8 @@ unicode-normalization = "0.1"
 tower = { version = "0.5", features = ["util"] }
 # Track D (migration): reading the other apps' databases
 folio-migrate = { path = "crates/migrate" }
+# Track C (compatibility): KOReader's MD5s (EPUBs are read with core's zip above)
+md-5 = "0.10"
 
 [build-dependencies]
 kit-server-settings = { git = "https://github.com/Krifmaz/kit", tag = "v0.2.2", default-features = false, features = ["toml"] }
