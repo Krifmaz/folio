@@ -1,5 +1,6 @@
 //! Bringing a plan in: each book and wanted entry is matched to its exact edition, then (in a real run) the edition
-//! is kept, wanted, given its people's progress and bookmarks, and its files are queued for the import.
+//! is kept, wanted, given its people's progress and bookmarks, and its files are handed to the import, which checks
+//! them like a download and files them in the library (the source files stay where they are).
 //!
 //! **Never a guess.** An audiobook is matched only by its Audible ASIN and an ebook only by its ISBN. A book without
 //! one is listed as needing a person, with the reason, and nothing is added for it.
@@ -78,8 +79,10 @@ pub struct Counts {
     pub in_folio: usize,
     /// added (or, in a dry run, to be looked up and added)
     pub added: usize,
-    /// books whose files wait for the import
+    /// books whose files go to the import (dry run: would go)
     pub files_queued: usize,
+    /// books handed to the import in this run: it checks each, then files it or puts it in the Review queue
+    pub files_handed: usize,
     /// put on the wanted list (dry run: to be)
     pub wanted: usize,
     /// progress entries brought in (dry run: to be)
@@ -200,6 +203,11 @@ pub async fn apply(st: &AppState, run_id: i64, plan: Plan, opts: &Options, by: i
     }
 
     let mut skipped = plan.skipped.clone();
+    if !opts.dry_run {
+        let handed = store::hand_over(db)?;
+        counts.files_handed = handed.handed;
+        skipped.extend(handed.missing.into_iter().map(|(item, reason)| left_out(&item, reason)));
+    }
     let users = pair_users(db, &plan, opts)?;
     let account: HashMap<&str, Option<i64>> = users.iter().map(|u| (u.name.as_str(), u.user_id)).collect();
     let target = |source_id: &str, targets: &HashMap<String, Target>| -> Result<Option<Target>> {

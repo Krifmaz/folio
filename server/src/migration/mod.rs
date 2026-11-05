@@ -11,7 +11,7 @@
 //!                                  it (dry run) or bring it in, in the background: the new run
 //! GET  /api/migrate/runs           (admins) every run, newest first: {runs: [...]}
 //! GET  /api/migrate/runs/{id}      (admins) one run, how far it got, and its report when done
-//! GET  /api/migrate/waiting        (admins) migrated books whose files wait for the import: {books: [...]}
+//! GET  /api/migrate/waiting        (admins) migrated books whose files haven't gone to the import yet, with why: {books: [...]}
 //! ```
 
 pub mod apply;
