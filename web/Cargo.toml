@@ -18,7 +18,19 @@ kit-rules = { git = "https://github.com/Krifmaz/kit", tag = "v0.2.2" }
 leptos = { version = "=0.8.23", features = ["csr"] }
 serde_json = "1"
 wasm-bindgen = "0.2"
-web-sys = { version = "0.3", features = ["Document", "Element", "HtmlElement", "HtmlFormElement", "HtmlInputElement", "Location", "Window"] }
+web-sys = { version = "0.3", features = ["Document", "Element", "HtmlElement", "HtmlFormElement", "HtmlInputElement", "Location", "Window",
+  # Track A (player and reader)
+  "HtmlMediaElement", "HtmlAudioElement", "MediaError", "Navigator", "KeyboardEvent", "Storage", "HtmlIFrameElement", "HtmlCollection", "Node",
+  "NodeList", "DomParser", "SupportedType", "XmlSerializer", "Blob", "BlobPropertyBag", "Url", "DomRect", "MouseEvent",
+  "CssStyleDeclaration", "Response", "ResponseInit", "Headers", "CacheStorage", "Cache", "ReadableStream",
+  "ReadableStreamDefaultReader", "StorageManager"] }
+# Track A (player and reader): the audio element, media keys, storage and promises
+js-sys = "0.3"
+wasm-bindgen-futures = "0.4"
+# Track A: opening EPUBs in the browser (zip with Rust's own deflate, the package's XML)
+zip = { version = "9", default-features = false, features = ["deflate-flate2"] }
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+roxmltree = "0.21"
 
 [lints.rust]
 missing_docs = "warn"
