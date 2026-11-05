@@ -11,7 +11,7 @@ No new features until every row is `done` or `n/a`. Then improvements go on top.
 
 | Track | PARITY rows | Owns |
 | --- | --- | --- |
-| **Core** | `P0` data model, `P2 users`, `P6 server admin` | `server/src/abs/{mod,db,models,auth,users,me,sessions_auth,socket,admin,backups,notifications,logs,cache,tools,settings}*`, `server/tests/parity/` (fixtures, harness), `server/tests/parity_abs_{users,admin}.rs`, `scripts/`, `UPSTREAM.*`, everything from phase 1 that no track owns |
+| **Core** | `P0` data model, `P2 users`, `P6 server admin` | `server/src/abs/{mod.rs,schema.sql,socket.rs,auth,users,me,admin,backups,notifications,logs,cache,tools,settings}*`, `server/src/abs/models/{mod,rows}.rs` and the core models' files (`user`, `setting`, `api_key`, `session`), `scripts/abs-rows.py`, `server/tests/parity/` (fixtures, harness), `server/tests/parity_abs_{users,admin}.rs`, `scripts/`, `UPSTREAM.*`, everything from phase 1 that no track owns |
 | **A: web and playback** | `W web fork`, `P3 playback`, the ebook reader (`F own pages`) | `abs-web/`, `server/src/abs/{playback,hls,sessions,progress,bookmarks}*`, `server/tests/parity_abs_playback.rs`, the build step that serves `abs-web` at `/`, `server/src/playback/`, `web/src/{player,reader,offline_media}.rs` |
 | **B: mobile** | `M mobile fork` | `abs-app/`, its CI job, and `android/` until the fork replaces it |
 | **C: library** | `P1 library`, `P4 collections`, `P5 podcasts and feeds` | `server/src/abs/{library,items,scanner,authors,series,search,collections,playlists,podcasts,feeds,match}*`, `server/tests/parity_abs_{library,collections,podcasts}.rs`, `server/src/compat/` |
@@ -21,6 +21,17 @@ The Review queue (verification) stays with core: `server/src/verify/`, `web/src/
 
 ### Shared files
 
+- **Models.** `server/src/abs/models/rows.rs` (generated from `schema.sql`, core) has one row type per table and
+  `models/mod.rs` the typed find, list, insert, update and delete. A model's behaviour (the JSON the API sends, its
+  rules) goes in `server/src/abs/models/<model>.rs`, owned by the track of its domain: C has `library_item`,
+  `book`, `podcast`, `podcast_episode`, `author`, `series`, `collection`, `playlist` and `feed`; A has
+  `playback_session`, `media_progress` and `device`; core has the rest. Add the file and its `pub mod` line in
+  `models/mod.rs`.
+- **Socket.** Emit through `st.sockets` (`server/src/abs/socket.rs`): `emitter`, `client_emitter`,
+  `admin_emitter`, `library_item_emitter`, `library_items_emitter`, named as in the original.
+- **Fixtures.** `server/tests/parity/` holds the harness (`mod.rs`: `fixture`, `assert_like`) and the recordings;
+  add requests to `abs/requests.json` (one entry each, any track) and copy the answers you need into
+  `fixtures/abs/`.
 - **`server/src/abs/mod.rs`** (core) declares every `abs` module and merges their routers. A track adds its own
   `pub mod x;` line and one `.merge(x::router())` line in its PR, and nothing else in that file.
 - **`server/src/lib.rs`**: the same, one line per new top-level module (`readarr`).

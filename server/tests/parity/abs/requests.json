@@ -1,0 +1,349 @@
+[
+ {
+  "name": "status",
+  "path": "/status",
+  "auth": false
+ },
+ {
+  "name": "ping",
+  "path": "/ping",
+  "auth": false
+ },
+ {
+  "name": "healthcheck",
+  "path": "/healthcheck",
+  "auth": false
+ },
+ {
+  "name": "me",
+  "path": "/api/me"
+ },
+ {
+  "name": "authorize",
+  "path": "/api/authorize",
+  "method": "POST"
+ },
+ {
+  "name": "libraries",
+  "path": "/api/libraries"
+ },
+ {
+  "name": "library",
+  "path": "/api/libraries/{library}?include=filterdata"
+ },
+ {
+  "name": "library_items",
+  "path": "/api/libraries/{library}/items?sort=media.metadata.title&minified=1",
+  "save": {
+   "item": "results.0.id",
+   "item2": "results.1.id",
+   "item3": "results.2.id"
+  }
+ },
+ {
+  "name": "library_items_full",
+  "path": "/api/libraries/{library}/items?sort=media.metadata.title"
+ },
+ {
+  "name": "library_items_desc",
+  "path": "/api/libraries/{library}/items?sort=media.metadata.title&desc=1&limit=2&page=0"
+ },
+ {
+  "name": "library_items_collapse",
+  "path": "/api/libraries/{library}/items?collapseseries=1&minified=1"
+ },
+ {
+  "name": "library_series",
+  "path": "/api/libraries/{library}/series",
+  "save": {
+   "series": "results.0.id"
+  }
+ },
+ {
+  "name": "library_series_one",
+  "path": "/api/libraries/{library}/series/{series}"
+ },
+ {
+  "name": "library_authors",
+  "path": "/api/libraries/{library}/authors",
+  "save": {
+   "author": "authors.0.id"
+  }
+ },
+ {
+  "name": "library_narrators",
+  "path": "/api/libraries/{library}/narrators"
+ },
+ {
+  "name": "library_collections",
+  "path": "/api/libraries/{library}/collections"
+ },
+ {
+  "name": "library_playlists",
+  "path": "/api/libraries/{library}/playlists"
+ },
+ {
+  "name": "library_personalized",
+  "path": "/api/libraries/{library}/personalized"
+ },
+ {
+  "name": "library_filterdata",
+  "path": "/api/libraries/{library}/filterdata"
+ },
+ {
+  "name": "library_search",
+  "path": "/api/libraries/{library}/search?q=justice"
+ },
+ {
+  "name": "library_stats",
+  "path": "/api/libraries/{library}/stats"
+ },
+ {
+  "name": "library_recent_episodes",
+  "path": "/api/libraries/{library}/recent-episodes"
+ },
+ {
+  "name": "item",
+  "path": "/api/items/{item}"
+ },
+ {
+  "name": "item_expanded",
+  "path": "/api/items/{item}?expanded=1&include=progress,rssfeed,authors,downloads"
+ },
+ {
+  "name": "item2_expanded",
+  "path": "/api/items/{item2}?expanded=1"
+ },
+ {
+  "name": "item3_expanded",
+  "path": "/api/items/{item3}?expanded=1"
+ },
+ {
+  "name": "item_cover",
+  "path": "/api/items/{item}/cover"
+ },
+ {
+  "name": "item_missing",
+  "path": "/api/items/00000000-0000-0000-0000-000000000000"
+ },
+ {
+  "name": "author",
+  "path": "/api/authors/{author}?include=items,series"
+ },
+ {
+  "name": "series",
+  "path": "/api/series/{series}"
+ },
+ {
+  "name": "series_missing",
+  "path": "/api/series/00000000-0000-0000-0000-000000000000"
+ },
+ {
+  "name": "me_progress_missing",
+  "path": "/api/me/progress/{item}"
+ },
+ {
+  "name": "me_progress_set",
+  "path": "/api/me/progress/{item}",
+  "method": "PATCH",
+  "body": {
+   "currentTime": 30,
+   "duration": 60,
+   "progress": 0.5
+  }
+ },
+ {
+  "name": "me_progress",
+  "path": "/api/me/progress/{item}"
+ },
+ {
+  "name": "me_items_in_progress",
+  "path": "/api/me/items-in-progress"
+ },
+ {
+  "name": "me_listening_sessions",
+  "path": "/api/me/listening-sessions"
+ },
+ {
+  "name": "me_listening_stats",
+  "path": "/api/me/listening-stats"
+ },
+ {
+  "name": "me_bookmark_add",
+  "path": "/api/me/item/{item}/bookmark",
+  "method": "POST",
+  "body": {
+   "time": 12,
+   "title": "A mark"
+  }
+ },
+ {
+  "name": "me_after_bookmark",
+  "path": "/api/me"
+ },
+ {
+  "name": "users",
+  "path": "/api/users"
+ },
+ {
+  "name": "user_online",
+  "path": "/api/users/online"
+ },
+ {
+  "name": "sessions",
+  "path": "/api/sessions"
+ },
+ {
+  "name": "collection_create",
+  "path": "/api/collections",
+  "method": "POST",
+  "body": {
+   "libraryId": "{library}",
+   "name": "Favourites",
+   "books": [
+    "{item}"
+   ]
+  },
+  "save": {
+   "collection": "id"
+  }
+ },
+ {
+  "name": "collection",
+  "path": "/api/collections/{collection}"
+ },
+ {
+  "name": "collections",
+  "path": "/api/collections"
+ },
+ {
+  "name": "playlist_create",
+  "path": "/api/playlists",
+  "method": "POST",
+  "body": {
+   "libraryId": "{library}",
+   "name": "Queue",
+   "items": [
+    {
+     "libraryItemId": "{item2}"
+    }
+   ]
+  },
+  "save": {
+   "playlist": "id"
+  }
+ },
+ {
+  "name": "playlist",
+  "path": "/api/playlists/{playlist}"
+ },
+ {
+  "name": "play",
+  "path": "/api/items/{item}/play",
+  "method": "POST",
+  "body": {
+   "deviceInfo": {
+    "clientName": "parity",
+    "deviceId": "parity-1"
+   },
+   "supportedMimeTypes": [
+    "audio/mp4",
+    "audio/mpeg"
+   ],
+   "forceDirectPlay": true,
+   "mediaPlayer": "html5"
+  },
+  "save": {
+   "session": "id"
+  }
+ },
+ {
+  "name": "session_sync",
+  "path": "/api/session/{session}/sync",
+  "method": "POST",
+  "body": {
+   "currentTime": 10,
+   "timeListened": 10,
+   "duration": 60
+  }
+ },
+ {
+  "name": "session_close",
+  "path": "/api/session/{session}/close",
+  "method": "POST",
+  "body": {
+   "currentTime": 15,
+   "timeListened": 5,
+   "duration": 60
+  }
+ },
+ {
+  "name": "session",
+  "path": "/api/sessions/{session}"
+ },
+ {
+  "name": "auth_settings",
+  "path": "/api/auth-settings"
+ },
+ {
+  "name": "tags",
+  "path": "/api/tags"
+ },
+ {
+  "name": "genres",
+  "path": "/api/genres"
+ },
+ {
+  "name": "backups",
+  "path": "/api/backups"
+ },
+ {
+  "name": "notifications",
+  "path": "/api/notifications"
+ },
+ {
+  "name": "notification_data",
+  "path": "/api/notificationdata"
+ },
+ {
+  "name": "emails",
+  "path": "/api/emails/settings"
+ },
+ {
+  "name": "custom_metadata_providers",
+  "path": "/api/custom-metadata-providers"
+ },
+ {
+  "name": "filesystem",
+  "path": "/api/filesystem"
+ },
+ {
+  "name": "logger_data",
+  "path": "/api/logger-data"
+ },
+ {
+  "name": "search_providers",
+  "path": "/api/search/providers"
+ },
+ {
+  "name": "stats_year",
+  "path": "/api/me/stats/year/2026"
+ },
+ {
+  "name": "feeds",
+  "path": "/api/feeds"
+ },
+ {
+  "name": "api_keys",
+  "path": "/api/api-keys"
+ },
+ {
+  "name": "unauthorized",
+  "path": "/api/libraries",
+  "auth": false
+ },
+ {
+  "name": "not_found",
+  "path": "/api/does-not-exist"
+ }
+]

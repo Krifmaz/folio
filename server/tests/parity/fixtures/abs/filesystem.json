@@ -1,0 +1,114 @@
+{
+ "body": {
+  "directories": [
+   {
+    "dirname": "app",
+    "level": 0,
+    "path": "/app"
+   },
+   {
+    "dirname": "bin",
+    "level": 0,
+    "path": "/bin"
+   },
+   {
+    "dirname": "config",
+    "level": 0,
+    "path": "/config"
+   },
+   {
+    "dirname": "dev",
+    "level": 0,
+    "path": "/dev"
+   },
+   {
+    "dirname": "etc",
+    "level": 0,
+    "path": "/etc"
+   },
+   {
+    "dirname": "home",
+    "level": 0,
+    "path": "/home"
+   },
+   {
+    "dirname": "lib",
+    "level": 0,
+    "path": "/lib"
+   },
+   {
+    "dirname": "media",
+    "level": 0,
+    "path": "/media"
+   },
+   {
+    "dirname": "metadata",
+    "level": 0,
+    "path": "/metadata"
+   },
+   {
+    "dirname": "mnt",
+    "level": 0,
+    "path": "/mnt"
+   },
+   {
+    "dirname": "opt",
+    "level": 0,
+    "path": "/opt"
+   },
+   {
+    "dirname": "proc",
+    "level": 0,
+    "path": "/proc"
+   },
+   {
+    "dirname": "root",
+    "level": 0,
+    "path": "/root"
+   },
+   {
+    "dirname": "run",
+    "level": 0,
+    "path": "/run"
+   },
+   {
+    "dirname": "sbin",
+    "level": 0,
+    "path": "/sbin"
+   },
+   {
+    "dirname": "srv",
+    "level": 0,
+    "path": "/srv"
+   },
+   {
+    "dirname": "sys",
+    "level": 0,
+    "path": "/sys"
+   },
+   {
+    "dirname": "tmp",
+    "level": 0,
+    "path": "/tmp"
+   },
+   {
+    "dirname": "usr",
+    "level": 0,
+    "path": "/usr"
+   },
+   {
+    "dirname": "var",
+    "level": 0,
+    "path": "/var"
+   }
+  ],
+  "posix": true
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/filesystem"
+ },
+ "status": 200
+}

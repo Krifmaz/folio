@@ -260,7 +260,7 @@ repository at the pinned commit.
 | A0220 | endpoint | `GET /auth/openid/mobile-redirect` | `server/Auth.js#L380` | P2 users | todo |  |
 | A0221 | endpoint | `GET /auth/openid/config` | `server/Auth.js#L464` | P2 users | todo |  |
 | A0222 | endpoint | `POST /logout` | `server/Auth.js#L486` | P2 users | todo |  |
-| A0223 | socket | client → server `auth` | `server/SocketAuthority.js#L188` | P2 users | todo |  |
+| A0223 | socket | client → server `auth` | `server/SocketAuthority.js#L188` | P2 users | wip | refusal done (`server/tests/abs_socket.rs`); tokens with P2 |
 | A0224 | socket | client → server `cancel_scan` | `server/SocketAuthority.js#L191` | P2 users | todo |  |
 | A0225 | socket | client → server `search_covers` | `server/SocketAuthority.js#L197` | P2 users | todo |  |
 | A0226 | socket | client → server `cancel_cover_search` | `server/SocketAuthority.js#L198` | P2 users | todo |  |
@@ -268,7 +268,7 @@ repository at the pinned commit.
 | A0228 | socket | client → server `remove_log_listener` | `server/SocketAuthority.js#L210` | P2 users | todo |  |
 | A0229 | socket | client → server `disconnect` | `server/SocketAuthority.js#L213` | P2 users | todo |  |
 | A0230 | socket | client → server `message_all_users` | `server/SocketAuthority.js#L239` | P2 users | todo |  |
-| A0231 | socket | client → server `ping` | `server/SocketAuthority.js#L249` | P2 users | todo |  |
+| A0231 | socket | client → server `ping` | `server/SocketAuthority.js#L249` | P2 users | done | `server/tests/abs_socket.rs::apps_connect_and_a_bad_token_gets_auth_failed` |
 | A0232 | socket | server → client `admin_message` | `server/SocketAuthority.js#L244` | P2 users | todo |  |
 | A0233 | socket | server → client `author_added` | `server/models/Book.js#L471` | P2 users | todo |  |
 | A0234 | socket | server → client `author_removed` | `server/controllers/AuthorController.js#L162` | P2 users | todo |  |
