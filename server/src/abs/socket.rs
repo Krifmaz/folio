@@ -6,7 +6,7 @@
 //! to one user's clients, [`Sockets::admin_emitter`] to admins, and [`Sockets::library_item_emitter`] to the
 //! clients allowed to see an item.
 
-use crate::abs::models::User;
+use crate::abs::models::{self, user, User};
 use crate::AppState;
 use serde::Serialize;
 use serde_json::Value;
@@ -32,8 +32,8 @@ pub struct Sockets {
 }
 
 /// Whether a user is an admin or the root user (`isAdminOrUp`).
-pub fn is_admin_or_up(user: &User) -> bool {
-    matches!(user.kind.as_deref(), Some("admin" | "root"))
+pub fn is_admin_or_up(u: &User) -> bool {
+    user::is_admin_or_up(u)
 }
 
 impl Sockets {
@@ -45,6 +45,26 @@ impl Sockets {
     /// The clients signed in as this user.
     pub fn clients_for_user(&self, user_id: &str) -> Vec<Client> {
         self.clients().into_iter().filter(|c| c.user.as_ref().and_then(|u| u.id.as_deref()) == Some(user_id)).collect()
+    }
+
+    /// The signed-in users with how many sockets each has open (`getUsersOnline`): each user's public JSON
+    /// plus `connections`.
+    pub fn users_online(&self) -> Vec<Value> {
+        let mut order: Vec<String> = Vec::new();
+        let mut seen: HashMap<String, Value> = HashMap::new();
+        for u in self.clients().into_iter().filter_map(|c| c.user) {
+            let id = u.id.clone().unwrap_or_default();
+            match seen.get_mut(&id) {
+                Some(j) => j["connections"] = Value::from(j["connections"].as_i64().unwrap_or(0) + 1),
+                None => {
+                    let mut j = user::to_json_for_public(&u, None);
+                    j["connections"] = Value::from(1);
+                    order.push(id.clone());
+                    seen.insert(id, j);
+                }
+            }
+        }
+        order.into_iter().filter_map(|id| seen.remove(&id)).collect()
     }
 
     /// Records the user a socket signed in as.
@@ -127,21 +147,34 @@ async fn on_connect(socket: SocketRef, State(st): State<AppState>) {
         let _ = s.emit("pong", &NoArgs());
     });
     socket.on_disconnect(async |s: SocketRef, State(st): State<AppState>| {
-        st.sockets.remove(&s.id.to_string());
+        if let Some(u) = st.sockets.remove(&s.id.to_string()).and_then(|c| c.user) {
+            st.sockets.admin_emitter("user_offline", &user::to_json_for_public(&u, None));
+        }
     });
 }
 
-/// `auth`: signs the socket in with the token the app holds, or answers `auth_failed`.
+/// `auth`: signs the socket in with the token the app holds (`authenticateSocket`), or answers `auth_failed`.
+/// Admins are told the user came online; the user's `lastSeen` is updated; the socket gets `init` (with who is
+/// online, for admins).
 async fn on_auth(socket: SocketRef, Data(token): Data<Value>, State(st): State<AppState>) {
     let token = token.as_str().unwrap_or_default().to_string();
-    match crate::abs::socket_user(&st, &token).await {
-        Ok(user) => {
-            let payload = serde_json::json!({ "userId": user.id, "username": user.username });
-            st.sockets.set_user(&socket.id.to_string(), user);
-            let _ = socket.emit("init", &payload);
-        }
+    let mut user = match crate::abs::socket_user(&st, &token) {
+        Ok(u) => u,
         Err(message) => {
+            tracing::warn!("A socket couldn't sign in: {message}");
             let _ = socket.emit("auth_failed", &serde_json::json!({ "message": message }));
+            return;
         }
+    };
+    st.sockets.set_user(&socket.id.to_string(), user.clone());
+    st.sockets.admin_emitter("user_online", &user::to_json_for_public(&user, None));
+    user.last_seen = Some(models::date_now());
+    if let Err(e) = models::update(&st.abs, &user) {
+        tracing::warn!("The user's last seen time couldn't be saved: {}", e.detail);
     }
+    let mut payload = serde_json::json!({ "userId": user.id, "username": user.username });
+    if user::is_admin_or_up(&user) {
+        payload["usersOnline"] = Value::Array(st.sockets.users_online());
+    }
+    let _ = socket.emit("init", &payload);
 }

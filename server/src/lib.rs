@@ -96,6 +96,8 @@ pub struct AppState {
     pub abs: SqliteDb,
     /// The Audiobookshelf port's connected socket clients.
     pub sockets: abs::socket::Sockets,
+    /// The Audiobookshelf port's settings, tokens and sign-in limit.
+    pub abs_server: abs::Server,
 }
 
 impl AppState {
@@ -126,6 +128,8 @@ impl AppState {
         compat::migrate(&db)?;
         migration::migrate(&db)?;
         let abs = abs::open(data)?;
+        let abs_server =
+            abs::Server::load(&abs, data).map_err(|e| anyhow::anyhow!("The Audiobookshelf settings can't be read: {}", e.detail))?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -148,6 +152,7 @@ impl AppState {
             http: metadata::http_client(),
             abs,
             sockets: abs::socket::Sockets::default(),
+            abs_server,
         })
     }
 

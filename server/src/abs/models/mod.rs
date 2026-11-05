@@ -5,7 +5,9 @@
 //! Behaviour of a model (its JSON for the API, its rules) lives in a file of its own next to this one, owned by
 //! the track that ports that part (docs/TRACKS.md).
 
+pub mod media_progress;
 pub mod rows;
+pub mod user;
 
 pub use rows::*;
 
