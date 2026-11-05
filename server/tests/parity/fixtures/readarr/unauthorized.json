@@ -1,0 +1,10 @@
+{
+ "body": "",
+ "content_type": "",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/author"
+ },
+ "status": 401
+}

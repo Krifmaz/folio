@@ -1,0 +1,170 @@
+{
+ "body": [
+  {
+   "addOptions": {
+    "booksToMonitor": [],
+    "monitor": "all",
+    "monitored": true,
+    "searchForMissingBooks": false
+   },
+   "added": "2025-05-01T09:30:00Z",
+   "authorMetadataId": 1,
+   "authorName": "Terry Pratchett",
+   "authorNameLastFirst": "Pratchett, Terry",
+   "cleanName": "terrypratchett",
+   "ended": true,
+   "foreignAuthorId": "1654",
+   "genres": [
+    "fantasy",
+    "humor"
+   ],
+   "id": 1,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg",
+     "url": "/MediaCover/1/poster.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/1654.Terry_Pratchett"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": true,
+   "nextBook": {
+    "addOptions": {
+     "addType": "automatic",
+     "searchForNewBook": false
+    },
+    "added": "2025-05-01T09:30:00Z",
+    "anyEditionOk": true,
+    "author": null,
+    "authorMetadata": null,
+    "authorMetadataId": 1,
+    "bookFiles": null,
+    "cleanTitle": "abooknotoutyet",
+    "editions": null,
+    "foreignBookId": "9000001",
+    "genres": [],
+    "id": 3,
+    "links": [],
+    "monitored": true,
+    "ratings": {
+     "popularity": 0,
+     "value": 0,
+     "votes": 0
+    },
+    "relatedBooks": [],
+    "releaseDate": "2099-01-01T00:00:00Z",
+    "seriesLinks": null,
+    "title": "A Book Not Out Yet",
+    "titleSlug": "9000001"
+   },
+   "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+   "path": "/books/Terry Pratchett",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 6195000,
+    "value": 4.13,
+    "votes": 1500000
+   },
+   "rootFolderPath": "/books/",
+   "sortName": "terry pratchett",
+   "sortNameLastFirst": "pratchett, terry",
+   "statistics": {
+    "availableBookCount": 1,
+    "bookCount": 2,
+    "bookFileCount": 1,
+    "percentOfBooks": 50.0,
+    "sizeOnDisk": 2048,
+    "totalBookCount": 3
+   },
+   "status": "ended",
+   "tags": [
+    1
+   ],
+   "titleSlug": "1654"
+  },
+  {
+   "added": "2025-05-02T09:30:00Z",
+   "authorMetadataId": 2,
+   "authorName": "Ursula K. Le Guin",
+   "authorNameLastFirst": "Le Guin, Ursula K.",
+   "cleanName": "ursulakleguin",
+   "ended": false,
+   "foreignAuthorId": "874602",
+   "genres": [],
+   "id": 2,
+   "images": [],
+   "lastBook": {
+    "addOptions": {
+     "addType": "automatic",
+     "searchForNewBook": false
+    },
+    "added": "2025-05-02T09:30:00Z",
+    "anyEditionOk": false,
+    "author": null,
+    "authorMetadata": null,
+    "authorMetadataId": 2,
+    "bookFiles": null,
+    "cleanTitle": "awizardofearthsea",
+    "editions": null,
+    "foreignBookId": "1561478",
+    "genres": [
+     "fantasy"
+    ],
+    "id": 4,
+    "links": [],
+    "monitored": false,
+    "ratings": {
+     "popularity": 1200000,
+     "value": 4.0,
+     "votes": 300000
+    },
+    "relatedBooks": [],
+    "releaseDate": "1968-01-01T00:00:00Z",
+    "seriesLinks": null,
+    "title": "A Wizard of Earthsea",
+    "titleSlug": "1561478"
+   },
+   "links": [],
+   "metadataProfileId": 2,
+   "monitorNewItems": "none",
+   "monitored": false,
+   "overview": "Ursula Kroeber Le Guin wrote Earthsea.",
+   "path": "/books/Ursula K. Le Guin",
+   "qualityProfileId": 2,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "rootFolderPath": "/books/",
+   "sortName": "ursula k. le guin",
+   "sortNameLastFirst": "le guin, ursula k.",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "status": "continuing",
+   "tags": [],
+   "titleSlug": "874602"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/author"
+ },
+ "status": 200
+}

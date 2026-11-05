@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start
+  rows, and its API v1 for reading authors, books, editions, series and book files, answering exactly like Readarr
+  0.4.19.2811 (checked against 34 recorded answers, errors included). Readarr's API key is Folio's.
 - Sign-in works like Audiobookshelf's: setting up the server, signing in with a name and password (the mobile app
   gets its tokens in the answer, the web app a cookie), refreshing and signing out, old tokens, API keys, the limit
   on sign-in attempts, and the apps' live connection. Each answer is checked against the original's own.
