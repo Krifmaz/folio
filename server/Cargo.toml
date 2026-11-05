@@ -59,6 +59,8 @@ socketioxide = { version = "0.18", features = ["state"] }
 ammonia = "4"
 serde_urlencoded = "0.7"
 httpdate = "1"
+# P6 backups: a restore copies the backup's tables on a connection of its own (the kit's own rusqlite)
+rusqlite = { version = "0.39", features = ["bundled"] }
 # Track C (the library side): the scanner's file and tag patterns
 regex = "1"
 # Track D (the Readarr port): .NET patterns that look around (Readarr's name cleaning and naming tokens)

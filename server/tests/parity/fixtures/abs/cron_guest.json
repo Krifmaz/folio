@@ -1,0 +1,15 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "expression": "0 * * * *"
+  },
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "POST",
+  "path": "/api/validate-cron"
+ },
+ "status": 200
+}

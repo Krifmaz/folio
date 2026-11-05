@@ -1,0 +1,15 @@
+{
+ "body": {
+  "queuedTaskData": {
+   "embedMetadata": []
+  },
+  "tasks": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/tasks?include=queue"
+ },
+ "status": 200
+}

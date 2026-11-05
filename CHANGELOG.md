@@ -11,6 +11,20 @@
   `edition:` ids, with what the library already has filled in. Authors and books come from Readarr's metadata
   server setting, or rreading-glasses' public server when it is empty. 20 answers are checked against Readarr's
   own, recorded against a stand-in metadata server and Goodreads.
+- Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
+  listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item
+  cache. Each answer is checked against the original's own.
+- Backups work like Audiobookshelf's: admins make, download, upload, restore and remove backups of the database
+  and the books' and authors' metadata, and move the backup folder. A schedule makes them on its own, only the
+  newest ones you choose to keep stay, and a backup that grows past the size limit is stopped. Each answer is
+  checked against the original's own.
+- Notifications work like Audiobookshelf's: point Folio at an Apprise server, set up notifications for events
+  with their own title and text, test them, and see when each last fired. One that keeps failing is turned off,
+  and events that come while one is being sent wait their turn. Each answer is checked against the original's own.
+- Server settings work like Audiobookshelf's: admins change the settings and the words ignored when sorting
+  titles (sort titles are refreshed), check a schedule before saving it, add and remove their own metadata
+  providers, and set the mail server and e-reader devices with who may use each. The task list the apps show is
+  in place for the jobs that will use it. Each answer is checked against the original's own.
 - The Readarr API can delete authors, books and book files, one or several, with Readarr's options (delete the
   files, add an import list exclusion). Files go to Readarr's recycling bin when one is set. What a delete leaves
   behind (rows and files on disk) is checked against Readarr's own, recorded at four points.
