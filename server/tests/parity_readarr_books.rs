@@ -20,6 +20,11 @@ const MADE_BY_THE_API: &str = "INSERT INTO RootFolders (Id, Path, Name, DefaultM
     VALUES (1, '/books/', 'Books', 1, 1, 0, '[]', 0, NULL, 0);
     INSERT INTO Tags (Id, Label) VALUES (1, 'kids');";
 
+/// Where Folio answers differently on purpose (docs/DECISIONS.md): `(fixture, path)`. Readarr caches statistics
+/// and its book editor forgets to clear the cache, so after `book_editor` it still counts Small Gods as
+/// unmonitored; Folio counts what is stored.
+const DIFFERENT_ON_PURPOSE: &[(&str, &str)] = &[("authors_after_changes", "$[0].statistics."), ("books_after_changes", "$[1].statistics.")];
+
 /// The recorder's folder (requests and seed).
 fn recorder() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/parity/readarr")
@@ -40,7 +45,14 @@ async fn every_recorded_answer_of_authors_books_and_files_matches() {
         if r.get("auth") != Some(&Value::Bool(false)) {
             req = req.header("x-api-key", "test-key");
         }
-        let res = app.clone().oneshot(req.body(Body::empty()).unwrap()).await.unwrap();
+        let body = match &fx.request["body"] {
+            Value::Null => Body::empty(),
+            b => {
+                req = req.header("content-type", "application/json");
+                Body::from(b.to_string())
+            }
+        };
+        let res = app.clone().oneshot(req.body(body).unwrap()).await.unwrap();
         let status = res.status().as_u16();
         let bytes = axum::body::to_bytes(res.into_body(), 1 << 24).await.unwrap();
         let body = if fx.content_type.contains("json") {
@@ -51,6 +63,7 @@ async fn every_recorded_answer_of_authors_books_and_files_matches() {
         let mut m = Matcher::default();
         m.volatile = vec!["traceId".into(), "description".into()];
         let mut diffs = m.diff(&body, &fx.body);
+        diffs.retain(|d| !DIFFERENT_ON_PURPOSE.iter().any(|(n, p)| *n == name && d.starts_with(p)));
         if status != fx.status {
             diffs.insert(0, format!("status {status} where Readarr answers {}", fx.status));
         }
