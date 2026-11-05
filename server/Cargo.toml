@@ -55,6 +55,10 @@ folio-migrate = { path = "crates/migrate" }
 md-5 = "0.10"
 # Core (the Audiobookshelf port): its socket.io
 socketioxide = { version = "0.18", features = ["state"] }
+# Core (the Audiobookshelf port): its HTML cleaning (sanitize-html), form bodies and cookie dates
+ammonia = "4"
+serde_urlencoded = "0.7"
+httpdate = "1"
 
 [build-dependencies]
 kit-server-settings = { git = "https://github.com/Krifmaz/kit", tag = "v0.2.2", default-features = false, features = ["toml"] }

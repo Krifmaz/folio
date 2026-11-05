@@ -1,0 +1,12 @@
+{
+ "body": {
+  "error": "No refresh token provided"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "POST",
+  "path": "/auth/refresh"
+ },
+ "status": 401
+}

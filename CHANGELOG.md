@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- Sign-in works like Audiobookshelf's: setting up the server, signing in with a name and password (the mobile app
+  gets its tokens in the answer, the web app a cookie), refreshing and signing out, old tokens, API keys, the limit
+  on sign-in attempts, and the apps' live connection. Each answer is checked against the original's own.
 - The mobile app (`abs-app/`) looks like Folio: the Encore colours and font in its default, Black and Light
   themes and in the reader, the name Folio with its own app id (it installs beside the Audiobookshelf app), a
   book icon, and no links out to the upstream project.
@@ -101,3 +104,7 @@
 - GPL-3.0 license and credits for the projects Folio learns from; the goal in `docs/GOALS.md`; `docs/DECISIONS.md`.
 - CI and releases through the kit's shared workflows (server, web app, Docker image, Android APK); merged
   branches are deleted by `cleanup-branches`.
+
+### Removed
+- The first Audiobookshelf compatibility layer (it answered as server 2.25 from Folio's own library): the port of
+  Audiobookshelf answers the apps now, with Audiobookshelf's own users.

@@ -25,6 +25,8 @@ async fn main() -> anyhow::Result<()> {
     let addr = SocketAddr::from(([0, 0, 0, 0], server::port()));
     tracing::info!("{name} {} listening on {addr}", server::VERSION);
     let listener = tokio::net::TcpListener::bind(addr).await?;
-    axum::serve(listener, server::app(st)).with_graceful_shutdown(server::shutdown_signal()).await?;
+    axum::serve(listener, server::app(st).into_make_service_with_connect_info::<std::net::SocketAddr>())
+        .with_graceful_shutdown(server::shutdown_signal())
+        .await?;
     Ok(())
 }
