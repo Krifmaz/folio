@@ -20,3 +20,11 @@ commit = "edb1f7efc92ecacdef51aafb4d9d5054ce10604f"
 commit_date = "2026-10-23T14:36:19-05:00"
 from = "client"
 into = "abs-web"
+
+[abs-app]
+repo = "https://github.com/advplyr/audiobookshelf-app"
+ref = "v0.14.2-beta"
+commit = "7014e04e6febcc5fd326e816a57b1065817e85f5"
+commit_date = "2026-09-27T17:50:38-05:00"
+from = "."
+into = "abs-app"
