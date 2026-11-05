@@ -664,5 +664,427 @@
  {
   "name": "lib_item_missing",
   "path": "/api/items/00000000-0000-4000-8000-000000000000"
+ },
+ {
+  "name": "users_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "reader",
+   "password": "pw",
+   "type": "user",
+   "isActive": true,
+   "email": "reader@example.org",
+   "permissions": {
+    "download": false,
+    "bogus": true,
+    "upload": "yes"
+   },
+   "librariesAccessible": [
+    "{library}"
+   ]
+  },
+  "save": {
+   "user_id": "user.id"
+  }
+ },
+ {
+  "name": "users_create_taken",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "reader",
+   "password": "pw"
+  }
+ },
+ {
+  "name": "users_create_bad_type",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "other",
+   "password": "pw",
+   "type": "root"
+  }
+ },
+ {
+  "name": "users_create_missing",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "other"
+  }
+ },
+ {
+  "name": "users_list",
+  "path": "/api/users",
+  "save": {
+   "root_id": "users.0.id"
+  }
+ },
+ {
+  "name": "user_one",
+  "path": "/api/users/{user_id}"
+ },
+ {
+  "name": "user_missing",
+  "path": "/api/users/00000000-0000-4000-8000-000000000000"
+ },
+ {
+  "name": "user_update",
+  "path": "/api/users/{user_id}",
+  "method": "PATCH",
+  "body": {
+   "email": "r@example.org",
+   "permissions": {
+    "update": true,
+    "accessAllTags": false,
+    "itemTagsSelected": [
+     "kids"
+    ],
+    "nope": true
+   }
+  }
+ },
+ {
+  "name": "user_update_bad_key",
+  "path": "/api/users/{user_id}",
+  "method": "PATCH",
+  "body": {
+   "token": "x"
+  }
+ },
+ {
+  "name": "user_update_bad_type",
+  "path": "/api/users/{user_id}",
+  "method": "PATCH",
+  "body": {
+   "type": "root"
+  }
+ },
+ {
+  "name": "user_update_root_type",
+  "path": "/api/users/{root_id}",
+  "method": "PATCH",
+  "body": {
+   "type": "user"
+  }
+ },
+ {
+  "name": "user_unlink",
+  "path": "/api/users/{user_id}/openid-unlink",
+  "method": "PATCH"
+ },
+ {
+  "name": "reader_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "reader",
+   "password": "pw"
+  },
+  "save": {
+   "reader_token": "user.accessToken",
+   "reader_refresh": "user.refreshToken"
+  }
+ },
+ {
+  "name": "reader_users_list",
+  "path": "/api/users",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  }
+ },
+ {
+  "name": "reader_user_self",
+  "path": "/api/users/{user_id}",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  }
+ },
+ {
+  "name": "reader_user_other",
+  "path": "/api/users/{root_id}",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  }
+ },
+ {
+  "name": "reader_api_keys",
+  "path": "/api/api-keys",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  }
+ },
+ {
+  "name": "reader_auth_settings",
+  "path": "/api/auth-settings",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  }
+ },
+ {
+  "name": "me_password_invalid",
+  "path": "/api/me/password",
+  "method": "PATCH",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  },
+  "body": {
+   "password": 5,
+   "newPassword": "x"
+  }
+ },
+ {
+  "name": "me_password_wrong",
+  "path": "/api/me/password",
+  "method": "PATCH",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  },
+  "body": {
+   "password": "wrong",
+   "newPassword": "pw2"
+  }
+ },
+ {
+  "name": "me_password_empty",
+  "path": "/api/me/password",
+  "method": "PATCH",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}"
+  },
+  "body": {
+   "password": "pw",
+   "newPassword": ""
+  }
+ },
+ {
+  "name": "me_password",
+  "path": "/api/me/password",
+  "method": "PATCH",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {reader_token}",
+   "x-refresh-token": "{reader_refresh}"
+  },
+  "body": {
+   "password": "pw",
+   "newPassword": "pw2"
+  }
+ },
+ {
+  "name": "reader_login_old_password",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "body": {
+   "username": "reader",
+   "password": "pw"
+  }
+ },
+ {
+  "name": "api_keys_create",
+  "path": "/api/api-keys",
+  "method": "POST",
+  "body": {
+   "name": "Test key",
+   "userId": "{user_id}",
+   "expiresIn": 3600,
+   "isActive": true
+  },
+  "save": {
+   "key_id": "apiKey.id",
+   "api_key": "apiKey.apiKey"
+  }
+ },
+ {
+  "name": "api_keys_create_root",
+  "path": "/api/api-keys",
+  "method": "POST",
+  "body": {
+   "name": "Root key",
+   "userId": "{root_id}"
+  },
+  "save": {
+   "root_key_id": "apiKey.id",
+   "root_api_key": "apiKey.apiKey"
+  }
+ },
+ {
+  "name": "api_keys_create_bad_name",
+  "path": "/api/api-keys",
+  "method": "POST",
+  "body": {
+   "name": "",
+   "userId": "{user_id}"
+  }
+ },
+ {
+  "name": "api_keys_create_bad_expiry",
+  "path": "/api/api-keys",
+  "method": "POST",
+  "body": {
+   "name": "x",
+   "userId": "{user_id}",
+   "expiresIn": -1
+  }
+ },
+ {
+  "name": "api_keys_create_no_user",
+  "path": "/api/api-keys",
+  "method": "POST",
+  "body": {
+   "name": "x",
+   "userId": "00000000-0000-4000-8000-000000000000"
+  }
+ },
+ {
+  "name": "api_keys_list",
+  "path": "/api/api-keys"
+ },
+ {
+  "name": "api_key_signs_in",
+  "path": "/api/me",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {api_key}"
+  }
+ },
+ {
+  "name": "api_key_inactive_signs_in",
+  "path": "/api/me",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {root_api_key}"
+  }
+ },
+ {
+  "name": "api_keys_update",
+  "path": "/api/api-keys/{key_id}",
+  "method": "PATCH",
+  "body": {
+   "isActive": false
+  }
+ },
+ {
+  "name": "api_keys_update_bad",
+  "path": "/api/api-keys/{key_id}",
+  "method": "PATCH",
+  "body": {
+   "isActive": "no"
+  }
+ },
+ {
+  "name": "api_keys_update_missing",
+  "path": "/api/api-keys/00000000-0000-4000-8000-000000000000",
+  "method": "PATCH",
+  "body": {
+   "isActive": true
+  }
+ },
+ {
+  "name": "api_key_turned_off_signs_in",
+  "path": "/api/me",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {api_key}"
+  }
+ },
+ {
+  "name": "api_keys_delete",
+  "path": "/api/api-keys/{key_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "api_keys_delete_missing",
+  "path": "/api/api-keys/{key_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "auth_settings_patch",
+  "path": "/api/auth-settings",
+  "method": "PATCH",
+  "body": {
+   "authLoginCustomMessage": "<b>Hi</b><script>x</script>",
+   "authOpenIDButtonText": "",
+   "authActiveAuthMethods": [
+    "local",
+    "bogus"
+   ],
+   "authOpenIDAutoLaunch": "yes",
+   "authOpenIDMobileRedirectURIs": [
+    "audiobookshelf://oauth",
+    "folio://cb"
+   ]
+  }
+ },
+ {
+  "name": "auth_settings_after",
+  "path": "/api/auth-settings"
+ },
+ {
+  "name": "status_with_message",
+  "path": "/status",
+  "auth": false
+ },
+ {
+  "name": "auth_settings_patch_none",
+  "path": "/api/auth-settings",
+  "method": "PATCH",
+  "body": {
+   "authOpenIDButtonText": null
+  }
+ },
+ {
+  "name": "auth_settings_patch_bad",
+  "path": "/api/auth-settings",
+  "method": "PATCH",
+  "body": [
+   "x"
+  ]
+ },
+ {
+  "name": "auth_settings_reset",
+  "path": "/api/auth-settings",
+  "method": "PATCH",
+  "body": {
+   "authLoginCustomMessage": "",
+   "authOpenIDButtonText": "Login with OpenId",
+   "authOpenIDMobileRedirectURIs": [
+    "audiobookshelf://oauth"
+   ]
+  }
+ },
+ {
+  "name": "users_delete_self",
+  "path": "/api/users/{root_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "users_delete",
+  "path": "/api/users/{user_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "users_delete_missing",
+  "path": "/api/users/{user_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "users_list_after",
+  "path": "/api/users"
  }
 ]

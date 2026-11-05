@@ -5,13 +5,18 @@
 //! GET /api/v1/book?authorId=&bookIds=&titleSlug=&includeAllAuthorBooks=   books (all of them without a filter)
 //! GET /api/v1/book/{id}                                                    one book, with its author
 //! GET /api/v1/book/{id}/overview                                           {id, overview} of its monitored edition
+//! PUT /api/v1/book/{id}                                                    change a book and its editions (202)
+//! PUT /api/v1/book/monitor   {bookIds, monitored}                          monitor books (202 with them)
+//! PUT /api/v1/book/editor    {bookIds, monitored}                          change several books (202 with them)
 //! ```
 
 use super::json::{date, date_or_min, doc, list, local_covers, marks, object, percent, ratings, Query};
 use super::{authors, Answer, Fail, Key};
 use crate::AppState;
+use axum::body::Bytes;
 use axum::extract::{Path, RawQuery, State};
-use axum::routing::get;
+use axum::http::StatusCode;
+use axum::routing::{get, put};
 use axum::{Json, Router};
 use kit_server_core::{Db, Row, RowExt, SqliteDb};
 use serde_json::{json, Value};
@@ -19,7 +24,12 @@ use std::collections::HashMap;
 
 /// The book routes.
 pub fn router() -> Router<AppState> {
-    Router::new().route("/api/v1/book", get(all)).route("/api/v1/book/{id}", get(one)).route("/api/v1/book/{id}/overview", get(overview))
+    Router::new()
+        .route("/api/v1/book", get(all).put(update_unrouted))
+        .route("/api/v1/book/{id}", get(one).put(update))
+        .route("/api/v1/book/{id}/overview", get(overview))
+        .route("/api/v1/book/monitor", put(monitor))
+        .route("/api/v1/book/editor", put(editor))
 }
 
 /// A book's stored add options, or the default ones a book without them gets (`AddBookOptions`).
@@ -85,9 +95,9 @@ impl Context {
     }
 }
 
-/// A book as `BookResource.ToResource` makes it, with its covers as Folio's copies. 500 like Readarr when the
-/// book has more than one monitored edition.
-fn resource(b: &Row, cx: &Context) -> Answer<Value> {
+/// A book as `BookResource.ToResource` makes it, with its covers as Folio's copies (`local`) or as stored. 500
+/// like Readarr when the book has more than one monitored edition.
+fn resource(b: &Row, cx: &Context, local: bool) -> Answer<Value> {
     let id = b.i("Id");
     let monitored = cx.editions.get(&id).map(Vec::as_slice).unwrap_or_default();
     if monitored.len() > 1 {
@@ -136,7 +146,7 @@ fn resource(b: &Row, cx: &Context) -> Answer<Value> {
         ("releaseDate", date(b.get("ReleaseDate"))),
         ("pageCount", json!(edition.map(|e| e.i("PageCount")).unwrap_or(0))),
         ("genres", list(b.get("Genres"))),
-        ("images", Value::Array(local_covers(images, "book", id))),
+        ("images", Value::Array(if local { local_covers(images, "book", id) } else { images })),
         ("links", Value::Array(all_links)),
         ("added", date_or_min(b.get("Added"))),
         ("lastSearchTime", date(b.get("LastSearchTime"))),
@@ -163,7 +173,7 @@ pub fn many(db: &SqliteDb, books: &[Row]) -> Answer<Vec<Value>> {
     books
         .iter()
         .map(|b| {
-            let mut v = resource(b, &cx)?;
+            let mut v = resource(b, &cx, true)?;
             if let Some(s) = stats.get(&b.i("Id")) {
                 v["statistics"] = stats_json(s);
             }
@@ -208,11 +218,16 @@ async fn all(State(st): State<AppState>, _: Key, RawQuery(q): RawQuery) -> Answe
 
 /// `GET /api/v1/book/{id}`: the book with its author (`MapToResource(book, true)`).
 async fn one(State(st): State<AppState>, _: Key, Path(id): Path<String>) -> Answer {
-    let db = &st.readarr;
     let id: i64 = id.parse().map_err(|_| Fail::not_found())?;
-    let Some(b) = rows(db, "b.Id = ?", vec![json!(id)])?.into_iter().next() else { return Err(Fail::not_found()) };
-    let cx = Context::of(db, std::slice::from_ref(&b))?;
-    let mut v = resource(&b, &cx)?;
+    let Some(b) = rows(&st.readarr, "b.Id = ?", vec![json!(id)])?.into_iter().next() else { return Err(Fail::not_found()) };
+    Ok(Json(with_author(&st.readarr, &b)?))
+}
+
+/// A book as `GET /api/v1/book/{id}` sends it: with its author and statistics.
+fn with_author(db: &SqliteDb, b: &Row) -> Answer<Value> {
+    let id = b.i("Id");
+    let cx = Context::of(db, std::slice::from_ref(b))?;
+    let mut v = resource(b, &cx, true)?;
     let author = cx.authors.get(&b.i("AuthorMetadataId"));
     if let Some(a) = author {
         v["author"] = authors::resource(a);
@@ -221,7 +236,106 @@ async fn one(State(st): State<AppState>, _: Key, Path(id): Path<String>) -> Answ
             v["statistics"] = stats_json(s);
         }
     }
-    Ok(Json(v))
+    Ok(v)
+}
+
+/// The books with these ids, or Readarr's `Expected query to return …` when one is missing.
+fn get_many(db: &SqliteDb, ids: &[i64]) -> Answer<Vec<Row>> {
+    let found = if ids.is_empty() {
+        Vec::new()
+    } else {
+        rows(db, &format!("b.Id IN ({})", marks(ids.len())), ids.iter().map(|i| json!(i)).collect())?
+    };
+    authors::get_many(found, ids.len())
+}
+
+/// `PUT /api/v1/book` (the id from the body).
+async fn update_unrouted(st: State<AppState>, key: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    put_book(st, key, 0, bytes).await
+}
+
+/// `PUT /api/v1/book/{id}`.
+async fn update(st: State<AppState>, key: Key, Path(id): Path<i64>, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    put_book(st, key, id, bytes).await
+}
+
+/// Changes a book like `BookController.UpdateBook`: its foreign id, add options, monitoring and "any edition",
+/// and every edition sent (all their fields); 500 like Readarr when no editions are sent. 202 with the book.
+async fn put_book(State(st): State<AppState>, _: Key, route_id: i64, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let id = match r.get("id").and_then(Value::as_i64).unwrap_or(0) {
+        0 => route_id,
+        id => id,
+    };
+    let mut f = super::validation::Failures::default();
+    f.valid_id("Id", id);
+    f.check()?;
+    get_or_404(db, id)?;
+    let Some(editions) = r.get("editions").and_then(Value::as_array) else {
+        return Err(Fail::exception(500, "System.ArgumentNullException", "Value cannot be null. (Parameter 'source')"));
+    };
+    let flag = |k: &str| json!(r.get(k).and_then(Value::as_bool).unwrap_or(false));
+    db.execute(
+        "UPDATE Books SET ForeignBookId = ?, AddOptions = ?, Monitored = ?, AnyEditionOk = ? WHERE Id = ?",
+        vec![
+            r.get("foreignBookId").cloned().unwrap_or(Value::Null),
+            super::json::stored_doc(r.get("addOptions")),
+            flag("monitored"),
+            flag("anyEditionOk"),
+            json!(id),
+        ],
+    )
+    .map_err(conflict)?;
+    for e in editions {
+        super::editions::store(db, e).map_err(conflict)?;
+    }
+    let b = get_or_404(db, id)?;
+    Ok((StatusCode::ACCEPTED, Json(with_author(db, &b)?)))
+}
+
+/// A write SQLite refused for a constraint (a field that can't be empty): Readarr's 409.
+fn conflict(e: kit_server_core::Error) -> kit_server_core::Error {
+    if e.detail.contains("constraint") {
+        kit_server_core::err(409, e.detail)
+    } else {
+        e
+    }
+}
+
+/// `PUT /api/v1/book/monitor` (`SetBooksMonitored`): 202 with the books as the list routes send them.
+async fn monitor(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let ids = authors::ids(&r, "bookIds");
+    let monitored = r.get("monitored").and_then(Value::as_bool).unwrap_or(false);
+    if !ids.is_empty() {
+        db.execute(&format!("UPDATE Books SET Monitored = ? WHERE Id IN ({})", marks(ids.len())), {
+            let mut p = vec![json!(monitored)];
+            p.extend(ids.iter().map(|i| json!(i)));
+            p
+        })?;
+    }
+    let books = get_many(db, &ids)?;
+    Ok((StatusCode::ACCEPTED, Json(Value::Array(many(db, &books)?))))
+}
+
+/// `PUT /api/v1/book/editor` (`BookEditorController.SaveAll`): monitoring of several books; 202 with them as
+/// `ToResource` makes them (covers as stored, no statistics).
+async fn editor(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let ids = authors::ids(&r, "bookIds");
+    let books = get_many(db, &ids)?;
+    if let Some(m) = r.get("monitored").and_then(Value::as_bool) {
+        for b in &books {
+            db.execute("UPDATE Books SET Monitored = ? WHERE Id = ?", vec![json!(m), json!(b.i("Id"))])?;
+        }
+    }
+    let books = get_many(db, &ids)?;
+    let cx = Context::of(db, &books)?;
+    let out = books.iter().map(|b| resource(b, &cx, false)).collect::<Answer<Vec<_>>>()?;
+    Ok((StatusCode::ACCEPTED, Json(Value::Array(out))))
 }
 
 /// `GET /api/v1/book/{id}/overview`: the overview of the book's one monitored edition; 500 like Readarr when

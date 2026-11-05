@@ -92,13 +92,13 @@ repository at the pinned commit.
 | A0052 | endpoint | `GET /api/items/:id/file/:fileid/download` (LibraryItemController.downloadLibraryFile) | `server/routers/ApiRouter.js#L126` | P1 library | todo |  |
 | A0053 | endpoint | `GET /api/items/:id/ebook/:fileid?` (LibraryItemController.getEBookFile) | `server/routers/ApiRouter.js#L127` | P1 library | todo |  |
 | A0054 | endpoint | `PATCH /api/items/:id/ebook/:fileid/status` (LibraryItemController.updateEbookFileStatus) | `server/routers/ApiRouter.js#L128` | P1 library | todo |  |
-| A0055 | endpoint | `POST /api/users` (UserController.create) | `server/routers/ApiRouter.js#L133` | P2 users | todo |  |
-| A0056 | endpoint | `GET /api/users` (UserController.findAll) | `server/routers/ApiRouter.js#L134` | P2 users | todo |  |
-| A0057 | endpoint | `GET /api/users/online` (UserController.getOnlineUsers) | `server/routers/ApiRouter.js#L135` | P2 users | todo |  |
-| A0058 | endpoint | `GET /api/users/:id` (UserController.findOne) | `server/routers/ApiRouter.js#L136` | P2 users | todo |  |
-| A0059 | endpoint | `PATCH /api/users/:id` (UserController.update) | `server/routers/ApiRouter.js#L137` | P2 users | todo |  |
-| A0060 | endpoint | `DELETE /api/users/:id` (UserController.delete) | `server/routers/ApiRouter.js#L138` | P2 users | todo |  |
-| A0061 | endpoint | `PATCH /api/users/:id/openid-unlink` (UserController.unlinkFromOpenID) | `server/routers/ApiRouter.js#L139` | P2 users | todo |  |
+| A0055 | endpoint | `POST /api/users` (UserController.create) | `server/routers/ApiRouter.js#L133` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0056 | endpoint | `GET /api/users` (UserController.findAll) | `server/routers/ApiRouter.js#L134` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0057 | endpoint | `GET /api/users/online` (UserController.getOnlineUsers) | `server/routers/ApiRouter.js#L135` | P2 users | wip | who is online works; open playback sessions come with P3 playback sessions |
+| A0058 | endpoint | `GET /api/users/:id` (UserController.findOne) | `server/routers/ApiRouter.js#L136` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0059 | endpoint | `PATCH /api/users/:id` (UserController.update) | `server/routers/ApiRouter.js#L137` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0060 | endpoint | `DELETE /api/users/:id` (UserController.delete) | `server/routers/ApiRouter.js#L138` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0061 | endpoint | `PATCH /api/users/:id/openid-unlink` (UserController.unlinkFromOpenID) | `server/routers/ApiRouter.js#L139` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0062 | endpoint | `GET /api/users/:id/listening-sessions` (UserController.getListeningSessions) | `server/routers/ApiRouter.js#L140` | P3 playback | todo |  |
 | A0063 | endpoint | `GET /api/users/:id/listening-stats` (UserController.getListeningStats) | `server/routers/ApiRouter.js#L141` | P3 playback | todo |  |
 | A0064 | endpoint | `POST /api/collections` (CollectionController.create) | `server/routers/ApiRouter.js#L146` | P4 collections | todo |  |
@@ -137,7 +137,7 @@ repository at the pinned commit.
 | A0097 | endpoint | `POST /api/me/item/:id/bookmark` (MeController.createBookmark) | `server/routers/ApiRouter.js#L187` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_and_bookmarks_answer_like_the_original` |
 | A0098 | endpoint | `PATCH /api/me/item/:id/bookmark` (MeController.updateBookmark) | `server/routers/ApiRouter.js#L188` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
 | A0099 | endpoint | `DELETE /api/me/item/:id/bookmark/:time` (MeController.removeBookmark) | `server/routers/ApiRouter.js#L189` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
-| A0100 | endpoint | `PATCH /api/me/password` (MeController.updatePassword) | `server/routers/ApiRouter.js#L190` | P2 users | todo |  |
+| A0100 | endpoint | `PATCH /api/me/password` (MeController.updatePassword) | `server/routers/ApiRouter.js#L190` | P2 users | done | `server/tests/abs_users.rs::a_password_change_signs_out_elsewhere_like_the_original` |
 | A0101 | endpoint | `GET /api/me/items-in-progress` (MeController.getAllLibraryItemsInProgress) | `server/routers/ApiRouter.js#L191` | P2 users | todo |  |
 | A0102 | endpoint | `GET /api/me/series/:id/remove-from-continue-listening` (MeController.removeSeriesFromContinueListening) | `server/routers/ApiRouter.js#L192` | P2 users | todo |  |
 | A0103 | endpoint | `GET /api/me/series/:id/readd-to-continue-listening` (MeController.readdSeriesFromContinueListening) | `server/routers/ApiRouter.js#L193` | P2 users | todo |  |
@@ -220,10 +220,10 @@ repository at the pinned commit.
 | A0180 | endpoint | `DELETE /api/share/mediaitem/:id` (ShareController.deleteMediaItemShare) | `server/routers/ApiRouter.js#L327` | P6 server admin | todo |  |
 | A0181 | endpoint | `GET /api/stats/year/:year` (StatsController.getAdminStatsForYear) | `server/routers/ApiRouter.js#L332` | P6 server admin | todo |  |
 | A0182 | endpoint | `GET /api/stats/server` (StatsController.getServerStats) | `server/routers/ApiRouter.js#L333` | P6 server admin | todo |  |
-| A0183 | endpoint | `GET /api/api-keys` (ApiKeyController.getAll) | `server/routers/ApiRouter.js#L338` | P6 server admin | todo |  |
-| A0184 | endpoint | `POST /api/api-keys` (ApiKeyController.create) | `server/routers/ApiRouter.js#L339` | P6 server admin | todo |  |
-| A0185 | endpoint | `PATCH /api/api-keys/:id` (ApiKeyController.update) | `server/routers/ApiRouter.js#L340` | P6 server admin | todo |  |
-| A0186 | endpoint | `DELETE /api/api-keys/:id` (ApiKeyController.delete) | `server/routers/ApiRouter.js#L341` | P6 server admin | todo |  |
+| A0183 | endpoint | `GET /api/api-keys` (ApiKeyController.getAll) | `server/routers/ApiRouter.js#L338` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
+| A0184 | endpoint | `POST /api/api-keys` (ApiKeyController.create) | `server/routers/ApiRouter.js#L339` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
+| A0185 | endpoint | `PATCH /api/api-keys/:id` (ApiKeyController.update) | `server/routers/ApiRouter.js#L340` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
+| A0186 | endpoint | `DELETE /api/api-keys/:id` (ApiKeyController.delete) | `server/routers/ApiRouter.js#L341` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0187 | endpoint | `POST /api/upload` (MiscController.handleUpload) | `server/routers/ApiRouter.js#L346` | P6 server admin | todo |  |
 | A0188 | endpoint | `GET /api/tasks` (MiscController.getTasks) | `server/routers/ApiRouter.js#L347` | P6 server admin | todo |  |
 | A0189 | endpoint | `PATCH /api/settings` (MiscController.updateServerSettings) | `server/routers/ApiRouter.js#L348` | P6 server admin | todo |  |
@@ -236,8 +236,8 @@ repository at the pinned commit.
 | A0196 | endpoint | `POST /api/genres/rename` (MiscController.renameGenre) | `server/routers/ApiRouter.js#L355` | P1 library | todo |  |
 | A0197 | endpoint | `DELETE /api/genres/:genre` (MiscController.deleteGenre) | `server/routers/ApiRouter.js#L356` | P1 library | todo |  |
 | A0198 | endpoint | `POST /api/validate-cron` (MiscController.validateCronExpression) | `server/routers/ApiRouter.js#L357` | P6 server admin | todo |  |
-| A0199 | endpoint | `GET /api/auth-settings` (MiscController.getAuthSettings) | `server/routers/ApiRouter.js#L358` | P2 users | todo |  |
-| A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | todo |  |
+| A0199 | endpoint | `GET /api/auth-settings` (MiscController.getAuthSettings) | `server/routers/ApiRouter.js#L358` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
+| A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |
 | A0202 | endpoint | `GET /api/logger-data` (MiscController.getLoggerData) | `server/routers/ApiRouter.js#L361` | P6 server admin | todo |  |
 | A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | todo |  |
@@ -586,10 +586,10 @@ repository at the pinned commit.
 | R0004 | endpoint | `GET /logout` (Authentication) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0005 | endpoint | `GET /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0006 | endpoint | `POST /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0007 | endpoint | `PUT /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0007 | endpoint | `PUT /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | checks and changes done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); `moveFiles` and the refresh after a metadata profile change come with commands (R5) |
 | R0008 | endpoint | `DELETE /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0009 | endpoint | `GET /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0010 | endpoint | `PUT /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0010 | endpoint | `PUT /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | changes done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); moving files to a new root folder comes with commands (R5) |
 | R0011 | endpoint | `DELETE /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0012 | endpoint | `GET /api/v1/author/lookup` (AuthorLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0013 | endpoint | `GET /api/v1/system/backup` (Backup) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
@@ -602,17 +602,17 @@ repository at the pinned commit.
 | R0020 | endpoint | `GET /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0021 | endpoint | `POST /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0022 | endpoint | `GET /api/v1/book/{id}/overview` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0023 | endpoint | `PUT /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0023 | endpoint | `PUT /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0024 | endpoint | `DELETE /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0025 | endpoint | `GET /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0026 | endpoint | `PUT /api/v1/book/monitor` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
-| R0027 | endpoint | `PUT /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0026 | endpoint | `PUT /api/v1/book/monitor` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
+| R0027 | endpoint | `PUT /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0028 | endpoint | `DELETE /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0029 | endpoint | `GET /api/v1/bookfile` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | ebook files done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); audio media info with the import |
-| R0030 | endpoint | `PUT /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0030 | endpoint | `PUT /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0031 | endpoint | `DELETE /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0032 | endpoint | `GET /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | ebook files done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); real files' tags with the import |
-| R0033 | endpoint | `PUT /api/v1/bookfile/editor` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0033 | endpoint | `PUT /api/v1/bookfile/editor` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0034 | endpoint | `DELETE /api/v1/bookfile/bulk` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0035 | endpoint | `GET /api/v1/book/lookup` (BookLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0036 | endpoint | `POST /api/v1/bookshelf` (Bookshelf) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |

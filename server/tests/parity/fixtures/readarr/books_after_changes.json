@@ -1,0 +1,159 @@
+{
+ "body": [
+  {
+   "added": "2025-05-01T09:30:00Z",
+   "anyEditionOk": true,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry Guards! Guards!",
+   "foreignBookId": "64216",
+   "foreignEditionId": "64216-e1",
+   "genres": [
+    "fantasy"
+   ],
+   "grabbed": false,
+   "id": 1,
+   "images": [
+    {
+     "coverType": "cover",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.gr-assets.com/books/1/64216.jpg",
+     "url": "/MediaCover/Books/1/cover.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/64216"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/64216"
+    }
+   ],
+   "monitored": true,
+   "pageCount": 416,
+   "ratings": {
+    "popularity": 4320,
+    "value": 4.32,
+    "votes": 1000
+   },
+   "releaseDate": "1989-11-01T00:00:00Z",
+   "seriesTitle": "Discworld #8",
+   "statistics": {
+    "bookCount": 1,
+    "bookFileCount": 1,
+    "percentOfBooks": 100,
+    "sizeOnDisk": 2048,
+    "totalBookCount": 1
+   },
+   "title": "Guards! Guards!",
+   "titleSlug": "64216"
+  },
+  {
+   "added": "2025-05-01T09:30:00Z",
+   "anyEditionOk": false,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry Small Gods",
+   "foreignBookId": "1215958",
+   "foreignEditionId": "1215958-e1",
+   "genres": [
+    "fantasy",
+    "religion"
+   ],
+   "grabbed": false,
+   "id": 2,
+   "images": [],
+   "lastSearchTime": "2025-06-02T08:00:00Z",
+   "links": [],
+   "monitored": true,
+   "pageCount": 400,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "1992-05-01T00:00:00Z",
+   "seriesTitle": "Discworld #13",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Small Gods",
+   "titleSlug": "1215958"
+  },
+  {
+   "added": "2025-05-01T09:30:00Z",
+   "anyEditionOk": true,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry A Book Not Out Yet",
+   "foreignBookId": "9000001",
+   "foreignEditionId": "9000001-e1",
+   "genres": [],
+   "grabbed": false,
+   "id": 3,
+   "images": [],
+   "links": [],
+   "monitored": true,
+   "pageCount": 0,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "2099-01-01T00:00:00Z",
+   "seriesTitle": "",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "A Book Not Out Yet",
+   "titleSlug": "9000001"
+  },
+  {
+   "added": "2025-05-02T09:30:00Z",
+   "anyEditionOk": false,
+   "authorId": 2,
+   "authorTitle": "le guin, ursula k. A Wizard of Earthsea",
+   "foreignBookId": "1561478",
+   "foreignEditionId": "1561478-e1",
+   "genres": [
+    "fantasy"
+   ],
+   "grabbed": false,
+   "id": 4,
+   "images": [],
+   "links": [],
+   "monitored": true,
+   "pageCount": 183,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "1968-01-01T00:00:00Z",
+   "seriesTitle": "",
+   "statistics": {
+    "bookCount": 1,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "A Wizard of Earthsea",
+   "titleSlug": "1561478"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/book"
+ },
+ "status": 200
+}

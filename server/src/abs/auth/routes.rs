@@ -84,7 +84,7 @@ fn http_date(ms: i64) -> String {
 }
 
 /// The `refresh_token` cookie (`setRefreshTokenCookie`): HTTP only, lax, for the refresh token's lifetime.
-fn refresh_cookie(st: &AppState, headers: &HeaderMap, token: &str) -> HeaderValue {
+pub(crate) fn refresh_cookie(st: &AppState, headers: &HeaderMap, token: &str) -> HeaderValue {
     let age = st.abs_server.tokens.refresh_expiry;
     let secure = if is_secure(headers) { "; Secure" } else { "" };
     let v = format!(
