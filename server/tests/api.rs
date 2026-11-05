@@ -161,15 +161,16 @@ async fn a_crash_log_is_kept_once() {
 }
 
 #[tokio::test]
-async fn diagnostics_check_the_data_folder_lantern_and_the_database() {
+async fn diagnostics_check_the_folders_lantern_and_the_database() {
     let (app, _, _) = server("diag").await;
     let (s, v, _) = call(&app, admin("GET", "/api/diagnostics", None)).await;
     assert_eq!(s, StatusCode::OK);
     let names: Vec<&str> = v["checks"].as_array().unwrap().iter().filter_map(|c| c["name"].as_str()).collect();
-    assert_eq!(names, ["Data folder", "Lantern", "Database"]);
+    assert_eq!(names, ["Data folder", "Library folder", "Lantern", "Database"]);
     for c in v["checks"].as_array().unwrap() {
-        // Lantern isn't set up in a fresh server, so its check says what to do; the others pass.
-        let want = c["name"] != "Lantern";
+        // Lantern isn't set up and /library isn't mounted in a fresh test server, so those checks say what to
+        // do; the others pass.
+        let want = c["name"] != "Lantern" && c["name"] != "Library folder";
         assert_eq!(c["ok"], want, "{c}");
     }
     let (s, v, _) = call(&app, admin("POST", "/api/diagnostics/nothing/test", None)).await;

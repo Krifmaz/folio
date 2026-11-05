@@ -119,6 +119,17 @@ pub fn Releases(id: i64) -> impl IntoView {
     }
 }
 
+/// Files the checked download `id` again after it couldn't be filed, then runs `after`.
+fn file_again(id: i64, after: impl Fn() + 'static) {
+    kit_leptos::rt::spawn(async move {
+        match api::post_empty(&format!("/grabs/{id}/file")).await {
+            Ok(v) => toast(&s(&v, "note"), "ok"),
+            Err(e) => toast(&e.message, "err"),
+        }
+        after();
+    });
+}
+
 /// The words for a grab's status.
 pub fn grab_label(status: &str) -> &'static str {
     match status {
@@ -126,6 +137,8 @@ pub fn grab_label(status: &str) -> &'static str {
         "downloading" => "Downloading",
         "completed" => "Arrived",
         "verified" => "Checked",
+        "importing" => "Filing",
+        "imported" => "In the library",
         "review" => "Needs a look",
         "rejected" => "Rejected",
         "failed" => "Failed",
@@ -150,6 +163,7 @@ pub fn Downloads() -> impl IntoView {
                     let pct = (g.get("progress").and_then(Value::as_f64).unwrap_or(0.0) * 100.0).round();
                     let status = s(g, "status");
                     let err = s(g, "error");
+                    let retry = status == "verified" && !err.is_empty();
                     view! {
                         <div class="list-item" style="gap:12px;flex-wrap:wrap">
                             <div class="grow" style="min-width:240px">
@@ -159,6 +173,10 @@ pub fn Downloads() -> impl IntoView {
                             </div>
                             <span class="small muted">{if status == "downloading" { format!("{pct}%") } else { String::new() }}</span>
                             <span class="badge">{grab_label(&status)}</span>
+                            {retry.then(|| {
+                                let id = g.get("id").and_then(Value::as_i64).unwrap_or(0);
+                                view! { <button class="btn sm" on:click=move |_| file_again(id, move || data.refetch())>"File again"</button> }
+                            })}
                         </div>
                     }
                 }).collect_view()}</div>

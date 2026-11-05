@@ -20,6 +20,12 @@
   jump, and waits on the phone while the server can't be reached.
 - Android: Library page (search titles and authors, All, Audiobooks or Ebooks) and a book page with every exact
   edition and its facts: narrator, runtime, abridged or not, language, pages, ASIN or ISBN.
+- Import: checked downloads are filed in the library folder as `Author/Series/NN - Title (Year)/`. Audiobooks
+  become one chaptered M4B with the edition's tags, Audnexus chapters (or one per file) and cover; several MP3s
+  are joined into it. EPUBs get the edition's title, authors, language, ISBN, series and cover. With "Clean up
+  files" off (Settings → Downloads) the downloads are hardlinked in unchanged. Lantern's copy is never touched,
+  so it keeps seeding. A download that can't be filed says why and has File again under Downloads. Diagnostics
+  checks the library folder.
 - Verification before import: every download is checked against the edition you asked for. Audiobooks: runtime
   within 3%, narrator, language, chapter count, and nothing marking a sample or an abridged copy (read with
   ffprobe, which the image now carries). Ebooks: a valid EPUB without DRM whose own ISBN, title, author and

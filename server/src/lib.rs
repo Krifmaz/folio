@@ -18,6 +18,7 @@
 pub mod auth;
 pub mod checks;
 pub mod compat;
+pub mod import;
 pub mod lantern;
 pub mod library;
 pub mod metadata;
@@ -238,6 +239,7 @@ pub fn app(st: AppState) -> Router {
         .merge(wanted::router())
         .merge(lantern::grabs::router())
         .merge(verify::router())
+        .merge(import::router())
         .merge(playback::router())
         .merge(compat::router())
         .merge(migration::router())

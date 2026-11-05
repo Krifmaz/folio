@@ -2,7 +2,7 @@
 //!
 //! - Notice `data`: the data folder can't be written (the kit's storage notice, for the one folder this app
 //!   writes to), checked every minute and on Check again. Served at `/api/notices/data` (and in `/api/notices`).
-//! - Diagnostics: the data folder, Lantern and the database.
+//! - Diagnostics: the data folder, the library folder, Lantern and the database.
 
 use crate::AppState;
 use kit_server_core::Db;
@@ -50,7 +50,7 @@ pub fn notices() -> Notices<AppState> {
     )
 }
 
-/// The Diagnostics page's checks: the data folder and the database.
+/// The Diagnostics page's checks: the data folder, the library folder, Lantern and the database.
 pub fn diagnostics() -> Registry<AppState> {
     Registry::new()
         .check("data", |st: AppState| async move {
@@ -61,6 +61,16 @@ pub fn diagnostics() -> Registry<AppState> {
                 Err(why) => Check::new("Data folder", Kind::Path, false, format!("{shown} · {why}"))
                     .request(shown)
                     .fix("Check the disk (dmesg, fsck) or the mount, and that the server's user may write to it"),
+            }
+        })
+        .check("library", |st: AppState| async move {
+            let dir = crate::import::library_root(&st);
+            let shown = dir.display().to_string();
+            match tokio::task::spawn_blocking(move || writable(&dir)).await.unwrap_or_else(|e| Err(e.to_string())) {
+                Ok(()) => Check::new("Library folder", Kind::Path, true, format!("{shown} · writable")).request(shown),
+                Err(why) => Check::new("Library folder", Kind::Path, false, format!("{shown} · {why}"))
+                    .request(shown)
+                    .fix("Mount the library folder (the same disk as Lantern's downloads) and let the server's user write to it, or change it under Settings → Downloads"),
             }
         })
         .check("lantern", |st: AppState| async move {
