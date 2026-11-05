@@ -124,7 +124,9 @@ con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
 with open(os.path.join(out, "schema.sql"), "w", encoding="utf-8") as f:
     for typ, name, sql in con.execute("SELECT type, name, sql FROM sqlite_master WHERE sql IS NOT NULL ORDER BY type DESC, name"):
         f.write(sql.strip() + ";\n\n")
-    f.write("-- SequelizeMeta\n")
-    for (name,) in con.execute("SELECT name FROM SequelizeMeta ORDER BY name"):
-        f.write(f"-- {name}\n")
+    tables = [n for (n,) in con.execute("SELECT name FROM sqlite_master WHERE type = 'table' AND lower(name) LIKE '%meta%'")]
+    for t in tables:  # the migrations bookkeeping, so Folio can write the same rows
+        f.write(f"-- rows of {t}\n")
+        for row in con.execute(f'SELECT * FROM "{t}"'):
+            f.write(f"-- {json.dumps(row)}\n")
 print("schema written")
