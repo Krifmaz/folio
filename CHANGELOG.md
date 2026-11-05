@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- The port plan: Folio now ports Audiobookshelf and Readarr instead of reimagining them. `docs/PARITY.md` lists
+  every endpoint, setting, page, action and job of the originals (989 rows) with its status and proof;
+  `UPSTREAM.lock` pins the exact upstream versions, and `scripts/upstream-merge.sh` keeps the forked apps up to
+  date (see `UPSTREAM.md`).
 - Move in hands migrated books' files to the import: each is checked like a download, then filed in the library
   with hardlinks (a copy across disks) or put in the Review queue; the old app's files stay where they are. Files
   Folio can't see are listed with what to do (mount the book folder read-only) and tried again on the next run.
