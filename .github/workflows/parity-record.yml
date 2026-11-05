@@ -35,6 +35,15 @@ jobs:
             "ghcr.io/advplyr/audiobookshelf:$version"
       - name: Record
         run: python3 -I server/tests/parity/abs/record.py http://127.0.0.1:13378 "$RUNNER_TEMP/out" "$RUNNER_TEMP/config/absdatabase.sqlite"
+      - name: Print the recording
+        # Also printed to the log (base64 of a .tar.gz between markers), for readers that can't reach artifacts.
+        run: |
+          echo "::group::abs-fixtures.tar.gz (base64)"
+          echo "FOLIO-FIXTURES-BEGIN"
+          tar czf - -C "$RUNNER_TEMP/out" . | base64 -w0
+          echo
+          echo "FOLIO-FIXTURES-END"
+          echo "::endgroup::"
       - name: Server log on failure
         if: failure()
         run: docker logs abs | tail -200
