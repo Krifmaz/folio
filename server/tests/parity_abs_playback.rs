@@ -6,7 +6,7 @@ mod common;
 mod parity;
 
 use axum::body::Body;
-use axum::http::{header, Request};
+use axum::http::{header, Request, StatusCode};
 use axum::Router;
 use kit_server_core::Db;
 use parity::{assert_like_with, fixture, Matcher};
@@ -350,12 +350,33 @@ async fn playback_sessions_answer_like_the_original() {
             Some(v) => b.header(header::CONTENT_TYPE, "application/json").body(Body::from(v.to_string())).unwrap(),
             None => b.body(Body::empty()).unwrap(),
         };
-        let r = app.clone().oneshot(req).await.unwrap();
+        // The recorded book's files aren't here: a track's file is stood in for by one of the recorded size.
+        if let Some(size) = fx.body.get("bytes").and_then(Value::as_u64) {
+            let session = ctx["session"].clone();
+            server::abs::playback::with_open(&st, |list| {
+                let s = list.iter_mut().find(|s| s.id == session).unwrap();
+                let t = &mut s.audio_tracks[0];
+                let ext = t.pointer("/metadata/ext").and_then(Value::as_str).unwrap().to_string();
+                let file = std::env::temp_dir().join(format!("folio-track-{}{ext}", std::process::id()));
+                std::fs::write(&file, vec![0u8; size as usize]).unwrap();
+                t["metadata"]["path"] = json!(file.display().to_string());
+            });
+        }
+        let mut r = app.clone().oneshot(req).await.unwrap();
+        // Like the recorder (Python's urllib), a redirect is followed.
+        if r.status() == StatusCode::FOUND {
+            let to = r.headers()[header::LOCATION].to_str().unwrap().to_string();
+            r = app.clone().oneshot(Request::get(to).body(Body::empty()).unwrap()).await.unwrap();
+        }
         let status = r.status().as_u16();
         let ctype =
             r.headers().get(header::CONTENT_TYPE).and_then(|v| v.to_str().ok()).unwrap_or_default().split(';').next().unwrap().to_string();
         let bytes = axum::body::to_bytes(r.into_body(), 1 << 24).await.unwrap();
-        let mut answer = serde_json::from_slice(&bytes).unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into()));
+        let mut answer = if ctype.starts_with("audio/") {
+            json!({"bytes": bytes.len()})
+        } else {
+            serde_json::from_slice(&bytes).unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into()))
+        };
         for (key, from) in [
             ("session", "play"),
             ("session2", "pb_play_firefox"),

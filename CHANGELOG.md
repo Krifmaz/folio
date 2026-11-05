@@ -8,6 +8,8 @@
 ### Added
 - Players that can't play a book's files as they are (FLAC, for one) get them converted on the fly into a stream,
   like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
+- The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,
+  with jumping (range requests), like Audiobookshelf.
 - Playback sessions work like Audiobookshelf's: starting one when a player opens a book, syncing and closing it,
   sessions phones played offline, the admins' list of open and past sessions (and deleting them), and each user's
   listening sessions and stats. Each answer is checked against the original's recorded one.

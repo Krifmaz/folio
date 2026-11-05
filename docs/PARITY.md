@@ -246,7 +246,7 @@ repository at the pinned commit.
 | A0206 | endpoint | `GET /public/share/:slug/cover` | `server/routers/PublicRouter.js#L18` | P6 server admin | todo |  |
 | A0207 | endpoint | `GET /public/share/:slug/download` | `server/routers/PublicRouter.js#L19` | P6 server admin | todo |  |
 | A0208 | endpoint | `PATCH /public/share/:slug/progress` | `server/routers/PublicRouter.js#L20` | P3 playback | todo |  |
-| A0209 | endpoint | `GET /public/session/:id/track/:index` | `server/routers/PublicRouter.js#L21` | P3 playback | todo |  |
+| A0209 | endpoint | `GET /public/session/:id/track/:index` | `server/routers/PublicRouter.js#L21` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0210 | endpoint | `GET /feed/:slug` | `server/Server.js#L362` | P5 podcasts and feeds | todo |  |
 | A0211 | endpoint | `GET /feed/:slug/cover*` | `server/Server.js#L366` | P5 podcasts and feeds | todo |  |
 | A0212 | endpoint | `GET /feed/:slug/item/:episodeId/*` | `server/Server.js#L369` | P5 podcasts and feeds | todo |  |
