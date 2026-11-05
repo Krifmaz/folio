@@ -1,0 +1,100 @@
+{
+ "body": {
+  "filterdata": {
+   "authorCount": 0,
+   "authors": [
+    {
+     "id": "c6b5a186-379f-403f-870c-bf6f4e767bdf",
+     "name": "Becky Chambers"
+    },
+    {
+     "id": "a10848be-f52d-49a4-a65b-e1ae86ae3b20",
+     "name": "Martha Wells"
+    },
+    {
+     "id": "a3250c2a-83d3-4d08-b9f8-2121c23ada8a",
+     "name": "Ann Leckie"
+    }
+   ],
+   "bookCount": 0,
+   "genres": [
+    "Science Fiction"
+   ],
+   "languages": [
+    "en"
+   ],
+   "loadedAt": 1793906888870,
+   "narrators": [
+    "Adjoa Andoh"
+   ],
+   "numIssues": 0,
+   "podcastCount": 0,
+   "publishedDecades": [
+    "2010"
+   ],
+   "publishers": [],
+   "series": [
+    {
+     "id": "1335e437-f3c9-45eb-988a-63c4545cbf6f",
+     "name": "The Murderbot Diaries"
+    },
+    {
+     "id": "23c94f0a-7690-4fff-9458-6282405ca185",
+     "name": "Imperial Radch"
+    }
+   ],
+   "seriesCount": 0,
+   "tags": []
+  },
+  "issues": 0,
+  "library": {
+   "createdAt": 1793906888836,
+   "displayOrder": 1,
+   "folders": [
+    {
+     "addedAt": 1793906888839,
+     "fullPath": "/media",
+     "id": "7a608141-2b4e-4dcb-95f1-b5cc5ad3b656",
+     "libraryId": "d74a7808-f6c2-4363-881a-b33767429187"
+    }
+   ],
+   "icon": "database",
+   "id": "d74a7808-f6c2-4363-881a-b33767429187",
+   "lastScan": 1793906889050,
+   "lastScanVersion": "2.37.2",
+   "lastUpdate": 1793906889050,
+   "mediaType": "book",
+   "name": "Books",
+   "provider": "google",
+   "settings": {
+    "audiobooksOnly": false,
+    "autoScanCronExpression": null,
+    "coverAspectRatio": 1,
+    "disableWatcher": false,
+    "epubsAllowScriptedContent": false,
+    "hideSingleBookSeries": false,
+    "markAsFinishedPercentComplete": null,
+    "markAsFinishedTimeRemaining": 10,
+    "metadataPrecedence": [
+     "folderStructure",
+     "audioMetatags",
+     "nfoFile",
+     "txtFiles",
+     "opfFile",
+     "absMetadata"
+    ],
+    "onlyShowLaterBooksInContinueSeries": false,
+    "skipMatchingMediaWithAsin": false,
+    "skipMatchingMediaWithIsbn": false
+   }
+  },
+  "numUserPlaylists": 1
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}?include=filterdata"
+ },
+ "status": 200
+}

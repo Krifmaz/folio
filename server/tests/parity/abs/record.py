@@ -163,7 +163,7 @@ for (t,) in snap.execute("SELECT name FROM sqlite_master WHERE type = 'table' AN
     cur = snap.execute(f'SELECT * FROM "{t}" ORDER BY rowid')
     cols = [d[0] for d in cur.description]
     rows[t] = [dict(zip(cols, r)) for r in cur]
-with open(os.path.join(out, "fixtures", "db_end.json"), "w", encoding="utf-8") as f:
+with open(os.path.join(out, "fixtures", "_db_end.json"), "w", encoding="utf-8") as f:
     json.dump(rows, f, indent=1, sort_keys=True, ensure_ascii=False)
     f.write("\n")
 print("database rows written")

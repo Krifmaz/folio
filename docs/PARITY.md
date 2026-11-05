@@ -39,11 +39,11 @@ repository at the pinned commit.
 | ID | Kind | Item | Upstream source | Track | Status | Proof |
 | --- | --- | --- | --- | --- | --- | --- |
 | A0001 | endpoint | `POST /api/libraries` (LibraryController.create) | `server/routers/ApiRouter.js#L69` | P1 library | todo |  |
-| A0002 | endpoint | `GET /api/libraries` (LibraryController.findAll) | `server/routers/ApiRouter.js#L70` | P1 library | todo |  |
-| A0003 | endpoint | `GET /api/libraries/:id` (LibraryController.findOne) | `server/routers/ApiRouter.js#L71` | P1 library | todo |  |
+| A0002 | endpoint | `GET /api/libraries` (LibraryController.findAll) | `server/routers/ApiRouter.js#L70` | P1 library | wip | `server/tests/parity_abs_library.rs::libraries_answer_like_the_original` (book libraries; podcast stats with P5) |
+| A0003 | endpoint | `GET /api/libraries/:id` (LibraryController.findOne) | `server/routers/ApiRouter.js#L71` | P1 library | wip | `server/tests/parity_abs_library.rs::libraries_answer_like_the_original` (book libraries; podcast filter data with P5) |
 | A0004 | endpoint | `PATCH /api/libraries/:id` (LibraryController.update) | `server/routers/ApiRouter.js#L72` | P1 library | todo |  |
 | A0005 | endpoint | `DELETE /api/libraries/:id` (LibraryController.delete) | `server/routers/ApiRouter.js#L73` | P1 library | todo |  |
-| A0006 | endpoint | `GET /api/libraries/:id/items` (LibraryController.getLibraryItems) | `server/routers/ApiRouter.js#L75` | P1 library | todo |  |
+| A0006 | endpoint | `GET /api/libraries/:id/items` (LibraryController.getLibraryItems) | `server/routers/ApiRouter.js#L75` | P1 library | wip | `server/tests/parity_abs_library.rs::library_pages_filter_and_sort_like_the_original` (books; podcasts with P5, `rssfeed`/`share` includes with P5) |
 | A0007 | endpoint | `DELETE /api/libraries/:id/issues` (LibraryController.removeLibraryItemsWithIssues) | `server/routers/ApiRouter.js#L76` | P1 library | todo |  |
 | A0008 | endpoint | `GET /api/libraries/:id/episode-downloads` (LibraryController.getEpisodeDownloadQueue) | `server/routers/ApiRouter.js#L77` | P1 library | todo |  |
 | A0009 | endpoint | `GET /api/libraries/:id/series` (LibraryController.getAllSeriesForLibrary) | `server/routers/ApiRouter.js#L78` | P1 library | todo |  |
@@ -71,7 +71,7 @@ repository at the pinned commit.
 | A0031 | endpoint | `POST /api/items/batch/get` (LibraryItemController.batchGet) | `server/routers/ApiRouter.js#L104` | P1 library | todo |  |
 | A0032 | endpoint | `POST /api/items/batch/quickmatch` (LibraryItemController.batchQuickMatch) | `server/routers/ApiRouter.js#L105` | P1 library | todo |  |
 | A0033 | endpoint | `POST /api/items/batch/scan` (LibraryItemController.batchScan) | `server/routers/ApiRouter.js#L106` | P1 library | todo |  |
-| A0034 | endpoint | `GET /api/items/:id` (LibraryItemController.findOne) | `server/routers/ApiRouter.js#L108` | P1 library | todo |  |
+| A0034 | endpoint | `GET /api/items/:id` (LibraryItemController.findOne) | `server/routers/ApiRouter.js#L108` | P1 library | wip | `server/tests/parity_abs_library.rs::items_answer_like_the_original` (books; podcasts with P5, `rssfeed`/`share` includes with P5) |
 | A0035 | endpoint | `DELETE /api/items/:id` (LibraryItemController.delete) | `server/routers/ApiRouter.js#L109` | P1 library | todo |  |
 | A0036 | endpoint | `GET /api/items/:id/download` (LibraryItemController.download) | `server/routers/ApiRouter.js#L110` | P1 library | todo |  |
 | A0037 | endpoint | `PATCH /api/items/:id/media` (LibraryItemController.updateMedia) | `server/routers/ApiRouter.js#L111` | P1 library | todo |  |

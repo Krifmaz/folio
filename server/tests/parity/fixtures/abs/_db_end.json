@@ -1,0 +1,447 @@
+{
+ "apiKeys": [],
+ "authors": [
+  {
+   "asin": null,
+   "createdAt": "2026-11-05 19:28:08.946 +00:00",
+   "description": null,
+   "id": "c6b5a186-379f-403f-870c-bf6f4e767bdf",
+   "imagePath": null,
+   "lastFirst": "Chambers, Becky",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "name": "Becky Chambers",
+   "updatedAt": "2026-11-05 19:28:08.946 +00:00"
+  },
+  {
+   "asin": null,
+   "createdAt": "2026-11-05 19:28:08.979 +00:00",
+   "description": null,
+   "id": "a10848be-f52d-49a4-a65b-e1ae86ae3b20",
+   "imagePath": null,
+   "lastFirst": "Wells, Martha",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "name": "Martha Wells",
+   "updatedAt": "2026-11-05 19:28:08.979 +00:00"
+  },
+  {
+   "asin": null,
+   "createdAt": "2026-11-05 19:28:09.035 +00:00",
+   "description": null,
+   "id": "a3250c2a-83d3-4d08-b9f8-2121c23ada8a",
+   "imagePath": null,
+   "lastFirst": "Leckie, Ann",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "name": "Ann Leckie",
+   "updatedAt": "2026-11-05 19:28:09.035 +00:00"
+  }
+ ],
+ "bookAuthors": [
+  {
+   "authorId": "c6b5a186-379f-403f-870c-bf6f4e767bdf",
+   "bookId": "819e240b-a2fd-4d0b-b038-57290afe8fcd",
+   "createdAt": "2026-11-05 19:28:08.929 +00:00",
+   "id": "55147f8a-40a0-4960-a1f1-818b92a6c96a"
+  },
+  {
+   "authorId": "a10848be-f52d-49a4-a65b-e1ae86ae3b20",
+   "bookId": "3ab513b6-6f27-441b-920f-3f9508f8918c",
+   "createdAt": "2026-11-05 19:28:08.972 +00:00",
+   "id": "0f4ee0f4-2356-4c3a-bbdc-c110beba4202"
+  },
+  {
+   "authorId": "a3250c2a-83d3-4d08-b9f8-2121c23ada8a",
+   "bookId": "1b1bd7da-2a74-4a49-857e-4f9d1628e0d4",
+   "createdAt": "2026-11-05 19:28:09.030 +00:00",
+   "id": "13c144c7-6d29-4ed4-af8a-2589688fda18"
+  }
+ ],
+ "bookSeries": [
+  {
+   "bookId": "3ab513b6-6f27-441b-920f-3f9508f8918c",
+   "createdAt": "2026-11-05 19:28:08.978 +00:00",
+   "id": "768d8a10-86a9-4a2f-8395-1cf4ff9490e5",
+   "sequence": "1",
+   "seriesId": "1335e437-f3c9-45eb-988a-63c4545cbf6f"
+  },
+  {
+   "bookId": "1b1bd7da-2a74-4a49-857e-4f9d1628e0d4",
+   "createdAt": "2026-11-05 19:28:09.034 +00:00",
+   "id": "6c880a9b-64b7-45bd-982c-4c713fc52502",
+   "sequence": "1",
+   "seriesId": "23c94f0a-7690-4fff-9458-6282405ca185"
+  }
+ ],
+ "books": [
+  {
+   "abridged": 0,
+   "asin": null,
+   "audioFiles": "[{\"index\":1,\"ino\":\"9437551\",\"metadata\":{\"filename\":\"Part 01.mp3\",\"ext\":\".mp3\",\"path\":\"/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3\",\"relPath\":\"Part 01.mp3\",\"size\":60510,\"mtimeMs\":1793906878513,\"ctimeMs\":1793906878513,\"birthtimeMs\":1793906878455},\"addedAt\":1793906888922,\"updatedAt\":1793906888922,\"trackNumFromMeta\":1,\"discNumFromMeta\":null,\"trackNumFromFilename\":1,\"discNumFromFilename\":null,\"manuallyVerified\":false,\"exclude\":false,\"error\":null,\"format\":\"MP2/3 (MPEG audio layer 2/3)\",\"duration\":15,\"bitRate\":32000,\"language\":null,\"codec\":\"mp3\",\"timeBase\":\"1/14112000\",\"channels\":1,\"channelLayout\":\"mono\",\"chapters\":[],\"embeddedCoverArt\":null,\"metaTags\":{\"tagAlbum\":\"A Psalm for the Wild-Built\",\"tagArtist\":\"Becky Chambers\",\"tagTitle\":\"Part 1\",\"tagTrack\":\"1/3\",\"tagEncoder\":\"Lavf60.16.100\"},\"mimeType\":\"audio/mpeg\"},{\"index\":2,\"ino\":\"9437552\",\"metadata\":{\"filename\":\"Part 02.mp3\",\"ext\":\".mp3\",\"path\":\"/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3\",\"relPath\":\"Part 02.mp3\",\"size\":60510,\"mtimeMs\":1793906878611,\"ctimeMs\":1793906878611,\"birthtimeMs\":1793906878554},\"addedAt\":1793906888927,\"updatedAt\":1793906888927,\"trackNumFromMeta\":2,\"discNumFromMeta\":null,\"trackNumFromFilename\":2,\"discNumFromFilename\":null,\"manuallyVerified\":false,\"exclude\":false,\"error\":null,\"format\":\"MP2/3 (MPEG audio layer 2/3)\",\"duration\":15,\"bitRate\":32000,\"language\":null,\"codec\":\"mp3\",\"timeBase\":\"1/14112000\",\"channels\":1,\"channelLayout\":\"mono\",\"chapters\":[],\"embeddedCoverArt\":null,\"metaTags\":{\"tagAlbum\":\"A Psalm for the Wild-Built\",\"tagArtist\":\"Becky Chambers\",\"tagTitle\":\"Part 2\",\"tagTrack\":\"2/3\",\"tagEncoder\":\"Lavf60.16.100\"},\"mimeType\":\"audio/mpeg\"},{\"index\":3,\"ino\":\"9437553\",\"metadata\":{\"filename\":\"Part 03.mp3\",\"ext\":\".mp3\",\"path\":\"/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3\",\"relPath\":\"Part 03.mp3\",\"size\":60510,\"mtimeMs\":1793906878710,\"ctimeMs\":1793906878710,\"birthtimeMs\":1793906878654},\"addedAt\":1793906888927,\"updatedAt\":1793906888927,\"trackNumFromMeta\":3,\"discNumFromMeta\":null,\"trackNumFromFilename\":3,\"discNumFromFilename\":null,\"manuallyVerified\":false,\"exclude\":false,\"error\":null,\"format\":\"MP2/3 (MPEG audio layer 2/3)\",\"duration\":15,\"bitRate\":32000,\"language\":null,\"codec\":\"mp3\",\"timeBase\":\"1/14112000\",\"channels\":1,\"channelLayout\":\"mono\",\"chapters\":[],\"embeddedCoverArt\":null,\"metaTags\":{\"tagAlbum\":\"A Psalm for the Wild-Built\",\"tagArtist\":\"Becky Chambers\",\"tagTitle\":\"Part 3\",\"tagTrack\":\"3/3\",\"tagEncoder\":\"Lavf60.16.100\"},\"mimeType\":\"audio/mpeg\"}]",
+   "chapters": "[{\"id\":0,\"start\":0,\"end\":15,\"title\":\"Part 1\"},{\"id\":1,\"start\":15,\"end\":30,\"title\":\"Part 2\"},{\"id\":2,\"start\":30,\"end\":45,\"title\":\"Part 3\"}]",
+   "coverPath": null,
+   "createdAt": "2026-11-05 19:28:08.932 +00:00",
+   "description": null,
+   "duration": 45.0,
+   "ebookFile": null,
+   "explicit": 0,
+   "genres": "[]",
+   "id": "819e240b-a2fd-4d0b-b038-57290afe8fcd",
+   "isbn": null,
+   "language": null,
+   "narrators": "[]",
+   "publishedDate": null,
+   "publishedYear": null,
+   "publisher": null,
+   "subtitle": null,
+   "tags": "[]",
+   "title": "A Psalm for the Wild-Built",
+   "titleIgnorePrefix": "Psalm for the Wild-Built",
+   "updatedAt": "2026-11-05 19:28:08.932 +00:00"
+  },
+  {
+   "abridged": 0,
+   "asin": null,
+   "audioFiles": "[]",
+   "chapters": "[]",
+   "coverPath": null,
+   "createdAt": "2026-11-05 19:28:08.974 +00:00",
+   "description": null,
+   "duration": 0.0,
+   "ebookFile": "{\"ino\":\"9437557\",\"metadata\":{\"filename\":\"All Systems Red.epub\",\"ext\":\".epub\",\"path\":\"/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub\",\"relPath\":\"All Systems Red.epub\",\"size\":1311,\"mtimeMs\":1793906878737,\"ctimeMs\":1793906878737,\"birthtimeMs\":1793906878736},\"isSupplementary\":null,\"addedAt\":1793906888878,\"updatedAt\":1793906888878,\"fileType\":\"ebook\",\"ebookFormat\":\"epub\"}",
+   "explicit": 0,
+   "genres": "[]",
+   "id": "3ab513b6-6f27-441b-920f-3f9508f8918c",
+   "isbn": null,
+   "language": "en",
+   "narrators": "[]",
+   "publishedDate": null,
+   "publishedYear": "2017",
+   "publisher": null,
+   "subtitle": null,
+   "tags": "[]",
+   "title": "All Systems Red",
+   "titleIgnorePrefix": "All Systems Red",
+   "updatedAt": "2026-11-05 19:28:08.974 +00:00"
+  },
+  {
+   "abridged": 0,
+   "asin": null,
+   "audioFiles": "[{\"index\":1,\"ino\":\"9437549\",\"metadata\":{\"filename\":\"Ancillary Justice.m4b\",\"ext\":\".m4b\",\"path\":\"/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b\",\"relPath\":\"Ancillary Justice.m4b\",\"size\":256184,\"mtimeMs\":1793906878413,\"ctimeMs\":1793906878413,\"birthtimeMs\":1793906878406},\"addedAt\":1793906889030,\"updatedAt\":1793906889030,\"trackNumFromMeta\":null,\"discNumFromMeta\":null,\"trackNumFromFilename\":null,\"discNumFromFilename\":null,\"manuallyVerified\":false,\"exclude\":false,\"error\":null,\"format\":\"QuickTime / MOV\",\"duration\":60,\"bitRate\":32539,\"language\":\"und\",\"codec\":\"aac\",\"timeBase\":\"1/44100\",\"channels\":1,\"channelLayout\":\"mono\",\"chapters\":[{\"start\":0,\"end\":20,\"title\":\"Chapter 1\",\"id\":0},{\"start\":20,\"end\":40,\"title\":\"Chapter 2\",\"id\":1},{\"start\":40,\"end\":60,\"title\":\"Chapter 3\",\"id\":2}],\"embeddedCoverArt\":null,\"metaTags\":{\"tagAlbum\":\"Ancillary Justice\",\"tagArtist\":\"Ann Leckie\",\"tagGenre\":\"Science Fiction\",\"tagTitle\":\"Ancillary Justice\",\"tagDate\":\"2013\",\"tagComposer\":\"Adjoa Andoh\",\"tagEncoder\":\"Lavf60.16.100\"},\"mimeType\":\"audio/mp4\"}]",
+   "chapters": "[{\"start\":0,\"end\":20,\"title\":\"Chapter 1\",\"id\":0},{\"start\":20,\"end\":40,\"title\":\"Chapter 2\",\"id\":1},{\"start\":40,\"end\":60,\"title\":\"Chapter 3\",\"id\":2}]",
+   "coverPath": null,
+   "createdAt": "2026-11-05 19:28:09.032 +00:00",
+   "description": null,
+   "duration": 60.0,
+   "ebookFile": null,
+   "explicit": 0,
+   "genres": "[\"Science Fiction\"]",
+   "id": "1b1bd7da-2a74-4a49-857e-4f9d1628e0d4",
+   "isbn": null,
+   "language": null,
+   "narrators": "[\"Adjoa Andoh\"]",
+   "publishedDate": null,
+   "publishedYear": "2013",
+   "publisher": null,
+   "subtitle": null,
+   "tags": "[]",
+   "title": "Ancillary Justice",
+   "titleIgnorePrefix": "Ancillary Justice",
+   "updatedAt": "2026-11-05 19:28:09.032 +00:00"
+  }
+ ],
+ "collectionBooks": [
+  {
+   "bookId": "819e240b-a2fd-4d0b-b038-57290afe8fcd",
+   "collectionId": "5f5e5979-e17f-4047-941b-af73078438c7",
+   "createdAt": "2026-11-05 19:28:13.335 +00:00",
+   "id": "764119f8-6627-4f84-a7dd-cfd590a66513",
+   "order": 1
+  }
+ ],
+ "collections": [
+  {
+   "createdAt": "2026-11-05 19:28:13.334 +00:00",
+   "description": null,
+   "id": "5f5e5979-e17f-4047-941b-af73078438c7",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "name": "Favourites",
+   "updatedAt": "2026-11-05 19:28:13.334 +00:00"
+  }
+ ],
+ "customMetadataProviders": [],
+ "devices": [
+  {
+   "clientName": "parity",
+   "clientVersion": "2.37.2",
+   "createdAt": "2026-11-05 19:28:13.388 +00:00",
+   "deviceId": "parity-1",
+   "deviceName": null,
+   "deviceVersion": null,
+   "extraData": "{}",
+   "id": "28c81207-abde-4d36-a404-e2c081c10151",
+   "ipAddress": "::ffff:172.17.0.1",
+   "updatedAt": "2026-11-05 19:28:13.388 +00:00",
+   "userId": "6fd19496-1cfe-42ef-9755-4171c0cba4b7"
+  }
+ ],
+ "feedEpisodes": [],
+ "feeds": [],
+ "libraries": [
+  {
+   "createdAt": "2026-11-05 19:28:08.836 +00:00",
+   "displayOrder": 1,
+   "extraData": "{\"lastScanMetadataPrecedence\":[\"folderStructure\",\"audioMetatags\",\"nfoFile\",\"txtFiles\",\"opfFile\",\"absMetadata\"]}",
+   "icon": "database",
+   "id": "d74a7808-f6c2-4363-881a-b33767429187",
+   "lastScan": "2026-11-05 19:28:09.050 +00:00",
+   "lastScanVersion": "2.37.2",
+   "mediaType": "book",
+   "name": "Books",
+   "provider": "google",
+   "settings": "{\"coverAspectRatio\":1,\"disableWatcher\":false,\"autoScanCronExpression\":null,\"skipMatchingMediaWithAsin\":false,\"skipMatchingMediaWithIsbn\":false,\"audiobooksOnly\":false,\"epubsAllowScriptedContent\":false,\"hideSingleBookSeries\":false,\"onlyShowLaterBooksInContinueSeries\":false,\"metadataPrecedence\":[\"folderStructure\",\"audioMetatags\",\"nfoFile\",\"txtFiles\",\"opfFile\",\"absMetadata\"],\"markAsFinishedPercentComplete\":null,\"markAsFinishedTimeRemaining\":10}",
+   "updatedAt": "2026-11-05 19:28:09.050 +00:00"
+  }
+ ],
+ "libraryFolders": [
+  {
+   "createdAt": "2026-11-05 19:28:08.839 +00:00",
+   "id": "7a608141-2b4e-4dcb-95f1-b5cc5ad3b656",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "path": "/media",
+   "updatedAt": "2026-11-05 19:28:08.839 +00:00"
+  }
+ ],
+ "libraryItems": [
+  {
+   "authorNamesFirstLast": "Becky Chambers",
+   "authorNamesLastFirst": "Chambers, Becky",
+   "birthtime": "2026-11-05 19:27:58.419 +00:00",
+   "createdAt": "2026-11-05 19:28:08.932 +00:00",
+   "ctime": "2026-11-05 19:27:58.654 +00:00",
+   "extraData": "{}",
+   "id": "9a472d57-1c3b-4bd6-9bcc-b1ab98671772",
+   "ino": "9437550",
+   "isFile": 0,
+   "isInvalid": 0,
+   "isMissing": 0,
+   "lastScan": "2026-11-05 19:28:08.930 +00:00",
+   "lastScanVersion": "2.37.2",
+   "libraryFiles": "[{\"ino\":\"9437551\",\"metadata\":{\"filename\":\"Part 01.mp3\",\"ext\":\".mp3\",\"path\":\"/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3\",\"relPath\":\"Part 01.mp3\",\"size\":60510,\"mtimeMs\":1793906878513,\"ctimeMs\":1793906878513,\"birthtimeMs\":1793906878455},\"isSupplementary\":null,\"addedAt\":1793906888877,\"updatedAt\":1793906888877,\"fileType\":\"audio\"},{\"ino\":\"9437552\",\"metadata\":{\"filename\":\"Part 02.mp3\",\"ext\":\".mp3\",\"path\":\"/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3\",\"relPath\":\"Part 02.mp3\",\"size\":60510,\"mtimeMs\":1793906878611,\"ctimeMs\":1793906878611,\"birthtimeMs\":1793906878554},\"isSupplementary\":null,\"addedAt\":1793906888877,\"updatedAt\":1793906888877,\"fileType\":\"audio\"},{\"ino\":\"9437553\",\"metadata\":{\"filename\":\"Part 03.mp3\",\"ext\":\".mp3\",\"path\":\"/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3\",\"relPath\":\"Part 03.mp3\",\"size\":60510,\"mtimeMs\":1793906878710,\"ctimeMs\":1793906878710,\"birthtimeMs\":1793906878654},\"isSupplementary\":null,\"addedAt\":1793906888877,\"updatedAt\":1793906888877,\"fileType\":\"audio\"}]",
+   "libraryFolderId": "7a608141-2b4e-4dcb-95f1-b5cc5ad3b656",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "mediaId": "819e240b-a2fd-4d0b-b038-57290afe8fcd",
+   "mediaType": "book",
+   "mtime": "2026-11-05 19:27:58.654 +00:00",
+   "path": "/media/Becky Chambers/A Psalm for the Wild-Built",
+   "relPath": "Becky Chambers/A Psalm for the Wild-Built",
+   "size": 181530,
+   "title": "A Psalm for the Wild-Built",
+   "titleIgnorePrefix": "Psalm for the Wild-Built",
+   "updatedAt": "2026-11-05 19:28:08.932 +00:00"
+  },
+  {
+   "authorNamesFirstLast": "Martha Wells",
+   "authorNamesLastFirst": "Wells, Martha",
+   "birthtime": "2026-11-05 19:27:58.715 +00:00",
+   "createdAt": "2026-11-05 19:28:08.973 +00:00",
+   "ctime": "2026-11-05 19:27:58.736 +00:00",
+   "extraData": "{}",
+   "id": "ad1a46c2-95da-4728-bbfc-0e7eefdf03ec",
+   "ino": "9437556",
+   "isFile": 0,
+   "isInvalid": 0,
+   "isMissing": 0,
+   "lastScan": "2026-11-05 19:28:08.972 +00:00",
+   "lastScanVersion": "2.37.2",
+   "libraryFiles": "[{\"ino\":\"9437557\",\"metadata\":{\"filename\":\"All Systems Red.epub\",\"ext\":\".epub\",\"path\":\"/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub\",\"relPath\":\"All Systems Red.epub\",\"size\":1311,\"mtimeMs\":1793906878737,\"ctimeMs\":1793906878737,\"birthtimeMs\":1793906878736},\"isSupplementary\":false,\"addedAt\":1793906888878,\"updatedAt\":1793906888878,\"fileType\":\"ebook\"}]",
+   "libraryFolderId": "7a608141-2b4e-4dcb-95f1-b5cc5ad3b656",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "mediaId": "3ab513b6-6f27-441b-920f-3f9508f8918c",
+   "mediaType": "book",
+   "mtime": "2026-11-05 19:27:58.736 +00:00",
+   "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+   "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+   "size": 1311,
+   "title": "All Systems Red",
+   "titleIgnorePrefix": "All Systems Red",
+   "updatedAt": "2026-11-05 19:28:08.973 +00:00"
+  },
+  {
+   "authorNamesFirstLast": "Ann Leckie",
+   "authorNamesLastFirst": "Leckie, Ann",
+   "birthtime": "2026-11-05 19:27:57.460 +00:00",
+   "createdAt": "2026-11-05 19:28:09.031 +00:00",
+   "ctime": "2026-11-05 19:27:58.417 +00:00",
+   "extraData": "{}",
+   "id": "a482600a-1484-46fd-a558-01afd548de5f",
+   "ino": "9437547",
+   "isFile": 0,
+   "isInvalid": 0,
+   "isMissing": 0,
+   "lastScan": "2026-11-05 19:28:09.030 +00:00",
+   "lastScanVersion": "2.37.2",
+   "libraryFiles": "[{\"ino\":\"9437549\",\"metadata\":{\"filename\":\"Ancillary Justice.m4b\",\"ext\":\".m4b\",\"path\":\"/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b\",\"relPath\":\"Ancillary Justice.m4b\",\"size\":256184,\"mtimeMs\":1793906878413,\"ctimeMs\":1793906878413,\"birthtimeMs\":1793906878406},\"isSupplementary\":null,\"addedAt\":1793906888878,\"updatedAt\":1793906888878,\"fileType\":\"audio\"}]",
+   "libraryFolderId": "7a608141-2b4e-4dcb-95f1-b5cc5ad3b656",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "mediaId": "1b1bd7da-2a74-4a49-857e-4f9d1628e0d4",
+   "mediaType": "book",
+   "mtime": "2026-11-05 19:27:58.417 +00:00",
+   "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+   "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+   "size": 256184,
+   "title": "Ancillary Justice",
+   "titleIgnorePrefix": "Ancillary Justice",
+   "updatedAt": "2026-11-05 19:28:09.031 +00:00"
+  }
+ ],
+ "mediaItemShares": [],
+ "mediaProgresses": [
+  {
+   "createdAt": "2026-11-05 19:28:13.301 +00:00",
+   "currentTime": 15.0,
+   "duration": 60.0,
+   "ebookLocation": null,
+   "ebookProgress": 0.0,
+   "extraData": "{\"libraryItemId\":\"9a472d57-1c3b-4bd6-9bcc-b1ab98671772\",\"progress\":0.3333333333333333}",
+   "finishedAt": null,
+   "hideFromContinueListening": 0,
+   "id": "abcf9016-4ca9-4061-83cd-08336114bc41",
+   "isFinished": 0,
+   "mediaItemId": "819e240b-a2fd-4d0b-b038-57290afe8fcd",
+   "mediaItemType": "book",
+   "podcastId": null,
+   "updatedAt": "2026-11-05 19:28:13.415 +00:00",
+   "userId": "6fd19496-1cfe-42ef-9755-4171c0cba4b7"
+  }
+ ],
+ "migrationsMeta": [
+  {
+   "key": "version",
+   "value": "2.37.2"
+  },
+  {
+   "key": "maxVersion",
+   "value": "2.37.2"
+  }
+ ],
+ "playbackSessions": [
+  {
+   "coverPath": null,
+   "createdAt": "2026-11-05 19:28:13.390 +00:00",
+   "currentTime": 15.0,
+   "date": "2026-11-05",
+   "dayOfWeek": "Thursday",
+   "deviceId": "28c81207-abde-4d36-a404-e2c081c10151",
+   "displayAuthor": "Becky Chambers",
+   "displayTitle": "A Psalm for the Wild-Built",
+   "duration": 45.0,
+   "extraData": "{\"libraryItemId\":\"9a472d57-1c3b-4bd6-9bcc-b1ab98671772\"}",
+   "id": "cd43abac-cc08-4c37-b76c-343bae298221",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "mediaItemId": "819e240b-a2fd-4d0b-b038-57290afe8fcd",
+   "mediaItemType": "book",
+   "mediaMetadata": "{\"title\":\"A Psalm for the Wild-Built\",\"subtitle\":null,\"authors\":[{\"id\":\"c6b5a186-379f-403f-870c-bf6f4e767bdf\",\"name\":\"Becky Chambers\"}],\"narrators\":[],\"series\":[],\"genres\":[],\"publishedYear\":null,\"publishedDate\":null,\"publisher\":null,\"description\":null,\"isbn\":null,\"asin\":null,\"language\":null,\"explicit\":false,\"abridged\":false}",
+   "mediaPlayer": "html5",
+   "playMethod": 0,
+   "serverVersion": "2.37.2",
+   "startTime": 30.0,
+   "timeListening": 15,
+   "updatedAt": "2026-11-05 19:28:13.414 +00:00",
+   "userId": "6fd19496-1cfe-42ef-9755-4171c0cba4b7"
+  }
+ ],
+ "playlistMediaItems": [
+  {
+   "createdAt": "2026-11-05 19:28:13.359 +00:00",
+   "id": "79e359ba-a558-4e8a-b8f5-91433646adf5",
+   "mediaItemId": "3ab513b6-6f27-441b-920f-3f9508f8918c",
+   "mediaItemType": "book",
+   "order": 1,
+   "playlistId": "d0480463-0d4f-4a6f-8b70-ca601e0aa9fb"
+  }
+ ],
+ "playlists": [
+  {
+   "createdAt": "2026-11-05 19:28:13.358 +00:00",
+   "description": null,
+   "id": "d0480463-0d4f-4a6f-8b70-ca601e0aa9fb",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "name": "Queue",
+   "updatedAt": "2026-11-05 19:28:13.358 +00:00",
+   "userId": "6fd19496-1cfe-42ef-9755-4171c0cba4b7"
+  }
+ ],
+ "podcastEpisodes": [],
+ "podcasts": [],
+ "series": [
+  {
+   "createdAt": "2026-11-05 19:28:08.979 +00:00",
+   "description": null,
+   "id": "1335e437-f3c9-45eb-988a-63c4545cbf6f",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "name": "The Murderbot Diaries",
+   "nameIgnorePrefix": "Murderbot Diaries",
+   "updatedAt": "2026-11-05 19:28:08.979 +00:00"
+  },
+  {
+   "createdAt": "2026-11-05 19:28:09.035 +00:00",
+   "description": null,
+   "id": "23c94f0a-7690-4fff-9458-6282405ca185",
+   "libraryId": "d74a7808-f6c2-4363-881a-b33767429187",
+   "name": "Imperial Radch",
+   "nameIgnorePrefix": "Imperial Radch",
+   "updatedAt": "2026-11-05 19:28:09.035 +00:00"
+  }
+ ],
+ "sessions": [
+  {
+   "createdAt": "2026-11-05 19:28:08.817 +00:00",
+   "expiresAt": "2026-12-05 19:28:08.816 +00:00",
+   "id": "a4d22dc2-920f-4ef7-9e08-88ad85f99060",
+   "ipAddress": "::ffff:172.17.0.1",
+   "lastRefreshToken": null,
+   "lastRefreshTokenExpiresAt": null,
+   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ZmQxOTQ5Ni0xY2ZlLTQyZWYtOTc1NS00MTcxYzBjYmE0YjciLCJ1c2VybmFtZSI6InJvb3QiLCJqdGkiOiJkYTY0N2E3NC0zMGY1LTRhMTctYjQxNC0xMzMzYmQxNWJjYTAiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc5MzkwNjg4OCwiZXhwIjoxNzk2NDk4ODg4fQ.mgfLuk2KduojuTMtNJuKxlUKqzytra7MjxIVmO8AR28",
+   "updatedAt": "2026-11-05 19:28:08.817 +00:00",
+   "userAgent": "Python-urllib/3.12",
+   "userId": "6fd19496-1cfe-42ef-9755-4171c0cba4b7"
+  },
+  {
+   "createdAt": "2026-11-05 19:28:13.029 +00:00",
+   "expiresAt": "2026-12-05 19:28:13.029 +00:00",
+   "id": "3c5440c6-a915-412f-8997-312e15798279",
+   "ipAddress": "::ffff:172.17.0.1",
+   "lastRefreshToken": null,
+   "lastRefreshTokenExpiresAt": null,
+   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ZmQxOTQ5Ni0xY2ZlLTQyZWYtOTc1NS00MTcxYzBjYmE0YjciLCJ1c2VybmFtZSI6InJvb3QiLCJqdGkiOiIxYjk0ZjY1Ny04ODkwLTRlZDgtOWUwOS1mM2ZkMWJlYWMzNjEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc5MzkwNjg5MywiZXhwIjoxNzk2NDk4ODkzfQ.lVGUINQ21paZd_cUXgFjoXx2JsU1Q3pMnFnIE4r3AUk",
+   "updatedAt": "2026-11-05 19:28:13.029 +00:00",
+   "userAgent": "Python-urllib/3.12",
+   "userId": "6fd19496-1cfe-42ef-9755-4171c0cba4b7"
+  }
+ ],
+ "settings": [
+  {
+   "createdAt": "2026-11-05 19:28:08.567 +00:00",
+   "key": "server-settings",
+   "updatedAt": "2026-11-05 19:28:08.567 +00:00",
+   "value": "{\"id\":\"server-settings\",\"tokenSecret\":\"Rvw20Pcla3tGFAnpY2omkxuOnG6csi1b/kfwfRuDLt7ZLbXpDigzGJR8vFO5GtwoxT832HEfQ/rHYFnkWnr8t8u/68QBSY2TYkjRzf3OBadm4xAt/TJQjluvstf2a0hH5AVS4Xl74EEQUvpltOIpOflRxjBBdZxq56Py6mqfV8gI+Q228jEc8iMR8FsqsbWlfmfBoSbYaTx+tDuvlukESaRufGfIkMFsLcXOtAH6h4oE3kkS9dkN+dFoBVBWEsKz3GCvy3uUtzr8kwZfQqZPZlULiRJxri8axUuW0PMcpN/UPrvhTSIt8EIX5zb/jlRx1VTW03ZQfLuGYSe4hnfsTQ==\",\"scannerFindCovers\":false,\"scannerCoverProvider\":\"google\",\"scannerParseSubtitle\":false,\"scannerPreferMatchedMetadata\":false,\"scannerDisableWatcher\":false,\"storeCoverWithItem\":false,\"storeMetadataWithItem\":false,\"metadataFileFormat\":\"json\",\"rateLimitLoginRequests\":10,\"rateLimitLoginWindow\":600000,\"allowIframe\":false,\"backupPath\":\"/metadata/backups\",\"backupSchedule\":false,\"backupsToKeep\":2,\"maxBackupSize\":1,\"loggerDailyLogsToKeep\":7,\"loggerScannerLogsToKeep\":2,\"homeBookshelfView\":1,\"bookshelfView\":1,\"podcastEpisodeSchedule\":\"0 * * * *\",\"sortingIgnorePrefix\":false,\"sortingPrefixes\":[\"the\",\"a\"],\"chromecastEnabled\":false,\"dateFormat\":\"MM/dd/yyyy\",\"timeFormat\":\"HH:mm\",\"language\":\"en-us\",\"allowedOrigins\":[],\"logLevel\":2,\"version\":\"2.37.2\",\"buildNumber\":1,\"authLoginCustomMessage\":null,\"authActiveAuthMethods\":[\"local\"],\"authOpenIDIssuerURL\":null,\"authOpenIDAuthorizationURL\":null,\"authOpenIDTokenURL\":null,\"authOpenIDUserInfoURL\":null,\"authOpenIDJwksURL\":null,\"authOpenIDLogoutURL\":null,\"authOpenIDClientID\":null,\"authOpenIDClientSecret\":null,\"authOpenIDTokenSigningAlgorithm\":\"RS256\",\"authOpenIDButtonText\":\"Login with OpenId\",\"authOpenIDAutoLaunch\":false,\"authOpenIDAutoRegister\":false,\"authOpenIDMatchExistingBy\":null,\"authOpenIDMobileRedirectURIs\":[\"audiobookshelf://oauth\"],\"authOpenIDGroupClaim\":\"\",\"authOpenIDAdvancedPermsClaim\":\"\"}"
+  }
+ ],
+ "users": [
+  {
+   "bookmarks": "[{\"libraryItemId\":\"9a472d57-1c3b-4bd6-9bcc-b1ab98671772\",\"time\":12,\"title\":\"A mark\",\"createdAt\":1793906893321}]",
+   "createdAt": "2026-11-05 19:28:08.784 +00:00",
+   "email": null,
+   "extraData": "{\"seriesHideFromContinueListening\":[]}",
+   "id": "6fd19496-1cfe-42ef-9755-4171c0cba4b7",
+   "isActive": 1,
+   "isLocked": 0,
+   "lastSeen": null,
+   "pash": "$2a$08$ZyO6c9pZI9AGoRNM6sQ8EOELVJa75fXIK.LeZplWMQBrRKzRf86ve",
+   "permissions": "{\"download\":true,\"update\":true,\"delete\":true,\"upload\":true,\"createEreader\":true,\"accessAllLibraries\":true,\"accessAllTags\":true,\"accessExplicitContent\":true,\"selectedTagsNotAccessible\":false,\"librariesAccessible\":[],\"itemTagsSelected\":[]}",
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ZmQxOTQ5Ni0xY2ZlLTQyZWYtOTc1NS00MTcxYzBjYmE0YjciLCJ1c2VybmFtZSI6InJvb3QiLCJpYXQiOjE3OTM5MDY4ODh9.oB0BCC4e-3x4RmF3pqVn4tYTGdy5ic9ha-NERySx3j8",
+   "type": "root",
+   "updatedAt": "2026-11-05 19:28:13.321 +00:00",
+   "username": "root"
+  }
+ ]
+}

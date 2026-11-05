@@ -313,7 +313,11 @@ pub fn book_items(db: &dyn Db, library_id: &str, u: &User, q: &Query, sorting: &
         .map(|r| r.get("n").and_then(Value::as_i64).unwrap_or(0))
         .unwrap_or(0);
 
-    let order_sql = if orders.is_empty() { String::new() } else { format!(" ORDER BY {}", orders.join(", ")) };
+    // The original's SQLite reads the items in the order of their ids (seen in every recording): that is the
+    // order without a sort, and of items a sort finds equal. It is written out here so it doesn't depend on the
+    // query plan.
+    orders.push("`libraryItem`.`id`".into());
+    let order_sql = format!(" ORDER BY {}", orders.join(", "));
     let limit_sql = match (q.limit, q.offset) {
         (0, 0) => String::new(),
         (0, off) => format!(" LIMIT -1 OFFSET {off}"),

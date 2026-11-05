@@ -17,6 +17,16 @@ pub fn js_num(n: f64) -> Value {
     }
 }
 
+/// Every number in a JSON value as JavaScript writes it (see [`js_num`]): for values built from stored floats.
+pub fn js_numbers(v: Value) -> Value {
+    match v {
+        Value::Number(n) if n.is_f64() => js_num(n.as_f64().unwrap_or(f64::NAN)),
+        Value::Array(a) => Value::Array(a.into_iter().map(js_numbers).collect()),
+        Value::Object(m) => Value::Object(m.into_iter().map(|(k, v)| (k, js_numbers(v))).collect()),
+        other => other,
+    }
+}
+
 /// An optional number as the original writes it: `null` when missing.
 pub fn js_num_opt(n: Option<f64>) -> Value {
     n.map_or(Value::Null, js_num)
