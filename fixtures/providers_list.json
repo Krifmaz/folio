@@ -1,0 +1,33 @@
+{
+ "body": {
+  "providers": [
+   {
+    "authHeaderValue": null,
+    "createdAt": "2026-11-05T23:46:28.773Z",
+    "extraData": null,
+    "id": "b6944e43-6385-46a8-bf1a-b11f36e73856",
+    "mediaType": "book",
+    "name": "My provider",
+    "updatedAt": "2026-11-05T23:46:28.773Z",
+    "url": "https://meta.example/api"
+   },
+   {
+    "authHeaderValue": "Bearer abc",
+    "createdAt": "2026-11-05T23:46:28.779Z",
+    "extraData": null,
+    "id": "b2a28480-0f91-4cc2-b0a0-0dbd06d17663",
+    "mediaType": "podcast",
+    "name": "Pods",
+    "updatedAt": "2026-11-05T23:46:28.779Z",
+    "url": "http://pods.example"
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/custom-metadata-providers"
+ },
+ "status": 200
+}

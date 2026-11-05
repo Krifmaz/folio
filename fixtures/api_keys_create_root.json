@@ -1,0 +1,30 @@
+{
+ "body": {
+  "apiKey": {
+   "apiKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlJZCI6ImI2MDhkYWY2LTNhOGItNGYxNi1iODA0LTM0ODI5YjFjNDEzMyIsIm5hbWUiOiJSb290IGtleSIsInR5cGUiOiJhcGkiLCJpYXQiOjE3OTM5MjIzODh9.iYSDWYz3XwKBexCH747Yks9Foid1W4gYLscLnlr8Jb8",
+   "createdAt": "2026-11-05T23:46:28.569Z",
+   "createdByUserId": "689d7307-ee39-4d51-a3db-fd43bcc57dcc",
+   "expiresAt": null,
+   "id": "b608daf6-3a8b-4f16-b804-34829b1c4133",
+   "isActive": false,
+   "name": "Root key",
+   "updatedAt": "2026-11-05T23:46:28.569Z",
+   "user": {
+    "id": "689d7307-ee39-4d51-a3db-fd43bcc57dcc",
+    "type": "root",
+    "username": "root"
+   },
+   "userId": "689d7307-ee39-4d51-a3db-fd43bcc57dcc"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "name": "Root key",
+   "userId": "{root_id}"
+  },
+  "method": "POST",
+  "path": "/api/api-keys"
+ },
+ "status": 200
+}

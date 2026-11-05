@@ -1,0 +1,14 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "appriseApiUrl": "",
+   "maxFailedAttempts": 5,
+   "maxNotificationQueue": 20
+  },
+  "method": "PATCH",
+  "path": "/api/notifications"
+ },
+ "status": 200
+}

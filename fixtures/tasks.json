@@ -1,0 +1,12 @@
+{
+ "body": {
+  "tasks": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/tasks"
+ },
+ "status": 200
+}

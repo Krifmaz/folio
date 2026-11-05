@@ -1,0 +1,31 @@
+{
+ "body": {
+  "apiKey": {
+   "createdAt": "2026-11-05T23:46:28.564Z",
+   "createdByUserId": "689d7307-ee39-4d51-a3db-fd43bcc57dcc",
+   "description": null,
+   "expiresAt": "2026-11-06T00:46:28.564Z",
+   "id": "02d7c718-741f-48f4-a948-ed54d6b85b42",
+   "isActive": false,
+   "lastUsedAt": null,
+   "name": "Test key",
+   "permissions": null,
+   "updatedAt": "2026-11-05T23:46:28.585Z",
+   "user": {
+    "id": "2057c1fb-dd1f-4314-a0da-f288ef20c9a6",
+    "type": "user",
+    "username": "reader"
+   },
+   "userId": "2057c1fb-dd1f-4314-a0da-f288ef20c9a6"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "isActive": false
+  },
+  "method": "PATCH",
+  "path": "/api/api-keys/{key_id}"
+ },
+ "status": 200
+}

@@ -1,0 +1,10 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "PATCH",
+  "path": "/api/users/{user_id}/openid-unlink"
+ },
+ "status": 200
+}

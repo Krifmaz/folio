@@ -1,0 +1,256 @@
+{
+ "body": {
+  "addedAt": 1793922383646,
+  "birthtimeMs": 1793922374725,
+  "ctimeMs": 1793922374952,
+  "folderId": "bd779166-9c0d-4513-b563-1406d45ed840",
+  "id": "7a416bb2-ad4e-429d-a8e8-7b84d62ad32a",
+  "ino": "9437195",
+  "isFile": false,
+  "isInvalid": false,
+  "isMissing": false,
+  "lastScan": 1793922383644,
+  "libraryFiles": [
+   {
+    "addedAt": 1793922383595,
+    "fileType": "audio",
+    "ino": "9437196",
+    "isSupplementary": null,
+    "metadata": {
+     "birthtimeMs": 1793922374761,
+     "ctimeMs": 1793922374816,
+     "ext": ".mp3",
+     "filename": "Part 01.mp3",
+     "mtimeMs": 1793922374816,
+     "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3",
+     "relPath": "Part 01.mp3",
+     "size": 60510
+    },
+    "updatedAt": 1793922383595
+   },
+   {
+    "addedAt": 1793922383595,
+    "fileType": "audio",
+    "ino": "9437197",
+    "isSupplementary": null,
+    "metadata": {
+     "birthtimeMs": 1793922374855,
+     "ctimeMs": 1793922374912,
+     "ext": ".mp3",
+     "filename": "Part 02.mp3",
+     "mtimeMs": 1793922374912,
+     "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3",
+     "relPath": "Part 02.mp3",
+     "size": 60510
+    },
+    "updatedAt": 1793922383595
+   },
+   {
+    "addedAt": 1793922383595,
+    "fileType": "audio",
+    "ino": "9437198",
+    "isSupplementary": null,
+    "metadata": {
+     "birthtimeMs": 1793922374952,
+     "ctimeMs": 1793922375008,
+     "ext": ".mp3",
+     "filename": "Part 03.mp3",
+     "mtimeMs": 1793922375008,
+     "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3",
+     "relPath": "Part 03.mp3",
+     "size": 60510
+    },
+    "updatedAt": 1793922383595
+   }
+  ],
+  "libraryId": "e59f74c4-a887-4b54-af0e-6284193b09a4",
+  "media": {
+   "audioFiles": [
+    {
+     "addedAt": 1793922383641,
+     "bitRate": 32000,
+     "channelLayout": "mono",
+     "channels": 1,
+     "chapters": [],
+     "codec": "mp3",
+     "discNumFromFilename": null,
+     "discNumFromMeta": null,
+     "duration": 15,
+     "embeddedCoverArt": null,
+     "error": null,
+     "exclude": false,
+     "format": "MP2/3 (MPEG audio layer 2/3)",
+     "index": 1,
+     "ino": "9437196",
+     "language": null,
+     "manuallyVerified": false,
+     "metaTags": {
+      "tagAlbum": "A Psalm for the Wild-Built",
+      "tagArtist": "Becky Chambers",
+      "tagEncoder": "Lavf60.16.100",
+      "tagTitle": "Part 1",
+      "tagTrack": "1/3"
+     },
+     "metadata": {
+      "birthtimeMs": 1793922374761,
+      "ctimeMs": 1793922374816,
+      "ext": ".mp3",
+      "filename": "Part 01.mp3",
+      "mtimeMs": 1793922374816,
+      "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3",
+      "relPath": "Part 01.mp3",
+      "size": 60510
+     },
+     "mimeType": "audio/mpeg",
+     "timeBase": "1/14112000",
+     "trackNumFromFilename": 1,
+     "trackNumFromMeta": 1,
+     "updatedAt": 1793922383641
+    },
+    {
+     "addedAt": 1793922383638,
+     "bitRate": 32000,
+     "channelLayout": "mono",
+     "channels": 1,
+     "chapters": [],
+     "codec": "mp3",
+     "discNumFromFilename": null,
+     "discNumFromMeta": null,
+     "duration": 15,
+     "embeddedCoverArt": null,
+     "error": null,
+     "exclude": false,
+     "format": "MP2/3 (MPEG audio layer 2/3)",
+     "index": 2,
+     "ino": "9437197",
+     "language": null,
+     "manuallyVerified": false,
+     "metaTags": {
+      "tagAlbum": "A Psalm for the Wild-Built",
+      "tagArtist": "Becky Chambers",
+      "tagEncoder": "Lavf60.16.100",
+      "tagTitle": "Part 2",
+      "tagTrack": "2/3"
+     },
+     "metadata": {
+      "birthtimeMs": 1793922374855,
+      "ctimeMs": 1793922374912,
+      "ext": ".mp3",
+      "filename": "Part 02.mp3",
+      "mtimeMs": 1793922374912,
+      "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3",
+      "relPath": "Part 02.mp3",
+      "size": 60510
+     },
+     "mimeType": "audio/mpeg",
+     "timeBase": "1/14112000",
+     "trackNumFromFilename": 2,
+     "trackNumFromMeta": 2,
+     "updatedAt": 1793922383638
+    },
+    {
+     "addedAt": 1793922383641,
+     "bitRate": 32000,
+     "channelLayout": "mono",
+     "channels": 1,
+     "chapters": [],
+     "codec": "mp3",
+     "discNumFromFilename": null,
+     "discNumFromMeta": null,
+     "duration": 15,
+     "embeddedCoverArt": null,
+     "error": null,
+     "exclude": false,
+     "format": "MP2/3 (MPEG audio layer 2/3)",
+     "index": 3,
+     "ino": "9437198",
+     "language": null,
+     "manuallyVerified": false,
+     "metaTags": {
+      "tagAlbum": "A Psalm for the Wild-Built",
+      "tagArtist": "Becky Chambers",
+      "tagEncoder": "Lavf60.16.100",
+      "tagTitle": "Part 3",
+      "tagTrack": "3/3"
+     },
+     "metadata": {
+      "birthtimeMs": 1793922374952,
+      "ctimeMs": 1793922375008,
+      "ext": ".mp3",
+      "filename": "Part 03.mp3",
+      "mtimeMs": 1793922375008,
+      "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3",
+      "relPath": "Part 03.mp3",
+      "size": 60510
+     },
+     "mimeType": "audio/mpeg",
+     "timeBase": "1/14112000",
+     "trackNumFromFilename": 3,
+     "trackNumFromMeta": 3,
+     "updatedAt": 1793922383641
+    }
+   ],
+   "chapters": [
+    {
+     "end": 15,
+     "id": 0,
+     "start": 0,
+     "title": "Part 1"
+    },
+    {
+     "end": 30,
+     "id": 1,
+     "start": 15,
+     "title": "Part 2"
+    },
+    {
+     "end": 45,
+     "id": 2,
+     "start": 30,
+     "title": "Part 3"
+    }
+   ],
+   "coverPath": null,
+   "ebookFile": null,
+   "id": "39fa36f7-4d93-4906-aab1-f740c3a27158",
+   "libraryItemId": "7a416bb2-ad4e-429d-a8e8-7b84d62ad32a",
+   "metadata": {
+    "abridged": false,
+    "asin": null,
+    "authors": [
+     {
+      "id": "311168ae-2a7f-4b66-901c-d7c3abdaf6e0",
+      "name": "Becky Chambers"
+     }
+    ],
+    "description": null,
+    "explicit": false,
+    "genres": [],
+    "isbn": null,
+    "language": null,
+    "narrators": [],
+    "publishedDate": null,
+    "publishedYear": null,
+    "publisher": null,
+    "series": [],
+    "subtitle": null,
+    "title": "A Psalm for the Wild-Built"
+   },
+   "tags": []
+  },
+  "mediaType": "book",
+  "mtimeMs": 1793922374952,
+  "oldLibraryItemId": null,
+  "path": "/media/Becky Chambers/A Psalm for the Wild-Built",
+  "relPath": "Becky Chambers/A Psalm for the Wild-Built",
+  "scanVersion": "2.37.2",
+  "updatedAt": 1793922383646
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/items/{item}"
+ },
+ "status": 200
+}

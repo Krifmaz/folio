@@ -1,0 +1,20 @@
+{
+ "body": {
+  "redirect_url": null
+ },
+ "content_type": "application/json",
+ "cookies": [
+  "auth_method; Path=/",
+  "connect.sid; Path=/; HttpOnly",
+  "refresh_token; Path=/"
+ ],
+ "request": {
+  "body": null,
+  "headers": {
+   "x-refresh-token": "{refresh2}"
+  },
+  "method": "POST",
+  "path": "/logout"
+ },
+ "status": 200
+}

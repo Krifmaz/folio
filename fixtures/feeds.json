@@ -1,0 +1,13 @@
+{
+ "body": {
+  "feeds": [],
+  "minified": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/feeds"
+ },
+ "status": 200
+}

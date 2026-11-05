@@ -1,0 +1,25 @@
+{
+ "body": {
+  "provider": {
+   "authHeaderValue": "Bearer abc",
+   "createdAt": "2026-11-05T23:46:28.779Z",
+   "id": "b2a28480-0f91-4cc2-b0a0-0dbd06d17663",
+   "mediaType": "podcast",
+   "name": "Pods",
+   "updatedAt": "2026-11-05T23:46:28.779Z",
+   "url": "http://pods.example"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "authHeaderValue": "Bearer abc",
+   "mediaType": "podcast",
+   "name": "Pods",
+   "url": "http://pods.example"
+  },
+  "method": "POST",
+  "path": "/api/custom-metadata-providers"
+ },
+ "status": 200
+}

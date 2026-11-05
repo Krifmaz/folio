@@ -1,0 +1,12 @@
+{
+ "body": {
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/tags"
+ },
+ "status": 200
+}

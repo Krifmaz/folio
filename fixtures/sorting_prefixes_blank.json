@@ -1,0 +1,15 @@
+{
+ "body": "Invalid sortingPrefixes in request body",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "sortingPrefixes": [
+    "  ",
+    7
+   ]
+  },
+  "method": "PATCH",
+  "path": "/api/sorting-prefixes"
+ },
+ "status": 400
+}

@@ -1,0 +1,24 @@
+{
+ "body": {
+  "booksWithCovers": [],
+  "finishedBooksWithCovers": [],
+  "longestAudiobookFinished": null,
+  "mostListenedMonth": null,
+  "mostListenedNarrator": null,
+  "numBooksFinished": 0,
+  "numBooksListened": 0,
+  "topAuthors": [],
+  "topGenres": [],
+  "totalBookListeningTime": 0,
+  "totalListeningSessions": 0,
+  "totalListeningTime": 0,
+  "totalPodcastListeningTime": 0
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/stats/year/2026"
+ },
+ "status": 200
+}

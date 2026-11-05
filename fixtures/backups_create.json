@@ -1,0 +1,25 @@
+{
+ "body": {
+  "backups": [
+   {
+    "backupDirPath": "/metadata/backups",
+    "createdAt": 1793922388992,
+    "datePretty": "Thu, Nov 5 2026 23:46",
+    "fileSize": 20909,
+    "filename": "2026-11-05T2346.audiobookshelf",
+    "fullPath": "/metadata/backups/2026-11-05T2346.audiobookshelf",
+    "id": "2026-11-05T2346",
+    "key": "sqlite",
+    "path": "backups/2026-11-05T2346.audiobookshelf",
+    "serverVersion": "2.37.2"
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "POST",
+  "path": "/api/backups"
+ },
+ "status": 200
+}
