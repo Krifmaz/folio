@@ -6,6 +6,9 @@
 - The Readarr API can change authors (folder, profiles, tags, monitoring, one at a time or several), books and
   their editions (monitoring, "any edition"), and book files' quality, with Readarr's checks and answers (21 more
   recorded answers).
+- Listening and reading progress and bookmarks work like Audiobookshelf's (`/api/me/progress`, `/api/me/bookmarks`,
+  `/api/me/item/:id/bookmark`): set from any app, finished near the end, synced from phones with their own times,
+  hidden from Continue Listening, and told to your other apps as they change.
 - The web app looks like Folio: the Encore colours and font, the name Folio and its book icon, and links to
   Folio's own repository instead of the upstream project's; its fork changes are listed in `abs-web/FOLIO.md`.
 - The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's
