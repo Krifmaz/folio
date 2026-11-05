@@ -1086,5 +1086,508 @@
  {
   "name": "users_list_after",
   "path": "/api/users"
+ },
+ {
+  "name": "p6_guest_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "viewer",
+   "password": "pw",
+   "type": "guest",
+   "isActive": true
+  },
+  "save": {
+   "guest_id": "user.id"
+  }
+ },
+ {
+  "name": "p6_guest_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "viewer",
+   "password": "pw"
+  },
+  "save": {
+   "guest_token": "user.accessToken"
+  }
+ },
+ {
+  "name": "settings_patch",
+  "path": "/api/settings",
+  "method": "PATCH",
+  "body": {
+   "dateFormat": "dd/MM/yyyy",
+   "bogus": 1,
+   "allowedOrigins": [
+    "https://a.example"
+   ],
+   "backupsToKeep": "3",
+   "tokenSecret": "x"
+  }
+ },
+ {
+  "name": "settings_patch_bad_origins",
+  "path": "/api/settings",
+  "method": "PATCH",
+  "body": {
+   "allowedOrigins": "https://a.example"
+  }
+ },
+ {
+  "name": "settings_patch_empty",
+  "path": "/api/settings",
+  "method": "PATCH",
+  "body": {}
+ },
+ {
+  "name": "settings_patch_guest",
+  "path": "/api/settings",
+  "method": "PATCH",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "body": {
+   "dateFormat": "x"
+  }
+ },
+ {
+  "name": "settings_patch_reset",
+  "path": "/api/settings",
+  "method": "PATCH",
+  "body": {
+   "dateFormat": "MM/dd/yyyy",
+   "allowedOrigins": [],
+   "backupsToKeep": 2
+  }
+ },
+ {
+  "name": "sorting_prefixes",
+  "path": "/api/sorting-prefixes",
+  "method": "PATCH",
+  "body": {
+   "sortingPrefixes": [
+    " The",
+    "a",
+    "An",
+    "THE",
+    "",
+    5
+   ]
+  }
+ },
+ {
+  "name": "sorting_prefixes_empty",
+  "path": "/api/sorting-prefixes",
+  "method": "PATCH",
+  "body": {
+   "sortingPrefixes": []
+  }
+ },
+ {
+  "name": "sorting_prefixes_blank",
+  "path": "/api/sorting-prefixes",
+  "method": "PATCH",
+  "body": {
+   "sortingPrefixes": [
+    "  ",
+    7
+   ]
+  }
+ },
+ {
+  "name": "sorting_prefixes_not_list",
+  "path": "/api/sorting-prefixes",
+  "method": "PATCH",
+  "body": {
+   "sortingPrefixes": "the"
+  }
+ },
+ {
+  "name": "sorting_prefixes_guest",
+  "path": "/api/sorting-prefixes",
+  "method": "PATCH",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "body": {
+   "sortingPrefixes": [
+    "the"
+   ]
+  }
+ },
+ {
+  "name": "sorting_prefixes_reset",
+  "path": "/api/sorting-prefixes",
+  "method": "PATCH",
+  "body": {
+   "sortingPrefixes": [
+    "the",
+    "a"
+   ]
+  }
+ },
+ {
+  "name": "cron_valid",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "body": {
+   "expression": "30 1 * * *"
+  }
+ },
+ {
+  "name": "cron_valid_names",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "body": {
+   "expression": "0 */6 * jan-mar mon-fri"
+  }
+ },
+ {
+  "name": "cron_valid_seconds",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "body": {
+   "expression": "*/10 * * * * *"
+  }
+ },
+ {
+  "name": "cron_bad_minute",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "body": {
+   "expression": "61 * * * *"
+  }
+ },
+ {
+  "name": "cron_bad_short",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "body": {
+   "expression": "* * *"
+  }
+ },
+ {
+  "name": "cron_bad_step",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "body": {
+   "expression": "*/x * * * *"
+  }
+ },
+ {
+  "name": "cron_missing",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "body": {}
+ },
+ {
+  "name": "cron_guest",
+  "path": "/api/validate-cron",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "body": {
+   "expression": "0 * * * *"
+  }
+ },
+ {
+  "name": "tasks",
+  "path": "/api/tasks"
+ },
+ {
+  "name": "tasks_queue",
+  "path": "/api/tasks?include=queue"
+ },
+ {
+  "name": "tasks_guest",
+  "path": "/api/tasks",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "logger_data_guest",
+  "path": "/api/logger-data",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "providers",
+  "path": "/api/custom-metadata-providers"
+ },
+ {
+  "name": "providers_create",
+  "path": "/api/custom-metadata-providers",
+  "method": "POST",
+  "body": {
+   "name": "My provider",
+   "url": "https://meta.example/api",
+   "mediaType": "book",
+   "authHeaderValue": ""
+  },
+  "save": {
+   "provider_id": "provider.id"
+  }
+ },
+ {
+  "name": "providers_create_missing",
+  "path": "/api/custom-metadata-providers",
+  "method": "POST",
+  "body": {
+   "name": "x",
+   "url": "https://meta.example/api"
+  }
+ },
+ {
+  "name": "providers_create_bad_url",
+  "path": "/api/custom-metadata-providers",
+  "method": "POST",
+  "body": {
+   "name": "x",
+   "url": "not a url",
+   "mediaType": "podcast"
+  }
+ },
+ {
+  "name": "providers_create_podcast",
+  "path": "/api/custom-metadata-providers",
+  "method": "POST",
+  "body": {
+   "name": "Pods",
+   "url": "http://pods.example",
+   "mediaType": "podcast",
+   "authHeaderValue": "Bearer abc"
+  },
+  "save": {
+   "provider2_id": "provider.id"
+  }
+ },
+ {
+  "name": "providers_list",
+  "path": "/api/custom-metadata-providers"
+ },
+ {
+  "name": "providers_guest",
+  "path": "/api/custom-metadata-providers",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "library_use_provider",
+  "path": "/api/libraries/{library}",
+  "method": "PATCH",
+  "body": {
+   "provider": "custom-{provider_id}"
+  }
+ },
+ {
+  "name": "providers_delete",
+  "path": "/api/custom-metadata-providers/{provider_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "library_after_provider_delete",
+  "path": "/api/libraries/{library}"
+ },
+ {
+  "name": "providers_delete_missing",
+  "path": "/api/custom-metadata-providers/{provider_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "providers_delete_podcast",
+  "path": "/api/custom-metadata-providers/{provider2_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "email_settings",
+  "path": "/api/emails/settings"
+ },
+ {
+  "name": "email_settings_guest",
+  "path": "/api/emails/settings",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "email_settings_patch",
+  "path": "/api/emails/settings",
+  "method": "PATCH",
+  "body": {
+   "host": "smtp.example",
+   "port": "587",
+   "secure": 0,
+   "user": "u",
+   "pass": "p",
+   "fromAddress": "f@example.org",
+   "rejectUnauthorized": false,
+   "bogus": 1
+  }
+ },
+ {
+  "name": "email_settings_patch_same",
+  "path": "/api/emails/settings",
+  "method": "PATCH",
+  "body": {
+   "host": "smtp.example",
+   "port": 587
+  }
+ },
+ {
+  "name": "email_settings_patch_nan_port",
+  "path": "/api/emails/settings",
+  "method": "PATCH",
+  "body": {
+   "port": "abc"
+  }
+ },
+ {
+  "name": "ereader_devices_missing",
+  "path": "/api/emails/ereader-devices",
+  "method": "POST",
+  "body": {}
+ },
+ {
+  "name": "ereader_devices_incomplete",
+  "path": "/api/emails/ereader-devices",
+  "method": "POST",
+  "body": {
+   "ereaderDevices": [
+    {
+     "name": "Kindle"
+    }
+   ]
+  }
+ },
+ {
+  "name": "ereader_devices",
+  "path": "/api/emails/ereader-devices",
+  "method": "POST",
+  "body": {
+   "ereaderDevices": [
+    {
+     "name": "Kindle",
+     "email": "k@kindle.example"
+    },
+    {
+     "name": "Kobo",
+     "email": "k@kobo.example",
+     "availabilityOption": "specificUsers",
+     "users": []
+    },
+    {
+     "name": "Shared",
+     "email": "s@example.org",
+     "availabilityOption": "guestOrUp",
+     "users": [
+      "{guest_id}"
+     ]
+    },
+    {
+     "name": "Mine",
+     "email": "m@example.org",
+     "availabilityOption": "specificUsers",
+     "users": [
+      "{guest_id}"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "ereader_devices_same",
+  "path": "/api/emails/ereader-devices",
+  "method": "POST",
+  "body": {
+   "ereaderDevices": [
+    {
+     "name": "Kindle",
+     "email": "k@kindle.example",
+     "availabilityOption": "adminOrUp",
+     "users": []
+    }
+   ]
+  }
+ },
+ {
+  "name": "guest_authorize_devices",
+  "path": "/api/authorize",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "send_ebook_unknown_device",
+  "path": "/api/emails/send-ebook-to-device",
+  "method": "POST",
+  "body": {
+   "deviceName": "Nope",
+   "libraryItemId": "x"
+  }
+ },
+ {
+  "name": "send_ebook_guest_forbidden",
+  "path": "/api/emails/send-ebook-to-device",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "body": {
+   "deviceName": "Kindle",
+   "libraryItemId": "x"
+  }
+ },
+ {
+  "name": "send_ebook_missing_item",
+  "path": "/api/emails/send-ebook-to-device",
+  "method": "POST",
+  "body": {
+   "deviceName": "Kindle",
+   "libraryItemId": "00000000-0000-4000-8000-000000000000"
+  }
+ },
+ {
+  "name": "email_settings_after",
+  "path": "/api/emails/settings"
+ },
+ {
+  "name": "email_settings_reset",
+  "path": "/api/emails/settings",
+  "method": "PATCH",
+  "body": {
+   "host": null,
+   "port": 465,
+   "secure": true,
+   "rejectUnauthorized": true,
+   "user": null,
+   "pass": null,
+   "fromAddress": null,
+   "ereaderDevices": []
+  }
+ },
+ {
+  "name": "p6_guest_delete",
+  "path": "/api/users/{guest_id}",
+  "method": "DELETE"
  }
 ]
