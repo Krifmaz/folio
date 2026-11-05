@@ -1,17 +1,23 @@
 //! Readarr's authors, books, editions, series and book files (PARITY rows R1): every request of
 //! `parity/readarr/requests.json` is sent to Folio, loaded with the same test library as the recording
-//! (`parity/readarr/seed.sql`), and must answer like Readarr 0.4.19.2811 did: status, every field, order and
-//! errors. Only trace ids and the .NET stack traces in error descriptions may differ.
+//! (`parity/readarr/seed.sql` and its files, `seed-files.json`), and must answer like Readarr 0.4.19.2811 did:
+//! status, every field, order and errors. Only trace ids and the .NET stack traces in error descriptions may differ.
+//!
+//! The deletes are also checked by what they leave behind: at each `snapshot` entry the rows of the tables they
+//! change and the files under the books folder must be Readarr's (`parity/readarr/state/<name>.json`), except the
+//! times of the history rows written during the run and the layout of the JSON documents in the rows (compared by
+//! what they hold).
 
 mod common;
 mod parity;
 
 use axum::body::Body;
 use axum::http::Request;
-use kit_server_core::Db;
+use kit_server_core::{Db, SqliteDb};
 use parity::{fixture, Matcher};
-use serde_json::Value;
-use std::path::PathBuf;
+use serde_json::{json, Value};
+use std::collections::HashMap;
+use std::path::{Path, PathBuf};
 use tower::ServiceExt;
 
 /// The rows Readarr's API made before the seed was written: the root folder `/books` and the tag `kids`.
@@ -25,20 +31,124 @@ const MADE_BY_THE_API: &str = "INSERT INTO RootFolders (Id, Path, Name, DefaultM
 /// unmonitored; Folio counts what is stored.
 const DIFFERENT_ON_PURPOSE: &[(&str, &str)] = &[("authors_after_changes", "$[0].statistics."), ("books_after_changes", "$[1].statistics.")];
 
-/// The recorder's folder (requests and seed).
+/// The history rows the seed and the `sql` entries write; later ones are written during the run, at a time
+/// that differs.
+const SEEDED_HISTORY: i64 = 2;
+
+/// The recorder's folder (requests, seed, states).
 fn recorder() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/parity/readarr")
 }
 
+/// Makes each `[path under /books, size]` file under `books`, filled with zeros, as the recorder does.
+fn write_files(books: &Path, files: &Value) {
+    for f in files.as_array().into_iter().flatten() {
+        let path = books.join(f[0].as_str().unwrap());
+        std::fs::create_dir_all(path.parent().unwrap()).unwrap();
+        std::fs::write(path, vec![0u8; f[1].as_u64().unwrap() as usize]).unwrap();
+    }
+}
+
+/// The files and folders under `books` (folders end with `/`), sorted, as the recorder lists them.
+fn listing(books: &Path) -> Vec<String> {
+    fn walk(root: &Path, dir: &Path, out: &mut Vec<String>) {
+        for e in std::fs::read_dir(dir).unwrap().flatten() {
+            let rel = e.path().strip_prefix(root).unwrap().to_string_lossy().into_owned();
+            if e.path().is_dir() {
+                out.push(format!("{rel}/"));
+                walk(root, &e.path(), out);
+            } else {
+                out.push(rel);
+            }
+        }
+    }
+    let mut out = Vec::new();
+    walk(books, books, &mut out);
+    out.sort();
+    out
+}
+
+/// What the requests so far left behind, in the recorder's form: `{"tables": {name: rows}, "files": [...]}`.
+fn state(db: &SqliteDb, books: &Path, tables: &[String]) -> Value {
+    let mut t = serde_json::Map::new();
+    for name in tables {
+        let rows: Vec<Value> = db
+            .query(&format!("SELECT * FROM \"{name}\" ORDER BY Id"), vec![])
+            .unwrap()
+            .into_iter()
+            .map(|r| Value::Object(r.into_iter().collect()))
+            .collect();
+        t.insert(name.clone(), Value::Array(rows));
+    }
+    json!({ "tables": t, "files": listing(books) })
+}
+
+/// A row with its JSON documents read: Readarr writes them indented and Folio compactly, and both read either, so
+/// they are compared by what they hold.
+fn read_documents(rows: &mut Value) {
+    for r in rows.as_array_mut().into_iter().flatten() {
+        for v in r.as_object_mut().into_iter().flat_map(|o| o.values_mut()) {
+            if let Some(doc) = v.as_str().filter(|s| s.starts_with(['{', '['])).and_then(|s| serde_json::from_str::<Value>(s).ok()) {
+                *v = doc;
+            }
+        }
+    }
+}
+
+/// The differences between Folio's state and Readarr's at a snapshot, leaving out the times of history rows
+/// written during the run.
+fn state_diffs(name: &str, ours: &Value, theirs: &Value) -> Vec<String> {
+    let mut out = Vec::new();
+    if ours["files"] != theirs["files"] {
+        out.push(format!("files {} where Readarr has {}", ours["files"], theirs["files"]));
+    }
+    for (table, want) in theirs["tables"].as_object().unwrap() {
+        let mut want = want.clone();
+        let mut got = ours["tables"][table].clone();
+        read_documents(&mut want);
+        read_documents(&mut got);
+        if table == "History" {
+            for rows in [&mut want, &mut got] {
+                for r in rows.as_array_mut().into_iter().flatten() {
+                    if r["Id"].as_i64().unwrap_or(0) > SEEDED_HISTORY {
+                        r["Date"] = json!("(during the run)");
+                    }
+                }
+            }
+        }
+        if got != want {
+            out.push(format!("{table}: {got} where Readarr has {want}"));
+        }
+    }
+    out.into_iter().map(|d| format!("{name}: {d}")).collect()
+}
+
 #[tokio::test]
 async fn every_recorded_answer_of_authors_books_and_files_matches() {
-    let (app, st, dir) = common::server("parity-readarr-books", Default::default()).await;
+    let disk = std::env::temp_dir().join(format!("folio-readarr-disk-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&disk);
+    let books = disk.join("books");
+    let env = HashMap::from([("READARR_DISK_ROOT".to_string(), disk.to_string_lossy().into_owned())]);
+    let (app, st, dir) = common::server("parity-readarr-books", env).await;
     st.readarr.execute_batch(MADE_BY_THE_API).unwrap();
     st.readarr.execute_batch(&std::fs::read_to_string(recorder().join("seed.sql")).unwrap()).unwrap();
+    write_files(&books, &serde_json::from_str(&std::fs::read_to_string(recorder().join("seed-files.json")).unwrap()).unwrap());
     let requests: Vec<Value> = serde_json::from_str(&std::fs::read_to_string(recorder().join("requests.json")).unwrap()).unwrap();
     let mut failed = Vec::new();
     for r in &requests {
         let name = r["name"].as_str().unwrap();
+        if let Some(sql) = r["sql"].as_str() {
+            write_files(&books, &r["files"]);
+            st.readarr.execute_batch(sql).unwrap();
+            continue;
+        }
+        if r["snapshot"] == json!(true) {
+            let theirs: Value =
+                serde_json::from_str(&std::fs::read_to_string(recorder().join(format!("state/{name}.json"))).unwrap()).unwrap();
+            let tables: Vec<String> = theirs["tables"].as_object().unwrap().keys().cloned().collect();
+            failed.extend(state_diffs(name, &state(&st.readarr, &books, &tables), &theirs));
+            continue;
+        }
         let fx = fixture("readarr", name);
         let path = fx.request["path"].as_str().unwrap().replace("{apikey}", "test-key");
         let mut req = Request::builder().method(fx.request["method"].as_str().unwrap_or("GET")).uri(&path);
@@ -72,5 +182,6 @@ async fn every_recorded_answer_of_authors_books_and_files_matches() {
         }
     }
     let _ = std::fs::remove_dir_all(dir);
+    let _ = std::fs::remove_dir_all(disk);
     assert!(failed.is_empty(), "Folio doesn't answer like Readarr:\n{}", failed.join("\n"));
 }

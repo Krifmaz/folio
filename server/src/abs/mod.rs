@@ -7,19 +7,28 @@
 //! ([`SCHEMA`], recorded from the original's image). An existing Audiobookshelf database can therefore be used as
 //! it is.
 
+pub mod admin;
 pub mod api_keys;
 pub mod auth;
+pub mod backups;
 pub mod bookmarks;
+pub mod cron;
+pub mod email;
+pub mod file_utils;
 pub mod html;
 pub mod items;
 pub mod library;
+pub mod metadata_providers;
 pub mod models;
+pub mod notifications;
 pub mod playback;
 pub mod progress;
 pub mod scanner;
 pub mod sessions;
 pub mod settings;
 pub mod socket;
+pub mod stats;
+pub mod tasks;
 pub mod users;
 
 use crate::AppState;
@@ -67,6 +76,12 @@ pub struct Server {
     pub config_path: PathBuf,
     /// The original's `MetadataPath`: covers, caches and backups (`<data>/metadata`).
     pub metadata_path: PathBuf,
+    /// The running tasks the apps show.
+    pub tasks: Arc<tasks::TaskManager>,
+    /// The queue of notifications being sent.
+    pub notifications: Arc<notifications::Manager>,
+    /// The backups in the backup folder.
+    pub backups: Arc<backups::Manager>,
     /// How the server was installed (`Source`, from `SOURCE`; `docker` by default, like the original's image).
     pub source: String,
 }
@@ -92,12 +107,16 @@ impl Server {
         if changed {
             st.save(db)?;
         }
+        let backups = Arc::new(backups::Manager::new(st.str("backupPath")));
         Ok(Server {
+            backups,
             settings: Arc::new(RwLock::new(st)),
             tokens: Arc::new(tokens),
             limiter: Arc::new(auth::RateLimiter::from_env()),
             config_path: data.to_path_buf(),
             metadata_path,
+            tasks: Arc::new(tasks::TaskManager::default()),
+            notifications: Arc::new(notifications::Manager::default()),
             source: std::env::var("SOURCE").ok().filter(|s| !s.is_empty()).unwrap_or_else(|| "docker".into()),
         })
     }
@@ -105,6 +124,17 @@ impl Server {
     /// A copy of the settings in effect.
     pub fn settings(&self) -> settings::ServerSettings {
         self.settings.read().map(|s| s.clone()).unwrap_or_else(|e| e.into_inner().clone())
+    }
+
+    /// Reads the settings again from the database (after a backup is restored, like the original's reconnect).
+    pub fn reload_settings(&self, db: &SqliteDb) {
+        match settings::ServerSettings::load(db, &self.metadata_path.display().to_string()) {
+            Ok(new) => match self.settings.write() {
+                Ok(mut s) => *s = new,
+                Err(e) => *e.into_inner() = new,
+            },
+            Err(e) => tracing::error!("The settings can't be read again: {}", e.detail),
+        }
     }
 
     /// Replaces the settings and stores them (`Database.updateServerSettings`).
@@ -165,6 +195,12 @@ pub fn router() -> Router<AppState> {
         .merge(scanner::router())
         .merge(users::router())
         .merge(api_keys::router())
+        .merge(admin::router())
+        .merge(backups::router())
+        .merge(stats::router())
+        .merge(metadata_providers::router())
+        .merge(email::router())
+        .merge(notifications::router())
 }
 
 /// Test helpers: the recorded answers of the original and the comparison of tests/parity.

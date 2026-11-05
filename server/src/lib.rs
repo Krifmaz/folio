@@ -101,6 +101,8 @@ pub struct AppState {
     pub sockets: abs::socket::Sockets,
     /// The Readarr port's database (`<data>/readarr.db`, the original's schema).
     pub readarr: SqliteDb,
+    /// Where the Readarr port finds its paths on this machine (`READARR_DISK_ROOT`, else as they are).
+    pub readarr_disk: readarr::disk::Disk,
     /// The Audiobookshelf port's settings, tokens and sign-in limit.
     pub abs_server: abs::Server,
 }
@@ -134,6 +136,7 @@ impl AppState {
         migration::migrate(&db)?;
         let abs = abs::open(data)?;
         let readarr = readarr::open(data)?;
+        let readarr_disk = readarr::disk::Disk::new(env("READARR_DISK_ROOT"));
         let abs_server =
             abs::Server::load(&abs, data).map_err(|e| anyhow::anyhow!("The Audiobookshelf settings can't be read: {}", e.detail))?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
@@ -159,6 +162,7 @@ impl AppState {
             abs,
             sockets: abs::socket::Sockets::default(),
             readarr,
+            readarr_disk,
             abs_server,
         })
     }
@@ -247,6 +251,7 @@ pub fn app(st: AppState) -> Router {
     let spa = tower_http::set_header::SetResponseHeader::if_not_present(spa, header::VARY, HeaderValue::from_static("accept-encoding"));
     let page = spa.clone();
     kit_server_notices::spawn_rechecks(st.clone());
+    abs::backups::spawn_schedule(st.clone());
     let sockets = abs::socket::layer(st.clone());
     Router::new()
         .merge(kit_server_health::router(kit_server_health::Health::new(VERSION, web)))

@@ -1,0 +1,12 @@
+{
+ "body": "Invalid request body. Must include path.",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "path": 5
+  },
+  "method": "PATCH",
+  "path": "/api/backups/path"
+ },
+ "status": 400
+}

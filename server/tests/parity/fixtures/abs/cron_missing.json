@@ -1,0 +1,10 @@
+{
+ "body": "Bad Request",
+ "content_type": "text/plain",
+ "request": {
+  "body": {},
+  "method": "POST",
+  "path": "/api/validate-cron"
+ },
+ "status": 400
+}

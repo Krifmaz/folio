@@ -11,11 +11,11 @@
 //! Not yet ported: moving an author's files (`moveFiles`, a command) and the refresh Readarr starts when the
 //! metadata profile changes (its metadata server is gone; commands come with R5).
 
-use super::json::{date, date_or_min, doc, list, local_covers, now_param, object, percent, ratings};
+use super::json::{date, date_or_min, doc, list, local_covers, now_param, object, percent, ratings, Query};
 use super::{Answer, Fail, Key};
 use crate::AppState;
 use axum::body::Bytes;
-use axum::extract::{Path, State};
+use axum::extract::{Path, RawQuery, State};
 use axum::http::StatusCode;
 use axum::routing::{get, put};
 use axum::{Json, Router};
@@ -27,8 +27,8 @@ use std::collections::HashMap;
 pub fn router() -> Router<AppState> {
     Router::new()
         .route("/api/v1/author", get(all).put(update_unrouted))
-        .route("/api/v1/author/{id}", get(one).put(update))
-        .route("/api/v1/author/editor", put(editor))
+        .route("/api/v1/author/{id}", get(one).put(update).delete(remove))
+        .route("/api/v1/author/editor", put(editor).delete(remove_many))
 }
 
 /// An author's columns and its metadata's, as one row (`Id` is the author's).
@@ -470,6 +470,25 @@ fn dedup(list: Vec<i64>) -> Vec<i64> {
         }
     }
     out
+}
+
+/// `DELETE /api/v1/author/{id}?deleteFiles=&addImportListExclusion=`: 200 with no body.
+async fn remove(State(st): State<AppState>, _: Key, Path(id): Path<String>, RawQuery(q): RawQuery) -> Answer<StatusCode> {
+    let id: i64 = id.parse().map_err(|_| Fail::not_found())?;
+    let q = Query::of(q.as_deref());
+    let (files, exclude) = (q.bool("deleteFiles").unwrap_or(false), q.bool("addImportListExclusion").unwrap_or(false));
+    super::delete::author(&st.readarr, &st.readarr_disk, id, files, exclude)?;
+    Ok(StatusCode::OK)
+}
+
+/// `DELETE /api/v1/author/editor` (`AuthorEditorController.DeleteAuthor`): deletes each author asked for, keeping
+/// their files, until one is missing; `{}`.
+async fn remove_many(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer {
+    let r = super::body(&bytes)?;
+    for id in ids(&r, "authorIds") {
+        super::delete::author(&st.readarr, &st.readarr_disk, id, false, false)?;
+    }
+    Ok(Json(json!({})))
 }
 
 #[cfg(test)]

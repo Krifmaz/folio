@@ -1,0 +1,119 @@
+{
+ "files": [
+  "Terry Pratchett/",
+  "Terry Pratchett/Guards! Guards! (1989)/",
+  "Terry Pratchett/Small Gods (1992)/",
+  "Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub",
+  "Unsorted/"
+ ],
+ "tables": {
+  "AuthorMetadata": [
+   {
+    "Aliases": "[]",
+    "Born": "1948-04-28 00:00:00Z",
+    "Died": "2015-03-12 00:00:00Z",
+    "Disambiguation": null,
+    "ForeignAuthorId": "1654",
+    "Gender": "male",
+    "Genres": "[\"fantasy\",\"humor\"]",
+    "Hometown": "Beaconsfield",
+    "Id": 1,
+    "Images": "[{\"url\":\"https://images.gr-assets.com/authors/1235562205p7/1654.jpg\",\"coverType\":\"poster\",\"extension\":\".jpg\"}]",
+    "Links": "[{\"url\":\"https://www.goodreads.com/author/show/1654.Terry_Pratchett\",\"name\":\"Goodreads\"}]",
+    "Name": "Terry Pratchett",
+    "NameLastFirst": "Pratchett, Terry",
+    "Overview": "Sir Terry Pratchett wrote the Discworld novels.",
+    "Ratings": "{\"votes\":1500000,\"value\":4.13}",
+    "SortName": "terry pratchett",
+    "SortNameLastFirst": "pratchett, terry",
+    "Status": 1,
+    "TitleSlug": "1654"
+   },
+   {
+    "Aliases": "[]",
+    "Born": "1929-10-21 00:00:00Z",
+    "Died": null,
+    "Disambiguation": null,
+    "ForeignAuthorId": "874602",
+    "Gender": null,
+    "Genres": "[]",
+    "Hometown": null,
+    "Id": 2,
+    "Images": "[]",
+    "Links": "[]",
+    "Name": "Ursula K. Le Guin",
+    "NameLastFirst": "Le Guin, Ursula K.",
+    "Overview": "Ursula Kroeber Le Guin wrote Earthsea.",
+    "Ratings": "{\"votes\":0,\"value\":0}",
+    "SortName": "ursula k. le guin",
+    "SortNameLastFirst": "le guin, ursula k.",
+    "Status": 0,
+    "TitleSlug": "874602"
+   }
+  ],
+  "Authors": [],
+  "BookFiles": [
+   {
+    "CalibreId": 0,
+    "DateAdded": "2025-05-05 12:00:00Z",
+    "EditionId": 3,
+    "Id": 3,
+    "IndexerFlags": 0,
+    "MediaInfo": null,
+    "Modified": "2025-05-05 11:00:00Z",
+    "OriginalFilePath": null,
+    "Part": 1,
+    "Path": "/books/Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub",
+    "Quality": "{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}",
+    "ReleaseGroup": "GRP",
+    "SceneName": null,
+    "Size": 512
+   },
+   {
+    "CalibreId": 0,
+    "DateAdded": "2025-05-06 12:00:00Z",
+    "EditionId": 5,
+    "Id": 4,
+    "IndexerFlags": 0,
+    "MediaInfo": null,
+    "Modified": "2025-05-06 11:00:00Z",
+    "OriginalFilePath": null,
+    "Part": 1,
+    "Path": "/books/Ursula K. Le Guin/A Wizard of Earthsea (1968)/A Wizard of Earthsea - Ursula K. Le Guin.epub",
+    "Quality": "{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}",
+    "ReleaseGroup": null,
+    "SceneName": null,
+    "Size": 256
+   }
+  ],
+  "Books": [],
+  "Editions": [],
+  "ExtraFiles": [],
+  "History": [],
+  "ImportListExclusions": [
+   {
+    "ForeignId": "1215958",
+    "Id": 1,
+    "Name": "Terry Pratchett - Small Gods"
+   },
+   {
+    "ForeignId": "874602",
+    "Id": 2,
+    "Name": "Ursula K. Le Guin"
+   }
+  ],
+  "MetadataFiles": [],
+  "Series": [
+   {
+    "Description": "The Discworld novels.",
+    "ForeignSeriesId": "40650",
+    "Id": 1,
+    "Numbered": 1,
+    "PrimaryWorkCount": 41,
+    "Title": "Discworld",
+    "WorkCount": 41
+   }
+  ],
+  "SeriesBookLink": []
+ }
+}

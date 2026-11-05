@@ -1,0 +1,10 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "DELETE",
+  "path": "/api/custom-metadata-providers/{provider2_id}"
+ },
+ "status": 200
+}
