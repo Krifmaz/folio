@@ -56,3 +56,21 @@ Not there: podcasts, collections and playlists, uploading, editing books from th
 ask again when you pull to refresh).
 
 Written from Audiobookshelf's [API documentation](https://api.audiobookshelf.org) (server version 2.25).
+
+## Kobo e-readers
+
+A Kobo syncs Folio's ebooks into its library over Wi-Fi, downloads them, and keeps its place in step with Folio
+(the newest place wins). Books removed on the Kobo are not synced to it again.
+
+1. In Folio, open **Settings → Other apps** and copy your **Kobo sync address**
+   (`https://folio.example/kobo/<token>`).
+2. Connect the Kobo to a computer by USB and open `.kobo/Kobo/Kobo eReader.conf` (the `.kobo` folder may be
+   hidden).
+3. Under `[OneStoreServices]`, set `api_endpoint=` to the address. Save, eject the Kobo, and tap **Sync**.
+
+Make a new address in Folio if the old one was shared by mistake; the old one stops working at once. To go back to
+the Kobo store, set `api_endpoint=https://storeapi.kobo.com` again. While the Kobo syncs with Folio, books bought
+in the Kobo store don't sync to it.
+
+Written from the public descriptions of the Kobo store's sync protocol (as Kobo e-readers speak it). Folio doesn't
+pass anything on to the Kobo store.

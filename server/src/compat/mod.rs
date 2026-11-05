@@ -1,9 +1,11 @@
 //! Other apps' protocols, so the apps people already use work with Folio: an OPDS catalogue for e-readers
-//! ([`opds`]), a KOReader sync server ([`koreader`]) and an Audiobookshelf-compatible API ([`abs`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
+//! ([`opds`]), a KOReader sync server ([`koreader`]), an Audiobookshelf-compatible API ([`abs`]) and Kobo sync
+//! ([`kobo`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
 //! how to point each app at Folio.
 
 pub mod abs;
 pub mod epub;
+pub mod kobo;
 pub mod koreader;
 pub mod model;
 pub mod opds;
@@ -60,6 +62,20 @@ pub const MIGRATIONS: Migrations = Migrations {
             closed INTEGER NOT NULL DEFAULT 0
         );
         CREATE INDEX compat_abs_sessions_user ON compat_abs_sessions (user_id, started_at);",
+        // 3: Kobo sync: each account's sync address token (kept to show it again, and as SHA-256 to look it up),
+        // and the books removed on the Kobo, which aren't synced to it again
+        "CREATE TABLE compat_kobo_tokens (
+            token_key TEXT PRIMARY KEY,
+            token TEXT NOT NULL,
+            user_id INTEGER NOT NULL UNIQUE,
+            created_at REAL NOT NULL
+        );
+        CREATE TABLE compat_kobo_removed (
+            user_id INTEGER NOT NULL,
+            edition_id INTEGER NOT NULL,
+            removed_at REAL NOT NULL,
+            PRIMARY KEY (user_id, edition_id)
+        );",
     ],
 };
 
@@ -70,7 +86,7 @@ pub fn migrate(db: &SqliteDb) -> anyhow::Result<()> {
 
 /// This part's routes.
 pub fn router() -> Router<AppState> {
-    Router::new().merge(opds::router()).merge(koreader::router()).merge(abs::router())
+    Router::new().merge(opds::router()).merge(koreader::router()).merge(abs::router()).merge(kobo::router())
 }
 
 /// Now, in seconds since 1970.
