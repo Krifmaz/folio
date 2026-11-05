@@ -2281,5 +2281,112 @@
   "name": "p6b_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
+ },
+ {
+  "name": "p6s_guest_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "viewer4",
+   "password": "pw",
+   "type": "guest",
+   "isActive": true
+  },
+  "save": {
+   "guest_id": "user.id"
+  }
+ },
+ {
+  "name": "p6s_guest_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "viewer4",
+   "password": "pw"
+  },
+  "save": {
+   "guest_token": "user.accessToken"
+  }
+ },
+ {
+  "name": "admin_stats_year",
+  "path": "/api/stats/year/2026"
+ },
+ {
+  "name": "admin_stats_year_empty",
+  "path": "/api/stats/year/2001"
+ },
+ {
+  "name": "admin_stats_year_fraction",
+  "path": "/api/stats/year/2026.5"
+ },
+ {
+  "name": "admin_stats_year_hex",
+  "path": "/api/stats/year/0x7EA"
+ },
+ {
+  "name": "admin_stats_year_early",
+  "path": "/api/stats/year/1999"
+ },
+ {
+  "name": "admin_stats_year_text",
+  "path": "/api/stats/year/abc"
+ },
+ {
+  "name": "admin_stats_year_guest",
+  "path": "/api/stats/year/2026",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "admin_stats_server",
+  "path": "/api/stats/server"
+ },
+ {
+  "name": "admin_stats_server_guest",
+  "path": "/api/stats/server",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "cache_purge",
+  "path": "/api/cache/purge",
+  "method": "POST"
+ },
+ {
+  "name": "cache_items_purge",
+  "path": "/api/cache/items/purge",
+  "method": "POST"
+ },
+ {
+  "name": "cache_purge_guest",
+  "path": "/api/cache/purge",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "cache_items_purge_guest",
+  "path": "/api/cache/items/purge",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "p6s_guest_delete",
+  "path": "/api/users/{guest_id}",
+  "method": "DELETE"
  }
 ]
