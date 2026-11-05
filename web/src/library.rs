@@ -94,14 +94,18 @@ fn series_line(list: &Value) -> String {
         .unwrap_or_default()
 }
 
-/// A cover picture, or a plain tile with the title's first letter when there is none.
+/// A cover picture, or a plain tile with the title's first letter when there is none or it can't be loaded.
 fn cover(url: String, title: String, class: &'static str) -> AnyView {
-    if url.is_empty() {
-        let letter = title.chars().next().map(|c| c.to_uppercase().to_string()).unwrap_or_default();
-        view! { <div class=format!("{class} cover-blank")>{letter}</div> }.into_any()
-    } else {
-        view! { <img class=class src=url alt="" loading="lazy"/> }.into_any()
+    let letter = title.chars().next().map(|c| c.to_uppercase().to_string()).unwrap_or_default();
+    let (failed, set_failed) = signal(url.is_empty());
+    view! {
+        {move || if failed.get() {
+            view! { <div class=format!("{class} cover-blank")>{letter.clone()}</div> }.into_any()
+        } else {
+            view! { <img class=class src=url.clone() alt="" loading="lazy" on:error=move |_| set_failed.set(true)/> }.into_any()
+        }}
     }
+    .into_any()
 }
 
 /// The Add book card: an ASIN or an ISBN, looked up and kept; the book opens after.

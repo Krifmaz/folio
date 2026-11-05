@@ -304,3 +304,4 @@ details.adv-fields > summary { cursor: pointer; width: max-content; }
 @media (max-width: 640px) { .book-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; } .work-cover { width: 140px; } }
 /* ---------- wanted ---------- */
 .profile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
