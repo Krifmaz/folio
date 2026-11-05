@@ -10,7 +10,8 @@ ease-of-use features from the first commit.
 | Folder | What it is |
 | --- | --- |
 | `server/` | Axum server with the kit server crates: health, changelog (What's new), notices, bug reports, diagnostics, settings |
-| `web/` | Leptos web app with the kit components and the kit's default theme, served at `/` by the server |
+| `abs-web/` | Audiobookshelf's web app (a light fork, see `UPSTREAM.md`), served at `/` by the server |
+| `web/` | Folio's own pages (Leptos, the kit's components and theme: wanted, downloads, Review, Move in), served at `/folio/` |
 | `android/` | Compose app with kit-compose, a Baseline Profile and a benchmark module |
 | `docs/releases/` | one Markdown file per release: the release notes and What's new |
 
@@ -25,8 +26,10 @@ ease-of-use features from the first commit.
 ## Run it
 
 ```
-cd web && trunk build && cd ..
-cd server && APP_DATA_DIR=../data APP_STATIC_DIR=../web/dist cargo run
+(cd abs-web && npm ci && ROUTER_BASE_PATH= npm run generate)
+(cd web && trunk build)
+rm -rf static && cp -r abs-web/dist static && cp -r web/dist static/folio
+cd server && APP_DATA_DIR=../data APP_STATIC_DIR=../static cargo run
 ```
 
 Then open <http://localhost:8080>. With Docker:
@@ -40,7 +43,7 @@ docker run --read-only -p 8080:8080 -v folio-data:/data folio
 | --- | --- | --- |
 | `APP_PORT` | the port the server listens on | `8080` |
 | `APP_DATA_DIR` | where the database and uploads live (the only folder it writes to) | `/data` |
-| `APP_STATIC_DIR` | the built web app | `/app/static` |
+| `APP_STATIC_DIR` | the built web apps: Audiobookshelf's at the top, Folio's own pages in `folio/` | `/app/static` |
 | `APP_ADMIN_USER`, `APP_ADMIN_PASSWORD` | the owner made at the first start | `admin`, a printed password |
 | `APP_NAME`, `APP_SESSION_DAYS`, `APP_API_KEY` | settings (settings.toml); set here they are locked in Settings | |
 

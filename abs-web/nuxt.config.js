@@ -23,7 +23,7 @@ module.exports = {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Audiobookshelf',
+    title: 'Folio',
     htmlAttrs: {
       lang: 'en'
     },
@@ -40,7 +40,8 @@ module.exports = {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/tailwind.css', '@/assets/app.css'],
+  // Folio: the kit's tokens and the Encore look, after upstream's CSS (assets/folio/)
+  css: ['@/assets/tailwind.css', '@/assets/app.css', '@/assets/folio/tokens.css', '@/assets/folio/folio.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['@/plugins/constants.js', '@/plugins/init.client.js', '@/plugins/axios.js', '@/plugins/toast.js', '@/plugins/utils.js', '@/plugins/i18n.js'],
@@ -83,16 +84,16 @@ module.exports = {
     icon: false,
     meta: {
       appleStatusBarStyle: 'black',
-      name: 'Audiobookshelf',
-      theme_color: '#232323',
+      name: 'Folio',
+      theme_color: '#161617',
       mobileAppIOS: true,
       nativeUI: true
     },
     manifest: {
-      name: 'Audiobookshelf',
-      short_name: 'Audiobookshelf',
+      name: 'Folio',
+      short_name: 'Folio',
       display: 'standalone',
-      background_color: '#232323',
+      background_color: '#161617',
       icons: [
         {
           src: routerBasePath + '/icon.svg',

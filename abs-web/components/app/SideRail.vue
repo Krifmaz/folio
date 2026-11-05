@@ -102,6 +102,13 @@
           <p class="text-xs font-mono pb-0.5">{{ numIssues }}</p>
         </div>
       </nuxt-link>
+
+      <!-- Folio: links to Folio's own pages (served at /folio/, outside this app's router) -->
+      <a v-for="page in folioPages" :key="page.path" :href="`/folio/#${page.path}`" class="w-full h-20 flex flex-col items-center justify-center text-white/80 border-b border-primary/70 hover:bg-primary cursor-pointer relative bg-bg/60">
+        <span class="material-symbols text-2xl">{{ page.icon }}</span>
+
+        <p class="pt-1 text-center leading-4" style="font-size: 0.9rem">{{ page.label }}</p>
+      </a>
     </div>
 
     <div class="w-full h-12 px-1 py-2 border-t border-black/20 bg-bg absolute left-0" :style="{ bottom: streamLibraryItem ? '224px' : '65px' }">
@@ -137,6 +144,16 @@ export default {
     },
     userIsAdminOrUp() {
       return this.$store.getters['user/getIsAdminOrUp']
+    },
+    // Folio: Folio's own pages, linked from the sidebar
+    folioPages() {
+      const pages = [
+        { path: '/wanted', label: 'Wanted', icon: 'bookmark_add' },
+        { path: '/downloads', label: 'Downloads', icon: 'download' },
+        { path: '/review', label: 'Review', icon: 'fact_check' }
+      ]
+      if (this.userIsAdminOrUp) pages.push({ path: '/migrate', label: 'Move in', icon: 'move_to_inbox' })
+      return pages
     },
     paramId() {
       return this.$route.params ? this.$route.params.id || '' : ''

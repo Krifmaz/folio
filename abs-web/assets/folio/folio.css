@@ -1,0 +1,74 @@
+/* Folio: the Encore look on Audiobookshelf's web app. Loaded after upstream's CSS, so these unlayered rules win
+   over Tailwind's theme (@layer theme) and app.css. Only the kit's tokens (tokens.css) are used: no colours,
+   fonts or sizes of our own. Upstream files stay unchanged, so upstream updates merge cleanly. */
+
+:root {
+  /* Tailwind's theme colours (assets/tailwind.css @theme) → the kit's tokens */
+  --color-bg: var(--bg-2);
+  --color-primary: var(--bg);
+  --color-accent: var(--accent-2);
+  --color-error: var(--err);
+  --color-info: var(--info);
+  --color-success: var(--ok);
+  --color-warning: var(--warn);
+  --color-darkgreen: var(--ok);
+  --color-black-50: var(--muted);
+  --color-black-100: var(--faint);
+  --color-black-200: var(--border);
+  --color-black-300: var(--border);
+  --color-black-400: var(--panel-2);
+  --color-black-500: var(--panel);
+  --color-black-600: var(--bg-2);
+  --color-black-700: var(--bg);
+  /* Tailwind's own colours that upstream uses for text and the "you are here" marks */
+  --color-white: var(--text);
+  --color-gray-100: var(--text);
+  --color-gray-200: var(--text);
+  --color-gray-300: var(--muted);
+  --color-gray-400: var(--muted);
+  --color-gray-500: var(--faint);
+  --color-gray-600: var(--faint);
+  --color-gray-700: var(--border);
+  --color-gray-800: var(--panel-2);
+  --color-gray-900: var(--panel);
+  --color-yellow-400: var(--accent-2);
+  /* the kit's type: the system's own sans-serif */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* app.css paints the pages and the bookshelf with a grey gradient: the theme's flat background instead */
+#page-wrapper,
+#bookshelf {
+  background-image: none;
+  background-color: var(--bg);
+}
+
+/* the scroll bars: the theme's accent */
+#bookshelf {
+  scrollbar-color: var(--border) transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--faint);
+}
+
+/* the track list */
+.tracksTable {
+  border-color: var(--border);
+}
+.tracksTable tr {
+  background-color: var(--panel);
+}
+.tracksTable tr:nth-child(even) {
+  background-color: var(--bg-2);
+}
+.tracksTable tr:hover:not(:has(th)) {
+  background-color: var(--panel-2);
+}
