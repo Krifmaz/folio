@@ -10,6 +10,7 @@
 //! | `#/wanted` | the wanted list per format, the preferences, Check followed now, Search now |
 //! | `#/releases?id=<wanted>` | what Lantern finds for a wanted book, scored, with Grab |
 //! | `#/downloads` | every grab and how far it is |
+//! | `#/migrate` | Move in (admins): check another app's books, wanted lists and places with a dry run, then bring them in |
 //! | `#/bug-reports` | the account's bug reports and the New report sheet |
 //! | `#/settings?s=<page>` | the server settings form from the server's schema, Diagnostics and What's new |
 //!
@@ -17,6 +18,7 @@
 
 mod downloads;
 mod library;
+mod migrate;
 mod pages;
 mod player;
 mod reader;
@@ -191,6 +193,7 @@ fn Shell(me: Value) -> impl IntoView {
             "/downloads" => view! { <downloads::Downloads/> }.into_any(),
             "/play" => view! { <player::Player id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
             "/read" => view! { <reader::Reader id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
+            "/migrate" => view! { <migrate::Migrate/> }.into_any(),
             _ => view! { <library::Library admin=admin/> }.into_any(),
         }
     };
@@ -207,6 +210,7 @@ fn Shell(me: Value) -> impl IntoView {
                 </nav>
                 <nav class="nav nav-under">
                     <NavLink href="/bug-reports" label="Bug reports" route=route/>
+                    {admin.then(|| view! { <NavLink href="/migrate" label="Move in" route=route/> })}
                 </nav>
                 <div class="sidebar-foot" style="margin-top:0">
                     <div class="grow" style="min-width:0">

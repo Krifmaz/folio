@@ -3,7 +3,8 @@
 ## Unreleased
 
 ### Added
-- Migration API (`/api/migrate/*`, admins): check a source with a dry run (what is in Folio already, what would be
+- Move in (`#/migrate`, admins; `/api/migrate/*`): check Audiobookshelf, Calibre, Calibre-Web, Readarr,
+  LazyLibrarian or Listenarr with a dry run (what is in Folio already, what would be
   added, whose places have an account to go to, what needs you and why), then bring it in. Exact editions by ASIN or
   ISBN only, never guessed; the wanted list; everyone's places and bookmarks (an older place never replaces a newer
   one); migrated books' files wait for the import. Running it again adds nothing twice.
