@@ -76,6 +76,11 @@ android {
 dependencies {
     // the kit: theme, toasts, What's new, updates, bug reports, offline, settings (it brings Compose, OkHttp, Coil)
     implementation(libs.kit.compose)
+    // the audiobook player: Media3's ExoPlayer in a media session (notification, lock screen, Bluetooth, Auto),
+    // streaming through the app's OkHttp client so the sign-in goes along
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.session)
+    implementation(libs.media3.datasource.okhttp)
     // installs the Baseline Profile on phones without Play's cloud profiles (and for the benchmarks)
     implementation(libs.androidx.profileinstaller)
     baselineProfile(project(":baselineprofile"))

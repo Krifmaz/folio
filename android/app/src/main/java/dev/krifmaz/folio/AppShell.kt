@@ -18,6 +18,7 @@ import dev.krifmaz.kit.compose.bugs.BugReportsHost
 import dev.krifmaz.kit.compose.bugs.BugReportsScreen
 import dev.krifmaz.kit.compose.whatsnew.ChangelogScreen
 import dev.krifmaz.kit.compose.widgets.BackBar
+import dev.krifmaz.kit.compose.widgets.SmallButton
 
 /** The app's pages; [AppShell] keeps them as a stack, and Back goes to the one below. */
 sealed interface Page {
@@ -44,6 +45,15 @@ sealed interface Page {
 
     /** One book with its editions ([WorkPage]). */
     data class Work(val id: Long) : Page
+
+    /** The audiobook player for an edition ([PlayerPage]). */
+    data class Player(val editionId: Long) : Page
+
+    /** The EPUB reader for an edition ([ReaderPage]). */
+    data class Reader(val editionId: Long) : Page
+
+    /** The books kept on this phone ([DownloadsPage]). */
+    data object Downloads : Page
 }
 
 /**
@@ -89,7 +99,21 @@ fun AppShell(app: App) {
 
         Page.Library -> LibraryPage(app, onBack = back, onOpen = { open(Page.Work(it)) })
 
-        is Page.Work -> WorkPage(app, page.id, onBack = back)
+        is Page.Work ->
+            WorkPage(app, page.id, onBack = back) { e ->
+                if (e.isAudiobook) {
+                    SmallButton("Listen", iconRes = R.drawable.ic_play, primary = true) { open(Page.Player(e.id)) }
+                } else {
+                    SmallButton("Read", iconRes = R.drawable.ic_list, primary = true) { open(Page.Reader(e.id)) }
+                }
+                DownloadButton(app, e)
+            }
+
+        is Page.Player -> PlayerPage(app, page.editionId, onBack = back)
+
+        is Page.Reader -> ReaderPage(app, page.editionId, onBack = back)
+
+        Page.Downloads -> DownloadsPage(app, onBack = back) { e -> open(if (e.isAudiobook) Page.Player(e.id) else Page.Reader(e.id)) }
     }
 }
 
