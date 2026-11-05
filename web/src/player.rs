@@ -257,16 +257,20 @@ struct Loaded {
     start_at: f64,
     /// the person's bookmarks
     bookmarks: Vec<Value>,
+    /// the edition's files as the server lists them
+    files: Vec<Value>,
+    /// `blob:` addresses of the files downloaded to this browser, by file id
+    local: std::collections::HashMap<i64, String>,
 }
 
 /// Loads the edition, its files, the person's place (the newer of the server's and one waiting in this browser)
 /// and their bookmarks.
 async fn load(id: i64) -> Result<Loaded, String> {
-    let edition = api::get(&format!("/library/editions/{id}")).await.map_err(|e| e.message)?;
+    let edition = offline_media::json(&format!("/library/editions/{id}")).await?;
     if s(&edition, "format") != "audiobook" {
         return Err("This edition is an ebook. Open it with Read.".into());
     }
-    let files = api::get(&format!("/library/editions/{id}/files")).await.map_err(|e| e.message)?;
+    let files = offline_media::json(&format!("/library/editions/{id}/files")).await?;
     let files = files.get("files").and_then(Value::as_array).cloned().unwrap_or_default();
     let tracks = tracks(&files);
     if tracks.is_empty() {
@@ -274,7 +278,7 @@ async fn load(id: i64) -> Result<Loaded, String> {
     }
     let fallback = edition.get("chapters").and_then(Value::as_array).cloned().unwrap_or_default();
     let chapters = book_chapters(&files, &tracks, &fallback);
-    let server = api::get(&format!("/progress/{id}")).await.ok();
+    let server = offline_media::json(&format!("/progress/{id}")).await.ok();
     let local = offline_media::pending(id);
     let place = match (server, local) {
         (Some(s), Some(l)) => Some(if offline_media::newer(&l, Some(&s)) { l } else { s }),
@@ -283,12 +287,20 @@ async fn load(id: i64) -> Result<Loaded, String> {
     let finished = place.as_ref().and_then(|p| p.get("finished")).and_then(Value::as_bool) == Some(true);
     let start_ms = if finished { 0 } else { place.as_ref().and_then(|p| p.get("position_ms")).and_then(Value::as_i64).unwrap_or(0) };
     let start_at = place.as_ref().and_then(|p| p.get("updated_at")).and_then(Value::as_f64).unwrap_or(0.0);
-    let bookmarks = api::get(&format!("/editions/{id}/bookmarks"))
+    let bookmarks = offline_media::json(&format!("/editions/{id}/bookmarks"))
         .await
         .ok()
         .and_then(|v| v.get("bookmarks").and_then(Value::as_array).cloned())
         .unwrap_or_default();
-    Ok(Loaded { edition, tracks, chapters, start_ms, start_at, bookmarks })
+    let mut local = std::collections::HashMap::new();
+    if offline_media::is_downloaded(id) {
+        for t in &tracks {
+            if let Some(u) = offline_media::local_url(t.file_id).await {
+                local.insert(t.file_id, u);
+            }
+        }
+    }
+    Ok(Loaded { edition, tracks, chapters, start_ms, start_at, bookmarks, files, local })
 }
 
 /// `#/play?id=<edition id>`: the player.
@@ -310,7 +322,8 @@ pub fn Player(id: i64) -> impl IntoView {
 /// The player itself, once the book is loaded.
 #[component]
 fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
-    let Loaded { edition, tracks, chapters, start_ms, start_at, bookmarks } = loaded;
+    let Loaded { edition, tracks, chapters, start_ms, start_at, bookmarks, files, local } = loaded;
+    let local = StoredValue::new(local);
     let total = total_ms(&tracks);
     let tracks = StoredValue::new(tracks);
     let chapters = StoredValue::new(chapters);
@@ -329,11 +342,19 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
     let known_at = StoredValue::new(start_at);
 
     let el = move || audio.get_untracked();
-    let url = move |i: usize| tracks.with_value(|t| t.get(i).map(|t| format!("/api/files/{}", t.file_id))).unwrap_or_default();
+    // the downloaded copy when there is one, else the server's
+    let url = move |i: usize| {
+        tracks
+            .with_value(|t| {
+                t.get(i).map(|t| local.with_value(|l| l.get(&t.file_id).cloned()).unwrap_or_else(|| offline_media::file_url(t.file_id)))
+            })
+            .unwrap_or_default()
+    };
 
     // sends the place now
     let save = move || {
         let place = audio_place(pos.get_untracked(), total);
+        offline_media::remember(id, &place);
         known_at.set_value(place["updated_at"].as_f64().unwrap_or(0.0));
         last_sent.set_value(rt::now_ms());
         rt::spawn(async move {
@@ -372,7 +393,12 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
             let _ = a.pause();
         }
     };
-    let skip = move |d: i64| seek(pos.get_untracked() + d);
+    // a move the person made: goes there and keeps it
+    let jump = move |ms: i64| {
+        seek(ms);
+        save();
+    };
+    let skip = move |d: i64| jump(pos.get_untracked() + d);
     let chapter_jump = move |d: i64| {
         let p = pos.get_untracked();
         let target = chapters.with_value(|c| {
@@ -382,7 +408,7 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
             c.get(i.clamp(0, c.len() as i64 - 1) as usize).map(|ch| ch.start_ms)
         });
         if let Some(t) = target {
-            seek(t);
+            jump(t);
         }
     };
 
@@ -414,6 +440,9 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
         let ms = start + (a.current_time() * 1000.0) as i64;
         if !dragging.get_untracked() {
             set_pos.set(ms);
+            if !a.paused() {
+                offline_media::remember(id, &audio_place(ms, total));
+            }
         }
         let now = rt::now_ms();
         set_clock_now.set(now);
@@ -473,15 +502,19 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
         })
     });
     let hide = StoredValue::new_local(hide);
+    // leaving: only what is not reactive any more may be used here (parts of the page may be gone already)
     on_cleanup(move || {
-        if let Some(a) = audio.get_untracked() {
+        if let Some(a) = audio.try_get_untracked().flatten() {
             let _ = a.pause();
         }
-        if cur.get_untracked() != usize::MAX {
-            save();
-        }
-        hide.update_value(|h| *h = None);
+        offline_media::send_latest(id);
+        hide.try_update_value(|h| *h = None);
         clear_media_session();
+        local.try_with_value(|l| {
+            for u in l.values() {
+                let _ = web_sys::Url::revoke_object_url(u);
+            }
+        });
     });
 
     // keys: space plays or pauses, the arrows skip, unless typing
@@ -504,10 +537,13 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
         })
     });
     let keys = StoredValue::new_local(keys);
-    on_cleanup(move || keys.update_value(|k| *k = None));
+    on_cleanup(move || {
+        keys.try_update_value(|k| *k = None);
+    });
 
     set_media_session(&edition, toggle, skip);
 
+    let edition_for_download = edition.clone();
     let title = s(&edition, "title");
     let author = crate::library::names(&edition["authors"]);
     let narrators = edition
@@ -580,7 +616,7 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
                 <input class="player-range" type="range" min="0" max=total.to_string() step="1000" aria-label="Place in the book"
                     prop:value=move || pos.get().to_string()
                     on:input=move |e| { set_dragging.set(true); set_pos.set(event_target_value(&e).parse().unwrap_or(0)); }
-                    on:change=move |e| { set_dragging.set(false); seek(event_target_value(&e).parse().unwrap_or(0)); }/>
+                    on:change=move |e| { set_dragging.set(false); jump(event_target_value(&e).parse().unwrap_or(0)); }/>
                 <div class="row between small muted">
                     <span id="player-pos">{move || clock(pos.get())}</span>
                     <span>{move || time_left(((total - pos.get()) as f64 / speed.get()) as i64)}</span>
@@ -610,6 +646,7 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
                 </label>
                 <span class="small muted" id="player-sleep-left">{move || sleep.get().label(clock_now.get())}</span>
                 <button class="btn" id="player-bookmark" on:click=add_mark>"Add bookmark"</button>
+                <offline_media::DownloadButton edition=edition_for_download files=files/>
             </div>
             <div class="player-lists">
                 <section class="card">
@@ -619,7 +656,7 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
                             let at = c.start_ms;
                             let on = move || chapters.with_value(|cs| chapter_at(cs, pos.get())) == Some(i);
                             view! {
-                                <button class="list-item player-item" class:on=on on:click=move |_| seek(at)>
+                                <button class="list-item player-item" class:on=on on:click=move |_| jump(at)>
                                     <span class="grow ellipsis">{c.title.clone()}</span>
                                     <span class="small faint">{clock(c.start_ms)}</span>
                                 </button>
@@ -634,7 +671,7 @@ fn Deck(id: i64, loaded: Loaded) -> impl IntoView {
                         if list.is_empty() {
                             view! { <p class="small muted">"No bookmarks yet. Add one with Add bookmark while you listen."</p> }.into_any()
                         } else {
-                            view! { <div class="list player-list" id="player-bookmarks">{list.into_iter().map(|b| bookmark_row(b, seek, set_marks)).collect_view()}</div> }.into_any()
+                            view! { <div class="list player-list" id="player-bookmarks">{list.into_iter().map(|b| bookmark_row(b, jump, set_marks)).collect_view()}</div> }.into_any()
                         }
                     }}
                 </section>

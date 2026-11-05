@@ -599,15 +599,17 @@ struct Loaded {
     place: Option<Value>,
     /// the person's bookmarks
     bookmarks: Vec<Value>,
+    /// the edition's files as the server lists them
+    files: Vec<Value>,
 }
 
 /// Loads the edition, its EPUB, the person's place and bookmarks.
 async fn load(id: i64) -> Result<Loaded, String> {
-    let edition = api::get(&format!("/library/editions/{id}")).await.map_err(|e| e.message)?;
+    let edition = offline_media::json(&format!("/library/editions/{id}")).await?;
     if edition.get("format").and_then(Value::as_str) != Some("ebook") {
         return Err("This edition is an audiobook. Open it with Listen.".into());
     }
-    let files = api::get(&format!("/library/editions/{id}/files")).await.map_err(|e| e.message)?;
+    let files = offline_media::json(&format!("/library/editions/{id}/files")).await?;
     let files = files.get("files").and_then(Value::as_array).cloned().unwrap_or_default();
     let kind =
         |k: &str| files.iter().find(|f| f.get("kind").and_then(Value::as_str) == Some(k)).and_then(|f| f.get("id")).and_then(Value::as_i64);
@@ -619,18 +621,18 @@ async fn load(id: i64) -> Result<Loaded, String> {
     };
     let bytes = offline_media::file_bytes(file).await?;
     let book = epub::Book::open(bytes)?;
-    let server = api::get(&format!("/progress/{id}")).await.ok();
+    let server = offline_media::json(&format!("/progress/{id}")).await.ok();
     let local = offline_media::pending(id);
     let place = match (server, local) {
         (Some(s), Some(l)) => Some(if offline_media::newer(&l, Some(&s)) { l } else { s }),
         (s, l) => s.or(l),
     };
-    let bookmarks = api::get(&format!("/editions/{id}/bookmarks"))
+    let bookmarks = offline_media::json(&format!("/editions/{id}/bookmarks"))
         .await
         .ok()
         .and_then(|v| v.get("bookmarks").and_then(Value::as_array).cloned())
         .unwrap_or_default();
-    Ok(Loaded { edition, open: Rc::new(std::cell::RefCell::new(Open { book, urls: HashMap::new() })), place, bookmarks })
+    Ok(Loaded { edition, open: Rc::new(std::cell::RefCell::new(Open { book, urls: HashMap::new() })), place, bookmarks, files })
 }
 
 /// `#/read?id=<edition id>`: the reader.
@@ -692,7 +694,8 @@ fn element_at(doc: &web_sys::Document, steps: &[usize]) -> Option<web_sys::Eleme
 /// The reader itself, once the book is open.
 #[component]
 fn Pages(id: i64, loaded: Loaded) -> impl IntoView {
-    let Loaded { edition, open, place, bookmarks } = loaded;
+    let Loaded { edition, open, place, bookmarks, files } = loaded;
+    let edition_for_download = edition.clone();
     let open = StoredValue::new_local(open);
     let frame = NodeRef::<leptos::html::Iframe>::new();
     let (spot, set_spot) = signal(Spot { index: 0, page: 0, pages: 1 });
@@ -705,8 +708,9 @@ fn Pages(id: i64, loaded: Loaded) -> impl IntoView {
     let known_at = StoredValue::new(place.as_ref().and_then(|p| p.get("updated_at")).and_then(Value::as_f64).unwrap_or(0.0));
     let listeners = StoredValue::new_local(Vec::<rt::Listener>::new());
 
-    let doc = move || frame.get_untracked().and_then(|f| f.content_document());
-    let width = move || frame.get_untracked().map(|f| f.client_width()).unwrap_or(1).max(1);
+    // (timers may fire after the reader is closed: then there is no frame)
+    let doc = move || frame.try_get_untracked().flatten().and_then(|f| f.content_document());
+    let width = move || frame.try_get_untracked().flatten().map(|f| f.client_width()).unwrap_or(1).max(1);
 
     // the place now, as the server keeps it
     let locator = move || -> Value {
@@ -726,10 +730,11 @@ fn Pages(id: i64, loaded: Loaded) -> impl IntoView {
             loc
         })
     };
-    let save_now = move || {
+    // the place now, as a device sends it; kept as the latest place too
+    let place_now = move || -> Option<Value> {
         let loc = locator();
         if loc.is_null() {
-            return;
+            return None;
         }
         let total = loc["total_progression"].as_f64().unwrap_or(0.0);
         let sp = spot.get_untracked();
@@ -741,6 +746,11 @@ fn Pages(id: i64, loaded: Loaded) -> impl IntoView {
             "device": offline_media::DEVICE,
             "updated_at": now_s(),
         });
+        offline_media::remember(id, &place);
+        Some(place)
+    };
+    let save_now = move || {
+        let Some(place) = place_now() else { return };
         known_at.set_value(place["updated_at"].as_f64().unwrap_or(0.0));
         rt::spawn(async move {
             let _ = offline_media::save_progress(id, place).await;
@@ -772,6 +782,7 @@ fn Pages(id: i64, loaded: Loaded) -> impl IntoView {
             s.page = p;
             s.pages = pages;
         });
+        place_now();
     };
 
     // draws chapter `index` and then goes to `t`
@@ -914,12 +925,13 @@ fn Pages(id: i64, loaded: Loaded) -> impl IntoView {
         })
     });
     let page_listeners = StoredValue::new_local((page_keys, resize, hide));
+    // leaving: only what is not reactive any more may be used here (parts of the page may be gone already)
     on_cleanup(move || {
-        save_now();
-        listeners.update_value(|l| l.clear());
-        page_listeners.update_value(|l| *l = (None, None, None));
-        open.with_value(|o| o.borrow_mut().free());
-        if let Some(f) = frame.get_untracked() {
+        offline_media::send_latest(id);
+        listeners.try_update_value(|l| l.clear());
+        page_listeners.try_update_value(|l| *l = (None, None, None));
+        open.try_with_value(|o| o.borrow_mut().free());
+        if let Some(f) = frame.try_get_untracked().flatten() {
             let src = f.src();
             if src.starts_with("blob:") {
                 let _ = web_sys::Url::revoke_object_url(&src);
@@ -997,6 +1009,7 @@ fn Pages(id: i64, loaded: Loaded) -> impl IntoView {
                 <button class="btn ghost sm" title="Smaller text" aria-label="Smaller text" on:click=move |_| resize_text(-10)>"A−"</button>
                 <button class="btn ghost sm" title="Larger text" aria-label="Larger text" on:click=move |_| resize_text(10)>"A+"</button>
                 <button class="btn sm" id="reader-bookmark" on:click=add_mark>"Add bookmark"</button>
+                <offline_media::DownloadButton edition=edition_for_download files=files/>
             </div>
             <div class="reader-body">
                 <div class="reader-page">

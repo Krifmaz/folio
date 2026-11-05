@@ -22,7 +22,8 @@ web-sys = { version = "0.3", features = ["Document", "Element", "HtmlElement", "
   # Track A (player and reader)
   "HtmlMediaElement", "HtmlAudioElement", "MediaError", "Navigator", "KeyboardEvent", "Storage", "HtmlIFrameElement", "HtmlCollection", "Node",
   "NodeList", "DomParser", "SupportedType", "XmlSerializer", "Blob", "BlobPropertyBag", "Url", "DomRect", "MouseEvent",
-  "CssStyleDeclaration", "Response"] }
+  "CssStyleDeclaration", "Response", "ResponseInit", "Headers", "CacheStorage", "Cache", "ReadableStream",
+  "ReadableStreamDefaultReader", "StorageManager"] }
 # Track A (player and reader): the audio element, media keys, storage and promises
 js-sys = "0.3"
 wasm-bindgen-futures = "0.4"

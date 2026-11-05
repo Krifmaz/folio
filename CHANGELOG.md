@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Added
+- Download a book to the browser (Download on the player and the reader): it then opens, plays and reads with no
+  connection, at the place you were; places made offline go to the server when the connection is back.
 - Listen and Read in the web app. The audiobook player plays a book's files as one book with its chapters, speed,
   a sleep timer (minutes or the end of the chapter), bookmarks with notes, media keys and the lock screen. The EPUB
   reader shows the book in pages in the app's colours, with its contents, text size, bookmarks and page turns by
