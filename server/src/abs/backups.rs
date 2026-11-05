@@ -422,7 +422,7 @@ fn restore(st: &AppState, b: &Backup) -> Result<(), Box<Response>> {
         let _ = std::fs::remove_file(&temp);
         return Err(fail("Failed to extract sqlite db from backup"));
     }
-    let copied = copy_tables(&st.abs, &temp);
+    let copied = copy_tables(&server.config_path.join("absdatabase.sqlite"), &temp);
     let _ = std::fs::remove_file(&temp);
     if let Err(e) = copied {
         tracing::error!("The database can't be replaced by the backup's: {e}");
@@ -442,55 +442,47 @@ fn restore(st: &AppState, b: &Backup) -> Result<(), Box<Response>> {
     Ok(())
 }
 
-/// Replaces every table of the database with the same table of another database file: the columns both have are
-/// copied, in one transaction (the original swaps the database file itself).
-fn copy_tables(db: &kit_server_core::SqliteDb, from: &Path) -> Result<(), String> {
-    let err = |e: kit_server_core::Error| e.detail;
-    db.execute("ATTACH DATABASE ? AS abs_backup", vec![json!(from.display().to_string())]).map_err(err)?;
-    let script = (|| -> Result<String, String> {
-        let names = |schema: &str| -> Result<Vec<String>, String> {
-            let rows = db
-                .query(&format!("SELECT name FROM {schema}.sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%'"), vec![])
-                .map_err(err)?;
-            Ok(rows.iter().filter_map(|r| r.get("name").and_then(Value::as_str).map(String::from)).collect())
-        };
-        let columns = |schema: &str, table: &str| -> Result<Vec<String>, String> {
-            let rows = db.query("SELECT name FROM pragma_table_info(?, ?)", vec![json!(table), json!(schema)]).map_err(err)?;
-            Ok(rows.iter().filter_map(|r| r.get("name").and_then(Value::as_str).map(String::from)).collect())
-        };
-        let quote = |s: &str| format!("\"{}\"", s.replace('"', "\"\""));
-        let mut tables = names("main")?;
-        let theirs = names("abs_backup")?;
-        // the items' titles are kept up to date by triggers on other tables, so they go in last
-        tables.sort_by_key(|t| t == "libraryItems");
-        let mut sql = String::from("BEGIN;\n");
-        for t in tables.iter().rev().filter(|t| *t == "libraryItems") {
-            sql += &format!("DELETE FROM main.{};\n", quote(t));
-        }
+/// Replaces every table of the database file `db` with the same table of another database file: the columns both
+/// have are copied, in one transaction on a connection of its own (the original swaps the database file itself).
+fn copy_tables(db: &Path, from: &Path) -> Result<(), String> {
+    let mut conn = rusqlite::Connection::open(db).map_err(|e| e.to_string())?;
+    conn.busy_timeout(std::time::Duration::from_secs(30)).map_err(|e| e.to_string())?;
+    conn.execute("ATTACH DATABASE ?1 AS abs_backup", [from.display().to_string()]).map_err(|e| e.to_string())?;
+    let names = |conn: &rusqlite::Connection, schema: &str| -> rusqlite::Result<Vec<String>> {
+        let mut q = conn.prepare(&format!("SELECT name FROM {schema}.sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%'"))?;
+        let rows = q.query_map([], |r| r.get::<_, String>(0))?;
+        rows.collect()
+    };
+    let columns = |conn: &rusqlite::Connection, schema: &str, table: &str| -> rusqlite::Result<Vec<String>> {
+        let mut q = conn.prepare("SELECT name FROM pragma_table_info(?1, ?2)")?;
+        let rows = q.query_map([table, schema], |r| r.get::<_, String>(0))?;
+        rows.collect()
+    };
+    let quote = |s: &str| format!("\"{}\"", s.replace('"', "\"\""));
+    let copy = |conn: &mut rusqlite::Connection| -> rusqlite::Result<()> {
+        let mut tables = names(conn, "main")?;
+        let theirs = names(conn, "abs_backup")?;
+        // the items' titles are kept up to date by triggers on other tables, so they go first and come back last
+        tables.sort_by_key(|t| t != "libraryItems");
+        let tx = conn.transaction()?;
         for t in &tables {
-            if t != "libraryItems" {
-                sql += &format!("DELETE FROM main.{};\n", quote(t));
-            }
+            tx.execute(&format!("DELETE FROM main.{}", quote(t)), [])?;
         }
+        tables.reverse();
         for t in tables.iter().filter(|t| theirs.contains(t)) {
-            let mine = columns("main", t)?;
-            let both: Vec<String> = columns("abs_backup", t)?.into_iter().filter(|c| mine.contains(c)).map(|c| quote(&c)).collect();
+            let mine = columns(&tx, "main", t)?;
+            let both: Vec<String> =
+                columns(&tx, "abs_backup", t)?.into_iter().filter(|c| mine.contains(c)).map(|c| quote(c.as_str())).collect();
             if both.is_empty() {
                 continue;
             }
             let cols = both.join(", ");
-            sql += &format!("INSERT INTO main.{q} ({cols}) SELECT {cols} FROM abs_backup.{q};\n", q = quote(t));
+            tx.execute(&format!("INSERT INTO main.{q} ({cols}) SELECT {cols} FROM abs_backup.{q}", q = quote(t)), [])?;
         }
-        sql += "COMMIT;";
-        Ok(sql)
-    })();
-    let result = script.and_then(|sql| {
-        db.execute_batch(&sql).map_err(|e| {
-            let _ = db.execute_batch("ROLLBACK");
-            e.detail
-        })
-    });
-    let _ = db.execute("DETACH DATABASE abs_backup", vec![]);
+        tx.commit()
+    };
+    let result = copy(&mut conn).map_err(|e| e.to_string());
+    let _ = conn.execute("DETACH DATABASE abs_backup", []);
     result
 }
 
@@ -821,5 +813,27 @@ mod tests {
         let short = Backup::from_details(&["x"], Path::new("/b/x.audiobookshelf"));
         assert!(short.to_json().get("key").is_none());
         assert_eq!(short.to_json()["createdAt"], Value::Null);
+    }
+
+    #[test]
+    fn a_backup_over_the_size_limit_is_stopped() {
+        let dir = std::env::temp_dir().join(format!("folio-backup-size-{}", std::process::id()));
+        let items = dir.join("items/one");
+        std::fs::create_dir_all(&items).unwrap();
+        std::fs::write(items.join("cover.jpg"), vec![7u8; 4096]).unwrap();
+        let db = dir.join("db.sqlite");
+        std::fs::write(&db, b"db").unwrap();
+        let b = Backup::new_now(&dir.display().to_string());
+        let authors = dir.join("authors");
+        // 2 KB at most: the cover is too large
+        let r = zip_backup(&db, &b, &dir.join("items"), &authors, Some(2e-6));
+        assert_eq!(r, Err("Backup too large".to_string()));
+        // without a limit the zip holds the database, the item's file and the details
+        zip_backup(&db, &b, &dir.join("items"), &authors, None).unwrap();
+        let z = zip::ZipArchive::new(File::open(&b.full_path).unwrap()).unwrap();
+        let mut names: Vec<&str> = z.file_names().collect();
+        names.sort();
+        assert_eq!(names, ["absdatabase.sqlite", "details", "metadata-items/one/cover.jpg"]);
+        std::fs::remove_dir_all(&dir).unwrap();
     }
 }
