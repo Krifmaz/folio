@@ -12,7 +12,8 @@ def folioKeystore = System.getenv("ANDROID_KEYSTORE_PATH")
 def folioHasKey = folioKeystore != null && !folioKeystore.isEmpty() && file(folioKeystore).isFile()
 
 // Folio's own app id (installs beside the upstream app), and its name, colours and icons: folio-res is laid over the
-// upstream resources for every build type, so the upstream files stay as they are.
+// upstream resources for both build types (in place of upstream's own debug resources), so the upstream files stay
+// as they are.
 def folioAppId = "dev.krifmaz.folio.mobile"
 
 android {
@@ -33,7 +34,8 @@ android {
     }
   }
   sourceSets {
-    debug.res.srcDirs += 'folio-res'
+    // upstream's src/debug/res repeats its name and icons for debug builds; Folio's take their place
+    debug.res.srcDirs = ['folio-res']
     release.res.srcDirs += 'folio-res'
   }
   buildTypes {
