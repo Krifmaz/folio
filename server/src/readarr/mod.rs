@@ -14,6 +14,8 @@
 pub mod authors;
 pub mod bookfiles;
 pub mod books;
+pub mod delete;
+pub mod disk;
 pub mod editions;
 pub mod json;
 pub mod quality;

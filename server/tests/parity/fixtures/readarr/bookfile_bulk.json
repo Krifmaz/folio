@@ -1,0 +1,14 @@
+{
+ "body": {},
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "bookFileIds": [
+    2
+   ]
+  },
+  "method": "DELETE",
+  "path": "/api/v1/bookfile/bulk"
+ },
+ "status": 200
+}

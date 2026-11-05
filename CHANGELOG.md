@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- The Readarr API can delete authors, books and book files, one or several, with Readarr's options (delete the
+  files, add an import list exclusion). Files go to Readarr's recycling bin when one is set. What a delete leaves
+  behind (rows and files on disk) is checked against Readarr's own, recorded at four points.
 - The Readarr API can change authors (folder, profiles, tags, monitoring, one at a time or several), books and
   their editions (monitoring, "any edition"), and book files' quality, with Readarr's checks and answers (21 more
   recorded answers).

@@ -6,6 +6,8 @@
 //! GET /api/v1/bookfile/{id}                                                                one file, with its tags
 //! PUT /api/v1/bookfile/{id}                                    set a file's quality (202 with the file)
 //! PUT /api/v1/bookfile/editor  {bookFileIds, quality}          set several files' quality (202 with them)
+//! DELETE /api/v1/bookfile/{id}                                 delete a file (to the recycling bin)
+//! DELETE /api/v1/bookfile/bulk  {bookFileIds}                  delete several files ({})
 //! ```
 //!
 //! Tags are read like Readarr reads a file it can't parse (an empty set with the quality of the extension); the
@@ -17,7 +19,7 @@ use crate::AppState;
 use axum::body::Bytes;
 use axum::extract::{Path, RawQuery, State};
 use axum::http::StatusCode;
-use axum::routing::{get, put};
+use axum::routing::{delete, get, put};
 use axum::{Json, Router};
 use kit_server_core::{Db, Row, RowExt, SqliteDb};
 use serde_json::{json, Value};
@@ -26,14 +28,20 @@ use serde_json::{json, Value};
 pub fn router() -> Router<AppState> {
     Router::new()
         .route("/api/v1/bookfile", get(all).put(update_unrouted))
-        .route("/api/v1/bookfile/{id}", get(one).put(update))
+        .route("/api/v1/bookfile/{id}", get(one).put(update).delete(remove))
         .route("/api/v1/bookfile/editor", put(editor))
+        .route("/api/v1/bookfile/bulk", delete(remove_many))
 }
 
 /// A file with its edition's book and its author (`MediaFileRepository`'s joins).
-const SELECT: &str = "SELECT f.*, e.Id AS EditionFound, e.BookId AS EditionBookId, a.Id AS AuthorFound, a.QualityProfileId AS AuthorProfile
+const SELECT: &str = "SELECT f.*, e.Id AS EditionFound, e.BookId AS EditionBookId, a.Id AS AuthorFound, a.QualityProfileId AS AuthorProfile, a.Path AS AuthorPath
     FROM BookFiles f LEFT JOIN Editions e ON f.EditionId = e.Id LEFT JOIN Books b ON e.BookId = b.Id
     LEFT JOIN Authors a ON b.AuthorMetadataId = a.AuthorMetadataId";
+
+/// The files of a book, through its editions (`GetFilesByBook`).
+pub fn of_book(db: &SqliteDb, book_id: i64) -> kit_server_core::Result<Vec<Row>> {
+    rows(db, "b.Id = ?", vec![json!(book_id)])
+}
 
 /// The files matching `filter` (SQL after `WHERE`), in the order they were added.
 fn rows(db: &SqliteDb, filter: &str, params: Vec<Value>) -> kit_server_core::Result<Vec<Row>> {
@@ -248,4 +256,31 @@ async fn editor(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(Sta
     let found = if ids.is_empty() { Vec::new() } else { rows(db, &format!("f.Id IN ({})", marks(ids.len())), params)? };
     let out = found.iter().map(|f| resource(db, f, true)).collect::<kit_server_core::Result<Vec<_>>>()?;
     Ok((StatusCode::ACCEPTED, Json(Value::Array(out))))
+}
+
+/// `DELETE /api/v1/bookfile/{id}`: 200 with no body.
+async fn remove(State(st): State<AppState>, _: Key, Path(id): Path<String>) -> Answer<StatusCode> {
+    let db = &st.readarr;
+    let id: i64 = id.parse().map_err(|_| Fail::not_found())?;
+    let Some(f) = rows(db, "f.Id = ?", vec![json!(id)])?.into_iter().next() else {
+        return Err(Fail::model_not_found("BookFile", id));
+    };
+    super::delete::book_file(db, &st.readarr_disk, &f)?;
+    Ok(StatusCode::OK)
+}
+
+/// `DELETE /api/v1/bookfile/bulk` (`DeleteTrackFiles`): every file asked for must exist; `{}`.
+async fn remove_many(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let ids = authors::ids(&r, "bookFileIds");
+    let found = if ids.is_empty() {
+        Vec::new()
+    } else {
+        rows(db, &format!("f.Id IN ({})", marks(ids.len())), ids.iter().map(|i| json!(i)).collect())?
+    };
+    for f in authors::get_many(found, ids.len())? {
+        super::delete::book_file(db, &st.readarr_disk, &f)?;
+    }
+    Ok(Json(json!({})))
 }
