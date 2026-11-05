@@ -1,0 +1,14 @@
+{
+  "asin": "B08G9PRS1K",
+  "brandIntroDurationMs": 2043,
+  "brandOutroDurationMs": 5061,
+  "chapters": [
+    { "lengthMs": 1000000, "startOffsetMs": 0, "startOffsetSec": 0, "title": "Opening Credits" },
+    { "lengthMs": 2000000, "startOffsetMs": 1000000, "startOffsetSec": 1000, "title": "Chapter 1" },
+    { "lengthMs": 55200000, "startOffsetMs": 3000000, "startOffsetSec": 3000, "title": "Chapter 2" }
+  ],
+  "isAccurate": true,
+  "region": "us",
+  "runtimeLengthMs": 58200000,
+  "runtimeLengthSec": 58200
+}

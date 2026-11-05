@@ -1,0 +1,22 @@
+{
+  "asin": "B08G9PRS1K",
+  "authors": [{ "asin": "B00G0WYW92", "name": "Andy Weir" }],
+  "description": "Ryland Grace is the sole survivor on a desperate, last-chance mission.",
+  "formatType": "unabridged",
+  "genres": [
+    { "asin": "18580606011", "name": "Science Fiction & Fantasy", "type": "genre" },
+    { "asin": "18580628011", "name": "Science Fiction", "type": "tag" }
+  ],
+  "image": "https://m.media-amazon.com/images/I/91vS2L5YfEL.jpg",
+  "isAdult": false,
+  "language": "english",
+  "literatureType": "fiction",
+  "narrators": [{ "name": "Ray Porter" }],
+  "publisherName": "Audible Studios",
+  "rating": "4.9",
+  "region": "us",
+  "releaseDate": "2021-05-04T00:00:00.000Z",
+  "runtimeLengthMin": 970,
+  "summary": "<p><b>Ryland Grace is the sole survivor on a desperate, last-chance mission - and if he fails, humanity and the earth itself will perish.</b></p>",
+  "title": "Project Hail Mary"
+}

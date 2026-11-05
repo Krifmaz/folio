@@ -1,0 +1,7 @@
+{
+  "key": "/works/OL21745884W",
+  "title": "Project Hail Mary",
+  "authors": [{ "author": { "key": "/authors/OL7234434A" }, "type": { "key": "/type/author_role" } }],
+  "description": { "type": "/type/text", "value": "A lone astronaut must save the earth from disaster." },
+  "subjects": ["Science fiction", "Astronauts", "Space flight"]
+}

@@ -9,11 +9,14 @@
 //! | `/api/diagnostics`, `/api/diagnostics/{id}/test` | kit-server-diagnostics |
 //! | `/api/settings`, `/api/settings/schema`, `/api/settings/secret/{key}` | kit-server-settings |
 //! | `/api/auth/login`, `/api/auth/logout`, `/api/auth/me` | [`auth`] |
+//! | `/api/library/*`: works, editions, authors, series, lookups | [`library`] |
 //!
 //! Everything the app adds of its own goes into [`app`] next to them.
 
 pub mod auth;
 pub mod checks;
+pub mod library;
+pub mod metadata;
 
 use axum::http::{header, HeaderValue};
 use axum::Router;
@@ -77,6 +80,8 @@ pub struct AppState {
     pub notices: kit_server_notices::Notices<AppState>,
     /// Sign-in and bug report limits per address or account.
     pub limits: Arc<auth::Limits>,
+    /// The HTTP client for the metadata sources (and later Lantern).
+    pub http: reqwest::Client,
 }
 
 impl AppState {
@@ -100,6 +105,7 @@ impl AppState {
         std::fs::create_dir_all(data).map_err(|e| anyhow::anyhow!("The data folder {} can't be made: {e}", data.display()))?;
         let db = SqliteDb::open(&data.join("app.db")).map_err(|e| anyhow::anyhow!("The database can't be opened: {}", e.detail))?;
         auth::migrate(&db)?;
+        library::store::migrate(&db)?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -119,6 +125,7 @@ impl AppState {
             changelog,
             notices,
             limits: Arc::new(auth::Limits::default()),
+            http: metadata::http_client(),
         })
     }
 
@@ -214,6 +221,7 @@ pub fn app(st: AppState) -> Router {
         .merge(kit_server_diagnostics::router())
         .merge(kit_server_settings::router())
         .merge(auth::router())
+        .merge(library::router())
         .with_state(st)
         .fallback_service(spa)
         .layer(axum::middleware::from_fn(security_headers))
