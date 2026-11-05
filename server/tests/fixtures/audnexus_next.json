@@ -1,0 +1,10 @@
+{
+  "asin": "B0NEWBOOK1",
+  "authors": [{ "asin": "B00G0WYW92", "name": "Andy Weir" }],
+  "formatType": "unabridged",
+  "language": "english",
+  "narrators": [{ "name": "Ray Porter" }],
+  "releaseDate": "2027-03-01T00:00:00.000Z",
+  "runtimeLengthMin": 600,
+  "title": "The Next One"
+}

@@ -302,3 +302,5 @@ details.adv-fields > summary { cursor: pointer; width: max-content; }
 .book-title { font-weight: 650; }
 .work-blurb { color: var(--muted); margin: 14px 0 0; max-width: 70ch; }
 @media (max-width: 640px) { .book-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; } .work-cover { width: 140px; } }
+/* ---------- wanted ---------- */
+.profile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }

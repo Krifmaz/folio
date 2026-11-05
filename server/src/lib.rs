@@ -10,6 +10,7 @@
 //! | `/api/settings`, `/api/settings/schema`, `/api/settings/secret/{key}` | kit-server-settings |
 //! | `/api/auth/login`, `/api/auth/logout`, `/api/auth/me` | [`auth`] |
 //! | `/api/library/*`: works, editions, authors, series, lookups | [`library`] |
+//! | `/api/wanted*`, `/api/profiles*`, following authors and series | [`wanted`] |
 //!
 //! Everything the app adds of its own goes into [`app`] next to them.
 
@@ -17,6 +18,7 @@ pub mod auth;
 pub mod checks;
 pub mod library;
 pub mod metadata;
+pub mod wanted;
 
 use axum::http::{header, HeaderValue};
 use axum::Router;
@@ -106,6 +108,7 @@ impl AppState {
         let db = SqliteDb::open(&data.join("app.db")).map_err(|e| anyhow::anyhow!("The database can't be opened: {}", e.detail))?;
         auth::migrate(&db)?;
         library::store::migrate(&db)?;
+        wanted::store::migrate(&db)?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -222,6 +225,7 @@ pub fn app(st: AppState) -> Router {
         .merge(kit_server_settings::router())
         .merge(auth::router())
         .merge(library::router())
+        .merge(wanted::router())
         .with_state(st)
         .fallback_service(spa)
         .layer(axum::middleware::from_fn(security_headers))

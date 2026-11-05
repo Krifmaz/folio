@@ -1,0 +1,11 @@
+{
+  "asin": "B0SECOND01",
+  "authors": [{ "asin": "B001IGFHW6", "name": "Brandon Sanderson" }],
+  "formatType": "unabridged",
+  "language": "english",
+  "narrators": [{ "name": "Michael Kramer" }, { "name": "Kate Reading" }],
+  "releaseDate": "2014-03-04T00:00:00.000Z",
+  "runtimeLengthMin": 2900,
+  "seriesPrimary": { "asin": "B00DA6YEKS", "name": "The Stormlight Archive", "position": "2" },
+  "title": "Words of Radiance"
+}

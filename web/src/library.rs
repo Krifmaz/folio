@@ -259,6 +259,14 @@ fn edition_row(e: &Value, admin: bool, on_change: impl Fn() + Copy + 'static) ->
             }
         })
     };
+    let want = move |_| {
+        kit_leptos::rt::spawn(async move {
+            match api::post("/wanted", json!({ "edition_id": id })).await {
+                Ok(_) => toast("Added to the wanted list.", "ok"),
+                Err(e) => toast(&e.message, "err"),
+            }
+        })
+    };
     let remove = move |_| {
         let (title, ident) = (title.clone(), ident.clone());
         kit_leptos::rt::spawn(async move {
@@ -286,6 +294,7 @@ fn edition_row(e: &Value, admin: bool, on_change: impl Fn() + Copy + 'static) ->
             <td>{s(e, "release_date")}<div class="small faint">{s(e, "publisher")}</div></td>
             <td style="white-space:nowrap">
                 {admin.then(|| view! {
+                    <button class="btn sm" title="Want this edition" on:click=want>"Want"</button>
                     <button class="btn ghost icon sm" title="Refresh details" aria-label="Refresh details" on:click=refresh inner_html=icon("refresh")></button>
                     <button class="btn ghost icon sm" title="Remove" aria-label="Remove" on:click=remove inner_html=icon("trash")></button>
                 }.into_any())}
@@ -333,7 +342,7 @@ pub fn Work(id: i64, admin: bool) -> impl IntoView {
 
 /// `#/authors`: every author and how many of their books are kept.
 #[component]
-pub fn Authors() -> impl IntoView {
+pub fn Authors(admin: bool) -> impl IntoView {
     let data = LocalResource::new(|| async { api::get("/library/authors").await.map_err(|e| e.message) });
     let body = move || match data.get() {
         None => view! { <div class="empty"><span class="spinner"></span></div> }.into_any(),
@@ -347,7 +356,15 @@ pub fn Authors() -> impl IntoView {
             view! {
                 <div class="list">{list.iter().map(|a| {
                     let n = a.get("works").and_then(Value::as_i64).unwrap_or(0);
-                    view! { <div class="list-item"><span class="grow" style="font-weight:650">{s(a, "name")}</span><span class="small muted">{if n == 1 { "1 book".to_string() } else { format!("{n} books") }}</span></div> }
+                    let id = a.get("id").and_then(Value::as_i64).unwrap_or(0);
+                    let follow = s(a, "follow");
+                    view! {
+                        <div class="list-item" style="gap:10px;flex-wrap:wrap">
+                            <span class="grow" style="font-weight:650">{s(a, "name")}</span>
+                            <span class="small muted">{if n == 1 { "1 book".to_string() } else { format!("{n} books") }}</span>
+                            {admin.then(|| crate::wanted::follow_select("authors", id, follow))}
+                        </div>
+                    }
                 }).collect_view()}</div>
             }
             .into_any()
@@ -358,7 +375,7 @@ pub fn Authors() -> impl IntoView {
 
 /// `#/series`: every series with its books in reading order.
 #[component]
-pub fn Series() -> impl IntoView {
+pub fn Series(admin: bool) -> impl IntoView {
     let data = LocalResource::new(|| async { api::get("/library/series").await.map_err(|e| e.message) });
     let body = move || match data.get() {
         None => view! { <div class="empty"><span class="spinner"></span></div> }.into_any(),
@@ -371,9 +388,10 @@ pub fn Series() -> impl IntoView {
             list.iter()
                 .map(|x| {
                     let works = x.get("works").and_then(Value::as_array).cloned().unwrap_or_default();
+                    let (id, follow) = (x.get("id").and_then(Value::as_i64).unwrap_or(0), s(x, "follow"));
                     view! {
                         <div class="card mt">
-                            <h3>{s(x, "name")}</h3>
+                            <div class="row between wrap" style="gap:10px"><h3>{s(x, "name")}</h3>{admin.then(|| crate::wanted::follow_select("series", id, follow))}</div>
                             <div class="list mt">{works.iter().map(|w| {
                                 let id = w.get("id").and_then(Value::as_i64).unwrap_or(0);
                                 let pos = s(w, "position");

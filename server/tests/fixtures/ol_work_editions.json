@@ -1,0 +1,8 @@
+{
+  "size": 3,
+  "entries": [
+    { "key": "/books/OL1M", "title": "Der Marsianer", "isbn_13": ["9783453316911"], "languages": [{ "key": "/languages/ger" }], "physical_format": "Paperback" },
+    { "key": "/books/OL2M", "title": "The Martian", "isbn_13": ["9780553418026"], "languages": [{ "key": "/languages/eng" }], "physical_format": "Paperback" },
+    { "key": "/books/OL3M", "title": "The Martian", "isbn_13": ["9780804139021"], "languages": [{ "key": "/languages/eng" }], "physical_format": "Ebook" }
+  ]
+}

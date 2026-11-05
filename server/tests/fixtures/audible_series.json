@@ -1,0 +1,11 @@
+{
+  "product": {
+    "asin": "B00DA6YEKS",
+    "title": "The Stormlight Archive",
+    "relationships": [
+      { "asin": "B0SECOND01", "relationship_to_product": "child", "relationship_type": "series", "sequence": "2", "sort": "2" },
+      { "asin": "B003ZWFO7E", "relationship_to_product": "child", "relationship_type": "series", "sequence": "1", "sort": "1" },
+      { "asin": "B0SOMEPARENT", "relationship_to_product": "parent", "relationship_type": "series", "sequence": "", "sort": "" }
+    ]
+  }
+}

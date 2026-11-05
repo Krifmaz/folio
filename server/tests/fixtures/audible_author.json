@@ -1,0 +1,9 @@
+{
+  "products": [
+    { "asin": "B0NEWBOOK1", "title": "The Next One", "authors": [{ "asin": "B00G0WYW92", "name": "Andy Weir" }], "content_delivery_type": "SinglePartBook", "format_type": "unabridged", "language": "english", "release_date": "2027-03-01" },
+    { "asin": "B08G9PRS1K", "title": "Project Hail Mary", "authors": [{ "asin": "B00G0WYW92", "name": "Andy Weir" }], "content_delivery_type": "SinglePartBook", "format_type": "unabridged", "language": "english", "release_date": "2021-05-04" },
+    { "asin": "B0ABRIDGE1", "title": "Project Hail Mary (Abridged)", "authors": [{ "asin": "B00G0WYW92", "name": "Andy Weir" }], "content_delivery_type": "SinglePartBook", "format_type": "abridged", "language": "english", "release_date": "2021-06-01" },
+    { "asin": "B0GERMAN01", "title": "Der Astronaut", "authors": [{ "asin": "B00G0WYW92", "name": "Andy Weir" }], "content_delivery_type": "SinglePartBook", "format_type": "unabridged", "language": "german", "release_date": "2021-07-01" }
+  ],
+  "total_results": 4
+}

@@ -6,7 +6,8 @@
 //! | after signing in | the What's new popup, once per release |
 //! | `#/` | the Library: every book, search, format filter, Add a book (ASIN or ISBN) |
 //! | `#/work?id=<id>` | one book with its exact editions |
-//! | `#/authors`, `#/series` | the authors; the series in reading order |
+//! | `#/authors`, `#/series` | the authors; the series in reading order; following them |
+//! | `#/wanted` | the wanted list per format, the preferences, Check followed now |
 //! | `#/bug-reports` | the account's bug reports and the New report sheet |
 //! | `#/settings?s=<page>` | the server settings form from the server's schema, Diagnostics and What's new |
 //!
@@ -14,6 +15,7 @@
 
 mod library;
 mod pages;
+mod wanted;
 
 use kit_leptos::api::{self, HttpBackend};
 use kit_leptos::{details, dropzone, notice, offline, rt, toasts, update, whats_new};
@@ -177,8 +179,9 @@ fn Shell(me: Value) -> impl IntoView {
             "/bug-reports" => view! { <pages::BugReports/> }.into_any(),
             "/settings" => view! { <pages::Settings page=r.param("s")/> }.into_any(),
             "/work" => view! { <library::Work id=r.param("id").parse().unwrap_or(0) admin=admin/> }.into_any(),
-            "/authors" => view! { <library::Authors/> }.into_any(),
-            "/series" => view! { <library::Series/> }.into_any(),
+            "/authors" => view! { <library::Authors admin=admin/> }.into_any(),
+            "/series" => view! { <library::Series admin=admin/> }.into_any(),
+            "/wanted" => view! { <wanted::Wanted admin=admin/> }.into_any(),
             _ => view! { <library::Library admin=admin/> }.into_any(),
         }
     };
@@ -190,6 +193,7 @@ fn Shell(me: Value) -> impl IntoView {
                     <NavLink href="/" label="Library" route=route/>
                     <NavLink href="/authors" label="Authors" route=route/>
                     <NavLink href="/series" label="Series" route=route/>
+                    <NavLink href="/wanted" label="Wanted" route=route/>
                 </nav>
                 <nav class="nav nav-under">
                     <NavLink href="/bug-reports" label="Bug reports" route=route/>

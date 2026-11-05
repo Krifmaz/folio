@@ -5,6 +5,7 @@
 //! The addresses, the Audible store and the tokens are settings (Settings → Metadata), so tests and people
 //! behind a mirror can point them elsewhere.
 
+pub mod audible;
 pub mod audnexus;
 pub mod googlebooks;
 pub mod hardcover;
@@ -169,6 +170,8 @@ pub struct Providers {
     pub audnexus_url: String,
     /// the Audible store (`us`, `uk` …)
     pub region: String,
+    /// the Audible catalogue's address; empty: the store's own
+    pub audible_url: String,
     /// Open Library's address
     pub openlibrary_url: String,
     /// Google Books' address
@@ -198,6 +201,7 @@ impl Providers {
             http,
             audnexus_url: url("audnexus_url"),
             region: s.str("audible_region"),
+            audible_url: url("audible_url"),
             openlibrary_url: url("openlibrary_url"),
             googlebooks_url: url("googlebooks_url"),
             google_key: s.str("google_books_key"),
