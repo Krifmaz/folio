@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- Playback sessions work like Audiobookshelf's: starting one when a player opens a book, syncing and closing it,
+  sessions phones played offline, the admins' list of open and past sessions (and deleting them), and each user's
+  listening sessions and stats. Each answer is checked against the original's recorded one.
 - Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked

@@ -216,3 +216,144 @@ async fn bookmarks_follow_the_originals_rules() {
         json!([{"libraryItemId": ITEM, "time": 30, "title": "Deux", "createdAt": all["bookmarks"][0]["createdAt"]}])
     );
 }
+
+/// The original's rows after its recording, loaded into Folio (like `parity_abs_library.rs`), without its
+/// playback sessions and devices, and with the item's progress back where the recording had it before `play`.
+async fn set_up_recorded(name: &str) -> (Router, server::AppState, String, HashMap<String, String>) {
+    let (app, st, _dir) = common::server(name, HashMap::new()).await;
+    let all: HashMap<String, Vec<serde_json::Map<String, Value>>> =
+        serde_json::from_str(&std::fs::read_to_string(parity::dir("abs").join("_db_end.json")).unwrap()).unwrap();
+    st.abs.execute("PRAGMA foreign_keys = OFF", vec![]).ok();
+    for (table, rows) in all {
+        if ["settings", "sessions", "migrationsMeta", "SequelizeMeta"].contains(&table.as_str()) {
+            continue;
+        }
+        st.abs.execute(&format!("DELETE FROM `{table}`"), vec![]).unwrap();
+        if ["playbackSessions", "devices", "mediaProgresses"].contains(&table.as_str()) {
+            continue;
+        }
+        for row in rows {
+            let cols: Vec<String> = row.keys().map(|k| format!("`{k}`")).collect();
+            let marks = vec!["?"; cols.len()].join(", ");
+            st.abs
+                .execute(&format!("INSERT INTO `{table}` ({}) VALUES ({marks})", cols.join(", ")), row.values().cloned().collect())
+                .unwrap();
+        }
+    }
+    let login = Request::post("/login")
+        .header(header::CONTENT_TYPE, "application/json")
+        .header("x-return-tokens", "true")
+        .body(Body::from(json!({"username": "root", "password": "root"}).to_string()))
+        .unwrap();
+    let r = app.clone().oneshot(login).await.unwrap();
+    let b: Value = serde_json::from_slice(&axum::body::to_bytes(r.into_body(), 1 << 20).await.unwrap()).unwrap();
+    let token = b["user"]["accessToken"].as_str().unwrap().to_string();
+    let ctx: Value = serde_json::from_str(&std::fs::read_to_string(parity::dir("abs").join("_lib_context.json")).unwrap()).unwrap();
+    let ctx: HashMap<String, String> =
+        ctx.as_object().unwrap().iter().filter_map(|(k, v)| v.as_str().map(|s| (k.clone(), s.to_string()))).collect();
+    let set = fixture("abs", "me_progress_set");
+    let path = set.request["path"].as_str().unwrap().replace("{item}", &ctx["item"]);
+    assert_eq!(send(&app, "PATCH", &path, Some(set.request["body"].clone()), &token).await.status, 200);
+    (app, st, token, ctx)
+}
+
+/// Fills `{placeholders}` in every text of a recorded request.
+fn fill_value(v: &Value, ctx: &HashMap<String, String>) -> Value {
+    match v {
+        Value::String(s) => {
+            let mut t = s.clone();
+            for (k, val) in ctx {
+                t = t.replace(&format!("{{{k}}}"), val);
+            }
+            Value::String(t)
+        }
+        Value::Array(a) => Value::Array(a.iter().map(|x| fill_value(x, ctx)).collect()),
+        Value::Object(m) => Value::Object(m.iter().map(|(k, x)| (k.clone(), fill_value(x, ctx))).collect()),
+        other => other.clone(),
+    }
+}
+
+/// Listening stats keyed by day, weekday and item id as lists sorted by time, and file addresses without their
+/// ids: the recording's days, ids and file numbers are not the test's; the amounts and the rest must be the same.
+fn by_amount(v: &mut Value) {
+    match v {
+        Value::Object(m) => {
+            for (k, x) in m.iter_mut() {
+                if ["days", "dayOfWeek", "items"].contains(&k.as_str()) && x.is_object() {
+                    let mut list: Vec<Value> = x.as_object().unwrap().values().cloned().collect();
+                    let amount = |e: &Value| e.get("timeListening").unwrap_or(e).as_f64().unwrap_or(0.0);
+                    list.sort_by(|a, b| amount(a).total_cmp(&amount(b)));
+                    *x = Value::Array(list);
+                } else if k == "contentUrl" {
+                    // `/api/items/<item>/file/<ino>`: the recording's item id and file numbers are not the test's.
+                    if let Some(t) = x.as_str() {
+                        let parts: Vec<&str> = t.split('/').collect();
+                        *x = json!(parts
+                            .iter()
+                            .enumerate()
+                            .map(|(i, p)| if i == 3 || i == 5 { "*" } else { p })
+                            .collect::<Vec<_>>()
+                            .join("/"));
+                    }
+                } else {
+                    by_amount(x);
+                }
+            }
+        }
+        Value::Array(a) => a.iter_mut().for_each(by_amount),
+        _ => {}
+    }
+}
+
+#[tokio::test]
+async fn playback_sessions_answer_like_the_original() {
+    let (app, _st, token, mut ctx) = set_up_recorded("pb-sessions").await;
+    let requests: Vec<Value> =
+        serde_json::from_str(&std::fs::read_to_string(parity::dir("abs").join("../../abs/requests.json")).unwrap()).unwrap();
+    let names: Vec<String> = requests.iter().map(|r| r["name"].as_str().unwrap().to_string()).collect();
+    let (from, to) = (names.iter().position(|n| n == "play").unwrap(), names.iter().position(|n| n == "pb_play_episode_of_book").unwrap());
+    let mut m = Matcher::default();
+    m.volatile.extend(["date", "dayOfWeek", "ipAddress"].map(String::from));
+    for name in &names[from..=to] {
+        // A request the recorder skipped (it needed an answer that didn't come) has no recording.
+        if !parity::dir("abs").join(format!("{name}.json")).exists() {
+            continue;
+        }
+        let mut fx = fixture("abs", name);
+        let path = fill_value(&fx.request["path"], &ctx).as_str().unwrap().to_string();
+        let method = fx.request["method"].as_str().unwrap_or("GET").to_string();
+        let body = fx.request.get("body").filter(|b| !b.is_null()).map(|b| fill_value(b, &ctx));
+        let mut b = Request::builder()
+            .method(method.as_str())
+            .uri(&path)
+            .header(header::AUTHORIZATION, format!("Bearer {token}"))
+            .header("x-forwarded-for", "172.17.0.1");
+        if let Some(Value::Object(h)) = fx.request.get("headers") {
+            for (k, v) in h {
+                b = b.header(k.as_str(), v.as_str().unwrap());
+            }
+        }
+        let req = match body {
+            Some(v) => b.header(header::CONTENT_TYPE, "application/json").body(Body::from(v.to_string())).unwrap(),
+            None => b.body(Body::empty()).unwrap(),
+        };
+        let r = app.clone().oneshot(req).await.unwrap();
+        let status = r.status().as_u16();
+        let ctype =
+            r.headers().get(header::CONTENT_TYPE).and_then(|v| v.to_str().ok()).unwrap_or_default().split(';').next().unwrap().to_string();
+        let bytes = axum::body::to_bytes(r.into_body(), 1 << 24).await.unwrap();
+        let mut answer = serde_json::from_slice(&bytes).unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into()));
+        for (key, from) in [("session", "play"), ("session2", "pb_play_firefox"), ("session3", "pb_play_chrome"), ("userid", "pb_me")] {
+            if let Some(id) = answer["id"].as_str().filter(|_| name == from) {
+                ctx.insert(key.into(), id.to_string());
+            }
+        }
+        if name == "pb_me" {
+            continue;
+        }
+        assert_eq!(ctype, fx.content_type, "{name}: content type");
+        by_amount(&mut answer);
+        by_amount(&mut fx.body);
+        assert_like_with(&mut m, status, &answer, &fx);
+    }
+}

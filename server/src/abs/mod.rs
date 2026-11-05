@@ -13,7 +13,9 @@ pub mod html;
 pub mod items;
 pub mod library;
 pub mod models;
+pub mod playback;
 pub mod progress;
+pub mod sessions;
 pub mod settings;
 pub mod socket;
 
@@ -154,6 +156,7 @@ pub fn router() -> Router<AppState> {
         .merge(auth::routes::router())
         .merge(progress::router())
         .merge(bookmarks::router())
+        .merge(sessions::router())
         .merge(library::router())
         .merge(items::router())
 }
