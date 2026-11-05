@@ -114,6 +114,15 @@ async fn replay(app: &Router, token: &str, ctx: &HashMap<String, String>, m: &mu
             }
         }
     }
+    // Without a sort the original returns rows in whatever order SQLite's planner reads them, which changes with
+    // the random ids of each recording. A whole unsorted page is compared by content, in folder order.
+    if !path.contains("sort=") && fx.body["limit"].as_i64() == Some(0) {
+        for v in [&mut body, &mut fx.body] {
+            if let Some(Value::Array(list)) = v.pointer_mut("/results") {
+                list.sort_by(|a, b| a["relPath"].as_str().cmp(&b["relPath"].as_str()));
+            }
+        }
+    }
     assert_like_with(m, status, &body, &fx);
 }
 

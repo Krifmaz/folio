@@ -5,7 +5,7 @@
 //! The original builds its queries with Sequelize; here the same SQL is written out against the same tables, so
 //! SQLite orders and counts the rows the same way.
 
-use super::util::{decode_filter, natural_cmp, title_ignore_prefix, Sorting};
+use super::util::{decode_filter, natural_cmp, Sorting};
 use crate::abs::models::book::{self, BookFull};
 use crate::abs::models::user;
 use crate::abs::models::{date_text, from_row, now_ms, LibraryItem, User};
@@ -556,9 +556,4 @@ pub fn book_library_stats(db: &dyn Db, library_id: &str) -> Result<Value> {
         "numAudioFiles": get("numAudioFiles"),
         "totalItems": get("totalItems"),
     }))
-}
-
-/// The title a page sorts a collapsed series under.
-pub fn series_sort_title(name: &str, sorting: &Sorting) -> String {
-    title_ignore_prefix(name, sorting)
 }
