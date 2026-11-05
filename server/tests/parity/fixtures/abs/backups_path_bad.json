@@ -1,0 +1,12 @@
+{
+ "body": "Invalid backup path \"/no/such/parent/backups\"",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "path": "/no/such/parent/backups"
+  },
+  "method": "PATCH",
+  "path": "/api/backups/path"
+ },
+ "status": 400
+}

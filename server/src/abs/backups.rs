@@ -681,14 +681,22 @@ async fn update_path(State(st): State<AppState>, me: AbsUser, headers: HeaderMap
     send_status(StatusCode::OK)
 }
 
+/// Express's page for an error thrown in a route.
+const EXPRESS_ERROR_PAGE: &str = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Internal Server Error</pre>\n</body>\n</html>\n";
+
 /// `POST /api/backups/upload`: adds a backup file sent from the browser (`uploadBackup`).
 async fn upload(State(st): State<AppState>, me: AbsUser, multipart: Option<Multipart>) -> Response {
     if let Err(r) = guard(&st, &me.user, None) {
         return *r;
     }
     let mut file: Option<(String, Bytes)> = None;
+    let mut any_file = false;
     if let Some(mut mp) = multipart {
         while let Ok(Some(field)) = mp.next_field().await {
+            if field.file_name().is_none() {
+                continue;
+            }
+            any_file = true;
             if field.name() == Some("file") && file.is_none() {
                 let name = field.file_name().unwrap_or_default().to_string();
                 match field.bytes().await {
@@ -697,6 +705,11 @@ async fn upload(State(st): State<AppState>, me: AbsUser, multipart: Option<Multi
                 }
             }
         }
+    }
+    if !any_file {
+        // the original reads `req.files.file` without files, which Express answers with its error page
+        tracing::error!("The upload has no files");
+        return send_text(StatusCode::INTERNAL_SERVER_ERROR, EXPRESS_ERROR_PAGE);
     }
     let Some((name, data)) = file else {
         tracing::error!("The uploaded backup is missing");
