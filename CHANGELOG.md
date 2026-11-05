@@ -6,7 +6,7 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
-- The mobile app's stats page is checked against Folio's listening stats (PARITY M0010).
+- The mobile app's stats page and home shelves are checked against Folio (PARITY M0002, M0006, M0010, M0017).
 - The home page shelves of a book library (`/api/libraries/:id/personalized`), as Audiobookshelf's apps show them:
   Continue Listening and Reading, Continue Series, Recently Added, Recent Series, Discover, Listen and Read Again,
   and Newest Authors, each checked against the original's answer on the same data.
