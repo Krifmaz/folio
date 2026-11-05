@@ -7,6 +7,9 @@
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked
   against the original's own on the same data. The recording is also pushed to a side branch `parity/<branch>`.
+- Listening and reading progress and bookmarks work like Audiobookshelf's (`/api/me/progress`, `/api/me/bookmarks`,
+  `/api/me/item/:id/bookmark`): set from any app, finished near the end, synced from phones with their own times,
+  hidden from Continue Listening, and told to your other apps as they change.
 - The web app looks like Folio: the Encore colours and font, the name Folio and its book icon, and links to
   Folio's own repository instead of the upstream project's; its fork changes are listed in `abs-web/FOLIO.md`.
 - The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's

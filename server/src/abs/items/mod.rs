@@ -88,7 +88,7 @@ async fn find_one(
                         }
                         mp.extra_data.as_ref().and_then(|x| x.get("libraryItemId")).and_then(Value::as_str) == item.id.as_deref()
                     })
-                    .map(|mp| crate::abs::library::util::js_numbers(media_progress::old_json(&mp)))
+                    .map(|mp| media_progress::old_json(&mp))
             });
             match progress {
                 Ok(p) => {

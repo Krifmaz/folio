@@ -123,20 +123,20 @@ repository at the pinned commit.
 | A0083 | endpoint | `GET /api/me` (MeController.getCurrentUser) | `server/routers/ApiRouter.js#L173` | P2 users | done | `server/tests/abs_auth.rs::sign_in_refresh_and_sign_out_answer_like_the_original` |
 | A0084 | endpoint | `GET /api/me/sessions` (MeController.getSessions) | `server/routers/ApiRouter.js#L174` | P2 users | todo |  |
 | A0085 | endpoint | `DELETE /api/me/sessions/:id` (MeController.deleteSession) | `server/routers/ApiRouter.js#L175` | P2 users | todo |  |
-| A0086 | endpoint | `GET /api/me/progress` (MeController.getAllMediaProgress) | `server/routers/ApiRouter.js#L176` | P3 playback | todo |  |
-| A0087 | endpoint | `GET /api/me/bookmarks` (MeController.getAllBookmarks) | `server/routers/ApiRouter.js#L177` | P3 playback | todo |  |
-| A0088 | endpoint | `GET /api/me/bookmarks/:libraryItemId` (MeController.getBookmarksForLibraryItem) | `server/routers/ApiRouter.js#L178` | P3 playback | todo |  |
+| A0086 | endpoint | `GET /api/me/progress` (MeController.getAllMediaProgress) | `server/routers/ApiRouter.js#L176` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_follows_the_originals_rules` |
+| A0087 | endpoint | `GET /api/me/bookmarks` (MeController.getAllBookmarks) | `server/routers/ApiRouter.js#L177` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
+| A0088 | endpoint | `GET /api/me/bookmarks/:libraryItemId` (MeController.getBookmarksForLibraryItem) | `server/routers/ApiRouter.js#L178` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
 | A0089 | endpoint | `GET /api/me/listening-sessions` (MeController.getListeningSessions) | `server/routers/ApiRouter.js#L179` | P3 playback | todo |  |
 | A0090 | endpoint | `GET /api/me/item/listening-sessions/:libraryItemId/:episodeId?` (MeController.getItemListeningSessions) | `server/routers/ApiRouter.js#L180` | P3 playback | todo |  |
 | A0091 | endpoint | `GET /api/me/listening-stats` (MeController.getListeningStats) | `server/routers/ApiRouter.js#L181` | P3 playback | todo |  |
-| A0092 | endpoint | `GET /api/me/progress/:id/remove-from-continue-listening` (MeController.removeItemFromContinueListening) | `server/routers/ApiRouter.js#L182` | P3 playback | todo |  |
-| A0093 | endpoint | `GET /api/me/progress/:id/:episodeId?` (MeController.getMediaProgress) | `server/routers/ApiRouter.js#L183` | P3 playback | todo |  |
-| A0094 | endpoint | `PATCH /api/me/progress/batch/update` (MeController.batchUpdateMediaProgress) | `server/routers/ApiRouter.js#L184` | P3 playback | todo |  |
-| A0095 | endpoint | `PATCH /api/me/progress/:libraryItemId/:episodeId?` (MeController.createUpdateMediaProgress) | `server/routers/ApiRouter.js#L185` | P3 playback | todo |  |
-| A0096 | endpoint | `DELETE /api/me/progress/:id` (MeController.removeMediaProgress) | `server/routers/ApiRouter.js#L186` | P3 playback | todo |  |
-| A0097 | endpoint | `POST /api/me/item/:id/bookmark` (MeController.createBookmark) | `server/routers/ApiRouter.js#L187` | P3 playback | todo |  |
-| A0098 | endpoint | `PATCH /api/me/item/:id/bookmark` (MeController.updateBookmark) | `server/routers/ApiRouter.js#L188` | P3 playback | todo |  |
-| A0099 | endpoint | `DELETE /api/me/item/:id/bookmark/:time` (MeController.removeBookmark) | `server/routers/ApiRouter.js#L189` | P3 playback | todo |  |
+| A0092 | endpoint | `GET /api/me/progress/:id/remove-from-continue-listening` (MeController.removeItemFromContinueListening) | `server/routers/ApiRouter.js#L182` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_follows_the_originals_rules` |
+| A0093 | endpoint | `GET /api/me/progress/:id/:episodeId?` (MeController.getMediaProgress) | `server/routers/ApiRouter.js#L183` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_and_bookmarks_answer_like_the_original` |
+| A0094 | endpoint | `PATCH /api/me/progress/batch/update` (MeController.batchUpdateMediaProgress) | `server/routers/ApiRouter.js#L184` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_follows_the_originals_rules` |
+| A0095 | endpoint | `PATCH /api/me/progress/:libraryItemId/:episodeId?` (MeController.createUpdateMediaProgress) | `server/routers/ApiRouter.js#L185` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_and_bookmarks_answer_like_the_original` |
+| A0096 | endpoint | `DELETE /api/me/progress/:id` (MeController.removeMediaProgress) | `server/routers/ApiRouter.js#L186` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_follows_the_originals_rules` |
+| A0097 | endpoint | `POST /api/me/item/:id/bookmark` (MeController.createBookmark) | `server/routers/ApiRouter.js#L187` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_and_bookmarks_answer_like_the_original` |
+| A0098 | endpoint | `PATCH /api/me/item/:id/bookmark` (MeController.updateBookmark) | `server/routers/ApiRouter.js#L188` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
+| A0099 | endpoint | `DELETE /api/me/item/:id/bookmark/:time` (MeController.removeBookmark) | `server/routers/ApiRouter.js#L189` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
 | A0100 | endpoint | `PATCH /api/me/password` (MeController.updatePassword) | `server/routers/ApiRouter.js#L190` | P2 users | todo |  |
 | A0101 | endpoint | `GET /api/me/items-in-progress` (MeController.getAllLibraryItemsInProgress) | `server/routers/ApiRouter.js#L191` | P2 users | todo |  |
 | A0102 | endpoint | `GET /api/me/series/:id/remove-from-continue-listening` (MeController.removeSeriesFromContinueListening) | `server/routers/ApiRouter.js#L192` | P2 users | todo |  |
