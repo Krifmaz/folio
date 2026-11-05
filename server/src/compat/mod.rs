@@ -1,9 +1,8 @@
 //! Other apps' protocols, so the apps people already use work with Folio: an OPDS catalogue for e-readers
-//! ([`opds`]), a KOReader sync server ([`koreader`]), an Audiobookshelf-compatible API ([`abs`]) and Kobo sync
-//! ([`kobo`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
-//! how to point each app at Folio. `GET /api/apps` gives the web app's Other apps page the addresses.
+//! ([`opds`]), a KOReader sync server ([`koreader`]) and Kobo sync ([`kobo`]); the Audiobookshelf apps use the
+//! port of Audiobookshelf itself (`crate::abs`). Each protocol reads the library through [`shelf`] as
+//! [`model::Item`]s. See docs/COMPAT.md for how to point each app at Folio. `GET /api/apps` gives the web app's Other apps page the addresses.
 
-pub mod abs;
 pub mod epub;
 pub mod kobo;
 pub mod koreader;
@@ -86,12 +85,7 @@ pub fn migrate(db: &SqliteDb) -> anyhow::Result<()> {
 
 /// This part's routes.
 pub fn router() -> Router<AppState> {
-    Router::new()
-        .route("/api/apps", axum::routing::get(apps))
-        .merge(opds::router())
-        .merge(koreader::router())
-        .merge(abs::router())
-        .merge(kobo::router())
+    Router::new().route("/api/apps", axum::routing::get(apps)).merge(opds::router()).merge(koreader::router()).merge(kobo::router())
 }
 
 /// `GET /api/apps`: the addresses to give each outside app, and what the account has set up for them (the

@@ -1,0 +1,18 @@
+{
+ "body": {
+  "include": "",
+  "limit": 0,
+  "minified": false,
+  "page": 0,
+  "results": [],
+  "sortDesc": false,
+  "total": 0
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/collections"
+ },
+ "status": 200
+}

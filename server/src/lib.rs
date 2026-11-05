@@ -16,6 +16,7 @@
 //!
 //! Everything the app adds of its own goes into [`app`] next to them.
 
+pub mod abs;
 pub mod auth;
 pub mod checks;
 pub mod compat;
@@ -93,6 +94,12 @@ pub struct AppState {
     pub limits: Arc<auth::Limits>,
     /// The HTTP client for the metadata sources (and later Lantern).
     pub http: reqwest::Client,
+    /// The Audiobookshelf port's database (`<data>/absdatabase.sqlite`, the original's schema).
+    pub abs: SqliteDb,
+    /// The Audiobookshelf port's connected socket clients.
+    pub sockets: abs::socket::Sockets,
+    /// The Audiobookshelf port's settings, tokens and sign-in limit.
+    pub abs_server: abs::Server,
 }
 
 impl AppState {
@@ -122,6 +129,9 @@ impl AppState {
         playback::migrate(&db)?;
         compat::migrate(&db)?;
         migration::migrate(&db)?;
+        let abs = abs::open(data)?;
+        let abs_server =
+            abs::Server::load(&abs, data).map_err(|e| anyhow::anyhow!("The Audiobookshelf settings can't be read: {}", e.detail))?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -142,6 +152,9 @@ impl AppState {
             notices,
             limits: Arc::new(auth::Limits::default()),
             http: metadata::http_client(),
+            abs,
+            sockets: abs::socket::Sockets::default(),
+            abs_server,
         })
     }
 
@@ -229,6 +242,7 @@ pub fn app(st: AppState) -> Router {
     let spa = tower_http::set_header::SetResponseHeader::if_not_present(spa, header::VARY, HeaderValue::from_static("accept-encoding"));
     let page = spa.clone();
     kit_server_notices::spawn_rechecks(st.clone());
+    let sockets = abs::socket::layer(st.clone());
     Router::new()
         .merge(kit_server_health::router(kit_server_health::Health::new(VERSION, web)))
         .merge(kit_server_changelog::router())
@@ -247,9 +261,11 @@ pub fn app(st: AppState) -> Router {
         .merge(playback::router())
         .merge(compat::router())
         .merge(migration::router())
+        .merge(abs::router())
         .method_not_allowed_fallback(move |req: axum::extract::Request| page_or_405(page.clone(), req))
         .with_state(st)
         .fallback_service(spa)
+        .layer(sockets)
         .layer(axum::middleware::from_fn(security_headers))
         .layer(tower_http::compression::CompressionLayer::new())
 }

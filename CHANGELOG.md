@@ -5,6 +5,12 @@
 ### Added
 - The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's
   own pages (Wanted, Downloads, Review, Move in) move to `/folio/` and are linked from its sidebar.
+- Sign-in works like Audiobookshelf's: setting up the server, signing in with a name and password (the mobile app
+  gets its tokens in the answer, the web app a cookie), refreshing and signing out, old tokens, API keys, the limit
+  on sign-in attempts, and the apps' live connection. Each answer is checked against the original's own.
+- The base of the Audiobookshelf port: its database with the original's exact schema, a row type for each of its 26
+  tables, its socket.io (apps connect, ping, and are told when a token is refused), and recordings of 65 of the
+  original's answers that parity tests compare Folio with.
 - Audiobookshelf's web app (v2.37.2) and mobile app (v0.14.2-beta) are imported as light forks in `abs-web/` and
   `abs-app/`, unchanged for now; the next steps retheme them and point them at Folio.
 - The port plan: Folio now ports Audiobookshelf and Readarr instead of reimagining them. `docs/PARITY.md` lists
@@ -95,3 +101,7 @@
 - GPL-3.0 license and credits for the projects Folio learns from; the goal in `docs/GOALS.md`; `docs/DECISIONS.md`.
 - CI and releases through the kit's shared workflows (server, web app, Docker image, Android APK); merged
   branches are deleted by `cleanup-branches`.
+
+### Removed
+- The first Audiobookshelf compatibility layer (it answered as server 2.25 from Folio's own library): the port of
+  Audiobookshelf answers the apps now, with Audiobookshelf's own users.
