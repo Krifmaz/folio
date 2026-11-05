@@ -1,0 +1,30 @@
+name: abs-app
+
+# The mobile app (abs-app/: the Audiobookshelf app, forked for Folio) built for Android on every pull request that
+# changes it: the Nuxt front end generated and copied into the Capacitor project, then the APK and the unit tests,
+# through the kit's kit-android.yml. Track B (mobile) owns this file (docs/TRACKS.md).
+on:
+  pull_request:
+    paths:
+      - "abs-app/**"
+      - ".github/workflows/abs-app.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: abs-app-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    uses: Krifmaz/kit/.github/workflows/kit-android.yml@v0.9.1
+    with:
+      app-name: Folio-mobile
+      project-dir: abs-app/android
+      web-dir: abs-app
+      web-build: npx nuxt generate && npx cap sync android
+      # the upstream build asks for a Java 17 toolchain
+      java-version: "17"

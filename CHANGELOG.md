@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Added
+- The mobile app (`abs-app/`, the Audiobookshelf app fork) is built for Android in CI on every change to it;
+  its fork changes are listed in `abs-app/FOLIO.md`.
 - The base of the Audiobookshelf port: its database with the original's exact schema, a row type for each of its 26
   tables, its socket.io (apps connect, ping, and are told when a token is refused), and recordings of 65 of the
   original's answers that parity tests compare Folio with.
