@@ -6,8 +6,8 @@
 //! `api_endpoint=https://<folio>/kobo/<token>`, with the token from Folio's Other apps page.
 //!
 //! ```text
-//! GET    /kobo/token                                (signed in) {token, url}: the Kobo sync address, made on first ask
-//! POST   /kobo/token                                (signed in) a new address; the old one stops working
+//! GET    /api/apps/kobo                                (signed in) {token, url}: the Kobo sync address, made on first ask
+//! POST   /api/apps/kobo                                (signed in) a new address; the old one stops working
 //! GET    /kobo/{token}/v1/initialization            where the Kobo finds everything
 //! POST   /kobo/{token}/v1/auth/device               the Kobo's own sign-in (any; the token is the key)
 //! GET    /kobo/{token}/v1/library/sync              what's new or changed since the last sync (x-kobo-synctoken)
@@ -39,7 +39,7 @@ pub const SYNC_PAGE: usize = 100;
 /// The routes.
 pub fn router() -> Router<AppState> {
     Router::new()
-        .route("/kobo/token", get(get_token).post(new_token))
+        .route("/api/apps/kobo", get(get_token).post(new_token))
         .route("/kobo/{token}/v1/initialization", get(initialization))
         .route("/kobo/{token}/v1/auth/device", post(auth_device))
         .route("/kobo/{token}/v1/library/sync", get(sync))
@@ -70,7 +70,7 @@ fn owner(st: &AppState, token: &str) -> Result<Who> {
 }
 
 /// Folio's address as the Kobo reached it (`https://folio.example`).
-fn origin(headers: &HeaderMap) -> String {
+pub fn origin(headers: &HeaderMap) -> String {
     let h = |n: &str| headers.get(n).and_then(|v| v.to_str().ok()).map(str::to_string);
     let host = h("x-forwarded-host").or_else(|| h("host")).unwrap_or_else(|| "localhost".into());
     let proto = h("x-forwarded-proto").unwrap_or_else(|| "http".into());
@@ -82,7 +82,7 @@ fn base(headers: &HeaderMap, token: &str) -> String {
     format!("{}/kobo/{token}", origin(headers))
 }
 
-/// `GET /kobo/token`: the account's Kobo sync address, made the first time.
+/// `GET /api/apps/kobo`: the account's Kobo sync address, made the first time.
 async fn get_token(State(st): State<AppState>, SignedIn(me): SignedIn, headers: HeaderMap) -> Result<Json<Value>> {
     let kept = st.db.one("SELECT token FROM compat_kobo_tokens WHERE user_id=?", p![me.id])?;
     let token = match kept {
@@ -92,7 +92,7 @@ async fn get_token(State(st): State<AppState>, SignedIn(me): SignedIn, headers: 
     Ok(Json(json!({ "token": token, "url": base(&headers, &token) })))
 }
 
-/// `POST /kobo/token`: a new Kobo sync address; the old one stops working.
+/// `POST /api/apps/kobo`: a new Kobo sync address; the old one stops working.
 async fn new_token(State(st): State<AppState>, SignedIn(me): SignedIn, headers: HeaderMap) -> Result<Json<Value>> {
     let token = make_token(&st, me.id)?;
     Ok(Json(json!({ "token": token, "url": base(&headers, &token) })))

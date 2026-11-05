@@ -10,8 +10,10 @@
   reader shows the book in pages in the app's colours, with its contents, text size, bookmarks and page turns by
   buttons, keys or a tap on the page's edge; the book's own scripts never run. Both keep your place on the server
   (every device carries on from it) and keep it in the browser until the server can be reached again.
+- Other apps page (in the sidebar): the addresses for OPDS, Audiobookshelf apps, KOReader and Kobo, each with
+  Copy, the KOReader sync password and the Kobo sync address.
 - Kobo sync: a Kobo e-reader syncs Folio's ebooks over Wi-Fi with covers, series and places kept in step
-  with Folio. Its address is on Settings → Other apps.
+  with Folio. Its address is on the Other apps page.
 - Audiobookshelf apps work with Folio (the official app, ShelfPlayer, Plappa …): sign in with your Folio
   account, browse Audiobooks and Ebooks, play with chapters, and keep your place and bookmarks in step with Folio,
   offline listening included.

@@ -7,9 +7,9 @@
 //! which Folio's own password can't be checked against).
 //!
 //! ```text
-//! PUT    /koreader/key                {password}: (signed in to Folio) set the KOReader sync password
-//! GET    /koreader/key                {set}: whether one is set
-//! DELETE /koreader/key                forget it (KOReader can't sync until a new one is set)
+//! PUT    /api/apps/koreader                {password}: (signed in to Folio) set the KOReader sync password
+//! GET    /api/apps/koreader                {set}: whether one is set
+//! DELETE /api/apps/koreader                forget it (KOReader can't sync until a new one is set)
 //! POST   /koreader/users/create       KOReader's Register: refused, with where to set the password instead
 //! GET    /koreader/users/auth         x-auth-user, x-auth-key → {authorized: "OK"} or 401
 //! PUT    /koreader/syncs/progress     {document, progress, percentage, device, device_id} → {document, timestamp}
@@ -39,7 +39,7 @@ use std::io::{Read, Seek, SeekFrom};
 /// The routes KOReader and Folio's web app use.
 pub fn router() -> Router<AppState> {
     Router::new()
-        .route("/koreader/key", get(key_state).put(set_key).delete(forget_key))
+        .route("/api/apps/koreader", get(key_state).put(set_key).delete(forget_key))
         .route("/koreader/users/create", post(register))
         .route("/koreader/users/auth", get(authorize))
         .route("/koreader/syncs/progress", put(push))
@@ -59,20 +59,20 @@ fn key_hash(md5_hex: &str) -> String {
     hex::encode(Sha256::digest(md5_hex.trim().to_lowercase()))
 }
 
-/// `PUT /koreader/key` body.
+/// `PUT /api/apps/koreader` body.
 #[derive(Debug, Deserialize)]
 pub struct NewKey {
     /// the KOReader sync password, as the person will type it in KOReader
     pub password: String,
 }
 
-/// `GET /koreader/key`.
+/// `GET /api/apps/koreader`.
 async fn key_state(State(st): State<AppState>, SignedIn(me): SignedIn) -> Result<Json<Value>> {
     let set = st.db.one("SELECT user_id FROM compat_koreader_keys WHERE user_id=?", p![me.id])?.is_some();
     Ok(Json(json!({ "set": set, "username": me.username })))
 }
 
-/// `PUT /koreader/key`: set the KOReader sync password (at least 8 characters).
+/// `PUT /api/apps/koreader`: set the KOReader sync password (at least 8 characters).
 async fn set_key(State(st): State<AppState>, SignedIn(me): SignedIn, Json(b): Json<NewKey>) -> Result<Json<Value>> {
     if b.password.chars().count() < 8 {
         return Err(err(400, "Use at least 8 characters for the KOReader sync password."));
@@ -86,7 +86,7 @@ async fn set_key(State(st): State<AppState>, SignedIn(me): SignedIn, Json(b): Js
     Ok(Json(json!({ "set": true, "username": me.username })))
 }
 
-/// `DELETE /koreader/key`.
+/// `DELETE /api/apps/koreader`.
 async fn forget_key(State(st): State<AppState>, SignedIn(me): SignedIn) -> Result<Json<Value>> {
     st.db.execute("DELETE FROM compat_koreader_keys WHERE user_id=?", p![me.id])?;
     Ok(Json(json!({ "set": false, "username": me.username })))
@@ -98,7 +98,7 @@ async fn register() -> Response {
     refuse(
         402,
         2002,
-        "Folio makes accounts itself. Sign in to Folio, set a KOReader sync password under Other apps, then use Login here with your Folio username.",
+        "Folio makes accounts itself. Sign in to Folio, set a KOReader sync password on the Other apps page, then use Login here with your Folio username.",
     )
 }
 
@@ -133,7 +133,7 @@ fn unauthorized() -> Response {
     refuse(
         401,
         2001,
-        "The username or KOReader sync password is wrong. Check them in KOReader, or set the password again in Folio under Other apps.",
+        "The username or KOReader sync password is wrong. Check them in KOReader, or set the password again in Folio on the Other apps page.",
     )
 }
 

@@ -32,9 +32,9 @@ async fn koreader_signs_in_with_the_sync_password_set_in_folio() {
     assert_eq!(s, StatusCode::UNAUTHORIZED);
     assert_eq!(v["code"], 2001);
     assert!(v["detail"].as_str().unwrap().contains("Other apps"));
-    let (s, v) = json_of(&lib, common::admin("PUT", "/koreader/key", Some(json!({ "password": "short" })))).await;
+    let (s, v) = json_of(&lib, common::admin("PUT", "/api/apps/koreader", Some(json!({ "password": "short" })))).await;
     assert_eq!(s, StatusCode::BAD_REQUEST, "{v}");
-    let (s, v) = json_of(&lib, common::admin("PUT", "/koreader/key", Some(json!({ "password": "kosync pass" })))).await;
+    let (s, v) = json_of(&lib, common::admin("PUT", "/api/apps/koreader", Some(json!({ "password": "kosync pass" })))).await;
     assert_eq!((s, v["set"].as_bool()), (StatusCode::OK, Some(true)), "{v}");
     let (s, v) = json_of(&lib, ko("GET", "/koreader/users/auth", "kosync pass", None)).await;
     assert_eq!((s, v["authorized"].as_str()), (StatusCode::OK, Some("OK")), "{v}");
@@ -47,7 +47,7 @@ async fn koreader_signs_in_with_the_sync_password_set_in_folio() {
     let (_, v) = json_of(&lib, req("GET", "/koreader/healthcheck", &[], None)).await;
     assert_eq!(v["state"], "OK");
     // forgetting the password stops KOReader
-    json_of(&lib, common::admin("DELETE", "/koreader/key", None)).await;
+    json_of(&lib, common::admin("DELETE", "/api/apps/koreader", None)).await;
     let (s, _) = json_of(&lib, ko("GET", "/koreader/users/auth", "kosync pass", None)).await;
     assert_eq!(s, StatusCode::UNAUTHORIZED);
 }
@@ -55,7 +55,7 @@ async fn koreader_signs_in_with_the_sync_password_set_in_folio() {
 #[tokio::test]
 async fn a_place_from_koreader_becomes_the_books_place_and_back() {
     let lib = library("ko-sync", Default::default()).await;
-    json_of(&lib, common::admin("PUT", "/koreader/key", Some(json!({ "password": "kosync pass" })))).await;
+    json_of(&lib, common::admin("PUT", "/api/apps/koreader", Some(json!({ "password": "kosync pass" })))).await;
     let path = lib.dir.join("Andy Weir/Mars/01 - The Martian (2014)/The Martian.epub");
     let doc = server::compat::koreader::partial_md5(&path).unwrap();
 
@@ -96,7 +96,7 @@ async fn a_place_from_koreader_becomes_the_books_place_and_back() {
 #[tokio::test]
 async fn books_outside_the_library_still_sync_between_koreaders() {
     let lib = library("ko-other", Default::default()).await;
-    json_of(&lib, common::admin("PUT", "/koreader/key", Some(json!({ "password": "kosync pass" })))).await;
+    json_of(&lib, common::admin("PUT", "/api/apps/koreader", Some(json!({ "password": "kosync pass" })))).await;
     let doc = md5(b"some other book.epub");
     let place = json!({ "document": doc, "progress": "17", "percentage": 0.1, "device": "Phone", "device_id": "P" });
     let (s, _) = json_of(&lib, ko("PUT", "/koreader/syncs/progress", "kosync pass", Some(place))).await;

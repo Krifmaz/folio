@@ -15,7 +15,7 @@ async fn call(lib: &compat_support::Library, r: axum::http::Request<axum::body::
 
 /// The account's Kobo token.
 async fn token(lib: &compat_support::Library) -> String {
-    let (s, v) = common::call(&lib.app, common::admin("GET", "/kobo/token", None)).await;
+    let (s, v) = common::call(&lib.app, common::admin("GET", "/api/apps/kobo", None)).await;
     assert_eq!(s, StatusCode::OK, "{v}");
     v["token"].as_str().unwrap().to_string()
 }
@@ -32,7 +32,7 @@ async fn a_kobo_starts_with_folio_s_addresses() {
     let lib = library("kobo-init", Default::default()).await;
     let t = token(&lib).await;
     assert!(t.chars().all(|c| c.is_ascii_alphanumeric()) && t.len() >= 20, "{t}");
-    let (_, v) = common::call(&lib.app, common::admin("GET", "/kobo/token", None)).await;
+    let (_, v) = common::call(&lib.app, common::admin("GET", "/api/apps/kobo", None)).await;
     assert_eq!(v["token"], t.as_str(), "the address stays until a new one is asked for");
     let (s, h, v) = call(&lib, kobo("GET", &format!("/kobo/{t}/v1/initialization"), &[], None)).await;
     assert_eq!(s, StatusCode::OK);
@@ -49,7 +49,7 @@ async fn a_kobo_starts_with_folio_s_addresses() {
     let (s, _, v) = call(&lib, kobo("GET", "/kobo/wrongtoken/v1/initialization", &[], None)).await;
     assert_eq!(s, StatusCode::UNAUTHORIZED);
     assert!(v["detail"].as_str().unwrap().contains("Other apps"));
-    let (_, v) = common::call(&lib.app, common::admin("POST", "/kobo/token", None)).await;
+    let (_, v) = common::call(&lib.app, common::admin("POST", "/api/apps/kobo", None)).await;
     assert_ne!(v["token"], t.as_str());
     let (s, _, _) = call(&lib, kobo("GET", &format!("/kobo/{t}/v1/initialization"), &[], None)).await;
     assert_eq!(s, StatusCode::UNAUTHORIZED);
@@ -149,4 +149,16 @@ async fn big_libraries_sync_a_hundred_at_a_time() {
     let (_, h, v) = call(&lib, kobo("GET", &format!("/kobo/{t}/v1/library/sync"), &[("x-kobo-synctoken", &mark)], None)).await;
     assert_eq!(v.as_array().unwrap().len(), 21);
     assert!(h.get("x-kobo-sync").is_none());
+}
+
+#[tokio::test]
+async fn the_other_apps_page_gets_every_address() {
+    let lib = library("kobo-apps", Default::default()).await;
+    let (s, v) = common::call(&lib.app, common::admin("GET", "/api/apps", None)).await;
+    assert_eq!(s, StatusCode::OK, "{v}");
+    assert_eq!((v["kobo"].clone(), v["koreader_password_set"].as_bool()), (Value::Null, Some(false)));
+    assert!(v["opds"].as_str().unwrap().ends_with("/opds"));
+    let t = token(&lib).await;
+    let (_, v) = common::call(&lib.app, common::admin("GET", "/api/apps", None)).await;
+    assert!(v["kobo"].as_str().unwrap().ends_with(&format!("/kobo/{t}")));
 }

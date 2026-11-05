@@ -12,10 +12,12 @@
 //! | `#/downloads` | every grab and how far it is |
 //! | `#/review` | downloads Folio isn't sure of: requested next to arrived, Accept, Reject, Search again |
 //! | `#/bug-reports` | the account's bug reports and the New report sheet |
+//! | `#/apps` | Other apps: addresses for OPDS, Audiobookshelf apps, KOReader and Kobo, the KOReader password |
 //! | `#/settings?s=<page>` | the server settings form from the server's schema, Diagnostics and What's new |
 //!
 //! The app's own pages are in [`library`], one component each, with a link in [`Shell`].
 
+mod compat;
 mod downloads;
 mod library;
 mod offline_media;
@@ -195,6 +197,7 @@ fn Shell(me: Value) -> impl IntoView {
             "/review" => view! { <review::Review/> }.into_any(),
             "/play" => view! { <player::Player id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
             "/read" => view! { <reader::Reader id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
+            "/apps" => view! { <compat::OtherApps/> }.into_any(),
             _ => view! { <library::Library admin=admin/> }.into_any(),
         }
     };
@@ -211,6 +214,7 @@ fn Shell(me: Value) -> impl IntoView {
                     <NavLink href="/review" label="Review" route=route/>
                 </nav>
                 <nav class="nav nav-under">
+                    <NavLink href="/apps" label="Other apps" route=route/>
                     <NavLink href="/bug-reports" label="Bug reports" route=route/>
                 </nav>
                 <div class="sidebar-foot" style="margin-top:0">

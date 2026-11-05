@@ -1,7 +1,7 @@
 //! Other apps' protocols, so the apps people already use work with Folio: an OPDS catalogue for e-readers
 //! ([`opds`]), a KOReader sync server ([`koreader`]), an Audiobookshelf-compatible API ([`abs`]) and Kobo sync
 //! ([`kobo`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
-//! how to point each app at Folio.
+//! how to point each app at Folio. `GET /api/apps` gives the web app's Other apps page the addresses.
 
 pub mod abs;
 pub mod epub;
@@ -86,7 +86,34 @@ pub fn migrate(db: &SqliteDb) -> anyhow::Result<()> {
 
 /// This part's routes.
 pub fn router() -> Router<AppState> {
-    Router::new().merge(opds::router()).merge(koreader::router()).merge(abs::router()).merge(kobo::router())
+    Router::new()
+        .route("/api/apps", axum::routing::get(apps))
+        .merge(opds::router())
+        .merge(koreader::router())
+        .merge(abs::router())
+        .merge(kobo::router())
+}
+
+/// `GET /api/apps`: the addresses to give each outside app, and what the account has set up for them (the
+/// web app's Other apps page).
+async fn apps(
+    axum::extract::State(st): axum::extract::State<AppState>,
+    kit_server_core::SignedIn(me): kit_server_core::SignedIn,
+    headers: axum::http::HeaderMap,
+) -> Result<axum::Json<serde_json::Value>> {
+    use kit_server_core::{p, Db, RowExt};
+    let origin = kobo::origin(&headers);
+    let koreader = st.db.one("SELECT user_id FROM compat_koreader_keys WHERE user_id=?", p![me.id])?.is_some();
+    let kobo =
+        st.db.one("SELECT token FROM compat_kobo_tokens WHERE user_id=?", p![me.id])?.map(|r| format!("{origin}/kobo/{}", r.s("token")));
+    Ok(axum::Json(serde_json::json!({
+        "username": me.username,
+        "opds": format!("{origin}/opds"),
+        "audiobookshelf": origin,
+        "koreader": format!("{origin}/koreader"),
+        "koreader_password_set": koreader,
+        "kobo": kobo
+    })))
 }
 
 /// Now, in seconds since 1970.
