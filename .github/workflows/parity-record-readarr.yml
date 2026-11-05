@@ -4,7 +4,9 @@ name: parity-record-readarr
 # Runs Readarr's last image (0.4.19.2811, the final develop build pinned in UPSTREAM.lock), writes the test library
 # (server/tests/parity/readarr/seed.sql) into it, replays server/tests/parity/readarr/requests.json and uploads the
 # answers and the database schema as the `readarr-fixtures` artifact. Nothing is pushed; track D commits the
-# fixtures it needs.
+# fixtures it needs. Readarr's metadata server is gone and Goodreads changes, so the lookups are answered by a
+# stand-in for both (server/tests/parity/readarr/stub): Readarr reaches it as metadata.test and, over HTTPS with a
+# certificate made here, as www.goodreads.com.
 on:
   workflow_dispatch:
   pull_request:
@@ -21,14 +23,26 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Start the stand-in metadata server and Goodreads
+        run: |
+          openssl req -x509 -newkey rsa:2048 -nodes -days 1 -subj /CN=www.goodreads.com \
+            -keyout "$RUNNER_TEMP/key.pem" -out "$RUNNER_TEMP/cert.pem"
+          # Port 443 needs root; the stand-in only reads routes.json and writes its log.
+          sudo nohup python3 -I server/tests/parity/readarr/stub/stub.py server/tests/parity/readarr/stub/routes.json \
+            8788 443 "$RUNNER_TEMP/cert.pem" "$RUNNER_TEMP/key.pem" "$RUNNER_TEMP/stub.log" > "$RUNNER_TEMP/stub.out" 2>&1 &
+          for i in $(seq 30); do grep -q "stub serving" "$RUNNER_TEMP/stub.out" 2>/dev/null && break; sleep 1; done
+          cat "$RUNNER_TEMP/stub.out"
       - name: Start the original
         run: |
           mkdir -p "$RUNNER_TEMP/config" "$RUNNER_TEMP/books"
           docker run -d --name readarr -p 8787:8787 -e PUID="$(id -u)" -e PGID="$(id -g)" -e TZ=Etc/UTC \
+            --add-host www.goodreads.com:host-gateway --add-host metadata.test:host-gateway \
             -v "$RUNNER_TEMP/config:/config" -v "$RUNNER_TEMP/books:/books" \
             docker.io/linuxserver/readarr:nightly-0.4.19.2811-ls400
       - name: Record
-        run: python3 -I server/tests/parity/readarr/record.py http://127.0.0.1:8787 "$RUNNER_TEMP/out" "$RUNNER_TEMP/config" "$RUNNER_TEMP/books"
+        run: |
+          python3 -I server/tests/parity/readarr/record.py http://127.0.0.1:8787 "$RUNNER_TEMP/out" "$RUNNER_TEMP/config" \
+            "$RUNNER_TEMP/books" http://metadata.test:8788/
       - name: Print the recording
         # Also printed to the log (base64 of a .tar.gz between markers), for readers that can't reach artifacts.
         run: |
@@ -40,7 +54,9 @@ jobs:
           echo "::endgroup::"
       - name: Server log on failure
         if: failure()
-        run: docker logs readarr | tail -200
+        run: |
+          docker logs readarr | tail -200
+          cat "$RUNNER_TEMP/stub.out" "$RUNNER_TEMP/stub.log" || true
       - uses: actions/upload-artifact@v4
         with:
           name: readarr-fixtures

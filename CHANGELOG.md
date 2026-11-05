@@ -6,6 +6,11 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The Readarr API can look up books and authors to add (`/api/v1/book/lookup`, `/api/v1/author/lookup`,
+  `/api/v1/search`) the way Readarr does: by name, ISBN or ASIN through Goodreads, or by `author:`, `work:` and
+  `edition:` ids, with what the library already has filled in. Authors and books come from Readarr's metadata
+  server setting, or rreading-glasses' public server when it is empty. 20 answers are checked against Readarr's
+  own, recorded against a stand-in metadata server and Goodreads.
 - The Readarr API can delete authors, books and book files, one or several, with Readarr's options (delete the
   files, add an import list exclusion). Files go to Readarr's recycling bin when one is set. What a delete leaves
   behind (rows and files on disk) is checked against Readarr's own, recorded at four points.
