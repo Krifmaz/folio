@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
+  with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
+  original's way. The parity recording now also keeps the original's database rows, so these answers are checked
+  against the original's own on the same data.
 - Sign-in works like Audiobookshelf's: setting up the server, signing in with a name and password (the mobile app
   gets its tokens in the answer, the web app a cookie), refreshing and signing out, old tokens, API keys, the limit
   on sign-in attempts, and the apps' live connection. Each answer is checked against the original's own.
