@@ -359,7 +359,11 @@ async fn create(State(st): State<AppState>, AbsUser { user, .. }: AbsUser, body:
             return send_text(StatusCode::INTERNAL_SERVER_ERROR, "Failed to create library");
         }
     };
-    let json = library_json(&lib, &made);
+    let mut json = library_json(&lib, &made);
+    // The original answers with the object it just made, whose `lastScanVersion` is still unset (left out).
+    if let Some(m) = json.as_object_mut() {
+        m.remove("lastScanVersion");
+    }
     let id = lib.id.clone().unwrap_or_default();
     st.sockets.emitter("library_added", &json, Some(&|u: &User| models::user::can_access_library(u, &id)));
     Json(json).into_response()

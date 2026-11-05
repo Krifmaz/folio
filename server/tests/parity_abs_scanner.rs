@@ -159,6 +159,10 @@ async fn a_scan_writes_the_originals_rows() {
     }
     let folio = tables(|t| st.abs.query(&format!("SELECT * FROM `{t}`"), vec![]).unwrap(), &media);
     let original = tables(|t| recorded.get(t).cloned().unwrap_or_default(), &media);
+    // The recording has the three test books with their authors and series, so the comparison covers them.
+    for (t, n) in [("libraryItems", 3), ("books", 3), ("authors", 3), ("bookAuthors", 3), ("series", 2), ("bookSeries", 2)] {
+        assert_eq!(original[t].len(), n, "the recording's {t}");
+    }
     let mut diffs = Vec::new();
     let mut item_ids = Vec::new();
     for t in SCANNED {
@@ -174,8 +178,12 @@ async fn a_scan_writes_the_originals_rows() {
     // The metadata.json files the scan wrote for each item.
     let files: HashMap<String, Value> =
         serde_json::from_str(&std::fs::read_to_string(parity::dir("abs").join("_metadata_files.json")).unwrap()).unwrap();
+    assert_eq!(files.len(), item_ids.len(), "the recording has a metadata.json for every item");
     for (original_id, folio_id) in &item_ids {
-        let Some(expected) = files.get(original_id) else { continue };
+        let Some(expected) = files.get(original_id) else {
+            diffs.push(format!("metadata.json of {original_id}: not in the recording"));
+            continue;
+        };
         let path = st.abs_server.metadata_path.join("items").join(folio_id).join("metadata.json");
         match std::fs::read_to_string(&path) {
             Ok(text) => {
