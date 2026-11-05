@@ -44,6 +44,8 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 anyhow = "1"
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "gzip"] }
 unicode-normalization = "0.1"
+# Track A (player and reader): sending library files whole or in parts
+tower = { version = "0.5", features = ["util"] }
 
 [build-dependencies]
 kit-server-settings = { git = "https://github.com/Krifmaz/kit", tag = "v0.2.2", default-features = false, features = ["toml"] }
