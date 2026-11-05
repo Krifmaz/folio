@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Added
+- The web app looks like Folio: the Encore colours and font, the name Folio and its book icon, and links to
+  Folio's own repository instead of the upstream project's; its fork changes are listed in `abs-web/FOLIO.md`.
 - The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's
   own pages (Wanted, Downloads, Review, Move in) move to `/folio/` and are linked from its sidebar.
 - The mobile app signs in to Folio: its connect page names a Folio server, and connecting and signing in were
