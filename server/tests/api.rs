@@ -216,6 +216,13 @@ async fn the_web_app_is_served_for_every_other_path() {
         let b = axum::body::to_bytes(r.into_body(), 1 << 16).await.unwrap();
         assert!(String::from_utf8_lossy(&b).contains(title), "{path}");
     }
+    // the web app's sign-in page is at /login, where the API takes POST: GET gets the page, other methods 405
+    let r = app.clone().oneshot(Request::get("/login").body(Body::empty()).unwrap()).await.unwrap();
+    assert_eq!(r.status(), StatusCode::OK);
+    let b = axum::body::to_bytes(r.into_body(), 1 << 16).await.unwrap();
+    assert!(String::from_utf8_lossy(&b).contains("<title>app</title>"));
+    let r = app.clone().oneshot(Request::delete("/login").body(Body::empty()).unwrap()).await.unwrap();
+    assert_eq!(r.status(), StatusCode::METHOD_NOT_ALLOWED);
     // `/folio` (no slash) goes to `/folio/`, so the pages' own addresses work
     let r = app.clone().oneshot(Request::get("/folio").body(Body::empty()).unwrap()).await.unwrap();
     assert!(r.status().is_redirection(), "{}", r.status());

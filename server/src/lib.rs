@@ -227,6 +227,7 @@ pub fn app(st: AppState) -> Router {
     let index = ServeFile::new(st.static_dir.join("index.html")).precompressed_br().precompressed_gzip();
     let spa = ServeDir::new(&st.static_dir).precompressed_br().precompressed_gzip().fallback(index);
     let spa = tower_http::set_header::SetResponseHeader::if_not_present(spa, header::VARY, HeaderValue::from_static("accept-encoding"));
+    let page = spa.clone();
     kit_server_notices::spawn_rechecks(st.clone());
     Router::new()
         .merge(kit_server_health::router(kit_server_health::Health::new(VERSION, web)))
@@ -246,10 +247,31 @@ pub fn app(st: AppState) -> Router {
         .merge(playback::router())
         .merge(compat::router())
         .merge(migration::router())
+        .method_not_allowed_fallback(move |req: axum::extract::Request| page_or_405(page.clone(), req))
         .with_state(st)
         .fallback_service(spa)
         .layer(axum::middleware::from_fn(security_headers))
         .layer(tower_http::compression::CompressionLayer::new())
+}
+
+/// A request whose path the server knows only for other methods: a page of the web app when it is a `GET` or
+/// `HEAD` (Audiobookshelf's web app has pages at `/login` and `/logout`, where its API takes `POST`, as
+/// upstream's server does), "405 Method Not Allowed" otherwise.
+async fn page_or_405<S>(pages: S, req: axum::extract::Request) -> axum::response::Response
+where
+    S: tower::Service<axum::extract::Request, Error = std::convert::Infallible>,
+    S::Response: axum::response::IntoResponse,
+{
+    use axum::response::IntoResponse;
+    use tower::ServiceExt;
+    if req.method() == axum::http::Method::GET || req.method() == axum::http::Method::HEAD {
+        match pages.oneshot(req).await {
+            Ok(r) => r.into_response(),
+            Err(e) => match e {},
+        }
+    } else {
+        axum::http::StatusCode::METHOD_NOT_ALLOWED.into_response()
+    }
 }
 
 /// Middleware: the security headers, the `x-<name>` mark and the cache policy on every answer.
