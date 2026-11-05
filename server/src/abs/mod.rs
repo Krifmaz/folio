@@ -28,6 +28,7 @@ pub mod scanner;
 pub mod sessions;
 pub mod settings;
 pub mod socket;
+pub mod stats;
 pub mod tasks;
 pub mod users;
 
@@ -209,6 +210,7 @@ pub fn router() -> Router<AppState> {
         .merge(admin::router())
         .merge(backups::router())
         .merge(logs::router())
+        .merge(stats::router())
         .merge(metadata_providers::router())
         .merge(email::router())
         .merge(notifications::router())

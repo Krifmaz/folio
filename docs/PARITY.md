@@ -202,8 +202,8 @@ repository at the pinned commit.
 | A0162 | endpoint | `GET /api/search/authors` (SearchController.findAuthor) | `server/routers/ApiRouter.js#L289` | P1 library | todo |  |
 | A0163 | endpoint | `GET /api/search/chapters` (SearchController.findChapters) | `server/routers/ApiRouter.js#L290` | P1 library | todo |  |
 | A0164 | endpoint | `GET /api/search/providers` (SearchController.getAllProviders) | `server/routers/ApiRouter.js#L291` | P1 library | todo |  |
-| A0165 | endpoint | `POST /api/cache/purge` (CacheController.purgeCache) | `server/routers/ApiRouter.js#L296` | P6 server admin | todo |  |
-| A0166 | endpoint | `POST /api/cache/items/purge` (CacheController.purgeItemsCache) | `server/routers/ApiRouter.js#L297` | P6 server admin | todo |  |
+| A0165 | endpoint | `POST /api/cache/purge` (CacheController.purgeCache) | `server/routers/ApiRouter.js#L296` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original` |
+| A0166 | endpoint | `POST /api/cache/items/purge` (CacheController.purgeItemsCache) | `server/routers/ApiRouter.js#L297` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original` |
 | A0167 | endpoint | `POST /api/tools/item/:id/encode-m4b` (ToolsController.encodeM) | `server/routers/ApiRouter.js#L302` | P6 server admin | todo |  |
 | A0168 | endpoint | `DELETE /api/tools/item/:id/encode-m4b` (ToolsController.cancelM) | `server/routers/ApiRouter.js#L303` | P6 server admin | todo |  |
 | A0169 | endpoint | `POST /api/tools/item/:id/embed-metadata` (ToolsController.embedAudioFileMetadata) | `server/routers/ApiRouter.js#L304` | P6 server admin | todo |  |
@@ -218,8 +218,8 @@ repository at the pinned commit.
 | A0178 | endpoint | `DELETE /api/custom-metadata-providers/:id` (CustomMetadataProviderController.delete) | `server/routers/ApiRouter.js#L321` | P6 server admin | done | `server/tests/abs_admin.rs::metadata_providers_are_added_and_removed_like_the_original` |
 | A0179 | endpoint | `POST /api/share/mediaitem` (ShareController.createMediaItemShare) | `server/routers/ApiRouter.js#L326` | P6 server admin | todo |  |
 | A0180 | endpoint | `DELETE /api/share/mediaitem/:id` (ShareController.deleteMediaItemShare) | `server/routers/ApiRouter.js#L327` | P6 server admin | todo |  |
-| A0181 | endpoint | `GET /api/stats/year/:year` (StatsController.getAdminStatsForYear) | `server/routers/ApiRouter.js#L332` | P6 server admin | todo |  |
-| A0182 | endpoint | `GET /api/stats/server` (StatsController.getServerStats) | `server/routers/ApiRouter.js#L333` | P6 server admin | todo |  |
+| A0181 | endpoint | `GET /api/stats/year/:year` (StatsController.getAdminStatsForYear) | `server/routers/ApiRouter.js#L332` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original`, `server/tests/abs_stats.rs::the_year_in_review_counts_like_the_original` |
+| A0182 | endpoint | `GET /api/stats/server` (StatsController.getServerStats) | `server/routers/ApiRouter.js#L333` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original`, `server/tests/abs_stats.rs::the_year_in_review_counts_like_the_original` |
 | A0183 | endpoint | `GET /api/api-keys` (ApiKeyController.getAll) | `server/routers/ApiRouter.js#L338` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0184 | endpoint | `POST /api/api-keys` (ApiKeyController.create) | `server/routers/ApiRouter.js#L339` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0185 | endpoint | `PATCH /api/api-keys/:id` (ApiKeyController.update) | `server/routers/ApiRouter.js#L340` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |

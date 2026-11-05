@@ -9,6 +9,9 @@
 - The server log works like Audiobookshelf's: admins read today's messages on the log page and watch them
   live, messages are kept in one file per day, and the log level and the number of days kept follow the
   settings. Each answer is checked against the original's own.
+- Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
+  listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item
+  cache. Each answer is checked against the original's own.
 - Backups work like Audiobookshelf's: admins make, download, upload, restore and remove backups of the database
   and the books' and authors' metadata, and move the backup folder. A schedule makes them on its own, only the
   newest ones you choose to keep stay, and a backup that grows past the size limit is stopped. Each answer is
