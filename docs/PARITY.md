@@ -240,7 +240,7 @@ repository at the pinned commit.
 | A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |
 | A0202 | endpoint | `GET /api/logger-data` (MiscController.getLoggerData) | `server/routers/ApiRouter.js#L361` | P6 server admin | todo |  |
-| A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | todo |  |
+| A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0204 | endpoint | `GET /public/share/:slug` | `server/routers/PublicRouter.js#L16` | P6 server admin | todo |  |
 | A0205 | endpoint | `GET /public/share/:slug/track/:index` | `server/routers/PublicRouter.js#L17` | P6 server admin | todo |  |
 | A0206 | endpoint | `GET /public/share/:slug/cover` | `server/routers/PublicRouter.js#L18` | P6 server admin | todo |  |
@@ -414,7 +414,7 @@ repository at the pinned commit.
 | A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | todo |  |
 | A0375 | job | daily log files and rotation (`loggerDailyLogsToKeep`, `loggerScannerLogsToKeep`) | `server/managers/LogManager.js` | P6 server admin | todo |  |
 | A0376 | job | folder watcher: rescans changed items (`scannerDisableWatcher`) | `server/Watcher.js` | P1 library | todo |  |
-| A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | wip |  |
+| A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0378 | job | embed-metadata queue (Quick Embed) | `server/managers/AudioMetadataManager.js` | P6 server admin | todo |  |
 | A0379 | job | M4B merge tasks | `server/managers/AbMergeManager.js` | P6 server admin | todo |  |
 | A0380 | job | cover and item cache purge | `server/managers/CacheManager.js` | P6 server admin | todo |  |
