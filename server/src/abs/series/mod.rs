@@ -93,7 +93,7 @@ struct SeriesQuery {
     sort_by: Option<String>,
     /// Whether the sort is reversed.
     desc: bool,
-    /// Series per page, 0 for all.
+    /// Series per page (0 gives an empty page, as in the original).
     limit: i64,
     /// Series skipped.
     offset: i64,
@@ -189,13 +189,12 @@ fn filtered_series(db: &dyn Db, library: &models::Library, u: &User, q: &SeriesQ
         "random" => ("", "RANDOM()".into()),
         _ => ("", String::new()),
     };
-    // Series a sort finds equal, and all of them without a sort, come in id order (see docs/DECISIONS.md).
-    let order_sql = if order.is_empty() { " ORDER BY series.id".to_string() } else { format!(" ORDER BY {order}, series.id") };
-    let limit_sql = match (q.limit, q.offset) {
-        (0, 0) => String::new(),
-        (0, off) => format!(" LIMIT -1 OFFSET {off}"),
-        (lim, off) => format!(" LIMIT {lim} OFFSET {off}"),
-    };
+    // Series a sort finds equal, and all of them without a sort, come in the order they were stored, as SQLite
+    // reads them for the original's query (see docs/DECISIONS.md).
+    let order_sql = if order.is_empty() { " ORDER BY series.rowid".to_string() } else { format!(" ORDER BY {order}, series.rowid") };
+    // The original hands its `limit` to the query as it is, so without one (0) the page is empty; the total
+    // still counts every series.
+    let limit_sql = format!(" LIMIT {} OFFSET {}", q.limit, q.offset);
     let count = db
         .one(&format!("SELECT count(DISTINCT series.id) AS n FROM series WHERE {where_sql}"), params.clone())?
         .map(|r| r.i("n"))
