@@ -2,6 +2,8 @@
 //! for the outside sources (Audnexus, Open Library, Google Books, Hardcover) serving the fixtures.
 #![allow(dead_code)]
 
+pub mod media;
+
 use axum::body::Body;
 use axum::http::{header, Request, StatusCode};
 use axum::routing::{get, post};
