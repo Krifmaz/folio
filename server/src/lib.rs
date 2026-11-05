@@ -26,6 +26,7 @@ pub mod library;
 pub mod metadata;
 pub mod migration;
 pub mod playback;
+pub mod readarr;
 pub mod verify;
 pub mod wanted;
 
@@ -98,6 +99,8 @@ pub struct AppState {
     pub abs: SqliteDb,
     /// The Audiobookshelf port's connected socket clients.
     pub sockets: abs::socket::Sockets,
+    /// The Readarr port's database (`<data>/readarr.db`, the original's schema).
+    pub readarr: SqliteDb,
     /// The Audiobookshelf port's settings, tokens and sign-in limit.
     pub abs_server: abs::Server,
 }
@@ -130,6 +133,7 @@ impl AppState {
         compat::migrate(&db)?;
         migration::migrate(&db)?;
         let abs = abs::open(data)?;
+        let readarr = readarr::open(data)?;
         let abs_server =
             abs::Server::load(&abs, data).map_err(|e| anyhow::anyhow!("The Audiobookshelf settings can't be read: {}", e.detail))?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
@@ -154,6 +158,7 @@ impl AppState {
             http: metadata::http_client(),
             abs,
             sockets: abs::socket::Sockets::default(),
+            readarr,
             abs_server,
         })
     }
@@ -262,6 +267,7 @@ pub fn app(st: AppState) -> Router {
         .merge(compat::router())
         .merge(migration::router())
         .merge(abs::router())
+        .merge(readarr::router())
         .method_not_allowed_fallback(move |req: axum::extract::Request| page_or_405(page.clone(), req))
         .with_state(st)
         .fallback_service(spa)

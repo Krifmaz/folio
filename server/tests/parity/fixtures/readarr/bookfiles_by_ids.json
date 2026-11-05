@@ -1,0 +1,54 @@
+{
+ "body": [
+  {
+   "authorId": 1,
+   "bookId": 1,
+   "dateAdded": "2025-05-03T12:00:00Z",
+   "id": 1,
+   "indexerFlags": 0,
+   "path": "/books/Terry Pratchett/Guards! Guards! (1989)/Guards! Guards! - Terry Pratchett.epub",
+   "quality": {
+    "quality": {
+     "id": 3,
+     "name": "EPUB"
+    },
+    "revision": {
+     "isRepack": false,
+     "real": 0,
+     "version": 1
+    }
+   },
+   "qualityCutoffNotMet": false,
+   "qualityWeight": 12,
+   "size": 2048
+  },
+  {
+   "authorId": 0,
+   "bookId": 0,
+   "dateAdded": "2025-05-04T12:00:00Z",
+   "id": 2,
+   "path": "/books/Unsorted/Mystery Book.epub",
+   "quality": {
+    "quality": {
+     "id": 3,
+     "name": "EPUB"
+    },
+    "revision": {
+     "isRepack": false,
+     "real": 0,
+     "version": 1
+    }
+   },
+   "qualityCutoffNotMet": false,
+   "qualityWeight": 12,
+   "size": 1024
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/bookfile?bookFileIds=2&bookFileIds=1"
+ },
+ "status": 200
+}

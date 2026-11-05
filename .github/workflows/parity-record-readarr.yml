@@ -1,0 +1,47 @@
+name: parity-record-readarr
+
+# Records how the pinned Readarr answers, so Folio's parity tests can compare against it (docs/PARITY.md, rows R).
+# Runs Readarr's last image (0.4.19.2811, the final develop build pinned in UPSTREAM.lock), writes the test library
+# (server/tests/parity/readarr/seed.sql) into it, replays server/tests/parity/readarr/requests.json and uploads the
+# answers and the database schema as the `readarr-fixtures` artifact. Nothing is pushed; track D commits the
+# fixtures it needs.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - server/tests/parity/readarr/**
+      - .github/workflows/parity-record-readarr.yml
+
+permissions:
+  contents: read
+
+jobs:
+  readarr:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the original
+        run: |
+          mkdir -p "$RUNNER_TEMP/config" "$RUNNER_TEMP/books"
+          docker run -d --name readarr -p 8787:8787 -e PUID="$(id -u)" -e PGID="$(id -g)" -e TZ=Etc/UTC \
+            -v "$RUNNER_TEMP/config:/config" -v "$RUNNER_TEMP/books:/books" \
+            docker.io/linuxserver/readarr:nightly-0.4.19.2811-ls400
+      - name: Record
+        run: python3 -I server/tests/parity/readarr/record.py http://127.0.0.1:8787 "$RUNNER_TEMP/out" "$RUNNER_TEMP/config" "$RUNNER_TEMP/books"
+      - name: Print the recording
+        # Also printed to the log (base64 of a .tar.gz between markers), for readers that can't reach artifacts.
+        run: |
+          echo "::group::readarr-fixtures.tar.gz (base64)"
+          echo "FOLIO-FIXTURES-BEGIN"
+          tar czf - -C "$RUNNER_TEMP/out" . | base64 -w0
+          echo
+          echo "FOLIO-FIXTURES-END"
+          echo "::endgroup::"
+      - name: Server log on failure
+        if: failure()
+        run: docker logs readarr | tail -200
+      - uses: actions/upload-artifact@v4
+        with:
+          name: readarr-fixtures
+          path: ${{ runner.temp }}/out

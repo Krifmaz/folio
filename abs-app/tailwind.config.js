@@ -20,7 +20,7 @@ module.exports = {
         'track-cursor': 'rgb(var(--color-track-cursor) / <alpha-value>)',
         track: 'rgb(var(--color-track) / <alpha-value>)',
         'track-buffered': 'rgb(var(--color-track-buffered) / <alpha-value>)',
-        accent: '#1ad691',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
         error: '#FF5252',
         info: '#2196F3',
         success: '#4CAF50',

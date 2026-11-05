@@ -1,0 +1,78 @@
+{
+ "body": {
+  "added": "2025-05-02T09:30:00Z",
+  "authorMetadataId": 2,
+  "authorName": "Ursula K. Le Guin",
+  "authorNameLastFirst": "Le Guin, Ursula K.",
+  "cleanName": "ursulakleguin",
+  "ended": false,
+  "foreignAuthorId": "874602",
+  "genres": [],
+  "id": 2,
+  "images": [],
+  "lastBook": {
+   "addOptions": {
+    "addType": "automatic",
+    "searchForNewBook": false
+   },
+   "added": "2025-05-02T09:30:00Z",
+   "anyEditionOk": false,
+   "author": null,
+   "authorMetadata": null,
+   "authorMetadataId": 2,
+   "bookFiles": null,
+   "cleanTitle": "awizardofearthsea",
+   "editions": null,
+   "foreignBookId": "1561478",
+   "genres": [
+    "fantasy"
+   ],
+   "id": 4,
+   "links": [],
+   "monitored": false,
+   "ratings": {
+    "popularity": 1200000,
+    "value": 4.0,
+    "votes": 300000
+   },
+   "relatedBooks": [],
+   "releaseDate": "1968-01-01T00:00:00Z",
+   "seriesLinks": null,
+   "title": "A Wizard of Earthsea",
+   "titleSlug": "1561478"
+  },
+  "links": [],
+  "metadataProfileId": 2,
+  "monitorNewItems": "none",
+  "monitored": false,
+  "overview": "Ursula Kroeber Le Guin wrote Earthsea.",
+  "path": "/books/Ursula K. Le Guin",
+  "qualityProfileId": 2,
+  "ratings": {
+   "popularity": 0,
+   "value": 0,
+   "votes": 0
+  },
+  "rootFolderPath": "/books/",
+  "sortName": "ursula k. le guin",
+  "sortNameLastFirst": "le guin, ursula k.",
+  "statistics": {
+   "availableBookCount": 0,
+   "bookCount": 0,
+   "bookFileCount": 0,
+   "percentOfBooks": 0,
+   "sizeOnDisk": 0,
+   "totalBookCount": 1
+  },
+  "status": "continuing",
+  "tags": [],
+  "titleSlug": "874602"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/author/2"
+ },
+ "status": 200
+}
