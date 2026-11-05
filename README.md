@@ -53,12 +53,14 @@ The signed Android APK builds with Actions → release → "apps" (secrets `ANDR
 
 ## License and credits
 
-Folio is free software under the [GNU General Public License v3.0](LICENSE). It is written from scratch in Rust;
-these projects were studied as references for what a good audiobook and ebook server does, and no code was copied
-from them. Thank you to their authors:
+Folio is free software under the [GNU General Public License v3.0](LICENSE). It is a port of Audiobookshelf and
+Readarr: their backends are being ported to Rust module by module, and Audiobookshelf's web and mobile apps are
+forked in `abs-web/` and `abs-app/` (see [UPSTREAM.md](UPSTREAM.md) for the exact versions). Their copyright
+notices stay with their code. Thank you to their authors:
 
-- [Audiobookshelf](https://github.com/advplyr/audiobookshelf) (GPL-3.0): the listening server and its API that
-  Folio speaks for existing apps.
+- [Audiobookshelf](https://github.com/advplyr/audiobookshelf) and its
+  [mobile app](https://github.com/advplyr/audiobookshelf-app) (GPL-3.0), by advplyr and contributors: the
+  listening server, web app and mobile app that Folio ports and forks.
 - [Calibre-Web](https://github.com/janeczku/calibre-web) (GPL-3.0) and [Calibre](https://calibre-ebook.com):
   reading in the browser, OPDS and Kobo sync.
 - [Readarr](https://github.com/Readarr/Readarr) (GPL-3.0), [LazyLibrarian](https://gitlab.com/LazyLibrarian/LazyLibrarian)

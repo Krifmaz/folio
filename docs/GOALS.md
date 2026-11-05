@@ -22,3 +22,15 @@ Work hands-off: make your own calls (log non-obvious ones in docs/DECISIONS.md),
 One PR each: works/editions metadata, wanted lists, Lantern search and grab, verification and Review queue, import
 cleanup, player and reader, Android app, ABS/OPDS/KOReader/Kobo compatibility, migration. v0.1.0 ships when a
 requested audiobook and ebook arrive verified and correctly filed end to end.
+
+## Change of approach (2026-11-05): port, don't reimagine
+
+Saved word for word. It replaces "Use the originals as reference only; write everything fresh in Rust" above.
+
+Change of approach: port, don't reimagine. The app is missing basic features of the originals.
+- Fork the originals as the starting point (Audiobookshelf, Readarr; record upstream versions in UPSTREAM.lock like Photovault). Port their backend logic module by module into Rust, keeping behaviour, settings and edge cases; GPL-3.0 with full credits.
+- Web UI: use Audiobookshelf's own web frontend (and its mobile app), forked and rethemed to the Encore look (keep their layouts, mobile behaviour and every page), running against Folio's compatible APIs. Strip branding/links we don't want. Our own pages only where the merge needs them (wanted lists and Lantern downloads, verification and Review queue, ebook reader).
+- Write docs/PARITY.md: every API endpoint, setting, page, action and background job of each original, with a status column; each row is done only with a test or a screenshot proving it works like the original. Work through it in parallel tracks.
+- No new features until parity is complete; then layer our improvements on top.
+
+v0.1.0 still ships when a requested audiobook and ebook arrive verified and correctly filed end to end.
