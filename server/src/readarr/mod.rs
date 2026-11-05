@@ -13,13 +13,17 @@
 
 pub mod authors;
 pub mod bookfiles;
+pub mod bookinfo;
 pub mod books;
 pub mod delete;
 pub mod disk;
 pub mod editions;
 pub mod json;
+pub mod lookup;
+pub mod naming;
 pub mod quality;
 pub mod series;
+pub mod text;
 pub mod validation;
 
 use crate::AppState;
@@ -64,6 +68,7 @@ pub fn router() -> Router<AppState> {
         .merge(editions::router())
         .merge(series::router())
         .merge(bookfiles::router())
+        .merge(lookup::router())
 }
 
 /// A request Readarr lets in: its API key in `X-Api-Key` or `?apikey=` (Folio's API key, the `api_key` setting),

@@ -1,0 +1,53 @@
+{
+ "body": [
+  {
+   "added": "0001-01-01T00:00:00Z",
+   "anyEditionOk": true,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry Mort",
+   "foreignBookId": "7000",
+   "foreignEditionId": "7000001",
+   "genres": [
+    "fantasy"
+   ],
+   "grabbed": false,
+   "images": [
+    {
+     "coverType": "cover",
+     "extension": ".png",
+     "remoteUrl": "https://images.example/7000001.png",
+     "url": "/MediaCoverProxy/acab39b1e6c4f875a18e9f9b6432f51bffe75c87d1ca7bfaabd190ec9a5120fb/7000001.png"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/7000"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/7000001"
+    }
+   ],
+   "monitored": false,
+   "pageCount": 320,
+   "ratings": {
+    "popularity": 850,
+    "value": 4.25,
+    "votes": 200
+   },
+   "releaseDate": "1987-11-12T00:00:00Z",
+   "remoteCover": "https://images.example/7000001.png",
+   "seriesTitle": "Discworld #4",
+   "title": "Mort",
+   "titleSlug": "7000"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/book/lookup?term=work:7000"
+ },
+ "status": 200
+}

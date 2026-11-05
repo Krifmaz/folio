@@ -3,6 +3,9 @@
 //! (`parity/readarr/seed.sql` and its files, `seed-files.json`), and must answer like Readarr 0.4.19.2811 did:
 //! status, every field, order and errors. Only trace ids and the .NET stack traces in error descriptions may differ.
 //!
+//! The lookups ask a stand-in for Readarr's metadata server and Goodreads, served here from the same fixed answers
+//! the recording used (`parity/readarr/stub/routes.json`, which `stub.py` served to Readarr).
+//!
 //! The deletes are also checked by what they leave behind: at each `snapshot` entry the rows of the tables they
 //! change and the files under the books folder must be Readarr's (`parity/readarr/state/<name>.json`), except the
 //! times of the history rows written during the run and the layout of the JSON documents in the rows (compared by
@@ -11,8 +14,10 @@
 mod common;
 mod parity;
 
-use axum::body::Body;
-use axum::http::Request;
+use axum::body::{Body, Bytes};
+use axum::extract::State;
+use axum::http::{Method, Request, Uri};
+use axum::response::{IntoResponse, Response};
 use kit_server_core::{Db, SqliteDb};
 use parity::{fixture, Matcher};
 use serde_json::{json, Value};
@@ -123,14 +128,60 @@ fn state_diffs(name: &str, ours: &Value, theirs: &Value) -> Vec<String> {
     out.into_iter().map(|d| format!("{name}: {d}")).collect()
 }
 
+/// The stand-in's answer to a request for `host` (`metadata` or `goodreads`): the route of routes.json with the
+/// same method, path, query and (for a POST) JSON body, or 404.
+async fn stub_answer(State((host, routes)): State<(&'static str, Vec<Value>)>, method: Method, uri: Uri, body: Bytes) -> Response {
+    let mut query = serde_json::Map::new();
+    for (k, v) in serde_urlencoded::from_str::<Vec<(String, String)>>(uri.query().unwrap_or_default()).unwrap_or_default() {
+        query.entry(k).or_insert(json!(v));
+    }
+    let body: Value = if body.is_empty() { Value::Null } else { serde_json::from_slice(&body).unwrap_or(Value::Null) };
+    let route = routes.iter().find(|r| {
+        r["host"] == json!(host)
+            && r["method"] == json!(method.as_str())
+            && r["path"] == json!(uri.path())
+            && r.get("query").cloned().unwrap_or(json!({})) == Value::Object(query.clone())
+            && r.get("request").is_none_or(|want| *want == body)
+    });
+    let Some(r) = route else { return (axum::http::StatusCode::NOT_FOUND, "{\"error\":\"no stub route\"}").into_response() };
+    let status = axum::http::StatusCode::from_u16(r["status"].as_u64().unwrap() as u16).unwrap();
+    let (kind, text) = match &r["body"] {
+        Value::String(s) => ("text/plain", s.clone()),
+        b => ("application/json", b.to_string()),
+    };
+    let mut res = (status, [("content-type", kind)], text).into_response();
+    if let Some(l) = r["location"].as_str() {
+        res.headers_mut().insert("location", l.parse().unwrap());
+    }
+    res
+}
+
+/// Serves the stand-ins on two local ports: (the metadata server's address, Goodreads' address).
+async fn stub() -> (String, String) {
+    let routes: Vec<Value> = serde_json::from_str(&std::fs::read_to_string(recorder().join("stub/routes.json")).unwrap()).unwrap();
+    let mut addrs = Vec::new();
+    for host in ["metadata", "goodreads"] {
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        addrs.push(format!("http://{}", listener.local_addr().unwrap()));
+        let app = axum::Router::new().fallback(stub_answer).with_state((host, routes.clone()));
+        tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
+    }
+    (addrs[0].clone(), addrs[1].clone())
+}
+
 #[tokio::test]
 async fn every_recorded_answer_of_authors_books_and_files_matches() {
     let disk = std::env::temp_dir().join(format!("folio-readarr-disk-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&disk);
     let books = disk.join("books");
-    let env = HashMap::from([("READARR_DISK_ROOT".to_string(), disk.to_string_lossy().into_owned())]);
+    let (metadata, goodreads) = stub().await;
+    let env = HashMap::from([
+        ("READARR_DISK_ROOT".to_string(), disk.to_string_lossy().into_owned()),
+        ("READARR_GOODREADS_URL".to_string(), goodreads),
+    ]);
     let (app, st, dir) = common::server("parity-readarr-books", env).await;
     st.readarr.execute_batch(MADE_BY_THE_API).unwrap();
+    st.readarr.execute("INSERT INTO Config (Key, Value) VALUES ('metadatasource', ?)", vec![json!(format!("{metadata}/"))]).unwrap();
     st.readarr.execute_batch(&std::fs::read_to_string(recorder().join("seed.sql")).unwrap()).unwrap();
     write_files(&books, &serde_json::from_str(&std::fs::read_to_string(recorder().join("seed-files.json")).unwrap()).unwrap());
     let requests: Vec<Value> = serde_json::from_str(&std::fs::read_to_string(recorder().join("requests.json")).unwrap()).unwrap();

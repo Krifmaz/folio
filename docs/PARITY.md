@@ -591,7 +591,7 @@ repository at the pinned commit.
 | R0009 | endpoint | `GET /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0010 | endpoint | `PUT /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | changes done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); moving files to a new root folder comes with commands (R5) |
 | R0011 | endpoint | `DELETE /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
-| R0012 | endpoint | `GET /api/v1/author/lookup` (AuthorLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0012 | endpoint | `GET /api/v1/author/lookup` (AuthorLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers from a stand-in metadata server and Goodreads, the same Readarr was recorded against) |
 | R0013 | endpoint | `GET /api/v1/system/backup` (Backup) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0014 | endpoint | `DELETE /api/v1/system/backup/{id}` (Backup) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0015 | endpoint | `POST /api/v1/system/backup/restore/{id}` (Backup) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
@@ -614,7 +614,7 @@ repository at the pinned commit.
 | R0032 | endpoint | `GET /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | ebook files done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); real files' tags with the import |
 | R0033 | endpoint | `PUT /api/v1/bookfile/editor` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0034 | endpoint | `DELETE /api/v1/bookfile/bulk` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
-| R0035 | endpoint | `GET /api/v1/book/lookup` (BookLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0035 | endpoint | `GET /api/v1/book/lookup` (BookLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers from a stand-in metadata server and Goodreads, the same Readarr was recorded against) |
 | R0036 | endpoint | `POST /api/v1/bookshelf` (Bookshelf) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0037 | endpoint | `GET /api/v1/calendar` (Calendar) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
 | R0038 | endpoint | `GET /api/v1/calendar/{id}` (Calendar) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
@@ -789,7 +789,7 @@ repository at the pinned commit.
 | R0207 | endpoint | `PUT /api/v1/rootfolder/{id}` (RootFolder) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
 | R0208 | endpoint | `DELETE /api/v1/rootfolder/{id}` (RootFolder) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
 | R0209 | endpoint | `GET /api/v1/rootfolder/{id}` (RootFolder) | `src/Readarr.Api.V1/openapi.json` | R4 providers | todo |  |
-| R0210 | endpoint | `GET /api/v1/search` (Search) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0210 | endpoint | `GET /api/v1/search` (Search) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers from a stand-in metadata server and Goodreads, the same Readarr was recorded against) |
 | R0211 | endpoint | `GET /api/v1/series` (Series) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0212 | endpoint | `GET /content/{path}` (StaticResource) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0213 | endpoint | `GET /` (StaticResource) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |

@@ -1,0 +1,10 @@
+{
+ "body": [],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/book/lookup?term=work:abc"
+ },
+ "status": 200
+}
