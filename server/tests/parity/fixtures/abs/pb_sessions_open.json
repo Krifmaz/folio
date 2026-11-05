@@ -1,0 +1,99 @@
+{
+ "body": {
+  "sessions": [
+   {
+    "bookId": "4f830c7f-49ed-4eec-abb4-1af273f496b0",
+    "chapters": [
+     {
+      "end": 15,
+      "id": 0,
+      "start": 0,
+      "title": "Part 1"
+     },
+     {
+      "end": 30,
+      "id": 1,
+      "start": 15,
+      "title": "Part 2"
+     },
+     {
+      "end": 45,
+      "id": 2,
+      "start": 30,
+      "title": "Part 3"
+     }
+    ],
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-05",
+    "dayOfWeek": "Thursday",
+    "deviceInfo": {
+     "browserName": "Firefox",
+     "browserVersion": "132.0",
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "Linux x86_64 Firefox",
+     "id": "5a5ba485-0caa-4878-9f9d-a97b9d44a626",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "osName": "Linux",
+     "osVersion": "x86_64",
+     "sdkVersion": "",
+     "userId": "47ceb483-2439-482e-900e-95588bb2ac9c"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "8339f084-323f-45a5-b93c-2318668c63d3",
+    "libraryId": "a534ba66-6f3e-47e0-a51e-010323a99c9f",
+    "libraryItemId": "a5e928f4-5237-4d0e-821a-89bb9b16a5f3",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "b7363c79-6e7c-46e8-81a7-b767726ca025",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "startTime": 15,
+    "startedAt": 1793914101576,
+    "timeListening": 0,
+    "updatedAt": 1793914101576,
+    "user": {
+     "id": "47ceb483-2439-482e-900e-95588bb2ac9c",
+     "username": "root"
+    },
+    "userId": "47ceb483-2439-482e-900e-95588bb2ac9c"
+   }
+  ],
+  "shareSessions": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/sessions/open"
+ },
+ "status": 200
+}

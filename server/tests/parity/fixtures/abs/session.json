@@ -1,5 +1,5 @@
 {
- "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /api/sessions/ac4e0f11-7787-4054-939a-c890436b94e0</pre>\n</body>\n</html>\n",
+ "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /api/sessions/2d1b042b-b5bd-4e86-8a0d-6d868f187a13</pre>\n</body>\n</html>\n",
  "content_type": "text/html",
  "request": {
   "body": null,

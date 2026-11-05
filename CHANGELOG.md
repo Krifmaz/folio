@@ -17,6 +17,9 @@
   titles (sort titles are refreshed), check a schedule before saving it, add and remove their own metadata
   providers, and set the mail server and e-reader devices with who may use each. The task list the apps show is
   in place for the jobs that will use it. Each answer is checked against the original's own.
+- Playback sessions work like Audiobookshelf's: starting one when a player opens a book, syncing and closing it,
+  sessions phones played offline, the admins' list of open and past sessions (and deleting them), and each user's
+  listening sessions and stats. Each answer is checked against the original's recorded one.
 - Audiobookshelf's library scanner for book libraries: adding a library and scanning it finds audiobooks and
   ebooks in their folders, reads their tags, chapters, OPF, NFO, `desc.txt`, `reader.txt` and `metadata.json`
   files the original's way, and adds, updates or marks missing the books, authors and series. The parity recording
