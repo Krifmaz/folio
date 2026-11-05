@@ -13,6 +13,7 @@ files of its own.
 | Reader's dark theme in the Encore colours | `components/readers/Reader.vue`, `components/readers/EpubReader.vue` |
 | App id `dev.krifmaz.folio.mobile` (installs beside the upstream app), name Folio, status bar, widget colours, launcher, notification and in-app icons | `android/app/folio.gradle`, `android/app/folio-res/` (laid over the upstream resources), `capacitor.config.json`, `static/Logo.png`; icons drawn by `folio/make_icons.py` |
 | Android Auto and other media browsers accept Folio's app id | `PlayerNotificationService.kt` (`VALID_MEDIA_BROWSERS`) |
+| Wording names a Folio server (connect page, its errors, the not-connected and linked-media messages in English) and the example address uses Folio's port | `components/connection/ServerConnectForm.vue`, `strings/en-us.json` |
 | No links out to the upstream GitHub, guides or discussions | `pages/connect.vue`, `pages/account.vue`, `pages/localMedia/folders/index.vue`, `components/connection/ServerConnectForm.vue` |
 
 The `audiobookshelf://oauth` sign-in redirect is kept, so single sign-on works the same against Folio's

@@ -38,7 +38,7 @@
             <span class="material-symbols text-fg-muted">arrow_back</span>
           </div>
           <h2 class="text-lg leading-7 mb-2">{{ $strings.LabelServerAddress }}</h2>
-          <ui-text-input v-model="serverConfig.address" :disabled="processing || !networkConnected || !!serverConfig.id" placeholder="http://55.55.55.55:13378" type="url" class="w-full h-10" />
+          <ui-text-input v-model="serverConfig.address" :disabled="processing || !networkConnected || !!serverConfig.id" placeholder="http://192.168.1.10:8080" type="url" class="w-full h-10" />
           <div class="flex justify-end items-center mt-6">
             <ui-btn :disabled="processing || !networkConnected" type="submit" :padding-x="3" class="h-10">{{ networkConnected ? $strings.ButtonSubmit : $strings.MessageNoNetworkConnection }}</ui-btn>
           </div>
@@ -726,12 +726,12 @@ export default {
         console.error('[ServerConnectForm] Received empty response')
         return false
       } else if (!('isInit' in statusData.data) || !('language' in statusData.data)) {
-        this.error = 'This does not seem to be a Audiobookshelf server'
+        this.error = 'This does not seem to be a Folio server'
         console.error('[ServerConnectForm] Received as response from Server:\n', statusData)
         return false
         //    TODO: delete the if above and comment the ones below out, as soon as the backend is ready to introduce a version check
         //    } else if (!('app' in statusData.data) || statusData.data.app.toLowerCase() !== 'audiobookshelf') {
-        //      this.error = 'This does not seem to be a Audiobookshelf server'
+        //      this.error = 'This does not seem to be a Folio server'
         //      console.error('[ServerConnectForm] Received as response from Server:\n', statusData)
         //      return false
         //    } else if (!this.isValidVersion(statusData.data.serverVersion, requiredServerVersion)) {
@@ -762,7 +762,7 @@ export default {
       console.error('[ServerConnectForm] Received invalid status', error)
 
       if (error.code === 404) {
-        this.error = `This does not seem to be an Audiobookshelf server. (Error: 404 querying /status)`
+        this.error = `This does not seem to be a Folio server. (Error: 404 querying /status)`
       } else if (typeof error.code === 'number') {
         // Error with HTTP Code
         this.error = `Failed to retrieve status of server: ${error.code}`

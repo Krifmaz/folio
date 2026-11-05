@@ -519,7 +519,7 @@ repository at the pinned commit.
 | --- | --- | --- | --- | --- | --- | --- |
 | M0001 | page | `/account` | `pages/account.vue` | M mobile fork | todo |  |
 | M0002 | page | `/bookshelf` | `pages/bookshelf.vue` | M mobile fork | todo |  |
-| M0003 | page | `/connect` | `pages/connect.vue` | M mobile fork | todo |  |
+| M0003 | page | `/connect` | `pages/connect.vue` | M mobile fork | done | `docs/parity/screens/M0003.png` (connect and sign in to a Folio server, then its bookshelf) |
 | M0004 | page | `/downloading` | `pages/downloading.vue` | M mobile fork | todo |  |
 | M0005 | page | `/downloads` | `pages/downloads.vue` | M mobile fork | todo |  |
 | M0006 | page | `/` | `pages/index.vue` | M mobile fork | todo |  |

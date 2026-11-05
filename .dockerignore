@@ -9,6 +9,8 @@ data
 *.md
 !docs/releases
 !docs/releases/*.md
-abs-web
+abs-web/node_modules
+abs-web/.nuxt
+abs-web/dist
 abs-app
 .upstream
