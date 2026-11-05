@@ -1,7 +1,8 @@
 //! Other apps' protocols, so the apps people already use work with Folio: an OPDS catalogue for e-readers
-//! ([`opds`]) and a KOReader sync server ([`koreader`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
+//! ([`opds`]), a KOReader sync server ([`koreader`]) and an Audiobookshelf-compatible API ([`abs`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
 //! how to point each app at Folio.
 
+pub mod abs;
 pub mod epub;
 pub mod koreader;
 pub mod model;
@@ -46,6 +47,19 @@ pub const MIGRATIONS: Migrations = Migrations {
             name_md5 TEXT NOT NULL
         );
         CREATE INDEX compat_file_digests_partial ON compat_file_digests (partial_md5);",
+        // 2: Audiobookshelf playback sessions: who plays what on which app, where it is and how long was heard
+        "CREATE TABLE compat_abs_sessions (
+            id TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            edition_id INTEGER NOT NULL,
+            device TEXT NOT NULL DEFAULT '',
+            started_at REAL NOT NULL,
+            updated_at REAL NOT NULL,
+            position REAL NOT NULL DEFAULT 0,
+            listened REAL NOT NULL DEFAULT 0,
+            closed INTEGER NOT NULL DEFAULT 0
+        );
+        CREATE INDEX compat_abs_sessions_user ON compat_abs_sessions (user_id, started_at);",
     ],
 };
 
@@ -56,7 +70,7 @@ pub fn migrate(db: &SqliteDb) -> anyhow::Result<()> {
 
 /// This part's routes.
 pub fn router() -> Router<AppState> {
-    Router::new().merge(opds::router()).merge(koreader::router())
+    Router::new().merge(opds::router()).merge(koreader::router()).merge(abs::router())
 }
 
 /// Now, in seconds since 1970.

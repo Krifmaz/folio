@@ -38,3 +38,21 @@ and the Android app, and a place reached there sends KOReader to the start of th
 Books KOReader opens that are not in Folio's library still sync between KOReader devices.
 
 Written from the API of [koreader-sync-server](https://github.com/koreader/koreader-sync-server) (version 1).
+
+## Audiobookshelf apps
+
+The Audiobookshelf phone app, ShelfPlayer, Plappa, Lissen and other Audiobookshelf apps play Folio's audiobooks
+and open its ebooks.
+
+- **Server address:** `https://folio.example` (`https://folio.example/abs` works too).
+- **Username and password:** your Folio ones.
+
+The apps see two libraries, **Audiobooks** and **Ebooks**, with Continue Listening, Recently Added, series,
+authors and search. A place reached in an app is the book's place in Folio's web player and Android app, and the
+other way round; the newest place wins, also for books played offline and synced later. Bookmarks are Folio's
+bookmarks.
+
+Not there: podcasts, collections and playlists, uploading, editing books from the app, and live updates (the apps
+ask again when you pull to refresh).
+
+Written from Audiobookshelf's [API documentation](https://api.audiobookshelf.org) (server version 2.25).

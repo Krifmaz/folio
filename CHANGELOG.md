@@ -10,6 +10,9 @@
   reader shows the book in pages in the app's colours, with its contents, text size, bookmarks and page turns by
   buttons, keys or a tap on the page's edge; the book's own scripts never run. Both keep your place on the server
   (every device carries on from it) and keep it in the browser until the server can be reached again.
+- Audiobookshelf apps work with Folio (the official app, ShelfPlayer, Plappa …): sign in with your Folio
+  account, browse Audiobooks and Ebooks, play with chapters, and keep your place and bookmarks in step with Folio,
+  offline listening included.
 - KOReader progress sync at `/koreader`: KOReader's place is the book's place in Folio and back (to the
   chapter), with a KOReader sync password of its own; books outside the library sync between KOReaders too.
 - OPDS catalogue at `/opds` for e-readers and reading apps (KOReader, Moon+ Reader, Thorium …): new books,
