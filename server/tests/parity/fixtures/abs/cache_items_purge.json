@@ -1,0 +1,10 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "POST",
+  "path": "/api/cache/items/purge"
+ },
+ "status": 200
+}

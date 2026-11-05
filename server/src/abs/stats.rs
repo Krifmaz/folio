@@ -57,9 +57,10 @@ fn js_year(text: &str) -> Option<f64> {
     t.parse::<f64>().ok().filter(|n| !n.is_nan())
 }
 
-/// The start of a year as the database stores times (Sequelize's form of `"<year>-01-01"`).
-fn year_start(year: i64) -> String {
-    format!("{year:04}-01-01 00:00:00.000 +00:00")
+/// `"<year>-01-01"` with the year written as JavaScript writes the number (`2026`, `2026.5`); stored times are
+/// compared with it as text.
+fn year_start(year: f64) -> String {
+    format!("{}-01-01", js_json(Some(year)).to_string().trim_matches('"'))
 }
 
 /// Whether a name is an array index, which JavaScript objects list first, in number order.
@@ -96,8 +97,8 @@ impl Tally {
 }
 
 /// The year in review (`getStatsForYear`).
-pub fn stats_for_year(db: &dyn Db, year: i64) -> Result<Value> {
-    let (from, to) = (year_start(year), year_start(year + 1));
+pub fn stats_for_year(db: &dyn Db, year: f64) -> Result<Value> {
+    let (from, to) = (year_start(year), year_start(year + 1.0));
     let books = db.query(
         "SELECT b.id, b.coverPath, b.duration, li.id AS itemId, li.size FROM books b
          JOIN libraryItems li ON li.mediaId = b.id WHERE b.createdAt >= ? AND b.createdAt < ? ORDER BY RANDOM()",
@@ -146,7 +147,7 @@ pub fn stats_for_year(db: &dyn Db, year: i64) -> Result<Value> {
     let totals = db.one(
         "SELECT SUM(li.size) AS totalSize, SUM(b.duration) AS totalDuration, COUNT(*) AS totalItems FROM libraryItems li, books b
          WHERE b.id = li.mediaId AND li.mediaType = 'book' AND li.createdAt < ?",
-        vec![json!(format!("{:04}-01-01", year + 1))],
+        vec![json!(to.clone())],
     )?;
     let total = |k: &str| match totals.as_ref().and_then(|t| t.get(k)) {
         Some(Value::Number(n)) if n.as_f64() != Some(0.0) => js_json(n.as_f64()),
@@ -188,22 +189,10 @@ async fn year(State(st): State<AppState>, me: AbsUser, Path(year): Path<String>)
         tracing::error!("The year {year} isn't valid");
         return send_text(StatusCode::BAD_REQUEST, "Invalid year");
     };
-    match stats_for_year(&st.abs, y.floor() as i64) {
-        Ok(v) if y.fract() == 0.0 => Json(v).into_response(),
-        // a fractional year counts from "<year>-01-01" to "<year + 1>-01-01" with the fraction in the text, which
-        // matches no stored time; the original answers its empty year then
-        Ok(_) => Json(empty_year()).into_response(),
+    match stats_for_year(&st.abs, y) {
+        Ok(v) => Json(v).into_response(),
         Err(e) => e.into_response(),
     }
-}
-
-/// The answer for a year with nothing in it.
-fn empty_year() -> Value {
-    json!({
-        "numListeningSessions": 0, "numBooksAdded": 0, "numAuthorsAdded": 0, "totalBooksAddedSize": 0,
-        "totalBooksAddedDuration": 0, "booksAddedWithCovers": [], "totalBooksSize": 0, "totalBooksDuration": 0,
-        "totalListeningTime": 0, "numBooks": 0, "topAuthors": [], "topNarrators": [], "topGenres": [],
-    })
 }
 
 /// The library's size by kind (`getTotalSize` and `getNumAudioFiles`).

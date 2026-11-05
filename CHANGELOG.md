@@ -6,6 +6,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
+  listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item
+  cache. Each answer is checked against the original's own.
 - Backups work like Audiobookshelf's: admins make, download, upload, restore and remove backups of the database
   and the books' and authors' metadata, and move the backup folder. A schedule makes them on its own, only the
   newest ones you choose to keep stay, and a backup that grows past the size limit is stopped. Each answer is

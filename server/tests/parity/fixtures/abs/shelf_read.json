@@ -1,0 +1,13 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "ebookLocation": "epubcfi(/6/2!/4/1:0)",
+   "ebookProgress": 0.25
+  },
+  "method": "PATCH",
+  "path": "/api/me/progress/{shelf_asr}"
+ },
+ "status": 200
+}
