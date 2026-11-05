@@ -72,6 +72,18 @@ label = "Folio's own address"
 help = "Where Lantern can reach Folio (for example http://folio:8080), so it says at once when a download is done. Empty: Folio asks Lantern every minute."
 type = "url"
 
+[groups.library]
+section = "downloads"
+title = "Library"
+desc = "Where finished books are filed: Author/Series/NN - Title (Year)/. Lantern's download folder must be on the same disk, so files are hardlinked, not copied."
+
+[keys.library_dir]
+env = "APP_LIBRARY_DIR"
+default = "/library"
+group = "library"
+label = "Library folder"
+help = "The folder Folio files books into, for example /library."
+
 [groups.searching]
 section = "downloads"
 title = "Searching"

@@ -18,6 +18,8 @@
 mod downloads;
 mod library;
 mod pages;
+mod player;
+mod reader;
 mod wanted;
 
 use kit_leptos::api::{self, HttpBackend};
@@ -187,6 +189,8 @@ fn Shell(me: Value) -> impl IntoView {
             "/wanted" => view! { <wanted::Wanted admin=admin/> }.into_any(),
             "/releases" => view! { <downloads::Releases id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
             "/downloads" => view! { <downloads::Downloads/> }.into_any(),
+            "/play" => view! { <player::Player id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
+            "/read" => view! { <reader::Reader id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
             _ => view! { <library::Library admin=admin/> }.into_any(),
         }
     };

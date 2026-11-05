@@ -81,6 +81,23 @@ pub const MIGRATIONS: Migrations = Migrations {
         // 2: followed authors and series ("" not followed, audiobook, ebook or both)
         "ALTER TABLE authors ADD COLUMN follow TEXT NOT NULL DEFAULT '';
         ALTER TABLE series ADD COLUMN follow TEXT NOT NULL DEFAULT '';",
+        // 3: an edition's files in the library, written by the import (docs/TRACKS.md): path under the library
+        // folder, kind audio, epub, pdf, azw3 or cover, the play order, and for audio the length and chapters
+        // ([{title, start_ms, end_ms}] from the start of this file)
+        "CREATE TABLE edition_files (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            edition_id INTEGER NOT NULL,
+            path TEXT NOT NULL UNIQUE,
+            name TEXT NOT NULL,
+            kind TEXT NOT NULL,
+            mime TEXT NOT NULL,
+            size INTEGER NOT NULL DEFAULT 0,
+            position INTEGER NOT NULL DEFAULT 0,
+            duration_ms INTEGER NOT NULL DEFAULT 0,
+            chapters TEXT NOT NULL DEFAULT '[]',
+            created_at REAL NOT NULL
+        );
+        CREATE INDEX edition_files_edition ON edition_files (edition_id, position);",
     ],
 };
 

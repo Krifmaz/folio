@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- `docs/TRACKS.md`: the parallel tracks, the files each one owns, and the schema and playback API they share. The
+  library keeps each book's files (`edition_files`), and the library folder is a setting (Settings → Downloads).
+- `docs/GOALS.md`: the goal, word for word.
 - Downloads through Lantern only (Settings → Downloads: its address and API key). Searches are built from the
   edition (ASIN or ISBN, author and title, title and narrator) and every result is scored on all of them, the
   file format, language, size and seeders, with the reasons; samples, abridged copies, other languages and file
