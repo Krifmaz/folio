@@ -18,6 +18,7 @@ pub mod items;
 pub mod library;
 pub mod metadata_providers;
 pub mod models;
+pub mod notifications;
 pub mod progress;
 pub mod settings;
 pub mod socket;
@@ -71,6 +72,8 @@ pub struct Server {
     pub metadata_path: PathBuf,
     /// The running tasks the apps show.
     pub tasks: Arc<tasks::TaskManager>,
+    /// The queue of notifications being sent.
+    pub notifications: Arc<notifications::Manager>,
     /// How the server was installed (`Source`, from `SOURCE`; `docker` by default, like the original's image).
     pub source: String,
 }
@@ -103,6 +106,7 @@ impl Server {
             config_path: data.to_path_buf(),
             metadata_path,
             tasks: Arc::new(tasks::TaskManager::default()),
+            notifications: Arc::new(notifications::Manager::default()),
             source: std::env::var("SOURCE").ok().filter(|s| !s.is_empty()).unwrap_or_else(|| "docker".into()),
         })
     }
@@ -171,6 +175,7 @@ pub fn router() -> Router<AppState> {
         .merge(admin::router())
         .merge(metadata_providers::router())
         .merge(email::router())
+        .merge(notifications::router())
 }
 
 /// Test helpers: the recorded answers of the original and the comparison of tests/parity.

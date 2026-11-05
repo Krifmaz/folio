@@ -183,14 +183,14 @@ repository at the pinned commit.
 | A0143 | endpoint | `GET /api/podcasts/:id/episode/:episodeId` (PodcastController.getEpisode) | `server/routers/ApiRouter.js#L258` | P5 podcasts and feeds | todo |  |
 | A0144 | endpoint | `PATCH /api/podcasts/:id/episode/:episodeId` (PodcastController.updateEpisode) | `server/routers/ApiRouter.js#L259` | P5 podcasts and feeds | todo |  |
 | A0145 | endpoint | `DELETE /api/podcasts/:id/episode/:episodeId` (PodcastController.removeEpisode) | `server/routers/ApiRouter.js#L260` | P5 podcasts and feeds | todo |  |
-| A0146 | endpoint | `GET /api/notifications` (NotificationController.get) | `server/routers/ApiRouter.js#L265` | P6 server admin | todo |  |
-| A0147 | endpoint | `PATCH /api/notifications` (NotificationController.update) | `server/routers/ApiRouter.js#L266` | P6 server admin | todo |  |
-| A0148 | endpoint | `GET /api/notificationdata` (NotificationController.getData) | `server/routers/ApiRouter.js#L267` | P6 server admin | todo |  |
-| A0149 | endpoint | `GET /api/notifications/test` (NotificationController.fireTestEvent) | `server/routers/ApiRouter.js#L268` | P6 server admin | todo |  |
-| A0150 | endpoint | `POST /api/notifications` (NotificationController.createNotification) | `server/routers/ApiRouter.js#L269` | P6 server admin | todo |  |
-| A0151 | endpoint | `DELETE /api/notifications/:id` (NotificationController.deleteNotification) | `server/routers/ApiRouter.js#L270` | P6 server admin | todo |  |
-| A0152 | endpoint | `PATCH /api/notifications/:id` (NotificationController.updateNotification) | `server/routers/ApiRouter.js#L271` | P6 server admin | todo |  |
-| A0153 | endpoint | `GET /api/notifications/:id/test` (NotificationController.sendNotificationTest) | `server/routers/ApiRouter.js#L272` | P6 server admin | todo |  |
+| A0146 | endpoint | `GET /api/notifications` (NotificationController.get) | `server/routers/ApiRouter.js#L265` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0147 | endpoint | `PATCH /api/notifications` (NotificationController.update) | `server/routers/ApiRouter.js#L266` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0148 | endpoint | `GET /api/notificationdata` (NotificationController.getData) | `server/routers/ApiRouter.js#L267` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0149 | endpoint | `GET /api/notifications/test` (NotificationController.fireTestEvent) | `server/routers/ApiRouter.js#L268` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0150 | endpoint | `POST /api/notifications` (NotificationController.createNotification) | `server/routers/ApiRouter.js#L269` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0151 | endpoint | `DELETE /api/notifications/:id` (NotificationController.deleteNotification) | `server/routers/ApiRouter.js#L270` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0152 | endpoint | `PATCH /api/notifications/:id` (NotificationController.updateNotification) | `server/routers/ApiRouter.js#L271` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0153 | endpoint | `GET /api/notifications/:id/test` (NotificationController.sendNotificationTest) | `server/routers/ApiRouter.js#L272` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_reach_apprise_with_their_texts_filled_in` |
 | A0154 | endpoint | `GET /api/emails/settings` (EmailController.getSettings) | `server/routers/ApiRouter.js#L277` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
 | A0155 | endpoint | `PATCH /api/emails/settings` (EmailController.updateSettings) | `server/routers/ApiRouter.js#L278` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
 | A0156 | endpoint | `POST /api/emails/test` (EmailController.sendTest) | `server/routers/ApiRouter.js#L279` | P6 server admin | todo |  |
@@ -294,7 +294,7 @@ repository at the pinned commit.
 | A0254 | socket | server → client `library_removed` | `server/controllers/LibraryController.js#L588` | P2 users | todo |  |
 | A0255 | socket | server → client `library_updated` | `server/controllers/LibraryController.js#L511` | P2 users | todo |  |
 | A0256 | socket | server → client `metadata_embed_queue_update` | `server/managers/AudioMetadataManager.js#L119` | P2 users | todo |  |
-| A0257 | socket | server → client `notifications_updated` | `server/managers/NotificationManager.js#L175` | P2 users | todo |  |
+| A0257 | socket | server → client `notifications_updated` | `server/managers/NotificationManager.js#L175` | P2 users | wip | emitted after each send (`abs::notifications::trigger`); no socket test yet |
 | A0258 | socket | server → client `rss_feed_closed` | `server/managers/RssFeedManager.js#L358` | P2 users | todo |  |
 | A0259 | socket | server → client `rss_feed_open` | `server/managers/RssFeedManager.js#L302` | P2 users | todo |  |
 | A0260 | socket | server → client `series_added` | `server/scanner/Scanner.js#L316` | P2 users | todo |  |
@@ -373,12 +373,12 @@ repository at the pinned commit.
 | A0333 | setting | email `testAddress` | `server/objects/settings/EmailSettings.js#L22` | P6 server admin | todo |  |
 | A0334 | setting | email `fromAddress` | `server/objects/settings/EmailSettings.js#L23` | P6 server admin | todo |  |
 | A0335 | setting | email `ereaderDevices` | `server/objects/settings/EmailSettings.js#L26` | P6 server admin | todo |  |
-| A0336 | setting | notifications `appriseType` | `server/objects/settings/NotificationSettings.js#L8` | P6 server admin | todo |  |
-| A0337 | setting | notifications `appriseApiUrl` | `server/objects/settings/NotificationSettings.js#L9` | P6 server admin | todo |  |
-| A0338 | setting | notifications `notifications` | `server/objects/settings/NotificationSettings.js#L10` | P6 server admin | todo |  |
-| A0339 | setting | notifications `maxFailedAttempts` | `server/objects/settings/NotificationSettings.js#L11` | P6 server admin | todo |  |
-| A0340 | setting | notifications `maxNotificationQueue` | `server/objects/settings/NotificationSettings.js#L12` | P6 server admin | todo |  |
-| A0341 | setting | notifications `notificationDelay` | `server/objects/settings/NotificationSettings.js#L13` | P6 server admin | todo |  |
+| A0336 | setting | notifications `appriseType` | `server/objects/settings/NotificationSettings.js#L8` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0337 | setting | notifications `appriseApiUrl` | `server/objects/settings/NotificationSettings.js#L9` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0338 | setting | notifications `notifications` | `server/objects/settings/NotificationSettings.js#L10` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0339 | setting | notifications `maxFailedAttempts` | `server/objects/settings/NotificationSettings.js#L11` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0340 | setting | notifications `maxNotificationQueue` | `server/objects/settings/NotificationSettings.js#L12` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0341 | setting | notifications `notificationDelay` | `server/objects/settings/NotificationSettings.js#L13` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
 | A0342 | setting | library `coverAspectRatio` | `server/models/Library.js#L59` | P1 library | todo |  |
 | A0343 | setting | library `disableWatcher` | `server/models/Library.js#L60` | P1 library | todo |  |
 | A0344 | setting | library `autoScanCronExpression` | `server/models/Library.js#L61` | P1 library | todo |  |
@@ -403,12 +403,12 @@ repository at the pinned commit.
 | A0363 | setting | user permission `selectedTagsNotAccessible` | `server/models/User.js#L179` | P2 users | todo |  |
 | A0364 | setting | user permission `librariesAccessible` | `server/models/User.js#L180` | P2 users | todo |  |
 | A0365 | setting | user permission `itemTagsSelected` | `server/models/User.js#L181` | P2 users | todo |  |
-| A0366 | job | notification event `onPodcastEpisodeDownloaded` | `server/utils/notifications.js#L6` | P6 server admin | todo |  |
-| A0367 | job | notification event `onBackupCompleted` | `server/utils/notifications.js#L32` | P6 server admin | todo |  |
-| A0368 | job | notification event `onBackupFailed` | `server/utils/notifications.js#L50` | P6 server admin | todo |  |
-| A0369 | job | notification event `onRSSFeedFailed` | `server/utils/notifications.js#L64` | P6 server admin | todo |  |
-| A0370 | job | notification event `onRSSFeedDisabled` | `server/utils/notifications.js#L80` | P6 server admin | todo |  |
-| A0371 | job | notification event `onTest` | `server/utils/notifications.js#L96` | P6 server admin | todo |  |
+| A0366 | job | notification event `onPodcastEpisodeDownloaded` | `server/utils/notifications.js#L6` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0367 | job | notification event `onBackupCompleted` | `server/utils/notifications.js#L32` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0368 | job | notification event `onBackupFailed` | `server/utils/notifications.js#L50` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0369 | job | notification event `onRSSFeedFailed` | `server/utils/notifications.js#L64` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0370 | job | notification event `onRSSFeedDisabled` | `server/utils/notifications.js#L80` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0371 | job | notification event `onTest` | `server/utils/notifications.js#L96` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
 | A0372 | job | library scan schedules (`cronExpression` per library) | `server/managers/CronManager.js` | P1 library | todo |  |
 | A0373 | job | podcast episode checks (`podcastEpisodeSchedule`, per podcast cron) | `server/managers/CronManager.js` | P5 podcasts and feeds | todo |  |
 | A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | todo |  |
