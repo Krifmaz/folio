@@ -2,6 +2,7 @@
 # A Cargo workspace of its own, like web/.
 [workspace]
 resolver = "2"
+members = ["crates/migrate"]
 
 [package]
 name = "folio"
