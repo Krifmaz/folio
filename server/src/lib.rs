@@ -23,6 +23,7 @@ pub mod library;
 pub mod metadata;
 pub mod migration;
 pub mod playback;
+pub mod verify;
 pub mod wanted;
 
 use axum::http::{header, HeaderValue};
@@ -236,6 +237,7 @@ pub fn app(st: AppState) -> Router {
         .merge(library::router())
         .merge(wanted::router())
         .merge(lantern::grabs::router())
+        .merge(verify::router())
         .merge(playback::router())
         .merge(compat::router())
         .merge(migration::router())

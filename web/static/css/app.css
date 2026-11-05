@@ -305,3 +305,7 @@ details.adv-fields > summary { cursor: pointer; width: max-content; }
 /* ---------- wanted ---------- */
 .profile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+
+/* Review: the fact-by-fact table */
+.review-checks td { vertical-align: top; }
+.review-checks td:last-child { min-width: 180px; }

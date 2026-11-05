@@ -20,6 +20,13 @@
   jump, and waits on the phone while the server can't be reached.
 - Android: Library page (search titles and authors, All, Audiobooks or Ebooks) and a book page with every exact
   edition and its facts: narrator, runtime, abridged or not, language, pages, ASIN or ISBN.
+- Verification before import: every download is checked against the edition you asked for. Audiobooks: runtime
+  within 3%, narrator, language, chapter count, and nothing marking a sample or an abridged copy (read with
+  ffprobe, which the image now carries). Ebooks: a valid EPUB without DRM whose own ISBN, title, author and
+  language match, with a length that fits. A confidence score decides: sure enough (85% by default, Settings →
+  Downloads) is checked and ready to file; anything else waits under **Review**, with what was requested next to
+  what arrived, the reason with Copy, and Accept, Reject or Reject and search again. A rejected download is
+  never grabbed again for that book.
 - OPDS catalogue at `/opds` for e-readers and reading apps (KOReader, Moon+ Reader, Thorium …): new books,
   audiobooks, ebooks, authors, series and search, with covers and every file to download. Sign in with your
   Folio username and password. How to set each app up is in `docs/COMPAT.md`.

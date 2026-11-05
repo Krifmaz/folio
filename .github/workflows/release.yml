@@ -35,8 +35,9 @@ concurrency:
 
 jobs:
   test:
-    uses: Krifmaz/kit/.github/workflows/kit-ci.yml@v0.2.2
+    uses: Krifmaz/kit/.github/workflows/kit-ci.yml@v0.3.5
     with:
+      apt-packages: ffmpeg
       rust-dirs: server
       wasm-dirs: web
 

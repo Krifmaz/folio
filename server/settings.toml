@@ -72,6 +72,28 @@ label = "Folio's own address"
 help = "Where Lantern can reach Folio (for example http://folio:8080), so it says at once when a download is done. Empty: Folio asks Lantern every minute."
 type = "url"
 
+[groups.verify]
+section = "downloads"
+title = "Checking what arrives"
+desc = "Every download is checked against the edition you asked for before it is filed. Anything Folio isn't sure of waits under Review."
+
+[keys.verify_min_confidence]
+env = "APP_VERIFY_MIN_CONFIDENCE"
+default = 85
+group = "verify"
+label = "Sure enough to file it (%)"
+help = "How sure Folio must be that a download is the right edition to file it without asking (1 to 100)."
+type = "number"
+min = 1
+max = 100
+
+[keys.ffprobe]
+env = "APP_FFPROBE"
+default = "ffprobe"
+group = "verify"
+label = "ffprobe program"
+help = "Reads audiobooks' length, chapters and tags. Folio's image has it; elsewhere, its path."
+
 [groups.library]
 section = "downloads"
 title = "Library"
