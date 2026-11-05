@@ -37,9 +37,9 @@ async fn update_settings(State(st): State<AppState>, me: AbsUser, headers: Heade
     }
     let fields = body_fields(&headers, &body);
     // JavaScript's `allowIframe == false`
-    let iframe_off = fields.get("allowIframe").is_some_and(|v| {
-        matches!(v, Value::Bool(false)) || v == &json!(0) || v == &json!("") || v == &json!("0") || v == &json!([])
-    });
+    let iframe_off = fields
+        .get("allowIframe")
+        .is_some_and(|v| matches!(v, Value::Bool(false)) || v == &json!(0) || v == &json!("") || v == &json!("0") || v == &json!([]));
     if iframe_off && std::env::var("ALLOW_IFRAME").as_deref() == Ok("1") {
         tracing::warn!("Embedding can't be turned off while ALLOW_IFRAME is on");
         return send_text(StatusCode::BAD_REQUEST, "Cannot disable iframe when ALLOW_IFRAME is enabled in environment");
@@ -94,13 +94,18 @@ async fn update_sorting_prefixes(State(st): State<AppState>, me: AbsUser, header
 /// it; answers how many rows changed.
 pub fn refresh_sort_titles(db: &dyn Db, sorting: &Sorting) -> Result<usize> {
     let mut rows = 0;
-    for (table, name, sort) in [("books", "title", "titleIgnorePrefix"), ("podcasts", "title", "titleIgnorePrefix"), ("series", "name", "nameIgnorePrefix")] {
+    for (table, name, sort) in
+        [("books", "title", "titleIgnorePrefix"), ("podcasts", "title", "titleIgnorePrefix"), ("series", "name", "nameIgnorePrefix")]
+    {
         let all = db.query(&format!("SELECT id, `{name}` AS n, `{sort}` AS s FROM {table}"), vec![])?;
         for r in all {
             let title = r.get("n").and_then(Value::as_str).unwrap_or_default();
             let new = title_ignore_prefix(title, sorting);
             if r.get("s").and_then(Value::as_str) != Some(new.as_str()) {
-                db.execute(&format!("UPDATE {table} SET `{sort}` = ? WHERE id = ?"), vec![json!(new), r.get("id").cloned().unwrap_or(Value::Null)])?;
+                db.execute(
+                    &format!("UPDATE {table} SET `{sort}` = ? WHERE id = ?"),
+                    vec![json!(new), r.get("id").cloned().unwrap_or(Value::Null)],
+                )?;
                 rows += 1;
             }
         }

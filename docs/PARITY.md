@@ -235,11 +235,7 @@ repository at the pinned commit.
 | A0195 | endpoint | `GET /api/genres` (MiscController.getAllGenres) | `server/routers/ApiRouter.js#L354` | P1 library | todo |  |
 | A0196 | endpoint | `POST /api/genres/rename` (MiscController.renameGenre) | `server/routers/ApiRouter.js#L355` | P1 library | todo |  |
 | A0197 | endpoint | `DELETE /api/genres/:genre` (MiscController.deleteGenre) | `server/routers/ApiRouter.js#L356` | P1 library | todo |  |
-<<<<<<< HEAD
 | A0198 | endpoint | `POST /api/validate-cron` (MiscController.validateCronExpression) | `server/routers/ApiRouter.js#L357` | P6 server admin | done | `server/tests/abs_admin.rs::schedules_and_tasks_answer_like_the_original` |
-=======
-| A0198 | endpoint | `POST /api/validate-cron` (MiscController.validateCronExpression) | `server/routers/ApiRouter.js#L357` | P6 server admin | todo |  |
->>>>>>> origin/main
 | A0199 | endpoint | `GET /api/auth-settings` (MiscController.getAuthSettings) | `server/routers/ApiRouter.js#L358` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |

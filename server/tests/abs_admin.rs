@@ -41,8 +41,14 @@ async fn server_settings_change_like_the_original() {
     let row = st.abs.one("SELECT titleIgnorePrefix FROM books WHERE id = 'b1'", vec![]).unwrap().unwrap();
     assert_eq!(row["titleIgnorePrefix"], "Example");
     st.abs.execute("DELETE FROM books WHERE id = 'b1'", vec![]).unwrap();
-    for name in ["sorting_prefixes", "sorting_prefixes_empty", "sorting_prefixes_blank", "sorting_prefixes_not_list", "sorting_prefixes_guest", "sorting_prefixes_reset"]
-    {
+    for name in [
+        "sorting_prefixes",
+        "sorting_prefixes_empty",
+        "sorting_prefixes_blank",
+        "sorting_prefixes_not_list",
+        "sorting_prefixes_guest",
+        "sorting_prefixes_reset",
+    ] {
         r.like(name).await;
     }
 }
@@ -72,7 +78,15 @@ async fn schedules_and_tasks_answer_like_the_original() {
 async fn metadata_providers_are_added_and_removed_like_the_original() {
     let (mut r, st, _dir) = set_up("abs-admin-providers").await;
     with_guest(&mut r).await;
-    for name in ["providers", "providers_create", "providers_create_missing", "providers_create_bad_url", "providers_create_podcast", "providers_list", "providers_guest"] {
+    for name in [
+        "providers",
+        "providers_create",
+        "providers_create_missing",
+        "providers_create_bad_url",
+        "providers_create_podcast",
+        "providers_list",
+        "providers_guest",
+    ] {
         r.like(name).await;
     }
     // a library that uses the provider goes back to Google Books when it is removed

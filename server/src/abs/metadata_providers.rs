@@ -119,11 +119,12 @@ async fn remove(State(st): State<AppState>, me: AbsUser, Path(id): Path<String>)
     };
     let fallback = if p.media_type.as_deref() == Some("book") { "google" } else { "itunes" };
     let done = models::delete::<CustomMetadataProvider>(&st.abs, &id).and_then(|_| {
-        st.abs.execute(
-            "UPDATE libraries SET provider = ?, updatedAt = ? WHERE provider = ?",
-            vec![json!(fallback), json!(models::date_now()), json!(format!("custom-{id}"))],
-        )
-        .map(|_| ())
+        st.abs
+            .execute(
+                "UPDATE libraries SET provider = ?, updatedAt = ? WHERE provider = ?",
+                vec![json!(fallback), json!(models::date_now()), json!(format!("custom-{id}"))],
+            )
+            .map(|_| ())
     });
     if let Err(e) = done {
         return e.into_response();

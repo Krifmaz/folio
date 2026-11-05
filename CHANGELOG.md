@@ -3,13 +3,10 @@
 ## Unreleased
 
 ### Added
-<<<<<<< HEAD
 - Server settings work like Audiobookshelf's: admins change the settings and the words ignored when sorting
   titles (sort titles are refreshed), check a schedule before saving it, add and remove their own metadata
   providers, and set the mail server and e-reader devices with who may use each. The task list the apps show is
   in place for the jobs that will use it. Each answer is checked against the original's own.
-=======
->>>>>>> origin/main
 - Users, API keys and the sign-in settings work like Audiobookshelf's: admins add, change and remove users and
   their permissions, make API keys that sign in as a user (with an expiry, turned on or off), and set the sign-in
   message, sign-in methods and OpenID app addresses; everyone can change their own password, which signs them out

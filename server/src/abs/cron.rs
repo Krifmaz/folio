@@ -16,7 +16,10 @@ fn valid_field(field: &str, min: i64, max: i64) -> bool {
     field.split(',').all(|option| {
         let in_range = parse_int(option).is_none_or(|n| n >= min && n <= max);
         let digits = !option.is_empty() && option.chars().all(|c| c.is_ascii_digit());
-        in_range && (digits || option == "*" || option.strip_prefix("*/").is_some_and(|d| !d.is_empty() && d.chars().all(|c| c.is_ascii_digit())))
+        in_range
+            && (digits
+                || option == "*"
+                || option.strip_prefix("*/").is_some_and(|d| !d.is_empty() && d.chars().all(|c| c.is_ascii_digit())))
     })
 }
 
@@ -42,7 +45,8 @@ pub fn convert(expression: &str) -> Option<Vec<String>> {
         }
         *field = steps(field)?;
         if i < 6 {
-            *field = field.split(',').map(|n| parse_int(n).map(|v| v.to_string()).unwrap_or_else(|| "NaN".into())).collect::<Vec<_>>().join(",");
+            *field =
+                field.split(',').map(|n| parse_int(n).map(|v| v.to_string()).unwrap_or_else(|| "NaN".into())).collect::<Vec<_>>().join(",");
         }
     }
     Some(fields)
@@ -158,9 +162,8 @@ fn steps(field: &str) -> Option<String> {
     if values.is_empty() || divider.is_empty() || !divider.chars().all(|c| c.is_ascii_alphanumeric() || c == '_') {
         return Some(field.to_string());
     }
-    if js_number(divider).is_none() {
-        return None;
-    }
+    // the original throws when the step isn't a number at all
+    js_number(divider)?;
     let d = parse_int(divider);
     let kept: Vec<String> = values
         .split(',')
@@ -227,8 +230,19 @@ mod tests {
 
     #[test]
     fn refuses_the_schedules_the_original_refuses() {
-        for bad in ["", "61 * * * *", "* * *", "*/x * * * *", "* 24 * * *", "* * 0 * *", "* * * 13 *", "a b c d e", "0 0 * * 8", "0 0 * * * * 1/x", "*,* * * * *"]
-        {
+        for bad in [
+            "",
+            "61 * * * *",
+            "* * *",
+            "*/x * * * *",
+            "* 24 * * *",
+            "* * 0 * *",
+            "* * * 13 *",
+            "a b c d e",
+            "0 0 * * 8",
+            "0 0 * * * * 1/x",
+            "*,* * * * *",
+        ] {
             assert!(!validate(bad), "{bad}");
         }
     }
