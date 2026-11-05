@@ -5,3 +5,10 @@ ref = "v2.37.2"
 commit = "edb1f7efc92ecacdef51aafb4d9d5054ce10604f"
 commit_date = "2026-10-23T14:36:19-05:00"
 from = "server"
+
+[readarr]
+repo = "https://github.com/Readarr/Readarr"
+ref = "develop"
+commit = "0b79d3000d4e5f8425f499970b0190e2c421fceb"
+commit_date = "2025-06-27T11:17:54+01:00"
+from = "src"
