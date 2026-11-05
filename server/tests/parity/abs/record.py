@@ -80,12 +80,16 @@ def dig(value, path):
 def ctx_needed(r):
     """The {placeholders} a request uses."""
     import re
-    return set(re.findall(r"\{([a-z0-9_]+)\}", json.dumps(r.get("body")) + json.dumps(r.get("headers")) + r["path"]))
+    return set(re.findall(r"\{(?:b64:)?([a-z0-9_]+)\}", json.dumps(r.get("body")) + json.dumps(r.get("headers")) + r["path"]))
 
 
 def fill(text):
+    """Fill {key} with a saved value, and {b64:key} with it base64-encoded for a URL (library page filters)."""
+    import base64
+    import urllib.parse
     for k, v in ctx.items():
         text = text.replace("{" + k + "}", str(v))
+        text = text.replace("{b64:" + k + "}", urllib.parse.quote(base64.b64encode(str(v).encode()).decode(), safe=""))
     return text
 
 
@@ -148,6 +152,21 @@ for r in requests:
 
 with open(os.path.join(out, "context.json"), "w", encoding="utf-8") as f:
     json.dump(ctx, f, indent=1, sort_keys=True)
+
+# Every row of every table once all requests ran, so a test can load the original's own data into Folio and
+# replay the last requests (the read-only ones at the end of requests.json) against the same state.
+time.sleep(2)
+snap = sqlite3.connect(":memory:")
+sqlite3.connect(f"file:{db_path}?mode=ro", uri=True).backup(snap)
+rows = {}
+for (t,) in snap.execute("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name"):
+    cur = snap.execute(f'SELECT * FROM "{t}" ORDER BY rowid')
+    cols = [d[0] for d in cur.description]
+    rows[t] = [dict(zip(cols, r)) for r in cur]
+with open(os.path.join(out, "fixtures", "_db_end.json"), "w", encoding="utf-8") as f:
+    json.dump(rows, f, indent=1, sort_keys=True, ensure_ascii=False)
+    f.write("\n")
+print("database rows written")
 con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
 with open(os.path.join(out, "schema.sql"), "w", encoding="utf-8") as f:
     for typ, name, sql in con.execute("SELECT type, name, sql FROM sqlite_master WHERE sql IS NOT NULL ORDER BY type DESC, name"):
