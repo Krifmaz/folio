@@ -6,6 +6,7 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The mobile app's stats page and home shelves are checked against Folio (PARITY M0002, M0006, M0010, M0017).
 - Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
   listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item
   cache. Each answer is checked against the original's own.
