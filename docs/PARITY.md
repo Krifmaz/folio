@@ -80,8 +80,8 @@ repository at the pinned commit.
 | A0040 | endpoint | `PATCH /api/items/:id/cover` (LibraryItemController.updateCover) | `server/routers/ApiRouter.js#L114` | P1 library | todo |  |
 | A0041 | endpoint | `DELETE /api/items/:id/cover` (LibraryItemController.removeCover) | `server/routers/ApiRouter.js#L115` | P1 library | todo |  |
 | A0042 | endpoint | `POST /api/items/:id/match` (LibraryItemController.match) | `server/routers/ApiRouter.js#L116` | P1 library | todo |  |
-| A0043 | endpoint | `POST /api/items/:id/play` (LibraryItemController.startPlaybackSession) | `server/routers/ApiRouter.js#L117` | P3 playback | todo |  |
-| A0044 | endpoint | `POST /api/items/:id/play/:episodeId` (LibraryItemController.startEpisodePlaybackSession) | `server/routers/ApiRouter.js#L118` | P3 playback | todo |  |
+| A0043 | endpoint | `POST /api/items/:id/play` (LibraryItemController.startPlaybackSession) | `server/routers/ApiRouter.js#L117` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0044 | endpoint | `POST /api/items/:id/play/:episodeId` (LibraryItemController.startEpisodePlaybackSession) | `server/routers/ApiRouter.js#L118` | P3 playback | wip |  |
 | A0045 | endpoint | `PATCH /api/items/:id/tracks` (LibraryItemController.updateTracks) | `server/routers/ApiRouter.js#L119` | P1 library | todo |  |
 | A0046 | endpoint | `POST /api/items/:id/scan` (LibraryItemController.scan) | `server/routers/ApiRouter.js#L120` | P1 library | todo |  |
 | A0047 | endpoint | `GET /api/items/:id/metadata-object` (LibraryItemController.getMetadataObject) | `server/routers/ApiRouter.js#L121` | P1 library | todo |  |
@@ -99,8 +99,8 @@ repository at the pinned commit.
 | A0059 | endpoint | `PATCH /api/users/:id` (UserController.update) | `server/routers/ApiRouter.js#L137` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0060 | endpoint | `DELETE /api/users/:id` (UserController.delete) | `server/routers/ApiRouter.js#L138` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0061 | endpoint | `PATCH /api/users/:id/openid-unlink` (UserController.unlinkFromOpenID) | `server/routers/ApiRouter.js#L139` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
-| A0062 | endpoint | `GET /api/users/:id/listening-sessions` (UserController.getListeningSessions) | `server/routers/ApiRouter.js#L140` | P3 playback | todo |  |
-| A0063 | endpoint | `GET /api/users/:id/listening-stats` (UserController.getListeningStats) | `server/routers/ApiRouter.js#L141` | P3 playback | todo |  |
+| A0062 | endpoint | `GET /api/users/:id/listening-sessions` (UserController.getListeningSessions) | `server/routers/ApiRouter.js#L140` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0063 | endpoint | `GET /api/users/:id/listening-stats` (UserController.getListeningStats) | `server/routers/ApiRouter.js#L141` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0064 | endpoint | `POST /api/collections` (CollectionController.create) | `server/routers/ApiRouter.js#L146` | P4 collections | todo |  |
 | A0065 | endpoint | `GET /api/collections` (CollectionController.findAll) | `server/routers/ApiRouter.js#L147` | P4 collections | todo |  |
 | A0066 | endpoint | `GET /api/collections/:id` (CollectionController.findOne) | `server/routers/ApiRouter.js#L148` | P4 collections | todo |  |
@@ -126,9 +126,9 @@ repository at the pinned commit.
 | A0086 | endpoint | `GET /api/me/progress` (MeController.getAllMediaProgress) | `server/routers/ApiRouter.js#L176` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_follows_the_originals_rules` |
 | A0087 | endpoint | `GET /api/me/bookmarks` (MeController.getAllBookmarks) | `server/routers/ApiRouter.js#L177` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
 | A0088 | endpoint | `GET /api/me/bookmarks/:libraryItemId` (MeController.getBookmarksForLibraryItem) | `server/routers/ApiRouter.js#L178` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
-| A0089 | endpoint | `GET /api/me/listening-sessions` (MeController.getListeningSessions) | `server/routers/ApiRouter.js#L179` | P3 playback | todo |  |
-| A0090 | endpoint | `GET /api/me/item/listening-sessions/:libraryItemId/:episodeId?` (MeController.getItemListeningSessions) | `server/routers/ApiRouter.js#L180` | P3 playback | todo |  |
-| A0091 | endpoint | `GET /api/me/listening-stats` (MeController.getListeningStats) | `server/routers/ApiRouter.js#L181` | P3 playback | todo |  |
+| A0089 | endpoint | `GET /api/me/listening-sessions` (MeController.getListeningSessions) | `server/routers/ApiRouter.js#L179` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0090 | endpoint | `GET /api/me/item/listening-sessions/:libraryItemId/:episodeId?` (MeController.getItemListeningSessions) | `server/routers/ApiRouter.js#L180` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0091 | endpoint | `GET /api/me/listening-stats` (MeController.getListeningStats) | `server/routers/ApiRouter.js#L181` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0092 | endpoint | `GET /api/me/progress/:id/remove-from-continue-listening` (MeController.removeItemFromContinueListening) | `server/routers/ApiRouter.js#L182` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_follows_the_originals_rules` |
 | A0093 | endpoint | `GET /api/me/progress/:id/:episodeId?` (MeController.getMediaProgress) | `server/routers/ApiRouter.js#L183` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_and_bookmarks_answer_like_the_original` |
 | A0094 | endpoint | `PATCH /api/me/progress/batch/update` (MeController.batchUpdateMediaProgress) | `server/routers/ApiRouter.js#L184` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_follows_the_originals_rules` |
@@ -161,15 +161,15 @@ repository at the pinned commit.
 | A0121 | endpoint | `DELETE /api/authors/:id/image` (AuthorController.deleteImage) | `server/routers/ApiRouter.js#L223` | P1 library | todo |  |
 | A0122 | endpoint | `GET /api/series/:id` (SeriesController.findOne) | `server/routers/ApiRouter.js#L228` | P1 library | todo |  |
 | A0123 | endpoint | `PATCH /api/series/:id` (SeriesController.update) | `server/routers/ApiRouter.js#L229` | P1 library | todo |  |
-| A0124 | endpoint | `GET /api/sessions` (SessionController.getAllWithUserData) | `server/routers/ApiRouter.js#L234` | P3 playback | todo |  |
-| A0125 | endpoint | `DELETE /api/sessions/:id` (SessionController.delete) | `server/routers/ApiRouter.js#L235` | P3 playback | todo |  |
-| A0126 | endpoint | `GET /api/sessions/open` (SessionController.getOpenSessions) | `server/routers/ApiRouter.js#L236` | P3 playback | todo |  |
-| A0127 | endpoint | `POST /api/sessions/batch/delete` (SessionController.batchDelete) | `server/routers/ApiRouter.js#L237` | P3 playback | todo |  |
-| A0128 | endpoint | `POST /api/session/local` (SessionController.syncLocal) | `server/routers/ApiRouter.js#L238` | P3 playback | todo |  |
-| A0129 | endpoint | `POST /api/session/local-all` (SessionController.syncLocalSessions) | `server/routers/ApiRouter.js#L239` | P3 playback | todo |  |
-| A0130 | endpoint | `GET /api/session/:id` (SessionController.getOpenSession) | `server/routers/ApiRouter.js#L241` | P3 playback | todo |  |
-| A0131 | endpoint | `POST /api/session/:id/sync` (SessionController.sync) | `server/routers/ApiRouter.js#L242` | P3 playback | todo |  |
-| A0132 | endpoint | `POST /api/session/:id/close` (SessionController.close) | `server/routers/ApiRouter.js#L243` | P3 playback | todo |  |
+| A0124 | endpoint | `GET /api/sessions` (SessionController.getAllWithUserData) | `server/routers/ApiRouter.js#L234` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0125 | endpoint | `DELETE /api/sessions/:id` (SessionController.delete) | `server/routers/ApiRouter.js#L235` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0126 | endpoint | `GET /api/sessions/open` (SessionController.getOpenSessions) | `server/routers/ApiRouter.js#L236` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0127 | endpoint | `POST /api/sessions/batch/delete` (SessionController.batchDelete) | `server/routers/ApiRouter.js#L237` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0128 | endpoint | `POST /api/session/local` (SessionController.syncLocal) | `server/routers/ApiRouter.js#L238` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0129 | endpoint | `POST /api/session/local-all` (SessionController.syncLocalSessions) | `server/routers/ApiRouter.js#L239` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0130 | endpoint | `GET /api/session/:id` (SessionController.getOpenSession) | `server/routers/ApiRouter.js#L241` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0131 | endpoint | `POST /api/session/:id/sync` (SessionController.sync) | `server/routers/ApiRouter.js#L242` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
+| A0132 | endpoint | `POST /api/session/:id/close` (SessionController.close) | `server/routers/ApiRouter.js#L243` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0133 | endpoint | `POST /api/podcasts` (PodcastController.create) | `server/routers/ApiRouter.js#L248` | P5 podcasts and feeds | todo |  |
 | A0134 | endpoint | `POST /api/podcasts/feed` (PodcastController.getPodcastFeed) | `server/routers/ApiRouter.js#L249` | P5 podcasts and feeds | todo |  |
 | A0135 | endpoint | `POST /api/podcasts/opml/parse` (PodcastController.getFeedsFromOPMLText) | `server/routers/ApiRouter.js#L250` | P5 podcasts and feeds | todo |  |
@@ -414,7 +414,7 @@ repository at the pinned commit.
 | A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | todo |  |
 | A0375 | job | daily log files and rotation (`loggerDailyLogsToKeep`, `loggerScannerLogsToKeep`) | `server/managers/LogManager.js` | P6 server admin | todo |  |
 | A0376 | job | folder watcher: rescans changed items (`scannerDisableWatcher`) | `server/Watcher.js` | P1 library | todo |  |
-| A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | todo |  |
+| A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | wip |  |
 | A0378 | job | embed-metadata queue (Quick Embed) | `server/managers/AudioMetadataManager.js` | P6 server admin | todo |  |
 | A0379 | job | M4B merge tasks | `server/managers/AbMergeManager.js` | P6 server admin | todo |  |
 | A0380 | job | cover and item cache purge | `server/managers/CacheManager.js` | P6 server admin | todo |  |

@@ -1,0 +1,10 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/session/{session}"
+ },
+ "status": 404
+}
