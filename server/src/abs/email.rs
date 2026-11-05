@@ -1,8 +1,7 @@
 //! The port of the original's email settings (`server/controllers/EmailController.js` and
 //! `objects/settings/EmailSettings.js`): the mail server Folio sends e-books through, and the e-reader devices
-//! (Kindle and others by address) with who may send to each. Sending itself (`/api/emails/test`,
-//! `/api/emails/send-ebook-to-device` once the checks pass) comes with the mail sender. Answers are the original's
-//! (tests/abs_admin.rs).
+//! (Kindle and others by address) with who may send to each, and the sending itself (`managers/EmailManager.js`):
+//! a test mail and e-books to devices. Answers are the original's (tests/abs_admin.rs and tests/abs_email.rs).
 
 use crate::abs::auth::routes::body_fields;
 use crate::abs::auth::{send_status, AbsUser};
@@ -17,12 +16,20 @@ use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
 use axum::{Json, Router};
 use kit_server_core::{Db, Result};
+use lettre::address::AddressError;
+use lettre::message::header::ContentType;
+use lettre::message::{Attachment, Mailbox, MessageBuilder, MultiPart, SinglePart};
+use lettre::transport::smtp::authentication::Credentials;
+use lettre::transport::smtp::client::{Tls, TlsParameters};
+use lettre::{AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor};
 use serde_json::{json, Map, Value};
+use std::time::Duration;
 
 /// The routes, under `/api/emails`.
 pub fn router() -> Router<AppState> {
     Router::new()
         .route("/api/emails/settings", get(settings).patch(update_settings))
+        .route("/api/emails/test", post(send_test))
         .route("/api/emails/ereader-devices", post(update_devices))
         .route("/api/emails/send-ebook-to-device", post(send_ebook))
 }
@@ -221,8 +228,7 @@ async fn update_devices(State(st): State<AppState>, me: AbsUser, headers: Header
 
 /// `POST /api/emails/send-ebook-to-device`: sends an item's e-book to a device by name (`deviceName`,
 /// `libraryItemId`), after the original's checks: the device exists and the user may use it, the item exists,
-/// the user may see it and it has an e-book. The mail sender isn't ported yet, so a request that passes every
-/// check is answered like the original answers when it can't reach the mail server.
+/// the user may see it and it has an e-book. The e-book goes as an attachment (`EmailManager.sendEBookToDevice`).
 async fn send_ebook(State(st): State<AppState>, me: AbsUser, headers: HeaderMap, body: Bytes) -> Response {
     let fields = body_fields(&headers, &body);
     let devices = match load(&st.abs) {
@@ -254,8 +260,117 @@ async fn send_ebook(State(st): State<AppState>, me: AbsUser, headers: HeaderMap,
     if row.get("ebookFile").is_none_or(|f| f.is_null() || f == &json!("null")) {
         return send_text(StatusCode::NOT_FOUND, "Ebook file not found");
     }
-    tracing::error!("Sending e-books by email isn't available in this version of Folio yet");
-    send_text(StatusCode::BAD_REQUEST, "Failed to verify SMTP connection configuration")
+    let ebook: Value = row.get("ebookFile").and_then(Value::as_str).and_then(|f| serde_json::from_str(f).ok()).unwrap_or_default();
+    let file_name = ebook["metadata"]["filename"].as_str().unwrap_or_default().to_string();
+    let path = ebook["metadata"]["path"].as_str().unwrap_or_default().to_string();
+    let to = device.get("email").and_then(Value::as_str).unwrap_or_default().to_string();
+    let device_name = device.get("name").and_then(Value::as_str).unwrap_or_default();
+    tracing::info!("Sending ebook \"{file_name}\" to device \"{device_name}\"/\"{to}\"");
+    let s = match load(&st.abs) {
+        Ok(s) => s,
+        Err(e) => return e.into_response(),
+    };
+    let Some(transport) = verified(&s).await else {
+        return send_text(StatusCode::BAD_REQUEST, "Failed to verify SMTP connection configuration");
+    };
+    let sent = async {
+        let bytes = tokio::fs::read(&path).await.map_err(|e| format!("The e-book file {path} can't be read: {e}"))?;
+        let kind =
+            ContentType::parse(mime_guess::from_path(&file_name).first_or_octet_stream().essence_str()).map_err(|e| e.to_string())?;
+        let body = MultiPart::mixed()
+            .singlepart(SinglePart::html(String::from("<div dir=\"auto\"></div>")))
+            .singlepart(Attachment::new(file_name.clone()).body(bytes, kind));
+        let mail = message(&s, &to, "Here is your Ebook!")?.multipart(body).map_err(|e| e.to_string())?;
+        transport.send(mail).await.map_err(|e| e.to_string())
+    };
+    match sent.await {
+        Ok(_) => {
+            tracing::info!("Ebook sent to device successfully");
+            send_status(StatusCode::OK)
+        }
+        Err(e) => {
+            tracing::error!("Failed to send ebook to device: {e}");
+            send_text(StatusCode::BAD_REQUEST, if e.is_empty() { "Failed to send ebook to device" } else { &e })
+        }
+    }
+}
+
+/// `POST /api/emails/test` (admins only): checks the mail server and sends a test mail to the test address, or
+/// to the sender's address when there is none (`EmailManager.sendTest`).
+async fn send_test(State(st): State<AppState>, me: AbsUser) -> Response {
+    if let Some(r) = admin_only(&me.user) {
+        return r;
+    }
+    tracing::info!("Sending test email");
+    let s = match load(&st.abs) {
+        Ok(s) => s,
+        Err(e) => return e.into_response(),
+    };
+    let Some(transport) = verified(&s).await else {
+        return send_text(StatusCode::BAD_REQUEST, "Failed to verify SMTP connection configuration");
+    };
+    let to = [text(&s, "testAddress"), text(&s, "fromAddress")].into_iter().flatten().next().unwrap_or_default();
+    let sent = async {
+        let mail = message(&s, &to, "Test email from Audiobookshelf")?.body(String::from("Success!")).map_err(|e| e.to_string())?;
+        transport.send(mail).await.map_err(|e| e.to_string())
+    };
+    match sent.await {
+        Ok(_) => {
+            tracing::info!("Test email sent successfully");
+            send_status(StatusCode::OK)
+        }
+        Err(e) => {
+            tracing::error!("Failed to send test email: {e}");
+            send_text(StatusCode::BAD_REQUEST, if e.is_empty() { "Failed to send test email" } else { &e })
+        }
+    }
+}
+
+/// A setting that holds text, when it isn't empty (JavaScript's truthy strings).
+fn text(s: &Map<String, Value>, key: &str) -> Option<String> {
+    s.get(key).and_then(Value::as_str).filter(|v| !v.is_empty()).map(String::from)
+}
+
+/// How the mail server is reached (`getTransportObject` with nodemailer's defaults): the host (`localhost` when
+/// none is set), the port (465 with `secure`, otherwise 587, when none is set), TLS from the start only on port
+/// 465 and otherwise when the server offers it, the sign-in when a user is set, and certificates that may be
+/// self-signed when `rejectUnauthorized` is off.
+pub fn transport(s: &Map<String, Value>) -> std::result::Result<AsyncSmtpTransport<Tokio1Executor>, String> {
+    let host = text(s, "host").unwrap_or_else(|| "localhost".into());
+    let set_port = s.get("port").and_then(Value::as_f64).filter(|p| *p != 0.0);
+    let secure = truthy(s.get("secure")) && set_port == Some(465.0);
+    let port = set_port.map(|p| p as u16).unwrap_or(if secure { 465 } else { 587 });
+    let strict = s.get("rejectUnauthorized").is_none_or(|v| truthy(Some(v)));
+    let params = TlsParameters::builder(host.clone())
+        .dangerous_accept_invalid_certs(!strict)
+        .dangerous_accept_invalid_hostnames(!strict)
+        .build()
+        .map_err(|e| e.to_string())?;
+    let mut b = AsyncSmtpTransport::<Tokio1Executor>::builder_dangerous(host)
+        .port(port)
+        .tls(if secure { Tls::Wrapper(params) } else { Tls::Opportunistic(params) })
+        .timeout(Some(Duration::from_secs(120)));
+    if let (Some(user), Some(pass)) = (text(s, "user"), s.get("pass")) {
+        b = b.credentials(Credentials::new(user, pass.as_str().unwrap_or_default().to_string()));
+    }
+    Ok(b.build())
+}
+
+/// The transport, once the mail server answered and accepted the sign-in (nodemailer's `verify`); `None`, with
+/// the reason in the log, when it didn't.
+async fn verified(s: &Map<String, Value>) -> Option<AsyncSmtpTransport<Tokio1Executor>> {
+    let checked = match transport(s) {
+        Ok(t) => t.test_connection().await.map_err(|e| e.to_string()).and_then(|ok| if ok { Ok(t) } else { Err("no answer".into()) }),
+        Err(e) => Err(e),
+    };
+    checked.map_err(|e| tracing::error!("Failed to verify SMTP connection config: {e}")).ok()
+}
+
+/// A mail from the sender's address (`fromAddress`) to `to` with the subject, ready for its body.
+fn message(s: &Map<String, Value>, to: &str, subject: &str) -> std::result::Result<MessageBuilder, String> {
+    let from: Mailbox = text(s, "fromAddress").unwrap_or_default().parse().map_err(|e: AddressError| e.to_string())?;
+    let to: Mailbox = to.parse().map_err(|e: AddressError| e.to_string())?;
+    Ok(Message::builder().from(from).to(to).subject(subject))
 }
 
 #[cfg(test)]
