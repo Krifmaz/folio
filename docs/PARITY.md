@@ -92,13 +92,13 @@ repository at the pinned commit.
 | A0052 | endpoint | `GET /api/items/:id/file/:fileid/download` (LibraryItemController.downloadLibraryFile) | `server/routers/ApiRouter.js#L126` | P1 library | todo |  |
 | A0053 | endpoint | `GET /api/items/:id/ebook/:fileid?` (LibraryItemController.getEBookFile) | `server/routers/ApiRouter.js#L127` | P1 library | todo |  |
 | A0054 | endpoint | `PATCH /api/items/:id/ebook/:fileid/status` (LibraryItemController.updateEbookFileStatus) | `server/routers/ApiRouter.js#L128` | P1 library | todo |  |
-| A0055 | endpoint | `POST /api/users` (UserController.create) | `server/routers/ApiRouter.js#L133` | P2 users | todo |  |
-| A0056 | endpoint | `GET /api/users` (UserController.findAll) | `server/routers/ApiRouter.js#L134` | P2 users | todo |  |
-| A0057 | endpoint | `GET /api/users/online` (UserController.getOnlineUsers) | `server/routers/ApiRouter.js#L135` | P2 users | todo |  |
-| A0058 | endpoint | `GET /api/users/:id` (UserController.findOne) | `server/routers/ApiRouter.js#L136` | P2 users | todo |  |
-| A0059 | endpoint | `PATCH /api/users/:id` (UserController.update) | `server/routers/ApiRouter.js#L137` | P2 users | todo |  |
-| A0060 | endpoint | `DELETE /api/users/:id` (UserController.delete) | `server/routers/ApiRouter.js#L138` | P2 users | todo |  |
-| A0061 | endpoint | `PATCH /api/users/:id/openid-unlink` (UserController.unlinkFromOpenID) | `server/routers/ApiRouter.js#L139` | P2 users | todo |  |
+| A0055 | endpoint | `POST /api/users` (UserController.create) | `server/routers/ApiRouter.js#L133` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0056 | endpoint | `GET /api/users` (UserController.findAll) | `server/routers/ApiRouter.js#L134` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0057 | endpoint | `GET /api/users/online` (UserController.getOnlineUsers) | `server/routers/ApiRouter.js#L135` | P2 users | wip | who is online works; open playback sessions come with P3 playback sessions |
+| A0058 | endpoint | `GET /api/users/:id` (UserController.findOne) | `server/routers/ApiRouter.js#L136` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0059 | endpoint | `PATCH /api/users/:id` (UserController.update) | `server/routers/ApiRouter.js#L137` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0060 | endpoint | `DELETE /api/users/:id` (UserController.delete) | `server/routers/ApiRouter.js#L138` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
+| A0061 | endpoint | `PATCH /api/users/:id/openid-unlink` (UserController.unlinkFromOpenID) | `server/routers/ApiRouter.js#L139` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0062 | endpoint | `GET /api/users/:id/listening-sessions` (UserController.getListeningSessions) | `server/routers/ApiRouter.js#L140` | P3 playback | todo |  |
 | A0063 | endpoint | `GET /api/users/:id/listening-stats` (UserController.getListeningStats) | `server/routers/ApiRouter.js#L141` | P3 playback | todo |  |
 | A0064 | endpoint | `POST /api/collections` (CollectionController.create) | `server/routers/ApiRouter.js#L146` | P4 collections | todo |  |
@@ -137,7 +137,7 @@ repository at the pinned commit.
 | A0097 | endpoint | `POST /api/me/item/:id/bookmark` (MeController.createBookmark) | `server/routers/ApiRouter.js#L187` | P3 playback | done | `server/tests/parity_abs_playback.rs::progress_and_bookmarks_answer_like_the_original` |
 | A0098 | endpoint | `PATCH /api/me/item/:id/bookmark` (MeController.updateBookmark) | `server/routers/ApiRouter.js#L188` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
 | A0099 | endpoint | `DELETE /api/me/item/:id/bookmark/:time` (MeController.removeBookmark) | `server/routers/ApiRouter.js#L189` | P3 playback | done | `server/tests/parity_abs_playback.rs::bookmarks_follow_the_originals_rules` |
-| A0100 | endpoint | `PATCH /api/me/password` (MeController.updatePassword) | `server/routers/ApiRouter.js#L190` | P2 users | todo |  |
+| A0100 | endpoint | `PATCH /api/me/password` (MeController.updatePassword) | `server/routers/ApiRouter.js#L190` | P2 users | done | `server/tests/abs_users.rs::a_password_change_signs_out_elsewhere_like_the_original` |
 | A0101 | endpoint | `GET /api/me/items-in-progress` (MeController.getAllLibraryItemsInProgress) | `server/routers/ApiRouter.js#L191` | P2 users | todo |  |
 | A0102 | endpoint | `GET /api/me/series/:id/remove-from-continue-listening` (MeController.removeSeriesFromContinueListening) | `server/routers/ApiRouter.js#L192` | P2 users | todo |  |
 | A0103 | endpoint | `GET /api/me/series/:id/readd-to-continue-listening` (MeController.readdSeriesFromContinueListening) | `server/routers/ApiRouter.js#L193` | P2 users | todo |  |
@@ -220,10 +220,10 @@ repository at the pinned commit.
 | A0180 | endpoint | `DELETE /api/share/mediaitem/:id` (ShareController.deleteMediaItemShare) | `server/routers/ApiRouter.js#L327` | P6 server admin | todo |  |
 | A0181 | endpoint | `GET /api/stats/year/:year` (StatsController.getAdminStatsForYear) | `server/routers/ApiRouter.js#L332` | P6 server admin | todo |  |
 | A0182 | endpoint | `GET /api/stats/server` (StatsController.getServerStats) | `server/routers/ApiRouter.js#L333` | P6 server admin | todo |  |
-| A0183 | endpoint | `GET /api/api-keys` (ApiKeyController.getAll) | `server/routers/ApiRouter.js#L338` | P6 server admin | todo |  |
-| A0184 | endpoint | `POST /api/api-keys` (ApiKeyController.create) | `server/routers/ApiRouter.js#L339` | P6 server admin | todo |  |
-| A0185 | endpoint | `PATCH /api/api-keys/:id` (ApiKeyController.update) | `server/routers/ApiRouter.js#L340` | P6 server admin | todo |  |
-| A0186 | endpoint | `DELETE /api/api-keys/:id` (ApiKeyController.delete) | `server/routers/ApiRouter.js#L341` | P6 server admin | todo |  |
+| A0183 | endpoint | `GET /api/api-keys` (ApiKeyController.getAll) | `server/routers/ApiRouter.js#L338` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
+| A0184 | endpoint | `POST /api/api-keys` (ApiKeyController.create) | `server/routers/ApiRouter.js#L339` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
+| A0185 | endpoint | `PATCH /api/api-keys/:id` (ApiKeyController.update) | `server/routers/ApiRouter.js#L340` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
+| A0186 | endpoint | `DELETE /api/api-keys/:id` (ApiKeyController.delete) | `server/routers/ApiRouter.js#L341` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0187 | endpoint | `POST /api/upload` (MiscController.handleUpload) | `server/routers/ApiRouter.js#L346` | P6 server admin | todo |  |
 | A0188 | endpoint | `GET /api/tasks` (MiscController.getTasks) | `server/routers/ApiRouter.js#L347` | P6 server admin | todo |  |
 | A0189 | endpoint | `PATCH /api/settings` (MiscController.updateServerSettings) | `server/routers/ApiRouter.js#L348` | P6 server admin | todo |  |
@@ -236,8 +236,8 @@ repository at the pinned commit.
 | A0196 | endpoint | `POST /api/genres/rename` (MiscController.renameGenre) | `server/routers/ApiRouter.js#L355` | P1 library | todo |  |
 | A0197 | endpoint | `DELETE /api/genres/:genre` (MiscController.deleteGenre) | `server/routers/ApiRouter.js#L356` | P1 library | todo |  |
 | A0198 | endpoint | `POST /api/validate-cron` (MiscController.validateCronExpression) | `server/routers/ApiRouter.js#L357` | P6 server admin | todo |  |
-| A0199 | endpoint | `GET /api/auth-settings` (MiscController.getAuthSettings) | `server/routers/ApiRouter.js#L358` | P2 users | todo |  |
-| A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | todo |  |
+| A0199 | endpoint | `GET /api/auth-settings` (MiscController.getAuthSettings) | `server/routers/ApiRouter.js#L358` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
+| A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |
 | A0202 | endpoint | `GET /api/logger-data` (MiscController.getLoggerData) | `server/routers/ApiRouter.js#L361` | P6 server admin | todo |  |
 | A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | todo |  |
@@ -517,15 +517,15 @@ repository at the pinned commit.
 
 | ID | Kind | Item | Upstream source | Track | Status | Proof |
 | --- | --- | --- | --- | --- | --- | --- |
-| M0001 | page | `/account` | `pages/account.vue` | M mobile fork | todo |  |
+| M0001 | page | `/account` | `pages/account.vue` | M mobile fork | done | `docs/parity/screens/M0001.png` (signed in to Folio: its address, the user and the server version) |
 | M0002 | page | `/bookshelf` | `pages/bookshelf.vue` | M mobile fork | todo |  |
 | M0003 | page | `/connect` | `pages/connect.vue` | M mobile fork | done | `docs/parity/screens/M0003.png` (connect and sign in to a Folio server, then its bookshelf) |
 | M0004 | page | `/downloading` | `pages/downloading.vue` | M mobile fork | todo |  |
 | M0005 | page | `/downloads` | `pages/downloads.vue` | M mobile fork | todo |  |
 | M0006 | page | `/` | `pages/index.vue` | M mobile fork | todo |  |
-| M0007 | page | `/logs` | `pages/logs.vue` | M mobile fork | todo |  |
+| M0007 | page | `/logs` | `pages/logs.vue` | M mobile fork | done | `docs/parity/screens/M0007.png` (the app's own log after signing in to Folio) |
 | M0008 | page | `/search` | `pages/search.vue` | M mobile fork | todo |  |
-| M0009 | page | `/settings` | `pages/settings.vue` | M mobile fork | todo |  |
+| M0009 | page | `/settings` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart), `docs/parity/screens/M0009.png` |
 | M0010 | page | `/stats` | `pages/stats.vue` | M mobile fork | todo |  |
 | M0011 | page | `/playlist/:id` | `pages/playlist/_id.vue` | M mobile fork | todo |  |
 | M0012 | page | `/collection/:id` | `pages/collection/_id.vue` | M mobile fork | todo |  |
@@ -535,39 +535,39 @@ repository at the pinned commit.
 | M0016 | page | `/bookshelf/collections` | `pages/bookshelf/collections.vue` | M mobile fork | todo |  |
 | M0017 | page | `/bookshelf` | `pages/bookshelf/index.vue` | M mobile fork | todo |  |
 | M0018 | page | `/bookshelf/latest` | `pages/bookshelf/latest.vue` | M mobile fork | todo |  |
-| M0019 | page | `/bookshelf/library` | `pages/bookshelf/library.vue` | M mobile fork | todo |  |
+| M0019 | page | `/bookshelf/library` | `pages/bookshelf/library.vue` | M mobile fork | done | `docs/parity/screens/M0019.png` (Folio's library with the original's recorded books) |
 | M0020 | page | `/bookshelf/playlists` | `pages/bookshelf/playlists.vue` | M mobile fork | todo |  |
 | M0021 | page | `/bookshelf/series/:id` | `pages/bookshelf/series/_id.vue` | M mobile fork | todo |  |
 | M0022 | page | `/bookshelf/series` | `pages/bookshelf/series/index.vue` | M mobile fork | todo |  |
-| M0023 | page | `/item/:id` | `pages/item/_id/index.vue` | M mobile fork | todo |  |
+| M0023 | page | `/item/:id` | `pages/item/_id/index.vue` | M mobile fork | done | `docs/parity/screens/M0023.png` (a book from Folio: author, series, narrator, genre, chapters, tracks) |
 | M0024 | page | `/item/:id/:episode` | `pages/item/_id/_episode/index.vue` | M mobile fork | todo |  |
 | M0025 | page | `/localMedia/folders/:id` | `pages/localMedia/folders/_id.vue` | M mobile fork | todo |  |
 | M0026 | page | `/localMedia/folders` | `pages/localMedia/folders/index.vue` | M mobile fork | todo |  |
 | M0027 | page | `/localMedia/item/:id` | `pages/localMedia/item/_id.vue` | M mobile fork | todo |  |
-| M0028 | setting | device `allowSeekingOnMediaControls` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0029 | setting | device `androidAutoBrowseLimitForGrouping` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0030 | setting | device `androidAutoBrowseSeriesSequenceOrder` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0031 | setting | device `autoSleepTimer` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0032 | setting | device `autoSleepTimerAutoRewind` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0033 | setting | device `autoSleepTimerAutoRewindTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0034 | setting | device `autoSleepTimerEndTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0035 | setting | device `autoSleepTimerStartTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0036 | setting | device `disableAutoRewind` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0037 | setting | device `disableShakeToResetSleepTimer` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0038 | setting | device `disableSleepTimerFadeOut` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0039 | setting | device `disableSleepTimerResetFeedback` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0040 | setting | device `downloadUsingCellular` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0041 | setting | device `enableAltView` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0042 | setting | device `enableMp` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0043 | setting | device `enableSleepTimerAlmostDoneChime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0044 | setting | device `hapticFeedback` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0045 | setting | device `jumpBackwardsTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0046 | setting | device `jumpForwardTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0047 | setting | device `languageCode` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0048 | setting | device `lockOrientation` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0049 | setting | device `shakeSensitivity` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0050 | setting | device `sleepTimerLength` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0051 | setting | device `streamingUsingCellular` | `pages/settings.vue` | M mobile fork | todo |  |
+| M0028 | setting | device `allowSeekingOnMediaControls` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0029 | setting | device `androidAutoBrowseLimitForGrouping` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0030 | setting | device `androidAutoBrowseSeriesSequenceOrder` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0031 | setting | device `autoSleepTimer` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0032 | setting | device `autoSleepTimerAutoRewind` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0033 | setting | device `autoSleepTimerAutoRewindTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0034 | setting | device `autoSleepTimerEndTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0035 | setting | device `autoSleepTimerStartTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0036 | setting | device `disableAutoRewind` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0037 | setting | device `disableShakeToResetSleepTimer` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0038 | setting | device `disableSleepTimerFadeOut` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0039 | setting | device `disableSleepTimerResetFeedback` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0040 | setting | device `downloadUsingCellular` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0041 | setting | device `enableAltView` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0042 | setting | device `enableMp` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0043 | setting | device `enableSleepTimerAlmostDoneChime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0044 | setting | device `hapticFeedback` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0045 | setting | device `jumpBackwardsTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0046 | setting | device `jumpForwardTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0047 | setting | device `languageCode` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0048 | setting | device `lockOrientation` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0049 | setting | device `shakeSensitivity` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0050 | setting | device `sleepTimerLength` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0051 | setting | device `streamingUsingCellular` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
 | M0052 | action | offline downloads and local media | `android/, plugins/` | M mobile fork | todo |  |
 | M0053 | action | Android Auto browse tree | `android/, plugins/` | M mobile fork | todo |  |
 | M0054 | action | media notification and lock-screen controls | `android/, plugins/` | M mobile fork | todo |  |

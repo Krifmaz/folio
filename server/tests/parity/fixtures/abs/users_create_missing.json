@@ -1,0 +1,12 @@
+{
+ "body": "Username and password are required",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "username": "other"
+  },
+  "method": "POST",
+  "path": "/api/users"
+ },
+ "status": 400
+}

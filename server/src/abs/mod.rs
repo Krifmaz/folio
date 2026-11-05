@@ -7,6 +7,7 @@
 //! ([`SCHEMA`], recorded from the original's image). An existing Audiobookshelf database can therefore be used as
 //! it is.
 
+pub mod api_keys;
 pub mod auth;
 pub mod bookmarks;
 pub mod html;
@@ -16,6 +17,7 @@ pub mod models;
 pub mod progress;
 pub mod settings;
 pub mod socket;
+pub mod users;
 
 use crate::AppState;
 use axum::Router;
@@ -156,6 +158,8 @@ pub fn router() -> Router<AppState> {
         .merge(bookmarks::router())
         .merge(library::router())
         .merge(items::router())
+        .merge(users::router())
+        .merge(api_keys::router())
 }
 
 /// Test helpers: the recorded answers of the original and the comparison of tests/parity.

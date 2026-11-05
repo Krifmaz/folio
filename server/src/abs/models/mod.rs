@@ -149,6 +149,17 @@ pub fn date_text(ms: i64) -> String {
     format!("{y:04}-{m:02}-{d:02} {h:02}:{mi:02}:{s:02}.{milli:03} +00:00")
 }
 
+/// A stored time as the original's API sends a date (`Date.toJSON`): `YYYY-MM-DDTHH:MM:SS.SSSZ`, or null.
+pub fn date_iso(text: Option<&str>) -> Value {
+    match text.and_then(date_ms) {
+        Some(ms) => {
+            let t = date_text(ms);
+            Value::String(format!("{}T{}Z", &t[..10], &t[11..23]))
+        }
+        None => Value::Null,
+    }
+}
+
 /// Now, as the original stores it.
 pub fn date_now() -> String {
     date_text(now_ms())
@@ -206,6 +217,13 @@ fn civil_from_days(z: i64) -> (i64, i64, i64) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn stored_dates_read_as_the_apis_iso_text() {
+        assert_eq!(date_iso(Some("2026-11-05 21:01:39.803 +00:00")), Value::String("2026-11-05T21:01:39.803Z".into()));
+        assert_eq!(date_iso(Some("not a date")), Value::Null);
+        assert_eq!(date_iso(None), Value::Null);
+    }
 
     #[test]
     fn dates_round_trip_in_the_originals_format() {

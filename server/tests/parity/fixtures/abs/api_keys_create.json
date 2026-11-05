@@ -1,0 +1,32 @@
+{
+ "body": {
+  "apiKey": {
+   "apiKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlJZCI6IjQwMjRmMGZjLWU0MGEtNGM1Mi1hYjU5LTBmNDQ0ZThkYjE4ZiIsIm5hbWUiOiJUZXN0IGtleSIsInR5cGUiOiJhcGkiLCJpYXQiOjE3OTM5MTI0OTksImV4cCI6MTc5MzkxNjA5OX0.zIfzo-F3WXysSJFX8k_UNuAqpZDfV_bfFZg7Sh2faDw",
+   "createdAt": "2026-11-05T21:01:39.803Z",
+   "createdByUserId": "49db85f9-e946-4323-9940-bd41e442dbe4",
+   "expiresAt": "2026-11-05T22:01:39.802Z",
+   "id": "4024f0fc-e40a-4c52-ab59-0f444e8db18f",
+   "isActive": true,
+   "name": "Test key",
+   "updatedAt": "2026-11-05T21:01:39.803Z",
+   "user": {
+    "id": "e87cca4d-3025-408f-870c-d5d64eb6492a",
+    "type": "user",
+    "username": "reader"
+   },
+   "userId": "e87cca4d-3025-408f-870c-d5d64eb6492a"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "expiresIn": 3600,
+   "isActive": true,
+   "name": "Test key",
+   "userId": "{user_id}"
+  },
+  "method": "POST",
+  "path": "/api/api-keys"
+ },
+ "status": 200
+}
