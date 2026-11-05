@@ -1,0 +1,10 @@
+{
+ "body": "Invalid year",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/stats/year/1999"
+ },
+ "status": 400
+}

@@ -1,0 +1,24 @@
+{
+ "body": {
+  "booksAddedWithCovers": [],
+  "numAuthorsAdded": 3,
+  "numBooks": 3,
+  "numBooksAdded": 3,
+  "numListeningSessions": 0,
+  "topAuthors": [],
+  "topGenres": [],
+  "topNarrators": [],
+  "totalBooksAddedDuration": 105,
+  "totalBooksAddedSize": 439025,
+  "totalBooksDuration": 105,
+  "totalBooksSize": 439025,
+  "totalListeningTime": 0
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/stats/year/0x7EA"
+ },
+ "status": 200
+}

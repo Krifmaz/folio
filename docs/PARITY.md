@@ -143,13 +143,13 @@ repository at the pinned commit.
 | A0103 | endpoint | `GET /api/me/series/:id/readd-to-continue-listening` (MeController.readdSeriesFromContinueListening) | `server/routers/ApiRouter.js#L193` | P2 users | todo |  |
 | A0104 | endpoint | `GET /api/me/stats/year/:year` (MeController.getStatsForYear) | `server/routers/ApiRouter.js#L194` | P2 users | todo |  |
 | A0105 | endpoint | `POST /api/me/ereader-devices` (MeController.updateUserEReaderDevices) | `server/routers/ApiRouter.js#L195` | P2 users | todo |  |
-| A0106 | endpoint | `GET /api/backups` (BackupController.getAll) | `server/routers/ApiRouter.js#L200` | P6 server admin | todo |  |
-| A0107 | endpoint | `POST /api/backups` (BackupController.create) | `server/routers/ApiRouter.js#L201` | P6 server admin | todo |  |
-| A0108 | endpoint | `DELETE /api/backups/:id` (BackupController.delete) | `server/routers/ApiRouter.js#L202` | P6 server admin | todo |  |
-| A0109 | endpoint | `GET /api/backups/:id/download` (BackupController.download) | `server/routers/ApiRouter.js#L203` | P6 server admin | todo |  |
-| A0110 | endpoint | `GET /api/backups/:id/apply` (BackupController.apply) | `server/routers/ApiRouter.js#L204` | P6 server admin | todo |  |
-| A0111 | endpoint | `POST /api/backups/upload` (BackupController.upload) | `server/routers/ApiRouter.js#L205` | P6 server admin | todo |  |
-| A0112 | endpoint | `PATCH /api/backups/path` (BackupController.updatePath) | `server/routers/ApiRouter.js#L206` | P6 server admin | todo |  |
+| A0106 | endpoint | `GET /api/backups` (BackupController.getAll) | `server/routers/ApiRouter.js#L200` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0107 | endpoint | `POST /api/backups` (BackupController.create) | `server/routers/ApiRouter.js#L201` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original`, `server/tests/abs_backups.rs::a_restore_puts_back_the_database_and_metadata` |
+| A0108 | endpoint | `DELETE /api/backups/:id` (BackupController.delete) | `server/routers/ApiRouter.js#L202` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0109 | endpoint | `GET /api/backups/:id/download` (BackupController.download) | `server/routers/ApiRouter.js#L203` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0110 | endpoint | `GET /api/backups/:id/apply` (BackupController.apply) | `server/routers/ApiRouter.js#L204` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original`, `server/tests/abs_backups.rs::a_restore_puts_back_the_database_and_metadata` |
+| A0111 | endpoint | `POST /api/backups/upload` (BackupController.upload) | `server/routers/ApiRouter.js#L205` | P6 server admin | done | `server/tests/abs_backups.rs::a_restore_puts_back_the_database_and_metadata` (uploads; the recorder sends JSON only), `server/tests/abs_backups.rs::backups_answer_like_the_original` (no file) |
+| A0112 | endpoint | `PATCH /api/backups/path` (BackupController.updatePath) | `server/routers/ApiRouter.js#L206` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
 | A0113 | endpoint | `GET /api/filesystem` (FileSystemController.getPaths) | `server/routers/ApiRouter.js#L211` | P1 library | todo |  |
 | A0114 | endpoint | `POST /api/filesystem/pathexists` (FileSystemController.checkPathExists) | `server/routers/ApiRouter.js#L212` | P1 library | todo |  |
 | A0115 | endpoint | `GET /api/authors/:id` (AuthorController.findOne) | `server/routers/ApiRouter.js#L217` | P1 library | done | `server/tests/parity_abs_library.rs::authors_answer_like_the_original` |
@@ -183,27 +183,27 @@ repository at the pinned commit.
 | A0143 | endpoint | `GET /api/podcasts/:id/episode/:episodeId` (PodcastController.getEpisode) | `server/routers/ApiRouter.js#L258` | P5 podcasts and feeds | todo |  |
 | A0144 | endpoint | `PATCH /api/podcasts/:id/episode/:episodeId` (PodcastController.updateEpisode) | `server/routers/ApiRouter.js#L259` | P5 podcasts and feeds | todo |  |
 | A0145 | endpoint | `DELETE /api/podcasts/:id/episode/:episodeId` (PodcastController.removeEpisode) | `server/routers/ApiRouter.js#L260` | P5 podcasts and feeds | todo |  |
-| A0146 | endpoint | `GET /api/notifications` (NotificationController.get) | `server/routers/ApiRouter.js#L265` | P6 server admin | todo |  |
-| A0147 | endpoint | `PATCH /api/notifications` (NotificationController.update) | `server/routers/ApiRouter.js#L266` | P6 server admin | todo |  |
-| A0148 | endpoint | `GET /api/notificationdata` (NotificationController.getData) | `server/routers/ApiRouter.js#L267` | P6 server admin | todo |  |
-| A0149 | endpoint | `GET /api/notifications/test` (NotificationController.fireTestEvent) | `server/routers/ApiRouter.js#L268` | P6 server admin | todo |  |
-| A0150 | endpoint | `POST /api/notifications` (NotificationController.createNotification) | `server/routers/ApiRouter.js#L269` | P6 server admin | todo |  |
-| A0151 | endpoint | `DELETE /api/notifications/:id` (NotificationController.deleteNotification) | `server/routers/ApiRouter.js#L270` | P6 server admin | todo |  |
-| A0152 | endpoint | `PATCH /api/notifications/:id` (NotificationController.updateNotification) | `server/routers/ApiRouter.js#L271` | P6 server admin | todo |  |
-| A0153 | endpoint | `GET /api/notifications/:id/test` (NotificationController.sendNotificationTest) | `server/routers/ApiRouter.js#L272` | P6 server admin | todo |  |
-| A0154 | endpoint | `GET /api/emails/settings` (EmailController.getSettings) | `server/routers/ApiRouter.js#L277` | P6 server admin | todo |  |
-| A0155 | endpoint | `PATCH /api/emails/settings` (EmailController.updateSettings) | `server/routers/ApiRouter.js#L278` | P6 server admin | todo |  |
+| A0146 | endpoint | `GET /api/notifications` (NotificationController.get) | `server/routers/ApiRouter.js#L265` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0147 | endpoint | `PATCH /api/notifications` (NotificationController.update) | `server/routers/ApiRouter.js#L266` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0148 | endpoint | `GET /api/notificationdata` (NotificationController.getData) | `server/routers/ApiRouter.js#L267` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0149 | endpoint | `GET /api/notifications/test` (NotificationController.fireTestEvent) | `server/routers/ApiRouter.js#L268` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0150 | endpoint | `POST /api/notifications` (NotificationController.createNotification) | `server/routers/ApiRouter.js#L269` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0151 | endpoint | `DELETE /api/notifications/:id` (NotificationController.deleteNotification) | `server/routers/ApiRouter.js#L270` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0152 | endpoint | `PATCH /api/notifications/:id` (NotificationController.updateNotification) | `server/routers/ApiRouter.js#L271` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0153 | endpoint | `GET /api/notifications/:id/test` (NotificationController.sendNotificationTest) | `server/routers/ApiRouter.js#L272` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_reach_apprise_with_their_texts_filled_in` |
+| A0154 | endpoint | `GET /api/emails/settings` (EmailController.getSettings) | `server/routers/ApiRouter.js#L277` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
+| A0155 | endpoint | `PATCH /api/emails/settings` (EmailController.updateSettings) | `server/routers/ApiRouter.js#L278` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
 | A0156 | endpoint | `POST /api/emails/test` (EmailController.sendTest) | `server/routers/ApiRouter.js#L279` | P6 server admin | todo |  |
-| A0157 | endpoint | `POST /api/emails/ereader-devices` (EmailController.updateEReaderDevices) | `server/routers/ApiRouter.js#L280` | P6 server admin | todo |  |
-| A0158 | endpoint | `POST /api/emails/send-ebook-to-device` (EmailController.sendEBookToDevice) | `server/routers/ApiRouter.js#L281` | P6 server admin | todo |  |
+| A0157 | endpoint | `POST /api/emails/ereader-devices` (EmailController.updateEReaderDevices) | `server/routers/ApiRouter.js#L280` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
+| A0158 | endpoint | `POST /api/emails/send-ebook-to-device` (EmailController.sendEBookToDevice) | `server/routers/ApiRouter.js#L281` | P6 server admin | wip | every check answers like the original; sending by mail comes with the mail sender |
 | A0159 | endpoint | `GET /api/search/covers` (SearchController.findCovers) | `server/routers/ApiRouter.js#L286` | P1 library | todo |  |
 | A0160 | endpoint | `GET /api/search/books` (SearchController.findBooks) | `server/routers/ApiRouter.js#L287` | P1 library | todo |  |
 | A0161 | endpoint | `GET /api/search/podcast` (SearchController.findPodcasts) | `server/routers/ApiRouter.js#L288` | P1 library | todo |  |
 | A0162 | endpoint | `GET /api/search/authors` (SearchController.findAuthor) | `server/routers/ApiRouter.js#L289` | P1 library | todo |  |
 | A0163 | endpoint | `GET /api/search/chapters` (SearchController.findChapters) | `server/routers/ApiRouter.js#L290` | P1 library | todo |  |
 | A0164 | endpoint | `GET /api/search/providers` (SearchController.getAllProviders) | `server/routers/ApiRouter.js#L291` | P1 library | todo |  |
-| A0165 | endpoint | `POST /api/cache/purge` (CacheController.purgeCache) | `server/routers/ApiRouter.js#L296` | P6 server admin | todo |  |
-| A0166 | endpoint | `POST /api/cache/items/purge` (CacheController.purgeItemsCache) | `server/routers/ApiRouter.js#L297` | P6 server admin | todo |  |
+| A0165 | endpoint | `POST /api/cache/purge` (CacheController.purgeCache) | `server/routers/ApiRouter.js#L296` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original` |
+| A0166 | endpoint | `POST /api/cache/items/purge` (CacheController.purgeItemsCache) | `server/routers/ApiRouter.js#L297` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original` |
 | A0167 | endpoint | `POST /api/tools/item/:id/encode-m4b` (ToolsController.encodeM) | `server/routers/ApiRouter.js#L302` | P6 server admin | todo |  |
 | A0168 | endpoint | `DELETE /api/tools/item/:id/encode-m4b` (ToolsController.cancelM) | `server/routers/ApiRouter.js#L303` | P6 server admin | todo |  |
 | A0169 | endpoint | `POST /api/tools/item/:id/embed-metadata` (ToolsController.embedAudioFileMetadata) | `server/routers/ApiRouter.js#L304` | P6 server admin | todo |  |
@@ -213,21 +213,21 @@ repository at the pinned commit.
 | A0173 | endpoint | `POST /api/feeds/collection/:collectionId/open` (RSSFeedController.openRSSFeedForCollection) | `server/routers/ApiRouter.js#L312` | P5 podcasts and feeds | todo |  |
 | A0174 | endpoint | `POST /api/feeds/series/:seriesId/open` (RSSFeedController.openRSSFeedForSeries) | `server/routers/ApiRouter.js#L313` | P5 podcasts and feeds | todo |  |
 | A0175 | endpoint | `POST /api/feeds/:id/close` (RSSFeedController.closeRSSFeed) | `server/routers/ApiRouter.js#L314` | P5 podcasts and feeds | todo |  |
-| A0176 | endpoint | `GET /api/custom-metadata-providers` (CustomMetadataProviderController.getAll) | `server/routers/ApiRouter.js#L319` | P6 server admin | todo |  |
-| A0177 | endpoint | `POST /api/custom-metadata-providers` (CustomMetadataProviderController.create) | `server/routers/ApiRouter.js#L320` | P6 server admin | todo |  |
-| A0178 | endpoint | `DELETE /api/custom-metadata-providers/:id` (CustomMetadataProviderController.delete) | `server/routers/ApiRouter.js#L321` | P6 server admin | todo |  |
+| A0176 | endpoint | `GET /api/custom-metadata-providers` (CustomMetadataProviderController.getAll) | `server/routers/ApiRouter.js#L319` | P6 server admin | done | `server/tests/abs_admin.rs::metadata_providers_are_added_and_removed_like_the_original` |
+| A0177 | endpoint | `POST /api/custom-metadata-providers` (CustomMetadataProviderController.create) | `server/routers/ApiRouter.js#L320` | P6 server admin | done | `server/tests/abs_admin.rs::metadata_providers_are_added_and_removed_like_the_original` |
+| A0178 | endpoint | `DELETE /api/custom-metadata-providers/:id` (CustomMetadataProviderController.delete) | `server/routers/ApiRouter.js#L321` | P6 server admin | done | `server/tests/abs_admin.rs::metadata_providers_are_added_and_removed_like_the_original` |
 | A0179 | endpoint | `POST /api/share/mediaitem` (ShareController.createMediaItemShare) | `server/routers/ApiRouter.js#L326` | P6 server admin | todo |  |
 | A0180 | endpoint | `DELETE /api/share/mediaitem/:id` (ShareController.deleteMediaItemShare) | `server/routers/ApiRouter.js#L327` | P6 server admin | todo |  |
-| A0181 | endpoint | `GET /api/stats/year/:year` (StatsController.getAdminStatsForYear) | `server/routers/ApiRouter.js#L332` | P6 server admin | todo |  |
-| A0182 | endpoint | `GET /api/stats/server` (StatsController.getServerStats) | `server/routers/ApiRouter.js#L333` | P6 server admin | todo |  |
+| A0181 | endpoint | `GET /api/stats/year/:year` (StatsController.getAdminStatsForYear) | `server/routers/ApiRouter.js#L332` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original`, `server/tests/abs_stats.rs::the_year_in_review_counts_like_the_original` |
+| A0182 | endpoint | `GET /api/stats/server` (StatsController.getServerStats) | `server/routers/ApiRouter.js#L333` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original`, `server/tests/abs_stats.rs::the_year_in_review_counts_like_the_original` |
 | A0183 | endpoint | `GET /api/api-keys` (ApiKeyController.getAll) | `server/routers/ApiRouter.js#L338` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0184 | endpoint | `POST /api/api-keys` (ApiKeyController.create) | `server/routers/ApiRouter.js#L339` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0185 | endpoint | `PATCH /api/api-keys/:id` (ApiKeyController.update) | `server/routers/ApiRouter.js#L340` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0186 | endpoint | `DELETE /api/api-keys/:id` (ApiKeyController.delete) | `server/routers/ApiRouter.js#L341` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0187 | endpoint | `POST /api/upload` (MiscController.handleUpload) | `server/routers/ApiRouter.js#L346` | P6 server admin | todo |  |
-| A0188 | endpoint | `GET /api/tasks` (MiscController.getTasks) | `server/routers/ApiRouter.js#L347` | P6 server admin | todo |  |
-| A0189 | endpoint | `PATCH /api/settings` (MiscController.updateServerSettings) | `server/routers/ApiRouter.js#L348` | P6 server admin | todo |  |
-| A0190 | endpoint | `PATCH /api/sorting-prefixes` (MiscController.updateSortingPrefixes) | `server/routers/ApiRouter.js#L349` | P6 server admin | todo |  |
+| A0188 | endpoint | `GET /api/tasks` (MiscController.getTasks) | `server/routers/ApiRouter.js#L347` | P6 server admin | done | `server/tests/abs_admin.rs::schedules_and_tasks_answer_like_the_original` |
+| A0189 | endpoint | `PATCH /api/settings` (MiscController.updateServerSettings) | `server/routers/ApiRouter.js#L348` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0190 | endpoint | `PATCH /api/sorting-prefixes` (MiscController.updateSortingPrefixes) | `server/routers/ApiRouter.js#L349` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0191 | endpoint | `POST /api/authorize` (MiscController.authorize) | `server/routers/ApiRouter.js#L350` | P2 users | done | `server/tests/abs_auth.rs::sign_in_refresh_and_sign_out_answer_like_the_original` |
 | A0192 | endpoint | `GET /api/tags` (MiscController.getAllTags) | `server/routers/ApiRouter.js#L351` | P1 library | todo |  |
 | A0193 | endpoint | `POST /api/tags/rename` (MiscController.renameTag) | `server/routers/ApiRouter.js#L352` | P1 library | todo |  |
@@ -235,7 +235,7 @@ repository at the pinned commit.
 | A0195 | endpoint | `GET /api/genres` (MiscController.getAllGenres) | `server/routers/ApiRouter.js#L354` | P1 library | todo |  |
 | A0196 | endpoint | `POST /api/genres/rename` (MiscController.renameGenre) | `server/routers/ApiRouter.js#L355` | P1 library | todo |  |
 | A0197 | endpoint | `DELETE /api/genres/:genre` (MiscController.deleteGenre) | `server/routers/ApiRouter.js#L356` | P1 library | todo |  |
-| A0198 | endpoint | `POST /api/validate-cron` (MiscController.validateCronExpression) | `server/routers/ApiRouter.js#L357` | P6 server admin | todo |  |
+| A0198 | endpoint | `POST /api/validate-cron` (MiscController.validateCronExpression) | `server/routers/ApiRouter.js#L357` | P6 server admin | done | `server/tests/abs_admin.rs::schedules_and_tasks_answer_like_the_original` |
 | A0199 | endpoint | `GET /api/auth-settings` (MiscController.getAuthSettings) | `server/routers/ApiRouter.js#L358` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |
@@ -274,7 +274,7 @@ repository at the pinned commit.
 | A0234 | socket | server → client `author_removed` | `server/controllers/AuthorController.js#L162` | P2 users | todo |  |
 | A0235 | socket | server → client `author_updated` | `server/controllers/AuthorController.js#L168` | P2 users | todo |  |
 | A0236 | socket | server → client `authors_num_books_updated` | `server/scanner/BookScanner.js#L926` | P2 users | todo |  |
-| A0237 | socket | server → client `backup_applied` | `server/managers/BackupManager.js#L266` | P2 users | todo |  |
+| A0237 | socket | server → client `backup_applied` | `server/managers/BackupManager.js#L266` | P2 users | wip | sent by `abs::backups` after a restore; no socket test yet |
 | A0238 | socket | server → client `collection_added` | `server/controllers/CollectionController.js#L104` | P2 users | todo |  |
 | A0239 | socket | server → client `collection_removed` | `server/controllers/CollectionController.js#L222` | P2 users | todo |  |
 | A0240 | socket | server → client `collection_updated` | `server/controllers/CollectionController.js#L201` | P2 users | todo |  |
@@ -294,7 +294,7 @@ repository at the pinned commit.
 | A0254 | socket | server → client `library_removed` | `server/controllers/LibraryController.js#L588` | P2 users | todo |  |
 | A0255 | socket | server → client `library_updated` | `server/controllers/LibraryController.js#L511` | P2 users | todo |  |
 | A0256 | socket | server → client `metadata_embed_queue_update` | `server/managers/AudioMetadataManager.js#L119` | P2 users | todo |  |
-| A0257 | socket | server → client `notifications_updated` | `server/managers/NotificationManager.js#L175` | P2 users | todo |  |
+| A0257 | socket | server → client `notifications_updated` | `server/managers/NotificationManager.js#L175` | P2 users | wip | emitted after each send (`abs::notifications::trigger`); no socket test yet |
 | A0258 | socket | server → client `rss_feed_closed` | `server/managers/RssFeedManager.js#L358` | P2 users | todo |  |
 | A0259 | socket | server → client `rss_feed_open` | `server/managers/RssFeedManager.js#L302` | P2 users | todo |  |
 | A0260 | socket | server → client `series_added` | `server/scanner/Scanner.js#L316` | P2 users | todo |  |
@@ -314,7 +314,7 @@ repository at the pinned commit.
 | A0274 | socket | server → client `user_online` | `server/SocketAuthority.js#L348` | P2 users | done | `server/tests/abs_socket.rs::a_valid_token_signs_the_socket_in_like_the_original` |
 | A0275 | socket | server → client `user_removed` | `server/controllers/UserController.js#L402` | P2 users | todo |  |
 | A0276 | socket | server → client `user_stream_update` | `server/managers/PlaybackSessionManager.js#L361` | P2 users | todo |  |
-| A0277 | setting | server `tokenSecret` (default `null`) | `server/objects/settings/ServerSettings.js#L36` | P6 server admin | todo |  |
+| A0277 | setting | server `tokenSecret` (default `null`) | `server/objects/settings/ServerSettings.js#L36` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0278 | setting | server `scannerParseSubtitle` (default `false`) | `server/objects/settings/ServerSettings.js#L39` | P6 server admin | todo |  |
 | A0279 | setting | server `scannerFindCovers` (default `false`) | `server/objects/settings/ServerSettings.js#L40` | P6 server admin | todo |  |
 | A0280 | setting | server `scannerCoverProvider` (default `'google'`) | `server/objects/settings/ServerSettings.js#L41` | P6 server admin | todo |  |
@@ -326,26 +326,26 @@ repository at the pinned commit.
 | A0286 | setting | server `rateLimitLoginRequests` (default `10`) | `server/objects/settings/ServerSettings.js#L51` | P6 server admin | todo |  |
 | A0287 | setting | server `rateLimitLoginWindow` (default `10 * 60 * 1000`) | `server/objects/settings/ServerSettings.js#L52` | P6 server admin | todo |  |
 | A0288 | setting | server `allowIframe` (default `false`) | `server/objects/settings/ServerSettings.js#L53` | P6 server admin | todo |  |
-| A0289 | setting | server `backupPath` (default `Path.join(global.MetadataPath, 'backups'`) | `server/objects/settings/ServerSettings.js#L56` | P6 server admin | todo |  |
-| A0290 | setting | server `backupSchedule` (default `false`) | `server/objects/settings/ServerSettings.js#L57` | P6 server admin | todo |  |
-| A0291 | setting | server `backupsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L58` | P6 server admin | todo |  |
-| A0292 | setting | server `maxBackupSize` (default `1`) | `server/objects/settings/ServerSettings.js#L59` | P6 server admin | todo |  |
+| A0289 | setting | server `backupPath` (default `Path.join(global.MetadataPath, 'backups'`) | `server/objects/settings/ServerSettings.js#L56` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0290 | setting | server `backupSchedule` (default `false`) | `server/objects/settings/ServerSettings.js#L57` | P6 server admin | wip | `server/src/abs/cron.rs::tests::a_schedule_runs_at_the_times_it_names` checks the matching; the timer itself (`backups::spawn_schedule`) has no test yet |
+| A0291 | setting | server `backupsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L58` | P6 server admin | done | `server/tests/abs_backups.rs::only_the_newest_backups_are_kept` |
+| A0292 | setting | server `maxBackupSize` (default `1`) | `server/objects/settings/ServerSettings.js#L59` | P6 server admin | done | `server/src/abs/backups.rs::tests::a_backup_over_the_size_limit_is_stopped` |
 | A0293 | setting | server `loggerDailyLogsToKeep` (default `7`) | `server/objects/settings/ServerSettings.js#L62` | P6 server admin | todo |  |
 | A0294 | setting | server `loggerScannerLogsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L63` | P6 server admin | todo |  |
-| A0295 | setting | server `homeBookshelfView` (default `BookshelfView.DETAIL`) | `server/objects/settings/ServerSettings.js#L66` | P6 server admin | todo |  |
-| A0296 | setting | server `bookshelfView` (default `BookshelfView.DETAIL`) | `server/objects/settings/ServerSettings.js#L67` | P6 server admin | todo |  |
+| A0295 | setting | server `homeBookshelfView` (default `BookshelfView.DETAIL`) | `server/objects/settings/ServerSettings.js#L66` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0296 | setting | server `bookshelfView` (default `BookshelfView.DETAIL`) | `server/objects/settings/ServerSettings.js#L67` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0297 | setting | server `podcastEpisodeSchedule` (default `'0 * * * *'`) | `server/objects/settings/ServerSettings.js#L70` | P6 server admin | todo |  |
-| A0298 | setting | server `sortingIgnorePrefix` (default `false`) | `server/objects/settings/ServerSettings.js#L73` | P6 server admin | todo |  |
-| A0299 | setting | server `sortingPrefixes` (default `['the', 'a']`) | `server/objects/settings/ServerSettings.js#L74` | P6 server admin | todo |  |
-| A0300 | setting | server `chromecastEnabled` (default `false`) | `server/objects/settings/ServerSettings.js#L77` | P6 server admin | todo |  |
-| A0301 | setting | server `dateFormat` (default `'MM/dd/yyyy'`) | `server/objects/settings/ServerSettings.js#L78` | P6 server admin | todo |  |
-| A0302 | setting | server `timeFormat` (default `'HH:mm'`) | `server/objects/settings/ServerSettings.js#L79` | P6 server admin | todo |  |
-| A0303 | setting | server `language` (default `'en-us'`) | `server/objects/settings/ServerSettings.js#L80` | P6 server admin | todo |  |
+| A0298 | setting | server `sortingIgnorePrefix` (default `false`) | `server/objects/settings/ServerSettings.js#L73` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0299 | setting | server `sortingPrefixes` (default `['the', 'a']`) | `server/objects/settings/ServerSettings.js#L74` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0300 | setting | server `chromecastEnabled` (default `false`) | `server/objects/settings/ServerSettings.js#L77` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0301 | setting | server `dateFormat` (default `'MM/dd/yyyy'`) | `server/objects/settings/ServerSettings.js#L78` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0302 | setting | server `timeFormat` (default `'HH:mm'`) | `server/objects/settings/ServerSettings.js#L79` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0303 | setting | server `language` (default `'en-us'`) | `server/objects/settings/ServerSettings.js#L80` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0304 | setting | server `allowedOrigins` (default `[]`) | `server/objects/settings/ServerSettings.js#L81` | P6 server admin | todo |  |
 | A0305 | setting | server `logLevel` (default `Logger.logLevel`) | `server/objects/settings/ServerSettings.js#L83` | P6 server admin | todo |  |
-| A0306 | setting | server `version` (default `packageJson.version`) | `server/objects/settings/ServerSettings.js#L85` | P6 server admin | todo |  |
-| A0307 | setting | server `buildNumber` (default `packageJson.buildNumber`) | `server/objects/settings/ServerSettings.js#L86` | P6 server admin | todo |  |
-| A0308 | setting | server `authLoginCustomMessage` (default `null`) | `server/objects/settings/ServerSettings.js#L89` | P6 server admin | todo |  |
+| A0306 | setting | server `version` (default `packageJson.version`) | `server/objects/settings/ServerSettings.js#L85` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0307 | setting | server `buildNumber` (default `packageJson.buildNumber`) | `server/objects/settings/ServerSettings.js#L86` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
+| A0308 | setting | server `authLoginCustomMessage` (default `null`) | `server/objects/settings/ServerSettings.js#L89` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0309 | setting | server `authActiveAuthMethods` (default `['local']`) | `server/objects/settings/ServerSettings.js#L90` | P6 server admin | todo |  |
 | A0310 | setting | server `authOpenIDIssuerURL` (default `null`) | `server/objects/settings/ServerSettings.js#L93` | P6 server admin | todo |  |
 | A0311 | setting | server `authOpenIDAuthorizationURL` (default `null`) | `server/objects/settings/ServerSettings.js#L94` | P6 server admin | todo |  |
@@ -373,12 +373,12 @@ repository at the pinned commit.
 | A0333 | setting | email `testAddress` | `server/objects/settings/EmailSettings.js#L22` | P6 server admin | todo |  |
 | A0334 | setting | email `fromAddress` | `server/objects/settings/EmailSettings.js#L23` | P6 server admin | todo |  |
 | A0335 | setting | email `ereaderDevices` | `server/objects/settings/EmailSettings.js#L26` | P6 server admin | todo |  |
-| A0336 | setting | notifications `appriseType` | `server/objects/settings/NotificationSettings.js#L8` | P6 server admin | todo |  |
-| A0337 | setting | notifications `appriseApiUrl` | `server/objects/settings/NotificationSettings.js#L9` | P6 server admin | todo |  |
-| A0338 | setting | notifications `notifications` | `server/objects/settings/NotificationSettings.js#L10` | P6 server admin | todo |  |
-| A0339 | setting | notifications `maxFailedAttempts` | `server/objects/settings/NotificationSettings.js#L11` | P6 server admin | todo |  |
-| A0340 | setting | notifications `maxNotificationQueue` | `server/objects/settings/NotificationSettings.js#L12` | P6 server admin | todo |  |
-| A0341 | setting | notifications `notificationDelay` | `server/objects/settings/NotificationSettings.js#L13` | P6 server admin | todo |  |
+| A0336 | setting | notifications `appriseType` | `server/objects/settings/NotificationSettings.js#L8` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0337 | setting | notifications `appriseApiUrl` | `server/objects/settings/NotificationSettings.js#L9` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0338 | setting | notifications `notifications` | `server/objects/settings/NotificationSettings.js#L10` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0339 | setting | notifications `maxFailedAttempts` | `server/objects/settings/NotificationSettings.js#L11` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0340 | setting | notifications `maxNotificationQueue` | `server/objects/settings/NotificationSettings.js#L12` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
+| A0341 | setting | notifications `notificationDelay` | `server/objects/settings/NotificationSettings.js#L13` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
 | A0342 | setting | library `coverAspectRatio` | `server/models/Library.js#L59` | P1 library | todo |  |
 | A0343 | setting | library `disableWatcher` | `server/models/Library.js#L60` | P1 library | todo |  |
 | A0344 | setting | library `autoScanCronExpression` | `server/models/Library.js#L61` | P1 library | todo |  |
@@ -403,15 +403,15 @@ repository at the pinned commit.
 | A0363 | setting | user permission `selectedTagsNotAccessible` | `server/models/User.js#L179` | P2 users | todo |  |
 | A0364 | setting | user permission `librariesAccessible` | `server/models/User.js#L180` | P2 users | todo |  |
 | A0365 | setting | user permission `itemTagsSelected` | `server/models/User.js#L181` | P2 users | todo |  |
-| A0366 | job | notification event `onPodcastEpisodeDownloaded` | `server/utils/notifications.js#L6` | P6 server admin | todo |  |
-| A0367 | job | notification event `onBackupCompleted` | `server/utils/notifications.js#L32` | P6 server admin | todo |  |
-| A0368 | job | notification event `onBackupFailed` | `server/utils/notifications.js#L50` | P6 server admin | todo |  |
-| A0369 | job | notification event `onRSSFeedFailed` | `server/utils/notifications.js#L64` | P6 server admin | todo |  |
-| A0370 | job | notification event `onRSSFeedDisabled` | `server/utils/notifications.js#L80` | P6 server admin | todo |  |
-| A0371 | job | notification event `onTest` | `server/utils/notifications.js#L96` | P6 server admin | todo |  |
+| A0366 | job | notification event `onPodcastEpisodeDownloaded` | `server/utils/notifications.js#L6` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0367 | job | notification event `onBackupCompleted` | `server/utils/notifications.js#L32` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0368 | job | notification event `onBackupFailed` | `server/utils/notifications.js#L50` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0369 | job | notification event `onRSSFeedFailed` | `server/utils/notifications.js#L64` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0370 | job | notification event `onRSSFeedDisabled` | `server/utils/notifications.js#L80` | P6 server admin | wip | sent by `abs::notifications::trigger`, which the backup (P6) and podcast (P5) ports call when they land |
+| A0371 | job | notification event `onTest` | `server/utils/notifications.js#L96` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
 | A0372 | job | library scan schedules (`cronExpression` per library) | `server/managers/CronManager.js` | P1 library | todo |  |
 | A0373 | job | podcast episode checks (`podcastEpisodeSchedule`, per podcast cron) | `server/managers/CronManager.js` | P5 podcasts and feeds | todo |  |
-| A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | todo |  |
+| A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | wip | made by `backups::spawn_schedule` (UTC, see DECISIONS); kept and size-limited as A0291 and A0292 show |
 | A0375 | job | daily log files and rotation (`loggerDailyLogsToKeep`, `loggerScannerLogsToKeep`) | `server/managers/LogManager.js` | P6 server admin | todo |  |
 | A0376 | job | folder watcher: rescans changed items (`scannerDisableWatcher`) | `server/Watcher.js` | P1 library | todo |  |
 | A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | wip |  |
@@ -587,10 +587,10 @@ repository at the pinned commit.
 | R0005 | endpoint | `GET /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0006 | endpoint | `POST /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0007 | endpoint | `PUT /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | checks and changes done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); `moveFiles` and the refresh after a metadata profile change come with commands (R5) |
-| R0008 | endpoint | `DELETE /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0008 | endpoint | `DELETE /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
 | R0009 | endpoint | `GET /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0010 | endpoint | `PUT /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | changes done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); moving files to a new root folder comes with commands (R5) |
-| R0011 | endpoint | `DELETE /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0011 | endpoint | `DELETE /api/v1/author/editor` (AuthorEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
 | R0012 | endpoint | `GET /api/v1/author/lookup` (AuthorLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0013 | endpoint | `GET /api/v1/system/backup` (Backup) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0014 | endpoint | `DELETE /api/v1/system/backup/{id}` (Backup) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
@@ -603,17 +603,17 @@ repository at the pinned commit.
 | R0021 | endpoint | `POST /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0022 | endpoint | `GET /api/v1/book/{id}/overview` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0023 | endpoint | `PUT /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0024 | endpoint | `DELETE /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0024 | endpoint | `DELETE /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
 | R0025 | endpoint | `GET /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0026 | endpoint | `PUT /api/v1/book/monitor` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0027 | endpoint | `PUT /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0028 | endpoint | `DELETE /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0028 | endpoint | `DELETE /api/v1/book/editor` (BookEditor) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
 | R0029 | endpoint | `GET /api/v1/bookfile` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | ebook files done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); audio media info with the import |
 | R0030 | endpoint | `PUT /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0031 | endpoint | `DELETE /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0031 | endpoint | `DELETE /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
 | R0032 | endpoint | `GET /api/v1/bookfile/{id}` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | ebook files done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); real files' tags with the import |
 | R0033 | endpoint | `PUT /api/v1/bookfile/editor` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0034 | endpoint | `DELETE /api/v1/bookfile/bulk` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0034 | endpoint | `DELETE /api/v1/bookfile/bulk` (BookFile) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
 | R0035 | endpoint | `GET /api/v1/book/lookup` (BookLookup) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0036 | endpoint | `POST /api/v1/bookshelf` (Bookshelf) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
 | R0037 | endpoint | `GET /api/v1/calendar` (Calendar) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
