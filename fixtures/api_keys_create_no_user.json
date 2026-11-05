@@ -1,0 +1,13 @@
+{
+ "body": "Bad Request",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "name": "x",
+   "userId": "00000000-0000-4000-8000-000000000000"
+  },
+  "method": "POST",
+  "path": "/api/api-keys"
+ },
+ "status": 400
+}

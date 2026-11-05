@@ -1,0 +1,63 @@
+{
+ "body": {
+  "bookmarks": [
+   {
+    "createdAt": 1793918968384,
+    "libraryItemId": "2e44c270-dfb9-4bf2-ad4b-0e5554db6134",
+    "time": 12,
+    "title": "A mark"
+   }
+  ],
+  "createdAt": 1793918964033,
+  "email": null,
+  "hasOpenIDLink": false,
+  "id": "8e105b7f-9edd-4487-8e85-d6944b14cb89",
+  "isActive": true,
+  "isLocked": false,
+  "itemTagsSelected": [],
+  "lastSeen": null,
+  "librariesAccessible": [],
+  "mediaProgress": [
+   {
+    "currentTime": 30,
+    "duration": 60,
+    "ebookLocation": null,
+    "ebookProgress": 0,
+    "episodeId": null,
+    "finishedAt": null,
+    "hideFromContinueListening": false,
+    "id": "712dd9e5-da2a-46f8-881a-634b057daa28",
+    "isFinished": false,
+    "lastUpdate": 1793918968369,
+    "libraryItemId": "2e44c270-dfb9-4bf2-ad4b-0e5554db6134",
+    "mediaItemId": "bbcdb8e3-6d9a-4bb7-a6f6-5e0a56f87d9a",
+    "mediaItemType": "book",
+    "progress": 0.5,
+    "startedAt": 1793918968368,
+    "userId": "8e105b7f-9edd-4487-8e85-d6944b14cb89"
+   }
+  ],
+  "permissions": {
+   "accessAllLibraries": true,
+   "accessAllTags": true,
+   "accessExplicitContent": true,
+   "createEreader": true,
+   "delete": true,
+   "download": true,
+   "selectedTagsNotAccessible": false,
+   "update": true,
+   "upload": true
+  },
+  "seriesHideFromContinueListening": [],
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZTEwNWI3Zi05ZWRkLTQ0ODctOGU4NS1kNjk0NGIxNGNiODkiLCJ1c2VybmFtZSI6InJvb3QiLCJpYXQiOjE3OTM5MTg5NjR9.9zK9WJPDIxGkFMWnTj4CN1vaArQ7qFg7QYZK8U4sHdg",
+  "type": "root",
+  "username": "root"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me"
+ },
+ "status": 200
+}

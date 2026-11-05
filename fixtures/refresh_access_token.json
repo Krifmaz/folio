@@ -1,0 +1,15 @@
+{
+ "body": {
+  "error": "Invalid token type"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "headers": {
+   "x-refresh-token": "{token}"
+  },
+  "method": "POST",
+  "path": "/auth/refresh"
+ },
+ "status": 401
+}

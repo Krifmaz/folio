@@ -1,0 +1,18 @@
+{
+ "body": {
+  "narrators": [
+   {
+    "id": "QWRqb2EgQW5kb2g%3D",
+    "name": "Adjoa Andoh",
+    "numBooks": 1
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/narrators"
+ },
+ "status": 200
+}

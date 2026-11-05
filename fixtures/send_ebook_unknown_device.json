@@ -1,0 +1,13 @@
+{
+ "body": "Ereader device not found",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "deviceName": "Nope",
+   "libraryItemId": "x"
+  },
+  "method": "POST",
+  "path": "/api/emails/send-ebook-to-device"
+ },
+ "status": 404
+}

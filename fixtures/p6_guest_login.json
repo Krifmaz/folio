@@ -1,0 +1,105 @@
+{
+ "body": {
+  "Source": "docker",
+  "ereaderDevices": [],
+  "serverSettings": {
+   "allowIframe": false,
+   "allowedOrigins": [],
+   "authActiveAuthMethods": [
+    "local"
+   ],
+   "authLoginCustomMessage": null,
+   "authOpenIDAuthorizationURL": null,
+   "authOpenIDAutoLaunch": false,
+   "authOpenIDAutoRegister": false,
+   "authOpenIDButtonText": "Login with OpenId",
+   "authOpenIDIssuerURL": null,
+   "authOpenIDJwksURL": null,
+   "authOpenIDLogoutURL": null,
+   "authOpenIDMatchExistingBy": null,
+   "authOpenIDTokenSigningAlgorithm": "RS256",
+   "authOpenIDTokenURL": null,
+   "authOpenIDUserInfoURL": null,
+   "backupPath": "/metadata/backups",
+   "backupSchedule": false,
+   "backupsToKeep": 2,
+   "bookshelfView": 1,
+   "buildNumber": 1,
+   "chromecastEnabled": false,
+   "dateFormat": "MM/dd/yyyy",
+   "homeBookshelfView": 1,
+   "id": "server-settings",
+   "language": "en-us",
+   "logLevel": 2,
+   "loggerDailyLogsToKeep": 7,
+   "loggerScannerLogsToKeep": 2,
+   "maxBackupSize": 1,
+   "metadataFileFormat": "json",
+   "podcastEpisodeSchedule": "0 * * * *",
+   "rateLimitLoginRequests": 10,
+   "rateLimitLoginWindow": 600000,
+   "scannerCoverProvider": "google",
+   "scannerDisableWatcher": false,
+   "scannerFindCovers": false,
+   "scannerParseSubtitle": false,
+   "scannerPreferMatchedMetadata": false,
+   "sortingIgnorePrefix": false,
+   "sortingPrefixes": [
+    "the",
+    "a"
+   ],
+   "storeCoverWithItem": false,
+   "storeMetadataWithItem": false,
+   "timeFormat": "HH:mm",
+   "timeZone": "UTC",
+   "version": "2.37.2"
+  },
+  "user": {
+   "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyYjc4YTNhNS0wM2FkLTRiYjktYThiYy1hZDEzYjI0ZTg2NTAiLCJ1c2VybmFtZSI6InZpZXdlciIsImp0aSI6IjYxODc4N2Y1LWI3OTctNDg1MS1hNmE2LWNjN2FkYTI4NGVkNCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3OTM5MTg5NjksImV4cCI6MTc5MzkyMjU2OX0.gvEDtnTD15RVIIOsKd35VEnUL5nk_7Wwu_4eEnqO5rw",
+   "bookmarks": [],
+   "createdAt": 1793918969056,
+   "email": null,
+   "hasOpenIDLink": false,
+   "id": "2b78a3a5-03ad-4bb9-a8bc-ad13b24e8650",
+   "isActive": true,
+   "isLocked": false,
+   "itemTagsSelected": [],
+   "lastSeen": null,
+   "librariesAccessible": [],
+   "mediaProgress": [],
+   "permissions": {
+    "accessAllLibraries": true,
+    "accessAllTags": true,
+    "accessExplicitContent": false,
+    "createEreader": false,
+    "delete": false,
+    "download": true,
+    "selectedTagsNotAccessible": false,
+    "update": false,
+    "upload": false
+   },
+   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyYjc4YTNhNS0wM2FkLTRiYjktYThiYy1hZDEzYjI0ZTg2NTAiLCJ1c2VybmFtZSI6InZpZXdlciIsImp0aSI6IjgzYTc0NzUwLTdkMjYtNGZhMy1iN2E0LTgxM2RkNzFjOWRmOSIsInR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNzkzOTE4OTY5LCJleHAiOjE3OTY1MTA5Njl9.q_JsSS4O1evyj7qzVffe_sGA3zg1pQSe2e118bYxztI",
+   "seriesHideFromContinueListening": [],
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyYjc4YTNhNS0wM2FkLTRiYjktYThiYy1hZDEzYjI0ZTg2NTAiLCJ1c2VybmFtZSI6InZpZXdlciIsImlhdCI6MTc5MzkxODk2OX0.POhNl7CrP9ItIWl2Zhej8yMA9VrEVOEzljZwPo8jRxE",
+   "type": "guest",
+   "username": "viewer"
+  },
+  "userDefaultLibraryId": "e8ee3aa6-d941-4a64-be45-05f33cfd1a79"
+ },
+ "content_type": "application/json",
+ "cookies": [
+  "connect.sid; Path=/; HttpOnly"
+ ],
+ "request": {
+  "body": {
+   "password": "pw",
+   "username": "viewer"
+  },
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "method": "POST",
+  "path": "/login"
+ },
+ "status": 200
+}

@@ -1,0 +1,75 @@
+{
+ "body": {
+  "results": [
+   {
+    "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+    "progressSynced": true,
+    "success": true
+   },
+   {
+    "error": "Media item not found",
+    "id": "play_local_parity",
+    "success": false
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "deviceInfo": {
+    "clientVersion": "0.9.81-beta",
+    "deviceId": "parity-2",
+    "manufacturer": "Google",
+    "model": "Pixel 8",
+    "sdkVersion": 34
+   },
+   "sessions": [
+    {
+     "currentTime": 3,
+     "deviceInfo": {
+      "clientVersion": "0.9.81-beta",
+      "deviceId": "parity-2",
+      "manufacturer": "Google",
+      "model": "Pixel 8",
+      "sdkVersion": 34
+     },
+     "displayAuthor": "",
+     "displayTitle": "",
+     "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+     "libraryItemId": "{item2}",
+     "mediaPlayer": "exo-player",
+     "mediaType": "book",
+     "playMethod": 3,
+     "startTime": 0,
+     "startedAt": 1699999990000,
+     "timeListening": 4.5,
+     "updatedAt": 1700000050000
+    },
+    {
+     "currentTime": 1,
+     "deviceInfo": {
+      "clientVersion": "0.9.81-beta",
+      "deviceId": "parity-2",
+      "manufacturer": "Google",
+      "model": "Pixel 8",
+      "sdkVersion": 34
+     },
+     "displayAuthor": "",
+     "displayTitle": "",
+     "id": "play_local_parity",
+     "libraryItemId": "00000000-0000-4000-8000-000000000000",
+     "mediaPlayer": "exo-player",
+     "mediaType": "book",
+     "playMethod": 3,
+     "startTime": 0,
+     "startedAt": 1700000000000,
+     "timeListening": 1,
+     "updatedAt": 1700000060000
+    }
+   ]
+  },
+  "method": "POST",
+  "path": "/api/session/local-all"
+ },
+ "status": 200
+}

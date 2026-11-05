@@ -1,0 +1,12 @@
+{
+ "body": {
+  "success": true
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "DELETE",
+  "path": "/api/users/{guest_id}"
+ },
+ "status": 200
+}
