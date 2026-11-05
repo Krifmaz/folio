@@ -131,3 +131,6 @@ dependencies {
 }
 
 apply from: 'capacitor.build.gradle'
+
+// Folio: version, signing and the other fork changes
+apply from: 'folio.gradle'
