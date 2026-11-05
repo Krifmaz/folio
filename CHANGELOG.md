@@ -6,6 +6,7 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The mobile app's stats page is checked against Folio's listening stats (PARITY M0010).
 - Playback sessions work like Audiobookshelf's: starting one when a player opens a book, syncing and closing it,
   sessions phones played offline, the admins' list of open and past sessions (and deleting them), and each user's
   listening sessions and stats. Each answer is checked against the original's recorded one.
