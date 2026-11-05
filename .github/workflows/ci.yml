@@ -1,0 +1,39 @@
+name: ci
+
+# Every pull request: the kit's checks (fmt, clippy -D warnings, tests of server/ and web/), the Docker image
+# built (not pushed) and the Android app built and unit-tested. Required to pass before a merge.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: Krifmaz/kit/.github/workflows/kit-ci.yml@v0.2.2
+    with:
+      rust-dirs: server
+      wasm-dirs: web
+
+  docker:
+    needs: test
+    uses: Krifmaz/kit/.github/workflows/kit-docker.yml@v0.2.2
+    with:
+      image: folio
+      push: false
+      platforms: linux/amd64
+
+  android:
+    needs: test
+    uses: Krifmaz/kit/.github/workflows/kit-android.yml@v0.2.2
+    with:
+      app-name: Folio
+      project-dir: android
+      baseline-profile: true
+
