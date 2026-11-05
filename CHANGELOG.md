@@ -6,6 +6,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Notifications work like Audiobookshelf's: point Folio at an Apprise server, set up notifications for events
+  with their own title and text, test them, and see when each last fired. One that keeps failing is turned off,
+  and events that come while one is being sent wait their turn. Each answer is checked against the original's own.
 - Server settings work like Audiobookshelf's: admins change the settings and the words ignored when sorting
   titles (sort titles are refreshed), check a schedule before saving it, add and remove their own metadata
   providers, and set the mail server and e-reader devices with who may use each. The task list the apps show is
