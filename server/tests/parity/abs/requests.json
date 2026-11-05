@@ -1589,5 +1589,180 @@
   "name": "p6_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
+ },
+ {
+  "name": "p6n_guest_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "viewer2",
+   "password": "pw",
+   "type": "guest",
+   "isActive": true
+  },
+  "save": {
+   "guest_id": "user.id"
+  }
+ },
+ {
+  "name": "p6n_guest_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "viewer2",
+   "password": "pw"
+  },
+  "save": {
+   "guest_token": "user.accessToken"
+  }
+ },
+ {
+  "name": "notifications_guest",
+  "path": "/api/notifications",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "notification_data_guest",
+  "path": "/api/notificationdata",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "notifications_create",
+  "path": "/api/notifications",
+  "method": "POST",
+  "body": {
+   "eventName": "onTest",
+   "urls": [
+    "json://localhost"
+   ],
+   "titleTemplate": "Test {{version}}",
+   "bodyTemplate": "Body {{ version }} {{missing}}",
+   "enabled": true,
+   "libraryId": ""
+  },
+  "save": {
+   "notification_id": "notifications.0.id"
+  }
+ },
+ {
+  "name": "notifications_create_no_event",
+  "path": "/api/notifications",
+  "method": "POST",
+  "body": {
+   "urls": [
+    "json://localhost"
+   ]
+  }
+ },
+ {
+  "name": "notifications_create_no_urls",
+  "path": "/api/notifications",
+  "method": "POST",
+  "body": {
+   "eventName": "onTest",
+   "urls": []
+  }
+ },
+ {
+  "name": "notification_test_unconfigured",
+  "path": "/api/notifications/{notification_id}/test"
+ },
+ {
+  "name": "notifications_update",
+  "path": "/api/notifications",
+  "method": "PATCH",
+  "body": {
+   "appriseApiUrl": "http://127.0.0.1:9/notify",
+   "maxFailedAttempts": "2",
+   "maxNotificationQueue": null,
+   "notificationDelay": 5
+  }
+ },
+ {
+  "name": "notifications_after_update",
+  "path": "/api/notifications"
+ },
+ {
+  "name": "notifications_fire_test_fail",
+  "path": "/api/notifications/test?fail=1"
+ },
+ {
+  "name": "notifications_after_fail",
+  "path": "/api/notifications"
+ },
+ {
+  "name": "notifications_fire_test_fail2",
+  "path": "/api/notifications/test?fail=1"
+ },
+ {
+  "name": "notifications_after_fail2",
+  "path": "/api/notifications"
+ },
+ {
+  "name": "notification_update",
+  "path": "/api/notifications/{notification_id}",
+  "method": "PATCH",
+  "body": {
+   "id": "{notification_id}",
+   "enabled": true,
+   "urls": [
+    "json://a",
+    "json://b"
+   ],
+   "titleTemplate": "New",
+   "type": "warning"
+  }
+ },
+ {
+  "name": "notification_update_missing",
+  "path": "/api/notifications/00000000-0000-4000-8000-000000000000",
+  "method": "PATCH",
+  "body": {
+   "id": "00000000-0000-4000-8000-000000000000",
+   "enabled": true
+  }
+ },
+ {
+  "name": "notification_test",
+  "path": "/api/notifications/{notification_id}/test"
+ },
+ {
+  "name": "notifications_after_test",
+  "path": "/api/notifications"
+ },
+ {
+  "name": "notification_delete",
+  "path": "/api/notifications/{notification_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "notification_delete_missing",
+  "path": "/api/notifications/{notification_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "notifications_reset",
+  "path": "/api/notifications",
+  "method": "PATCH",
+  "body": {
+   "appriseApiUrl": "",
+   "maxFailedAttempts": 5,
+   "maxNotificationQueue": 20
+  }
+ },
+ {
+  "name": "p6n_guest_delete",
+  "path": "/api/users/{guest_id}",
+  "method": "DELETE"
  }
 ]
