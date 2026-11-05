@@ -47,7 +47,7 @@ COPY --from=ui /src/web/dist /app/static
 COPY --from=ffmpeg /ffmpeg /ffprobe /usr/local/bin/
 ARG APP_VERSION=
 LABEL org.opencontainers.image.version="${APP_VERSION}"
-ENV APP_DATA_DIR=/data APP_STATIC_DIR=/app/static APP_PORT=8080 APP_FFPROBE=/usr/local/bin/ffprobe
+ENV APP_DATA_DIR=/data APP_STATIC_DIR=/app/static APP_PORT=8080 APP_FFPROBE=/usr/local/bin/ffprobe APP_FFMPEG=/usr/local/bin/ffmpeg APP_LIBRARY_DIR=/library
 USER nonroot
 VOLUME /data
 EXPOSE 8080

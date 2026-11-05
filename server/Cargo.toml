@@ -49,6 +49,10 @@ reqwest = { version = "0.12", default-features = false, features = ["json", "rus
 unicode-normalization = "0.1"
 # Track A (player and reader): sending library files whole or in parts
 tower = { version = "0.5", features = ["util"] }
+# Track D (migration): reading the other apps' databases
+folio-migrate = { path = "crates/migrate" }
+# Track C (compatibility): KOReader's MD5s (EPUBs are read with core's zip above)
+md-5 = "0.10"
 
 [build-dependencies]
 kit-server-settings = { git = "https://github.com/Krifmaz/kit", tag = "v0.2.2", default-features = false, features = ["toml"] }
@@ -57,6 +61,8 @@ kit-server-changelog = { git = "https://github.com/Krifmaz/kit", tag = "v0.2.2",
 [dev-dependencies]
 tower = { version = "0.5", features = ["util"] }
 http-body-util = "0.1"
+# Track D (migration): the tests make other apps' databases
+rusqlite = { version = "0.39", features = ["bundled"] }
 
 [lints.rust]
 missing_docs = "warn"

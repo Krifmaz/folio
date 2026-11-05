@@ -337,6 +337,9 @@ pub fn spawn(st: AppState) {
             if let Err(e) = crate::verify::pending(&st).await {
                 tracing::warn!("downloads can't be checked: {}", e.detail);
             }
+            if let Err(e) = crate::import::pending(&st).await {
+                tracing::warn!("downloads can't be filed: {}", e.detail);
+            }
             if let Err(e) = search_due(&st).await {
                 tracing::warn!("the wanted list can't be searched: {}", e.detail);
             }
@@ -413,7 +416,7 @@ async fn callback(State(st): State<AppState>, Path(token): Path<String>, Json(g)
     }
     let known = apply(&st.db, &g)?;
     if known && g.status == "completed" {
-        crate::verify::pending(&st).await?;
+        crate::import::spawn_pending(&st);
     }
     Ok(Json(json!({ "ok": true, "known": known })))
 }

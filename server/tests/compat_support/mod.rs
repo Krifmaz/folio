@@ -159,9 +159,29 @@ pub async fn library(name: &str, mut env: HashMap<String, String>) -> Library {
     Library { app, st, dir, audio, ebook }
 }
 
-/// Bytes standing in for an EPUB (big enough for KOReader's sampled MD5 to read several pieces).
+/// A small real EPUB: three chapters (`OEBPS/one.xhtml`, `two.xhtml`, `three.xhtml`) and a stored picture
+/// big enough for KOReader's sampled MD5 to read several pieces.
 pub fn epub_bytes() -> Vec<u8> {
-    (0..300_000u32).map(|i| (i * 7 % 251) as u8).collect()
+    use std::io::Write;
+    let mut z = zip::ZipWriter::new(std::io::Cursor::new(Vec::new()));
+    let stored = zip::write::SimpleFileOptions::default().compression_method(zip::CompressionMethod::Stored);
+    z.start_file("mimetype", stored).unwrap();
+    z.write_all(b"application/epub+zip").unwrap();
+    z.start_file("META-INF/container.xml", stored).unwrap();
+    z.write_all(br#"<container><rootfiles><rootfile full-path="OEBPS/content.opf"/></rootfiles></container>"#).unwrap();
+    z.start_file("OEBPS/content.opf", stored).unwrap();
+    z.write_all(
+        br#"<package><manifest><item id="a" href="one.xhtml"/><item id="b" href="two.xhtml"/><item id="c" href="three.xhtml"/></manifest>
+        <spine><itemref idref="a"/><itemref idref="b"/><itemref idref="c"/></spine></package>"#,
+    )
+    .unwrap();
+    for name in ["one", "two", "three"] {
+        z.start_file(format!("OEBPS/{name}.xhtml"), stored).unwrap();
+        z.write_all(format!("<html><body><p>{name}</p></body></html>").as_bytes()).unwrap();
+    }
+    z.start_file("OEBPS/picture.bin", stored).unwrap();
+    z.write_all(&(0..300_000u32).map(|i| (i * 7 % 251) as u8).collect::<Vec<_>>()).unwrap();
+    z.finish().unwrap().into_inner()
 }
 
 /// `Authorization: Basic` for the owner (or `password`).

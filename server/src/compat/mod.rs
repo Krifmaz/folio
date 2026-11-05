@@ -1,7 +1,12 @@
 //! Other apps' protocols, so the apps people already use work with Folio: an OPDS catalogue for e-readers
-//! ([`opds`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
-//! how to point each app at Folio.
+//! ([`opds`]), a KOReader sync server ([`koreader`]), an Audiobookshelf-compatible API ([`abs`]) and Kobo sync
+//! ([`kobo`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
+//! how to point each app at Folio. `GET /api/apps` gives the web app's Other apps page the addresses.
 
+pub mod abs;
+pub mod epub;
+pub mod kobo;
+pub mod koreader;
 pub mod model;
 pub mod opds;
 pub mod shelf;
@@ -17,19 +22,98 @@ use std::path::Path;
 use tower_http::services::ServeFile;
 
 /// The compatibility track's tables, step by step (a released step is never changed).
-pub const MIGRATIONS: Migrations = Migrations { component: "folio-compat", steps: &[] };
+pub const MIGRATIONS: Migrations = Migrations {
+    component: "folio-compat",
+    steps: &[
+        // 1: KOReader: each account's sync password (SHA-256 of KOReader's MD5 of it), KOReader's own places by
+        // its document name, and the MD5s KOReader names the library's ebook files by
+        "CREATE TABLE compat_koreader_keys (
+            user_id INTEGER PRIMARY KEY,
+            key_hash TEXT NOT NULL,
+            created_at REAL NOT NULL
+        );
+        CREATE TABLE compat_koreader_progress (
+            user_id INTEGER NOT NULL,
+            document TEXT NOT NULL,
+            progress TEXT NOT NULL DEFAULT '',
+            percentage REAL NOT NULL DEFAULT 0,
+            device TEXT NOT NULL DEFAULT '',
+            device_id TEXT NOT NULL DEFAULT '',
+            updated_at REAL NOT NULL,
+            PRIMARY KEY (user_id, document)
+        );
+        CREATE TABLE compat_file_digests (
+            file_id INTEGER PRIMARY KEY,
+            size INTEGER NOT NULL,
+            partial_md5 TEXT NOT NULL,
+            name_md5 TEXT NOT NULL
+        );
+        CREATE INDEX compat_file_digests_partial ON compat_file_digests (partial_md5);",
+        // 2: Audiobookshelf playback sessions: who plays what on which app, where it is and how long was heard
+        "CREATE TABLE compat_abs_sessions (
+            id TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            edition_id INTEGER NOT NULL,
+            device TEXT NOT NULL DEFAULT '',
+            started_at REAL NOT NULL,
+            updated_at REAL NOT NULL,
+            position REAL NOT NULL DEFAULT 0,
+            listened REAL NOT NULL DEFAULT 0,
+            closed INTEGER NOT NULL DEFAULT 0
+        );
+        CREATE INDEX compat_abs_sessions_user ON compat_abs_sessions (user_id, started_at);",
+        // 3: Kobo sync: each account's sync address token (kept to show it again, and as SHA-256 to look it up),
+        // and the books removed on the Kobo, which aren't synced to it again
+        "CREATE TABLE compat_kobo_tokens (
+            token_key TEXT PRIMARY KEY,
+            token TEXT NOT NULL,
+            user_id INTEGER NOT NULL UNIQUE,
+            created_at REAL NOT NULL
+        );
+        CREATE TABLE compat_kobo_removed (
+            user_id INTEGER NOT NULL,
+            edition_id INTEGER NOT NULL,
+            removed_at REAL NOT NULL,
+            PRIMARY KEY (user_id, edition_id)
+        );",
+    ],
+};
 
 /// Makes this part's tables (the steps not run yet).
 pub fn migrate(db: &SqliteDb) -> anyhow::Result<()> {
-    if MIGRATIONS.steps.is_empty() {
-        return Ok(());
-    }
     db.migrate(&MIGRATIONS).map_err(|e| anyhow::anyhow!("The tables for other apps can't be made: {}", e.detail))
 }
 
 /// This part's routes.
 pub fn router() -> Router<AppState> {
-    Router::new().merge(opds::router())
+    Router::new()
+        .route("/api/apps", axum::routing::get(apps))
+        .merge(opds::router())
+        .merge(koreader::router())
+        .merge(abs::router())
+        .merge(kobo::router())
+}
+
+/// `GET /api/apps`: the addresses to give each outside app, and what the account has set up for them (the
+/// web app's Other apps page).
+async fn apps(
+    axum::extract::State(st): axum::extract::State<AppState>,
+    kit_server_core::SignedIn(me): kit_server_core::SignedIn,
+    headers: axum::http::HeaderMap,
+) -> Result<axum::Json<serde_json::Value>> {
+    use kit_server_core::{p, Db, RowExt};
+    let origin = kobo::origin(&headers);
+    let koreader = st.db.one("SELECT user_id FROM compat_koreader_keys WHERE user_id=?", p![me.id])?.is_some();
+    let kobo =
+        st.db.one("SELECT token FROM compat_kobo_tokens WHERE user_id=?", p![me.id])?.map(|r| format!("{origin}/kobo/{}", r.s("token")));
+    Ok(axum::Json(serde_json::json!({
+        "username": me.username,
+        "opds": format!("{origin}/opds"),
+        "audiobookshelf": origin,
+        "koreader": format!("{origin}/koreader"),
+        "koreader_password_set": koreader,
+        "kobo": kobo
+    })))
 }
 
 /// Now, in seconds since 1970.
