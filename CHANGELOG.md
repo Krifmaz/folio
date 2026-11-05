@@ -3,6 +3,13 @@
 ## Unreleased
 
 ### Added
+- Verification before import: every download is checked against the edition you asked for. Audiobooks: runtime
+  within 3%, narrator, language, chapter count, and nothing marking a sample or an abridged copy (read with
+  ffprobe, which the image now carries). Ebooks: a valid EPUB without DRM whose own ISBN, title, author and
+  language match, with a length that fits. A confidence score decides: sure enough (85% by default, Settings →
+  Downloads) is checked and ready to file; anything else waits under **Review**, with what was requested next to
+  what arrived, the reason with Copy, and Accept, Reject or Reject and search again. A rejected download is
+  never grabbed again for that book.
 - `docs/TRACKS.md`: the parallel tracks, the files each one owns, and the schema and playback API they share. The
   library keeps each book's files (`edition_files`), and the library folder is a setting (Settings → Downloads).
 - `docs/GOALS.md`: the goal, word for word.

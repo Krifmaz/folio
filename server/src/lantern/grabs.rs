@@ -29,7 +29,8 @@ use serde_json::{json, Value};
 /// The grabs' table, step by step (a released step is never changed).
 pub const MIGRATIONS: Migrations = Migrations {
     component: "folio-grabs",
-    steps: &["CREATE TABLE grabs (
+    steps: &[
+        "CREATE TABLE grabs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             wanted_id INTEGER NOT NULL,
             lantern_id TEXT NOT NULL DEFAULT '',
@@ -51,7 +52,22 @@ pub const MIGRATIONS: Migrations = Migrations {
         );
         CREATE INDEX grabs_wanted ON grabs (wanted_id);
         CREATE INDEX grabs_status ON grabs (status);
-        CREATE TABLE folio_kv (key TEXT PRIMARY KEY, value TEXT NOT NULL);"],
+        CREATE TABLE folio_kv (key TEXT PRIMARY KEY, value TEXT NOT NULL);",
+        // 2: the verdict on what arrived (verify), and the downloads someone rejected, never grabbed again for
+        // the same book
+        "ALTER TABLE grabs ADD COLUMN verdict TEXT NOT NULL DEFAULT '';
+        ALTER TABLE grabs ADD COLUMN confidence INTEGER NOT NULL DEFAULT 0;
+        CREATE TABLE rejected_releases (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            wanted_id INTEGER NOT NULL,
+            guid TEXT NOT NULL,
+            title TEXT NOT NULL DEFAULT '',
+            reason TEXT NOT NULL DEFAULT '',
+            user_id INTEGER NOT NULL DEFAULT 0,
+            created_at REAL NOT NULL
+        );
+        CREATE INDEX rejected_releases_wanted ON rejected_releases (wanted_id, guid);",
+    ],
 };
 
 /// Makes the grabs' table (the steps not run yet).
@@ -96,7 +112,7 @@ pub fn callback_url(st: &AppState) -> Result<String> {
 }
 
 /// A wanted entry's edition and preferences.
-fn wanted_parts(db: &SqliteDb, wanted_id: i64) -> Result<(Row, EditionMeta, wanted::Profile)> {
+pub fn wanted_parts(db: &SqliteDb, wanted_id: i64) -> Result<(Row, EditionMeta, wanted::Profile)> {
     let w = db
         .one("SELECT * FROM wanted WHERE id=?", p![wanted_id])?
         .ok_or_else(|| err(404, "That book isn't on the wanted list any more."))?;
@@ -107,7 +123,8 @@ fn wanted_parts(db: &SqliteDb, wanted_id: i64) -> Result<(Row, EditionMeta, want
 
 /// Every result Lantern has for the edition, from all its searches, scored best first. Searches that fail are
 /// skipped while others answer; when all fail, the first failure.
-pub async fn find(l: &Lantern, m: &EditionMeta, pr: &wanted::Profile) -> Result<Vec<Scored>> {
+/// Results someone rejected for the wanted entry stay refused.
+pub async fn find(db: &SqliteDb, wanted_id: i64, l: &Lantern, m: &EditionMeta, pr: &wanted::Profile) -> Result<Vec<Scored>> {
     let mut all = Vec::new();
     let mut first_err = None;
     let mut answered = false;
@@ -127,7 +144,14 @@ pub async fn find(l: &Lantern, m: &EditionMeta, pr: &wanted::Profile) -> Result<
             return Err(e);
         }
     }
-    Ok(score::rank(m, pr, all))
+    let rejected: std::collections::HashSet<String> =
+        db.query("SELECT guid FROM rejected_releases WHERE wanted_id=?", p![wanted_id])?.iter().map(|r| r.s("guid")).collect();
+    let mut ranked = score::rank(m, pr, all);
+    for s in ranked.iter_mut().filter(|s| rejected.contains(&s.release.guid)) {
+        s.refused = Some("You rejected this download for this book before.".into());
+    }
+    ranked.sort_by_key(|s| s.refused.is_some());
+    Ok(ranked)
 }
 
 /// Sends the result to Lantern and keeps the grab; the wanted entry becomes `downloading`.
@@ -161,13 +185,17 @@ async fn start_grab(st: &AppState, l: &Lantern, wanted_id: i64, format: Format, 
 /// entry goes back to `wanted` with a note saying why. `{grab, best}`.
 pub async fn search_and_grab(st: &AppState, wanted_id: i64) -> Result<Value> {
     let (w, m, pr) = wanted_parts(&st.db, wanted_id)?;
-    if matches!(w.s("status").as_str(), "downloading" | "imported") {
-        return Err(err(409, "This book is already on its way or in the library."));
+    match w.s("status").as_str() {
+        "downloading" | "downloaded" | "verified" | "imported" => {
+            return Err(err(409, "This book is already on its way or in the library."));
+        }
+        "review" => return Err(err(409, "A download of this book is waiting for a look under Review. Accept or reject it first.")),
+        _ => {}
     }
     let l = lantern(st)?;
     wanted::set_status(&st.db, wanted_id, "searching", "")?;
     st.db.execute("UPDATE wanted SET searched_at=? WHERE id=?", p![now(), wanted_id])?;
-    let found = match find(&l, &m, &pr).await {
+    let found = match find(&st.db, wanted_id, &l, &m, &pr).await {
         Ok(f) => f,
         Err(e) => {
             wanted::set_status(&st.db, wanted_id, "wanted", &e.detail)?;
@@ -201,7 +229,7 @@ pub async fn search_and_grab(st: &AppState, wanted_id: i64) -> Result<Value> {
 }
 
 /// A grab as clients get it.
-fn grab_row_json(r: &Row) -> Value {
+pub fn grab_row_json(r: &Row) -> Value {
     json!({
         "id": r.i("id"),
         "wanted_id": r.i("wanted_id"),
@@ -217,6 +245,8 @@ fn grab_row_json(r: &Row) -> Value {
         "path": r.s("path"),
         "files": serde_json::from_str::<Value>(&r.s("files")).unwrap_or(json!([])),
         "error": r.s("error"),
+        "confidence": r.i("confidence"),
+        "verdict": serde_json::from_str::<Value>(&r.s("verdict")).unwrap_or(Value::Null),
         "created_at": r.f("created_at"),
         "updated_at": r.f("updated_at"),
     })
@@ -230,9 +260,13 @@ fn grab_json(db: &SqliteDb, id: i64) -> Result<Value> {
 }
 
 /// Records what Lantern says about a grab; a finished one moves its wanted entry to `downloaded` (files
-/// arrived) and a failed one to `failed` with Lantern's reason.
+/// arrived, to be checked by [`crate::verify::pending`]) and a failed one to `failed` with Lantern's reason.
 pub fn apply(db: &SqliteDb, g: &GrabState) -> Result<bool> {
     let Some(row) = db.one("SELECT * FROM grabs WHERE lantern_id=?", p![g.id])? else { return Ok(false) };
+    // once checked (or accepted or rejected), what Lantern says doesn't change it again
+    if matches!(row.s("status").as_str(), "verified" | "review" | "rejected" | "imported") {
+        return Ok(true);
+    }
     let status = match g.status.as_str() {
         "queued" | "downloading" | "completed" | "failed" => g.status.as_str(),
         _ => "downloading",
@@ -300,6 +334,9 @@ pub fn spawn(st: AppState) {
             if let Err(e) = poll(&st).await {
                 tracing::warn!("downloads can't be followed: {}", e.detail);
             }
+            if let Err(e) = crate::verify::pending(&st).await {
+                tracing::warn!("downloads can't be checked: {}", e.detail);
+            }
             if let Err(e) = search_due(&st).await {
                 tracing::warn!("the wanted list can't be searched: {}", e.detail);
             }
@@ -310,7 +347,7 @@ pub fn spawn(st: AppState) {
 /// `GET /api/wanted/{id}/releases`.
 async fn releases(State(st): State<AppState>, _: Admin, Path(id): Path<i64>) -> Result<Json<Value>> {
     let (_, m, pr) = wanted_parts(&st.db, id)?;
-    let found = find(&lantern(&st)?, &m, &pr).await?;
+    let found = find(&st.db, id, &lantern(&st)?, &m, &pr).await?;
     Ok(Json(json!({ "results": found, "min_score": st.settings.int("min_score") })))
 }
 
@@ -336,7 +373,7 @@ pub struct GrabThis {
 async fn grab_one(State(st): State<AppState>, _: Admin, Path(id): Path<i64>, Json(g): Json<GrabThis>) -> Result<Json<Value>> {
     let (_, m, pr) = wanted_parts(&st.db, id)?;
     let l = lantern(&st)?;
-    let found = find(&l, &m, &pr).await?;
+    let found = find(&st.db, id, &l, &m, &pr).await?;
     let s = found
         .into_iter()
         .find(|s| s.release.guid == g.guid && (g.indexer_id == 0 || s.release.indexer_id == g.indexer_id))
@@ -375,6 +412,9 @@ async fn callback(State(st): State<AppState>, Path(token): Path<String>, Json(g)
         return Err(err(404, "Not found"));
     }
     let known = apply(&st.db, &g)?;
+    if known && g.status == "completed" {
+        crate::verify::pending(&st).await?;
+    }
     Ok(Json(json!({ "ok": true, "known": known })))
 }
 
