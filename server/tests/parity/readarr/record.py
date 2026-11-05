@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Record how the pinned Readarr answers, for Folio's parity tests.
 
-Usage: record.py BASE_URL OUT_DIR CONFIG_DIR BOOKS_DIR
+Usage: record.py BASE_URL OUT_DIR CONFIG_DIR BOOKS_DIR [METADATA_URL]
 
 BASE_URL is the running Readarr (its last image, see UPSTREAM.lock), CONFIG_DIR the folder mounted at /config and
 BOOKS_DIR the one mounted at /books, both as this machine sees them.
 
-1. Waits for Readarr, reads its API key from config.xml, adds the root folder /books and the tag `kids`.
+1. Waits for Readarr, reads its API key from config.xml, adds the root folder /books and the tag `kids`. With
+   METADATA_URL, points Readarr's metadata source at it and turns certificate checks off, so that the stand-ins
+   of `stub/stub.py` answer its lookups (the workflow sends www.goodreads.com to the Goodreads stand-in).
 2. Writes the test library (`seed.sql`) into Readarr's database and its files (`seed-files.json`) into
    BOOKS_DIR. Readarr's metadata server is gone, so authors and books can't be added through its API.
 3. Replays requests.json. Each request may use {placeholders} filled from earlier answers (see `save`), and
@@ -30,6 +32,7 @@ import urllib.error
 import urllib.request
 
 base, out, config, books = sys.argv[1].rstrip("/"), sys.argv[2], sys.argv[3], sys.argv[4]
+metadata_url = sys.argv[5] if len(sys.argv) > 5 else None
 here = os.path.dirname(os.path.abspath(__file__))
 os.makedirs(os.path.join(out, "fixtures"), exist_ok=True)
 ctx = {}
@@ -100,6 +103,11 @@ print("root folder:", call("POST", "/api/v1/rootfolder", {
     "defaultMonitorOption": "all", "defaultNewItemMonitorOption": "all", "defaultTags": [], "isCalibreLibrary": False,
 })[0])
 print("tag:", call("POST", "/api/v1/tag", {"label": "kids"})[0])
+if metadata_url:
+    for section, change in (("development", {"metadataSource": metadata_url}), ("host", {"certificateValidation": "disabled"})):
+        settings = call("GET", f"/api/v1/config/{section}")[2]
+        settings.update(change)
+        print(f"{section} settings:", call("PUT", f"/api/v1/config/{section}/{settings['id']}", settings)[0])
 
 
 def write_files(files):

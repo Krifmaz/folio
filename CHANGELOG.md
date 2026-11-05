@@ -10,6 +10,11 @@
   (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
   `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's
   books grouped by series.
+- The Readarr API can look up books and authors to add (`/api/v1/book/lookup`, `/api/v1/author/lookup`,
+  `/api/v1/search`) the way Readarr does: by name, ISBN or ASIN through Goodreads, or by `author:`, `work:` and
+  `edition:` ids, with what the library already has filled in. Authors and books come from Readarr's metadata
+  server setting, or rreading-glasses' public server when it is empty. 20 answers are checked against Readarr's
+  own, recorded against a stand-in metadata server and Goodreads.
 - The mobile app's stats page and home shelves are checked against Folio (PARITY M0002, M0006, M0010, M0017).
 - Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
   listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item

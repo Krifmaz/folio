@@ -1,0 +1,55 @@
+{
+ "body": [
+  {
+   "added": "2025-05-01T09:30:00Z",
+   "anyEditionOk": true,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry Guards! Guards!",
+   "foreignBookId": "64216",
+   "foreignEditionId": "64216001",
+   "genres": [
+    "fantasy",
+    "humor"
+   ],
+   "grabbed": false,
+   "id": 1,
+   "images": [
+    {
+     "coverType": "cover",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.example/64216001.jpg",
+     "url": "/MediaCover/Books/1/cover.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/64216"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/64216001"
+    }
+   ],
+   "monitored": true,
+   "pageCount": 416,
+   "ratings": {
+    "popularity": 4320,
+    "value": 4.32,
+    "votes": 1000
+   },
+   "releaseDate": "1989-11-01T00:00:00Z",
+   "remoteCover": "https://images.example/64216001.jpg",
+   "seriesTitle": "Discworld #8",
+   "title": "Guards! Guards!",
+   "titleSlug": "64216"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/book/lookup?term=isbn:9780062237378"
+ },
+ "status": 200
+}

@@ -1,0 +1,363 @@
+{
+ "body": [
+  {
+   "author": {
+    "addOptions": {
+     "booksToMonitor": [],
+     "monitor": "all",
+     "monitored": true,
+     "searchForMissingBooks": false
+    },
+    "added": "2025-05-01T09:30:00Z",
+    "authorMetadataId": 1,
+    "authorName": "Terry Pratchett",
+    "authorNameLastFirst": "Pratchett, Terry",
+    "cleanName": "terrypratchett",
+    "ended": true,
+    "folder": "Terry Pratchett",
+    "foreignAuthorId": "1654",
+    "genres": [
+     "fantasy",
+     "humor"
+    ],
+    "id": 1,
+    "images": [
+     {
+      "coverType": "poster",
+      "extension": ".jpg",
+      "remoteUrl": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg",
+      "url": "/MediaCover/1/poster.jpg"
+     }
+    ],
+    "links": [
+     {
+      "name": "Goodreads",
+      "url": "https://www.goodreads.com/author/show/1654.Terry_Pratchett"
+     }
+    ],
+    "metadataProfileId": 1,
+    "monitorNewItems": "all",
+    "monitored": false,
+    "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+    "path": "/books/Terry Pratchett",
+    "qualityProfileId": 1,
+    "ratings": {
+     "popularity": 6195000,
+     "value": 4.13,
+     "votes": 1500000
+    },
+    "remotePoster": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg",
+    "sortName": "terry pratchett",
+    "sortNameLastFirst": "pratchett, terry",
+    "statistics": {
+     "availableBookCount": 0,
+     "bookCount": 0,
+     "bookFileCount": 0,
+     "percentOfBooks": 0,
+     "sizeOnDisk": 0,
+     "totalBookCount": 0
+    },
+    "status": "ended",
+    "tags": [],
+    "titleSlug": "1654"
+   },
+   "foreignId": "1654",
+   "id": 1
+  },
+  {
+   "book": {
+    "added": "2025-05-01T09:30:00Z",
+    "anyEditionOk": false,
+    "author": {
+     "addOptions": {
+      "booksToMonitor": [],
+      "monitor": "all",
+      "monitored": true,
+      "searchForMissingBooks": false
+     },
+     "added": "2025-05-01T09:30:00Z",
+     "authorMetadataId": 1,
+     "authorName": "Terry Pratchett",
+     "authorNameLastFirst": "Pratchett, Terry",
+     "cleanName": "terrypratchett",
+     "ended": true,
+     "folder": "Terry Pratchett",
+     "foreignAuthorId": "1654",
+     "genres": [
+      "fantasy",
+      "humor"
+     ],
+     "id": 1,
+     "images": [
+      {
+       "coverType": "poster",
+       "extension": ".jpg",
+       "url": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg"
+      }
+     ],
+     "links": [
+      {
+       "name": "Goodreads",
+       "url": "https://www.goodreads.com/author/show/1654.Terry_Pratchett"
+      }
+     ],
+     "metadataProfileId": 1,
+     "monitorNewItems": "all",
+     "monitored": false,
+     "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+     "path": "/books/Terry Pratchett",
+     "qualityProfileId": 1,
+     "ratings": {
+      "popularity": 6195000,
+      "value": 4.13,
+      "votes": 1500000
+     },
+     "sortName": "terry pratchett",
+     "sortNameLastFirst": "pratchett, terry",
+     "statistics": {
+      "availableBookCount": 0,
+      "bookCount": 0,
+      "bookFileCount": 0,
+      "percentOfBooks": 0,
+      "sizeOnDisk": 0,
+      "totalBookCount": 0
+     },
+     "status": "ended",
+     "tags": [],
+     "titleSlug": "1654"
+    },
+    "authorId": 1,
+    "authorTitle": "pratchett, terry Small Gods",
+    "editions": [
+     {
+      "bookId": 0,
+      "foreignEditionId": "1215958001",
+      "format": "Paperback",
+      "grabbed": false,
+      "images": [],
+      "isEbook": false,
+      "isbn13": "9780062237385",
+      "language": "eng",
+      "links": [
+       {
+        "name": "Goodreads Book",
+        "url": "https://www.goodreads.com/book/show/1215958001"
+       }
+      ],
+      "manualAdd": false,
+      "monitored": true,
+      "overview": "Brutha and the tortoise.",
+      "pageCount": 400,
+      "publisher": "Harper",
+      "ratings": {
+       "popularity": 2100,
+       "value": 4.2,
+       "votes": 500
+      },
+      "releaseDate": "2013-01-01T00:00:00Z",
+      "title": "Small Gods",
+      "titleSlug": "1215958001"
+     }
+    ],
+    "foreignBookId": "1215958",
+    "foreignEditionId": "1215958001",
+    "genres": [
+     "fantasy",
+     "religion"
+    ],
+    "grabbed": false,
+    "id": 2,
+    "images": [],
+    "lastSearchTime": "2025-06-02T08:00:00Z",
+    "links": [
+     {
+      "name": "Goodreads Editions",
+      "url": "https://www.goodreads.com/work/editions/1215958"
+     },
+     {
+      "name": "Goodreads Book",
+      "url": "https://www.goodreads.com/book/show/1215958001"
+     }
+    ],
+    "monitored": true,
+    "overview": "Brutha and the tortoise.",
+    "pageCount": 400,
+    "ratings": {
+     "popularity": 2100,
+     "value": 4.2,
+     "votes": 500
+    },
+    "releaseDate": "1992-05-01T00:00:00Z",
+    "seriesTitle": "Discworld #13",
+    "title": "Small Gods",
+    "titleSlug": "1215958"
+   },
+   "foreignId": "1215958",
+   "id": 2
+  },
+  {
+   "author": {
+    "added": "0001-01-01T00:00:00Z",
+    "authorMetadataId": 0,
+    "authorName": "Neil Gaiman",
+    "authorNameLastFirst": "Gaiman, Neil",
+    "cleanName": "neilgaiman",
+    "ended": false,
+    "folder": "Neil Gaiman",
+    "foreignAuthorId": "1221698",
+    "genres": [],
+    "images": [],
+    "links": [
+     {
+      "name": "Goodreads",
+      "url": "https://www.goodreads.com/author/show/1221698"
+     }
+    ],
+    "metadataProfileId": 0,
+    "monitorNewItems": "all",
+    "monitored": false,
+    "overview": "Neil Gaiman writes.",
+    "qualityProfileId": 0,
+    "ratings": {
+     "popularity": 3279999.9999999995,
+     "value": 4.1,
+     "votes": 800000
+    },
+    "sortName": "neil gaiman",
+    "sortNameLastFirst": "gaiman, neil",
+    "statistics": {
+     "availableBookCount": 0,
+     "bookCount": 0,
+     "bookFileCount": 0,
+     "percentOfBooks": 0,
+     "sizeOnDisk": 0,
+     "totalBookCount": 0
+    },
+    "status": "continuing",
+    "tags": [],
+    "titleSlug": "1221698"
+   },
+   "foreignId": "1221698",
+   "id": 3
+  },
+  {
+   "book": {
+    "added": "0001-01-01T00:00:00Z",
+    "anyEditionOk": true,
+    "author": {
+     "added": "0001-01-01T00:00:00Z",
+     "authorMetadataId": 0,
+     "authorName": "Neil Gaiman",
+     "authorNameLastFirst": "Gaiman, Neil",
+     "cleanName": "neilgaiman",
+     "ended": false,
+     "folder": "Neil Gaiman",
+     "foreignAuthorId": "1221698",
+     "genres": [],
+     "images": [],
+     "links": [
+      {
+       "name": "Goodreads",
+       "url": "https://www.goodreads.com/author/show/1221698"
+      }
+     ],
+     "metadataProfileId": 0,
+     "monitorNewItems": "all",
+     "monitored": false,
+     "overview": "Neil Gaiman writes.",
+     "qualityProfileId": 0,
+     "ratings": {
+      "popularity": 3279999.9999999995,
+      "value": 4.1,
+      "votes": 800000
+     },
+     "sortName": "neil gaiman",
+     "sortNameLastFirst": "gaiman, neil",
+     "statistics": {
+      "availableBookCount": 0,
+      "bookCount": 0,
+      "bookFileCount": 0,
+      "percentOfBooks": 0,
+      "sizeOnDisk": 0,
+      "totalBookCount": 0
+     },
+     "status": "continuing",
+     "tags": [],
+     "titleSlug": "1221698"
+    },
+    "authorId": 0,
+    "authorTitle": "gaiman, neil Good Omens",
+    "editions": [
+     {
+      "bookId": 0,
+      "foreignEditionId": "12067001",
+      "format": "Paperback",
+      "grabbed": false,
+      "images": [],
+      "isEbook": false,
+      "isbn13": "9780060853983",
+      "language": "eng",
+      "links": [
+       {
+        "name": "Goodreads Book",
+        "url": "https://www.goodreads.com/book/show/12067001"
+       }
+      ],
+      "manualAdd": false,
+      "monitored": true,
+      "overview": "The world ends on Saturday.",
+      "pageCount": 432,
+      "publisher": "William Morrow",
+      "ratings": {
+       "popularity": 1700,
+       "value": 4.25,
+       "votes": 400
+      },
+      "releaseDate": "2006-11-28T00:00:00Z",
+      "title": "Good Omens",
+      "titleSlug": "12067001"
+     }
+    ],
+    "foreignBookId": "12067",
+    "foreignEditionId": "12067001",
+    "genres": [
+     "fantasy",
+     "humor"
+    ],
+    "grabbed": false,
+    "images": [],
+    "links": [
+     {
+      "name": "Goodreads Editions",
+      "url": "https://www.goodreads.com/work/editions/12067"
+     },
+     {
+      "name": "Goodreads Book",
+      "url": "https://www.goodreads.com/book/show/12067001"
+     }
+    ],
+    "monitored": false,
+    "overview": "The world ends on Saturday.",
+    "pageCount": 432,
+    "ratings": {
+     "popularity": 1700,
+     "value": 4.25,
+     "votes": 400
+    },
+    "releaseDate": "1990-05-01T00:00:00Z",
+    "seriesTitle": "",
+    "title": "Good Omens",
+    "titleSlug": "12067"
+   },
+   "foreignId": "12067",
+   "id": 4
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/search?term=small%20gods"
+ },
+ "status": 200
+}

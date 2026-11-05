@@ -63,6 +63,8 @@ httpdate = "1"
 rusqlite = { version = "0.39", features = ["bundled"] }
 # Track C (the library side): the scanner's file and tag patterns
 regex = "1"
+# Track D (the Readarr port): .NET patterns that look around (Readarr's name cleaning and naming tokens)
+fancy-regex = "0.14"
 
 [build-dependencies]
 kit-server-settings = { git = "https://github.com/Krifmaz/kit", tag = "v0.2.2", default-features = false, features = ["toml"] }

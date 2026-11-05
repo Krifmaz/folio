@@ -1,0 +1,112 @@
+{
+ "body": [
+  {
+   "addOptions": {
+    "booksToMonitor": [],
+    "monitor": "all",
+    "monitored": true,
+    "searchForMissingBooks": false
+   },
+   "added": "2025-05-01T09:30:00Z",
+   "authorMetadataId": 1,
+   "authorName": "Terry Pratchett",
+   "authorNameLastFirst": "Pratchett, Terry",
+   "cleanName": "terrypratchett",
+   "ended": true,
+   "folder": "Terry Pratchett",
+   "foreignAuthorId": "1654",
+   "genres": [
+    "fantasy",
+    "humor"
+   ],
+   "id": 1,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg",
+     "url": "/MediaCover/1/poster.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/1654.Terry_Pratchett"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": false,
+   "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+   "path": "/books/Terry Pratchett",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 6195000,
+    "value": 4.13,
+    "votes": 1500000
+   },
+   "remotePoster": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg",
+   "sortName": "terry pratchett",
+   "sortNameLastFirst": "pratchett, terry",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "ended",
+   "tags": [],
+   "titleSlug": "1654"
+  },
+  {
+   "added": "0001-01-01T00:00:00Z",
+   "authorMetadataId": 0,
+   "authorName": "Neil Gaiman",
+   "authorNameLastFirst": "Gaiman, Neil",
+   "cleanName": "neilgaiman",
+   "ended": false,
+   "folder": "Neil Gaiman",
+   "foreignAuthorId": "1221698",
+   "genres": [],
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/1221698"
+    }
+   ],
+   "metadataProfileId": 0,
+   "monitorNewItems": "all",
+   "monitored": false,
+   "overview": "Neil Gaiman writes.",
+   "qualityProfileId": 0,
+   "ratings": {
+    "popularity": 3279999.9999999995,
+    "value": 4.1,
+    "votes": 800000
+   },
+   "sortName": "neil gaiman",
+   "sortNameLastFirst": "gaiman, neil",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "continuing",
+   "tags": [],
+   "titleSlug": "1221698"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/author/lookup?term=pratchett"
+ },
+ "status": 200
+}
