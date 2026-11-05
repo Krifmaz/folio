@@ -38,7 +38,7 @@ repository at the pinned commit.
 
 | ID | Kind | Item | Upstream source | Track | Status | Proof |
 | --- | --- | --- | --- | --- | --- | --- |
-| A0001 | endpoint | `POST /api/libraries` (LibraryController.create) | `server/routers/ApiRouter.js#L69` | P1 library | todo |  |
+| A0001 | endpoint | `POST /api/libraries` (LibraryController.create) | `server/routers/ApiRouter.js#L69` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 | A0002 | endpoint | `GET /api/libraries` (LibraryController.findAll) | `server/routers/ApiRouter.js#L70` | P1 library | wip | `server/tests/parity_abs_library.rs::libraries_answer_like_the_original` (book libraries; podcast stats with P5) |
 | A0003 | endpoint | `GET /api/libraries/:id` (LibraryController.findOne) | `server/routers/ApiRouter.js#L71` | P1 library | wip | `server/tests/parity_abs_library.rs::libraries_answer_like_the_original` (book libraries; podcast filter data with P5) |
 | A0004 | endpoint | `PATCH /api/libraries/:id` (LibraryController.update) | `server/routers/ApiRouter.js#L72` | P1 library | todo |  |
@@ -59,7 +59,7 @@ repository at the pinned commit.
 | A0019 | endpoint | `PATCH /api/libraries/:id/narrators/:narratorId` (LibraryController.updateNarrator) | `server/routers/ApiRouter.js#L88` | P1 library | todo |  |
 | A0020 | endpoint | `DELETE /api/libraries/:id/narrators/:narratorId` (LibraryController.removeNarrator) | `server/routers/ApiRouter.js#L89` | P1 library | todo |  |
 | A0021 | endpoint | `GET /api/libraries/:id/matchall` (LibraryController.matchAll) | `server/routers/ApiRouter.js#L90` | P1 library | todo |  |
-| A0022 | endpoint | `POST /api/libraries/:id/scan` (LibraryController.scan) | `server/routers/ApiRouter.js#L91` | P1 library | todo |  |
+| A0022 | endpoint | `POST /api/libraries/:id/scan` (LibraryController.scan) | `server/routers/ApiRouter.js#L91` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 | A0023 | endpoint | `GET /api/libraries/:id/recent-episodes` (LibraryController.getRecentEpisodes) | `server/routers/ApiRouter.js#L92` | P1 library | todo |  |
 | A0024 | endpoint | `GET /api/libraries/:id/opml` (LibraryController.getOPMLFile) | `server/routers/ApiRouter.js#L93` | P1 library | todo |  |
 | A0025 | endpoint | `POST /api/libraries/order` (LibraryController.reorder) | `server/routers/ApiRouter.js#L94` | P1 library | todo |  |
@@ -423,19 +423,19 @@ repository at the pinned commit.
 | A0383 | job | database migrations on start | `server/managers/MigrationManager.js` | P6 server admin | todo |  |
 | A0384 | job | ffmpeg/ffprobe presence check and download | `server/managers/BinaryManager.js` | P6 server admin | todo |  |
 | A0385 | job | server start: purge (`cleanUserData`, `purgeMetadata`) | `server/Server.js` | P6 server admin | todo |  |
-| A0386 | job | scanner: `AbsMetadataFileScanner` | `server/scanner/AbsMetadataFileScanner.js` | P1 library | todo |  |
-| A0387 | job | scanner: `AudioFileScanner` | `server/scanner/AudioFileScanner.js` | P1 library | todo |  |
-| A0388 | job | scanner: `BookScanner` | `server/scanner/BookScanner.js` | P1 library | todo |  |
-| A0389 | job | scanner: `LibraryItemScanData` | `server/scanner/LibraryItemScanData.js` | P1 library | todo |  |
-| A0390 | job | scanner: `LibraryItemScanner` | `server/scanner/LibraryItemScanner.js` | P1 library | todo |  |
-| A0391 | job | scanner: `LibraryScan` | `server/scanner/LibraryScan.js` | P1 library | todo |  |
-| A0392 | job | scanner: `LibraryScanner` | `server/scanner/LibraryScanner.js` | P1 library | todo |  |
-| A0393 | job | scanner: `MediaProbeData` | `server/scanner/MediaProbeData.js` | P1 library | todo |  |
-| A0394 | job | scanner: `NfoFileScanner` | `server/scanner/NfoFileScanner.js` | P1 library | todo |  |
-| A0395 | job | scanner: `OpfFileScanner` | `server/scanner/OpfFileScanner.js` | P1 library | todo |  |
+| A0386 | job | scanner: `AbsMetadataFileScanner` | `server/scanner/AbsMetadataFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0387 | job | scanner: `AudioFileScanner` | `server/scanner/AudioFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0388 | job | scanner: `BookScanner` | `server/scanner/BookScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0389 | job | scanner: `LibraryItemScanData` | `server/scanner/LibraryItemScanData.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0390 | job | scanner: `LibraryItemScanner` | `server/scanner/LibraryItemScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0391 | job | scanner: `LibraryScan` | `server/scanner/LibraryScan.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0392 | job | scanner: `LibraryScanner` | `server/scanner/LibraryScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0393 | job | scanner: `MediaProbeData` | `server/scanner/MediaProbeData.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0394 | job | scanner: `NfoFileScanner` | `server/scanner/NfoFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0395 | job | scanner: `OpfFileScanner` | `server/scanner/OpfFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 | A0396 | job | scanner: `PodcastScanner` | `server/scanner/PodcastScanner.js` | P1 library | todo |  |
-| A0397 | job | scanner: `ScanLogger` | `server/scanner/ScanLogger.js` | P1 library | todo |  |
-| A0398 | job | scanner: `Scanner` | `server/scanner/Scanner.js` | P1 library | todo |  |
+| A0397 | job | scanner: `ScanLogger` | `server/scanner/ScanLogger.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
+| A0398 | job | scanner: `Scanner` | `server/scanner/Scanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 
 ### ABS web
 

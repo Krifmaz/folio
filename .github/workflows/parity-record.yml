@@ -38,6 +38,8 @@ jobs:
             "ghcr.io/advplyr/audiobookshelf:$version"
       - name: Record
         run: python3 -I server/tests/parity/abs/record.py http://127.0.0.1:13378 "$RUNNER_TEMP/out" "$RUNNER_TEMP/config/absdatabase.sqlite"
+      - name: Record ffprobe's answers and the metadata files
+        run: python3 -I server/tests/parity/abs/record_files.py abs "$RUNNER_TEMP/media" "$RUNNER_TEMP/metadata" "$RUNNER_TEMP/out"
       - name: Print the recording
         # Also printed to the log (base64 of a .tar.gz between markers), for readers that can't reach artifacts.
         run: |
