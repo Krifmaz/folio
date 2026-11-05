@@ -35,6 +35,20 @@ class App :
     lateinit var changelog: ServerChangelog
         private set
 
+    /** Where the person is in each book and their bookmarks, kept in step with the server. */
+    lateinit var sync: Sync
+        private set
+
+    /** Books kept on the phone to use offline. */
+    lateinit var downloads: Downloads
+        private set
+
+    /** The line to the audiobook player (connects on first use). */
+    val player: PlayerConnection by lazy { PlayerConnection(this) }
+
+    /** The player's choices (speed). */
+    val playerPrefs: PlayerPrefs by lazy { PlayerPrefs(this) }
+
     /** The app's image loader (bug report pictures); built on first use, through [ServerApi.http]. */
     val imageLoader: ImageLoader by lazy { buildKitImageLoader(this, server.http) }
 
@@ -69,6 +83,12 @@ class App :
         server = ServerApi(settings)
         changelog = ServerChangelog(server)
         bugs = BugReportsApi(server.kit, server.http)
+        sync = Sync(this, server, settings)
+        // places and bookmarks saved while offline go as soon as the app starts
+        sync.flushLater()
+        downloads = Downloads(this, server)
+        // downloads the app was closed in the middle of go on
+        downloads.resume()
         CrashLog.uploadPending(this, this)
     }
 }

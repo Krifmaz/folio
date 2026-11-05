@@ -65,9 +65,12 @@ class ServerSettings(context: Context) {
         baseFlow.value = base
     }
 
-    /** Keeps the app token of a sign-in. */
-    fun signIn(token: String) {
-        prefs.edit().putString(K_TOKEN, token).apply()
+    /** Who signed in last (the username typed); "" before the first sign-in. */
+    val username: String get() = prefs.getString(K_USER, "").orEmpty()
+
+    /** Keeps the app token of a sign-in, and who it is for. */
+    fun signIn(token: String, username: String) {
+        prefs.edit().putString(K_TOKEN, token).putString(K_USER, username.trim()).apply()
         signedInFlow.value = true
     }
 
@@ -90,6 +93,7 @@ class ServerSettings(context: Context) {
         const val K_LAST = "last"
         const val K_TOKEN = "token"
         const val K_DEVICE = "device_id"
+        const val K_USER = "username"
     }
 }
 
@@ -206,7 +210,7 @@ class ServerApi(private val settings: ServerSettings) {
         val body = SignInRules.body(username, password, code, settings.deviceId, name)
         val req = Request.Builder().url(need("/api/auth/login")).header("Accept", "application/json").post(body.toString().toRequestBody(jsonType)).build()
         val result = http.newCall(req).execute().use { SignInRules.result(it.code, it.body.string()) }
-        if (result is LoginResult.Success) settings.signIn(result.token)
+        if (result is LoginResult.Success) settings.signIn(result.token, username)
         return result
     }
 
