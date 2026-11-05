@@ -8,8 +8,10 @@
 //! it is.
 
 pub mod auth;
+pub mod bookmarks;
 pub mod html;
 pub mod models;
+pub mod progress;
 pub mod settings;
 pub mod socket;
 
@@ -146,7 +148,7 @@ pub fn socket_user(st: &AppState, token: &str) -> Result<models::User, &'static 
 
 /// Every ported route. Each track adds its module's router here (one line each, docs/TRACKS.md).
 pub fn router() -> Router<AppState> {
-    Router::new().merge(auth::routes::router())
+    Router::new().merge(auth::routes::router()).merge(progress::router()).merge(bookmarks::router())
 }
 
 /// Test helpers: the recorded answers of the original and the comparison of tests/parity.
