@@ -8,3 +8,6 @@ target/
 /android/local.properties
 
 /.upstream
+
+# the two built web apps together, as the README runs them
+/static/

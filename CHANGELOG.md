@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Added
+- The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's
+  own pages (Wanted, Downloads, Review, Move in) move to `/folio/` and are linked from its sidebar.
 - The mobile app signs in to Folio: its connect page names a Folio server, and connecting and signing in were
   checked against a running Folio server.
 - The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start
