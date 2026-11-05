@@ -1,0 +1,32 @@
+{
+ "body": [
+  {
+   "authorId": 0,
+   "bookId": 0,
+   "dateAdded": "2025-05-05T12:00:00Z",
+   "id": 3,
+   "path": "/books/Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub",
+   "quality": {
+    "quality": {
+     "id": 3,
+     "name": "EPUB"
+    },
+    "revision": {
+     "isRepack": false,
+     "real": 0,
+     "version": 1
+    }
+   },
+   "qualityCutoffNotMet": false,
+   "qualityWeight": 12,
+   "size": 512
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/bookfile?bookFileIds=3"
+ },
+ "status": 200
+}
