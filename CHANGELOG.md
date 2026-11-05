@@ -6,6 +6,8 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The mobile app's library list, book page, account page and log are checked against a Folio server holding the
+  original's recorded library (PARITY M0001, M0007, M0019, M0023).
 - Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked
