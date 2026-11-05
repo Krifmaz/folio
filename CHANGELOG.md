@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- The Readarr API can change authors (folder, profiles, tags, monitoring, one at a time or several), books and
+  their editions (monitoring, "any edition"), and book files' quality, with Readarr's checks and answers (21 more
+  recorded answers).
 - Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked

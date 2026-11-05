@@ -1,0 +1,60 @@
+{
+ "body": [
+  {
+   "added": "2025-05-02T09:30:00Z",
+   "authorMetadataId": 2,
+   "authorName": "Ursula K. Le Guin",
+   "authorNameLastFirst": "Le Guin, Ursula K.",
+   "cleanName": "ursulakleguin",
+   "ended": false,
+   "foreignAuthorId": "874602",
+   "genres": [],
+   "id": 2,
+   "images": [],
+   "links": [],
+   "metadataProfileId": 2,
+   "monitorNewItems": "all",
+   "monitored": false,
+   "overview": "Ursula Kroeber Le Guin wrote Earthsea.",
+   "path": "/books/Ursula K. Le Guin",
+   "qualityProfileId": 2,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "sortName": "ursula k. le guin",
+   "sortNameLastFirst": "le guin, ursula k.",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "continuing",
+   "tags": [
+    1
+   ],
+   "titleSlug": "874602"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "applyTags": "add",
+   "authorIds": [
+    2
+   ],
+   "monitorNewItems": "all",
+   "qualityProfileId": 2,
+   "tags": [
+    1
+   ]
+  },
+  "method": "PUT",
+  "path": "/api/v1/author/editor"
+ },
+ "status": 202
+}

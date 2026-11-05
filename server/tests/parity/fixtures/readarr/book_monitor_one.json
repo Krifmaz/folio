@@ -1,0 +1,49 @@
+{
+ "body": [
+  {
+   "added": "2025-05-02T09:30:00Z",
+   "anyEditionOk": false,
+   "authorId": 2,
+   "authorTitle": "le guin, ursula k. A Wizard of Earthsea",
+   "foreignBookId": "1561478",
+   "foreignEditionId": "1561478-e1",
+   "genres": [
+    "fantasy"
+   ],
+   "grabbed": false,
+   "id": 4,
+   "images": [],
+   "links": [],
+   "monitored": true,
+   "pageCount": 183,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "1968-01-01T00:00:00Z",
+   "seriesTitle": "",
+   "statistics": {
+    "bookCount": 1,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "A Wizard of Earthsea",
+   "titleSlug": "1561478"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "bookIds": [
+    4
+   ],
+   "monitored": true
+  },
+  "method": "PUT",
+  "path": "/api/v1/book/monitor"
+ },
+ "status": 202
+}

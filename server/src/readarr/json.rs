@@ -13,6 +13,26 @@ pub fn date(v: Option<&Value>) -> Value {
     }
 }
 
+/// A time from a request (`2013-01-01T00:00:00Z`) as Readarr stores it (`2013-01-01 00:00:00Z`); nothing stays
+/// nothing.
+pub fn stored_date(v: Option<&Value>) -> Value {
+    match v {
+        Some(Value::String(s)) if !s.trim().is_empty() => {
+            let s = s.trim().replacen('T', " ", 1);
+            Value::String(if s.ends_with('Z') { s } else { format!("{s}Z") })
+        }
+        _ => Value::Null,
+    }
+}
+
+/// A JSON value to store in a document column: its compact text, or nothing.
+pub fn stored_doc(v: Option<&Value>) -> Value {
+    match v {
+        None | Some(Value::Null) => Value::Null,
+        Some(v) => Value::String(v.to_string()),
+    }
+}
+
 /// A stored time that .NET can't leave empty: nothing becomes `0001-01-01T00:00:00Z`.
 pub fn date_or_min(v: Option<&Value>) -> Value {
     match date(v) {

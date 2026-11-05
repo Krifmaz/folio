@@ -1,0 +1,101 @@
+{
+ "body": [
+  {
+   "added": "2025-05-01T09:30:00Z",
+   "anyEditionOk": true,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry Guards! Guards!",
+   "foreignBookId": "64216",
+   "foreignEditionId": "64216-e1",
+   "genres": [
+    "fantasy"
+   ],
+   "grabbed": false,
+   "id": 1,
+   "images": [
+    {
+     "coverType": "cover",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.gr-assets.com/books/1/64216.jpg",
+     "url": "/MediaCover/Books/1/cover.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/64216"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/64216"
+    }
+   ],
+   "monitored": false,
+   "pageCount": 416,
+   "ratings": {
+    "popularity": 4320,
+    "value": 4.32,
+    "votes": 1000
+   },
+   "releaseDate": "1989-11-01T00:00:00Z",
+   "seriesTitle": "Discworld #8",
+   "statistics": {
+    "bookCount": 1,
+    "bookFileCount": 1,
+    "percentOfBooks": 100,
+    "sizeOnDisk": 2048,
+    "totalBookCount": 1
+   },
+   "title": "Guards! Guards!",
+   "titleSlug": "64216"
+  },
+  {
+   "added": "2025-05-01T09:30:00Z",
+   "anyEditionOk": false,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry Small Gods",
+   "foreignBookId": "1215958",
+   "foreignEditionId": "1215958-e1",
+   "genres": [
+    "fantasy",
+    "religion"
+   ],
+   "grabbed": false,
+   "id": 2,
+   "images": [],
+   "lastSearchTime": "2025-06-02T08:00:00Z",
+   "links": [],
+   "monitored": false,
+   "pageCount": 400,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "1992-05-01T00:00:00Z",
+   "seriesTitle": "Discworld #13",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Small Gods",
+   "titleSlug": "1215958"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "bookIds": [
+    1,
+    2
+   ],
+   "monitored": false
+  },
+  "method": "PUT",
+  "path": "/api/v1/book/monitor"
+ },
+ "status": 202
+}
