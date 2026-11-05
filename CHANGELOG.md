@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Users, API keys and the sign-in settings work like Audiobookshelf's: admins add, change and remove users and
+  their permissions, make API keys that sign in as a user (with an expiry, turned on or off), and set the sign-in
+  message, sign-in methods and OpenID app addresses; everyone can change their own password, which signs them out
+  on their other devices. Each answer is checked against the original's own.
 - Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked

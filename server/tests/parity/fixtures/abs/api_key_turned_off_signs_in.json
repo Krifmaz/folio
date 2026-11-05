@@ -1,0 +1,13 @@
+{
+ "body": "Unauthorized",
+ "content_type": "",
+ "request": {
+  "body": null,
+  "headers": {
+   "Authorization": "Bearer {api_key}"
+  },
+  "method": "GET",
+  "path": "/api/me"
+ },
+ "status": 401
+}
