@@ -6,6 +6,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The home page shelves of a book library (`/api/libraries/:id/personalized`), as Audiobookshelf's apps show them:
+  Continue Listening and Reading, Continue Series, Recently Added, Recent Series, Discover, Listen and Read Again,
+  and Newest Authors, each checked against the original's answer on the same data.
 - Playback sessions work like Audiobookshelf's: starting one when a player opens a book, syncing and closing it,
   sessions phones played offline, the admins' list of open and past sessions (and deleting them), and each user's
   listening sessions and stats. Each answer is checked against the original's recorded one.
