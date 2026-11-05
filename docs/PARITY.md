@@ -50,7 +50,7 @@ repository at the pinned commit.
 | A0010 | endpoint | `GET /api/libraries/:id/series/:seriesId` (LibraryController.getSeriesForLibrary) | `server/routers/ApiRouter.js#L79` | P1 library | todo |  |
 | A0011 | endpoint | `GET /api/libraries/:id/collections` (LibraryController.getCollectionsForLibrary) | `server/routers/ApiRouter.js#L80` | P1 library | todo |  |
 | A0012 | endpoint | `GET /api/libraries/:id/playlists` (LibraryController.getUserPlaylistsForLibrary) | `server/routers/ApiRouter.js#L81` | P1 library | todo |  |
-| A0013 | endpoint | `GET /api/libraries/:id/personalized` (LibraryController.getUserPersonalizedShelves) | `server/routers/ApiRouter.js#L82` | P1 library | todo |  |
+| A0013 | endpoint | `GET /api/libraries/:id/personalized` (LibraryController.getUserPersonalizedShelves) | `server/routers/ApiRouter.js#L82` | P1 library | done | `server/tests/parity_abs_library.rs::home_shelves_answer_like_the_original` |
 | A0014 | endpoint | `GET /api/libraries/:id/filterdata` (LibraryController.getLibraryFilterData) | `server/routers/ApiRouter.js#L83` | P1 library | todo |  |
 | A0015 | endpoint | `GET /api/libraries/:id/search` (LibraryController.search) | `server/routers/ApiRouter.js#L84` | P1 library | todo |  |
 | A0016 | endpoint | `GET /api/libraries/:id/stats` (LibraryController.stats) | `server/routers/ApiRouter.js#L85` | P1 library | todo |  |

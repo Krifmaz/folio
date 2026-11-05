@@ -94,24 +94,34 @@ struct Sql {
 }
 
 /// The conditions that hide books a user may not see: explicit ones, and ones by tag
-/// (`getUserPermissionBookWhereQuery`).
-fn permission_where(u: &User, sql: &mut Sql) {
+/// (`getUserPermissionBookWhereQuery`), on the books table named `book`, with their values.
+pub fn permission_conditions(u: &User, book: &str) -> (Vec<String>, Vec<Value>) {
+    let mut conds = Vec::new();
+    let mut params = Vec::new();
     if !user::can(u, "accessExplicitContent") {
-        sql.wheres.push("book.explicit = 0".into());
+        conds.push(format!("{book}.explicit = 0"));
     }
     let perms = u.permissions.clone().unwrap_or(Value::Null);
     let all_tags = perms.get("accessAllTags").is_some_and(book::truthy);
     let tags: Vec<Value> = perms.get("itemTagsSelected").and_then(Value::as_array).cloned().unwrap_or_default();
     if !all_tags && !tags.is_empty() {
         let marks = vec!["?"; tags.len()].join(", ");
-        let count = format!("(SELECT count(*) FROM json_each(book.tags) WHERE json_valid(book.tags) AND json_each.value IN ({marks}))");
+        let count = format!("(SELECT count(*) FROM json_each({book}.tags) WHERE json_valid({book}.tags) AND json_each.value IN ({marks}))");
         if perms.get("selectedTagsNotAccessible").is_some_and(book::truthy) {
-            sql.wheres.push(format!("{count} = 0"));
+            conds.push(format!("{count} = 0"));
         } else {
-            sql.wheres.push(format!("{count} >= 1"));
+            conds.push(format!("{count} >= 1"));
         }
-        sql.params_where.extend(tags);
+        params.extend(tags);
     }
+    (conds, params)
+}
+
+/// Adds [`permission_conditions`] to a page query.
+fn permission_where(u: &User, sql: &mut Sql) {
+    let (conds, params) = permission_conditions(u, "book");
+    sql.wheres.extend(conds);
+    sql.params_where.extend(params);
 }
 
 /// The conditions of a filter on the book itself (`getMediaGroupQuery`).
