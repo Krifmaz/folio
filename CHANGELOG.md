@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Audiobookshelf's library scanner for book libraries: adding a library and scanning it finds audiobooks and
+  ebooks in their folders, reads their tags, chapters, OPF, NFO, `desc.txt`, `reader.txt` and `metadata.json`
+  files the original's way, and adds, updates or marks missing the books, authors and series. The parity recording
+  now also keeps the original's ffprobe answers, so the test compares Folio's scan with the original's own rows.
 - Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked
