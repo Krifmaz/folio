@@ -1,0 +1,13 @@
+{
+ "body": "Username already taken",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "password": "pw",
+   "username": "reader"
+  },
+  "method": "POST",
+  "path": "/api/users"
+ },
+ "status": 400
+}

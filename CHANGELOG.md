@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Users, API keys and the sign-in settings work like Audiobookshelf's: admins add, change and remove users and
+  their permissions, make API keys that sign in as a user (with an expiry, turned on or off), and set the sign-in
+  message, sign-in methods and OpenID app addresses; everyone can change their own password, which signs them out
+  on their other devices. Each answer is checked against the original's own.
 - The Readarr API can change authors (folder, profiles, tags, monitoring, one at a time or several), books and
   their editions (monitoring, "any edition"), and book files' quality, with Readarr's checks and answers (21 more
   recorded answers).
