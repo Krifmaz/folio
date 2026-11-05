@@ -289,15 +289,15 @@ async fn auth_device(State(st): State<AppState>, Path(token): Path<String>, body
 /// place sent. Sent to the Kobo as base64 JSON in `x-kobo-synctoken`, and back with the next sync.
 #[derive(Debug, Clone, Default, Serialize, Deserialize, PartialEq)]
 pub struct SyncMark {
-    /// the change time of the last book sent
+    /// the change time of the last book sent, in microseconds since 1970
     #[serde(default)]
-    pub t: f64,
+    pub t: i64,
     /// that book's edition (books changed at the same time come in edition order)
     #[serde(default)]
     pub id: i64,
-    /// the time of the last place sent
+    /// the time of the last place sent, in microseconds since 1970
     #[serde(default)]
-    pub p: f64,
+    pub p: i64,
 }
 
 impl SyncMark {
@@ -327,6 +327,11 @@ fn kobo_books(st: &AppState, who: &Who) -> Result<Vec<Item>> {
         .into_iter()
         .filter(|i| !i.is_audio() && !removed.contains(&i.id) && i.files.iter().any(|f| f.kind == "epub"))
         .collect())
+}
+
+/// A time in whole microseconds, so the sync mark compares exactly after its trip through JSON.
+fn micros(secs: f64) -> i64 {
+    (secs * 1_000_000.0).round() as i64
 }
 
 /// When a book last changed, for syncing.
@@ -438,19 +443,19 @@ async fn sync(State(st): State<AppState>, Path(token): Path<String>, headers: He
     let mark = SyncMark::read(&headers);
     let mut books = kobo_books(&st, &who)?;
     books.sort_by(|a, b| changed_at(a).total_cmp(&changed_at(b)).then(a.id.cmp(&b.id)));
-    let pending: Vec<&Item> = books.iter().filter(|i| (changed_at(i), i.id) > (mark.t, mark.id)).collect();
+    let pending: Vec<&Item> = books.iter().filter(|i| (micros(changed_at(i)), i.id) > (mark.t, mark.id)).collect();
     let places: std::collections::HashMap<i64, playback::Progress> =
         playback::all_progress(&st.db, who.id, None)?.into_iter().map(|p| (p.edition_id, p)).collect();
     let mut out = Vec::new();
     let mut next = mark.clone();
     for it in pending.iter().take(SYNC_PAGE) {
-        let key = if it.added_at > mark.t || mark.t == 0.0 { "NewEntitlement" } else { "ChangedEntitlement" };
+        let key = if micros(it.added_at) > mark.t || mark.t == 0 { "NewEntitlement" } else { "ChangedEntitlement" };
         out.push(json!({ key: {
             "BookEntitlement": entitlement(it),
             "BookMetadata": book_metadata(it, &me),
             "ReadingState": reading_state(it, places.get(&it.id))
         }}));
-        next.t = changed_at(it);
+        next.t = micros(changed_at(it));
         next.id = it.id;
     }
     let more = pending.len() > SYNC_PAGE;
@@ -459,12 +464,12 @@ async fn sync(State(st): State<AppState>, Path(token): Path<String>, headers: He
         let sent: std::collections::HashSet<i64> = pending.iter().map(|i| i.id).collect();
         let mut latest = mark.p;
         for it in books.iter().filter(|i| !sent.contains(&i.id)) {
-            if let Some(p) = places.get(&it.id).filter(|p| p.updated_at > mark.p && !p.device.starts_with("kobo")) {
+            if let Some(p) = places.get(&it.id).filter(|p| micros(p.updated_at) > mark.p && !p.device.starts_with("kobo")) {
                 out.push(json!({ "ChangedReadingState": { "ReadingState": reading_state(it, Some(p)) } }));
             }
         }
         for p in places.values() {
-            latest = latest.max(p.updated_at);
+            latest = latest.max(micros(p.updated_at));
         }
         next.p = latest;
     }
@@ -645,7 +650,7 @@ mod tests {
 
     #[test]
     fn the_sync_mark_goes_there_and_back() {
-        let m = SyncMark { t: 12.5, id: 3, p: 7.0 };
+        let m = SyncMark { t: micros(1_793_843_239.123_456_7), id: 3, p: 7_000_000 };
         let mut h = HeaderMap::new();
         h.insert("x-kobo-synctoken", HeaderValue::from_str(&m.write()).unwrap());
         assert_eq!(SyncMark::read(&h), m);
