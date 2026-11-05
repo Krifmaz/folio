@@ -1,0 +1,401 @@
+{
+ "body": [
+  {
+   "entities": [
+    {
+     "addedAt": 1793915239921,
+     "birthtimeMs": 1793915230403,
+     "ctimeMs": 1793915230423,
+     "folderId": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
+     "id": "3fd51198-5d38-45bb-a557-1323dfe5a405",
+     "ino": "9177995",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+     "media": {
+      "coverPath": null,
+      "duration": 0,
+      "ebookFormat": "epub",
+      "id": "c26b2bda-de10-49df-a56e-292f0045699f",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Martha Wells",
+       "authorNameLF": "Wells, Martha",
+       "description": null,
+       "explicit": false,
+       "genres": [],
+       "isbn": null,
+       "language": "en",
+       "narratorName": "",
+       "publishedDate": null,
+       "publishedYear": "2017",
+       "publisher": null,
+       "seriesName": "The Murderbot Diaries #1",
+       "subtitle": null,
+       "title": "All Systems Red",
+       "titleIgnorePrefix": "All Systems Red"
+      },
+      "numAudioFiles": 0,
+      "numChapters": 0,
+      "numTracks": 0,
+      "size": 1311,
+      "tags": []
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793915230423,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "size": 1311,
+     "updatedAt": 1793915239921
+    }
+   ],
+   "id": "continue-reading",
+   "label": "Continue Reading",
+   "labelStringKey": "LabelContinueReading",
+   "total": 2,
+   "type": "book"
+  },
+  {
+   "entities": [
+    {
+     "addedAt": 1793915239975,
+     "birthtimeMs": 1793915229452,
+     "ctimeMs": 1793915230109,
+     "folderId": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
+     "id": "c6e01b70-b584-418d-a5f7-1eae2840a82f",
+     "ino": "9177988",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+     "media": {
+      "coverPath": null,
+      "duration": 60,
+      "id": "00a4cb3f-7fbe-43a9-950b-bef9b1884404",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Ann Leckie",
+       "authorNameLF": "Leckie, Ann",
+       "description": null,
+       "explicit": false,
+       "genres": [
+        "Science Fiction"
+       ],
+       "isbn": null,
+       "language": null,
+       "narratorName": "Adjoa Andoh",
+       "publishedDate": null,
+       "publishedYear": "2013",
+       "publisher": null,
+       "seriesName": "Imperial Radch #1",
+       "subtitle": null,
+       "title": "Ancillary Justice",
+       "titleIgnorePrefix": "Ancillary Justice"
+      },
+      "numAudioFiles": 1,
+      "numChapters": 3,
+      "numTracks": 1,
+      "size": 256184,
+      "tags": []
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793915230109,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "size": 256184,
+     "updatedAt": 1793915239975
+    }
+   ],
+   "id": "recently-added",
+   "label": "Recently Added",
+   "labelStringKey": "LabelRecentlyAdded",
+   "total": 3,
+   "type": "book"
+  },
+  {
+   "entities": [
+    {
+     "addedAt": 1793915239979,
+     "books": [
+      {
+       "addedAt": 1793915239975,
+       "birthtimeMs": 1793915229452,
+       "ctimeMs": 1793915230109,
+       "folderId": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
+       "id": "c6e01b70-b584-418d-a5f7-1eae2840a82f",
+       "ino": "9177988",
+       "isFile": false,
+       "isInvalid": false,
+       "isMissing": false,
+       "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+       "media": {
+        "coverPath": null,
+        "duration": 60,
+        "id": "00a4cb3f-7fbe-43a9-950b-bef9b1884404",
+        "metadata": {
+         "abridged": false,
+         "asin": null,
+         "authorName": "",
+         "authorNameLF": "",
+         "description": null,
+         "explicit": false,
+         "genres": [
+          "Science Fiction"
+         ],
+         "isbn": null,
+         "language": null,
+         "narratorName": "Adjoa Andoh",
+         "publishedDate": null,
+         "publishedYear": "2013",
+         "publisher": null,
+         "seriesName": "",
+         "subtitle": null,
+         "title": "Ancillary Justice",
+         "titleIgnorePrefix": "Ancillary Justice"
+        },
+        "numAudioFiles": 1,
+        "numChapters": 3,
+        "numTracks": 1,
+        "size": 256184,
+        "tags": []
+       },
+       "mediaType": "book",
+       "mtimeMs": 1793915230109,
+       "numFiles": 1,
+       "oldLibraryItemId": null,
+       "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+       "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+       "size": 256184,
+       "updatedAt": 1793915239975
+      }
+     ],
+     "description": null,
+     "id": "a478fb10-4c84-494a-ba88-f0c7ab43d131",
+     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+     "name": "Imperial Radch",
+     "nameIgnorePrefix": "Imperial Radch",
+     "updatedAt": 1793915239979
+    },
+    {
+     "addedAt": 1793915239925,
+     "books": [
+      {
+       "addedAt": 1793915239921,
+       "birthtimeMs": 1793915230403,
+       "ctimeMs": 1793915230423,
+       "folderId": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
+       "id": "3fd51198-5d38-45bb-a557-1323dfe5a405",
+       "ino": "9177995",
+       "isFile": false,
+       "isInvalid": false,
+       "isMissing": false,
+       "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+       "media": {
+        "coverPath": null,
+        "duration": 0,
+        "ebookFormat": "epub",
+        "id": "c26b2bda-de10-49df-a56e-292f0045699f",
+        "metadata": {
+         "abridged": false,
+         "asin": null,
+         "authorName": "",
+         "authorNameLF": "",
+         "description": null,
+         "explicit": false,
+         "genres": [],
+         "isbn": null,
+         "language": "en",
+         "narratorName": "",
+         "publishedDate": null,
+         "publishedYear": "2017",
+         "publisher": null,
+         "seriesName": "",
+         "subtitle": null,
+         "title": "All Systems Red",
+         "titleIgnorePrefix": "All Systems Red"
+        },
+        "numAudioFiles": 0,
+        "numChapters": 0,
+        "numTracks": 0,
+        "size": 1311,
+        "tags": []
+       },
+       "mediaType": "book",
+       "mtimeMs": 1793915230423,
+       "numFiles": 1,
+       "oldLibraryItemId": null,
+       "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+       "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+       "size": 1311,
+       "updatedAt": 1793915239921
+      }
+     ],
+     "description": null,
+     "id": "d4b3083a-537b-4789-b6f7-cc290d51980f",
+     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+     "name": "The Murderbot Diaries",
+     "nameIgnorePrefix": "Murderbot Diaries, The",
+     "updatedAt": 1793915239925
+    }
+   ],
+   "id": "recent-series",
+   "label": "Recent Series",
+   "labelStringKey": "LabelRecentSeries",
+   "total": 2,
+   "type": "series"
+  },
+  {
+   "entities": [
+    {
+     "addedAt": 1793915239921,
+     "birthtimeMs": 1793915230403,
+     "ctimeMs": 1793915230423,
+     "folderId": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
+     "id": "3fd51198-5d38-45bb-a557-1323dfe5a405",
+     "ino": "9177995",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+     "media": {
+      "coverPath": null,
+      "duration": 0,
+      "ebookFormat": "epub",
+      "id": "c26b2bda-de10-49df-a56e-292f0045699f",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Martha Wells",
+       "authorNameLF": "Wells, Martha",
+       "description": null,
+       "explicit": false,
+       "genres": [],
+       "isbn": null,
+       "language": "en",
+       "narratorName": "",
+       "publishedDate": null,
+       "publishedYear": "2017",
+       "publisher": null,
+       "seriesName": "The Murderbot Diaries #1",
+       "subtitle": null,
+       "title": "All Systems Red",
+       "titleIgnorePrefix": "All Systems Red"
+      },
+      "numAudioFiles": 0,
+      "numChapters": 0,
+      "numTracks": 0,
+      "size": 1311,
+      "tags": []
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793915230423,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "size": 1311,
+     "updatedAt": 1793915239921
+    }
+   ],
+   "id": "discover",
+   "label": "Discover",
+   "labelStringKey": "LabelDiscover",
+   "total": 1,
+   "type": "book"
+  },
+  {
+   "entities": [
+    {
+     "addedAt": 1793915239975,
+     "birthtimeMs": 1793915229452,
+     "ctimeMs": 1793915230109,
+     "folderId": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
+     "id": "c6e01b70-b584-418d-a5f7-1eae2840a82f",
+     "ino": "9177988",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+     "media": {
+      "coverPath": null,
+      "duration": 60,
+      "id": "00a4cb3f-7fbe-43a9-950b-bef9b1884404",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Ann Leckie",
+       "authorNameLF": "Leckie, Ann",
+       "description": null,
+       "explicit": false,
+       "genres": [
+        "Science Fiction"
+       ],
+       "isbn": null,
+       "language": null,
+       "narratorName": "Adjoa Andoh",
+       "publishedDate": null,
+       "publishedYear": "2013",
+       "publisher": null,
+       "seriesName": "Imperial Radch #1",
+       "subtitle": null,
+       "title": "Ancillary Justice",
+       "titleIgnorePrefix": "Ancillary Justice"
+      },
+      "numAudioFiles": 1,
+      "numChapters": 3,
+      "numTracks": 1,
+      "size": 256184,
+      "tags": []
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793915230109,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "size": 256184,
+     "updatedAt": 1793915239975
+    }
+   ],
+   "id": "listen-again",
+   "label": "Listen Again",
+   "labelStringKey": "LabelListenAgain",
+   "total": 1,
+   "type": "book"
+  },
+  {
+   "entities": [
+    {
+     "addedAt": 1793915239979,
+     "asin": null,
+     "description": null,
+     "id": "2865baf7-e6bd-46dc-ad2d-8bebba2a2935",
+     "imagePath": null,
+     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+     "name": "Ann Leckie",
+     "numBooks": 1,
+     "updatedAt": 1793915239979
+    }
+   ],
+   "id": "newest-authors",
+   "label": "Newest Authors",
+   "labelStringKey": "LabelNewestAuthors",
+   "total": 3,
+   "type": "authors"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/personalized?limit=1&include=rssfeed"
+ },
+ "status": 200
+}
