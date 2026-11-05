@@ -9,6 +9,10 @@
 - The Readarr API can delete authors, books and book files, one or several, with Readarr's options (delete the
   files, add an import list exclusion). Files go to Readarr's recycling bin when one is set. What a delete leaves
   behind (rows and files on disk) is checked against Readarr's own, recorded at four points.
+- Audiobookshelf's library scanner for book libraries: adding a library and scanning it finds audiobooks and
+  ebooks in their folders, reads their tags, chapters, OPF, NFO, `desc.txt`, `reader.txt` and `metadata.json`
+  files the original's way, and adds, updates or marks missing the books, authors and series. The parity recording
+  now also keeps the original's ffprobe answers, so the test compares Folio's scan with the original's own rows.
 - The mobile app's library list, book page, account page and log are checked against a Folio server holding the
   original's recorded library (PARITY M0001, M0007, M0019, M0023).
 - Users, API keys and the sign-in settings work like Audiobookshelf's: admins add, change and remove users and
