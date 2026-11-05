@@ -58,7 +58,7 @@ pub fn js_number(v: Option<&Value>) -> Option<f64> {
 }
 
 /// A JavaScript truthiness test of a request field (`!!v`).
-fn js_truthy(v: Option<&Value>) -> bool {
+pub fn js_truthy(v: Option<&Value>) -> bool {
     crate::abs::settings::truthy(v)
 }
 
