@@ -1,4 +1,5 @@
-//! The server: the app's state, the kit server crates wired to it, and the web app served at `/`.
+//! The server: the app's state, the kit server crates wired to it, and the web apps: Audiobookshelf's at `/`,
+//! Folio's own pages at `/folio/`.
 //!
 //! | Route | From |
 //! | --- | --- |
@@ -81,7 +82,8 @@ pub struct AppState {
     pub settings: Store,
     /// The data folder: the database, bug report files. The only folder the server writes to.
     pub data_dir: PathBuf,
-    /// The built web app (trunk's dist), served at `/`.
+    /// The built web apps: abs-web's dist at the top (served at `/`), Folio's own pages (trunk's dist) in
+    /// `folio/` (served at `/folio/`).
     pub static_dir: PathBuf,
     /// What's new: the release notes built into this server.
     pub changelog: Arc<Changelog>,
@@ -216,11 +218,12 @@ impl kit_server_diagnostics::Diagnostics for AppState {
     }
 }
 
-/// The whole app: the kit's routes, the sign-in routes, and the web app's files at `/` (index.html for every
-/// path that is not a file, the brotli and gzip copies the image keeps next to each file when the browser
-/// takes them).
+/// The whole app: the kit's routes, the sign-in routes, and the web apps' files with the brotli and gzip
+/// copies the image keeps next to each file when the browser takes them. The static folder holds the
+/// Audiobookshelf web app (`abs-web/`, at `/`; its index.html answers every path that is not a file, as its
+/// pages are drawn in the browser) and Folio's own pages in `folio/` (at `/folio/`).
 pub fn app(st: AppState) -> Router {
-    let web = kit_server_health::web_build(&st.static_dir, &format!("{NAME}-web-"));
+    let web = kit_server_health::web_build(&st.static_dir.join(OWN_PAGES), &format!("{NAME}-web-"));
     let index = ServeFile::new(st.static_dir.join("index.html")).precompressed_br().precompressed_gzip();
     let spa = ServeDir::new(&st.static_dir).precompressed_br().precompressed_gzip().fallback(index);
     let spa = tower_http::set_header::SetResponseHeader::if_not_present(spa, header::VARY, HeaderValue::from_static("accept-encoding"));
@@ -275,10 +278,17 @@ async fn security_headers(req: axum::extract::Request, next: axum::middleware::N
     resp
 }
 
-/// `/<name>-web-f92ab5b84b305a59_bg.wasm`: a file at the root whose name ends in a hash of its content (12 hex
-/// digits or more; trunk drops leading zeros), so it never changes under that name.
+/// The folder (in the static folder) and path (`/folio/`) of Folio's own pages.
+pub const OWN_PAGES: &str = "folio";
+
+/// A file whose name says what is in it, so it never changes under that name:
+/// `/folio/<name>-web-f92ab5b84b305a59_bg.wasm` (trunk: a hash of 12 hex digits or more; it drops leading zeros)
+/// or anything under `/_nuxt/` (the Audiobookshelf web app's build, named by content).
 pub fn hashed_asset(path: &str) -> bool {
-    let Some(name) = path.strip_prefix('/') else { return false };
+    if path.starts_with("/_nuxt/") {
+        return true;
+    }
+    let Some(name) = path.strip_prefix(&format!("/{OWN_PAGES}/")) else { return false };
     let stem = name.rsplit_once('.').map(|(s, _)| s).unwrap_or(name);
     let stem = stem.strip_suffix("_bg").unwrap_or(stem);
     !name.contains('/') && stem.rsplit_once('-').is_some_and(|(_, h)| h.len() >= 12 && h.bytes().all(|b| b.is_ascii_hexdigit()))

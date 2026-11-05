@@ -1,6 +1,6 @@
 [build]
 target = "index.html"
 dist = "dist"
-# the web app is the website: served at the root of the server
-public_url = "/"
+# Folio's own pages: served at /folio/ (the Audiobookshelf web app, abs-web/, is at the root)
+public_url = "/folio/"
 filehash = true

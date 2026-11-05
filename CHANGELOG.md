@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Added
+- The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's
+  own pages (Wanted, Downloads, Review, Move in) move to `/folio/` and are linked from its sidebar.
 - Audiobookshelf's web app (v2.37.2) and mobile app (v0.14.2-beta) are imported as light forks in `abs-web/` and
   `abs-app/`, unchanged for now; the next steps retheme them and point them at Folio.
 - The port plan: Folio now ports Audiobookshelf and Readarr instead of reimagining them. `docs/PARITY.md` lists
