@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Fixed
+- The mobile app shows its saved language again after a restart; it came back in English before.
+
 ### Added
 - Backups work like Audiobookshelf's: admins make, download, upload, restore and remove backups of the database
   and the books' and authors' metadata, and move the backup folder. A schedule makes them on its own, only the
@@ -14,6 +17,12 @@
   titles (sort titles are refreshed), check a schedule before saving it, add and remove their own metadata
   providers, and set the mail server and e-reader devices with who may use each. The task list the apps show is
   in place for the jobs that will use it. Each answer is checked against the original's own.
+- Audiobookshelf's library scanner for book libraries: adding a library and scanning it finds audiobooks and
+  ebooks in their folders, reads their tags, chapters, OPF, NFO, `desc.txt`, `reader.txt` and `metadata.json`
+  files the original's way, and adds, updates or marks missing the books, authors and series. The parity recording
+  now also keeps the original's ffprobe answers, so the test compares Folio's scan with the original's own rows.
+- The mobile app's library list, book page, account page and log are checked against a Folio server holding the
+  original's recorded library (PARITY M0001, M0007, M0019, M0023).
 - Users, API keys and the sign-in settings work like Audiobookshelf's: admins add, change and remove users and
   their permissions, make API keys that sign in as a user (with an expiry, turned on or off), and set the sign-in
   message, sign-in methods and OpenID app addresses; everyone can change their own password, which signs them out
@@ -32,6 +41,8 @@
   Folio's own repository instead of the upstream project's; its fork changes are listed in `abs-web/FOLIO.md`.
 - The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's
   own pages (Wanted, Downloads, Review, Move in) move to `/folio/` and are linked from its sidebar.
+- The mobile app's settings page is checked in CI: each of its 24 device settings is changed on the page and
+  must be saved and kept after a restart.
 - The mobile app signs in to Folio: its connect page names a Folio server, and connecting and signing in were
   checked against a running Folio server.
 - The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start
