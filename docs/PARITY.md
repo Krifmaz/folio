@@ -143,13 +143,13 @@ repository at the pinned commit.
 | A0103 | endpoint | `GET /api/me/series/:id/readd-to-continue-listening` (MeController.readdSeriesFromContinueListening) | `server/routers/ApiRouter.js#L193` | P2 users | todo |  |
 | A0104 | endpoint | `GET /api/me/stats/year/:year` (MeController.getStatsForYear) | `server/routers/ApiRouter.js#L194` | P2 users | todo |  |
 | A0105 | endpoint | `POST /api/me/ereader-devices` (MeController.updateUserEReaderDevices) | `server/routers/ApiRouter.js#L195` | P2 users | todo |  |
-| A0106 | endpoint | `GET /api/backups` (BackupController.getAll) | `server/routers/ApiRouter.js#L200` | P6 server admin | todo |  |
-| A0107 | endpoint | `POST /api/backups` (BackupController.create) | `server/routers/ApiRouter.js#L201` | P6 server admin | todo |  |
-| A0108 | endpoint | `DELETE /api/backups/:id` (BackupController.delete) | `server/routers/ApiRouter.js#L202` | P6 server admin | todo |  |
-| A0109 | endpoint | `GET /api/backups/:id/download` (BackupController.download) | `server/routers/ApiRouter.js#L203` | P6 server admin | todo |  |
-| A0110 | endpoint | `GET /api/backups/:id/apply` (BackupController.apply) | `server/routers/ApiRouter.js#L204` | P6 server admin | todo |  |
-| A0111 | endpoint | `POST /api/backups/upload` (BackupController.upload) | `server/routers/ApiRouter.js#L205` | P6 server admin | todo |  |
-| A0112 | endpoint | `PATCH /api/backups/path` (BackupController.updatePath) | `server/routers/ApiRouter.js#L206` | P6 server admin | todo |  |
+| A0106 | endpoint | `GET /api/backups` (BackupController.getAll) | `server/routers/ApiRouter.js#L200` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0107 | endpoint | `POST /api/backups` (BackupController.create) | `server/routers/ApiRouter.js#L201` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original`, `server/tests/abs_backups.rs::a_restore_puts_back_the_database_and_metadata` |
+| A0108 | endpoint | `DELETE /api/backups/:id` (BackupController.delete) | `server/routers/ApiRouter.js#L202` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0109 | endpoint | `GET /api/backups/:id/download` (BackupController.download) | `server/routers/ApiRouter.js#L203` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0110 | endpoint | `GET /api/backups/:id/apply` (BackupController.apply) | `server/routers/ApiRouter.js#L204` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original`, `server/tests/abs_backups.rs::a_restore_puts_back_the_database_and_metadata` |
+| A0111 | endpoint | `POST /api/backups/upload` (BackupController.upload) | `server/routers/ApiRouter.js#L205` | P6 server admin | done | `server/tests/abs_backups.rs::a_restore_puts_back_the_database_and_metadata` (uploads; the recorder sends JSON only), `server/tests/abs_backups.rs::backups_answer_like_the_original` (no file) |
+| A0112 | endpoint | `PATCH /api/backups/path` (BackupController.updatePath) | `server/routers/ApiRouter.js#L206` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
 | A0113 | endpoint | `GET /api/filesystem` (FileSystemController.getPaths) | `server/routers/ApiRouter.js#L211` | P1 library | todo |  |
 | A0114 | endpoint | `POST /api/filesystem/pathexists` (FileSystemController.checkPathExists) | `server/routers/ApiRouter.js#L212` | P1 library | todo |  |
 | A0115 | endpoint | `GET /api/authors/:id` (AuthorController.findOne) | `server/routers/ApiRouter.js#L217` | P1 library | todo |  |
@@ -274,7 +274,7 @@ repository at the pinned commit.
 | A0234 | socket | server → client `author_removed` | `server/controllers/AuthorController.js#L162` | P2 users | todo |  |
 | A0235 | socket | server → client `author_updated` | `server/controllers/AuthorController.js#L168` | P2 users | todo |  |
 | A0236 | socket | server → client `authors_num_books_updated` | `server/scanner/BookScanner.js#L926` | P2 users | todo |  |
-| A0237 | socket | server → client `backup_applied` | `server/managers/BackupManager.js#L266` | P2 users | todo |  |
+| A0237 | socket | server → client `backup_applied` | `server/managers/BackupManager.js#L266` | P2 users | wip | sent by `abs::backups` after a restore; no socket test yet |
 | A0238 | socket | server → client `collection_added` | `server/controllers/CollectionController.js#L104` | P2 users | todo |  |
 | A0239 | socket | server → client `collection_removed` | `server/controllers/CollectionController.js#L222` | P2 users | todo |  |
 | A0240 | socket | server → client `collection_updated` | `server/controllers/CollectionController.js#L201` | P2 users | todo |  |
@@ -326,10 +326,10 @@ repository at the pinned commit.
 | A0286 | setting | server `rateLimitLoginRequests` (default `10`) | `server/objects/settings/ServerSettings.js#L51` | P6 server admin | todo |  |
 | A0287 | setting | server `rateLimitLoginWindow` (default `10 * 60 * 1000`) | `server/objects/settings/ServerSettings.js#L52` | P6 server admin | todo |  |
 | A0288 | setting | server `allowIframe` (default `false`) | `server/objects/settings/ServerSettings.js#L53` | P6 server admin | todo |  |
-| A0289 | setting | server `backupPath` (default `Path.join(global.MetadataPath, 'backups'`) | `server/objects/settings/ServerSettings.js#L56` | P6 server admin | todo |  |
-| A0290 | setting | server `backupSchedule` (default `false`) | `server/objects/settings/ServerSettings.js#L57` | P6 server admin | todo |  |
-| A0291 | setting | server `backupsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L58` | P6 server admin | todo |  |
-| A0292 | setting | server `maxBackupSize` (default `1`) | `server/objects/settings/ServerSettings.js#L59` | P6 server admin | todo |  |
+| A0289 | setting | server `backupPath` (default `Path.join(global.MetadataPath, 'backups'`) | `server/objects/settings/ServerSettings.js#L56` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
+| A0290 | setting | server `backupSchedule` (default `false`) | `server/objects/settings/ServerSettings.js#L57` | P6 server admin | wip | `server/src/abs/cron.rs::tests::a_schedule_runs_at_the_times_it_names` checks the matching; the timer itself (`backups::spawn_schedule`) has no test yet |
+| A0291 | setting | server `backupsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L58` | P6 server admin | done | `server/tests/abs_backups.rs::only_the_newest_backups_are_kept` |
+| A0292 | setting | server `maxBackupSize` (default `1`) | `server/objects/settings/ServerSettings.js#L59` | P6 server admin | done | `server/src/abs/backups.rs::tests::a_backup_over_the_size_limit_is_stopped` |
 | A0293 | setting | server `loggerDailyLogsToKeep` (default `7`) | `server/objects/settings/ServerSettings.js#L62` | P6 server admin | todo |  |
 | A0294 | setting | server `loggerScannerLogsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L63` | P6 server admin | todo |  |
 | A0295 | setting | server `homeBookshelfView` (default `BookshelfView.DETAIL`) | `server/objects/settings/ServerSettings.js#L66` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
@@ -411,7 +411,7 @@ repository at the pinned commit.
 | A0371 | job | notification event `onTest` | `server/utils/notifications.js#L96` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
 | A0372 | job | library scan schedules (`cronExpression` per library) | `server/managers/CronManager.js` | P1 library | todo |  |
 | A0373 | job | podcast episode checks (`podcastEpisodeSchedule`, per podcast cron) | `server/managers/CronManager.js` | P5 podcasts and feeds | todo |  |
-| A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | todo |  |
+| A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | wip | made by `backups::spawn_schedule` (UTC, see DECISIONS); kept and size-limited as A0291 and A0292 show |
 | A0375 | job | daily log files and rotation (`loggerDailyLogsToKeep`, `loggerScannerLogsToKeep`) | `server/managers/LogManager.js` | P6 server admin | todo |  |
 | A0376 | job | folder watcher: rescans changed items (`scannerDisableWatcher`) | `server/Watcher.js` | P1 library | todo |  |
 | A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | wip |  |

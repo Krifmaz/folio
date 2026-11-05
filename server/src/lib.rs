@@ -251,6 +251,7 @@ pub fn app(st: AppState) -> Router {
     let spa = tower_http::set_header::SetResponseHeader::if_not_present(spa, header::VARY, HeaderValue::from_static("accept-encoding"));
     let page = spa.clone();
     kit_server_notices::spawn_rechecks(st.clone());
+    abs::backups::spawn_schedule(st.clone());
     let sockets = abs::socket::layer(st.clone());
     Router::new()
         .merge(kit_server_health::router(kit_server_health::Health::new(VERSION, web)))

@@ -6,6 +6,10 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Backups work like Audiobookshelf's: admins make, download, upload, restore and remove backups of the database
+  and the books' and authors' metadata, and move the backup folder. A schedule makes them on its own, only the
+  newest ones you choose to keep stay, and a backup that grows past the size limit is stopped. Each answer is
+  checked against the original's own.
 - Notifications work like Audiobookshelf's: point Folio at an Apprise server, set up notifications for events
   with their own title and text, test them, and see when each last fired. One that keeps failing is turned off,
   and events that come while one is being sent wait their turn. Each answer is checked against the original's own.
