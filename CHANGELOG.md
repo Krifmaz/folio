@@ -2,7 +2,12 @@
 
 ## Unreleased
 
+### Fixed
+- The mobile app shows its saved language again after a restart; it came back in English before.
+
 ### Added
+- The mobile app's settings page is checked in CI: each of its 24 device settings is changed on the page and
+  must be saved and kept after a restart.
 - The mobile app signs in to Folio: its connect page names a Folio server, and connecting and signing in were
   checked against a running Folio server.
 - The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start

@@ -525,7 +525,7 @@ repository at the pinned commit.
 | M0006 | page | `/` | `pages/index.vue` | M mobile fork | todo |  |
 | M0007 | page | `/logs` | `pages/logs.vue` | M mobile fork | todo |  |
 | M0008 | page | `/search` | `pages/search.vue` | M mobile fork | todo |  |
-| M0009 | page | `/settings` | `pages/settings.vue` | M mobile fork | todo |  |
+| M0009 | page | `/settings` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart), `docs/parity/screens/M0009.png` |
 | M0010 | page | `/stats` | `pages/stats.vue` | M mobile fork | todo |  |
 | M0011 | page | `/playlist/:id` | `pages/playlist/_id.vue` | M mobile fork | todo |  |
 | M0012 | page | `/collection/:id` | `pages/collection/_id.vue` | M mobile fork | todo |  |
@@ -544,30 +544,30 @@ repository at the pinned commit.
 | M0025 | page | `/localMedia/folders/:id` | `pages/localMedia/folders/_id.vue` | M mobile fork | todo |  |
 | M0026 | page | `/localMedia/folders` | `pages/localMedia/folders/index.vue` | M mobile fork | todo |  |
 | M0027 | page | `/localMedia/item/:id` | `pages/localMedia/item/_id.vue` | M mobile fork | todo |  |
-| M0028 | setting | device `allowSeekingOnMediaControls` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0029 | setting | device `androidAutoBrowseLimitForGrouping` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0030 | setting | device `androidAutoBrowseSeriesSequenceOrder` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0031 | setting | device `autoSleepTimer` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0032 | setting | device `autoSleepTimerAutoRewind` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0033 | setting | device `autoSleepTimerAutoRewindTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0034 | setting | device `autoSleepTimerEndTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0035 | setting | device `autoSleepTimerStartTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0036 | setting | device `disableAutoRewind` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0037 | setting | device `disableShakeToResetSleepTimer` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0038 | setting | device `disableSleepTimerFadeOut` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0039 | setting | device `disableSleepTimerResetFeedback` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0040 | setting | device `downloadUsingCellular` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0041 | setting | device `enableAltView` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0042 | setting | device `enableMp` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0043 | setting | device `enableSleepTimerAlmostDoneChime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0044 | setting | device `hapticFeedback` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0045 | setting | device `jumpBackwardsTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0046 | setting | device `jumpForwardTime` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0047 | setting | device `languageCode` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0048 | setting | device `lockOrientation` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0049 | setting | device `shakeSensitivity` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0050 | setting | device `sleepTimerLength` | `pages/settings.vue` | M mobile fork | todo |  |
-| M0051 | setting | device `streamingUsingCellular` | `pages/settings.vue` | M mobile fork | todo |  |
+| M0028 | setting | device `allowSeekingOnMediaControls` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0029 | setting | device `androidAutoBrowseLimitForGrouping` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0030 | setting | device `androidAutoBrowseSeriesSequenceOrder` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0031 | setting | device `autoSleepTimer` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0032 | setting | device `autoSleepTimerAutoRewind` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0033 | setting | device `autoSleepTimerAutoRewindTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0034 | setting | device `autoSleepTimerEndTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0035 | setting | device `autoSleepTimerStartTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0036 | setting | device `disableAutoRewind` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0037 | setting | device `disableShakeToResetSleepTimer` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0038 | setting | device `disableSleepTimerFadeOut` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0039 | setting | device `disableSleepTimerResetFeedback` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0040 | setting | device `downloadUsingCellular` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0041 | setting | device `enableAltView` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0042 | setting | device `enableMp` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0043 | setting | device `enableSleepTimerAlmostDoneChime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0044 | setting | device `hapticFeedback` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0045 | setting | device `jumpBackwardsTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0046 | setting | device `jumpForwardTime` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0047 | setting | device `languageCode` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0048 | setting | device `lockOrientation` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0049 | setting | device `shakeSensitivity` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0050 | setting | device `sleepTimerLength` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
+| M0051 | setting | device `streamingUsingCellular` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart) |
 | M0052 | action | offline downloads and local media | `android/, plugins/` | M mobile fork | todo |  |
 | M0053 | action | Android Auto browse tree | `android/, plugins/` | M mobile fork | todo |  |
 | M0054 | action | media notification and lock-screen controls | `android/, plugins/` | M mobile fork | todo |  |
