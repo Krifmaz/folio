@@ -1,0 +1,44 @@
+name: parity-record
+
+# Records how the pinned original answers, so Folio's parity tests can compare against it (docs/PARITY.md).
+# Runs the original's own image (the version in UPSTREAM.lock) on generated test media, replays
+# server/tests/parity/abs/requests.json against it, and uploads the answers and the database schema as the
+# `abs-fixtures` artifact. Nothing is pushed; a person or the core track commits the fixtures.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - server/tests/parity/abs/**
+      - .github/workflows/parity-record.yml
+
+permissions:
+  contents: read
+
+jobs:
+  abs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -yq ffmpeg
+      - name: Make test media
+        run: server/tests/parity/abs/make_media.sh "$RUNNER_TEMP/media"
+      - name: Start the original
+        run: |
+          version="$(sed -n '/^\[abs-server\]/,/^\[/s/^ref = "v\(.*\)"/\1/p' UPSTREAM.lock)"
+          echo "Audiobookshelf $version"
+          mkdir -p "$RUNNER_TEMP/config" "$RUNNER_TEMP/metadata"
+          docker run -d --name abs -p 13378:80 -e TZ=UTC \
+            -v "$RUNNER_TEMP/media:/media:ro" \
+            -v "$RUNNER_TEMP/config:/config" -v "$RUNNER_TEMP/metadata:/metadata" \
+            "ghcr.io/advplyr/audiobookshelf:$version"
+      - name: Record
+        run: python3 -I server/tests/parity/abs/record.py http://127.0.0.1:13378 "$RUNNER_TEMP/out" "$RUNNER_TEMP/config/absdatabase.sqlite"
+      - name: Server log on failure
+        if: failure()
+        run: docker logs abs | tail -200
+      - uses: actions/upload-artifact@v4
+        with:
+          name: abs-fixtures
+          path: ${{ runner.temp }}/out
