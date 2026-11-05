@@ -7,12 +7,19 @@
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked
   against the original's own on the same data. The recording is also pushed to a side branch `parity/<branch>`.
+- The mobile app signs in to Folio: its connect page names a Folio server, and connecting and signing in were
+  checked against a running Folio server.
 - The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start
   rows, and its API v1 for reading authors, books, editions, series and book files, answering exactly like Readarr
   0.4.19.2811 (checked against 34 recorded answers, errors included). Readarr's API key is Folio's.
 - Sign-in works like Audiobookshelf's: setting up the server, signing in with a name and password (the mobile app
   gets its tokens in the answer, the web app a cookie), refreshing and signing out, old tokens, API keys, the limit
   on sign-in attempts, and the apps' live connection. Each answer is checked against the original's own.
+- The mobile app (`abs-app/`) looks like Folio: the Encore colours and font in its default, Black and Light
+  themes and in the reader, the name Folio with its own app id (it installs beside the Audiobookshelf app), a
+  book icon, and no links out to the upstream project.
+- The mobile app (`abs-app/`, the Audiobookshelf app fork) is built for Android in CI on every change to it;
+  its fork changes are listed in `abs-app/FOLIO.md`.
 - The base of the Audiobookshelf port: its database with the original's exact schema, a row type for each of its 26
   tables, its socket.io (apps connect, ping, and are told when a token is refused), and recordings of 65 of the
   original's answers that parity tests compare Folio with.

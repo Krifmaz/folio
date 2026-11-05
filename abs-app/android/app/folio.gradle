@@ -1,0 +1,51 @@
+// Folio's changes to the Audiobookshelf app's build, kept out of build.gradle so upstream merges stay clean
+// (build.gradle only applies this file). See abs-app/FOLIO.md.
+
+// The version from the release workflow (the kit's kit-android.yml): -PappVersionName=… -PappVersionCode=…;
+// a local build keeps the upstream version.
+def folioVersionName = project.findProperty("appVersionName")
+def folioVersionCode = project.findProperty("appVersionCode")
+
+// Release signing from the environment (CI decodes ANDROID_KEYSTORE_BASE64 to a file and sets the path). Without a
+// keystore the release build is signed with the debug key, so it still installs.
+def folioKeystore = System.getenv("ANDROID_KEYSTORE_PATH")
+def folioHasKey = folioKeystore != null && !folioKeystore.isEmpty() && file(folioKeystore).isFile()
+
+// Folio's own app id (installs beside the upstream app), and its name, colours and icons: folio-res is laid over the
+// upstream resources for both build types (in place of upstream's own debug resources), so the upstream files stay
+// as they are.
+def folioAppId = "dev.krifmaz.folio.mobile"
+
+android {
+  defaultConfig {
+    applicationId folioAppId
+    manifestPlaceholders["appAuthRedirectScheme"] = folioAppId
+    if (folioVersionName != null) versionName folioVersionName.toString()
+    if (folioVersionCode != null) versionCode folioVersionCode.toString().toInteger()
+  }
+  signingConfigs {
+    folioRelease {
+      if (folioHasKey) {
+        storeFile file(folioKeystore)
+        storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+        keyAlias System.getenv("ANDROID_KEY_ALIAS")
+        keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+      }
+    }
+  }
+  sourceSets {
+    // upstream's src/debug/res repeats its name and icons for debug builds; Folio's take their place
+    debug.res.srcDirs = ['folio-res']
+    release.res.srcDirs += 'folio-res'
+  }
+  buildTypes {
+    release {
+      signingConfig folioHasKey ? signingConfigs.folioRelease : signingConfigs.debug
+    }
+  }
+}
+
+// Upstream has unit tests but no JUnit to run them; Folio's tests (and the CI's testDebugUnitTest) need it.
+dependencies {
+  testImplementation "junit:junit:$junitVersion"
+}
