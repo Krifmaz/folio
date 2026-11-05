@@ -9,6 +9,7 @@
 - The server log works like Audiobookshelf's: admins read today's messages on the log page and watch them
   live, messages are kept in one file per day, and the log level and the number of days kept follow the
   settings. Each answer is checked against the original's own.
+- The mobile app's stats page and home shelves are checked against Folio (PARITY M0002, M0006, M0010, M0017).
 - Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
   listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item
   cache. Each answer is checked against the original's own.
