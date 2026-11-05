@@ -6,6 +6,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The home page shelves of a book library (`/api/libraries/:id/personalized`), as Audiobookshelf's apps show them:
+  Continue Listening and Reading, Continue Series, Recently Added, Recent Series, Discover, Listen and Read Again,
+  and Newest Authors, each checked against the original's answer on the same data.
 - Audiobookshelf's library scanner for book libraries: adding a library and scanning it finds audiobooks and
   ebooks in their folders, reads their tags, chapters, OPF, NFO, `desc.txt`, `reader.txt` and `metadata.json`
   files the original's way, and adds, updates or marks missing the books, authors and series. The parity recording

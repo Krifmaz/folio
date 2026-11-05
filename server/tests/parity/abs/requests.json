@@ -511,6 +511,32 @@
   "path": "/api/does-not-exist"
  },
  {
+  "name": "shelf_items",
+  "path": "/api/libraries/{library}/items?sort=media.metadata.title",
+  "save": {
+   "shelf_psalm": "results.0.id",
+   "shelf_asr": "results.1.id",
+   "shelf_aj": "results.2.id"
+  }
+ },
+ {
+  "name": "shelf_finish",
+  "path": "/api/me/progress/{shelf_aj}",
+  "method": "PATCH",
+  "body": {
+   "isFinished": true
+  }
+ },
+ {
+  "name": "shelf_read",
+  "path": "/api/me/progress/{shelf_asr}",
+  "method": "PATCH",
+  "body": {
+   "ebookProgress": 0.25,
+   "ebookLocation": "epubcfi(/6/2!/4/1:0)"
+  }
+ },
+ {
   "name": "lib_libraries",
   "path": "/api/libraries"
  },
@@ -1086,5 +1112,13 @@
  {
   "name": "users_list_after",
   "path": "/api/users"
+ },
+ {
+  "name": "lib_personalized",
+  "path": "/api/libraries/{library}/personalized"
+ },
+ {
+  "name": "lib_personalized_limit",
+  "path": "/api/libraries/{library}/personalized?limit=1&include=rssfeed"
  }
 ]
