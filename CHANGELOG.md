@@ -10,6 +10,7 @@
   (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
   `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's
   books grouped by series.
+- The mobile app's stats page and home shelves are checked against Folio (PARITY M0002, M0006, M0010, M0017).
 - Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
   listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item
   cache. Each answer is checked against the original's own.
