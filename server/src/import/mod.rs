@@ -262,6 +262,41 @@ pub async fn pending(st: &AppState) -> Result<usize> {
     Ok(n)
 }
 
+/// Hands local files (a book moving in from another app) to the same checks and filing as a download: the
+/// edition gets a wanted entry when it has none (source `source`, the format's preferences, never refused, since
+/// the book is already owned), and the files become a finished download (`local:<source>`) that the next check
+/// verifies and files. The files are only read and linked or copied, never moved or changed. Answers the grab id.
+pub fn queue_local(db: &kit_server_core::SqliteDb, edition_id: i64, files: &[PathBuf], source: &str) -> Result<i64> {
+    let (_, m) = crate::library::store::edition(db, edition_id)?;
+    if files.is_empty() {
+        return Err(err(400, "There are no files to bring in for this book."));
+    }
+    let wanted_id = match db.one("SELECT id FROM wanted WHERE edition_id=?", p![edition_id])? {
+        Some(r) => r.i("id"),
+        None => {
+            let pr = wanted::default_profile(db, m.format)?;
+            let t = now();
+            db.execute(
+                "INSERT INTO wanted (edition_id, profile_id, status, user_id, source, added_at, updated_at) VALUES (?,?,'downloaded',0,?,?,?)",
+                p![edition_id, pr.id, source, t, t],
+            )?
+        }
+    };
+    let list: Vec<GrabFile> = files
+        .iter()
+        .map(|f| GrabFile { path: f.display().to_string(), size: std::fs::metadata(f).map(|x| x.len()).unwrap_or(0) })
+        .collect();
+    let folder = files[0].parent().map(|d| d.display().to_string()).unwrap_or_default();
+    let t = now();
+    let id = db.execute(
+        "INSERT INTO grabs (wanted_id, lantern_id, guid, title, indexer, status, progress, path, files, created_at, updated_at)
+         VALUES (?, '', ?, ?, ?, 'completed', 1, ?, ?, ?, ?)",
+        p![wanted_id, format!("local:{source}:{edition_id}:{t}"), m.title, source, folder, json!(list).to_string(), t, t],
+    )?;
+    wanted::set_status(db, wanted_id, "downloaded", &format!("Brought in from {source}; being checked."))?;
+    Ok(id)
+}
+
 /// The import's route: `POST /api/grabs/{id}/file` (admins) files a checked download again after a failure.
 pub fn router() -> axum::Router<AppState> {
     axum::Router::new().route("/api/grabs/{id}/file", axum::routing::post(file_again))

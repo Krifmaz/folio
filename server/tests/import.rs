@@ -143,3 +143,27 @@ async fn without_clean_up_the_download_is_hardlinked() {
     let filed = lib.join(rows[0].s("path"));
     assert_eq!(std::fs::metadata(&filed).unwrap().ino(), std::fs::metadata(&src).unwrap().ino(), "the same file, linked");
 }
+
+#[tokio::test]
+async fn local_files_from_another_app_are_checked_and_filed() {
+    let (lib, env) = library("local");
+    let (app, st, dir) = common::server("im-local", {
+        let mut e = common::sources().await;
+        e.extend(env.iter().map(|(k, v)| (k.to_string(), v.clone())));
+        e
+    })
+    .await;
+    let (_, e) = call(&app, admin("POST", "/api/library/editions", Some(json!({ "isbn": "9780593135204" })))).await;
+    let edition = e["edition_id"].as_i64().unwrap();
+    st.db.execute("UPDATE editions SET meta=json_set(meta, '$.pages', 40, '$.cover_url', '') WHERE id=?", p![edition]).unwrap();
+    let src = epub(&dir.join("calibre"), "book", ["9780593135204", "Project Hail Mary", "Andy Weir", "en"], 10_000, false);
+    let g = server::import::queue_local(&st.db, edition, std::slice::from_ref(&src), "Calibre").unwrap();
+    server::verify::pending(&st).await.unwrap();
+    server::import::pending(&st).await.unwrap();
+    let r = st.db.one("SELECT status FROM grabs WHERE id=?", p![g]).unwrap().unwrap();
+    assert_eq!(r.s("status"), "imported");
+    let (_, w) = call(&app, admin("GET", "/api/wanted", None)).await;
+    assert_eq!((w["wanted"][0]["status"].as_str(), w["wanted"][0]["source"].as_str()), (Some("imported"), Some("Calibre")));
+    assert!(lib.join(files(&st)[0].s("path")).exists());
+    assert!(src.exists(), "the source stays where it was");
+}
