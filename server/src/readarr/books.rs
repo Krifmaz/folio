@@ -26,10 +26,10 @@ use std::collections::HashMap;
 pub fn router() -> Router<AppState> {
     Router::new()
         .route("/api/v1/book", get(all).put(update_unrouted))
-        .route("/api/v1/book/{id}", get(one).put(update))
+        .route("/api/v1/book/{id}", get(one).put(update).delete(remove))
         .route("/api/v1/book/{id}/overview", get(overview))
         .route("/api/v1/book/monitor", put(monitor))
-        .route("/api/v1/book/editor", put(editor))
+        .route("/api/v1/book/editor", put(editor).delete(remove_many))
 }
 
 /// A book's stored add options, or the default ones a book without them gets (`AddBookOptions`).
@@ -271,18 +271,21 @@ async fn put_book(State(st): State<AppState>, _: Key, route_id: i64, bytes: Byte
     let mut f = super::validation::Failures::default();
     f.valid_id("Id", id);
     f.check()?;
-    get_or_404(db, id)?;
+    let stored = get_or_404(db, id)?;
     let Some(editions) = r.get("editions").and_then(Value::as_array) else {
         return Err(Fail::exception(500, "System.ArgumentNullException", "Value cannot be null. (Parameter 'source')"));
     };
     let flag = |k: &str| json!(r.get(k).and_then(Value::as_bool).unwrap_or(false));
     db.execute(
-        "UPDATE Books SET ForeignBookId = ?, AddOptions = ?, Monitored = ?, AnyEditionOk = ? WHERE Id = ?",
+        "UPDATE Books SET ForeignBookId = ?, AddOptions = ?, Monitored = ?, AnyEditionOk = ?, Ratings = ? WHERE Id = ?",
         vec![
             r.get("foreignBookId").cloned().unwrap_or(Value::Null),
-            super::json::stored_doc(r.get("addOptions")),
+            // Readarr writes the whole book back: add options (the default ones when none are sent) and its
+            // ratings with their popularity.
+            json!(add_options(r.get("addOptions").filter(|v| !v.is_null()).map(|v| json!(v.to_string())).as_ref()).to_string()),
             flag("monitored"),
             flag("anyEditionOk"),
+            json!(ratings(stored.get("Ratings")).to_string()),
             json!(id),
         ],
     )
@@ -327,10 +330,19 @@ async fn editor(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(Sta
     let r = super::body(&bytes)?;
     let ids = authors::ids(&r, "bookIds");
     let books = get_many(db, &ids)?;
-    if let Some(m) = r.get("monitored").and_then(Value::as_bool) {
-        for b in &books {
-            db.execute("UPDATE Books SET Monitored = ? WHERE Id = ?", vec![json!(m), json!(b.i("Id"))])?;
-        }
+    let monitored = r.get("monitored").and_then(Value::as_bool);
+    for b in &books {
+        // `UpdateMany` writes the whole book back, so its add options and ratings come out as Readarr writes
+        // them (the default add options when it has none, ratings with their popularity).
+        db.execute(
+            "UPDATE Books SET Monitored = ?, AddOptions = ?, Ratings = ? WHERE Id = ?",
+            vec![
+                json!(monitored.unwrap_or(b.i("Monitored") != 0)),
+                json!(add_options(b.get("AddOptions")).to_string()),
+                json!(ratings(b.get("Ratings")).to_string()),
+                json!(b.i("Id")),
+            ],
+        )?;
     }
     let books = get_many(db, &ids)?;
     let cx = Context::of(db, &books)?;
@@ -347,4 +359,24 @@ async fn overview(State(st): State<AppState>, _: Key, Path(id): Path<i64>) -> An
         [] => Err(Fail::exception(500, "System.InvalidOperationException", "Sequence contains no matching element")),
         _ => Err(Fail::exception(500, "System.InvalidOperationException", "Sequence contains more than one matching element")),
     }
+}
+
+/// `DELETE /api/v1/book/{id}?deleteFiles=&addImportListExclusion=`: 200 with no body.
+async fn remove(State(st): State<AppState>, _: Key, Path(id): Path<String>, RawQuery(q): RawQuery) -> Answer<StatusCode> {
+    let id: i64 = id.parse().map_err(|_| Fail::not_found())?;
+    let q = Query::of(q.as_deref());
+    let (files, exclude) = (q.bool("deleteFiles").unwrap_or(false), q.bool("addImportListExclusion").unwrap_or(false));
+    super::delete::book(&st.readarr, &st.readarr_disk, id, files, exclude)?;
+    Ok(StatusCode::OK)
+}
+
+/// `DELETE /api/v1/book/editor` (`BookEditorController.DeleteBook`): deletes each book asked for, until one is
+/// missing; 200 with no body.
+async fn remove_many(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<StatusCode> {
+    let r = super::body(&bytes)?;
+    let flag = |k: &str| r.get(k).and_then(Value::as_bool).unwrap_or(false);
+    for id in authors::ids(&r, "bookIds") {
+        super::delete::book(&st.readarr, &st.readarr_disk, id, flag("deleteFiles"), flag("addImportListExclusion"))?;
+    }
+    Ok(StatusCode::OK)
 }
