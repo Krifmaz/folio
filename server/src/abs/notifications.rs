@@ -397,6 +397,18 @@ pub fn current(st: &AppState) -> Result<Settings> {
     Ok(s)
 }
 
+/// Whether notifications can be sent and one is turned on for an event (`isUseable` and
+/// `getHasActiveNotificationsForEvent`).
+pub fn has_active(st: &AppState, event: &str) -> bool {
+    let Ok(mut s) = current(st) else { return false };
+    s.is_useable() && s.list().iter().any(|n| n.get("eventName").and_then(Value::as_str) == Some(event) && truthy(n.get("enabled")))
+}
+
+/// Drops the settings in effect so they are read again from the database (after a backup is restored).
+pub fn forget(st: &AppState) {
+    *st.abs_server.notifications.cache.lock().unwrap_or_else(|e| e.into_inner()) = None;
+}
+
 /// Stores the settings and makes them the ones in effect.
 pub fn store(st: &AppState, s: &Settings) -> Result<()> {
     s.save(&st.abs)?;

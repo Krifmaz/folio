@@ -206,6 +206,20 @@ fn js_number(s: &str) -> Option<f64> {
     s.parse::<f64>().ok()
 }
 
+/// The six parts of a time that a schedule is matched against, in UTC: second, minute, hour, day of the month,
+/// month and weekday (Sunday 0).
+pub fn time_parts(ms: i64) -> [i64; 6] {
+    let t = crate::abs::models::date_text(ms);
+    let num = |a: usize, b: usize| t.get(a..b).and_then(|x| x.parse::<i64>().ok()).unwrap_or(0);
+    let weekday = (ms.div_euclid(86_400_000) + 4).rem_euclid(7);
+    [num(17, 19), num(14, 16), num(11, 13), num(8, 10), num(5, 7), weekday]
+}
+
+/// Whether a converted schedule ([`convert`]) runs at this time (`TimeMatcher.match`): every part listed.
+pub fn matches(fields: &[String], parts: [i64; 6]) -> bool {
+    fields.iter().zip(parts).all(|(field, value)| field.split(',').any(|v| v == value.to_string()))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -245,5 +259,16 @@ mod tests {
         ] {
             assert!(!validate(bad), "{bad}");
         }
+    }
+
+    #[test]
+    fn a_schedule_runs_at_the_times_it_names() {
+        let fields = convert("30 1 * * mon").unwrap();
+        // Monday 2026-11-02 01:30:00 UTC
+        let monday = 1_793_583_000_000;
+        assert_eq!(time_parts(monday), [0, 30, 1, 2, 11, 1]);
+        assert!(matches(&fields, time_parts(monday)));
+        assert!(!matches(&fields, time_parts(monday + 1000)));
+        assert!(!matches(&fields, time_parts(monday + 86_400_000)));
     }
 }

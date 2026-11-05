@@ -10,9 +10,11 @@
 pub mod admin;
 pub mod api_keys;
 pub mod auth;
+pub mod backups;
 pub mod bookmarks;
 pub mod cron;
 pub mod email;
+pub mod file_utils;
 pub mod html;
 pub mod items;
 pub mod library;
@@ -74,6 +76,8 @@ pub struct Server {
     pub tasks: Arc<tasks::TaskManager>,
     /// The queue of notifications being sent.
     pub notifications: Arc<notifications::Manager>,
+    /// The backups in the backup folder.
+    pub backups: Arc<backups::Manager>,
     /// How the server was installed (`Source`, from `SOURCE`; `docker` by default, like the original's image).
     pub source: String,
 }
@@ -99,7 +103,9 @@ impl Server {
         if changed {
             st.save(db)?;
         }
+        let backups = Arc::new(backups::Manager::new(st.str("backupPath")));
         Ok(Server {
+            backups,
             settings: Arc::new(RwLock::new(st)),
             tokens: Arc::new(tokens),
             limiter: Arc::new(auth::RateLimiter::from_env()),
@@ -114,6 +120,17 @@ impl Server {
     /// A copy of the settings in effect.
     pub fn settings(&self) -> settings::ServerSettings {
         self.settings.read().map(|s| s.clone()).unwrap_or_else(|e| e.into_inner().clone())
+    }
+
+    /// Reads the settings again from the database (after a backup is restored, like the original's reconnect).
+    pub fn reload_settings(&self, db: &SqliteDb) {
+        match settings::ServerSettings::load(db, &self.metadata_path.display().to_string()) {
+            Ok(new) => match self.settings.write() {
+                Ok(mut s) => *s = new,
+                Err(e) => *e.into_inner() = new,
+            },
+            Err(e) => tracing::error!("The settings can't be read again: {}", e.detail),
+        }
     }
 
     /// Replaces the settings and stores them (`Database.updateServerSettings`).
@@ -173,6 +190,7 @@ pub fn router() -> Router<AppState> {
         .merge(users::router())
         .merge(api_keys::router())
         .merge(admin::router())
+        .merge(backups::router())
         .merge(metadata_providers::router())
         .merge(email::router())
         .merge(notifications::router())

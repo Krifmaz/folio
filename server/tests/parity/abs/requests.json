@@ -1764,5 +1764,174 @@
   "name": "p6n_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
+ },
+ {
+  "name": "p6b_guest_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "viewer3",
+   "password": "pw",
+   "type": "guest",
+   "isActive": true
+  },
+  "save": {
+   "guest_id": "user.id"
+  }
+ },
+ {
+  "name": "p6b_guest_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "viewer3",
+   "password": "pw"
+  },
+  "save": {
+   "guest_token": "user.accessToken"
+  }
+ },
+ {
+  "name": "backups_guest",
+  "path": "/api/backups",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "backups_empty",
+  "path": "/api/backups",
+  "save": {
+   "backup_location": "backupLocation"
+  }
+ },
+ {
+  "name": "backups_create",
+  "path": "/api/backups",
+  "method": "POST",
+  "save": {
+   "backup_id": "backups.0.id"
+  }
+ },
+ {
+  "name": "backups_list",
+  "path": "/api/backups"
+ },
+ {
+  "name": "backups_download",
+  "path": "/api/backups/{backup_id}/download"
+ },
+ {
+  "name": "backups_download_missing",
+  "path": "/api/backups/nope/download"
+ },
+ {
+  "name": "backups_apply",
+  "path": "/api/backups/{backup_id}/apply"
+ },
+ {
+  "name": "backups_apply_missing",
+  "path": "/api/backups/nope/apply"
+ },
+ {
+  "name": "backups_list_after_apply",
+  "path": "/api/backups"
+ },
+ {
+  "name": "backups_path_missing",
+  "path": "/api/backups/path",
+  "method": "PATCH",
+  "body": {}
+ },
+ {
+  "name": "backups_path_blank",
+  "path": "/api/backups/path",
+  "method": "PATCH",
+  "body": {
+   "path": "  "
+  }
+ },
+ {
+  "name": "backups_path_not_text",
+  "path": "/api/backups/path",
+  "method": "PATCH",
+  "body": {
+   "path": 5
+  }
+ },
+ {
+  "name": "backups_path_same",
+  "path": "/api/backups/path",
+  "method": "PATCH",
+  "body": {
+   "path": "{backup_location}/"
+  }
+ },
+ {
+  "name": "backups_path_move",
+  "path": "/api/backups/path",
+  "method": "PATCH",
+  "body": {
+   "path": "{backup_location}-moved"
+  }
+ },
+ {
+  "name": "backups_list_moved",
+  "path": "/api/backups"
+ },
+ {
+  "name": "backups_path_bad",
+  "path": "/api/backups/path",
+  "method": "PATCH",
+  "body": {
+   "path": "/no/such/parent/backups"
+  }
+ },
+ {
+  "name": "backups_path_back",
+  "path": "/api/backups/path",
+  "method": "PATCH",
+  "body": {
+   "path": "{backup_location}"
+  }
+ },
+ {
+  "name": "backups_list_back",
+  "path": "/api/backups"
+ },
+ {
+  "name": "backups_create_guest",
+  "path": "/api/backups",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "backups_upload_no_file",
+  "path": "/api/backups/upload",
+  "method": "POST",
+  "body": {}
+ },
+ {
+  "name": "backups_delete",
+  "path": "/api/backups/{backup_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "backups_delete_missing",
+  "path": "/api/backups/{backup_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "p6b_guest_delete",
+  "path": "/api/users/{guest_id}",
+  "method": "DELETE"
  }
 ]
