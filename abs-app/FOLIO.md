@@ -8,6 +8,7 @@ files of its own.
 | Change | Where |
 | --- | --- |
 | Version from the release workflow (`-PappVersionName`, `-PappVersionCode`), release signing from the environment (the debug key without one) | `android/app/folio.gradle`, applied by one line at the end of `android/app/build.gradle` |
+| JUnit for the unit tests (upstream has tests but not the dependency) | `android/app/folio.gradle` |
 | Encore look: the app's colours for the default, `black` (kit oled) and `light` themes, the Inter font and the accent | `assets/folio-theme.css` (loaded last in `nuxt.config.js`), `accent` in `tailwind.config.js` |
 | Reader's dark theme in the Encore colours | `components/readers/Reader.vue`, `components/readers/EpubReader.vue` |
 | App id `dev.krifmaz.folio.mobile` (installs beside the upstream app), name Folio, status bar, widget colours, launcher, notification and in-app icons | `android/app/folio.gradle`, `android/app/folio-res/` (laid over the upstream resources), `capacitor.config.json`, `static/Logo.png`; icons drawn by `folio/make_icons.py` |
