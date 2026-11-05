@@ -1,0 +1,30 @@
+{
+ "body": "Media item not found",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "currentTime": 5,
+   "deviceInfo": {
+    "clientVersion": "0.9.81-beta",
+    "deviceId": "parity-2",
+    "manufacturer": "Google",
+    "model": "Pixel 8",
+    "sdkVersion": 34
+   },
+   "displayAuthor": "",
+   "displayTitle": "",
+   "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+   "libraryItemId": "00000000-0000-4000-8000-000000000000",
+   "mediaPlayer": "exo-player",
+   "mediaType": "book",
+   "playMethod": 3,
+   "startTime": 0,
+   "startedAt": 1699999940000,
+   "timeListening": 5,
+   "updatedAt": 1700000000000
+  },
+  "method": "POST",
+  "path": "/api/session/local"
+ },
+ "status": 500
+}

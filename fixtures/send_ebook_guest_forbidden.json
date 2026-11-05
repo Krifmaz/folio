@@ -1,0 +1,16 @@
+{
+ "body": "Forbidden",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "deviceName": "Kindle",
+   "libraryItemId": "x"
+  },
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "POST",
+  "path": "/api/emails/send-ebook-to-device"
+ },
+ "status": 403
+}

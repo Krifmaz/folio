@@ -1,0 +1,37 @@
+{
+ "body": {
+  "bookmarks": [],
+  "createdAt": 1793918209273,
+  "email": null,
+  "hasOpenIDLink": false,
+  "id": "dd6906e1-2d4e-4e03-a404-360cd9c428dd",
+  "isActive": true,
+  "isLocked": false,
+  "itemTagsSelected": [],
+  "lastSeen": null,
+  "librariesAccessible": [],
+  "mediaProgress": [],
+  "permissions": {
+   "accessAllLibraries": true,
+   "accessAllTags": true,
+   "accessExplicitContent": true,
+   "createEreader": true,
+   "delete": true,
+   "download": true,
+   "selectedTagsNotAccessible": false,
+   "update": true,
+   "upload": true
+  },
+  "seriesHideFromContinueListening": [],
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkZDY5MDZlMS0yZDRlLTRlMDMtYTQwNC0zNjBjZDljNDI4ZGQiLCJ1c2VybmFtZSI6InJvb3QiLCJpYXQiOjE3OTM5MTgyMDl9.OHupbwBLDpSnn_FW7NJhsHRyWZxirXFTJrbISUBgn_E",
+  "type": "root",
+  "username": "root"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me"
+ },
+ "status": 200
+}

@@ -1,0 +1,262 @@
+{
+ "body": {
+  "authors": [],
+  "book": [
+   {
+    "libraryItem": {
+     "addedAt": 1793918209484,
+     "birthtimeMs": 1793918198835,
+     "ctimeMs": 1793918199337,
+     "folderId": "bac79c66-ac9b-470f-a5a3-06ba299b441a",
+     "id": "3fce5d9a-1091-4700-8bae-14eb04117f4e",
+     "ino": "9437891",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "lastScan": 1793918209483,
+     "libraryFiles": [
+      {
+       "addedAt": 1793918209354,
+       "fileType": "audio",
+       "ino": "9437893",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793918199326,
+        "ctimeMs": 1793918199332,
+        "ext": ".m4b",
+        "filename": "Ancillary Justice.m4b",
+        "mtimeMs": 1793918199332,
+        "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+        "relPath": "Ancillary Justice.m4b",
+        "size": 256184
+       },
+       "updatedAt": 1793918209354
+      }
+     ],
+     "libraryId": "b2121efa-a36f-49fe-931f-c387ee09c67e",
+     "media": {
+      "audioFiles": [
+       {
+        "addedAt": 1793918209483,
+        "bitRate": 32539,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [
+         {
+          "end": 20,
+          "id": 0,
+          "start": 0,
+          "title": "Chapter 1"
+         },
+         {
+          "end": 40,
+          "id": 1,
+          "start": 20,
+          "title": "Chapter 2"
+         },
+         {
+          "end": 60,
+          "id": 2,
+          "start": 40,
+          "title": "Chapter 3"
+         }
+        ],
+        "codec": "aac",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 60,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "QuickTime / MOV",
+        "index": 1,
+        "ino": "9437893",
+        "language": "und",
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "Ancillary Justice",
+         "tagArtist": "Ann Leckie",
+         "tagComposer": "Adjoa Andoh",
+         "tagDate": "2013",
+         "tagEncoder": "Lavf60.16.100",
+         "tagGenre": "Science Fiction",
+         "tagTitle": "Ancillary Justice"
+        },
+        "metadata": {
+         "birthtimeMs": 1793918199326,
+         "ctimeMs": 1793918199332,
+         "ext": ".m4b",
+         "filename": "Ancillary Justice.m4b",
+         "mtimeMs": 1793918199332,
+         "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+         "relPath": "Ancillary Justice.m4b",
+         "size": 256184
+        },
+        "mimeType": "audio/mp4",
+        "timeBase": "1/44100",
+        "trackNumFromFilename": null,
+        "trackNumFromMeta": null,
+        "updatedAt": 1793918209483
+       }
+      ],
+      "chapters": [
+       {
+        "end": 20,
+        "id": 0,
+        "start": 0,
+        "title": "Chapter 1"
+       },
+       {
+        "end": 40,
+        "id": 1,
+        "start": 20,
+        "title": "Chapter 2"
+       },
+       {
+        "end": 60,
+        "id": 2,
+        "start": 40,
+        "title": "Chapter 3"
+       }
+      ],
+      "coverPath": null,
+      "duration": 60,
+      "ebookFile": null,
+      "id": "a033b774-2ee0-4fc0-a350-7d1249bfbbdb",
+      "libraryItemId": "3fce5d9a-1091-4700-8bae-14eb04117f4e",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Ann Leckie",
+       "authorNameLF": "Leckie, Ann",
+       "authors": [
+        {
+         "id": "f6986917-f793-4b6a-89d0-c316274de590",
+         "name": "Ann Leckie"
+        }
+       ],
+       "description": null,
+       "descriptionPlain": null,
+       "explicit": false,
+       "genres": [
+        "Science Fiction"
+       ],
+       "isbn": null,
+       "language": null,
+       "narratorName": "Adjoa Andoh",
+       "narrators": [
+        "Adjoa Andoh"
+       ],
+       "publishedDate": null,
+       "publishedYear": "2013",
+       "publisher": null,
+       "series": [
+        {
+         "id": "6bef3e3e-edfb-4768-a98b-746eb182605a",
+         "name": "Imperial Radch",
+         "sequence": "1"
+        }
+       ],
+       "seriesName": "Imperial Radch #1",
+       "subtitle": null,
+       "title": "Ancillary Justice",
+       "titleIgnorePrefix": "Ancillary Justice"
+      },
+      "numAudioFiles": 1,
+      "numChapters": 3,
+      "numTracks": 1,
+      "size": 256184,
+      "tags": [],
+      "tracks": [
+       {
+        "addedAt": 1793918209483,
+        "bitRate": 32539,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [
+         {
+          "end": 20,
+          "id": 0,
+          "start": 0,
+          "title": "Chapter 1"
+         },
+         {
+          "end": 40,
+          "id": 1,
+          "start": 20,
+          "title": "Chapter 2"
+         },
+         {
+          "end": 60,
+          "id": 2,
+          "start": 40,
+          "title": "Chapter 3"
+         }
+        ],
+        "codec": "aac",
+        "contentUrl": "/api/items/3fce5d9a-1091-4700-8bae-14eb04117f4e/file/9437893",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 60,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "QuickTime / MOV",
+        "index": 1,
+        "ino": "9437893",
+        "language": "und",
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "Ancillary Justice",
+         "tagArtist": "Ann Leckie",
+         "tagComposer": "Adjoa Andoh",
+         "tagDate": "2013",
+         "tagEncoder": "Lavf60.16.100",
+         "tagGenre": "Science Fiction",
+         "tagTitle": "Ancillary Justice"
+        },
+        "metadata": {
+         "birthtimeMs": 1793918199326,
+         "ctimeMs": 1793918199332,
+         "ext": ".m4b",
+         "filename": "Ancillary Justice.m4b",
+         "mtimeMs": 1793918199332,
+         "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+         "relPath": "Ancillary Justice.m4b",
+         "size": 256184
+        },
+        "mimeType": "audio/mp4",
+        "startOffset": 0,
+        "timeBase": "1/44100",
+        "title": "Ancillary Justice.m4b",
+        "trackNumFromFilename": null,
+        "trackNumFromMeta": null,
+        "updatedAt": 1793918209483
+       }
+      ]
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793918199337,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "scanVersion": "2.37.2",
+     "size": 256184,
+     "updatedAt": 1793918209484
+    }
+   }
+  ],
+  "genres": [],
+  "narrators": [],
+  "series": [],
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=justice"
+ },
+ "status": 200
+}

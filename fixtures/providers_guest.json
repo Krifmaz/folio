@@ -1,0 +1,13 @@
+{
+ "body": "Forbidden",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "GET",
+  "path": "/api/custom-metadata-providers"
+ },
+ "status": 403
+}

@@ -1,0 +1,12 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "isFinished": true
+  },
+  "method": "PATCH",
+  "path": "/api/me/progress/{shelf_aj}"
+ },
+ "status": 200
+}

@@ -1,0 +1,89 @@
+{
+ "body": {
+  "itemsPerPage": 2,
+  "numPages": 2,
+  "page": 1,
+  "sessions": [
+   {
+    "audioTracks": [],
+    "bookId": "ffd44a94-8bf5-4964-ae3c-2a972a5b7c37",
+    "chapters": [],
+    "coverAspectRatio": null,
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-05",
+    "dayOfWeek": "Thursday",
+    "deviceInfo": {
+     "browserName": "Firefox",
+     "browserVersion": "132.0",
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "Linux x86_64 Firefox",
+     "id": "8957ba40-5802-43cd-9ba5-153aa27e58ae",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "osName": "Linux",
+     "osVersion": "x86_64",
+     "sdkVersion": "",
+     "userId": "dd6906e1-2d4e-4e03-a404-360cd9c428dd"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "ff3787fd-ad84-4c00-90e0-194a4509c6fa",
+    "lastSave": 0,
+    "libraryId": "b2121efa-a36f-49fe-931f-c387ee09c67e",
+    "libraryItemId": "4bb2212a-93c6-4fe0-b3b0-a57553adb4e6",
+    "mediaItemShareId": null,
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "9ab4129a-326d-4f02-b453-e5f8a0fa9e16",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "shareSessionId": null,
+    "startTime": 30,
+    "startedAt": 1793918213750,
+    "stream": null,
+    "timeListening": 15,
+    "updatedAt": 1793918213767,
+    "user": {
+     "id": "dd6906e1-2d4e-4e03-a404-360cd9c428dd",
+     "username": "root"
+    },
+    "userId": "dd6906e1-2d4e-4e03-a404-360cd9c428dd"
+   }
+  ],
+  "total": 3
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/sessions?itemsPerPage=2&page=1&sort=nope"
+ },
+ "status": 200
+}

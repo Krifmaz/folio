@@ -1,0 +1,18 @@
+{
+ "body": {
+  "appriseApiUrl": "http://127.0.0.1:9/notify",
+  "appriseType": "api",
+  "id": "notification-settings",
+  "maxFailedAttempts": 2,
+  "maxNotificationQueue": 20,
+  "notificationDelay": 1000,
+  "notifications": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "DELETE",
+  "path": "/api/notifications/{notification_id}"
+ },
+ "status": 200
+}

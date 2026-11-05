@@ -1,0 +1,17 @@
+{
+ "body": "Forbidden",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "sortingPrefixes": [
+    "the"
+   ]
+  },
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "PATCH",
+  "path": "/api/sorting-prefixes"
+ },
+ "status": 403
+}
