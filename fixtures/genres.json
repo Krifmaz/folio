@@ -1,0 +1,14 @@
+{
+ "body": {
+  "genres": [
+   "Science Fiction"
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/genres"
+ },
+ "status": 200
+}

@@ -1,0 +1,12 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "path": "{backup_location}"
+  },
+  "method": "PATCH",
+  "path": "/api/backups/path"
+ },
+ "status": 200
+}

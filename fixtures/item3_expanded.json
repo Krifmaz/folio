@@ -1,0 +1,251 @@
+{
+ "body": {
+  "addedAt": 1793919946281,
+  "birthtimeMs": 1793919936195,
+  "ctimeMs": 1793919936830,
+  "folderId": "ea15a69a-9f6a-49e0-af7b-ca60189699a1",
+  "id": "673ac963-a828-4fa6-aac3-ec62a8548bdd",
+  "ino": "9437188",
+  "isFile": false,
+  "isInvalid": false,
+  "isMissing": false,
+  "lastScan": 1793919946281,
+  "libraryFiles": [
+   {
+    "addedAt": 1793919946149,
+    "fileType": "audio",
+    "ino": "9437190",
+    "isSupplementary": null,
+    "metadata": {
+     "birthtimeMs": 1793919936819,
+     "ctimeMs": 1793919936826,
+     "ext": ".m4b",
+     "filename": "Ancillary Justice.m4b",
+     "mtimeMs": 1793919936826,
+     "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+     "relPath": "Ancillary Justice.m4b",
+     "size": 256184
+    },
+    "updatedAt": 1793919946149
+   }
+  ],
+  "libraryId": "1a3aafc6-6384-4a18-ba90-42c24f013ccb",
+  "media": {
+   "audioFiles": [
+    {
+     "addedAt": 1793919946280,
+     "bitRate": 32539,
+     "channelLayout": "mono",
+     "channels": 1,
+     "chapters": [
+      {
+       "end": 20,
+       "id": 0,
+       "start": 0,
+       "title": "Chapter 1"
+      },
+      {
+       "end": 40,
+       "id": 1,
+       "start": 20,
+       "title": "Chapter 2"
+      },
+      {
+       "end": 60,
+       "id": 2,
+       "start": 40,
+       "title": "Chapter 3"
+      }
+     ],
+     "codec": "aac",
+     "discNumFromFilename": null,
+     "discNumFromMeta": null,
+     "duration": 60,
+     "embeddedCoverArt": null,
+     "error": null,
+     "exclude": false,
+     "format": "QuickTime / MOV",
+     "index": 1,
+     "ino": "9437190",
+     "language": "und",
+     "manuallyVerified": false,
+     "metaTags": {
+      "tagAlbum": "Ancillary Justice",
+      "tagArtist": "Ann Leckie",
+      "tagComposer": "Adjoa Andoh",
+      "tagDate": "2013",
+      "tagEncoder": "Lavf60.16.100",
+      "tagGenre": "Science Fiction",
+      "tagTitle": "Ancillary Justice"
+     },
+     "metadata": {
+      "birthtimeMs": 1793919936819,
+      "ctimeMs": 1793919936826,
+      "ext": ".m4b",
+      "filename": "Ancillary Justice.m4b",
+      "mtimeMs": 1793919936826,
+      "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+      "relPath": "Ancillary Justice.m4b",
+      "size": 256184
+     },
+     "mimeType": "audio/mp4",
+     "timeBase": "1/44100",
+     "trackNumFromFilename": null,
+     "trackNumFromMeta": null,
+     "updatedAt": 1793919946280
+    }
+   ],
+   "chapters": [
+    {
+     "end": 20,
+     "id": 0,
+     "start": 0,
+     "title": "Chapter 1"
+    },
+    {
+     "end": 40,
+     "id": 1,
+     "start": 20,
+     "title": "Chapter 2"
+    },
+    {
+     "end": 60,
+     "id": 2,
+     "start": 40,
+     "title": "Chapter 3"
+    }
+   ],
+   "coverPath": null,
+   "duration": 60,
+   "ebookFile": null,
+   "id": "cad10978-ff67-43be-a41a-a1d69d73bebd",
+   "libraryItemId": "673ac963-a828-4fa6-aac3-ec62a8548bdd",
+   "metadata": {
+    "abridged": false,
+    "asin": null,
+    "authorName": "Ann Leckie",
+    "authorNameLF": "Leckie, Ann",
+    "authors": [
+     {
+      "id": "fb18e0b4-3a78-4dc1-88de-722935213575",
+      "name": "Ann Leckie"
+     }
+    ],
+    "description": null,
+    "descriptionPlain": null,
+    "explicit": false,
+    "genres": [
+     "Science Fiction"
+    ],
+    "isbn": null,
+    "language": null,
+    "narratorName": "Adjoa Andoh",
+    "narrators": [
+     "Adjoa Andoh"
+    ],
+    "publishedDate": null,
+    "publishedYear": "2013",
+    "publisher": null,
+    "series": [
+     {
+      "id": "de621736-5686-46b3-b7b8-e6fbf9f38edd",
+      "name": "Imperial Radch",
+      "sequence": "1"
+     }
+    ],
+    "seriesName": "Imperial Radch #1",
+    "subtitle": null,
+    "title": "Ancillary Justice",
+    "titleIgnorePrefix": "Ancillary Justice"
+   },
+   "numAudioFiles": 1,
+   "numChapters": 3,
+   "numTracks": 1,
+   "size": 256184,
+   "tags": [],
+   "tracks": [
+    {
+     "addedAt": 1793919946280,
+     "bitRate": 32539,
+     "channelLayout": "mono",
+     "channels": 1,
+     "chapters": [
+      {
+       "end": 20,
+       "id": 0,
+       "start": 0,
+       "title": "Chapter 1"
+      },
+      {
+       "end": 40,
+       "id": 1,
+       "start": 20,
+       "title": "Chapter 2"
+      },
+      {
+       "end": 60,
+       "id": 2,
+       "start": 40,
+       "title": "Chapter 3"
+      }
+     ],
+     "codec": "aac",
+     "contentUrl": "/api/items/673ac963-a828-4fa6-aac3-ec62a8548bdd/file/9437190",
+     "discNumFromFilename": null,
+     "discNumFromMeta": null,
+     "duration": 60,
+     "embeddedCoverArt": null,
+     "error": null,
+     "exclude": false,
+     "format": "QuickTime / MOV",
+     "index": 1,
+     "ino": "9437190",
+     "language": "und",
+     "manuallyVerified": false,
+     "metaTags": {
+      "tagAlbum": "Ancillary Justice",
+      "tagArtist": "Ann Leckie",
+      "tagComposer": "Adjoa Andoh",
+      "tagDate": "2013",
+      "tagEncoder": "Lavf60.16.100",
+      "tagGenre": "Science Fiction",
+      "tagTitle": "Ancillary Justice"
+     },
+     "metadata": {
+      "birthtimeMs": 1793919936819,
+      "ctimeMs": 1793919936826,
+      "ext": ".m4b",
+      "filename": "Ancillary Justice.m4b",
+      "mtimeMs": 1793919936826,
+      "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+      "relPath": "Ancillary Justice.m4b",
+      "size": 256184
+     },
+     "mimeType": "audio/mp4",
+     "startOffset": 0,
+     "timeBase": "1/44100",
+     "title": "Ancillary Justice.m4b",
+     "trackNumFromFilename": null,
+     "trackNumFromMeta": null,
+     "updatedAt": 1793919946280
+    }
+   ]
+  },
+  "mediaType": "book",
+  "mtimeMs": 1793919936830,
+  "numFiles": 1,
+  "oldLibraryItemId": null,
+  "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+  "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+  "scanVersion": "2.37.2",
+  "size": 256184,
+  "updatedAt": 1793919946281
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/items/{item3}?expanded=1"
+ },
+ "status": 200
+}

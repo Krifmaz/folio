@@ -1,0 +1,16 @@
+{
+ "body": "Invalid payload. ereaderDevices array items must have name and email",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "ereaderDevices": [
+    {
+     "name": "Kindle"
+    }
+   ]
+  },
+  "method": "POST",
+  "path": "/api/emails/ereader-devices"
+ },
+ "status": 400
+}

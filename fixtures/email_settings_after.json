@@ -1,0 +1,30 @@
+{
+ "body": {
+  "settings": {
+   "ereaderDevices": [
+    {
+     "availabilityOption": "adminOrUp",
+     "email": "k@kindle.example",
+     "name": "Kindle",
+     "users": []
+    }
+   ],
+   "fromAddress": "f@example.org",
+   "host": "smtp.example",
+   "id": "email-settings",
+   "pass": "p",
+   "port": 465,
+   "rejectUnauthorized": false,
+   "secure": false,
+   "testAddress": null,
+   "user": "u"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/emails/settings"
+ },
+ "status": 200
+}

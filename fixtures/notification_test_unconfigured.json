@@ -1,0 +1,10 @@
+{
+ "body": "Apprise is not configured",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/notifications/{notification_id}/test"
+ },
+ "status": 400
+}

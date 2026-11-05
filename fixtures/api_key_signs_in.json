@@ -1,0 +1,44 @@
+{
+ "body": {
+  "bookmarks": [],
+  "createdAt": 1793919951354,
+  "email": "r@example.org",
+  "hasOpenIDLink": false,
+  "id": "71589c81-ab1d-4b60-a4a0-f67d7ef64e76",
+  "isActive": true,
+  "isLocked": false,
+  "itemTagsSelected": [
+   "kids"
+  ],
+  "lastSeen": null,
+  "librariesAccessible": [
+   "1a3aafc6-6384-4a18-ba90-42c24f013ccb"
+  ],
+  "mediaProgress": [],
+  "permissions": {
+   "accessAllLibraries": true,
+   "accessAllTags": false,
+   "accessExplicitContent": false,
+   "createEreader": false,
+   "delete": false,
+   "download": false,
+   "selectedTagsNotAccessible": false,
+   "update": true,
+   "upload": false
+  },
+  "seriesHideFromContinueListening": [],
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MTU4OWM4MS1hYjFkLTRiNjAtYTRhMC1mNjdkN2VmNjRlNzYiLCJ1c2VybmFtZSI6InJlYWRlciIsImlhdCI6MTc5MzkxOTk1MX0.ilX2vdCuXiGU70AJAS5rvWxISQnfFo-QaMe0AtXIKCc",
+  "type": "user",
+  "username": "reader"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "headers": {
+   "Authorization": "Bearer {api_key}"
+  },
+  "method": "GET",
+  "path": "/api/me"
+ },
+ "status": 200
+}

@@ -1,0 +1,72 @@
+{
+ "body": {
+  "collapseseries": false,
+  "filterBy": "authors.Zjg2MTU2MDMtNjhhYS00YWY2LTg0YzItMTA4MTc5YThjZDc4",
+  "include": "",
+  "limit": 0,
+  "mediaType": "book",
+  "minified": true,
+  "offset": 0,
+  "page": 0,
+  "results": [
+   {
+    "addedAt": 1793919946199,
+    "birthtimeMs": 1793919936832,
+    "ctimeMs": 1793919937063,
+    "folderId": "ea15a69a-9f6a-49e0-af7b-ca60189699a1",
+    "id": "53a37fe8-9d39-49ae-af5b-80374859ac1a",
+    "ino": "9437191",
+    "isFile": false,
+    "isInvalid": false,
+    "isMissing": false,
+    "libraryId": "1a3aafc6-6384-4a18-ba90-42c24f013ccb",
+    "media": {
+     "coverPath": null,
+     "duration": 45,
+     "id": "f2d31a19-cf8f-42fd-ac0b-29b52129321c",
+     "metadata": {
+      "abridged": false,
+      "asin": null,
+      "authorName": "Becky Chambers",
+      "authorNameLF": "Chambers, Becky",
+      "description": null,
+      "explicit": false,
+      "genres": [],
+      "isbn": null,
+      "language": null,
+      "narratorName": "",
+      "publishedDate": null,
+      "publishedYear": null,
+      "publisher": null,
+      "seriesName": "",
+      "subtitle": null,
+      "title": "A Psalm for the Wild-Built",
+      "titleIgnorePrefix": "Psalm for the Wild-Built, A"
+     },
+     "numAudioFiles": 3,
+     "numChapters": 3,
+     "numTracks": 3,
+     "size": 181530,
+     "tags": []
+    },
+    "mediaType": "book",
+    "mtimeMs": 1793919937063,
+    "numFiles": 3,
+    "oldLibraryItemId": null,
+    "path": "/media/Becky Chambers/A Psalm for the Wild-Built",
+    "relPath": "Becky Chambers/A Psalm for the Wild-Built",
+    "size": 181530,
+    "updatedAt": 1793919946199
+   }
+  ],
+  "sortDesc": false,
+  "total": 1
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/items?minified=1&filter=authors.{b64:author}"
+ },
+ "status": 200
+}

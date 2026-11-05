@@ -1,0 +1,44 @@
+{
+ "body": {
+  "user": {
+   "bookmarks": [],
+   "createdAt": 1793919952470,
+   "email": null,
+   "hasOpenIDLink": false,
+   "id": "81b09f77-6ece-43fd-b9f3-e1badb09d935",
+   "isActive": true,
+   "isLocked": false,
+   "itemTagsSelected": [],
+   "lastSeen": null,
+   "librariesAccessible": [],
+   "mediaProgress": [],
+   "permissions": {
+    "accessAllLibraries": true,
+    "accessAllTags": true,
+    "accessExplicitContent": false,
+    "createEreader": false,
+    "delete": false,
+    "download": true,
+    "selectedTagsNotAccessible": false,
+    "update": false,
+    "upload": false
+   },
+   "seriesHideFromContinueListening": [],
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4MWIwOWY3Ny02ZWNlLTQzZmQtYjlmMy1lMWJhZGIwOWQ5MzUiLCJ1c2VybmFtZSI6InZpZXdlcjMiLCJpYXQiOjE3OTM5MTk5NTJ9.frygEqJhx5z7_-dyDGBglNsJxLFyigfWD_grPCipGIk",
+   "type": "guest",
+   "username": "viewer3"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "isActive": true,
+   "password": "pw",
+   "type": "guest",
+   "username": "viewer3"
+  },
+  "method": "POST",
+  "path": "/api/users"
+ },
+ "status": 200
+}

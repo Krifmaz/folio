@@ -1,0 +1,10 @@
+{
+ "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /api/sessions/61801a10-9cc7-4880-ace9-58f2ecdba394</pre>\n</body>\n</html>\n",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/sessions/{session}"
+ },
+ "status": 404
+}

@@ -1,0 +1,39 @@
+{
+ "body": {
+  "appriseApiUrl": null,
+  "appriseType": "api",
+  "id": "notification-settings",
+  "maxFailedAttempts": 5,
+  "maxNotificationQueue": 20,
+  "notificationDelay": 1000,
+  "notifications": [
+   {
+    "bodyTemplate": "Body {{ version}} {{podcastTitle}} {{ version }}",
+    "createdAt": 1793919952390,
+    "enabled": true,
+    "eventName": "onTest",
+    "id": "ce9b0f71-aaca-4332-b125-987e00b012d2",
+    "lastAttemptFailed": false,
+    "lastFiredAt": null,
+    "libraryId": null,
+    "numConsecutiveFailedAttempts": 0,
+    "numTimesFired": 0,
+    "titleTemplate": "Test {{ version }}",
+    "type": null,
+    "urls": [
+     "json://localhost"
+    ]
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "eventName": "onTest",
+   "urls": []
+  },
+  "method": "POST",
+  "path": "/api/notifications"
+ },
+ "status": 200
+}
