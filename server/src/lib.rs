@@ -17,9 +17,12 @@
 
 pub mod auth;
 pub mod checks;
+pub mod compat;
 pub mod lantern;
 pub mod library;
 pub mod metadata;
+pub mod migration;
+pub mod playback;
 pub mod wanted;
 
 use axum::http::{header, HeaderValue};
@@ -112,6 +115,9 @@ impl AppState {
         library::store::migrate(&db)?;
         wanted::store::migrate(&db)?;
         lantern::grabs::migrate(&db)?;
+        playback::migrate(&db)?;
+        compat::migrate(&db)?;
+        migration::migrate(&db)?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -230,6 +236,9 @@ pub fn app(st: AppState) -> Router {
         .merge(library::router())
         .merge(wanted::router())
         .merge(lantern::grabs::router())
+        .merge(playback::router())
+        .merge(compat::router())
+        .merge(migration::router())
         .with_state(st)
         .fallback_service(spa)
         .layer(axum::middleware::from_fn(security_headers))

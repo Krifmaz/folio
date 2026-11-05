@@ -297,6 +297,7 @@ fn edition_row(e: &Value, admin: bool, on_change: impl Fn() + Copy + 'static) ->
             <td>{abridged}</td>
             <td>{s(e, "release_date")}<div class="small faint">{s(e, "publisher")}</div></td>
             <td style="white-space:nowrap">
+                {crate::player::edition_actions(e)}
                 {admin.then(|| view! {
                     <button class="btn sm" title="Want this edition" on:click=want>"Want"</button>
                     <button class="btn ghost icon sm" title="Refresh details" aria-label="Refresh details" on:click=refresh inner_html=icon("refresh")></button>
