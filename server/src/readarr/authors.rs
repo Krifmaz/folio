@@ -4,13 +4,20 @@
 //! ```text
 //! GET /api/v1/author        every author, in the order they were added
 //! GET /api/v1/author/{id}   one author; ASP.NET's "Not Found" when there is none
+//! PUT /api/v1/author/{id}   change an author's folder, profiles, tags and monitoring (202 with the author)
+//! PUT /api/v1/author/editor change several authors at once (202 with them)
 //! ```
+//!
+//! Not yet ported: moving an author's files (`moveFiles`, a command) and the refresh Readarr starts when the
+//! metadata profile changes (its metadata server is gone; commands come with R5).
 
 use super::json::{date, date_or_min, doc, list, local_covers, now_param, object, percent, ratings};
 use super::{Answer, Fail, Key};
 use crate::AppState;
+use axum::body::Bytes;
 use axum::extract::{Path, State};
-use axum::routing::get;
+use axum::http::StatusCode;
+use axum::routing::{get, put};
 use axum::{Json, Router};
 use kit_server_core::{Db, Row, RowExt, SqliteDb};
 use serde_json::{json, Value};
@@ -18,7 +25,10 @@ use std::collections::HashMap;
 
 /// The author routes.
 pub fn router() -> Router<AppState> {
-    Router::new().route("/api/v1/author", get(all)).route("/api/v1/author/{id}", get(one))
+    Router::new()
+        .route("/api/v1/author", get(all).put(update_unrouted))
+        .route("/api/v1/author/{id}", get(one).put(update))
+        .route("/api/v1/author/editor", put(editor))
 }
 
 /// An author's columns and its metadata's, as one row (`Id` is the author's).
@@ -42,6 +52,20 @@ pub fn find(db: &SqliteDb, id: i64) -> kit_server_core::Result<Option<Row>> {
 /// The author `id`, or Readarr's `ModelNotFoundException`.
 pub fn get_or_404(db: &SqliteDb, id: i64) -> Answer<Row> {
     find(db, id)?.ok_or_else(|| Fail::model_not_found("Author", id))
+}
+
+/// `NewItemMonitorTypes` from a request (its name or number); `None` when it is neither.
+pub fn parse_monitor_new_items(v: &Value) -> Option<i64> {
+    match v {
+        Value::Number(n) => n.as_i64().filter(|n| (0..=2).contains(n)),
+        Value::String(s) => match s.to_ascii_lowercase().as_str() {
+            "all" | "0" => Some(0),
+            "none" | "1" => Some(1),
+            "new" | "2" => Some(2),
+            _ => None,
+        },
+        _ => None,
+    }
 }
 
 /// How Readarr names `NewItemMonitorTypes` (stored as a number).
@@ -273,6 +297,179 @@ async fn one(State(st): State<AppState>, _: Key, Path(id): Path<String>) -> Answ
     let Some(a) = find(&st.readarr, id)? else { return Err(Fail::not_found()) };
     let mut list = full(&st.readarr, &[a], true)?;
     Ok(Json(list.remove(0)))
+}
+
+/// A number from a request body (0 when it is missing or not one, as .NET binds it).
+fn int(v: &Value, k: &str) -> i64 {
+    v.get(k).and_then(Value::as_i64).unwrap_or(0)
+}
+
+/// `PUT /api/v1/author` (the id from the body).
+async fn update_unrouted(st: State<AppState>, key: Key, raw: axum::extract::RawQuery, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    put_author(st, key, 0, raw, bytes).await
+}
+
+/// `PUT /api/v1/author/{id}`.
+async fn update(
+    st: State<AppState>,
+    key: Key,
+    Path(id): Path<i64>,
+    raw: axum::extract::RawQuery,
+    bytes: Bytes,
+) -> Answer<(StatusCode, Json<Value>)> {
+    put_author(st, key, id, raw, bytes).await
+}
+
+/// Changes an author like `AuthorController.UpdateAuthor`: the request's checks, then its folder, profiles,
+/// tags and monitoring (never its add options); 202 with the author as `GET` sends it.
+async fn put_author(
+    State(st): State<AppState>,
+    _: Key,
+    route_id: i64,
+    _q: axum::extract::RawQuery,
+    bytes: Bytes,
+) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let id = match int(&r, "id") {
+        0 => route_id,
+        id => id,
+    };
+    let path = r.get("path").and_then(Value::as_str);
+    let mut f = super::validation::Failures::default();
+    f.valid_id("QualityProfileId", int(&r, "qualityProfileId"));
+    f.valid_id("MetadataProfileId", int(&r, "metadataProfileId"));
+    if let Some(p) = path.filter(|p| !p.trim().is_empty()) {
+        super::validation::author_path(db, &mut f, id, p)?;
+    }
+    super::validation::profile_exists(db, &mut f, "QualityProfileId", int(&r, "qualityProfileId"))?;
+    super::validation::profile_exists(db, &mut f, "MetadataProfileId", int(&r, "metadataProfileId"))?;
+    f.valid_id("Id", id);
+    super::validation::valid_path(&mut f, "Path", path);
+    f.check()?;
+    get_or_404(db, id)?;
+    let tags = super::json::stored_doc(r.get("tags"));
+    let monitor_new = r.get("monitorNewItems").and_then(parse_monitor_new_items).unwrap_or(0);
+    db.execute(
+        "UPDATE Authors SET Path = ?, QualityProfileId = ?, MetadataProfileId = ?, Tags = ?, Monitored = ?, MonitorNewItems = ? WHERE Id = ?",
+        vec![
+            json!(path),
+            json!(int(&r, "qualityProfileId")),
+            json!(int(&r, "metadataProfileId")),
+            tags,
+            json!(r.get("monitored").and_then(Value::as_bool).unwrap_or(false)),
+            json!(monitor_new),
+            json!(id),
+        ],
+    )?;
+    let a = get_or_404(db, id)?;
+    let mut list = full(db, &[a], true)?;
+    Ok((StatusCode::ACCEPTED, Json(list.remove(0))))
+}
+
+/// The ids in a request body's list `k`.
+pub fn ids(v: &Value, k: &str) -> Vec<i64> {
+    v.get(k).and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_i64).collect()).unwrap_or_default()
+}
+
+/// The rows found for `wanted` ids, or Readarr's `Expected query to return …` when one is missing.
+pub fn get_many(rows: Vec<Row>, wanted: usize) -> Answer<Vec<Row>> {
+    if rows.len() != wanted {
+        return Err(Fail::exception(
+            500,
+            "System.ApplicationException",
+            format!("Expected query to return {wanted} rows but returned {}", rows.len()),
+        ));
+    }
+    Ok(rows)
+}
+
+/// `PUT /api/v1/author/editor` (`AuthorEditorController.SaveAll`): monitoring, new-item monitoring, profiles,
+/// root folder (the author's folder keeps its name) and tags (`applyTags`: add, remove or replace) of several
+/// authors; 202 with them as `ToResource` makes them.
+async fn editor(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let wanted = ids(&r, "authorIds");
+    let found = if wanted.is_empty() {
+        Vec::new()
+    } else {
+        rows(db, &format!("a.Id IN ({})", super::json::marks(wanted.len())), wanted.iter().map(|i| json!(i)).collect())?
+    };
+    let found = get_many(found, wanted.len())?;
+    let apply = r.get("applyTags").map(|v| match v {
+        Value::Number(n) => n.as_i64().unwrap_or(0),
+        Value::String(s) => match s.to_ascii_lowercase().as_str() {
+            "remove" | "1" => 1,
+            "replace" | "2" => 2,
+            _ => 0,
+        },
+        _ => 0,
+    });
+    let root = r.get("rootFolderPath").and_then(Value::as_str).filter(|p| !p.trim().is_empty());
+    for a in &found {
+        let mut monitored = a.i("Monitored") != 0;
+        let mut monitor_new = a.i("MonitorNewItems");
+        let mut quality = a.i("QualityProfileId");
+        let mut metadata = a.i("MetadataProfileId");
+        let mut path = a.s("Path");
+        if let Some(m) = r.get("monitored").and_then(Value::as_bool) {
+            monitored = m;
+        }
+        if let Some(m) = r.get("monitorNewItems").and_then(parse_monitor_new_items) {
+            monitor_new = m;
+        }
+        if let Some(q) = r.get("qualityProfileId").and_then(Value::as_i64) {
+            quality = q;
+        }
+        if let Some(m) = r.get("metadataProfileId").and_then(Value::as_i64) {
+            metadata = m;
+        }
+        if let Some(root) = root {
+            let folder = path.trim_end_matches('/').rsplit('/').next().unwrap_or_default().to_string();
+            path = format!("{}/{folder}", root.trim_end_matches('/'));
+        }
+        let mut tags: Vec<i64> = match doc(a.get("Tags")) {
+            Value::Array(t) => t.iter().filter_map(Value::as_i64).collect(),
+            _ => Vec::new(),
+        };
+        if let Some(new) = r.get("tags").and_then(Value::as_array) {
+            let new: Vec<i64> = new.iter().filter_map(Value::as_i64).collect();
+            match apply.unwrap_or(0) {
+                1 => tags.retain(|t| !new.contains(t)),
+                2 => tags = dedup(new),
+                _ => {
+                    for t in new {
+                        if !tags.contains(&t) {
+                            tags.push(t);
+                        }
+                    }
+                }
+            }
+        }
+        db.execute(
+            "UPDATE Authors SET Monitored = ?, MonitorNewItems = ?, QualityProfileId = ?, MetadataProfileId = ?, Path = ?, Tags = ? WHERE Id = ?",
+            vec![json!(monitored), json!(monitor_new), json!(quality), json!(metadata), json!(path), json!(json!(tags).to_string()), json!(a.i("Id"))],
+        )?;
+    }
+    let mut out = Vec::new();
+    for a in &found {
+        if let Some(row) = find(db, a.i("Id"))? {
+            out.push(resource(&row));
+        }
+    }
+    Ok((StatusCode::ACCEPTED, Json(Value::Array(out))))
+}
+
+/// The numbers once each, in their first order (a `HashSet<int>` of a few small numbers keeps that order).
+fn dedup(list: Vec<i64>) -> Vec<i64> {
+    let mut out = Vec::new();
+    for t in list {
+        if !out.contains(&t) {
+            out.push(t);
+        }
+    }
+    out
 }
 
 #[cfg(test)]

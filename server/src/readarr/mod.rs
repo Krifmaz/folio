@@ -18,6 +18,7 @@ pub mod editions;
 pub mod json;
 pub mod quality;
 pub mod series;
+pub mod validation;
 
 use crate::AppState;
 use axum::extract::FromRequestParts;
@@ -148,6 +149,14 @@ impl IntoResponse for Fail {
 
 /// What a Readarr route answers.
 pub type Answer<T = axum::Json<Value>> = Result<T, Fail>;
+
+/// A request's JSON body; Readarr's `Request body can't be empty` when there is none, 400 when it isn't JSON.
+pub fn body(bytes: &[u8]) -> Answer<Value> {
+    if bytes.iter().all(u8::is_ascii_whitespace) {
+        return Err(Fail::exception(500, "NzbDrone.Core.Exceptions.BadRequestException", "Request body can't be empty"));
+    }
+    serde_json::from_slice(bytes).map_err(|e| Fail::exception(400, "System.Text.Json.JsonException", e.to_string()))
+}
 
 /// `n` random bytes as lowercase hex (trace ids).
 fn hex(n: usize) -> String {

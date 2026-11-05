@@ -7,6 +7,13 @@
   ebooks in their folders, reads their tags, chapters, OPF, NFO, `desc.txt`, `reader.txt` and `metadata.json`
   files the original's way, and adds, updates or marks missing the books, authors and series. The parity recording
   now also keeps the original's ffprobe answers, so the test compares Folio's scan with the original's own rows.
+- Users, API keys and the sign-in settings work like Audiobookshelf's: admins add, change and remove users and
+  their permissions, make API keys that sign in as a user (with an expiry, turned on or off), and set the sign-in
+  message, sign-in methods and OpenID app addresses; everyone can change their own password, which signs them out
+  on their other devices. Each answer is checked against the original's own.
+- The Readarr API can change authors (folder, profiles, tags, monitoring, one at a time or several), books and
+  their editions (monitoring, "any edition"), and book files' quality, with Readarr's checks and answers (21 more
+  recorded answers).
 - Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
   with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
   original's way. The parity recording now also keeps the original's database rows, so these answers are checked

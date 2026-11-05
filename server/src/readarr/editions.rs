@@ -11,7 +11,7 @@ use crate::AppState;
 use axum::extract::{RawQuery, State};
 use axum::routing::get;
 use axum::{Json, Router};
-use kit_server_core::{Db, Row, RowExt};
+use kit_server_core::{Db, Row, RowExt, SqliteDb};
 use serde_json::{json, Value};
 
 /// The edition routes.
@@ -44,6 +44,44 @@ pub fn resource(e: &Row) -> Value {
         ("grabbed", json!(false)),
         ("id", json!(e.i("Id"))),
     ])
+}
+
+/// Writes an edition sent in a request over the stored one with its id (`EditionRepository.UpdateMany`: every
+/// field, as `EditionResource.ToModel` makes the model). An id Readarr doesn't have changes nothing.
+pub fn store(db: &SqliteDb, e: &Value) -> kit_server_core::Result<()> {
+    use super::json::{stored_date, stored_doc};
+    let text = |k: &str| e.get(k).filter(|v| v.is_string()).cloned().unwrap_or(Value::Null);
+    let flag = |k: &str| json!(e.get(k).and_then(Value::as_bool).unwrap_or(false));
+    let num = |k: &str| json!(e.get(k).and_then(Value::as_i64).unwrap_or(0));
+    let ratings = e.get("ratings").filter(|v| !v.is_null()).cloned().unwrap_or_else(|| json!({"votes": 0, "value": 0}));
+    db.execute(
+        "UPDATE Editions SET BookId = ?, ForeignEditionId = ?, Isbn13 = ?, Asin = ?, Title = ?, TitleSlug = ?, Language = ?,
+         Overview = ?, Format = ?, IsEbook = ?, Disambiguation = ?, Publisher = ?, PageCount = ?, ReleaseDate = ?, Images = ?,
+         Links = ?, Ratings = ?, Monitored = ?, ManualAdd = ? WHERE Id = ?",
+        vec![
+            num("bookId"),
+            text("foreignEditionId"),
+            text("isbn13"),
+            text("asin"),
+            text("title"),
+            text("titleSlug"),
+            text("language"),
+            text("overview"),
+            text("format"),
+            flag("isEbook"),
+            text("disambiguation"),
+            text("publisher"),
+            num("pageCount"),
+            stored_date(e.get("releaseDate")),
+            Value::String(e.get("images").filter(|v| v.is_array()).cloned().unwrap_or(json!([])).to_string()),
+            stored_doc(e.get("links")),
+            Value::String(ratings.to_string()),
+            flag("monitored"),
+            flag("manualAdd"),
+            num("id"),
+        ],
+    )?;
+    Ok(())
 }
 
 /// `GET /api/v1/edition`.

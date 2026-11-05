@@ -1,0 +1,36 @@
+{
+ "body": [
+  {
+   "bookId": 2,
+   "foreignEditionId": "1215958-e1",
+   "format": "Paperback",
+   "grabbed": false,
+   "id": 3,
+   "images": [],
+   "isEbook": false,
+   "isbn13": "9780062237378",
+   "language": "eng",
+   "links": [],
+   "manualAdd": false,
+   "monitored": true,
+   "overview": "Brutha and the tortoise.",
+   "pageCount": 400,
+   "publisher": "Harper",
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "2013-01-01T00:00:00Z",
+   "title": "Small Gods",
+   "titleSlug": "1215958-e1"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/edition?bookId=2"
+ },
+ "status": 200
+}
