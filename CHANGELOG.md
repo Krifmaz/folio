@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- Listening and reading on the server: each book's files are sent whole or in parts (so players can jump anywhere)
+  with an ETag; each person's place in each book and their bookmarks are kept, and the newest place wins across
+  devices (`/api/files`, `/api/progress`, `/api/editions/{id}/bookmarks`).
 - Android: Library page (search titles and authors, All, Audiobooks or Ebooks) and a book page with every exact
   edition and its facts: narrator, runtime, abridged or not, language, pages, ASIN or ISBN.
 - Verification before import: every download is checked against the edition you asked for. Audiobooks: runtime
@@ -12,6 +15,9 @@
   Downloads) is checked and ready to file; anything else waits under **Review**, with what was requested next to
   what arrived, the reason with Copy, and Accept, Reject or Reject and search again. A rejected download is
   never grabbed again for that book.
+- OPDS catalogue at `/opds` for e-readers and reading apps (KOReader, Moon+ Reader, Thorium …): new books,
+  audiobooks, ebooks, authors, series and search, with covers and every file to download. Sign in with your
+  Folio username and password. How to set each app up is in `docs/COMPAT.md`.
 - `docs/TRACKS.md`: the parallel tracks, the files each one owns, and the schema and playback API they share. The
   library keeps each book's files (`edition_files`), and the library folder is a setting (Settings → Downloads).
 - `docs/GOALS.md`: the goal, word for word.
