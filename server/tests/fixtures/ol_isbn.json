@@ -1,0 +1,14 @@
+{
+  "key": "/books/OL32362806M",
+  "title": "Project Hail Mary",
+  "authors": [{ "key": "/authors/OL7234434A" }],
+  "works": [{ "key": "/works/OL21745884W" }],
+  "publishers": ["Ballantine Books"],
+  "publish_date": "May 04, 2021",
+  "number_of_pages": 496,
+  "languages": [{ "key": "/languages/eng" }],
+  "isbn_13": ["9780593135204"],
+  "isbn_10": ["0593135202"],
+  "covers": [10521270],
+  "physical_format": "Hardcover"
+}

@@ -38,3 +38,75 @@ env = "APP_API_KEY"
 default = ""
 secret = true
 help = "The server's API key (`x-api-key`): signs in as the owner. Empty: no API key."
+
+[sections.metadata]
+title = "Metadata"
+
+[groups.audiobooks]
+section = "metadata"
+title = "Audiobooks"
+desc = "Audiobook editions come from Audnexus, by their Audible ASIN."
+
+[keys.audible_region]
+env = "APP_AUDIBLE_REGION"
+default = "us"
+group = "audiobooks"
+label = "Audible store"
+help = "The Audible store whose ASINs you add. Each store has its own ASINs and narrators."
+type = "select"
+options = [["us", "United States"], ["uk", "United Kingdom"], ["ca", "Canada"], ["au", "Australia"], ["de", "Germany"], ["fr", "France"], ["es", "Spain"], ["it", "Italy"], ["in", "India"], ["jp", "Japan"]]
+
+[keys.audnexus_url]
+env = "APP_AUDNEXUS_URL"
+default = "https://api.audnex.us"
+group = "audiobooks"
+label = "Audnexus address"
+type = "url"
+advanced = true
+
+[groups.ebooks]
+section = "metadata"
+title = "Ebooks"
+desc = "Ebook editions come from Open Library, Google Books and Hardcover, by their ISBN. Each fills what the others miss."
+
+[keys.hardcover_token]
+env = "APP_HARDCOVER_TOKEN"
+default = ""
+secret = true
+group = "ebooks"
+label = "Hardcover API token"
+help = "Optional. From hardcover.app → Settings → API. Without it, Hardcover is not asked."
+type = "password"
+
+[keys.google_books_key]
+env = "APP_GOOGLE_BOOKS_KEY"
+default = ""
+secret = true
+group = "ebooks"
+label = "Google Books API key"
+help = "Optional. Google Books answers without a key, but allows more lookups with one."
+type = "password"
+
+[keys.openlibrary_url]
+env = "APP_OPENLIBRARY_URL"
+default = "https://openlibrary.org"
+group = "ebooks"
+label = "Open Library address"
+type = "url"
+advanced = true
+
+[keys.googlebooks_url]
+env = "APP_GOOGLEBOOKS_URL"
+default = "https://www.googleapis.com/books/v1"
+group = "ebooks"
+label = "Google Books address"
+type = "url"
+advanced = true
+
+[keys.hardcover_url]
+env = "APP_HARDCOVER_URL"
+default = "https://api.hardcover.app/v1/graphql"
+group = "ebooks"
+label = "Hardcover address"
+type = "url"
+advanced = true

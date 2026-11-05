@@ -4,12 +4,15 @@
 //! | --- | --- |
 //! | everywhere | toasts with Copy, the details dialog, the data folder notice with Check again, the offline and connection banners, self-update after a new server build |
 //! | after signing in | the What's new popup, once per release |
-//! | `#/` | Home: the app's own start page (a bug report button to begin with) |
+//! | `#/` | the Library: every book, search, format filter, Add a book (ASIN or ISBN) |
+//! | `#/work?id=<id>` | one book with its exact editions |
+//! | `#/authors`, `#/series` | the authors; the series in reading order |
 //! | `#/bug-reports` | the account's bug reports and the New report sheet |
 //! | `#/settings?s=<page>` | the server settings form from the server's schema, Diagnostics and What's new |
 //!
-//! The app's own pages go next to [`Home`], one component each, with a link in [`Shell`].
+//! The app's own pages are in [`library`], one component each, with a link in [`Shell`].
 
+mod library;
 mod pages;
 
 use kit_leptos::api::{self, HttpBackend};
@@ -154,6 +157,7 @@ fn Shell(me: Value) -> impl IntoView {
     rt::on_window("hashchange", move |_| set_route.set(current_route()));
     let name = app_name();
     let username = me.get("username").and_then(Value::as_str).unwrap_or("").to_string();
+    let admin = me.get("is_admin").and_then(Value::as_bool) == Some(true);
     let role = match me.get("role").and_then(Value::as_str) {
         Some("owner") => "Owner",
         _ if me.get("is_admin").and_then(Value::as_bool) == Some(true) => "Admin",
@@ -172,7 +176,10 @@ fn Shell(me: Value) -> impl IntoView {
         match r.path.as_str() {
             "/bug-reports" => view! { <pages::BugReports/> }.into_any(),
             "/settings" => view! { <pages::Settings page=r.param("s")/> }.into_any(),
-            _ => view! { <pages::Home/> }.into_any(),
+            "/work" => view! { <library::Work id=r.param("id").parse().unwrap_or(0) admin=admin/> }.into_any(),
+            "/authors" => view! { <library::Authors/> }.into_any(),
+            "/series" => view! { <library::Series/> }.into_any(),
+            _ => view! { <library::Library admin=admin/> }.into_any(),
         }
     };
     view! {
@@ -180,7 +187,9 @@ fn Shell(me: Value) -> impl IntoView {
             <aside class="sidebar" id="sidebar">
                 <a class="brand" href="#/">{name}</a>
                 <nav class="nav">
-                    <NavLink href="/" label="Home" route=route/>
+                    <NavLink href="/" label="Library" route=route/>
+                    <NavLink href="/authors" label="Authors" route=route/>
+                    <NavLink href="/series" label="Series" route=route/>
                 </nav>
                 <nav class="nav nav-under">
                     <NavLink href="/bug-reports" label="Bug reports" route=route/>

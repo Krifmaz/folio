@@ -292,3 +292,13 @@ details.settings-card[open] .chev svg { transform: rotate(180deg); }
 }
 /* a card's advanced fields, folded under "Show advanced" (schema_form.rs) */
 details.adv-fields > summary { cursor: pointer; width: max-content; }
+/* ---------- library ---------- */
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px; }
+.book-tile { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 8px; border-radius: 12px; transition: background .15s; }
+.book-tile:hover { background: var(--panel-2); }
+.book-cover, .work-cover { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--border); margin-bottom: 8px; }
+.work-cover { width: 200px; flex: none; margin: 0; }
+.cover-blank { display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 750; color: var(--faint); }
+.book-title { font-weight: 650; }
+.work-blurb { color: var(--muted); margin: 14px 0 0; max-width: 70ch; }
+@media (max-width: 640px) { .book-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; } .work-cover { width: 140px; } }

@@ -1,4 +1,4 @@
-//! The app's pages: sign-in, Home, Bug reports and Settings (the server's settings form, Diagnostics and
+//! The app's pages: sign-in, Bug reports and Settings (the server's settings form, Diagnostics and
 //! What's new). Words and markup are the kit's, so the kit's stylesheet (static/css/app.css) draws them.
 
 use crate::{app_name, navigate};
@@ -86,24 +86,6 @@ fn new_report(from: &'static str) {
         o.on_sent = Some(Rc::new(|_| navigate("/bug-reports")));
         bug_report::open(o);
     });
-}
-
-/// Home: the app's own start page. Replace it with the app's first feature.
-#[component]
-pub fn Home() -> impl IntoView {
-    let name = app_name();
-    view! {
-        <section class="hero">
-            <h1>{name.clone()}</h1>
-            <p class="muted" style="margin:6px 0 0">{format!("{name} is ready. Its pages go here.")}</p>
-        </section>
-        <div class="row wrap mt" style="gap:8px">
-            <a class="btn" href="#/settings">"Settings"</a>
-            <a class="btn" href="#/settings?s=diagnostics">"Diagnostics"</a>
-            <a class="btn" href="#/settings?s=whats-new">"What's new"</a>
-            <button class="btn primary" on:click=|_| new_report("#/") inner_html=format!("{}New report", icon("bug"))></button>
-        </div>
-    }
 }
 
 /// One report of the list (title, author and replies).

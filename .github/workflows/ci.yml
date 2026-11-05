@@ -20,6 +20,7 @@ jobs:
     with:
       rust-dirs: server
       wasm-dirs: web
+      fmt: true
 
   docker:
     needs: test

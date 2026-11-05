@@ -1,0 +1,23 @@
+{
+  "data": {
+    "editions": [
+      {
+        "title": "Project Hail Mary",
+        "subtitle": null,
+        "pages": 496,
+        "release_date": "2021-05-04",
+        "isbn_13": "9780593135204",
+        "isbn_10": "0593135202",
+        "language": { "language": "English" },
+        "publisher": { "name": "Ballantine Books" },
+        "image": { "url": "https://assets.hardcover.app/edition/30397/cover.jpg" },
+        "book": {
+          "title": "Project Hail Mary",
+          "description": "Ryland Grace is the sole survivor on a desperate, last-chance mission.",
+          "contributions": [{ "author": { "name": "Andy Weir" } }],
+          "book_series": []
+        }
+      }
+    ]
+  }
+}
