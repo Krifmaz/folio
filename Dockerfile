@@ -32,6 +32,9 @@ RUN cd web && trunk build --release --locked \
       -o -name '*.webmanifest' -o -name '*.json' \) -exec brotli -f -k -q 11 {} + -exec gzip -f -k -n -9 {} + \
  && find dist -name '*.br' | grep -q . && find dist -name '*.gz' | grep -q .
 
+# ffmpeg and ffprobe, static builds (FOSS, LGPL/GPL) for checking and merging audiobooks; no shell needed.
+FROM mwader/static-ffmpeg:7.1.1 AS ffmpeg
+
 # Distroless: no shell, no package manager, only glibc and CA certificates. Runs as the image's non-root user
 # (65532) and writes only to /data, so it also runs with `docker run --read-only`.
 FROM gcr.io/distroless/cc-debian13:nonroot
@@ -41,9 +44,10 @@ LABEL org.opencontainers.image.title="Folio" \
 COPY --from=build /app /usr/local/bin/folio
 COPY --from=build --chown=65532:65532 /data /data
 COPY --from=ui /src/web/dist /app/static
+COPY --from=ffmpeg /ffmpeg /ffprobe /usr/local/bin/
 ARG APP_VERSION=
 LABEL org.opencontainers.image.version="${APP_VERSION}"
-ENV APP_DATA_DIR=/data APP_STATIC_DIR=/app/static APP_PORT=8080
+ENV APP_DATA_DIR=/data APP_STATIC_DIR=/app/static APP_PORT=8080 APP_FFPROBE=/usr/local/bin/ffprobe
 USER nonroot
 VOLUME /data
 EXPOSE 8080

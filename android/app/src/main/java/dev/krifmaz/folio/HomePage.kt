@@ -15,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -120,7 +121,10 @@ fun HomePage(app: App, base: String, bugs: BugReportsHost, open: (Page) -> Unit,
             SectionHead(KitApp.name, subtitle = base.substringAfter("://"), action = "Change server", onAction = onChangeServer)
 
             SectionHead("Books")
+            val playing by NowPlaying.book.collectAsState()
+            playing?.let { b -> EntryRow("Now playing", b.edition.title) { open(Page.Player(b.edition.id)) } }
             EntryRow("Library", "Every audiobook and ebook on the server") { open(Page.Library) }
+            EntryRow("Downloads", "Books on this phone, to listen to or read offline") { open(Page.Downloads) }
 
             SectionHead("Settings")
             EntryRow("What's new", "Every release's notes") { open(Page.Changelog) }
