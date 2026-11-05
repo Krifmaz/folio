@@ -10,6 +10,11 @@
   reader shows the book in pages in the app's colours, with its contents, text size, bookmarks and page turns by
   buttons, keys or a tap on the page's edge; the book's own scripts never run. Both keep your place on the server
   (every device carries on from it) and keep it in the browser until the server can be reached again.
+- KOReader progress sync at `/koreader`: KOReader's place is the book's place in Folio and back (to the
+  chapter), with a KOReader sync password of its own; books outside the library sync between KOReaders too.
+- OPDS catalogue at `/opds` for e-readers and reading apps (KOReader, Moon+ Reader, Thorium …): new books,
+  audiobooks, ebooks, authors, series and search, with covers and every file to download. Sign in with your
+  Folio username and password. How to set each app up is in `docs/COMPAT.md`.
 - Listening and reading on the server: each book's files are sent whole or in parts (so players can jump anywhere)
   with an ETag; each person's place in each book and their bookmarks are kept, and the newest place wins across
   devices (`/api/files`, `/api/progress`, `/api/editions/{id}/bookmarks`).

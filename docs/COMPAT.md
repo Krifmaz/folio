@@ -20,3 +20,21 @@ can resume (ranges).
 
 Written from the [OPDS 1.2 specification](https://specs.opds.io/opds-1.2) and Atom (RFC 4287), with
 [OpenSearch 1.1](https://github.com/dewitt/opensearch) for the search.
+
+## KOReader progress sync
+
+KOReader keeps its place in step with Folio: a page turned in KOReader is the book's place in Folio's web reader
+and the Android app, and a place reached there sends KOReader to the start of the same chapter.
+
+1. In Folio, open **Settings → Other apps** and set a **KOReader sync password** (at least 8 characters).
+   KOReader only ever sends a scrambled copy of a password, which Folio's own password can't be checked
+   against, so this one is separate.
+2. In KOReader, open a book, then **Tools → Progress sync → Custom sync server** and enter
+   `https://folio.example/koreader`.
+3. **Login** with your Folio username and the KOReader sync password. (Register is not needed: Folio makes the
+   accounts.)
+4. Set **Document matching method** to **Binary** (the default). Folio also knows books by their file name.
+
+Books KOReader opens that are not in Folio's library still sync between KOReader devices.
+
+Written from the API of [koreader-sync-server](https://github.com/koreader/koreader-sync-server) (version 1).

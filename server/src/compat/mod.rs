@@ -1,7 +1,9 @@
 //! Other apps' protocols, so the apps people already use work with Folio: an OPDS catalogue for e-readers
-//! ([`opds`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
+//! ([`opds`]) and a KOReader sync server ([`koreader`]). Each protocol reads the library through [`shelf`] as [`model::Item`]s. See docs/COMPAT.md for
 //! how to point each app at Folio.
 
+pub mod epub;
+pub mod koreader;
 pub mod model;
 pub mod opds;
 pub mod shelf;
@@ -17,19 +19,44 @@ use std::path::Path;
 use tower_http::services::ServeFile;
 
 /// The compatibility track's tables, step by step (a released step is never changed).
-pub const MIGRATIONS: Migrations = Migrations { component: "folio-compat", steps: &[] };
+pub const MIGRATIONS: Migrations = Migrations {
+    component: "folio-compat",
+    steps: &[
+        // 1: KOReader: each account's sync password (SHA-256 of KOReader's MD5 of it), KOReader's own places by
+        // its document name, and the MD5s KOReader names the library's ebook files by
+        "CREATE TABLE compat_koreader_keys (
+            user_id INTEGER PRIMARY KEY,
+            key_hash TEXT NOT NULL,
+            created_at REAL NOT NULL
+        );
+        CREATE TABLE compat_koreader_progress (
+            user_id INTEGER NOT NULL,
+            document TEXT NOT NULL,
+            progress TEXT NOT NULL DEFAULT '',
+            percentage REAL NOT NULL DEFAULT 0,
+            device TEXT NOT NULL DEFAULT '',
+            device_id TEXT NOT NULL DEFAULT '',
+            updated_at REAL NOT NULL,
+            PRIMARY KEY (user_id, document)
+        );
+        CREATE TABLE compat_file_digests (
+            file_id INTEGER PRIMARY KEY,
+            size INTEGER NOT NULL,
+            partial_md5 TEXT NOT NULL,
+            name_md5 TEXT NOT NULL
+        );
+        CREATE INDEX compat_file_digests_partial ON compat_file_digests (partial_md5);",
+    ],
+};
 
 /// Makes this part's tables (the steps not run yet).
 pub fn migrate(db: &SqliteDb) -> anyhow::Result<()> {
-    if MIGRATIONS.steps.is_empty() {
-        return Ok(());
-    }
     db.migrate(&MIGRATIONS).map_err(|e| anyhow::anyhow!("The tables for other apps can't be made: {}", e.detail))
 }
 
 /// This part's routes.
 pub fn router() -> Router<AppState> {
-    Router::new().merge(opds::router())
+    Router::new().merge(opds::router()).merge(koreader::router())
 }
 
 /// Now, in seconds since 1970.
