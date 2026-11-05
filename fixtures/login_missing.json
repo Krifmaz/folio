@@ -1,0 +1,12 @@
+{
+ "body": "Bad Request",
+ "content_type": "",
+ "request": {
+  "body": {
+   "username": "root"
+  },
+  "method": "POST",
+  "path": "/login"
+ },
+ "status": 400
+}

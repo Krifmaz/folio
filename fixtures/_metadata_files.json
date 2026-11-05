@@ -1,0 +1,111 @@
+{
+ "1dcd0b0f-4346-40ff-866d-9fe3323fe1c7": {
+  "abridged": false,
+  "asin": null,
+  "authors": [
+   "Martha Wells"
+  ],
+  "chapters": [],
+  "description": null,
+  "explicit": false,
+  "genres": [],
+  "isbn": null,
+  "language": "en",
+  "narrators": [],
+  "publishedDate": null,
+  "publishedYear": "2017",
+  "publisher": null,
+  "series": [
+   "The Murderbot Diaries #1"
+  ],
+  "subtitle": null,
+  "tags": [],
+  "title": "All Systems Red"
+ },
+ "1ec59dac-bbe4-4619-8875-3a418ea845d0": {
+  "abridged": false,
+  "asin": null,
+  "authors": [
+   "Becky Chambers"
+  ],
+  "chapters": [
+   {
+    "end": 15,
+    "id": 0,
+    "start": 0,
+    "title": "Part 1"
+   },
+   {
+    "end": 30,
+    "id": 1,
+    "start": 15,
+    "title": "Part 2"
+   },
+   {
+    "end": 45,
+    "id": 2,
+    "start": 30,
+    "title": "Part 3"
+   }
+  ],
+  "description": null,
+  "explicit": false,
+  "genres": [],
+  "isbn": null,
+  "language": null,
+  "narrators": [],
+  "publishedDate": null,
+  "publishedYear": null,
+  "publisher": null,
+  "series": [],
+  "subtitle": null,
+  "tags": [],
+  "title": "A Psalm for the Wild-Built"
+ },
+ "f77e631e-da99-44bb-8130-042bd925ddee": {
+  "abridged": false,
+  "asin": null,
+  "authors": [
+   "Ann Leckie"
+  ],
+  "chapters": [
+   {
+    "end": 20,
+    "id": 0,
+    "start": 0,
+    "title": "Chapter 1"
+   },
+   {
+    "end": 40,
+    "id": 1,
+    "start": 20,
+    "title": "Chapter 2"
+   },
+   {
+    "end": 60,
+    "id": 2,
+    "start": 40,
+    "title": "Chapter 3"
+   }
+  ],
+  "description": null,
+  "explicit": false,
+  "genres": [
+   "Science Fiction"
+  ],
+  "isbn": null,
+  "language": null,
+  "narrators": [
+   "Adjoa Andoh"
+  ],
+  "publishedDate": null,
+  "publishedYear": "2013",
+  "publisher": null,
+  "series": [
+   "Imperial Radch #1"
+  ],
+  "subtitle": null,
+  "tags": [],
+  "title": "Ancillary Justice"
+ }
+}

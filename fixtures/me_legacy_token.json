@@ -1,0 +1,41 @@
+{
+ "body": {
+  "bookmarks": [],
+  "createdAt": 1793917319073,
+  "email": null,
+  "hasOpenIDLink": false,
+  "id": "ce234ffb-8589-482f-b672-01b05a89f3d7",
+  "isActive": true,
+  "isLocked": false,
+  "isOldToken": true,
+  "itemTagsSelected": [],
+  "lastSeen": null,
+  "librariesAccessible": [],
+  "mediaProgress": [],
+  "permissions": {
+   "accessAllLibraries": true,
+   "accessAllTags": true,
+   "accessExplicitContent": true,
+   "createEreader": true,
+   "delete": true,
+   "download": true,
+   "selectedTagsNotAccessible": false,
+   "update": true,
+   "upload": true
+  },
+  "seriesHideFromContinueListening": [],
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZTIzNGZmYi04NTg5LTQ4MmYtYjY3Mi0wMWIwNWE4OWYzZDciLCJ1c2VybmFtZSI6InJvb3QiLCJpYXQiOjE3OTM5MTczMTl9.mCJ6wAoyOu0SzX2DhdJayJkBk-B7q3k0VrQiqGup7k4",
+  "type": "root",
+  "username": "root"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "headers": {
+   "Authorization": "Bearer {legacy_token}"
+  },
+  "method": "GET",
+  "path": "/api/me"
+ },
+ "status": 200
+}

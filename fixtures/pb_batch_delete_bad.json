@@ -1,0 +1,14 @@
+{
+ "body": "Invalid request body. \"sessions\" array of session id strings is required.",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "sessions": [
+    "nope"
+   ]
+  },
+  "method": "POST",
+  "path": "/api/sessions/batch/delete"
+ },
+ "status": 400
+}

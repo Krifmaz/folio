@@ -1,0 +1,57 @@
+{
+ "body": {
+  "createdAt": 1793917319135,
+  "displayOrder": 1,
+  "folders": [
+   {
+    "addedAt": 1793917319137,
+    "fullPath": "/media",
+    "id": "769a931c-ee68-4671-bb94-b0e702326658",
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1"
+   }
+  ],
+  "icon": "database",
+  "id": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+  "lastScan": null,
+  "lastUpdate": 1793917319135,
+  "mediaType": "book",
+  "name": "Books",
+  "provider": "google",
+  "settings": {
+   "audiobooksOnly": false,
+   "autoScanCronExpression": null,
+   "coverAspectRatio": 1,
+   "disableWatcher": false,
+   "epubsAllowScriptedContent": false,
+   "hideSingleBookSeries": false,
+   "markAsFinishedPercentComplete": null,
+   "markAsFinishedTimeRemaining": 10,
+   "metadataPrecedence": [
+    "folderStructure",
+    "audioMetatags",
+    "nfoFile",
+    "txtFiles",
+    "opfFile",
+    "absMetadata"
+   ],
+   "onlyShowLaterBooksInContinueSeries": false,
+   "skipMatchingMediaWithAsin": false,
+   "skipMatchingMediaWithIsbn": false
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "folders": [
+    {
+     "fullPath": "/media"
+    }
+   ],
+   "mediaType": "book",
+   "name": "Books"
+  },
+  "method": "POST",
+  "path": "/api/libraries"
+ },
+ "status": 200
+}

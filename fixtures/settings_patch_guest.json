@@ -1,0 +1,15 @@
+{
+ "body": "Forbidden",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "dateFormat": "x"
+  },
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "PATCH",
+  "path": "/api/settings"
+ },
+ "status": 403
+}

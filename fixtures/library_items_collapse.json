@@ -1,0 +1,192 @@
+{
+ "body": {
+  "collapseseries": true,
+  "include": "",
+  "limit": 0,
+  "mediaType": "book",
+  "minified": true,
+  "offset": 0,
+  "page": 0,
+  "results": [
+   {
+    "addedAt": 1793917319250,
+    "birthtimeMs": 1793917311762,
+    "ctimeMs": 1793917312037,
+    "folderId": "769a931c-ee68-4671-bb94-b0e702326658",
+    "id": "1ec59dac-bbe4-4619-8875-3a418ea845d0",
+    "ino": "9178126",
+    "isFile": false,
+    "isInvalid": false,
+    "isMissing": false,
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+    "media": {
+     "coverPath": null,
+     "duration": 45,
+     "id": "3706f2b7-c4c2-4cb6-937c-f4224a89007f",
+     "metadata": {
+      "abridged": false,
+      "asin": null,
+      "authorName": "Becky Chambers",
+      "authorNameLF": "Chambers, Becky",
+      "description": null,
+      "explicit": false,
+      "genres": [],
+      "isbn": null,
+      "language": null,
+      "narratorName": "",
+      "publishedDate": null,
+      "publishedYear": null,
+      "publisher": null,
+      "seriesName": "",
+      "subtitle": null,
+      "title": "A Psalm for the Wild-Built",
+      "titleIgnorePrefix": "Psalm for the Wild-Built, A"
+     },
+     "numAudioFiles": 3,
+     "numChapters": 3,
+     "numTracks": 3,
+     "size": 181530,
+     "tags": []
+    },
+    "mediaType": "book",
+    "mtimeMs": 1793917312037,
+    "numFiles": 3,
+    "oldLibraryItemId": null,
+    "path": "/media/Becky Chambers/A Psalm for the Wild-Built",
+    "relPath": "Becky Chambers/A Psalm for the Wild-Built",
+    "size": 181530,
+    "updatedAt": 1793917319250
+   },
+   {
+    "addedAt": 1793917319349,
+    "birthtimeMs": 1793917310689,
+    "collapsedSeries": {
+     "id": "63b83201-55bd-4c7e-8b0b-2eca757d2dd5",
+     "libraryItemIds": [
+      "f77e631e-da99-44bb-8130-042bd925ddee"
+     ],
+     "name": "Imperial Radch",
+     "nameIgnorePrefix": "Imperial Radch",
+     "numBooks": 1,
+     "sequence": "1"
+    },
+    "ctimeMs": 1793917311760,
+    "folderId": "769a931c-ee68-4671-bb94-b0e702326658",
+    "id": "f77e631e-da99-44bb-8130-042bd925ddee",
+    "ino": "9178125",
+    "isFile": false,
+    "isInvalid": false,
+    "isMissing": false,
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+    "media": {
+     "coverPath": null,
+     "duration": 60,
+     "id": "b1a4d36e-1b5e-4964-9bfe-41ef81f5aaf0",
+     "metadata": {
+      "abridged": false,
+      "asin": null,
+      "authorName": "Ann Leckie",
+      "authorNameLF": "Leckie, Ann",
+      "description": null,
+      "explicit": false,
+      "genres": [
+       "Science Fiction"
+      ],
+      "isbn": null,
+      "language": null,
+      "narratorName": "Adjoa Andoh",
+      "publishedDate": null,
+      "publishedYear": "2013",
+      "publisher": null,
+      "seriesName": "Imperial Radch #1",
+      "subtitle": null,
+      "title": "Ancillary Justice",
+      "titleIgnorePrefix": "Ancillary Justice"
+     },
+     "numAudioFiles": 1,
+     "numChapters": 3,
+     "numTracks": 1,
+     "size": 256184,
+     "tags": []
+    },
+    "mediaType": "book",
+    "mtimeMs": 1793917311760,
+    "numFiles": 1,
+    "oldLibraryItemId": null,
+    "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+    "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+    "size": 256184,
+    "updatedAt": 1793917319349
+   },
+   {
+    "addedAt": 1793917319286,
+    "birthtimeMs": 1793917312115,
+    "collapsedSeries": {
+     "id": "e588abd0-95e8-4244-ad76-aa1a966d495a",
+     "libraryItemIds": [
+      "1dcd0b0f-4346-40ff-866d-9fe3323fe1c7"
+     ],
+     "name": "The Murderbot Diaries",
+     "nameIgnorePrefix": "Murderbot Diaries",
+     "numBooks": 1,
+     "sequence": "1"
+    },
+    "ctimeMs": 1793917312141,
+    "folderId": "769a931c-ee68-4671-bb94-b0e702326658",
+    "id": "1dcd0b0f-4346-40ff-866d-9fe3323fe1c7",
+    "ino": "9178132",
+    "isFile": false,
+    "isInvalid": false,
+    "isMissing": false,
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+    "media": {
+     "coverPath": null,
+     "duration": 0,
+     "ebookFormat": "epub",
+     "id": "88f7e7bb-1ef7-4a10-aa35-b74bb24089f4",
+     "metadata": {
+      "abridged": false,
+      "asin": null,
+      "authorName": "Martha Wells",
+      "authorNameLF": "Wells, Martha",
+      "description": null,
+      "explicit": false,
+      "genres": [],
+      "isbn": null,
+      "language": "en",
+      "narratorName": "",
+      "publishedDate": null,
+      "publishedYear": "2017",
+      "publisher": null,
+      "seriesName": "The Murderbot Diaries #1",
+      "subtitle": null,
+      "title": "All Systems Red",
+      "titleIgnorePrefix": "All Systems Red"
+     },
+     "numAudioFiles": 0,
+     "numChapters": 0,
+     "numTracks": 0,
+     "size": 1311,
+     "tags": []
+    },
+    "mediaType": "book",
+    "mtimeMs": 1793917312141,
+    "numFiles": 1,
+    "oldLibraryItemId": null,
+    "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+    "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+    "size": 1311,
+    "updatedAt": 1793917319286
+   }
+  ],
+  "sortDesc": false,
+  "total": 3
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/items?collapseseries=1&minified=1"
+ },
+ "status": 200
+}

@@ -1,0 +1,267 @@
+{
+ "body": {
+  "dayOfWeek": {
+   "Thursday": 15,
+   "Tuesday": 12.5
+  },
+  "days": {
+   "2023-11-14": 12.5,
+   "2026-11-05": 15
+  },
+  "items": {
+   "1dcd0b0f-4346-40ff-866d-9fe3323fe1c7": {
+    "id": "1dcd0b0f-4346-40ff-866d-9fe3323fe1c7",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "6e223ec0-64ef-4ef6-b139-fb0eb80bbe7d",
+       "name": "Martha Wells"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": "en",
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": "2017",
+     "publisher": null,
+     "series": [
+      {
+       "id": "e588abd0-95e8-4244-ad76-aa1a966d495a",
+       "name": "The Murderbot Diaries",
+       "sequence": "1"
+      }
+     ],
+     "subtitle": null,
+     "title": "All Systems Red"
+    },
+    "timeListening": 4.5
+   },
+   "1ec59dac-bbe4-4619-8875-3a418ea845d0": {
+    "id": "1ec59dac-bbe4-4619-8875-3a418ea845d0",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "21999b8b-b4f9-4312-bb97-e0a2d22b1008",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "timeListening": 23
+   }
+  },
+  "recentSessions": [
+   {
+    "bookId": "3706f2b7-c4c2-4cb6-937c-f4224a89007f",
+    "chapters": [],
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-05",
+    "dayOfWeek": "Thursday",
+    "deviceInfo": {
+     "browserName": "Firefox",
+     "browserVersion": "132.0",
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "Linux x86_64 Firefox",
+     "id": "a3e41e34-d628-4fe1-aeeb-9f98ca16b36e",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "osName": "Linux",
+     "osVersion": "x86_64",
+     "sdkVersion": "",
+     "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "da7a85ea-e65d-44c2-8269-d9b4bbd45579",
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+    "libraryItemId": "1ec59dac-bbe4-4619-8875-3a418ea845d0",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "21999b8b-b4f9-4312-bb97-e0a2d22b1008",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "startTime": 30,
+    "startedAt": 1793917323666,
+    "timeListening": 15,
+    "updatedAt": 1793917323685,
+    "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+   },
+   {
+    "bookId": "3706f2b7-c4c2-4cb6-937c-f4224a89007f",
+    "chapters": [],
+    "coverPath": null,
+    "currentTime": 7,
+    "date": "2023-11-14",
+    "dayOfWeek": "Tuesday",
+    "deviceInfo": {
+     "clientName": "Abs Android",
+     "clientVersion": "0.9.81-beta",
+     "deviceId": "parity-2",
+     "deviceName": "Google Pixel 8",
+     "id": "f9b71e90-c96d-4bd7-b2c7-eac40ee7359e",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "Google",
+     "model": "Pixel 8",
+     "sdkVersion": "34",
+     "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "6c1f8d0e-3a52-4b7e-9d1a-2f4e5b6c7d80",
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+    "libraryItemId": "1ec59dac-bbe4-4619-8875-3a418ea845d0",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "21999b8b-b4f9-4312-bb97-e0a2d22b1008",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "exo-player",
+    "mediaType": "book",
+    "playMethod": 3,
+    "serverVersion": "2.37.2",
+    "startTime": 0,
+    "startedAt": 1699999940000,
+    "timeListening": 8,
+    "updatedAt": 1700000100000,
+    "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+   },
+   {
+    "bookId": "88f7e7bb-1ef7-4a10-aa35-b74bb24089f4",
+    "chapters": [],
+    "coverPath": null,
+    "currentTime": 3,
+    "date": "2023-11-14",
+    "dayOfWeek": "Tuesday",
+    "deviceInfo": {
+     "clientName": "Abs Android",
+     "clientVersion": "0.9.81-beta",
+     "deviceId": "parity-2",
+     "deviceName": "Google Pixel 8",
+     "id": "f9b71e90-c96d-4bd7-b2c7-eac40ee7359e",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "Google",
+     "model": "Pixel 8",
+     "sdkVersion": "34",
+     "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+    },
+    "displayAuthor": "Martha Wells",
+    "displayTitle": "All Systems Red",
+    "duration": 0,
+    "episodeId": null,
+    "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+    "libraryItemId": "1dcd0b0f-4346-40ff-866d-9fe3323fe1c7",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "6e223ec0-64ef-4ef6-b139-fb0eb80bbe7d",
+       "name": "Martha Wells"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": "en",
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": "2017",
+     "publisher": null,
+     "series": [
+      {
+       "id": "e588abd0-95e8-4244-ad76-aa1a966d495a",
+       "name": "The Murderbot Diaries",
+       "sequence": "1"
+      }
+     ],
+     "subtitle": null,
+     "title": "All Systems Red"
+    },
+    "mediaPlayer": "exo-player",
+    "mediaType": "book",
+    "playMethod": 3,
+    "serverVersion": "2.37.2",
+    "startTime": 0,
+    "startedAt": 1699999990000,
+    "timeListening": 4.5,
+    "updatedAt": 1700000050000,
+    "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+   }
+  ],
+  "today": 15,
+  "totalTime": 27.5
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/listening-stats"
+ },
+ "status": 200
+}

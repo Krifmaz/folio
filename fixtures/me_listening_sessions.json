@@ -1,0 +1,16 @@
+{
+ "body": {
+  "itemsPerPage": 10,
+  "numPages": 0,
+  "page": 0,
+  "sessions": [],
+  "total": 0
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/listening-sessions"
+ },
+ "status": 200
+}

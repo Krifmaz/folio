@@ -1,0 +1,75 @@
+{
+ "body": {
+  "itemsPerPage": 10,
+  "numPages": 1,
+  "page": 0,
+  "sessions": [
+   {
+    "bookId": "3706f2b7-c4c2-4cb6-937c-f4224a89007f",
+    "chapters": [],
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-05",
+    "dayOfWeek": "Thursday",
+    "deviceInfo": {
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "",
+     "id": "a3e41e34-d628-4fe1-aeeb-9f98ca16b36e",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "sdkVersion": "",
+     "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "da7a85ea-e65d-44c2-8269-d9b4bbd45579",
+    "libraryId": "e555f0f1-0fcf-426a-b1c8-22c578d9f8e1",
+    "libraryItemId": "1ec59dac-bbe4-4619-8875-3a418ea845d0",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "21999b8b-b4f9-4312-bb97-e0a2d22b1008",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "startTime": 30,
+    "startedAt": 1793917323666,
+    "timeListening": 15,
+    "updatedAt": 1793917323685,
+    "userId": "ce234ffb-8589-482f-b672-01b05a89f3d7"
+   }
+  ],
+  "total": 1
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/item/listening-sessions/{item}"
+ },
+ "status": 200
+}
