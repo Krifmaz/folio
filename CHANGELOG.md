@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
+  with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
+  original's way. The parity recording now also keeps the original's database rows, so these answers are checked
+  against the original's own on the same data. The recording is also pushed to a side branch `parity/<branch>`.
 - Listening and reading progress and bookmarks work like Audiobookshelf's (`/api/me/progress`, `/api/me/bookmarks`,
   `/api/me/item/:id/bookmark`): set from any app, finished near the end, synced from phones with their own times,
   hidden from Continue Listening, and told to your other apps as they change.

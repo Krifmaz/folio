@@ -509,5 +509,160 @@
  {
   "name": "not_found",
   "path": "/api/does-not-exist"
+ },
+ {
+  "name": "lib_libraries",
+  "path": "/api/libraries"
+ },
+ {
+  "name": "lib_libraries_stats",
+  "path": "/api/libraries?include=stats"
+ },
+ {
+  "name": "lib_library",
+  "path": "/api/libraries/{library}"
+ },
+ {
+  "name": "lib_library_filterdata",
+  "path": "/api/libraries/{library}?include=filterdata",
+  "save": {
+   "lseries": "filterdata.series.0.id"
+  }
+ },
+ {
+  "name": "lib_library_missing",
+  "path": "/api/libraries/00000000-0000-4000-8000-000000000000"
+ },
+ {
+  "name": "lib_items_plain",
+  "path": "/api/libraries/{library}/items"
+ },
+ {
+  "name": "lib_items_title",
+  "path": "/api/libraries/{library}/items?minified=1&sort=media.metadata.title"
+ },
+ {
+  "name": "lib_items_title_page",
+  "path": "/api/libraries/{library}/items?minified=1&sort=media.metadata.title&desc=1&limit=1&page=1"
+ },
+ {
+  "name": "lib_items_added",
+  "path": "/api/libraries/{library}/items?minified=1&sort=addedAt&desc=1"
+ },
+ {
+  "name": "lib_items_author_lf",
+  "path": "/api/libraries/{library}/items?minified=1&sort=media.metadata.authorNameLF"
+ },
+ {
+  "name": "lib_items_author_desc",
+  "path": "/api/libraries/{library}/items?minified=1&sort=media.metadata.authorName&desc=1"
+ },
+ {
+  "name": "lib_items_year",
+  "path": "/api/libraries/{library}/items?minified=1&sort=media.metadata.publishedYear"
+ },
+ {
+  "name": "lib_items_duration",
+  "path": "/api/libraries/{library}/items?minified=1&sort=media.duration&desc=1"
+ },
+ {
+  "name": "lib_items_size",
+  "path": "/api/libraries/{library}/items?minified=1&sort=size"
+ },
+ {
+  "name": "lib_items_progress_sort",
+  "path": "/api/libraries/{library}/items?minified=1&sort=progress&desc=1"
+ },
+ {
+  "name": "lib_items_collapse",
+  "path": "/api/libraries/{library}/items?minified=1&collapseseries=1&sort=media.metadata.title"
+ },
+ {
+  "name": "lib_items_genre",
+  "path": "/api/libraries/{library}/items?minified=1&filter=genres.U2NpZW5jZSBGaWN0aW9u"
+ },
+ {
+  "name": "lib_items_narrator",
+  "path": "/api/libraries/{library}/items?minified=1&filter=narrators.QWRqb2EgQW5kb2g%3D"
+ },
+ {
+  "name": "lib_items_author",
+  "path": "/api/libraries/{library}/items?minified=1&filter=authors.{b64:author}"
+ },
+ {
+  "name": "lib_items_series",
+  "path": "/api/libraries/{library}/items?minified=1&filter=series.{b64:lseries}&sort=sequence"
+ },
+ {
+  "name": "lib_items_no_series",
+  "path": "/api/libraries/{library}/items?minified=1&filter=series.bm8tc2VyaWVz"
+ },
+ {
+  "name": "lib_items_in_progress",
+  "path": "/api/libraries/{library}/items?minified=1&filter=progress.aW4tcHJvZ3Jlc3M%3D"
+ },
+ {
+  "name": "lib_items_not_started",
+  "path": "/api/libraries/{library}/items?minified=1&filter=progress.bm90LXN0YXJ0ZWQ%3D"
+ },
+ {
+  "name": "lib_items_finished",
+  "path": "/api/libraries/{library}/items?minified=1&filter=progress.ZmluaXNoZWQ%3D"
+ },
+ {
+  "name": "lib_items_missing_isbn",
+  "path": "/api/libraries/{library}/items?minified=1&filter=missing.aXNibg%3D%3D"
+ },
+ {
+  "name": "lib_items_missing_cover",
+  "path": "/api/libraries/{library}/items?minified=1&filter=missing.Y292ZXI%3D"
+ },
+ {
+  "name": "lib_items_tracks_multi",
+  "path": "/api/libraries/{library}/items?minified=1&filter=tracks.bXVsdGk%3D"
+ },
+ {
+  "name": "lib_items_ebook",
+  "path": "/api/libraries/{library}/items?minified=1&filter=ebooks.ZWJvb2s%3D"
+ },
+ {
+  "name": "lib_items_issues",
+  "path": "/api/libraries/{library}/items?minified=1&filter=issues"
+ },
+ {
+  "name": "lib_items_decade",
+  "path": "/api/libraries/{library}/items?minified=1&filter=publishedDecades.MjAxMA%3D%3D"
+ },
+ {
+  "name": "lib_items_language",
+  "path": "/api/libraries/{library}/items?minified=1&filter=languages.ZW4%3D"
+ },
+ {
+  "name": "lib_items_bad_limit",
+  "path": "/api/libraries/{library}/items?limit=-1"
+ },
+ {
+  "name": "lib_items_bad_page",
+  "path": "/api/libraries/{library}/items?page=1.5"
+ },
+ {
+  "name": "lib_item",
+  "path": "/api/items/{item}"
+ },
+ {
+  "name": "lib_item_expanded_progress",
+  "path": "/api/items/{item}?expanded=1&include=progress"
+ },
+ {
+  "name": "lib_item2_expanded",
+  "path": "/api/items/{item2}?expanded=1"
+ },
+ {
+  "name": "lib_item3_expanded",
+  "path": "/api/items/{item3}?expanded=1"
+ },
+ {
+  "name": "lib_item_missing",
+  "path": "/api/items/00000000-0000-4000-8000-000000000000"
  }
 ]
