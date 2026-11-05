@@ -442,6 +442,320 @@
   }
  },
  {
+  "name": "pb_me",
+  "path": "/api/me",
+  "save": {
+   "userid": "id"
+  }
+ },
+ {
+  "name": "pb_sessions",
+  "path": "/api/sessions"
+ },
+ {
+  "name": "pb_me_listening_sessions",
+  "path": "/api/me/listening-sessions"
+ },
+ {
+  "name": "pb_me_listening_stats",
+  "path": "/api/me/listening-stats"
+ },
+ {
+  "name": "pb_me_item_listening_sessions",
+  "path": "/api/me/item/listening-sessions/{item}"
+ },
+ {
+  "name": "pb_me_item_listening_missing",
+  "path": "/api/me/item/listening-sessions/00000000-0000-4000-8000-000000000000"
+ },
+ {
+  "name": "pb_user_listening_sessions",
+  "path": "/api/users/{userid}/listening-sessions"
+ },
+ {
+  "name": "pb_user_listening_stats",
+  "path": "/api/users/{userid}/listening-stats"
+ },
+ {
+  "name": "pb_user_listening_missing",
+  "path": "/api/users/00000000-0000-4000-8000-000000000000/listening-sessions"
+ },
+ {
+  "name": "pb_closed_get",
+  "path": "/api/session/{session}"
+ },
+ {
+  "name": "pb_closed_sync",
+  "method": "POST",
+  "path": "/api/session/{session}/sync",
+  "body": {
+   "currentTime": 1,
+   "timeListened": 1
+  }
+ },
+ {
+  "name": "pb_play_firefox",
+  "method": "POST",
+  "path": "/api/items/{item}/play",
+  "headers": {
+   "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:132.0) Gecko/20100101 Firefox/132.0"
+  },
+  "body": {
+   "deviceInfo": {
+    "clientName": "parity",
+    "deviceId": "parity-1"
+   },
+   "mediaPlayer": "html5",
+   "supportedMimeTypes": [
+    "audio/mpeg"
+   ]
+  },
+  "save": {
+   "session2": "id"
+  }
+ },
+ {
+  "name": "pb_open_get",
+  "path": "/api/session/{session2}"
+ },
+ {
+  "name": "pb_sessions_open",
+  "path": "/api/sessions/open"
+ },
+ {
+  "name": "pb_play_chrome",
+  "method": "POST",
+  "path": "/api/items/{item2}/play",
+  "headers": {
+   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+  },
+  "body": {
+   "deviceInfo": {
+    "deviceId": "parity-1"
+   },
+   "forceDirectPlay": true
+  },
+  "save": {
+   "session3": "id"
+  }
+ },
+ {
+  "name": "pb_sessions_open_replaced",
+  "path": "/api/sessions/open"
+ },
+ {
+  "name": "pb_replaced_get",
+  "path": "/api/session/{session2}"
+ },
+ {
+  "name": "pb_close_empty",
+  "method": "POST",
+  "path": "/api/session/{session3}/close"
+ },
+ {
+  "name": "pb_local",
+  "method": "POST",
+  "path": "/api/session/local",
+  "body": {
+   "id": "6c1f8d0e-3a52-4b7e-9d1a-2f4e5b6c7d80",
+   "libraryItemId": "{item}",
+   "displayTitle": "",
+   "displayAuthor": "",
+   "currentTime": 5,
+   "timeListening": 5,
+   "startTime": 0,
+   "startedAt": 1699999940000,
+   "updatedAt": 1700000000000,
+   "mediaPlayer": "exo-player",
+   "playMethod": 3,
+   "mediaType": "book",
+   "deviceInfo": {
+    "deviceId": "parity-2",
+    "manufacturer": "Google",
+    "model": "Pixel 8",
+    "sdkVersion": 34,
+    "clientVersion": "0.9.81-beta"
+   }
+  }
+ },
+ {
+  "name": "pb_local_missing",
+  "method": "POST",
+  "path": "/api/session/local",
+  "body": {
+   "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+   "libraryItemId": "00000000-0000-4000-8000-000000000000",
+   "displayTitle": "",
+   "displayAuthor": "",
+   "currentTime": 5,
+   "timeListening": 5,
+   "startTime": 0,
+   "startedAt": 1699999940000,
+   "updatedAt": 1700000000000,
+   "mediaPlayer": "exo-player",
+   "playMethod": 3,
+   "mediaType": "book",
+   "deviceInfo": {
+    "deviceId": "parity-2",
+    "manufacturer": "Google",
+    "model": "Pixel 8",
+    "sdkVersion": 34,
+    "clientVersion": "0.9.81-beta"
+   }
+  }
+ },
+ {
+  "name": "pb_local_all",
+  "method": "POST",
+  "path": "/api/session/local-all",
+  "body": {
+   "deviceInfo": {
+    "deviceId": "parity-2",
+    "manufacturer": "Google",
+    "model": "Pixel 8",
+    "sdkVersion": 34,
+    "clientVersion": "0.9.81-beta"
+   },
+   "sessions": [
+    {
+     "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+     "libraryItemId": "{item2}",
+     "displayTitle": "",
+     "displayAuthor": "",
+     "currentTime": 3,
+     "timeListening": 4.5,
+     "startTime": 0,
+     "startedAt": 1699999990000,
+     "updatedAt": 1700000050000,
+     "mediaPlayer": "exo-player",
+     "playMethod": 3,
+     "mediaType": "book",
+     "deviceInfo": {
+      "deviceId": "parity-2",
+      "manufacturer": "Google",
+      "model": "Pixel 8",
+      "sdkVersion": 34,
+      "clientVersion": "0.9.81-beta"
+     }
+    },
+    {
+     "id": "play_local_parity",
+     "libraryItemId": "00000000-0000-4000-8000-000000000000",
+     "displayTitle": "",
+     "displayAuthor": "",
+     "currentTime": 1,
+     "timeListening": 1,
+     "startTime": 0,
+     "startedAt": 1700000000000,
+     "updatedAt": 1700000060000,
+     "mediaPlayer": "exo-player",
+     "playMethod": 3,
+     "mediaType": "book",
+     "deviceInfo": {
+      "deviceId": "parity-2",
+      "manufacturer": "Google",
+      "model": "Pixel 8",
+      "sdkVersion": 34,
+      "clientVersion": "0.9.81-beta"
+     }
+    }
+   ]
+  }
+ },
+ {
+  "name": "pb_local_again",
+  "method": "POST",
+  "path": "/api/session/local",
+  "body": {
+   "id": "6c1f8d0e-3a52-4b7e-9d1a-2f4e5b6c7d80",
+   "libraryItemId": "{item}",
+   "displayTitle": "",
+   "displayAuthor": "",
+   "currentTime": 7,
+   "timeListening": 8,
+   "startTime": 0,
+   "startedAt": 1700000040000,
+   "updatedAt": 1700000100000,
+   "mediaPlayer": "exo-player",
+   "playMethod": 3,
+   "mediaType": "book",
+   "deviceInfo": {
+    "deviceId": "parity-2",
+    "manufacturer": "Google",
+    "model": "Pixel 8",
+    "sdkVersion": 34,
+    "clientVersion": "0.9.81-beta"
+   }
+  }
+ },
+ {
+  "name": "pb_sessions_sorted",
+  "path": "/api/sessions?sort=timeListening&desc=1"
+ },
+ {
+  "name": "pb_sessions_paged",
+  "path": "/api/sessions?itemsPerPage=2&page=1&sort=nope"
+ },
+ {
+  "name": "pb_sessions_user",
+  "path": "/api/sessions?user={userid}&itemsPerPage=1"
+ },
+ {
+  "name": "pb_me_listening_sessions_paged",
+  "path": "/api/me/listening-sessions?itemsPerPage=2&page=1"
+ },
+ {
+  "name": "pb_me_listening_stats_after",
+  "path": "/api/me/listening-stats"
+ },
+ {
+  "name": "pb_delete",
+  "method": "DELETE",
+  "path": "/api/sessions/{session}"
+ },
+ {
+  "name": "pb_delete_missing",
+  "method": "DELETE",
+  "path": "/api/sessions/{session}"
+ },
+ {
+  "name": "pb_batch_delete_bad",
+  "method": "POST",
+  "path": "/api/sessions/batch/delete",
+  "body": {
+   "sessions": [
+    "nope"
+   ]
+  }
+ },
+ {
+  "name": "pb_batch_delete",
+  "method": "POST",
+  "path": "/api/sessions/batch/delete",
+  "body": {
+   "sessions": [
+    "6c1f8d0e-3a52-4b7e-9d1a-2f4e5b6c7d80",
+    "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91"
+   ]
+  }
+ },
+ {
+  "name": "pb_sessions_final",
+  "path": "/api/sessions"
+ },
+ {
+  "name": "pb_play_missing",
+  "method": "POST",
+  "path": "/api/items/00000000-0000-4000-8000-000000000000/play",
+  "body": {}
+ },
+ {
+  "name": "pb_play_episode_of_book",
+  "method": "POST",
+  "path": "/api/items/{item}/play/abc",
+  "body": {}
+ },
+ {
   "name": "session",
   "path": "/api/sessions/{session}"
  },
@@ -509,6 +823,32 @@
  {
   "name": "not_found",
   "path": "/api/does-not-exist"
+ },
+ {
+  "name": "shelf_items",
+  "path": "/api/libraries/{library}/items?sort=media.metadata.title",
+  "save": {
+   "shelf_psalm": "results.0.id",
+   "shelf_asr": "results.1.id",
+   "shelf_aj": "results.2.id"
+  }
+ },
+ {
+  "name": "shelf_finish",
+  "path": "/api/me/progress/{shelf_aj}",
+  "method": "PATCH",
+  "body": {
+   "isFinished": true
+  }
+ },
+ {
+  "name": "shelf_read",
+  "path": "/api/me/progress/{shelf_asr}",
+  "method": "PATCH",
+  "body": {
+   "ebookProgress": 0.25,
+   "ebookLocation": "epubcfi(/6/2!/4/1:0)"
+  }
  },
  {
   "name": "lib_libraries",
@@ -1086,5 +1426,13 @@
  {
   "name": "users_list_after",
   "path": "/api/users"
+ },
+ {
+  "name": "lib_personalized",
+  "path": "/api/libraries/{library}/personalized"
+ },
+ {
+  "name": "lib_personalized_limit",
+  "path": "/api/libraries/{library}/personalized?limit=1&include=rssfeed"
  }
 ]
