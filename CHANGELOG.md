@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Migration API (`/api/migrate/*`, admins): check a source with a dry run (what is in Folio already, what would be
+  added, whose places have an account to go to, what needs you and why), then bring it in. Exact editions by ASIN or
+  ISBN only, never guessed; the wanted list; everyone's places and bookmarks (an older place never replaces a newer
+  one); migrated books' files wait for the import. Running it again adds nothing twice.
 - Listening and reading on the server: each book's files are sent whole or in parts (so players can jump anywhere)
   with an ETag; each person's place in each book and their bookmarks are kept, and the newest place wins across
   devices (`/api/files`, `/api/progress`, `/api/editions/{id}/bookmarks`).
