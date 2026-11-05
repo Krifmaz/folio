@@ -1,0 +1,231 @@
+{
+ "files": [
+  "Terry Pratchett/",
+  "Terry Pratchett/Guards! Guards! (1989)/",
+  "Terry Pratchett/Small Gods (1992)/",
+  "Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub",
+  "Unsorted/"
+ ],
+ "tables": {
+  "AuthorMetadata": [
+   {
+    "Aliases": "[]",
+    "Born": "1948-04-28 00:00:00Z",
+    "Died": "2015-03-12 00:00:00Z",
+    "Disambiguation": null,
+    "ForeignAuthorId": "1654",
+    "Gender": "male",
+    "Genres": "[\"fantasy\",\"humor\"]",
+    "Hometown": "Beaconsfield",
+    "Id": 1,
+    "Images": "[{\"url\":\"https://images.gr-assets.com/authors/1235562205p7/1654.jpg\",\"coverType\":\"poster\",\"extension\":\".jpg\"}]",
+    "Links": "[{\"url\":\"https://www.goodreads.com/author/show/1654.Terry_Pratchett\",\"name\":\"Goodreads\"}]",
+    "Name": "Terry Pratchett",
+    "NameLastFirst": "Pratchett, Terry",
+    "Overview": "Sir Terry Pratchett wrote the Discworld novels.",
+    "Ratings": "{\"votes\":1500000,\"value\":4.13}",
+    "SortName": "terry pratchett",
+    "SortNameLastFirst": "pratchett, terry",
+    "Status": 1,
+    "TitleSlug": "1654"
+   },
+   {
+    "Aliases": "[]",
+    "Born": "1929-10-21 00:00:00Z",
+    "Died": null,
+    "Disambiguation": null,
+    "ForeignAuthorId": "874602",
+    "Gender": null,
+    "Genres": "[]",
+    "Hometown": null,
+    "Id": 2,
+    "Images": "[]",
+    "Links": "[]",
+    "Name": "Ursula K. Le Guin",
+    "NameLastFirst": "Le Guin, Ursula K.",
+    "Overview": "Ursula Kroeber Le Guin wrote Earthsea.",
+    "Ratings": "{\"votes\":0,\"value\":0}",
+    "SortName": "ursula k. le guin",
+    "SortNameLastFirst": "le guin, ursula k.",
+    "Status": 0,
+    "TitleSlug": "874602"
+   }
+  ],
+  "Authors": [
+   {
+    "AddOptions": "{\n  \"searchForMissingBooks\": false,\n  \"monitor\": \"all\",\n  \"booksToMonitor\": [],\n  \"monitored\": true\n}",
+    "Added": "2025-05-01 09:30:00Z",
+    "AuthorMetadataId": 1,
+    "CleanName": "terrypratchett",
+    "Id": 1,
+    "LastInfoSync": "2025-06-01 10:00:00Z",
+    "MetadataProfileId": 1,
+    "MonitorNewItems": 0,
+    "Monitored": 0,
+    "Path": "/books/Terry Pratchett",
+    "QualityProfileId": 1,
+    "Tags": "[]"
+   }
+  ],
+  "BookFiles": [
+   {
+    "CalibreId": 0,
+    "DateAdded": "2025-05-05 12:00:00Z",
+    "EditionId": 3,
+    "Id": 3,
+    "IndexerFlags": 0,
+    "MediaInfo": null,
+    "Modified": "2025-05-05 11:00:00Z",
+    "OriginalFilePath": null,
+    "Part": 1,
+    "Path": "/books/Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub",
+    "Quality": "{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}",
+    "ReleaseGroup": "GRP",
+    "SceneName": null,
+    "Size": 512
+   },
+   {
+    "CalibreId": 0,
+    "DateAdded": "2025-05-06 12:00:00Z",
+    "EditionId": 5,
+    "Id": 4,
+    "IndexerFlags": 0,
+    "MediaInfo": null,
+    "Modified": "2025-05-06 11:00:00Z",
+    "OriginalFilePath": null,
+    "Part": 1,
+    "Path": "/books/Ursula K. Le Guin/A Wizard of Earthsea (1968)/A Wizard of Earthsea - Ursula K. Le Guin.epub",
+    "Quality": "{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}",
+    "ReleaseGroup": null,
+    "SceneName": null,
+    "Size": 256
+   }
+  ],
+  "Books": [
+   {
+    "AddOptions": "{\n  \"addType\": \"automatic\",\n  \"searchForNewBook\": false\n}",
+    "Added": "2025-05-01 09:30:00Z",
+    "AnyEditionOk": 1,
+    "AuthorMetadataId": 1,
+    "CleanTitle": "guardsguards",
+    "ForeignBookId": "64216",
+    "Genres": "[\n  \"fantasy\"\n]",
+    "Id": 1,
+    "LastInfoSync": "2025-06-01 10:00:00Z",
+    "LastSearchTime": null,
+    "Links": "[\n  {\n    \"url\": \"https://www.goodreads.com/work/editions/64216\",\n    \"name\": \"Goodreads Editions\"\n  }\n]",
+    "Monitored": 1,
+    "Ratings": "{\n  \"votes\": 200000,\n  \"value\": 4.32,\n  \"popularity\": 864000\n}",
+    "RelatedBooks": "[]",
+    "ReleaseDate": "1989-11-01 00:00:00Z",
+    "Title": "Guards! Guards!",
+    "TitleSlug": "64216"
+   }
+  ],
+  "Editions": [
+   {
+    "Asin": null,
+    "BookId": 1,
+    "Disambiguation": null,
+    "ForeignEditionId": "64216-e1",
+    "Format": "Kindle Edition",
+    "Id": 1,
+    "Images": "[{\"url\":\"https://images.gr-assets.com/books/1/64216.jpg\",\"coverType\":\"cover\",\"extension\":\".jpg\"}]",
+    "IsEbook": 1,
+    "Isbn13": "9780062237378",
+    "Language": "eng",
+    "Links": "[{\"url\":\"https://www.goodreads.com/book/show/64216\",\"name\":\"Goodreads Book\"}]",
+    "ManualAdd": 0,
+    "Monitored": 1,
+    "Overview": "The eighth Discworld novel.",
+    "PageCount": 416,
+    "Publisher": "Harper",
+    "Ratings": "{\"votes\":1000,\"value\":4.32}",
+    "ReleaseDate": "2013-08-27 00:00:00Z",
+    "Title": "Guards! Guards!",
+    "TitleSlug": "64216-e1"
+   },
+   {
+    "Asin": "B00XQKXNR8",
+    "BookId": 1,
+    "Disambiguation": null,
+    "ForeignEditionId": "64216-a1",
+    "Format": "Audible Audio",
+    "Id": 2,
+    "Images": "[]",
+    "IsEbook": 0,
+    "Isbn13": null,
+    "Language": "eng",
+    "Links": "[]",
+    "ManualAdd": 0,
+    "Monitored": 0,
+    "Overview": null,
+    "PageCount": 0,
+    "Publisher": "Isis",
+    "Ratings": "{\"votes\":10,\"value\":4.5}",
+    "ReleaseDate": "2015-01-01 00:00:00Z",
+    "Title": "Guards! Guards!",
+    "TitleSlug": "64216-a1"
+   }
+  ],
+  "ExtraFiles": [],
+  "History": [
+   {
+    "AuthorId": 1,
+    "BookId": 1,
+    "Data": "{}",
+    "Date": "2025-05-03 12:00:00Z",
+    "DownloadId": null,
+    "EventType": 8,
+    "Id": 2,
+    "Quality": "{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}",
+    "SourceTitle": "Guards.epub"
+   },
+   {
+    "AuthorId": 1,
+    "BookId": 1,
+    "Data": "{\n  \"reason\": \"Manual\",\n  \"releaseGroup\": null,\n  \"indexerFlags\": \"0\"\n}",
+    "Date": "2026-11-05 21:10:29.9653065Z",
+    "DownloadId": null,
+    "EventType": 5,
+    "Id": 3,
+    "Quality": "{\n  \"quality\": 1,\n  \"revision\": {\n    \"version\": 1,\n    \"real\": 0,\n    \"isRepack\": false\n  }\n}",
+    "SourceTitle": "/books/Terry Pratchett/Guards! Guards! (1989)/Guards! Guards! - Terry Pratchett.epub"
+   }
+  ],
+  "ImportListExclusions": [
+   {
+    "ForeignId": "1215958",
+    "Id": 1,
+    "Name": "Terry Pratchett - Small Gods"
+   },
+   {
+    "ForeignId": "874602",
+    "Id": 2,
+    "Name": "Ursula K. Le Guin"
+   }
+  ],
+  "MetadataFiles": [],
+  "Series": [
+   {
+    "Description": "The Discworld novels.",
+    "ForeignSeriesId": "40650",
+    "Id": 1,
+    "Numbered": 1,
+    "PrimaryWorkCount": 41,
+    "Title": "Discworld",
+    "WorkCount": 41
+   }
+  ],
+  "SeriesBookLink": [
+   {
+    "BookId": 1,
+    "Id": 1,
+    "IsPrimary": 1,
+    "Position": "8",
+    "SeriesId": 1,
+    "SeriesPosition": 8
+   }
+  ]
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "body": "",
+ "content_type": "",
+ "request": {
+  "body": {
+   "bookIds": [
+    3
+   ]
+  },
+  "method": "DELETE",
+  "path": "/api/v1/book/editor"
+ },
+ "status": 200
+}
