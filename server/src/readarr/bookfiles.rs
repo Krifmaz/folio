@@ -4,6 +4,8 @@
 //! ```text
 //! GET /api/v1/bookfile?authorId=|bookId=&bookId=|bookFileIds=&bookFileIds=|unmapped=true   files
 //! GET /api/v1/bookfile/{id}                                                                one file, with its tags
+//! PUT /api/v1/bookfile/{id}                                    set a file's quality (202 with the file)
+//! PUT /api/v1/bookfile/editor  {bookFileIds, quality}          set several files' quality (202 with them)
 //! ```
 //!
 //! Tags are read like Readarr reads a file it can't parse (an empty set with the quality of the extension); the
@@ -12,15 +14,20 @@
 use super::json::{date_or_min, doc, marks, object, Query};
 use super::{authors, books, quality, Answer, Fail, Key};
 use crate::AppState;
+use axum::body::Bytes;
 use axum::extract::{Path, RawQuery, State};
-use axum::routing::get;
+use axum::http::StatusCode;
+use axum::routing::{get, put};
 use axum::{Json, Router};
 use kit_server_core::{Db, Row, RowExt, SqliteDb};
 use serde_json::{json, Value};
 
 /// The book file routes.
 pub fn router() -> Router<AppState> {
-    Router::new().route("/api/v1/bookfile", get(all)).route("/api/v1/bookfile/{id}", get(one))
+    Router::new()
+        .route("/api/v1/bookfile", get(all).put(update_unrouted))
+        .route("/api/v1/bookfile/{id}", get(one).put(update))
+        .route("/api/v1/bookfile/editor", put(editor))
 }
 
 /// A file with its edition's book and its author (`MediaFileRepository`'s joins).
@@ -161,7 +168,84 @@ async fn one(State(st): State<AppState>, _: Key, Path(id): Path<String>) -> Answ
     let db = &st.readarr;
     let id: i64 = id.parse().map_err(|_| Fail::not_found())?;
     let Some(f) = rows(db, "f.Id = ?", vec![json!(id)])?.into_iter().next() else { return Err(Fail::not_found()) };
-    let mut v = resource(db, &f, true)?;
+    Ok(Json(with_tags(db, &f)?))
+}
+
+/// A file as `GET /api/v1/bookfile/{id}` sends it: with its tags.
+fn with_tags(db: &SqliteDb, f: &Row) -> kit_server_core::Result<Value> {
+    let mut v = resource(db, f, true)?;
     v["audioTags"] = tags(&f.s("Path"));
-    Ok(Json(v))
+    Ok(v)
+}
+
+/// A quality from a request (`{"quality": {"id": 3, …}, "revision": {…}}`) as Readarr stores it
+/// (`{"quality": 3, "revision": {…}}`); nothing when none is sent.
+fn stored_quality(q: Option<&Value>) -> Option<Value> {
+    let q = q.filter(|v| v.is_object())?;
+    let id = match q.get("quality") {
+        Some(Value::Object(m)) => m.get("id").and_then(Value::as_i64).unwrap_or(0),
+        Some(v) => v.as_i64().unwrap_or(0),
+        None => 0,
+    };
+    let rev = q.get("revision").filter(|v| v.is_object()).cloned().unwrap_or_else(|| json!({}));
+    let revision = json!({
+        "version": rev.get("version").and_then(Value::as_i64).unwrap_or(1),
+        "real": rev.get("real").and_then(Value::as_i64).unwrap_or(0),
+        "isRepack": rev.get("isRepack").and_then(Value::as_bool).unwrap_or(false),
+    });
+    Some(json!({ "quality": id, "revision": revision }))
+}
+
+/// `PUT /api/v1/bookfile` (the id from the body).
+async fn update_unrouted(st: State<AppState>, key: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    put_file(st, key, 0, bytes).await
+}
+
+/// `PUT /api/v1/bookfile/{id}`.
+async fn update(st: State<AppState>, key: Key, Path(id): Path<i64>, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    put_file(st, key, id, bytes).await
+}
+
+/// Sets a file's quality like `BookFileController.SetQuality`; 202 with the file and its tags.
+async fn put_file(State(st): State<AppState>, _: Key, route_id: i64, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let id = match r.get("id").and_then(Value::as_i64).unwrap_or(0) {
+        0 => route_id,
+        id => id,
+    };
+    let mut f = super::validation::Failures::default();
+    f.valid_id("Id", id);
+    f.check()?;
+    if rows(db, "f.Id = ?", vec![json!(id)])?.is_empty() {
+        return Err(Fail::model_not_found("BookFile", id));
+    }
+    let Some(q) = stored_quality(r.get("quality")) else {
+        return Err(Fail::exception(
+            409,
+            "System.Data.SQLite.SQLiteException",
+            "constraint failed\nNOT NULL constraint failed: BookFiles.Quality",
+        ));
+    };
+    db.execute("UPDATE BookFiles SET Quality = ? WHERE Id = ?", vec![json!(q.to_string()), json!(id)])?;
+    let f = rows(db, "f.Id = ?", vec![json!(id)])?.remove(0);
+    Ok((StatusCode::ACCEPTED, Json(with_tags(db, &f)?)))
+}
+
+/// `PUT /api/v1/bookfile/editor` (`SetQuality` of several files); 202 with them.
+async fn editor(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    let ids = authors::ids(&r, "bookFileIds");
+    let params: Vec<Value> = ids.iter().map(|i| json!(i)).collect();
+    let found = if ids.is_empty() { Vec::new() } else { rows(db, &format!("f.Id IN ({})", marks(ids.len())), params.clone())? };
+    let found = authors::get_many(found, ids.len())?;
+    if let Some(q) = stored_quality(r.get("quality")) {
+        for f in &found {
+            db.execute("UPDATE BookFiles SET Quality = ? WHERE Id = ?", vec![json!(q.to_string()), json!(f.i("Id"))])?;
+        }
+    }
+    let found = if ids.is_empty() { Vec::new() } else { rows(db, &format!("f.Id IN ({})", marks(ids.len())), params)? };
+    let out = found.iter().map(|f| resource(db, f, true)).collect::<kit_server_core::Result<Vec<_>>>()?;
+    Ok((StatusCode::ACCEPTED, Json(Value::Array(out))))
 }

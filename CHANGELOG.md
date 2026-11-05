@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- The Readarr API can change authors (folder, profiles, tags, monitoring, one at a time or several), books and
+  their editions (monitoring, "any edition"), and book files' quality, with Readarr's checks and answers (21 more
+  recorded answers).
 - The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start
   rows, and its API v1 for reading authors, books, editions, series and book files, answering exactly like Readarr
   0.4.19.2811 (checked against 34 recorded answers, errors included). Readarr's API key is Folio's.

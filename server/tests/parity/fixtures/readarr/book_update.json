@@ -1,0 +1,162 @@
+{
+ "body": {
+  "added": "2025-05-01T09:30:00Z",
+  "anyEditionOk": false,
+  "author": {
+   "addOptions": {
+    "booksToMonitor": [],
+    "monitor": "all",
+    "monitored": true,
+    "searchForMissingBooks": false
+   },
+   "added": "2025-05-01T09:30:00Z",
+   "authorMetadataId": 1,
+   "authorName": "Terry Pratchett",
+   "authorNameLastFirst": "Pratchett, Terry",
+   "cleanName": "terrypratchett",
+   "ended": true,
+   "foreignAuthorId": "1654",
+   "genres": [
+    "fantasy",
+    "humor"
+   ],
+   "id": 1,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "url": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/1654.Terry_Pratchett"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": false,
+   "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+   "path": "/books/Terry Pratchett",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 6195000,
+    "value": 4.13,
+    "votes": 1500000
+   },
+   "sortName": "terry pratchett",
+   "sortNameLastFirst": "pratchett, terry",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "ended",
+   "tags": [],
+   "titleSlug": "1654"
+  },
+  "authorId": 1,
+  "authorTitle": "pratchett, terry Small Gods",
+  "foreignBookId": "1215958",
+  "foreignEditionId": "1215958-e1",
+  "genres": [
+   "fantasy",
+   "religion"
+  ],
+  "grabbed": false,
+  "id": 2,
+  "images": [],
+  "lastSearchTime": "2025-06-02T08:00:00Z",
+  "links": [],
+  "monitored": false,
+  "pageCount": 400,
+  "ratings": {
+   "popularity": 0,
+   "value": 0,
+   "votes": 0
+  },
+  "releaseDate": "1992-05-01T00:00:00Z",
+  "seriesTitle": "Discworld #13",
+  "statistics": {
+   "bookCount": 0,
+   "bookFileCount": 0,
+   "percentOfBooks": 0,
+   "sizeOnDisk": 0,
+   "totalBookCount": 1
+  },
+  "title": "Small Gods",
+  "titleSlug": "1215958"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "added": "2025-05-01T09:30:00Z",
+   "anyEditionOk": false,
+   "authorId": 1,
+   "authorTitle": "pratchett, terry Small Gods",
+   "editions": [
+    {
+     "bookId": 2,
+     "foreignEditionId": "1215958-e1",
+     "format": "Paperback",
+     "grabbed": false,
+     "id": 3,
+     "images": [],
+     "isEbook": false,
+     "isbn13": "9780062237378",
+     "language": "eng",
+     "links": [],
+     "manualAdd": false,
+     "monitored": true,
+     "overview": "Brutha and the tortoise.",
+     "pageCount": 400,
+     "publisher": "Harper",
+     "ratings": {
+      "popularity": 0,
+      "value": 0,
+      "votes": 0
+     },
+     "releaseDate": "2013-01-01T00:00:00Z",
+     "title": "Small Gods",
+     "titleSlug": "1215958-e1"
+    }
+   ],
+   "foreignBookId": "1215958",
+   "foreignEditionId": "1215958-e1",
+   "genres": [
+    "fantasy",
+    "religion"
+   ],
+   "grabbed": false,
+   "id": 2,
+   "images": [],
+   "lastSearchTime": "2025-06-02T08:00:00Z",
+   "links": [],
+   "monitored": false,
+   "pageCount": 400,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "1992-05-01T00:00:00Z",
+   "seriesTitle": "Discworld #13",
+   "statistics": {
+    "bookCount": 1,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Small Gods",
+   "titleSlug": "1215958"
+  },
+  "method": "PUT",
+  "path": "/api/v1/book/2"
+ },
+ "status": 202
+}
