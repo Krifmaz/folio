@@ -15,6 +15,170 @@
   "auth": false
  },
  {
+  "name": "init_again",
+  "path": "/init",
+  "method": "POST",
+  "auth": false,
+  "body": {
+   "newRoot": {
+    "username": "root",
+    "password": "root"
+   }
+  }
+ },
+ {
+  "name": "login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "root",
+   "password": "root"
+  },
+  "save": {
+   "refresh": "user.refreshToken"
+  }
+ },
+ {
+  "name": "login_web",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "body": {
+   "username": "ROOT",
+   "password": "root"
+  }
+ },
+ {
+  "name": "login_bad_password",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "body": {
+   "username": "root",
+   "password": "wrong"
+  }
+ },
+ {
+  "name": "login_unknown_user",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "body": {
+   "username": "nobody",
+   "password": "root"
+  }
+ },
+ {
+  "name": "login_missing",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "body": {
+   "username": "root"
+  }
+ },
+ {
+  "name": "refresh_missing",
+  "path": "/auth/refresh",
+  "method": "POST",
+  "auth": false
+ },
+ {
+  "name": "refresh_bad",
+  "path": "/auth/refresh",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-refresh-token": "not-a-token"
+  }
+ },
+ {
+  "name": "refresh_access_token",
+  "path": "/auth/refresh",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-refresh-token": "{token}"
+  }
+ },
+ {
+  "name": "refresh",
+  "path": "/auth/refresh",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-refresh-token": "{refresh}"
+  },
+  "save": {
+   "refresh2": "user.refreshToken"
+  }
+ },
+ {
+  "name": "refresh_grace",
+  "path": "/auth/refresh",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-refresh-token": "{refresh}"
+  }
+ },
+ {
+  "name": "me_query_token",
+  "path": "/api/me?token={token}",
+  "auth": false
+ },
+ {
+  "name": "me_legacy_token",
+  "path": "/api/me",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {legacy_token}"
+  }
+ },
+ {
+  "name": "me_refresh_token",
+  "path": "/api/me",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {refresh2}"
+  }
+ },
+ {
+  "name": "me_bad_token",
+  "path": "/api/me",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer not-a-token"
+  }
+ },
+ {
+  "name": "not_found_post",
+  "path": "/api/does-not-exist",
+  "method": "POST"
+ },
+ {
+  "name": "logout",
+  "path": "/logout",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-refresh-token": "{refresh2}"
+  }
+ },
+ {
+  "name": "refresh_after_logout",
+  "path": "/auth/refresh",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-refresh-token": "{refresh2}"
+  }
+ },
+ {
   "name": "me",
   "path": "/api/me"
  },
