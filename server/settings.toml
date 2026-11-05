@@ -39,6 +39,65 @@ default = ""
 secret = true
 help = "The server's API key (`x-api-key`): signs in as the owner. Empty: no API key."
 
+[sections.downloads]
+title = "Downloads"
+
+[groups.lantern]
+section = "downloads"
+title = "Lantern"
+desc = "Folio downloads only through Lantern: its address and API key are all it needs."
+
+[keys.lantern_url]
+env = "APP_LANTERN_URL"
+default = ""
+group = "lantern"
+label = "Lantern address"
+help = "For example http://lantern:8080"
+type = "url"
+
+[keys.lantern_api_key]
+env = "APP_LANTERN_API_KEY"
+default = ""
+secret = true
+group = "lantern"
+label = "Lantern API key"
+help = "From Lantern → Settings → General."
+type = "password"
+
+[keys.public_url]
+env = "APP_PUBLIC_URL"
+default = ""
+group = "lantern"
+label = "Folio's own address"
+help = "Where Lantern can reach Folio (for example http://folio:8080), so it says at once when a download is done. Empty: Folio asks Lantern every minute."
+type = "url"
+
+[groups.searching]
+section = "downloads"
+title = "Searching"
+desc = "How wanted books are searched for and when a result is good enough to grab."
+
+[keys.search_every_hours]
+env = "APP_SEARCH_EVERY_HOURS"
+default = 6
+group = "searching"
+label = "Search the wanted list every"
+help = "0 turns automatic searches off; Search now still works."
+type = "number"
+unit = "hours"
+min = 0
+max = 168
+
+[keys.min_score]
+env = "APP_MIN_SCORE"
+default = 70
+group = "searching"
+label = "Grab results that score at least"
+help = "Each result scores up to 100 on its title, author, narrator, ASIN or ISBN, file format, language, size and seeders."
+type = "number"
+min = 1
+max = 100
+
 [sections.metadata]
 title = "Metadata"
 

@@ -19,6 +19,7 @@ pub fn status_label(status: &str) -> (&'static str, &'static str) {
         "wanted" => ("Wanted", "info"),
         "searching" => ("Searching", "info"),
         "downloading" => ("Downloading", "info"),
+        "downloaded" => ("Arrived", "info"),
         "review" => ("Needs a look", "warn"),
         "imported" => ("In the library", "ok"),
         "failed" => ("Failed", "err"),
@@ -101,7 +102,11 @@ fn wanted_row(w: &Value, admin: bool, on_change: impl Fn() + Copy + 'static) -> 
             </a>
             <span class="small faint">{s(w, "profile")}</span>
             <span class=format!("badge {class}")>{label}</span>
-            {admin.then(|| view! { <button class="btn ghost icon sm" title="Remove" aria-label="Remove" on:click=remove inner_html=icon("trash")></button> })}
+            {admin.then(|| view! {
+                <a class="btn sm" href=format!("#/releases?id={id}") title="See what Lantern finds">"Results"</a>
+                <button class="btn sm" title="Search and grab the best result" on:click=move |_| crate::downloads::search_now(id, on_change)>"Search now"</button>
+                <button class="btn ghost icon sm" title="Remove" aria-label="Remove" on:click=remove inner_html=icon("trash")></button>
+            })}
         </div>
     }
 }

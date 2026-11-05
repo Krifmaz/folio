@@ -7,12 +7,15 @@
 //! | `#/` | the Library: every book, search, format filter, Add a book (ASIN or ISBN) |
 //! | `#/work?id=<id>` | one book with its exact editions |
 //! | `#/authors`, `#/series` | the authors; the series in reading order; following them |
-//! | `#/wanted` | the wanted list per format, the preferences, Check followed now |
+//! | `#/wanted` | the wanted list per format, the preferences, Check followed now, Search now |
+//! | `#/releases?id=<wanted>` | what Lantern finds for a wanted book, scored, with Grab |
+//! | `#/downloads` | every grab and how far it is |
 //! | `#/bug-reports` | the account's bug reports and the New report sheet |
 //! | `#/settings?s=<page>` | the server settings form from the server's schema, Diagnostics and What's new |
 //!
 //! The app's own pages are in [`library`], one component each, with a link in [`Shell`].
 
+mod downloads;
 mod library;
 mod pages;
 mod wanted;
@@ -182,6 +185,8 @@ fn Shell(me: Value) -> impl IntoView {
             "/authors" => view! { <library::Authors admin=admin/> }.into_any(),
             "/series" => view! { <library::Series admin=admin/> }.into_any(),
             "/wanted" => view! { <wanted::Wanted admin=admin/> }.into_any(),
+            "/releases" => view! { <downloads::Releases id=r.param("id").parse().unwrap_or(0)/> }.into_any(),
+            "/downloads" => view! { <downloads::Downloads/> }.into_any(),
             _ => view! { <library::Library admin=admin/> }.into_any(),
         }
     };
@@ -194,6 +199,7 @@ fn Shell(me: Value) -> impl IntoView {
                     <NavLink href="/authors" label="Authors" route=route/>
                     <NavLink href="/series" label="Series" route=route/>
                     <NavLink href="/wanted" label="Wanted" route=route/>
+                    <NavLink href="/downloads" label="Downloads" route=route/>
                 </nav>
                 <nav class="nav nav-under">
                     <NavLink href="/bug-reports" label="Bug reports" route=route/>
