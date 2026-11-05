@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- The base of the Audiobookshelf port: its database with the original's exact schema, a row type for each of its 26
+  tables, its socket.io (apps connect, ping, and are told when a token is refused), and recordings of 65 of the
+  original's answers that parity tests compare Folio with.
 - The port plan: Folio now ports Audiobookshelf and Readarr instead of reimagining them. `docs/PARITY.md` lists
   every endpoint, setting, page, action and job of the originals (989 rows) with its status and proof;
   `UPSTREAM.lock` pins the exact upstream versions, and `scripts/upstream-merge.sh` keeps the forked apps up to

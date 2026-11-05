@@ -1,0 +1,293 @@
+{
+ "body": {
+  "currentDailyLogs": [
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "=== Starting Server ===",
+    "source": "Server.js:223",
+    "timestamp": "2026-11-05 18:03:59.795"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Init v2.37.2",
+    "source": "Server.js:151",
+    "timestamp": "2026-11-05 18:03:59.796"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Node.js Version: v24.22.1",
+    "source": "Server.js:152",
+    "timestamp": "2026-11-05 18:03:59.796"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Platform: linux",
+    "source": "Server.js:153",
+    "timestamp": "2026-11-05 18:03:59.796"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Arch: x64",
+    "source": "Server.js:154",
+    "timestamp": "2026-11-05 18:03:59.796"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] absdatabase.sqlite not found at /config/absdatabase.sqlite",
+    "source": "Database.js:133",
+    "timestamp": "2026-11-05 18:03:59.800"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Initializing db at \"/config/absdatabase.sqlite\"",
+    "source": "Database.js:171",
+    "timestamp": "2026-11-05 18:03:59.800"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Loading extension /usr/local/lib/nusqlite3/libnusqlite3.so",
+    "source": "Database.js:241",
+    "timestamp": "2026-11-05 18:03:59.835"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Successfully loaded extension /usr/local/lib/nusqlite3/libnusqlite3.so",
+    "source": "Database.js:249",
+    "timestamp": "2026-11-05 18:03:59.835"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Db supports unaccent and unicode foldings",
+    "source": "Database.js:218",
+    "timestamp": "2026-11-05 18:03:59.835"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Db connection was successful",
+    "source": "Database.js:222",
+    "timestamp": "2026-11-05 18:03:59.836"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[MigrationManager] Database is new. Skipping migrations.",
+    "source": "MigrationManager.js:75",
+    "timestamp": "2026-11-05 18:03:59.853"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Db initialized with models: user, session, apiKey, library, libraryFolder, book, podcast, podcastEpisode, libraryItem, mediaProgress, series, bookSeries, author, bookAuthor, collection, collectionBook, playlist, playlistMediaItem, device, playbackSession, feed, feedEpisode, setting, customMetadataProvider, mediaItemShare",
+    "source": "Database.js:159",
+    "timestamp": "2026-11-05 18:04:00.081"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-05 18:04:00.082"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title_ignore_prefix",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-05 18:04:00.084"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title_from_podcasts_title",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-05 18:04:00.085"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title_ignore_prefix_from_podcasts_title_ignore_prefix",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-05 18:04:00.087"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_author_names_on_book_authors_insert",
+    "source": "Database.js:830",
+    "timestamp": "2026-11-05 18:04:00.090"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_author_names_on_book_authors_delete",
+    "source": "Database.js:830",
+    "timestamp": "2026-11-05 18:04:00.092"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_author_names_on_authors_update",
+    "source": "Database.js:852",
+    "timestamp": "2026-11-05 18:04:00.094"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] running ANALYZE",
+    "source": "Database.js:162",
+    "timestamp": "2026-11-05 18:04:00.133"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] ANALYZE completed",
+    "source": "Database.js:164",
+    "timestamp": "2026-11-05 18:04:00.135"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Serving from base path \"/audiobookshelf\"",
+    "source": "Server.js:168",
+    "timestamp": "2026-11-05 18:04:00.135"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[TokenManager] JWT secret key not found, generating one",
+    "source": "TokenManager.js:44",
+    "timestamp": "2026-11-05 18:04:00.136"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LogManager] Init current daily log filename: 2026-11-05.txt",
+    "source": "LogManager.js:59",
+    "timestamp": "2026-11-05 18:04:00.146"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[BackupManager] 0 Backups Found",
+    "source": "BackupManager.js:288",
+    "timestamp": "2026-11-05 18:04:00.152"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[BackupManager] Auto Backups are disabled",
+    "source": "BackupManager.js:64",
+    "timestamp": "2026-11-05 18:04:00.152"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "Listening on port :80",
+    "source": "Server.js:425",
+    "timestamp": "2026-11-05 18:04:00.172"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Initializing new server",
+    "source": "Server.js:432",
+    "timestamp": "2026-11-05 18:04:00.207"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LocalAuth] User \"root\" logged in from ip ::ffff:172.17.0.1",
+    "source": "LocalAuthStrategy.js:81",
+    "timestamp": "2026-11-05 18:04:00.282"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Watcher] Initializing watcher for \"Books\".",
+    "source": "Watcher.js:51",
+    "timestamp": "2026-11-05 18:04:00.318"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScanner] Library metadata precedence changed since last scan. From [Unset] to [folderStructure,audioMetatags,nfoFile,txtFiles,opfFile,absMetadata]",
+    "source": "LibraryScanner.js:60",
+    "timestamp": "2026-11-05 18:04:00.332"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScanner] Starting (forced) library scan 7d7465fa-6d1f-42f3-860f-988f9e74dfa5 for Books",
+    "source": "LibraryScanner.js:78",
+    "timestamp": "2026-11-05 18:04:00.333"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Watcher] \"Books\" Ready",
+    "source": "Watcher.js:81",
+    "timestamp": "2026-11-05 18:04:00.347"
+   },
+   {
+    "level": 3,
+    "levelName": "WARN",
+    "message": "Cover image not found in manifest for epub at \"/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub\"",
+    "source": "parseEpubMetadata.js:122",
+    "timestamp": "2026-11-05 18:04:00.475"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScanner] Library scan \"7d7465fa-6d1f-42f3-860f-988f9e74dfa5\" completed in 0:00 | 3 Added | 0 Updated | 0 Missing",
+    "source": "LibraryScanner.js:82",
+    "timestamp": "2026-11-05 18:04:00.568"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScan] Scan log saved \"/metadata/logs/scans/2026-11-05_7d7465fa-6d1f-42f3-860f-988f9e74dfa5.txt\"",
+    "source": "LibraryScan.js:125",
+    "timestamp": "2026-11-05 18:04:00.573"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryController] Scan complete",
+    "source": "LibraryController.js:1169",
+    "timestamp": "2026-11-05 18:04:00.574"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "Received ping",
+    "source": "Server.js:348",
+    "timestamp": "2026-11-05 18:04:04.378"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItem] Library item not found with id \"00000000-0000-0000-0000-000000000000\"",
+    "source": "LibraryItem.js:188",
+    "timestamp": "2026-11-05 18:04:04.644"
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/logger-data"
+ },
+ "status": 200
+}
