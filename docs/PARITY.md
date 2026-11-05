@@ -239,7 +239,7 @@ repository at the pinned commit.
 | A0199 | endpoint | `GET /api/auth-settings` (MiscController.getAuthSettings) | `server/routers/ApiRouter.js#L358` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |
-| A0202 | endpoint | `GET /api/logger-data` (MiscController.getLoggerData) | `server/routers/ApiRouter.js#L361` | P6 server admin | todo |  |
+| A0202 | endpoint | `GET /api/logger-data` (MiscController.getLoggerData) | `server/routers/ApiRouter.js#L361` | P6 server admin | done | `server/tests/abs_logs.rs` |
 | A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | todo |  |
 | A0204 | endpoint | `GET /public/share/:slug` | `server/routers/PublicRouter.js#L16` | P6 server admin | todo |  |
 | A0205 | endpoint | `GET /public/share/:slug/track/:index` | `server/routers/PublicRouter.js#L17` | P6 server admin | todo |  |
@@ -330,7 +330,7 @@ repository at the pinned commit.
 | A0290 | setting | server `backupSchedule` (default `false`) | `server/objects/settings/ServerSettings.js#L57` | P6 server admin | wip | `server/src/abs/cron.rs::tests::a_schedule_runs_at_the_times_it_names` checks the matching; the timer itself (`backups::spawn_schedule`) has no test yet |
 | A0291 | setting | server `backupsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L58` | P6 server admin | done | `server/tests/abs_backups.rs::only_the_newest_backups_are_kept` |
 | A0292 | setting | server `maxBackupSize` (default `1`) | `server/objects/settings/ServerSettings.js#L59` | P6 server admin | done | `server/src/abs/backups.rs::tests::a_backup_over_the_size_limit_is_stopped` |
-| A0293 | setting | server `loggerDailyLogsToKeep` (default `7`) | `server/objects/settings/ServerSettings.js#L62` | P6 server admin | todo |  |
+| A0293 | setting | server `loggerDailyLogsToKeep` (default `7`) | `server/objects/settings/ServerSettings.js#L62` | P6 server admin | done | `server/tests/abs_logs.rs` |
 | A0294 | setting | server `loggerScannerLogsToKeep` (default `2`) | `server/objects/settings/ServerSettings.js#L63` | P6 server admin | todo |  |
 | A0295 | setting | server `homeBookshelfView` (default `BookshelfView.DETAIL`) | `server/objects/settings/ServerSettings.js#L66` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0296 | setting | server `bookshelfView` (default `BookshelfView.DETAIL`) | `server/objects/settings/ServerSettings.js#L67` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
@@ -342,7 +342,7 @@ repository at the pinned commit.
 | A0302 | setting | server `timeFormat` (default `'HH:mm'`) | `server/objects/settings/ServerSettings.js#L79` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0303 | setting | server `language` (default `'en-us'`) | `server/objects/settings/ServerSettings.js#L80` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0304 | setting | server `allowedOrigins` (default `[]`) | `server/objects/settings/ServerSettings.js#L81` | P6 server admin | todo |  |
-| A0305 | setting | server `logLevel` (default `Logger.logLevel`) | `server/objects/settings/ServerSettings.js#L83` | P6 server admin | todo |  |
+| A0305 | setting | server `logLevel` (default `Logger.logLevel`) | `server/objects/settings/ServerSettings.js#L83` | P6 server admin | done | `server/tests/abs_logs.rs` |
 | A0306 | setting | server `version` (default `packageJson.version`) | `server/objects/settings/ServerSettings.js#L85` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0307 | setting | server `buildNumber` (default `packageJson.buildNumber`) | `server/objects/settings/ServerSettings.js#L86` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0308 | setting | server `authLoginCustomMessage` (default `null`) | `server/objects/settings/ServerSettings.js#L89` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
