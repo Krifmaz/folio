@@ -28,3 +28,30 @@ jobs:
       web-build: npx nuxt generate && npx cap sync android
       # Capacitor 7 compiles with Java 21, as upstream's own CI does (the app module's Java 17 toolchain comes through foojay)
       java-version: "21"
+
+  # The app's pages, driven in Chromium against its web build: the proofs for the PARITY M rows (folio/e2e/).
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: abs-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: abs-app/package-lock.json
+      - name: Web build
+        run: |
+          npm ci --no-audit --no-fund
+          npx nuxt generate
+      - name: Playwright and Chromium
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: Settings page and device settings (M0009, M0028–M0051)
+        run: |
+          python3 -m http.server 8765 --directory dist > /dev/null 2>&1 &
+          for _ in $(seq 1 30); do curl -sf http://localhost:8765/ > /dev/null && break; sleep 1; done
+          BASE_URL=http://localhost:8765 node folio/e2e/settings.cjs
