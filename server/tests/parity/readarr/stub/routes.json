@@ -1,0 +1,972 @@
+[
+ {
+  "host": "goodreads",
+  "method": "GET",
+  "path": "/book/auto_complete",
+  "query": {
+   "format": "json",
+   "q": "small gods"
+  },
+  "status": 200,
+  "body": [
+   {
+    "imageUrl": "https://images.example/s.jpg",
+    "bookId": 1215958001,
+    "workId": 1215958,
+    "bookUrl": "/book/show/1215958001",
+    "from_search": true,
+    "from_srp": true,
+    "qid": "q",
+    "rank": 1,
+    "title": "Small Gods",
+    "bookTitleBare": "Small Gods",
+    "numPages": 300,
+    "avgRating": "4.20",
+    "ratingsCount": 100,
+    "author": {
+     "id": 1654,
+     "name": "Terry Pratchett",
+     "isGoodreadsAuthor": true,
+     "profileUrl": "https://www.goodreads.com/author/show/1654",
+     "worksListUrl": ""
+    },
+    "kcrPreviewUrl": null,
+    "description": {
+     "html": "",
+     "truncated": false,
+     "fullContentUrl": ""
+    }
+   },
+   {
+    "imageUrl": "https://images.example/s.jpg",
+    "bookId": 12067001,
+    "workId": 12067,
+    "bookUrl": "/book/show/12067001",
+    "from_search": true,
+    "from_srp": true,
+    "qid": "q",
+    "rank": 2,
+    "title": "Good Omens",
+    "bookTitleBare": "Good Omens",
+    "numPages": 300,
+    "avgRating": "4.20",
+    "ratingsCount": 100,
+    "author": {
+     "id": 1221698,
+     "name": "Neil Gaiman",
+     "isGoodreadsAuthor": true,
+     "profileUrl": "https://www.goodreads.com/author/show/1221698",
+     "worksListUrl": ""
+    },
+    "kcrPreviewUrl": null,
+    "description": {
+     "html": "",
+     "truncated": false,
+     "fullContentUrl": ""
+    }
+   }
+  ]
+ },
+ {
+  "host": "goodreads",
+  "method": "GET",
+  "path": "/book/auto_complete",
+  "query": {
+   "format": "json",
+   "q": "pratchett"
+  },
+  "status": 200,
+  "body": [
+   {
+    "imageUrl": "https://images.example/s.jpg",
+    "bookId": 1215958001,
+    "workId": 1215958,
+    "bookUrl": "/book/show/1215958001",
+    "from_search": true,
+    "from_srp": true,
+    "qid": "q",
+    "rank": 1,
+    "title": "Small Gods",
+    "bookTitleBare": "Small Gods",
+    "numPages": 300,
+    "avgRating": "4.20",
+    "ratingsCount": 100,
+    "author": {
+     "id": 1654,
+     "name": "Terry Pratchett",
+     "isGoodreadsAuthor": true,
+     "profileUrl": "https://www.goodreads.com/author/show/1654",
+     "worksListUrl": ""
+    },
+    "kcrPreviewUrl": null,
+    "description": {
+     "html": "",
+     "truncated": false,
+     "fullContentUrl": ""
+    }
+   },
+   {
+    "imageUrl": "https://images.example/s.jpg",
+    "bookId": 7000001,
+    "workId": 7000,
+    "bookUrl": "/book/show/7000001",
+    "from_search": true,
+    "from_srp": true,
+    "qid": "q",
+    "rank": 2,
+    "title": "Mort",
+    "bookTitleBare": "Mort",
+    "numPages": 300,
+    "avgRating": "4.20",
+    "ratingsCount": 100,
+    "author": {
+     "id": 1654,
+     "name": "Terry Pratchett",
+     "isGoodreadsAuthor": true,
+     "profileUrl": "https://www.goodreads.com/author/show/1654",
+     "worksListUrl": ""
+    },
+    "kcrPreviewUrl": null,
+    "description": {
+     "html": "",
+     "truncated": false,
+     "fullContentUrl": ""
+    }
+   },
+   {
+    "imageUrl": "https://images.example/s.jpg",
+    "bookId": 12067001,
+    "workId": 12067,
+    "bookUrl": "/book/show/12067001",
+    "from_search": true,
+    "from_srp": true,
+    "qid": "q",
+    "rank": 3,
+    "title": "Good Omens",
+    "bookTitleBare": "Good Omens",
+    "numPages": 300,
+    "avgRating": "4.20",
+    "ratingsCount": 100,
+    "author": {
+     "id": 1221698,
+     "name": "Neil Gaiman",
+     "isGoodreadsAuthor": true,
+     "profileUrl": "https://www.goodreads.com/author/show/1221698",
+     "worksListUrl": ""
+    },
+    "kcrPreviewUrl": null,
+    "description": {
+     "html": "",
+     "truncated": false,
+     "fullContentUrl": ""
+    }
+   }
+  ]
+ },
+ {
+  "host": "goodreads",
+  "method": "GET",
+  "path": "/book/auto_complete",
+  "query": {
+   "format": "json",
+   "q": "9780062237378"
+  },
+  "status": 200,
+  "body": [
+   {
+    "imageUrl": "https://images.example/s.jpg",
+    "bookId": 64216001,
+    "workId": 64216,
+    "bookUrl": "/book/show/64216001",
+    "from_search": true,
+    "from_srp": true,
+    "qid": "q",
+    "rank": 1,
+    "title": "Guards! Guards!",
+    "bookTitleBare": "Guards! Guards!",
+    "numPages": 300,
+    "avgRating": "4.20",
+    "ratingsCount": 100,
+    "author": {
+     "id": 1654,
+     "name": "Terry Pratchett",
+     "isGoodreadsAuthor": true,
+     "profileUrl": "https://www.goodreads.com/author/show/1654",
+     "worksListUrl": ""
+    },
+    "kcrPreviewUrl": null,
+    "description": {
+     "html": "",
+     "truncated": false,
+     "fullContentUrl": ""
+    }
+   }
+  ]
+ },
+ {
+  "host": "goodreads",
+  "method": "GET",
+  "path": "/book/auto_complete",
+  "query": {
+   "format": "json",
+   "q": "mort"
+  },
+  "status": 200,
+  "body": [
+   {
+    "imageUrl": "https://images.example/s.jpg",
+    "bookId": 7000001,
+    "workId": 7000,
+    "bookUrl": "/book/show/7000001",
+    "from_search": true,
+    "from_srp": true,
+    "qid": "q",
+    "rank": 1,
+    "title": "Mort",
+    "bookTitleBare": "Mort",
+    "numPages": 300,
+    "avgRating": "4.20",
+    "ratingsCount": 100,
+    "author": {
+     "id": 1654,
+     "name": "Terry Pratchett",
+     "isGoodreadsAuthor": true,
+     "profileUrl": "https://www.goodreads.com/author/show/1654",
+     "worksListUrl": ""
+    },
+    "kcrPreviewUrl": null,
+    "description": {
+     "html": "",
+     "truncated": false,
+     "fullContentUrl": ""
+    }
+   }
+  ]
+ },
+ {
+  "host": "goodreads",
+  "method": "GET",
+  "path": "/book/auto_complete",
+  "query": {
+   "format": "json",
+   "q": "nothing"
+  },
+  "status": 200,
+  "body": []
+ },
+ {
+  "host": "goodreads",
+  "method": "GET",
+  "path": "/book/auto_complete",
+  "query": {
+   "format": "json",
+   "q": "broken"
+  },
+  "status": 500,
+  "body": "oops"
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/author/1654",
+  "status": 200,
+  "body": {
+   "ForeignId": 1654,
+   "Name": "Terry  Pratchett",
+   "Description": "Sir Terry Pratchett wrote the Discworld novels.",
+   "ImageUrl": "https://images.example/1654.jpg",
+   "Url": "https://www.goodreads.com/author/show/1654",
+   "RatingCount": 1500000,
+   "AverageRating": 4.13,
+   "Works": [
+    {
+     "ForeignId": 64216,
+     "Title": "Guards! Guards!",
+     "Url": "https://www.goodreads.com/work/editions/64216",
+     "ReleaseDate": "1989-11-01T00:00:00Z",
+     "Genres": [
+      "fantasy",
+      "humor"
+     ],
+     "RelatedWorks": [
+      1215958
+     ],
+     "Books": [
+      {
+       "ForeignId": 64216001,
+       "Asin": null,
+       "Description": "The eighth Discworld novel.",
+       "Isbn13": "9780062237378",
+       "Title": "Guards! Guards!",
+       "Language": "eng",
+       "Format": "Kindle Edition",
+       "EditionInformation": null,
+       "Publisher": "Harper",
+       "ImageUrl": "https://images.example/64216001.jpg",
+       "IsEbook": true,
+       "NumPages": 416,
+       "RatingCount": 1000,
+       "AverageRating": 4.32,
+       "Url": "https://www.goodreads.com/book/show/64216001",
+       "ReleaseDate": "2013-08-27T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      },
+      {
+       "ForeignId": 64216002,
+       "Asin": "B00XQKXNR8",
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Guards!  Guards!",
+       "Language": "eng",
+       "Format": "Audible Audio",
+       "EditionInformation": null,
+       "Publisher": "Isis",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": null,
+       "RatingCount": 0,
+       "AverageRating": 0.0,
+       "Url": "https://www.goodreads.com/book/show/64216002",
+       "ReleaseDate": "2015-01-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 1215958,
+     "Title": "Small Gods",
+     "Url": "https://www.goodreads.com/work/editions/1215958",
+     "ReleaseDate": "1992-05-01T00:00:00Z",
+     "Genres": [
+      "fantasy",
+      "religion"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 1215958001,
+       "Asin": null,
+       "Description": "Brutha and the tortoise.",
+       "Isbn13": "9780062237385",
+       "Title": "Small Gods",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Harper",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 400,
+       "RatingCount": 500,
+       "AverageRating": 4.2,
+       "Url": "https://www.goodreads.com/book/show/1215958001",
+       "ReleaseDate": "2013-01-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 7000,
+     "Title": "Mort",
+     "Url": "https://www.goodreads.com/work/editions/7000",
+     "ReleaseDate": null,
+     "Genres": [
+      "fantasy"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 7000001,
+       "Asin": null,
+       "Description": "Death takes an apprentice.",
+       "Isbn13": "9780062237347",
+       "Title": "Mort",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Harper",
+       "ImageUrl": "https://images.example/7000001.png",
+       "IsEbook": false,
+       "NumPages": 320,
+       "RatingCount": 200,
+       "AverageRating": 4.25,
+       "Url": "https://www.goodreads.com/book/show/7000001",
+       "ReleaseDate": "2013-04-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      },
+      {
+       "ForeignId": 7000002,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Mort (Discworld, #4)",
+       "Language": "eng",
+       "Format": "Hardcover",
+       "EditionInformation": null,
+       "Publisher": null,
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 256,
+       "RatingCount": 100,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/7000002",
+       "ReleaseDate": "1987-11-12T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 12067,
+     "Title": "Good Omens",
+     "Url": "https://www.goodreads.com/work/editions/12067",
+     "ReleaseDate": "1990-05-01T00:00:00Z",
+     "Genres": [
+      "fantasy",
+      "humor"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 12067001,
+       "Asin": null,
+       "Description": "The world ends on Saturday.",
+       "Isbn13": "9780060853983",
+       "Title": "Good Omens",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "William Morrow",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 432,
+       "RatingCount": 400,
+       "AverageRating": 4.25,
+       "Url": "https://www.goodreads.com/book/show/12067001",
+       "ReleaseDate": "2006-11-28T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1221698,
+         "Role": "Author"
+        },
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    }
+   ],
+   "Series": [
+    {
+     "ForeignId": 40650,
+     "Title": "Discworld",
+     "Description": "The Discworld novels.",
+     "LinkItems": [
+      {
+       "ForeignWorkId": 64216,
+       "PositionInSeries": "8",
+       "SeriesPosition": 8,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 1215958,
+       "PositionInSeries": "13",
+       "SeriesPosition": 13,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 7000,
+       "PositionInSeries": "4",
+       "SeriesPosition": 4,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 99999,
+       "PositionInSeries": "99",
+       "SeriesPosition": 99,
+       "Primary": false
+      }
+     ]
+    },
+    {
+     "ForeignId": 40651,
+     "Title": "Nothing here",
+     "Description": null,
+     "LinkItems": []
+    }
+   ]
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/author/1221698",
+  "status": 200,
+  "body": {
+   "ForeignId": 1221698,
+   "Name": "Neil Gaiman",
+   "Description": "Neil Gaiman writes.",
+   "ImageUrl": null,
+   "Url": "https://www.goodreads.com/author/show/1221698",
+   "RatingCount": 800000,
+   "AverageRating": 4.1,
+   "Works": [
+    {
+     "ForeignId": 12067,
+     "Title": "Good Omens",
+     "Url": "https://www.goodreads.com/work/editions/12067",
+     "ReleaseDate": "1990-05-01T00:00:00Z",
+     "Genres": [
+      "fantasy",
+      "humor"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 12067001,
+       "Asin": null,
+       "Description": "The world ends on Saturday.",
+       "Isbn13": "9780060853983",
+       "Title": "Good Omens",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "William Morrow",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 432,
+       "RatingCount": 400,
+       "AverageRating": 4.25,
+       "Url": "https://www.goodreads.com/book/show/12067001",
+       "ReleaseDate": "2006-11-28T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1221698,
+         "Role": "Author"
+        },
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    }
+   ],
+   "Series": []
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/author/404",
+  "status": 404,
+  "body": {
+   "error": "not found"
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/work/7000",
+  "status": 200,
+  "body": {
+   "ForeignId": 7000,
+   "Title": "Mort",
+   "Url": "https://www.goodreads.com/work/editions/7000",
+   "ReleaseDate": null,
+   "Genres": [
+    "fantasy"
+   ],
+   "RelatedWorks": [],
+   "Books": [
+    {
+     "ForeignId": 7000001,
+     "Asin": null,
+     "Description": "Death takes an apprentice.",
+     "Isbn13": "9780062237347",
+     "Title": "Mort",
+     "Language": "eng",
+     "Format": "Paperback",
+     "EditionInformation": null,
+     "Publisher": "Harper",
+     "ImageUrl": "https://images.example/7000001.png",
+     "IsEbook": false,
+     "NumPages": 320,
+     "RatingCount": 200,
+     "AverageRating": 4.25,
+     "Url": "https://www.goodreads.com/book/show/7000001",
+     "ReleaseDate": "2013-04-01T00:00:00Z",
+     "Contributors": [
+      {
+       "ForeignId": 1654,
+       "Role": "Author"
+      }
+     ]
+    },
+    {
+     "ForeignId": 7000002,
+     "Asin": null,
+     "Description": null,
+     "Isbn13": null,
+     "Title": "Mort (Discworld, #4)",
+     "Language": "eng",
+     "Format": "Hardcover",
+     "EditionInformation": null,
+     "Publisher": null,
+     "ImageUrl": null,
+     "IsEbook": false,
+     "NumPages": 256,
+     "RatingCount": 100,
+     "AverageRating": 4.0,
+     "Url": "https://www.goodreads.com/book/show/7000002",
+     "ReleaseDate": "1987-11-12T00:00:00Z",
+     "Contributors": [
+      {
+       "ForeignId": 1654,
+       "Role": "Author"
+      }
+     ]
+    }
+   ],
+   "Series": [
+    {
+     "ForeignId": 40650,
+     "Title": "Discworld",
+     "Description": "The Discworld novels.",
+     "LinkItems": [
+      {
+       "ForeignWorkId": 64216,
+       "PositionInSeries": "8",
+       "SeriesPosition": 8,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 1215958,
+       "PositionInSeries": "13",
+       "SeriesPosition": 13,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 7000,
+       "PositionInSeries": "4",
+       "SeriesPosition": 4,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 99999,
+       "PositionInSeries": "99",
+       "SeriesPosition": 99,
+       "Primary": false
+      }
+     ]
+    }
+   ],
+   "Authors": [
+    {
+     "ForeignId": 1654,
+     "Name": "Terry  Pratchett",
+     "Description": "Sir Terry Pratchett wrote the Discworld novels.",
+     "ImageUrl": "https://images.example/1654.jpg",
+     "Url": "https://www.goodreads.com/author/show/1654",
+     "RatingCount": 1500000,
+     "AverageRating": 4.13
+    }
+   ]
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/work/12067",
+  "status": 200,
+  "body": {
+   "ForeignId": 12067,
+   "Title": "Good Omens",
+   "Url": "https://www.goodreads.com/work/editions/12067",
+   "ReleaseDate": "1990-05-01T00:00:00Z",
+   "Genres": [
+    "fantasy",
+    "humor"
+   ],
+   "RelatedWorks": [],
+   "Books": [
+    {
+     "ForeignId": 12067001,
+     "Asin": null,
+     "Description": "The world ends on Saturday.",
+     "Isbn13": "9780060853983",
+     "Title": "Good Omens",
+     "Language": "eng",
+     "Format": "Paperback",
+     "EditionInformation": null,
+     "Publisher": "William Morrow",
+     "ImageUrl": null,
+     "IsEbook": false,
+     "NumPages": 432,
+     "RatingCount": 400,
+     "AverageRating": 4.25,
+     "Url": "https://www.goodreads.com/book/show/12067001",
+     "ReleaseDate": "2006-11-28T00:00:00Z",
+     "Contributors": [
+      {
+       "ForeignId": 1221698,
+       "Role": "Author"
+      },
+      {
+       "ForeignId": 1654,
+       "Role": "Author"
+      }
+     ]
+    }
+   ],
+   "Series": [],
+   "Authors": [
+    {
+     "ForeignId": 1221698,
+     "Name": "Neil Gaiman",
+     "Description": "Neil Gaiman writes.",
+     "ImageUrl": null,
+     "Url": "https://www.goodreads.com/author/show/1221698",
+     "RatingCount": 800000,
+     "AverageRating": 4.1
+    },
+    {
+     "ForeignId": 1654,
+     "Name": "Terry  Pratchett",
+     "Description": "Sir Terry Pratchett wrote the Discworld novels.",
+     "ImageUrl": "https://images.example/1654.jpg",
+     "Url": "https://www.goodreads.com/author/show/1654",
+     "RatingCount": 1500000,
+     "AverageRating": 4.13
+    }
+   ]
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/work/404",
+  "status": 404,
+  "body": {
+   "error": "not found"
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/work/1215958",
+  "status": 302,
+  "location": "/author/1654",
+  "body": ""
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/book/7000001",
+  "status": 302,
+  "location": "/work/7000",
+  "body": ""
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/book/64216001",
+  "status": 302,
+  "location": "/author/1654",
+  "body": ""
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/book/404",
+  "status": 404,
+  "body": {
+   "error": "not found"
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "POST",
+  "path": "/book/bulk",
+  "request": [
+   1215958001,
+   12067001
+  ],
+  "status": 200,
+  "body": {
+   "Works": [
+    {
+     "ForeignId": 12067,
+     "Title": "Good Omens",
+     "Url": "https://www.goodreads.com/work/editions/12067",
+     "ReleaseDate": "1990-05-01T00:00:00Z",
+     "Genres": [
+      "fantasy",
+      "humor"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 12067001,
+       "Asin": null,
+       "Description": "The world ends on Saturday.",
+       "Isbn13": "9780060853983",
+       "Title": "Good Omens",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "William Morrow",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 432,
+       "RatingCount": 400,
+       "AverageRating": 4.25,
+       "Url": "https://www.goodreads.com/book/show/12067001",
+       "ReleaseDate": "2006-11-28T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1221698,
+         "Role": "Author"
+        },
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 1215958,
+     "Title": "Small Gods",
+     "Url": "https://www.goodreads.com/work/editions/1215958",
+     "ReleaseDate": "1992-05-01T00:00:00Z",
+     "Genres": [
+      "fantasy",
+      "religion"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 1215958001,
+       "Asin": null,
+       "Description": "Brutha and the tortoise.",
+       "Isbn13": "9780062237385",
+       "Title": "Small Gods",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Harper",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 400,
+       "RatingCount": 500,
+       "AverageRating": 4.2,
+       "Url": "https://www.goodreads.com/book/show/1215958001",
+       "ReleaseDate": "2013-01-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 1654,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    }
+   ],
+   "Series": [
+    {
+     "ForeignId": 40650,
+     "Title": "Discworld",
+     "Description": "The Discworld novels.",
+     "LinkItems": [
+      {
+       "ForeignWorkId": 64216,
+       "PositionInSeries": "8",
+       "SeriesPosition": 8,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 1215958,
+       "PositionInSeries": "13",
+       "SeriesPosition": 13,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 7000,
+       "PositionInSeries": "4",
+       "SeriesPosition": 4,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 99999,
+       "PositionInSeries": "99",
+       "SeriesPosition": 99,
+       "Primary": false
+      }
+     ]
+    }
+   ],
+   "Authors": [
+    {
+     "ForeignId": 1221698,
+     "Name": "Neil Gaiman",
+     "Description": "Neil Gaiman writes.",
+     "ImageUrl": null,
+     "Url": "https://www.goodreads.com/author/show/1221698",
+     "RatingCount": 800000,
+     "AverageRating": 4.1
+    },
+    {
+     "ForeignId": 1654,
+     "Name": "Terry  Pratchett",
+     "Description": "Sir Terry Pratchett wrote the Discworld novels.",
+     "ImageUrl": "https://images.example/1654.jpg",
+     "Url": "https://www.goodreads.com/author/show/1654",
+     "RatingCount": 1500000,
+     "AverageRating": 4.13
+    }
+   ]
+  }
+ }
+]

@@ -767,6 +767,86 @@
   "path": "/api/v1/bookfile?authorId=1"
  },
  {
+  "name": "book_lookup",
+  "path": "/api/v1/book/lookup?term=Small%20Gods"
+ },
+ {
+  "name": "book_lookup_isbn",
+  "path": "/api/v1/book/lookup?term=isbn:9780062237378"
+ },
+ {
+  "name": "book_lookup_edition",
+  "path": "/api/v1/book/lookup?term=edition:7000001"
+ },
+ {
+  "name": "book_lookup_work",
+  "path": "/api/v1/book/lookup?term=work:7000"
+ },
+ {
+  "name": "book_lookup_work_redirect",
+  "path": "/api/v1/book/lookup?term=work:1215958"
+ },
+ {
+  "name": "book_lookup_work_missing",
+  "path": "/api/v1/book/lookup?term=work:404"
+ },
+ {
+  "name": "book_lookup_work_not_a_number",
+  "path": "/api/v1/book/lookup?term=work:abc"
+ },
+ {
+  "name": "book_lookup_author_blank",
+  "path": "/api/v1/book/lookup?term=author:"
+ },
+ {
+  "name": "book_lookup_nothing",
+  "path": "/api/v1/book/lookup?term=nothing"
+ },
+ {
+  "name": "book_lookup_search_fails",
+  "path": "/api/v1/book/lookup?term=broken"
+ },
+ {
+  "name": "book_lookup_no_term",
+  "path": "/api/v1/book/lookup"
+ },
+ {
+  "name": "author_lookup",
+  "path": "/api/v1/author/lookup?term=pratchett"
+ },
+ {
+  "name": "author_lookup_id",
+  "path": "/api/v1/author/lookup?term=author:1654"
+ },
+ {
+  "name": "author_lookup_missing",
+  "path": "/api/v1/author/lookup?term=author:404"
+ },
+ {
+  "name": "author_lookup_nothing",
+  "path": "/api/v1/author/lookup?term=nothing"
+ },
+ {
+  "name": "search",
+  "path": "/api/v1/search?term=small%20gods"
+ },
+ {
+  "name": "search_one",
+  "path": "/api/v1/search?term=mort"
+ },
+ {
+  "name": "search_edition_via_author",
+  "path": "/api/v1/search?term=isbn:9780062237378"
+ },
+ {
+  "name": "search_nothing",
+  "path": "/api/v1/search?term=nothing"
+ },
+ {
+  "name": "search_no_term",
+  "path": "/api/v1/search"
+ },
+ {
   "name": "more_files",
   "sql": "INSERT INTO BookFiles (Id, EditionId, CalibreId, Quality, Size, SceneName, DateAdded, ReleaseGroup, MediaInfo, Modified, Path, Part, OriginalFilePath, IndexerFlags) VALUES\n (3, 3, 0, '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', 512, NULL, '2025-05-05 12:00:00Z', 'GRP', NULL, '2025-05-05 11:00:00Z', '/books/Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub', 1, NULL, 0),\n (4, 5, 0, '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', 256, NULL, '2025-05-06 12:00:00Z', NULL, NULL, '2025-05-06 11:00:00Z', '/books/Ursula K. Le Guin/A Wizard of Earthsea (1968)/A Wizard of Earthsea - Ursula K. Le Guin.epub', 1, NULL, 0);\nINSERT INTO History (Id, SourceTitle, Date, Quality, Data, EventType, DownloadId, AuthorId, BookId) VALUES\n (1, 'Earthsea.epub', '2025-05-06 12:00:00Z', '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', '{}', 8, NULL, 2, 4),\n (2, 'Guards.epub', '2025-05-03 12:00:00Z', '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', '{}', 8, NULL, 1, 1);\nINSERT INTO ExtraFiles (Id, AuthorId, BookId, BookFileId, RelativePath, Extension, Added, LastUpdated) VALUES\n (1, 2, 4, 4, 'A Wizard of Earthsea (1968)/cover.jpg', '.jpg', '2025-05-06 12:00:00Z', '2025-05-06 12:00:00Z');\n",
   "files": [

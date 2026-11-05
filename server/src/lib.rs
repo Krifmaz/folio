@@ -103,6 +103,9 @@ pub struct AppState {
     pub readarr: SqliteDb,
     /// Where the Readarr port finds its paths on this machine (`READARR_DISK_ROOT`, else as they are).
     pub readarr_disk: readarr::disk::Disk,
+    /// The Readarr port's metadata client, which keeps answers and authors between lookups
+    /// (`READARR_GOODREADS_URL` says where Goodreads is, else www.goodreads.com).
+    pub readarr_lookup: readarr::bookinfo::BookInfo,
     /// The Audiobookshelf port's settings, tokens and sign-in limit.
     pub abs_server: abs::Server,
 }
@@ -137,6 +140,7 @@ impl AppState {
         let abs = abs::open(data)?;
         let readarr = readarr::open(data)?;
         let readarr_disk = readarr::disk::Disk::new(env("READARR_DISK_ROOT"));
+        let readarr_lookup = readarr::bookinfo::BookInfo::new(env("READARR_GOODREADS_URL"));
         let abs_server =
             abs::Server::load(&abs, data).map_err(|e| anyhow::anyhow!("The Audiobookshelf settings can't be read: {}", e.detail))?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
@@ -163,6 +167,7 @@ impl AppState {
             sockets: abs::socket::Sockets::default(),
             readarr,
             readarr_disk,
+            readarr_lookup,
             abs_server,
         })
     }
