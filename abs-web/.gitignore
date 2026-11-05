@@ -1,0 +1,5 @@
+# Folio: what `npm ci` and `npm run generate` make here (Audiobookshelf ignores the same in its repository root)
+node_modules/
+.nuxt/
+dist/
+static/sw.js

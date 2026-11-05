@@ -17,8 +17,12 @@ async fn server(name: &str) -> (Router, server::AppState, PathBuf) {
     let _ = std::fs::remove_dir_all(&dir);
     let web = dir.join("static");
     std::fs::create_dir_all(&web).unwrap();
+    // the Audiobookshelf web app at the root, Folio's own pages in folio/
     std::fs::write(web.join("index.html"), "<!doctype html><title>app</title>").unwrap();
-    std::fs::write(web.join(format!("{}-web-0123456789abcdef.js", server::NAME)), "").unwrap();
+    let own = web.join(server::OWN_PAGES);
+    std::fs::create_dir_all(&own).unwrap();
+    std::fs::write(own.join("index.html"), "<!doctype html><title>own pages</title>").unwrap();
+    std::fs::write(own.join(format!("{}-web-0123456789abcdef.js", server::NAME)), "").unwrap();
     let st = server::AppState::open(&dir.join("data"), web, |name| (name == "APP_API_KEY").then(|| "test-key".to_string())).await.unwrap();
     server::auth::ensure_owner(&st, None, Some(PASSWORD.into())).unwrap();
     (server::app(st.clone()), st, dir)
@@ -51,7 +55,10 @@ async fn health_names_the_version_and_the_web_build() {
     let r = app.clone().oneshot(Request::get("/api/health").body(Body::empty()).unwrap()).await.unwrap();
     assert_eq!(r.headers().get(format!("x-{}", server::NAME)).map(|v| v.to_str().unwrap()), Some("1"));
     assert_eq!(r.headers().get(header::CACHE_CONTROL).map(|v| v.to_str().unwrap()), Some("no-store"));
-    assert!(server::hashed_asset("/t-web-0123456789abcdef_bg.wasm"));
+    assert!(server::hashed_asset("/folio/t-web-0123456789abcdef_bg.wasm"));
+    assert!(server::hashed_asset("/_nuxt/3f2a1b9.js"));
+    assert!(!server::hashed_asset("/t-web-0123456789abcdef_bg.wasm"));
+    assert!(!server::hashed_asset("/folio/index.html"));
     assert!(!server::hashed_asset("/index.html"));
 }
 
@@ -197,12 +204,29 @@ async fn settings_come_from_the_schema_and_save() {
 #[tokio::test]
 async fn the_web_app_is_served_for_every_other_path() {
     let (app, _, _) = server("web").await;
-    for path in ["/", "/settings/diagnostics"] {
+    // the Audiobookshelf web app draws its pages in the browser: its index.html answers them all
+    for (path, title) in [
+        ("/", "<title>app</title>"),
+        ("/item/0b4a7e5c-1111-4222-8333-944455556666", "<title>app</title>"),
+        ("/library/abc/bookshelf/series", "<title>app</title>"),
+        ("/folio/", "<title>own pages</title>"),
+    ] {
         let r = app.clone().oneshot(Request::get(path).body(Body::empty()).unwrap()).await.unwrap();
         assert_eq!(r.status(), StatusCode::OK, "{path}");
         let b = axum::body::to_bytes(r.into_body(), 1 << 16).await.unwrap();
-        assert!(String::from_utf8_lossy(&b).contains("<title>app</title>"), "{path}");
+        assert!(String::from_utf8_lossy(&b).contains(title), "{path}");
     }
+    // the web app's sign-in page is at /login, where the API takes POST: GET gets the page, other methods 405
+    let r = app.clone().oneshot(Request::get("/login").body(Body::empty()).unwrap()).await.unwrap();
+    assert_eq!(r.status(), StatusCode::OK);
+    let b = axum::body::to_bytes(r.into_body(), 1 << 16).await.unwrap();
+    assert!(String::from_utf8_lossy(&b).contains("<title>app</title>"));
+    let r = app.clone().oneshot(Request::delete("/login").body(Body::empty()).unwrap()).await.unwrap();
+    assert_eq!(r.status(), StatusCode::METHOD_NOT_ALLOWED);
+    // `/folio` (no slash) goes to `/folio/`, so the pages' own addresses work
+    let r = app.clone().oneshot(Request::get("/folio").body(Body::empty()).unwrap()).await.unwrap();
+    assert!(r.status().is_redirection(), "{}", r.status());
+    assert_eq!(r.headers().get(header::LOCATION).map(|v| v.to_str().unwrap()), Some("/folio/"));
 }
 
 #[tokio::test]

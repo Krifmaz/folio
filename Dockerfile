@@ -19,7 +19,7 @@ RUN case "$TARGETARCH" in arm64) T=aarch64-unknown-linux-gnu ;; *) T=x86_64-unkn
  && cd server && cargo build --release --locked --target "$T" && cp "target/$T/release/folio" /app \
  && mkdir -p /data
 
-# The web app (Leptos → WebAssembly), built once on the build machine with trunk, served at / by the server.
+# Folio's own pages (Leptos → WebAssembly), built once on the build machine with trunk, served at /folio/.
 # Every text file also as <file>.br and <file>.gz next to it: the server sends the one the browser takes as it is.
 FROM --platform=$BUILDPLATFORM rust:1-slim-trixie AS ui
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates brotli && rm -rf /var/lib/apt/lists/* \
@@ -32,6 +32,18 @@ RUN cd web && trunk build --release --locked \
       -o -name '*.webmanifest' -o -name '*.json' \) -exec brotli -f -k -q 11 {} + -exec gzip -f -k -n -9 {} + \
  && find dist -name '*.br' | grep -q . && find dist -name '*.gz' | grep -q .
 
+# The Audiobookshelf web app (abs-web/, a light fork), built as static files for the root of the server
+# (ROUTER_BASE_PATH empty: upstream's default is /audiobookshelf), with the same .br and .gz copies.
+FROM --platform=$BUILDPLATFORM node:24-alpine AS absweb
+RUN apk add --no-cache brotli
+WORKDIR /src/abs-web
+COPY abs-web/package.json abs-web/package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY abs-web ./
+RUN ROUTER_BASE_PATH= npm run generate \
+ && find dist -type f \( -name '*.js' -o -name '*.css' -o -name '*.html' -o -name '*.svg' -o -name '*.json' \) \
+      -exec brotli -f -k -q 11 {} + -exec gzip -f -k -n -9 {} +
+
 # ffmpeg and ffprobe, static builds (FOSS, LGPL/GPL) for checking and merging audiobooks; no shell needed.
 FROM mwader/static-ffmpeg:7.1.1 AS ffmpeg
 
@@ -43,7 +55,9 @@ LABEL org.opencontainers.image.title="Folio" \
       org.opencontainers.image.url="https://github.com/Krifmaz/folio"
 COPY --from=build /app /usr/local/bin/folio
 COPY --from=build --chown=65532:65532 /data /data
-COPY --from=ui /src/web/dist /app/static
+# the Audiobookshelf web app at /, Folio's own pages at /folio/
+COPY --from=absweb /src/abs-web/dist /app/static
+COPY --from=ui /src/web/dist /app/static/folio
 COPY --from=ffmpeg /ffmpeg /ffprobe /usr/local/bin/
 ARG APP_VERSION=
 LABEL org.opencontainers.image.version="${APP_VERSION}"

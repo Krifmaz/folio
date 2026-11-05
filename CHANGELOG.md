@@ -6,6 +6,17 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Audiobookshelf's library pages: the list of libraries, one library with its filter menus, and a library's items
+  with every filter, sort and "collapse series", plus one item plain or expanded. Names sort "Last, First" the
+  original's way. The parity recording now also keeps the original's database rows, so these answers are checked
+  against the original's own on the same data. The recording is also pushed to a side branch `parity/<branch>`.
+- Listening and reading progress and bookmarks work like Audiobookshelf's (`/api/me/progress`, `/api/me/bookmarks`,
+  `/api/me/item/:id/bookmark`): set from any app, finished near the end, synced from phones with their own times,
+  hidden from Continue Listening, and told to your other apps as they change.
+- The web app looks like Folio: the Encore colours and font, the name Folio and its book icon, and links to
+  Folio's own repository instead of the upstream project's; its fork changes are listed in `abs-web/FOLIO.md`.
+- The web app is now Audiobookshelf's (built from `abs-web/` for the root of the server, served at `/`). Folio's
+  own pages (Wanted, Downloads, Review, Move in) move to `/folio/` and are linked from its sidebar.
 - The mobile app's settings page is checked in CI: each of its 24 device settings is changed on the page and
   must be saved and kept after a restart.
 - The mobile app signs in to Folio: its connect page names a Folio server, and connecting and signing in were
