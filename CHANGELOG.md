@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Added
+- The mobile app signs in to Folio: its connect page names a Folio server, and connecting and signing in were
+  checked against a running Folio server.
 - The base of the Readarr port: its database (`<data>/readarr.db`) with the original's exact schema and first-start
   rows, and its API v1 for reading authors, books, editions, series and book files, answering exactly like Readarr
   0.4.19.2811 (checked against 34 recorded answers, errors included). Readarr's API key is Folio's.
