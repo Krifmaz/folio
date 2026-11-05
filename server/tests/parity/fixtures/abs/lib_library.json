@@ -1,20 +1,20 @@
 {
  "body": {
-  "createdAt": 1793907650368,
+  "createdAt": 1793915239801,
   "displayOrder": 1,
   "folders": [
    {
-    "addedAt": 1793907650370,
+    "addedAt": 1793915239803,
     "fullPath": "/media",
-    "id": "e215a515-134a-4dd9-ba20-6db501b5ce10",
-    "libraryId": "41c7c607-9da9-483a-9fd7-94f86887db00"
+    "id": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
+    "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99"
    }
   ],
   "icon": "database",
-  "id": "41c7c607-9da9-483a-9fd7-94f86887db00",
-  "lastScan": 1793907650591,
+  "id": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+  "lastScan": 1793915239991,
   "lastScanVersion": "2.37.2",
-  "lastUpdate": 1793907650592,
+  "lastUpdate": 1793915239991,
   "mediaType": "book",
   "name": "Books",
   "provider": "google",
