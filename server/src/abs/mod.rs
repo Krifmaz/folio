@@ -17,6 +17,7 @@ pub mod models;
 pub mod playback;
 pub mod progress;
 pub mod sessions;
+pub mod scanner;
 pub mod settings;
 pub mod socket;
 pub mod users;
@@ -161,6 +162,7 @@ pub fn router() -> Router<AppState> {
         .merge(sessions::router())
         .merge(library::router())
         .merge(items::router())
+        .merge(scanner::router())
         .merge(users::router())
         .merge(api_keys::router())
 }
