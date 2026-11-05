@@ -99,6 +99,8 @@ pub struct AppState {
     pub sockets: abs::socket::Sockets,
     /// The Readarr port's database (`<data>/readarr.db`, the original's schema).
     pub readarr: SqliteDb,
+    /// The Audiobookshelf port's settings, tokens and sign-in limit.
+    pub abs_server: abs::Server,
 }
 
 impl AppState {
@@ -130,6 +132,8 @@ impl AppState {
         migration::migrate(&db)?;
         let abs = abs::open(data)?;
         let readarr = readarr::open(data)?;
+        let abs_server =
+            abs::Server::load(&abs, data).map_err(|e| anyhow::anyhow!("The Audiobookshelf settings can't be read: {}", e.detail))?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -153,6 +157,7 @@ impl AppState {
             abs,
             sockets: abs::socket::Sockets::default(),
             readarr,
+            abs_server,
         })
     }
 

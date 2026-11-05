@@ -3,10 +3,13 @@
 
 Usage: record.py BASE_URL OUT_DIR DB_PATH
 
+Placeholders always known: {library}, {token} (root's access token) and {legacy_token} (root's old token).
+
 1. Waits for the server, creates the root user (root / root), signs in, adds a book library on /media and scans it.
 2. Replays requests.json. Each request may use {placeholders} filled from earlier answers (see `save`).
 3. Writes one JSON file per request to OUT_DIR/fixtures/<name>.json:
-   {"request": {...}, "status": 200, "content_type": "...", "body": <JSON or text>}
+   {"request": {...}, "status": 200, "content_type": "...", "body": <JSON or text>, "cookies": [...]}
+   (`cookies`: the cookies the answer set, as `name; attributes`, without their values)
 4. Copies the database schema (sqlite_master) to OUT_DIR/schema.sql.
 
 Only the standard library is used, so it runs on any CI runner.
@@ -26,19 +29,37 @@ ctx = {}
 token = None
 
 
-def call(method, path, body=None, auth=True):
-    """Send one request; answer (status, content type, parsed body)."""
+def cookies_of(headers):
+    """The cookies an answer sets, without their values: `name; attributes` (values are tokens)."""
+    out = []
+    for c in headers.get_all("Set-Cookie") or []:
+        name, _, rest = c.partition("=")
+        attrs = [a.strip() for a in rest.split(";")[1:] if not a.strip().lower().startswith("expires=")]
+        out.append("; ".join([name.strip()] + attrs))
+    return sorted(out)
+
+
+last_cookies = []
+
+
+def call(method, path, body=None, auth=True, headers=None):
+    """Send one request; answer (status, content type, parsed body). The cookies it set go to `last_cookies`."""
+    global last_cookies
     data = None if body is None else json.dumps(body).encode()
     req = urllib.request.Request(base + path, data=data, method=method)
     if data is not None:
         req.add_header("Content-Type", "application/json")
     if auth and token:
         req.add_header("Authorization", "Bearer " + token)
+    for k, v in (headers or {}).items():
+        req.add_header(k, v)
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
             status, ctype, raw = r.status, r.headers.get("Content-Type", ""), r.read()
+            last_cookies = cookies_of(r.headers)
     except urllib.error.HTTPError as e:
         status, ctype, raw = e.code, e.headers.get("Content-Type", ""), e.read()
+        last_cookies = cookies_of(e.headers)
     if "json" in ctype:
         try:
             return status, ctype, json.loads(raw)
@@ -59,7 +80,7 @@ def dig(value, path):
 def ctx_needed(r):
     """The {placeholders} a request uses."""
     import re
-    return set(re.findall(r"\{([a-z0-9_]+)\}", json.dumps(r.get("body")) + r["path"]))
+    return set(re.findall(r"\{([a-z0-9_]+)\}", json.dumps(r.get("body")) + json.dumps(r.get("headers")) + r["path"]))
 
 
 def fill(text):
@@ -83,6 +104,8 @@ status, _, login = call("POST", "/login", {"username": "root", "password": "root
 if status != 200:
     sys.exit(f"login failed: {status} {login}")
 token = login["user"].get("accessToken") or login["user"]["token"]
+ctx["token"] = token
+ctx["legacy_token"] = login["user"]["token"]
 status, _, lib = call("POST", "/api/libraries", {"name": "Books", "folders": [{"fullPath": "/media"}], "mediaType": "book"})
 print("library:", status)
 ctx["library"] = lib["id"]
@@ -105,7 +128,8 @@ for r in requests:
         continue
     path = fill(r["path"])
     body = json.loads(fill(json.dumps(r["body"]))) if "body" in r else None
-    status, ctype, answer = call(r.get("method", "GET"), path, body, auth=r.get("auth", True))
+    headers = json.loads(fill(json.dumps(r["headers"]))) if "headers" in r else None
+    status, ctype, answer = call(r.get("method", "GET"), path, body, auth=r.get("auth", True), headers=headers)
     for key, where in r.get("save", {}).items():
         try:
             ctx[key] = dig(answer, where)
@@ -113,6 +137,10 @@ for r in requests:
             print(f"warning: {r['name']} has no {where}; requests that need {{{key}}} are skipped")
     record = {"request": {"method": r.get("method", "GET"), "path": r["path"], "body": r.get("body")},
               "status": status, "content_type": ctype.split(";")[0], "body": answer}
+    if "headers" in r:
+        record["request"]["headers"] = r["headers"]
+    if last_cookies:
+        record["cookies"] = last_cookies
     with open(os.path.join(out, "fixtures", r["name"] + ".json"), "w", encoding="utf-8") as f:
         json.dump(record, f, indent=1, sort_keys=True, ensure_ascii=False)
         f.write("\n")

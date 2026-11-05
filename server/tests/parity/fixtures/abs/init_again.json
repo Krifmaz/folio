@@ -1,0 +1,15 @@
+{
+ "body": "Internal Server Error",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "newRoot": {
+    "password": "root",
+    "username": "root"
+   }
+  },
+  "method": "POST",
+  "path": "/init"
+ },
+ "status": 500
+}

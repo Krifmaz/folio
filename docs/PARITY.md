@@ -120,7 +120,7 @@ repository at the pinned commit.
 | A0080 | endpoint | `POST /api/playlists/:id/batch/add` (PlaylistController.addBatch) | `server/routers/ApiRouter.js#L166` | P4 collections | todo |  |
 | A0081 | endpoint | `POST /api/playlists/:id/batch/remove` (PlaylistController.removeBatch) | `server/routers/ApiRouter.js#L167` | P4 collections | todo |  |
 | A0082 | endpoint | `POST /api/playlists/collection/:collectionId` (PlaylistController.createFromCollection) | `server/routers/ApiRouter.js#L168` | P4 collections | todo |  |
-| A0083 | endpoint | `GET /api/me` (MeController.getCurrentUser) | `server/routers/ApiRouter.js#L173` | P2 users | todo |  |
+| A0083 | endpoint | `GET /api/me` (MeController.getCurrentUser) | `server/routers/ApiRouter.js#L173` | P2 users | done | `server/tests/abs_auth.rs::sign_in_refresh_and_sign_out_answer_like_the_original` |
 | A0084 | endpoint | `GET /api/me/sessions` (MeController.getSessions) | `server/routers/ApiRouter.js#L174` | P2 users | todo |  |
 | A0085 | endpoint | `DELETE /api/me/sessions/:id` (MeController.deleteSession) | `server/routers/ApiRouter.js#L175` | P2 users | todo |  |
 | A0086 | endpoint | `GET /api/me/progress` (MeController.getAllMediaProgress) | `server/routers/ApiRouter.js#L176` | P3 playback | todo |  |
@@ -228,7 +228,7 @@ repository at the pinned commit.
 | A0188 | endpoint | `GET /api/tasks` (MiscController.getTasks) | `server/routers/ApiRouter.js#L347` | P6 server admin | todo |  |
 | A0189 | endpoint | `PATCH /api/settings` (MiscController.updateServerSettings) | `server/routers/ApiRouter.js#L348` | P6 server admin | todo |  |
 | A0190 | endpoint | `PATCH /api/sorting-prefixes` (MiscController.updateSortingPrefixes) | `server/routers/ApiRouter.js#L349` | P6 server admin | todo |  |
-| A0191 | endpoint | `POST /api/authorize` (MiscController.authorize) | `server/routers/ApiRouter.js#L350` | P2 users | todo |  |
+| A0191 | endpoint | `POST /api/authorize` (MiscController.authorize) | `server/routers/ApiRouter.js#L350` | P2 users | done | `server/tests/abs_auth.rs::sign_in_refresh_and_sign_out_answer_like_the_original` |
 | A0192 | endpoint | `GET /api/tags` (MiscController.getAllTags) | `server/routers/ApiRouter.js#L351` | P1 library | todo |  |
 | A0193 | endpoint | `POST /api/tags/rename` (MiscController.renameTag) | `server/routers/ApiRouter.js#L352` | P1 library | todo |  |
 | A0194 | endpoint | `DELETE /api/tags/:tag` (MiscController.deleteTag) | `server/routers/ApiRouter.js#L353` | P1 library | todo |  |
@@ -250,23 +250,23 @@ repository at the pinned commit.
 | A0210 | endpoint | `GET /feed/:slug` | `server/Server.js#L362` | P5 podcasts and feeds | todo |  |
 | A0211 | endpoint | `GET /feed/:slug/cover*` | `server/Server.js#L366` | P5 podcasts and feeds | todo |  |
 | A0212 | endpoint | `GET /feed/:slug/item/:episodeId/*` | `server/Server.js#L369` | P5 podcasts and feeds | todo |  |
-| A0213 | endpoint | `POST /init` | `server/Server.js#L377` | P2 users | todo |  |
-| A0214 | endpoint | `GET /status` | `server/Server.js#L384` | P2 users | todo |  |
-| A0215 | endpoint | `GET /ping` | `server/Server.js#L401` | P2 users | todo |  |
-| A0216 | endpoint | `GET /healthcheck` | `server/Server.js#L405` | P2 users | todo |  |
-| A0217 | endpoint | `POST /login` | `server/Auth.js#L322` | P2 users | todo |  |
-| A0218 | endpoint | `POST /auth/refresh` | `server/Auth.js#L331` | P2 users | todo |  |
+| A0213 | endpoint | `POST /init` | `server/Server.js#L377` | P2 users | done | `server/tests/abs_auth.rs::a_new_server_asks_for_setup_then_answers_like_the_original` |
+| A0214 | endpoint | `GET /status` | `server/Server.js#L384` | P2 users | done | `server/tests/abs_auth.rs::a_new_server_asks_for_setup_then_answers_like_the_original` |
+| A0215 | endpoint | `GET /ping` | `server/Server.js#L401` | P2 users | done | `server/tests/abs_auth.rs::a_new_server_asks_for_setup_then_answers_like_the_original` |
+| A0216 | endpoint | `GET /healthcheck` | `server/Server.js#L405` | P2 users | done | `server/tests/abs_auth.rs::a_new_server_asks_for_setup_then_answers_like_the_original` |
+| A0217 | endpoint | `POST /login` | `server/Auth.js#L322` | P2 users | done | `server/tests/abs_auth.rs::sign_in_refresh_and_sign_out_answer_like_the_original`, `server/tests/abs_auth.rs::too_many_sign_in_attempts_are_refused`, `server/tests/abs_auth.rs::a_passwordless_root_signs_in_with_an_empty_password_only` |
+| A0218 | endpoint | `POST /auth/refresh` | `server/Auth.js#L331` | P2 users | done | `server/tests/abs_auth.rs::sign_in_refresh_and_sign_out_answer_like_the_original` |
 | A0219 | endpoint | `GET /auth/openid` | `server/Auth.js#L362` | P2 users | todo |  |
 | A0220 | endpoint | `GET /auth/openid/mobile-redirect` | `server/Auth.js#L380` | P2 users | todo |  |
 | A0221 | endpoint | `GET /auth/openid/config` | `server/Auth.js#L464` | P2 users | todo |  |
-| A0222 | endpoint | `POST /logout` | `server/Auth.js#L486` | P2 users | todo |  |
-| A0223 | socket | client → server `auth` | `server/SocketAuthority.js#L188` | P2 users | wip | refusal done (`server/tests/abs_socket.rs`); tokens with P2 |
+| A0222 | endpoint | `POST /logout` | `server/Auth.js#L486` | P2 users | wip | `server/tests/abs_auth.rs::sign_in_refresh_and_sign_out_answer_like_the_original`; the OpenID sign-out address comes with P2b |
+| A0223 | socket | client → server `auth` | `server/SocketAuthority.js#L188` | P2 users | done | `server/tests/abs_socket.rs::a_valid_token_signs_the_socket_in_like_the_original`, `server/tests/abs_socket.rs::apps_connect_and_a_bad_token_gets_auth_failed` |
 | A0224 | socket | client → server `cancel_scan` | `server/SocketAuthority.js#L191` | P2 users | todo |  |
 | A0225 | socket | client → server `search_covers` | `server/SocketAuthority.js#L197` | P2 users | todo |  |
 | A0226 | socket | client → server `cancel_cover_search` | `server/SocketAuthority.js#L198` | P2 users | todo |  |
 | A0227 | socket | client → server `set_log_listener` | `server/SocketAuthority.js#L201` | P2 users | todo |  |
 | A0228 | socket | client → server `remove_log_listener` | `server/SocketAuthority.js#L210` | P2 users | todo |  |
-| A0229 | socket | client → server `disconnect` | `server/SocketAuthority.js#L213` | P2 users | todo |  |
+| A0229 | socket | client → server `disconnect` | `server/SocketAuthority.js#L213` | P2 users | wip | `user_offline` is sent to admins; no test yet |
 | A0230 | socket | client → server `message_all_users` | `server/SocketAuthority.js#L239` | P2 users | todo |  |
 | A0231 | socket | client → server `ping` | `server/SocketAuthority.js#L249` | P2 users | done | `server/tests/abs_socket.rs::apps_connect_and_a_bad_token_gets_auth_failed` |
 | A0232 | socket | server → client `admin_message` | `server/SocketAuthority.js#L244` | P2 users | todo |  |
@@ -310,8 +310,8 @@ repository at the pinned commit.
 | A0270 | socket | server → client `track_progress` | `server/managers/AbMergeManager.js#L147` | P2 users | todo |  |
 | A0271 | socket | server → client `track_started` | `server/managers/AbMergeManager.js#L145` | P2 users | todo |  |
 | A0272 | socket | server → client `user_added` | `server/controllers/UserController.js#L187` | P2 users | todo |  |
-| A0273 | socket | server → client `user_offline` | `server/SocketAuthority.js#L224` | P2 users | todo |  |
-| A0274 | socket | server → client `user_online` | `server/SocketAuthority.js#L348` | P2 users | todo |  |
+| A0273 | socket | server → client `user_offline` | `server/SocketAuthority.js#L224` | P2 users | wip | sent on disconnect; no test yet |
+| A0274 | socket | server → client `user_online` | `server/SocketAuthority.js#L348` | P2 users | done | `server/tests/abs_socket.rs::a_valid_token_signs_the_socket_in_like_the_original` |
 | A0275 | socket | server → client `user_removed` | `server/controllers/UserController.js#L402` | P2 users | todo |  |
 | A0276 | socket | server → client `user_stream_update` | `server/managers/PlaybackSessionManager.js#L361` | P2 users | todo |  |
 | A0277 | setting | server `tokenSecret` (default `null`) | `server/objects/settings/ServerSettings.js#L36` | P6 server admin | todo |  |
