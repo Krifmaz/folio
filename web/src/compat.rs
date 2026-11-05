@@ -113,7 +113,7 @@ pub fn OtherApps() -> impl IntoView {
             </div>
             <div class="card mt" id="abs-card">
                 <h2>"Audiobookshelf apps"</h2>
-                <p class="muted">"The Audiobookshelf app, ShelfPlayer, Plappa and others: use this server address and your Folio username and password."</p>
+                <p class="muted">"The Audiobookshelf app, ShelfPlayer, Plappa and others: use this server address and your Audiobookshelf username and password (the first visit sets up the root user)."</p>
                 <Address value=s(&v, "audiobookshelf")/>
             </div>
             <KoreaderCard address=s(&v, "koreader") username=s(&v, "username") set=v["koreader_password_set"].as_bool().unwrap_or(false) reload=reload/>

@@ -41,21 +41,16 @@ Written from the API of [koreader-sync-server](https://github.com/koreader/korea
 
 ## Audiobookshelf apps
 
-The Audiobookshelf phone app, ShelfPlayer, Plappa, Lissen and other Audiobookshelf apps play Folio's audiobooks
-and open its ebooks.
+Folio is a port of the Audiobookshelf server (v2.37.2, see `docs/PARITY.md`), so the Audiobookshelf phone app,
+ShelfPlayer, Plappa, Lissen and other Audiobookshelf apps talk to it as they would to Audiobookshelf.
 
-- **Server address:** `https://folio.example` (`https://folio.example/abs` works too).
-- **Username and password:** your Folio ones.
+- **Server address:** `https://folio.example`.
+- **Username and password:** the Audiobookshelf ones. The first time, the server asks for a root user to be set
+  up, like a new Audiobookshelf; an existing Audiobookshelf database (`absdatabase.sqlite` in the data folder)
+  keeps its users, passwords and tokens.
 
-The apps see two libraries, **Audiobooks** and **Ebooks**, with Continue Listening, Recently Added, series,
-authors and search. A place reached in an app is the book's place in Folio's web player and Android app, and the
-other way round; the newest place wins, also for books played offline and synced later. Bookmarks are Folio's
-bookmarks.
-
-Not there: podcasts, collections and playlists, uploading, editing books from the app, and live updates (the apps
-ask again when you pull to refresh).
-
-Written from Audiobookshelf's [API documentation](https://api.audiobookshelf.org) (server version 2.25).
+The port is in progress: sign-in, sign-out and the apps' live connection work like the original now; the library,
+playback, collections, podcasts and the rest follow track by track (each row of `docs/PARITY.md` says what works).
 
 ## Kobo e-readers
 
