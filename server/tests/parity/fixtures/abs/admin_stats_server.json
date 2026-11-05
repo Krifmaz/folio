@@ -1,0 +1,26 @@
+{
+ "body": {
+  "books": {
+   "numAudioFiles": 4,
+   "numItems": 3,
+   "totalSize": 439025
+  },
+  "podcasts": {
+   "numAudioFiles": 0,
+   "numItems": 0,
+   "totalSize": 0
+  },
+  "total": {
+   "numAudioFiles": 4,
+   "numItems": 3,
+   "totalSize": 439025
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/stats/server"
+ },
+ "status": 200
+}

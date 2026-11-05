@@ -1,0 +1,13 @@
+{
+ "body": "Forbidden",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "POST",
+  "path": "/api/cache/purge"
+ },
+ "status": 403
+}
