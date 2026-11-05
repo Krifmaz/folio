@@ -527,7 +527,7 @@ pub fn ereader_devices(db: &dyn Db, u: &models::User) -> Result<Vec<Value>> {
 }
 
 /// Whether a user may use an e-reader device (`checkUserCanAccessDevice`).
-fn device_allowed(device: &Value, u: &models::User) -> bool {
+pub fn device_allowed(device: &Value, u: &models::User) -> bool {
     use crate::abs::models::user;
     match device.get("availabilityOption").and_then(Value::as_str).filter(|s| !s.is_empty()).unwrap_or("adminOrUp") {
         "adminOrUp" => user::is_admin_or_up(u),

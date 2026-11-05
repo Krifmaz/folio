@@ -1,0 +1,12 @@
+{
+ "body": "allowedOrigins must be an array",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "allowedOrigins": "https://a.example"
+  },
+  "method": "PATCH",
+  "path": "/api/settings"
+ },
+ "status": 400
+}
