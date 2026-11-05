@@ -3,6 +3,11 @@
 ## Unreleased
 
 ### Added
+- Listen and Read in the web app. The audiobook player plays a book's files as one book with its chapters, speed,
+  a sleep timer (minutes or the end of the chapter), bookmarks with notes, media keys and the lock screen. The EPUB
+  reader shows the book in pages in the app's colours, with its contents, text size, bookmarks and page turns by
+  buttons, keys or a tap on the page's edge; the book's own scripts never run. Both keep your place on the server
+  (every device carries on from it) and keep it in the browser until the server can be reached again.
 - Listening and reading on the server: each book's files are sent whole or in parts (so players can jump anywhere)
   with an ETag; each person's place in each book and their bookmarks are kept, and the newest place wins across
   devices (`/api/files`, `/api/progress`, `/api/editions/{id}/bookmarks`).
