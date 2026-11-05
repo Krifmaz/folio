@@ -1,0 +1,13 @@
+{
+ "body": "Invalid request body",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "name": "x",
+   "url": "https://meta.example/api"
+  },
+  "method": "POST",
+  "path": "/api/custom-metadata-providers"
+ },
+ "status": 400
+}

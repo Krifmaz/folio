@@ -7,12 +7,16 @@
 //! ([`SCHEMA`], recorded from the original's image). An existing Audiobookshelf database can therefore be used as
 //! it is.
 
+pub mod admin;
 pub mod api_keys;
 pub mod auth;
 pub mod bookmarks;
+pub mod cron;
+pub mod email;
 pub mod html;
 pub mod items;
 pub mod library;
+pub mod metadata_providers;
 pub mod models;
 pub mod playback;
 pub mod progress;
@@ -20,6 +24,7 @@ pub mod scanner;
 pub mod sessions;
 pub mod settings;
 pub mod socket;
+pub mod tasks;
 pub mod users;
 
 use crate::AppState;
@@ -67,6 +72,8 @@ pub struct Server {
     pub config_path: PathBuf,
     /// The original's `MetadataPath`: covers, caches and backups (`<data>/metadata`).
     pub metadata_path: PathBuf,
+    /// The running tasks the apps show.
+    pub tasks: Arc<tasks::TaskManager>,
     /// How the server was installed (`Source`, from `SOURCE`; `docker` by default, like the original's image).
     pub source: String,
 }
@@ -98,6 +105,7 @@ impl Server {
             limiter: Arc::new(auth::RateLimiter::from_env()),
             config_path: data.to_path_buf(),
             metadata_path,
+            tasks: Arc::new(tasks::TaskManager::default()),
             source: std::env::var("SOURCE").ok().filter(|s| !s.is_empty()).unwrap_or_else(|| "docker".into()),
         })
     }
@@ -165,6 +173,9 @@ pub fn router() -> Router<AppState> {
         .merge(scanner::router())
         .merge(users::router())
         .merge(api_keys::router())
+        .merge(admin::router())
+        .merge(metadata_providers::router())
+        .merge(email::router())
 }
 
 /// Test helpers: the recorded answers of the original and the comparison of tests/parity.

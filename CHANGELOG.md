@@ -6,6 +6,10 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Server settings work like Audiobookshelf's: admins change the settings and the words ignored when sorting
+  titles (sort titles are refreshed), check a schedule before saving it, add and remove their own metadata
+  providers, and set the mail server and e-reader devices with who may use each. The task list the apps show is
+  in place for the jobs that will use it. Each answer is checked against the original's own.
 - The Readarr API can delete authors, books and book files, one or several, with Readarr's options (delete the
   files, add an import list exclusion). Files go to Readarr's recycling bin when one is set. What a delete leaves
   behind (rows and files on disk) is checked against Readarr's own, recorded at four points.
