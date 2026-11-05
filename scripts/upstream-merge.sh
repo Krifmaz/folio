@@ -105,6 +105,12 @@ fi
 
 prev=""
 prev_upstream=""
+# The last snapshot: the local branch, else the newest one in this branch's history (a fresh clone, or the
+# branch deleted after its merge).
+if ! git rev-parse --verify --quiet "refs/heads/$branch" >/dev/null; then
+    last="$(git log -1 --format=%H --grep="^Upstream snapshot of $dst at " HEAD 2>/dev/null || true)"
+    [[ -n "$last" ]] && git branch --quiet "$branch" "$last"
+fi
 if git rev-parse --verify --quiet "refs/heads/$branch" >/dev/null; then
     prev="$(git rev-parse "refs/heads/$branch")"
     prev_upstream="$(git log -1 --format=%B "$prev" | sed -n 's/^Upstream-Commit: //p' | head -n1)"
