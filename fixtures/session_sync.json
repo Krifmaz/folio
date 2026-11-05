@@ -1,0 +1,14 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "currentTime": 10,
+   "duration": 60,
+   "timeListened": 10
+  },
+  "method": "POST",
+  "path": "/api/session/{session}/sync"
+ },
+ "status": 200
+}

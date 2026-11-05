@@ -1,0 +1,32 @@
+{
+ "body": {
+  "booksWithCovers": [],
+  "finishedBooksWithCovers": [],
+  "longestAudiobookFinished": null,
+  "mostListenedMonth": {
+   "month": 10,
+   "time": 15
+  },
+  "mostListenedNarrator": null,
+  "numBooksFinished": 0,
+  "numBooksListened": 1,
+  "topAuthors": [
+   {
+    "name": "Becky Chambers",
+    "time": 15
+   }
+  ],
+  "topGenres": [],
+  "totalBookListeningTime": 15,
+  "totalListeningSessions": 1,
+  "totalListeningTime": 15,
+  "totalPodcastListeningTime": 0
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/stats/year/2026"
+ },
+ "status": 200
+}

@@ -1,0 +1,12 @@
+{
+ "body": "Key \"token\" cannot be updated",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "token": "x"
+  },
+  "method": "PATCH",
+  "path": "/api/users/{user_id}"
+ },
+ "status": 400
+}
