@@ -3,6 +3,12 @@
 ## Unreleased
 
 ### Added
+- Downloads through Lantern only (Settings → Downloads: its address and API key). Searches are built from the
+  edition (ASIN or ISBN, author and title, title and narrator) and every result is scored on all of them, the
+  file format, language, size and seeders, with the reasons; samples, abridged copies, other languages and file
+  formats the preferences don't take are refused. The best result is grabbed (Search now, or every 6 hours);
+  Results shows every result with Grab; Downloads follows each grab until its files arrive. Diagnostics checks
+  Lantern. The contract is in `docs/LANTERN.md`.
 - Wanted lists: want an exact edition; Wanted page per format with each book's status. Preferences per format
   (file formats best first: M4B before MP3, EPUB before AZW3 before PDF; languages; unabridged only) refuse
   editions that won't do, in plain words. Follow authors and series in audiobooks, ebooks or both: new books

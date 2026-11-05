@@ -11,11 +11,13 @@
 //! | `/api/auth/login`, `/api/auth/logout`, `/api/auth/me` | [`auth`] |
 //! | `/api/library/*`: works, editions, authors, series, lookups | [`library`] |
 //! | `/api/wanted*`, `/api/profiles*`, following authors and series | [`wanted`] |
+//! | `/api/wanted/{id}/search`, `/releases`, `/grab`, `/api/grabs`, `/api/lantern/*`: downloads through Lantern | [`lantern`] |
 //!
 //! Everything the app adds of its own goes into [`app`] next to them.
 
 pub mod auth;
 pub mod checks;
+pub mod lantern;
 pub mod library;
 pub mod metadata;
 pub mod wanted;
@@ -109,6 +111,7 @@ impl AppState {
         auth::migrate(&db)?;
         library::store::migrate(&db)?;
         wanted::store::migrate(&db)?;
+        lantern::grabs::migrate(&db)?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
         let prefs = SqlitePrefs::new(db.clone()).map_err(kit)?;
         let reports = kit_server_bugreports::SqliteReports::new(db.clone()).map_err(kit)?;
@@ -226,6 +229,7 @@ pub fn app(st: AppState) -> Router {
         .merge(auth::router())
         .merge(library::router())
         .merge(wanted::router())
+        .merge(lantern::grabs::router())
         .with_state(st)
         .fallback_service(spa)
         .layer(axum::middleware::from_fn(security_headers))

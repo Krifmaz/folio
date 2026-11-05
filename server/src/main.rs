@@ -21,6 +21,7 @@ async fn main() -> anyhow::Result<()> {
         .init();
     let st = server::AppState::from_env().await?;
     server::wanted::follow::spawn(st.clone());
+    server::lantern::grabs::spawn(st.clone());
     let addr = SocketAddr::from(([0, 0, 0, 0], server::port()));
     tracing::info!("{name} {} listening on {addr}", server::VERSION);
     let listener = tokio::net::TcpListener::bind(addr).await?;

@@ -55,7 +55,7 @@ pub fn migrate(db: &SqliteDb) -> anyhow::Result<()> {
 }
 
 /// Where a wanted edition is on its way into the library.
-pub const STATUSES: &[&str] = &["wanted", "searching", "downloading", "review", "imported", "failed"];
+pub const STATUSES: &[&str] = &["wanted", "searching", "downloading", "downloaded", "review", "imported", "failed"];
 
 /// What a good copy of a book in one format is.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

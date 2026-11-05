@@ -2,7 +2,7 @@
 //!
 //! - Notice `data`: the data folder can't be written (the kit's storage notice, for the one folder this app
 //!   writes to), checked every minute and on Check again. Served at `/api/notices/data` (and in `/api/notices`).
-//! - Diagnostics: the data folder and the database. An app adds its own services, folders and tools here.
+//! - Diagnostics: the data folder, Lantern and the database.
 
 use crate::AppState;
 use kit_server_core::Db;
@@ -61,6 +61,25 @@ pub fn diagnostics() -> Registry<AppState> {
                 Err(why) => Check::new("Data folder", Kind::Path, false, format!("{shown} · {why}"))
                     .request(shown)
                     .fix("Check the disk (dmesg, fsck) or the mount, and that the server's user may write to it"),
+            }
+        })
+        .check("lantern", |st: AppState| async move {
+            let url = st.settings.str("lantern_url");
+            match crate::lantern::grabs::lantern(&st) {
+                Err(e) => Check::new("Lantern", Kind::Service, false, e.detail)
+                    .fix("Add Lantern's address and API key under Settings → Downloads"),
+                Ok(l) => match l
+                    .search(
+                        crate::metadata::Format::Ebook,
+                        &crate::lantern::score::SearchQuery { text: "test".into(), author: String::new(), title: String::new() },
+                    )
+                    .await
+                {
+                    Ok(_) => Check::new("Lantern", Kind::Service, true, format!("{url} · answers")).request(url),
+                    Err(e) => Check::new("Lantern", Kind::Service, false, e.detail)
+                        .request(url)
+                        .fix("Check that Lantern is running, its address and the API key"),
+                },
             }
         })
         .check("database", |st: AppState| async move {

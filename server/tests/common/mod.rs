@@ -156,3 +156,69 @@ pub async fn sources() -> HashMap<String, String> {
         ("APP_HARDCOVER_TOKEN".to_string(), "hc-token".to_string()),
     ])
 }
+
+/// A stand-in Lantern with the API key `lantern-key`: searches answer from a fixed list of results (an M4B, an
+/// MP3, a sample and an abridged copy of Project Hail Mary; an EPUB of it; nothing else), grabs get ids `g1`, `g2`
+/// … and report `completed` with one file each when asked. The environment that points Folio at it.
+pub async fn lantern() -> HashMap<String, String> {
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    use std::sync::Arc;
+    let count = Arc::new(AtomicUsize::new(0));
+    let ok_key = |h: &axum::http::HeaderMap| h.get("x-api-key").and_then(|v| v.to_str().ok()) == Some("lantern-key");
+    let search = move |headers: axum::http::HeaderMap, axum::extract::Query(q): axum::extract::Query<HashMap<String, String>>| async move {
+        if !ok_key(&headers) {
+            return Err(StatusCode::UNAUTHORIZED);
+        }
+        let text = q.get("query").cloned().unwrap_or_default();
+        let cats = q.get("categories").cloned().unwrap_or_default();
+        let r = |guid: &str, title: &str, mb: u64, seeders: i64| serde_json::json!({ "guid": guid, "title": title, "indexerId": 1, "indexer": "BookTracker", "size": mb * 1_000_000, "seeders": seeders, "protocol": "torrent", "downloadUrl": format!("http://lantern/1/download?link={guid}") });
+        let audio = cats.contains("3030");
+        let list = if text.contains("Hail Mary") || text == "B08G9PRS1K" || text == "9780593135204" {
+            if audio {
+                vec![
+                    r("mp3", "Andy Weir - Project Hail Mary [Ray Porter] MP3", 800, 30),
+                    r("m4b", "Andy Weir - Project Hail Mary (Unabridged) [Ray Porter] B08G9PRS1K M4B", 520, 12),
+                    r("sample", "Andy Weir - Project Hail Mary sample m4b", 4, 50),
+                    r("abridged", "Andy Weir - Project Hail Mary (Abridged) m4b", 200, 40),
+                ]
+            } else {
+                vec![
+                    r("epub", "Andy Weir - Project Hail Mary (2021) 9780593135204 epub", 3, 20),
+                    r("mobi", "Andy Weir - Project Hail Mary mobi", 3, 20),
+                ]
+            }
+        } else {
+            vec![]
+        };
+        Ok(Json(serde_json::Value::Array(list)))
+    };
+    let apps = move |headers: axum::http::HeaderMap, Json(_): Json<Value>| async move {
+        if !ok_key(&headers) {
+            return Err(StatusCode::UNAUTHORIZED);
+        }
+        Ok(Json(serde_json::json!({ "id": "folio", "categories": { "audiobook": "folio-audiobooks", "ebook": "folio-ebooks" } })))
+    };
+    let c = count.clone();
+    let grab = move |headers: axum::http::HeaderMap, Json(body): Json<Value>| {
+        let c = c.clone();
+        async move {
+            if !ok_key(&headers) {
+                return Err(StatusCode::UNAUTHORIZED);
+            }
+            let n = c.fetch_add(1, Ordering::SeqCst) + 1;
+            Ok(Json(serde_json::json!({ "id": format!("g{n}"), "status": "queued", "progress": 0, "reference": body["reference"] })))
+        }
+    };
+    let state = |axum::extract::Path(id): axum::extract::Path<String>| async move {
+        Json(
+            serde_json::json!({ "id": id, "status": "completed", "progress": 1, "path": format!("/downloads/folio/{id}"), "files": [{ "path": format!("/downloads/folio/{id}/book.m4b"), "size": 520_000_000u64 }] }),
+        )
+    };
+    let r = Router::new()
+        .route("/api/v1/search", get(search))
+        .route("/api/hub/apps", post(apps))
+        .route("/api/hub/grabs", post(grab))
+        .route("/api/hub/grabs/{id}", get(state));
+    let base = serve(r).await;
+    HashMap::from([("APP_LANTERN_URL".to_string(), base), ("APP_LANTERN_API_KEY".to_string(), "lantern-key".to_string())])
+}
