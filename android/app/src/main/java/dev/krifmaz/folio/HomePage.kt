@@ -36,7 +36,6 @@ import dev.krifmaz.kit.compose.bugs.CrashLog
 import dev.krifmaz.kit.compose.bugs.CrashLogReport
 import dev.krifmaz.kit.compose.bugs.NewBugReportSheet
 import dev.krifmaz.kit.compose.bugs.saveExport
-import dev.krifmaz.kit.compose.details.DetailsDialog
 import dev.krifmaz.kit.compose.dialogs.ConfirmDialog
 import dev.krifmaz.kit.compose.offline.OfflineBanner
 import dev.krifmaz.kit.compose.offline.probeHealth
@@ -58,8 +57,8 @@ import dev.krifmaz.kit.compose.R as KitR
 
 /**
  * The first page: the offline banner when the server can't be reached, What's new once after an update, the
- * kit's toasts and details, the entries to the other pages, bug reports, the crash log and updates. The list's
- * resource id ("home-list") is what the benchmarks scroll. Replace the "Try the kit" part with the app's own.
+ * entries to the library and the other pages, bug reports, the crash log and updates. The list's resource id
+ * ("home-list") is what the benchmarks scroll.
  *
  * @param app the app (its server, settings and calls).
  * @param base the server's address.
@@ -74,7 +73,6 @@ fun HomePage(app: App, base: String, bugs: BugReportsHost, open: (Page) -> Unit,
     val scope = rememberCoroutineScope()
     // who is looking: null until the server says (or when it can't); the admin pages show unless it says no
     var me by remember { mutableStateOf<Me?>(null) }
-    var details by remember { mutableStateOf(false) }
     var askSignOut by remember { mutableStateOf(false) }
     var newReport by remember { mutableStateOf(false) }
     // offline mode: one /api/health check at start and on every Retry
@@ -121,16 +119,8 @@ fun HomePage(app: App, base: String, bugs: BugReportsHost, open: (Page) -> Unit,
         ) {
             SectionHead(KitApp.name, subtitle = base.substringAfter("://"), action = "Change server", onAction = onChangeServer)
 
-            SectionHead("Try the kit", subtitle = "Toasts and details, in the kit's theme")
-            Row(Modifier.padding(horizontal = Gutter), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                SmallButton("Info") { Toasts.show("Saved") }
-                SmallButton("OK") { Toasts.show("Done", "ok") }
-                SmallButton("Error") { Toasts.show("The server answered 502 Bad Gateway – it may be restarting", "err") }
-                SmallButton("Undo") { Toasts.show("Moved to the Trash", action = "Undo", onAction = { Toasts.show("Restored", "ok") }) }
-            }
-            Row(Modifier.padding(Gutter), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                SmallButton("Details") { details = true }
-            }
+            SectionHead("Books")
+            EntryRow("Library", "Every audiobook and ebook on the server") { open(Page.Library) }
 
             SectionHead("Settings")
             EntryRow("What's new", "Every release's notes") { open(Page.Changelog) }
@@ -160,9 +150,6 @@ fun HomePage(app: App, base: String, bugs: BugReportsHost, open: (Page) -> Unit,
             onDismiss = { askSignOut = false },
             onConfirm = { scope.launch { withContext(Dispatchers.IO) { app.server.logout() } } },
         )
-    }
-    if (details) {
-        DetailsDialog("Details", "java.io.IOException: unexpected end of stream on $base/api/health\n\tat okhttp3...") { details = false }
     }
     if (newReport) {
         NewBugReportSheet(bugs, page = "Home", onDismiss = { newReport = false })
