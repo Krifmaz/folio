@@ -2722,5 +2722,254 @@
   "name": "p6u_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
+ },
+ {
+  "name": "p6h_guest_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "viewer8",
+   "password": "pw",
+   "type": "guest",
+   "isActive": true
+  },
+  "save": {
+   "guest_id": "user.id"
+  }
+ },
+ {
+  "name": "p6h_guest_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "viewer8",
+   "password": "pw"
+  },
+  "save": {
+   "guest_token": "user.accessToken"
+  }
+ },
+ {
+  "name": "share_item",
+  "path": "/api/items/{item}",
+  "save": {
+   "share_book": "media.id"
+  }
+ },
+ {
+  "name": "share_create_guest",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "body": {
+   "slug": "g",
+   "expiresAt": 0,
+   "mediaItemType": "book",
+   "mediaItemId": "{share_book}"
+  }
+ },
+ {
+  "name": "share_create_missing",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "body": {}
+ },
+ {
+  "name": "share_create_no_expiry",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "body": {
+   "slug": "s",
+   "mediaItemType": "book",
+   "mediaItemId": "x"
+  }
+ },
+ {
+  "name": "share_create_bad_type",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "body": {
+   "slug": "s",
+   "expiresAt": 0,
+   "mediaItemType": "podcast",
+   "mediaItemId": "x"
+  }
+ },
+ {
+  "name": "share_create_unknown",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "body": {
+   "slug": "s",
+   "expiresAt": 0,
+   "mediaItemType": "book",
+   "mediaItemId": "nope"
+  }
+ },
+ {
+  "name": "share_create",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "body": {
+   "slug": "folio-share",
+   "expiresAt": 0,
+   "mediaItemType": "book",
+   "mediaItemId": "{share_book}",
+   "isDownloadable": true
+  },
+  "save": {
+   "share_id": "id"
+  }
+ },
+ {
+  "name": "share_create_again",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "body": {
+   "slug": "other",
+   "expiresAt": 0,
+   "mediaItemType": "book",
+   "mediaItemId": "{share_book}"
+  }
+ },
+ {
+  "name": "share_create_slug_taken",
+  "path": "/api/share/mediaitem",
+  "method": "POST",
+  "body": {
+   "slug": "folio-share",
+   "expiresAt": 0,
+   "mediaItemType": "book",
+   "mediaItemId": "other"
+  }
+ },
+ {
+  "name": "public_share_unknown",
+  "path": "/public/share/nope",
+  "auth": false
+ },
+ {
+  "name": "public_share",
+  "path": "/public/share/folio-share?t=5",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  }
+ },
+ {
+  "name": "public_share_again",
+  "path": "/public/share/folio-share",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  }
+ },
+ {
+  "name": "public_share_track_no_cookie",
+  "path": "/public/share/folio-share/track/1",
+  "auth": false
+ },
+ {
+  "name": "public_share_track_missing",
+  "path": "/public/share/folio-share/track/99",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  }
+ },
+ {
+  "name": "public_share_track",
+  "path": "/public/share/folio-share/track/1",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  }
+ },
+ {
+  "name": "public_share_cover",
+  "path": "/public/share/folio-share/cover",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  }
+ },
+ {
+  "name": "public_share_download",
+  "path": "/public/share/folio-share/download",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  }
+ },
+ {
+  "name": "public_share_progress_bad",
+  "path": "/public/share/folio-share/progress",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  },
+  "method": "PATCH",
+  "body": {
+   "currentTime": -1
+  }
+ },
+ {
+  "name": "public_share_progress",
+  "path": "/public/share/folio-share/progress",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  },
+  "method": "PATCH",
+  "body": {
+   "currentTime": 12
+  }
+ },
+ {
+  "name": "public_share_bad_cookie",
+  "path": "/public/share/folio-share",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=not-a-uuid"
+  }
+ },
+ {
+  "name": "share_delete_guest",
+  "path": "/api/share/mediaitem/{share_id}",
+  "method": "DELETE",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  }
+ },
+ {
+  "name": "share_delete",
+  "path": "/api/share/mediaitem/{share_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "share_delete_again",
+  "path": "/api/share/mediaitem/{share_id}",
+  "method": "DELETE"
+ },
+ {
+  "name": "public_share_after_delete",
+  "path": "/public/share/folio-share",
+  "auth": false,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  }
+ },
+ {
+  "name": "p6h_guest_delete",
+  "path": "/api/users/{guest_id}",
+  "method": "DELETE"
  }
 ]
