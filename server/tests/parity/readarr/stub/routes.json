@@ -968,5 +968,650 @@
     }
    ]
   }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/author/5001",
+  "status": 200,
+  "body": {
+   "ForeignId": 5001,
+   "Name": "Ann Leckie",
+   "Description": "Ann Leckie writes space opera.",
+   "ImageUrl": "https://images.example/5001.jpg",
+   "Url": "https://www.goodreads.com/author/show/5001",
+   "RatingCount": 90000,
+   "AverageRating": 4.05,
+   "Works": [
+    {
+     "ForeignId": 5101,
+     "Title": "Ancillary Justice",
+     "Url": "https://www.goodreads.com/work/editions/5101",
+     "ReleaseDate": "2013-10-01T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5101001,
+       "Asin": null,
+       "Description": "Breq was a ship.",
+       "Isbn13": "9780316246620",
+       "Title": "Ancillary Justice",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": "https://images.example/5101001.jpg",
+       "IsEbook": false,
+       "NumPages": 386,
+       "RatingCount": 2000,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5101001",
+       "ReleaseDate": "2013-10-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      },
+      {
+       "ForeignId": 5101002,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "La Justice de l'Ancillaire",
+       "Language": "fre",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 400,
+       "RatingCount": 10,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5101002",
+       "ReleaseDate": "2015-03-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      },
+      {
+       "ForeignId": 5101003,
+       "Asin": "B00GXK3VUA",
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Ancillary Justice",
+       "Language": null,
+       "Format": "Audible Audio",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": null,
+       "RatingCount": 0,
+       "AverageRating": 0.0,
+       "Url": "https://www.goodreads.com/book/show/5101003",
+       "ReleaseDate": "2014-01-15T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5102,
+     "Title": "Ancillary Sword",
+     "Url": "https://www.goodreads.com/work/editions/5102",
+     "ReleaseDate": "2014-10-07T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5102001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "L'Epee de l'Ancillaire",
+       "Language": "French",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 380,
+       "RatingCount": 1500,
+       "AverageRating": 4.1,
+       "Url": "https://www.goodreads.com/book/show/5102001",
+       "ReleaseDate": "2016-02-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      },
+      {
+       "ForeignId": 5102002,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": "9780316246651",
+       "Title": "Ancillary Sword",
+       "Language": "en-GB",
+       "Format": "Kindle Edition",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": true,
+       "NumPages": 368,
+       "RatingCount": 300,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5102002",
+       "ReleaseDate": "2014-10-07T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5103,
+     "Title": "Ancillary Mercy",
+     "Url": "https://www.goodreads.com/work/editions/5103",
+     "ReleaseDate": null,
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5103001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": "9780316246682",
+       "Title": "Ancillary Mercy",
+       "Language": "eng",
+       "Format": "Hardcover",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 330,
+       "RatingCount": 900,
+       "AverageRating": 4.2,
+       "Url": "https://www.goodreads.com/book/show/5103001",
+       "ReleaseDate": "2015-10-06T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      },
+      {
+       "ForeignId": 5103002,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Ancillary  Mercy",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 352,
+       "RatingCount": 100,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5103002",
+       "ReleaseDate": "2016-01-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5104,
+     "Title": "Imperial Radch Boxed Trilogy",
+     "Url": "https://www.goodreads.com/work/editions/5104",
+     "ReleaseDate": "2016-11-01T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5104001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Imperial Radch Boxed Trilogy",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 1100,
+       "RatingCount": 1000,
+       "AverageRating": 4.5,
+       "Url": "https://www.goodreads.com/book/show/5104001",
+       "ReleaseDate": "2016-11-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5105,
+     "Title": "Provenance",
+     "Url": "https://www.goodreads.com/work/editions/5105",
+     "ReleaseDate": "2017-09-26T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5105001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": "9780316388672",
+       "Title": "Provenance",
+       "Language": "eng",
+       "Format": "Hardcover",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 448,
+       "RatingCount": 100,
+       "AverageRating": 3.9,
+       "Url": "https://www.goodreads.com/book/show/5105001",
+       "ReleaseDate": "2017-09-26T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5106,
+     "Title": "Translation State",
+     "Url": "https://www.goodreads.com/work/editions/5106",
+     "ReleaseDate": "2023-06-06T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5106001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Translation State",
+       "Language": "eng",
+       "Format": "Hardcover",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 352,
+       "RatingCount": 50,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5106001",
+       "ReleaseDate": "2023-06-06T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5107,
+     "Title": "Untitled Radch Novel",
+     "Url": "https://www.goodreads.com/work/editions/5107",
+     "ReleaseDate": "2030-01-01T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5107001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Untitled Radch Novel",
+       "Language": "eng",
+       "Format": "Hardcover",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": null,
+       "RatingCount": 0,
+       "AverageRating": 0.0,
+       "Url": "https://www.goodreads.com/book/show/5107001",
+       "ReleaseDate": "2030-01-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5108,
+     "Title": "The Raven Tower",
+     "Url": "https://www.goodreads.com/work/editions/5108",
+     "ReleaseDate": null,
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5108001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "The Raven Tower",
+       "Language": "eng",
+       "Format": "Hardcover",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 416,
+       "RatingCount": 800,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5108001",
+       "ReleaseDate": null,
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5109,
+     "Title": "Ancillary Justice / Ancillary Sword",
+     "Url": "https://www.goodreads.com/work/editions/5109",
+     "ReleaseDate": "2016-05-01T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5109001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Ancillary Justice / Ancillary Sword",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 760,
+       "RatingCount": 600,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5109001",
+       "ReleaseDate": "2016-05-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5110,
+     "Title": "Collected Stories",
+     "Url": "https://www.goodreads.com/work/editions/5110",
+     "ReleaseDate": "2019-01-01T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5110001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Collected Stories",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 300,
+       "RatingCount": 700,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5110001",
+       "ReleaseDate": "2019-01-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5003,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    },
+    {
+     "ForeignId": 5111,
+     "Title": "Night Stories",
+     "Url": "https://www.goodreads.com/work/editions/5111",
+     "ReleaseDate": "2021-04-01T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5111001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "Histoires de nuit",
+       "Language": "fre",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 200,
+       "RatingCount": 500,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5111001",
+       "ReleaseDate": "2021-04-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5001,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    }
+   ],
+   "Series": [
+    {
+     "ForeignId": 6001,
+     "Title": "Imperial Radch",
+     "Description": "The Radch trilogy.",
+     "LinkItems": [
+      {
+       "ForeignWorkId": 5101,
+       "PositionInSeries": "1",
+       "SeriesPosition": 1,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 5102,
+       "PositionInSeries": "2",
+       "SeriesPosition": 2,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 5103,
+       "PositionInSeries": "3",
+       "SeriesPosition": 3,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 5104,
+       "PositionInSeries": "1-3",
+       "SeriesPosition": 0,
+       "Primary": false
+      },
+      {
+       "ForeignWorkId": 5199,
+       "PositionInSeries": "4",
+       "SeriesPosition": 4,
+       "Primary": true
+      }
+     ]
+    },
+    {
+     "ForeignId": 6002,
+     "Title": "Radch Universe",
+     "Description": null,
+     "LinkItems": [
+      {
+       "ForeignWorkId": 5105,
+       "PositionInSeries": null,
+       "SeriesPosition": 0,
+       "Primary": false
+      },
+      {
+       "ForeignWorkId": 5106,
+       "PositionInSeries": "5",
+       "SeriesPosition": 5,
+       "Primary": false
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/author/5002",
+  "status": 200,
+  "body": {
+   "ForeignId": 5002,
+   "Name": "Ann  Leckie",
+   "Description": null,
+   "ImageUrl": null,
+   "Url": "https://www.goodreads.com/author/show/5002",
+   "RatingCount": 0,
+   "AverageRating": 0.0,
+   "Works": [
+    {
+     "ForeignId": 5201,
+     "Title": "A Lonely Book",
+     "Url": "https://www.goodreads.com/work/editions/5201",
+     "ReleaseDate": "2020-01-01T00:00:00Z",
+     "Genres": [
+      "science fiction"
+     ],
+     "RelatedWorks": [],
+     "Books": [
+      {
+       "ForeignId": 5201001,
+       "Asin": null,
+       "Description": null,
+       "Isbn13": null,
+       "Title": "A Lonely Book",
+       "Language": "eng",
+       "Format": "Paperback",
+       "EditionInformation": null,
+       "Publisher": "Orbit",
+       "ImageUrl": null,
+       "IsEbook": false,
+       "NumPages": 200,
+       "RatingCount": 1000,
+       "AverageRating": 4.0,
+       "Url": "https://www.goodreads.com/book/show/5201001",
+       "ReleaseDate": "2020-01-01T00:00:00Z",
+       "Contributors": [
+        {
+         "ForeignId": 5002,
+         "Role": "Author"
+        }
+       ]
+      }
+     ],
+     "Series": [],
+     "Authors": []
+    }
+   ],
+   "Series": []
+  }
  }
 ]

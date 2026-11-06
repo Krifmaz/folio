@@ -7,6 +7,17 @@
 
 ### Added
 - The mobile app's series, one series and authors pages are checked against Folio (PARITY M0015, M0021, M0022).
+- Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
+  browser, and the files are put in the library folder under author, series and title. Each answer is checked
+  against the original's own.
+- The Readarr API can add an author (`POST /api/v1/author`) the way Readarr does: the same checks and messages,
+  the author's folder made from the naming settings (and kept apart from a folder already in use), then its books,
+  editions and series filled in from the metadata server in the background. The metadata profile decides which
+  books and editions are kept (ratings, release date, parts and sets, languages, ISBNs, pages, ignored terms), and
+  the add options decide which books are monitored. Every answer and the stored rows are checked against
+  Readarr's own, recorded with the same stand-in metadata server.
+- Mail works like Audiobookshelf's: admins send a test mail, and e-books go to Kindles and other e-readers
+  by mail through the mail server in the email settings. Each answer is checked against the original's own.
 - A library's series and authors pages, one series and one author, like Audiobookshelf's
   (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
   `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's

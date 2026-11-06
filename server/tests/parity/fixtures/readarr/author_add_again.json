@@ -1,0 +1,38 @@
+{
+ "body": [
+  {
+   "attemptedValue": "5001",
+   "errorCode": "AuthorExistsValidator",
+   "errorMessage": "This author has already been added",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Foreign Author Id",
+    "propertyValue": "5001"
+   },
+   "propertyName": "ForeignAuthorId",
+   "severity": "error"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   },
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": true,
+   "qualityProfileId": 1,
+   "rootFolderPath": "/books/",
+   "tags": [
+    1
+   ]
+  },
+  "method": "POST",
+  "path": "/api/v1/author"
+ },
+ "status": 400
+}

@@ -1,0 +1,142 @@
+{
+ "body": [
+  {
+   "added": "2026-11-05T23:51:30Z",
+   "authorMetadataId": 3,
+   "authorName": "Ann Leckie",
+   "authorNameLastFirst": "Leckie, Ann",
+   "cleanName": "annleckie",
+   "ended": false,
+   "foreignAuthorId": "5001",
+   "genres": [],
+   "id": 3,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.example/5001.jpg",
+     "url": "/MediaCover/3/poster.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/5001"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": true,
+   "nextBook": {
+    "addOptions": {
+     "addType": "automatic",
+     "searchForNewBook": false
+    },
+    "added": "2026-11-05T23:51:30Z",
+    "anyEditionOk": true,
+    "author": null,
+    "authorMetadata": null,
+    "authorMetadataId": 3,
+    "bookFiles": null,
+    "cleanTitle": "untitledradchnovel",
+    "editions": null,
+    "foreignBookId": "5107",
+    "genres": [
+     "science fiction"
+    ],
+    "id": 9,
+    "lastInfoSync": "2026-11-05T23:51:30Z",
+    "links": [
+     {
+      "name": "Goodreads Editions",
+      "url": "https://www.goodreads.com/work/editions/5107"
+     }
+    ],
+    "monitored": true,
+    "ratings": {
+     "popularity": 0,
+     "value": 0,
+     "votes": 0
+    },
+    "relatedBooks": [],
+    "releaseDate": "2030-01-01T00:00:00Z",
+    "seriesLinks": null,
+    "title": "Untitled Radch Novel",
+    "titleSlug": "5107"
+   },
+   "overview": "Ann Leckie writes space opera.",
+   "path": "/books/Ann Leckie",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 364500,
+    "value": 4.05,
+    "votes": 90000
+   },
+   "rootFolderPath": "/books/",
+   "sortName": "ann leckie",
+   "sortNameLastFirst": "leckie, ann",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 5
+   },
+   "status": "continuing",
+   "tags": [
+    1
+   ],
+   "titleSlug": "5001"
+  },
+  {
+   "added": "2026-11-05T23:51:30Z",
+   "authorMetadataId": 4,
+   "authorName": "Ann Leckie",
+   "authorNameLastFirst": "Leckie, Ann",
+   "cleanName": "annleckie",
+   "ended": false,
+   "foreignAuthorId": "5002",
+   "genres": [],
+   "id": 4,
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/5002"
+    }
+   ],
+   "metadataProfileId": 2,
+   "monitorNewItems": "none",
+   "monitored": false,
+   "path": "/books/Ann Leckie (1)",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "rootFolderPath": "/books/",
+   "sortName": "ann leckie",
+   "sortNameLastFirst": "leckie, ann",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "continuing",
+   "tags": [],
+   "titleSlug": "5002"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/author"
+ },
+ "status": 200
+}

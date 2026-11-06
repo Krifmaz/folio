@@ -1,0 +1,165 @@
+{
+ "body": [
+  {
+   "bookId": 5,
+   "foreignEditionId": "5101001",
+   "format": "Paperback",
+   "grabbed": false,
+   "id": 6,
+   "images": [
+    {
+     "coverType": "cover",
+     "extension": ".jpg",
+     "url": "https://images.example/5101001.jpg"
+    }
+   ],
+   "isEbook": false,
+   "isbn13": "9780316246620",
+   "language": "eng",
+   "links": [
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5101001"
+    }
+   ],
+   "manualAdd": false,
+   "monitored": true,
+   "overview": "Breq was a ship.",
+   "pageCount": 386,
+   "publisher": "Orbit",
+   "ratings": {
+    "popularity": 8000,
+    "value": 4,
+    "votes": 2000
+   },
+   "releaseDate": "2013-10-01T00:00:00Z",
+   "title": "Ancillary Justice",
+   "titleSlug": "5101001"
+  },
+  {
+   "asin": "B00GXK3VUA",
+   "bookId": 5,
+   "foreignEditionId": "5101003",
+   "format": "Audible Audio",
+   "grabbed": false,
+   "id": 7,
+   "images": [],
+   "isEbook": false,
+   "links": [
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5101003"
+    }
+   ],
+   "manualAdd": false,
+   "monitored": false,
+   "overview": "",
+   "pageCount": 0,
+   "publisher": "Orbit",
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "2014-01-15T00:00:00Z",
+   "title": "Ancillary Justice",
+   "titleSlug": "5101003"
+  },
+  {
+   "bookId": 6,
+   "foreignEditionId": "5102002",
+   "format": "Kindle Edition",
+   "grabbed": false,
+   "id": 8,
+   "images": [],
+   "isEbook": true,
+   "isbn13": "9780316246651",
+   "language": "en-GB",
+   "links": [
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5102002"
+    }
+   ],
+   "manualAdd": false,
+   "monitored": true,
+   "overview": "",
+   "pageCount": 368,
+   "publisher": "Orbit",
+   "ratings": {
+    "popularity": 1200,
+    "value": 4,
+    "votes": 300
+   },
+   "releaseDate": "2014-10-07T00:00:00Z",
+   "title": "Ancillary Sword",
+   "titleSlug": "5102002"
+  },
+  {
+   "bookId": 7,
+   "foreignEditionId": "5103001",
+   "format": "Hardcover",
+   "grabbed": false,
+   "id": 9,
+   "images": [],
+   "isEbook": false,
+   "isbn13": "9780316246682",
+   "language": "eng",
+   "links": [
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5103001"
+    }
+   ],
+   "manualAdd": false,
+   "monitored": true,
+   "overview": "",
+   "pageCount": 330,
+   "publisher": "Orbit",
+   "ratings": {
+    "popularity": 3780,
+    "value": 4.2,
+    "votes": 900
+   },
+   "releaseDate": "2015-10-06T00:00:00Z",
+   "title": "Ancillary Mercy",
+   "titleSlug": "5103001"
+  },
+  {
+   "bookId": 7,
+   "foreignEditionId": "5103002",
+   "format": "Paperback",
+   "grabbed": false,
+   "id": 10,
+   "images": [],
+   "isEbook": false,
+   "language": "eng",
+   "links": [
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5103002"
+    }
+   ],
+   "manualAdd": false,
+   "monitored": false,
+   "overview": "",
+   "pageCount": 352,
+   "publisher": "Orbit",
+   "ratings": {
+    "popularity": 400,
+    "value": 4,
+    "votes": 100
+   },
+   "releaseDate": "2016-01-01T00:00:00Z",
+   "title": "Ancillary Mercy",
+   "titleSlug": "5103002"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/edition?bookId={b1}&bookId={b2}&bookId={b3}"
+ },
+ "status": 200
+}

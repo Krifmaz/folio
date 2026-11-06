@@ -1,0 +1,32 @@
+{
+ "body": [
+  {
+   "attemptedValue": "404",
+   "errorMessage": "An author with this ID was not found",
+   "propertyName": "ForeignAuthorId",
+   "severity": "error"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   },
+   "authorName": "Nobody",
+   "foreignAuthorId": "404",
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": true,
+   "qualityProfileId": 1,
+   "rootFolderPath": "/books/",
+   "tags": [
+    1
+   ]
+  },
+  "method": "POST",
+  "path": "/api/v1/author"
+ },
+ "status": 400
+}
