@@ -2722,5 +2722,77 @@
   "name": "p6u_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
+ },
+ {
+  "name": "lib_search_title",
+  "path": "/api/libraries/{library}/search?q=systems"
+ },
+ {
+  "name": "lib_search_case",
+  "path": "/api/libraries/{library}/search?q=ANCILLARY"
+ },
+ {
+  "name": "lib_search_narrator",
+  "path": "/api/libraries/{library}/search?q=adjoa"
+ },
+ {
+  "name": "lib_search_genre",
+  "path": "/api/libraries/{library}/search?q=fiction"
+ },
+ {
+  "name": "lib_search_series",
+  "path": "/api/libraries/{library}/search?q=murderbot"
+ },
+ {
+  "name": "lib_search_author",
+  "path": "/api/libraries/{library}/search?q=wells"
+ },
+ {
+  "name": "lib_search_letter",
+  "path": "/api/libraries/{library}/search?q=a"
+ },
+ {
+  "name": "lib_search_limit",
+  "path": "/api/libraries/{library}/search?q=a&limit=1"
+ },
+ {
+  "name": "lib_search_limit_zero",
+  "path": "/api/libraries/{library}/search?q=e&limit=0"
+ },
+ {
+  "name": "lib_search_spaces",
+  "path": "/api/libraries/{library}/search?q=%20%20"
+ },
+ {
+  "name": "lib_search_wildcard",
+  "path": "/api/libraries/{library}/search?q=r_d"
+ },
+ {
+  "name": "lib_search_accent",
+  "path": "/api/libraries/{library}/search?q=%C3%A1nn"
+ },
+ {
+  "name": "lib_search_unaccented",
+  "path": "/api/libraries/{library}/search?q=leck"
+ },
+ {
+  "name": "lib_search_nothing",
+  "path": "/api/libraries/{library}/search?q=zzzz"
+ },
+ {
+  "name": "lib_search_no_q",
+  "path": "/api/libraries/{library}/search"
+ },
+ {
+  "name": "lib_search_empty_q",
+  "path": "/api/libraries/{library}/search?q="
+ },
+ {
+  "name": "lib_search_bad_limit",
+  "path": "/api/libraries/{library}/search?q=a&limit=-1"
+ },
+ {
+  "name": "lib_search_missing_library",
+  "path": "/api/libraries/00000000-0000-4000-8000-000000000000/search?q=a"
  }
 ]

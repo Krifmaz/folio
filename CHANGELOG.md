@@ -8,6 +8,8 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Library search like Audiobookshelf's (`/api/libraries/:id/search`): books by title, subtitle, ASIN or ISBN,
+  and narrators, tags, genres, series and authors by name, ignoring case and accents.
 - The Readarr API can add a single book (`POST /api/v1/book`) the way Readarr does: the same checks and
   messages, the book and the edition asked for from the metadata server, its author added first when the library
   doesn't have it, and the book kept as added by hand, so the metadata profile never drops it. The author is then

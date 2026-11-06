@@ -27,6 +27,7 @@ pub mod notifications;
 pub mod playback;
 pub mod progress;
 pub mod scanner;
+pub mod search;
 pub mod series;
 pub mod sessions;
 pub mod settings;
@@ -212,6 +213,7 @@ pub fn router() -> Router<AppState> {
         .merge(scanner::router())
         .merge(series::router())
         .merge(authors::router())
+        .merge(search::router())
         .merge(users::router())
         .merge(api_keys::router())
         .merge(admin::router())

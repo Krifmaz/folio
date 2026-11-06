@@ -1,0 +1,22 @@
+{
+ "body": {
+  "authors": [],
+  "book": [],
+  "genres": [
+   {
+    "name": "Science Fiction",
+    "numItems": 1
+   }
+  ],
+  "narrators": [],
+  "series": [],
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=fiction"
+ },
+ "status": 200
+}

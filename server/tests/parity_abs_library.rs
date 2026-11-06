@@ -127,6 +127,16 @@ async fn replay(app: &Router, token: &str, ctx: &HashMap<String, String>, m: &mu
             }
         }
     }
+    // A search lists books, series and authors in the planner's order: compared by content, in name order.
+    if path.contains("/search") {
+        for v in [&mut body, &mut fx.body] {
+            for (list, key) in [("/book", "/libraryItem/relPath"), ("/series", "/series/name"), ("/authors", "/name")] {
+                if let Some(Value::Array(list)) = v.pointer_mut(list) {
+                    list.sort_by(|a, b| a.pointer(key).and_then(Value::as_str).cmp(&b.pointer(key).and_then(Value::as_str)));
+                }
+            }
+        }
+    }
     // The Discover shelf is in random order on both sides: compared by content, in id order.
     for v in [&mut body, &mut fx.body] {
         if let Value::Array(shelves) = v {
@@ -219,6 +229,17 @@ async fn authors_answer_like_the_original() {
     let ctx = context();
     let names = recorded("lib_author");
     assert!(names.len() >= 8, "{names:?}");
+    for name in names {
+        replay(&app, &token, &ctx, &mut matcher(), &name).await;
+    }
+}
+
+#[tokio::test]
+async fn search_answers_like_the_original() {
+    let (app, token) = set_up("abs-lib-search").await;
+    let ctx = context();
+    let names = recorded("lib_search");
+    assert!(names.len() >= 18, "{names:?}");
     for name in names {
         replay(&app, &token, &ctx, &mut matcher(), &name).await;
     }

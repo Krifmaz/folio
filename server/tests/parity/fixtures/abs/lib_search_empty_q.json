@@ -1,0 +1,10 @@
+{
+ "body": "Invalid request. Query param \"q\" must be a string",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q="
+ },
+ "status": 400
+}

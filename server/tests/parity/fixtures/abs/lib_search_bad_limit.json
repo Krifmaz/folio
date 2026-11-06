@@ -1,0 +1,10 @@
+{
+ "body": "Invalid request. limit must be a positive integer",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=a&limit=-1"
+ },
+ "status": 400
+}
