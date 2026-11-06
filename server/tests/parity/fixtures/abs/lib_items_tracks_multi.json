@@ -10,20 +10,20 @@
   "page": 0,
   "results": [
    {
-    "addedAt": 1793915239893,
-    "birthtimeMs": 1793915230110,
-    "ctimeMs": 1793915230341,
-    "folderId": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
-    "id": "e6e9c9f6-ccd5-457c-8bb9-98c2673d2952",
-    "ino": "9177989",
+    "addedAt": 1793918572782,
+    "birthtimeMs": 1793918564238,
+    "ctimeMs": 1793918564436,
+    "folderId": "f627aa94-8073-48cc-a8d7-8d249b4694b1",
+    "id": "2ae3ffc2-cdbb-4dbf-9879-92b78bd9172d",
+    "ino": "9437195",
     "isFile": false,
     "isInvalid": false,
     "isMissing": false,
-    "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
+    "libraryId": "2cae27a4-5a4a-4a1d-af1f-142ea391150c",
     "media": {
      "coverPath": null,
      "duration": 45,
-     "id": "35294b74-7895-44f1-9066-9a5fd37e2c17",
+     "id": "94e3835f-7038-49d1-aad2-73983af84e53",
      "metadata": {
       "abridged": false,
       "asin": null,
@@ -50,13 +50,13 @@
      "tags": []
     },
     "mediaType": "book",
-    "mtimeMs": 1793915230341,
+    "mtimeMs": 1793918564436,
     "numFiles": 3,
     "oldLibraryItemId": null,
     "path": "/media/Becky Chambers/A Psalm for the Wild-Built",
     "relPath": "Becky Chambers/A Psalm for the Wild-Built",
     "size": 181530,
-    "updatedAt": 1793915239893
+    "updatedAt": 1793918572782
    }
   ],
   "sortDesc": false,

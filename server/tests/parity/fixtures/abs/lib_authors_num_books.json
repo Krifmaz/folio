@@ -1,0 +1,31 @@
+{
+ "body": {
+  "limit": 2,
+  "minified": false,
+  "page": 1,
+  "results": [
+   {
+    "addedAt": 1793918572858,
+    "asin": null,
+    "description": null,
+    "id": "dfb9aebe-a60f-41c4-a168-20c2be5c1a06",
+    "imagePath": null,
+    "lastFirst": "Leckie, Ann",
+    "libraryId": "2cae27a4-5a4a-4a1d-af1f-142ea391150c",
+    "name": "Ann Leckie",
+    "numBooks": 1,
+    "updatedAt": 1793918572858
+   }
+  ],
+  "sortBy": "numBooks",
+  "sortDesc": true,
+  "total": 3
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/authors?limit=2&page=1&sort=numBooks&desc=1"
+ },
+ "status": 200
+}
