@@ -6,6 +6,8 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Mail works like Audiobookshelf's: admins send a test mail, and e-books go to Kindles and other e-readers
+  by mail through the mail server in the email settings. Each answer is checked against the original's own.
 - The server log works like Audiobookshelf's: admins read today's messages on the log page and watch them
   live, messages are kept in one file per day, and the log level and the number of days kept follow the
   settings. Each answer is checked against the original's own.
