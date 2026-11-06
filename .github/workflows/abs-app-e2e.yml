@@ -1,7 +1,8 @@
 name: abs-app-e2e
 
 # The mobile app (abs-app/) driven in Chromium against a real Folio server built from this commit, filled with the
-# original Audiobookshelf's recorded library: sign-in, the library pages and streaming (abs-app/folio/e2e/server.cjs).
+# original Audiobookshelf's recorded library: sign-in, the library pages, the ebook reader and
+# streaming (abs-app/folio/e2e/server.cjs).
 # It runs when either side changes, so a server change that breaks the phone app shows here. Track B (mobile) owns
 # this file (docs/TRACKS.md).
 on:
@@ -53,8 +54,9 @@ jobs:
           # the recorded books live under /media, as when they were recorded
           sudo install -d -o "$(id -u)" -g "$(id -g)" /media
           bash server/tests/parity/abs/make_media.sh /media
+          python3 -I abs-app/folio/e2e/make_epub.py "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub"
           abs-app/folio/e2e/seed_folio.sh "$PWD/server/target/debug/folio" "$RUNNER_TEMP/folio-data" 8091
-      - name: Sign-in, library pages and streaming against Folio
+      - name: Sign-in, library pages, ebook reader and streaming against Folio
         working-directory: abs-app
         run: |
           python3 -m http.server 8765 --directory dist > /dev/null 2>&1 &

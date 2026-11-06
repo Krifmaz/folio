@@ -1,8 +1,8 @@
 /**
  * Proof that the mobile fork works against a real Folio server: the app signs in (PARITY M0003), opens each page
  * that reads the library and shows the original's recorded books on it (home M0002/M0006/M0017, library M0019,
- * series M0022, one series M0021, authors M0015, a book M0023, account M0001, stats M0010, logs M0007), and
- * streams a book (the play button, Folio's session and its track stream). Every page must load without a failed
+ * series M0022, one series M0021, authors M0015, a book M0023, account M0001, stats M0010, logs M0007), opens an
+ * EPUB in the reader (M0058) and streams a book (the play button, Folio's session and its track stream). Every page must load without a failed
  * request to Folio and without an error in the page.
  *
  * It runs against the app's web build (served at BASE_URL) and a Folio server at FOLIO_URL started by
@@ -22,6 +22,10 @@ const SHOTS = process.env.SHOTS_DIR || ''
 const PSALM_ITEM = '2ae3ffc2-cdbb-4dbf-9879-92b78bd9172d'
 /** The recorded series "The Murderbot Diaries". */
 const MURDERBOT_SERIES = 'ea9f35d3-5cea-4418-81f8-26978c289f71'
+/** The recorded library item "All Systems Red", an EPUB. */
+const MURDERBOT_ITEM = '9d8b5a7c-34ec-4cc7-a140-8eb67f2973c8'
+/** Upstream's reader asks for the phone's volume buttons, which a browser does not have; on the phone it works. */
+const VOLUME_BUTTONS = 'page error: VolumeButtons is not supported on web'
 
 /** Each page the test opens, the PARITY rows it proves and the words it must show from Folio's data. */
 const PAGES = [
@@ -82,6 +86,22 @@ async function go(p, path) {
       assert.deepEqual(seen.take(), [], `${page.path} (${page.rows}) loads without errors`)
       console.log(`ok ${page.path} (${page.rows})`)
     }
+
+    // The ebook reader (M0058, EPUB): the book's read button downloads the EPUB from Folio and shows its text.
+    await go(p, `/item/${MURDERBOT_ITEM}`)
+    await p.getByRole('button', { name: /read/i }).first().click()
+    const page = p.frameLocator('#viewer iframe').locator('body')
+    await page.getByText('word word', { exact: false }).first().waitFor({ timeout: 20000 })
+    // the reader counts the book's locations after it shows the first page, then shows where the reader is
+    await p.getByText(/Location \d+ of \d+/).waitFor({ timeout: 20000 })
+    assert.deepEqual(
+      seen.take().filter((e) => e !== VOLUME_BUTTONS),
+      [],
+      'the ebook reader loads without errors'
+    )
+    if (SHOTS) await p.screenshot({ path: `${SHOTS}/M0058.png` })
+    console.log('ok ebook reader (M0058)')
+    await p.evaluate(() => window.$nuxt.$store.commit('setShowReader', false))
 
     // Streaming: the book's play button opens a session on Folio and the audio plays from its track stream.
     await go(p, `/item/${PSALM_ITEM}`)

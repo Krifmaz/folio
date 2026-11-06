@@ -574,7 +574,7 @@ repository at the pinned commit.
 | M0055 | action | sleep timer with shake to reset | `android/, plugins/` | M mobile fork | todo |  |
 | M0056 | action | Chromecast | `android/, plugins/` | M mobile fork | todo |  |
 | M0057 | action | local progress sync with the server | `android/, plugins/` | M mobile fork | todo |  |
-| M0058 | action | ebook reader (EPUB, PDF, comic) | `android/, plugins/` | M mobile fork | todo |  |
+| M0058 | action | ebook reader (EPUB, PDF, comic) | `android/, plugins/` | M mobile fork | wip | EPUB done: `abs-app/folio/e2e/server.cjs` (against a running Folio in CI), `docs/parity/screens/M0058.png`; PDF and comic books next |
 
 ### Readarr
 

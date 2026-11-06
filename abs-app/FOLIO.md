@@ -15,7 +15,7 @@ files of its own.
 | Android Auto and other media browsers accept Folio's app id | `PlayerNotificationService.kt` (`VALID_MEDIA_BROWSERS`) |
 | Wording names a Folio server (connect page, its errors, the not-connected and linked-media messages in English) and the example address uses Folio's port | `components/connection/ServerConnectForm.vue`, `strings/en-us.json` |
 | A saved language other than English shows again after a restart (upstream's `loadi18n` ran without a page there, failed before telling the page, and left it in English) | `plugins/i18n.js` |
-| Browser tests of the app's pages, the proofs for the PARITY M rows: alone (`settings.cjs`) and against a real Folio server (`server.cjs`, `seed_folio.sh`) | `folio/e2e/`, the `web` job in `.github/workflows/abs-app.yml` and `.github/workflows/abs-app-e2e.yml` |
+| Browser tests of the app's pages, the proofs for the PARITY M rows: alone (`settings.cjs`) and against a real Folio server (`server.cjs`, `seed_folio.sh`, `make_epub.py`) | `folio/e2e/`, the `web` job in `.github/workflows/abs-app.yml` and `.github/workflows/abs-app-e2e.yml` |
 | No links out to the upstream GitHub, guides or discussions | `pages/connect.vue`, `pages/account.vue`, `pages/localMedia/folders/index.vue`, `components/connection/ServerConnectForm.vue` |
 
 The `audiobookshelf://oauth` sign-in redirect is kept, so single sign-on works the same against Folio's
