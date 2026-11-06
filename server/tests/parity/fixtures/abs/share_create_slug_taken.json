@@ -1,0 +1,15 @@
+{
+ "body": "Slug is already in use",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "expiresAt": 0,
+   "mediaItemId": "other",
+   "mediaItemType": "book",
+   "slug": "folio-share"
+  },
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 409
+}

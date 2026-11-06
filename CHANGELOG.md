@@ -6,6 +6,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Shares work like Audiobookshelf's: admins share a book under a public link, with an end date and downloads
+  if they like, and anyone with the link can listen, download and come back to where they stopped. Each answer
+  is checked against the original's own.
 - Players that can't play a book's files as they are (FLAC, for one) get them converted on the fly into a stream,
   like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
 - The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,

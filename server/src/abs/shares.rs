@@ -604,16 +604,20 @@ fn parse_int(t: &str) -> f64 {
 
 /// The share and the visitor's session for the public file routes; the original's answer when either is
 /// missing.
-fn share_and_session(st: &AppState, headers: &HeaderMap, slug: &str) -> std::result::Result<(Map<String, Value>, ShareSession), Response> {
+fn share_and_session(
+    st: &AppState,
+    headers: &HeaderMap,
+    slug: &str,
+) -> std::result::Result<(Map<String, Value>, ShareSession), Box<Response>> {
     let Some(cookie) = share_cookie(headers) else {
-        return Err(send_text(StatusCode::NOT_FOUND, "Share session not set"));
+        return Err(Box::new(send_text(StatusCode::NOT_FOUND, "Share session not set")));
     };
     let Some(share) = st.abs_server.shares.find_by_slug(slug) else {
-        return Err(send_status(StatusCode::NOT_FOUND));
+        return Err(Box::new(send_status(StatusCode::NOT_FOUND)));
     };
     match st.abs_server.shares.session_of(&cookie) {
         Some(s) if Some(s.media_item_share_id.as_str()) == share.get("id").and_then(Value::as_str) => Ok((share, s)),
-        _ => Err(send_text(StatusCode::NOT_FOUND, "Share session not found")),
+        _ => Err(Box::new(send_text(StatusCode::NOT_FOUND, "Share session not found"))),
     }
 }
 
@@ -629,7 +633,7 @@ async fn send_file(path: &Path, req: Request) -> Response {
 async fn track(State(st): State<AppState>, UrlPath((slug, index)): UrlPath<(String, String)>, req: Request) -> Response {
     let (_, s) = match share_and_session(&st, req.headers(), &slug) {
         Ok(found) => found,
-        Err(r) => return r,
+        Err(r) => return *r,
     };
     let wanted = parse_int(&index);
     let starts_with_digit = index.trim_start().trim_start_matches(['-', '+']).starts_with(|c: char| c.is_ascii_digit());
@@ -648,7 +652,7 @@ async fn track(State(st): State<AppState>, UrlPath((slug, index)): UrlPath<(Stri
 async fn cover(State(st): State<AppState>, UrlPath(slug): UrlPath<String>, req: Request) -> Response {
     let (_, s) = match share_and_session(&st, req.headers(), &slug) {
         Ok(found) => found,
-        Err(r) => return r,
+        Err(r) => return *r,
     };
     let Some(path) = s.session.cover_path.as_str().filter(|p| !p.is_empty()).map(PathBuf::from) else {
         return send_text(StatusCode::NOT_FOUND, "Cover image not found");
@@ -670,7 +674,7 @@ async fn download(State(st): State<AppState>, UrlPath(slug): UrlPath<String>, re
     }
     let (_, s) = match share_and_session(&st, req.headers(), &slug) {
         Ok(found) => found,
-        Err(r) => return r,
+        Err(r) => return *r,
     };
     let item = match s.session.library_item_id.as_deref().map(|id| models::find::<LibraryItem>(&st.abs, id)).transpose() {
         Ok(Some(Some(item))) => item,
@@ -774,7 +778,7 @@ async fn progress(State(st): State<AppState>, UrlPath(slug): UrlPath<String>, he
     };
     let (_, _) = match share_and_session(&st, &headers, &slug) {
         Ok(found) => found,
-        Err(r) => return r,
+        Err(r) => return *r,
     };
     st.abs_server.shares.with_sessions(|list| {
         if let Some(s) = list.iter_mut().find(|s| s.share_session_id == cookie) {

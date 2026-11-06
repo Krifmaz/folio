@@ -1,0 +1,10 @@
+{
+ "body": "Share session not set",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/public/share/folio-share/track/1"
+ },
+ "status": 404
+}

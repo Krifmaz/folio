@@ -1,0 +1,15 @@
+{
+ "body": "",
+ "content_type": "",
+ "request": {
+  "body": {
+   "currentTime": 12
+  },
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  },
+  "method": "PATCH",
+  "path": "/public/share/folio-share/progress"
+ },
+ "status": 204
+}

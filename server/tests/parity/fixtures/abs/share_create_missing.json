@@ -1,0 +1,10 @@
+{
+ "body": "Missing or invalid required fields",
+ "content_type": "text/html",
+ "request": {
+  "body": {},
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 400
+}
