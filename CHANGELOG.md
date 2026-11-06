@@ -6,6 +6,8 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Library search like Audiobookshelf's (`/api/libraries/:id/search`): books by title, subtitle, ASIN or ISBN,
+  and narrators, tags, genres, series and authors by name, ignoring case and accents.
 - A library's series and authors pages, one series and one author, like Audiobookshelf's
   (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
   `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's
