@@ -3,12 +3,18 @@
 ## Unreleased
 
 ### Fixed
+- A Readarr time test no longer fails now and then: it expected every time to be written with all seven digits
+  of the fraction, but Readarr drops trailing zeros.
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
 - Shares work like Audiobookshelf's: admins share a book under a public link, with an end date and downloads
   if they like, and anyone with the link can listen, download and come back to where they stopped. Each answer
   is checked against the original's own.
+- The Readarr API can add a single book (`POST /api/v1/book`) the way Readarr does: the same checks and
+  messages, the book and the edition asked for from the metadata server, its author added first when the library
+  doesn't have it, and the book kept as added by hand, so the metadata profile never drops it. The author is then
+  refreshed in the background. Every answer and the stored rows are checked against Readarr's own.
 - Players that can't play a book's files as they are (FLAC, for one) get them converted on the fly into a stream,
   like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
 - The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,

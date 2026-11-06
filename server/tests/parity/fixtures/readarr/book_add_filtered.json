@@ -1,0 +1,120 @@
+{
+ "body": {
+  "added": "2026-11-06T00:45:40Z",
+  "anyEditionOk": false,
+  "author": {
+   "added": "2026-11-06T00:45:24Z",
+   "authorMetadataId": 3,
+   "authorName": "Ann Leckie",
+   "authorNameLastFirst": "Leckie, Ann",
+   "cleanName": "annleckie",
+   "ended": false,
+   "foreignAuthorId": "5001",
+   "genres": [],
+   "id": 3,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "url": "https://images.example/5001.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/5001"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": true,
+   "overview": "Ann Leckie writes space opera.",
+   "path": "/books/Ann Leckie",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 364500,
+    "value": 4.05,
+    "votes": 90000
+   },
+   "sortName": "ann leckie",
+   "sortNameLastFirst": "leckie, ann",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "continuing",
+   "tags": [
+    1
+   ],
+   "titleSlug": "5001"
+  },
+  "authorId": 3,
+  "authorTitle": "leckie, ann Imperial Radch Boxed Trilogy",
+  "foreignBookId": "5104",
+  "foreignEditionId": "5104001",
+  "genres": [
+   "science fiction"
+  ],
+  "grabbed": false,
+  "id": 11,
+  "images": [],
+  "links": [
+   {
+    "name": "Goodreads Editions",
+    "url": "https://www.goodreads.com/work/editions/5104"
+   },
+   {
+    "name": "Goodreads Book",
+    "url": "https://www.goodreads.com/book/show/5104001"
+   }
+  ],
+  "monitored": false,
+  "pageCount": 1100,
+  "ratings": {
+   "popularity": 4500,
+   "value": 4.5,
+   "votes": 1000
+  },
+  "releaseDate": "2016-11-01T00:00:00Z",
+  "seriesTitle": "",
+  "statistics": {
+   "bookCount": 0,
+   "bookFileCount": 0,
+   "percentOfBooks": 0,
+   "sizeOnDisk": 0,
+   "totalBookCount": 1
+  },
+  "title": "Imperial Radch Boxed Trilogy",
+  "titleSlug": "5104"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "addOptions": {
+    "searchForNewBook": false
+   },
+   "anyEditionOk": false,
+   "author": {
+    "foreignAuthorId": "5001",
+    "metadataProfileId": 2,
+    "qualityProfileId": 2,
+    "rootFolderPath": "/books/"
+   },
+   "editions": [
+    {
+     "foreignEditionId": "5104001",
+     "monitored": true
+    }
+   ],
+   "foreignBookId": "5104",
+   "monitored": false
+  },
+  "method": "POST",
+  "path": "/api/v1/book"
+ },
+ "status": 201
+}
