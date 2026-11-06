@@ -11,6 +11,8 @@
 - Shares work like Audiobookshelf's: admins share a book under a public link, with an end date and downloads
   if they like, and anyone with the link can listen, download and come back to where they stopped. Each answer
   is checked against the original's own.
+- At start, Folio cleans up like Audiobookshelf: listening progress of books and episodes that are gone is
+  removed, removed series leave the "hide from continue listening" lists, and the cache folders are made.
 - The Readarr API can add a single book (`POST /api/v1/book`) the way Readarr does: the same checks and
   messages, the book and the edition asked for from the metadata server, its author added first when the library
   doesn't have it, and the book kept as added by hand, so the metadata profile never drops it. The author is then
