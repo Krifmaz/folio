@@ -1,0 +1,147 @@
+{
+ "body": {
+  "providers": {
+   "books": [
+    {
+     "text": "Google Books",
+     "value": "google"
+    },
+    {
+     "text": "iTunes",
+     "value": "itunes"
+    },
+    {
+     "text": "Open Library",
+     "value": "openlibrary"
+    },
+    {
+     "text": "FantLab.ru",
+     "value": "fantlab"
+    },
+    {
+     "text": "Audible.com",
+     "value": "audible"
+    },
+    {
+     "text": "Audible.ca",
+     "value": "audible.ca"
+    },
+    {
+     "text": "Audible.co.uk",
+     "value": "audible.uk"
+    },
+    {
+     "text": "Audible.com.au",
+     "value": "audible.au"
+    },
+    {
+     "text": "Audible.fr",
+     "value": "audible.fr"
+    },
+    {
+     "text": "Audible.de",
+     "value": "audible.de"
+    },
+    {
+     "text": "Audible.co.jp",
+     "value": "audible.jp"
+    },
+    {
+     "text": "Audible.it",
+     "value": "audible.it"
+    },
+    {
+     "text": "Audible.in",
+     "value": "audible.in"
+    },
+    {
+     "text": "Audible.es",
+     "value": "audible.es"
+    }
+   ],
+   "booksCovers": [
+    {
+     "text": "Best",
+     "value": "best"
+    },
+    {
+     "text": "Google Books",
+     "value": "google"
+    },
+    {
+     "text": "iTunes",
+     "value": "itunes"
+    },
+    {
+     "text": "Open Library",
+     "value": "openlibrary"
+    },
+    {
+     "text": "FantLab.ru",
+     "value": "fantlab"
+    },
+    {
+     "text": "AudiobookCovers.com",
+     "value": "audiobookcovers"
+    },
+    {
+     "text": "Audible.com",
+     "value": "audible"
+    },
+    {
+     "text": "Audible.ca",
+     "value": "audible.ca"
+    },
+    {
+     "text": "Audible.co.uk",
+     "value": "audible.uk"
+    },
+    {
+     "text": "Audible.com.au",
+     "value": "audible.au"
+    },
+    {
+     "text": "Audible.fr",
+     "value": "audible.fr"
+    },
+    {
+     "text": "Audible.de",
+     "value": "audible.de"
+    },
+    {
+     "text": "Audible.co.jp",
+     "value": "audible.jp"
+    },
+    {
+     "text": "Audible.it",
+     "value": "audible.it"
+    },
+    {
+     "text": "Audible.in",
+     "value": "audible.in"
+    },
+    {
+     "text": "Audible.es",
+     "value": "audible.es"
+    },
+    {
+     "text": "All",
+     "value": "all"
+    }
+   ],
+   "podcasts": [
+    {
+     "text": "iTunes",
+     "value": "itunes"
+    }
+   ]
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/search/providers"
+ },
+ "status": 200
+}

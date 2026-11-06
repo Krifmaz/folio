@@ -1,0 +1,28 @@
+{
+ "body": {
+  "ereaderDevices": [
+   {
+    "availabilityOption": "adminOrUp",
+    "email": "k@kindle.example",
+    "name": "Kindle",
+    "users": []
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "ereaderDevices": [
+    {
+     "availabilityOption": "adminOrUp",
+     "email": "k@kindle.example",
+     "name": "Kindle",
+     "users": []
+    }
+   ]
+  },
+  "method": "POST",
+  "path": "/api/emails/ereader-devices"
+ },
+ "status": 200
+}

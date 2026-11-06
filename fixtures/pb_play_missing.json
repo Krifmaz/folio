@@ -1,0 +1,10 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": {},
+  "method": "POST",
+  "path": "/api/items/00000000-0000-4000-8000-000000000000/play"
+ },
+ "status": 404
+}

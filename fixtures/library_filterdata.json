@@ -1,0 +1,55 @@
+{
+ "body": {
+  "authorCount": 0,
+  "authors": [
+   {
+    "id": "291fc0f6-cce0-45b9-a7dc-4b140d04c684",
+    "name": "Becky Chambers"
+   },
+   {
+    "id": "14d4801b-5c75-46ef-a56d-4edf57567ab4",
+    "name": "Martha Wells"
+   },
+   {
+    "id": "a3a749a1-3d34-4960-895d-8690bc3c77a6",
+    "name": "Ann Leckie"
+   }
+  ],
+  "bookCount": 0,
+  "genres": [
+   "Science Fiction"
+  ],
+  "languages": [
+   "en"
+  ],
+  "loadedAt": 1793923711231,
+  "narrators": [
+   "Adjoa Andoh"
+  ],
+  "numIssues": 0,
+  "podcastCount": 0,
+  "publishedDecades": [
+   "2010"
+  ],
+  "publishers": [],
+  "series": [
+   {
+    "id": "0d8b4b01-78a8-4d0b-aff1-5abd5490cdfe",
+    "name": "The Murderbot Diaries"
+   },
+   {
+    "id": "04c833b9-03ad-4fc1-9884-6260b2338fad",
+    "name": "Imperial Radch"
+   }
+  ],
+  "seriesCount": 0,
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/filterdata"
+ },
+ "status": 200
+}

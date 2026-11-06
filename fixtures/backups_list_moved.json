@@ -1,0 +1,14 @@
+{
+ "body": {
+  "backupLocation": "/metadata/backups-moved",
+  "backupPathEnvSet": false,
+  "backups": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/backups"
+ },
+ "status": 200
+}

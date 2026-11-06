@@ -1,0 +1,14 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "currentTime": 30,
+   "duration": 60,
+   "progress": 0.5
+  },
+  "method": "PATCH",
+  "path": "/api/me/progress/{item}"
+ },
+ "status": 200
+}

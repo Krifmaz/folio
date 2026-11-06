@@ -1,0 +1,10 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "DELETE",
+  "path": "/api/custom-metadata-providers/{provider_id}"
+ },
+ "status": 404
+}

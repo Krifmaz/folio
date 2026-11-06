@@ -1,0 +1,131 @@
+{
+ "body": {
+  "createdAt": 1793923715754,
+  "description": null,
+  "id": "27d27a82-05d0-4913-8086-690fab42b55f",
+  "items": [
+   {
+    "libraryItem": {
+     "addedAt": 1793923711348,
+     "birthtimeMs": 1793923703583,
+     "ctimeMs": 1793923703611,
+     "folderId": "0e17a53b-d91f-43af-b255-29ca94db9e96",
+     "id": "52aab8f7-c8fa-4420-aef6-a8c609e3906b",
+     "ino": "9178272",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "lastScan": 1793923711346,
+     "libraryFiles": [
+      {
+       "addedAt": 1793923711241,
+       "fileType": "ebook",
+       "ino": "9178273",
+       "isSupplementary": false,
+       "metadata": {
+        "birthtimeMs": 1793923703611,
+        "ctimeMs": 1793923703612,
+        "ext": ".epub",
+        "filename": "All Systems Red.epub",
+        "mtimeMs": 1793923703612,
+        "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+        "relPath": "All Systems Red.epub",
+        "size": 1311
+       },
+       "updatedAt": 1793923711241
+      }
+     ],
+     "libraryId": "02d7f265-c204-42e2-8a55-deaccd654300",
+     "media": {
+      "audioFiles": [],
+      "chapters": [],
+      "coverPath": null,
+      "duration": 0,
+      "ebookFile": {
+       "addedAt": 1793923711241,
+       "ebookFormat": "epub",
+       "fileType": "ebook",
+       "ino": "9178273",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793923703611,
+        "ctimeMs": 1793923703612,
+        "ext": ".epub",
+        "filename": "All Systems Red.epub",
+        "mtimeMs": 1793923703612,
+        "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+        "relPath": "All Systems Red.epub",
+        "size": 1311
+       },
+       "updatedAt": 1793923711241
+      },
+      "ebookFormat": "epub",
+      "id": "29fccd72-c91b-4437-9213-a1c35f6c2004",
+      "libraryItemId": "52aab8f7-c8fa-4420-aef6-a8c609e3906b",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Martha Wells",
+       "authorNameLF": "Wells, Martha",
+       "authors": [
+        {
+         "id": "14d4801b-5c75-46ef-a56d-4edf57567ab4",
+         "name": "Martha Wells"
+        }
+       ],
+       "description": null,
+       "descriptionPlain": null,
+       "explicit": false,
+       "genres": [],
+       "isbn": null,
+       "language": "en",
+       "narratorName": "",
+       "narrators": [],
+       "publishedDate": null,
+       "publishedYear": "2017",
+       "publisher": null,
+       "series": [
+        {
+         "id": "0d8b4b01-78a8-4d0b-aff1-5abd5490cdfe",
+         "name": "The Murderbot Diaries",
+         "sequence": "1"
+        }
+       ],
+       "seriesName": "The Murderbot Diaries #1",
+       "subtitle": null,
+       "title": "All Systems Red",
+       "titleIgnorePrefix": "All Systems Red"
+      },
+      "numAudioFiles": 0,
+      "numChapters": 0,
+      "numTracks": 0,
+      "size": 1311,
+      "tags": [],
+      "tracks": []
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793923703611,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "scanVersion": "2.37.2",
+     "size": 1311,
+     "updatedAt": 1793923711348
+    },
+    "libraryItemId": "52aab8f7-c8fa-4420-aef6-a8c609e3906b"
+   }
+  ],
+  "lastUpdate": 1793923715754,
+  "libraryId": "02d7f265-c204-42e2-8a55-deaccd654300",
+  "name": "Queue",
+  "userId": "05299f74-3137-4b02-852e-76639edf0b5f"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/playlists/{playlist}"
+ },
+ "status": 200
+}

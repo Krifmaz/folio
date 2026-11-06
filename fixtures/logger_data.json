@@ -1,0 +1,489 @@
+{
+ "body": {
+  "currentDailyLogs": [
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "=== Starting Server ===",
+    "source": "Server.js:223",
+    "timestamp": "2026-11-06 00:08:30.662"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Init v2.37.2",
+    "source": "Server.js:151",
+    "timestamp": "2026-11-06 00:08:30.663"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Node.js Version: v24.22.1",
+    "source": "Server.js:152",
+    "timestamp": "2026-11-06 00:08:30.663"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Platform: linux",
+    "source": "Server.js:153",
+    "timestamp": "2026-11-06 00:08:30.663"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Arch: x64",
+    "source": "Server.js:154",
+    "timestamp": "2026-11-06 00:08:30.663"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] absdatabase.sqlite not found at /config/absdatabase.sqlite",
+    "source": "Database.js:133",
+    "timestamp": "2026-11-06 00:08:30.667"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Initializing db at \"/config/absdatabase.sqlite\"",
+    "source": "Database.js:171",
+    "timestamp": "2026-11-06 00:08:30.668"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Loading extension /usr/local/lib/nusqlite3/libnusqlite3.so",
+    "source": "Database.js:241",
+    "timestamp": "2026-11-06 00:08:30.704"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Successfully loaded extension /usr/local/lib/nusqlite3/libnusqlite3.so",
+    "source": "Database.js:249",
+    "timestamp": "2026-11-06 00:08:30.705"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Db supports unaccent and unicode foldings",
+    "source": "Database.js:218",
+    "timestamp": "2026-11-06 00:08:30.705"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Db connection was successful",
+    "source": "Database.js:222",
+    "timestamp": "2026-11-06 00:08:30.705"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[MigrationManager] Database is new. Skipping migrations.",
+    "source": "MigrationManager.js:75",
+    "timestamp": "2026-11-06 00:08:30.724"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Db initialized with models: user, session, apiKey, library, libraryFolder, book, podcast, podcastEpisode, libraryItem, mediaProgress, series, bookSeries, author, bookAuthor, collection, collectionBook, playlist, playlistMediaItem, device, playbackSession, feed, feedEpisode, setting, customMetadataProvider, mediaItemShare",
+    "source": "Database.js:159",
+    "timestamp": "2026-11-06 00:08:30.927"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-06 00:08:30.927"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title_ignore_prefix",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-06 00:08:30.929"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title_from_podcasts_title",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-06 00:08:30.931"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_title_ignore_prefix_from_podcasts_title_ignore_prefix",
+    "source": "Database.js:795",
+    "timestamp": "2026-11-06 00:08:30.932"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_author_names_on_book_authors_insert",
+    "source": "Database.js:830",
+    "timestamp": "2026-11-06 00:08:30.935"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_author_names_on_book_authors_delete",
+    "source": "Database.js:830",
+    "timestamp": "2026-11-06 00:08:30.936"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] Adding trigger update_library_items_author_names_on_authors_update",
+    "source": "Database.js:852",
+    "timestamp": "2026-11-06 00:08:30.938"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] running ANALYZE",
+    "source": "Database.js:162",
+    "timestamp": "2026-11-06 00:08:30.975"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Database] ANALYZE completed",
+    "source": "Database.js:164",
+    "timestamp": "2026-11-06 00:08:30.977"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Serving from base path \"/audiobookshelf\"",
+    "source": "Server.js:168",
+    "timestamp": "2026-11-06 00:08:30.977"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[TokenManager] JWT secret key not found, generating one",
+    "source": "TokenManager.js:44",
+    "timestamp": "2026-11-06 00:08:30.978"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LogManager] Init current daily log filename: 2026-11-06.txt",
+    "source": "LogManager.js:59",
+    "timestamp": "2026-11-06 00:08:30.982"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[BackupManager] 0 Backups Found",
+    "source": "BackupManager.js:288",
+    "timestamp": "2026-11-06 00:08:30.988"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[BackupManager] Auto Backups are disabled",
+    "source": "BackupManager.js:64",
+    "timestamp": "2026-11-06 00:08:30.989"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "Listening on port :80",
+    "source": "Server.js:425",
+    "timestamp": "2026-11-06 00:08:31.009"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Server] Initializing new server",
+    "source": "Server.js:432",
+    "timestamp": "2026-11-06 00:08:31.076"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LocalAuth] User \"root\" logged in from ip ::ffff:172.17.0.1",
+    "source": "LocalAuthStrategy.js:81",
+    "timestamp": "2026-11-06 00:08:31.152"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Watcher] Initializing watcher for \"Books\".",
+    "source": "Watcher.js:51",
+    "timestamp": "2026-11-06 00:08:31.190"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScanner] Library metadata precedence changed since last scan. From [Unset] to [folderStructure,audioMetatags,nfoFile,txtFiles,opfFile,absMetadata]",
+    "source": "LibraryScanner.js:60",
+    "timestamp": "2026-11-06 00:08:31.204"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScanner] Starting (forced) library scan ce58f47e-6f37-464b-a752-b8281a00e92c for Books",
+    "source": "LibraryScanner.js:78",
+    "timestamp": "2026-11-06 00:08:31.205"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[Watcher] \"Books\" Ready",
+    "source": "Watcher.js:81",
+    "timestamp": "2026-11-06 00:08:31.219"
+   },
+   {
+    "level": 3,
+    "levelName": "WARN",
+    "message": "Cover image not found in manifest for epub at \"/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub\"",
+    "source": "parseEpubMetadata.js:122",
+    "timestamp": "2026-11-06 00:08:31.345"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScanner] Library scan \"ce58f47e-6f37-464b-a752-b8281a00e92c\" completed in 0:00 | 3 Added | 0 Updated | 0 Missing",
+    "source": "LibraryScanner.js:82",
+    "timestamp": "2026-11-06 00:08:31.435"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryScan] Scan log saved \"/metadata/logs/scans/2026-11-06_ce58f47e-6f37-464b-a752-b8281a00e92c.txt\"",
+    "source": "LibraryScan.js:125",
+    "timestamp": "2026-11-06 00:08:31.441"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LibraryController] Scan complete",
+    "source": "LibraryController.js:1169",
+    "timestamp": "2026-11-06 00:08:31.441"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "Received ping",
+    "source": "Server.js:348",
+    "timestamp": "2026-11-06 00:08:35.253"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[Server] attempt to init server when server already has a root user",
+    "source": "Server.js:325",
+    "timestamp": "2026-11-06 00:08:35.257"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LocalAuth] User \"root\" logged in from ip ::ffff:172.17.0.1",
+    "source": "LocalAuthStrategy.js:81",
+    "timestamp": "2026-11-06 00:08:35.279"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[LocalAuth] User \"root\" logged in from ip ::ffff:172.17.0.1",
+    "source": "LocalAuthStrategy.js:81",
+    "timestamp": "2026-11-06 00:08:35.308"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LocalAuth] Failed login attempt for username \"root\" from ip ::ffff:172.17.0.1 (Invalid password)",
+    "source": "LocalAuthStrategy.js:98",
+    "timestamp": "2026-11-06 00:08:35.336"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LocalAuth] Failed login attempt for username \"nobody\" from ip ::ffff:172.17.0.1 (User not found)",
+    "source": "LocalAuthStrategy.js:98",
+    "timestamp": "2026-11-06 00:08:35.341"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[Auth] Failed to refresh token. No refresh token provided",
+    "source": "Auth.js:300",
+    "timestamp": "2026-11-06 00:08:35.345"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[TokenManager] Invalid refresh token format: jwt malformed",
+    "source": "TokenManager.js:409",
+    "timestamp": "2026-11-06 00:08:35.347"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[TokenManager] Failed to refresh token. Invalid token type: access",
+    "source": "TokenManager.js:324",
+    "timestamp": "2026-11-06 00:08:35.356"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[TokenManager] Refresh token invalidated, 1 sessions deleted",
+    "source": "TokenManager.js:498",
+    "timestamp": "2026-11-06 00:08:35.402"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[TokenManager] Failed to refresh token. Session not found",
+    "source": "TokenManager.js:335",
+    "timestamp": "2026-11-06 00:08:35.406"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItem] Library item not found with id \"00000000-0000-0000-0000-000000000000\"",
+    "source": "LibraryItem.js:188",
+    "timestamp": "2026-11-06 00:08:35.657"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItem] Library item not found with id \"00000000-0000-4000-8000-000000000000\"",
+    "source": "LibraryItem.js:188",
+    "timestamp": "2026-11-06 00:08:35.856"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[MeController] Media item not found for library item id \"00000000-0000-4000-8000-000000000000\"",
+    "source": "MeController.js:166",
+    "timestamp": "2026-11-06 00:08:35.856"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItemController] startPlaybackSession cannot playback 52aab8f7-c8fa-4420-aef6-a8c609e3906b",
+    "source": "LibraryItemController.js:402",
+    "timestamp": "2026-11-06 00:08:35.908"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[PlaybackSessionManager] Not updating progress for \"A Psalm for the Wild-Built\" because it has been updated more recently (1793923715825 > 1700000000000) (incoming currentTime: 5) (current currentTime: 15)",
+    "source": "PlaybackSessionManager.js:207",
+    "timestamp": "2026-11-06 00:08:35.935"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItem] Library item not found with id \"00000000-0000-4000-8000-000000000000\"",
+    "source": "LibraryItem.js:188",
+    "timestamp": "2026-11-06 00:08:35.940"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[PlaybackSessionManager] syncLocalSession: Media item not found for session \"\" (7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91)",
+    "source": "PlaybackSessionManager.js:116",
+    "timestamp": "2026-11-06 00:08:35.940"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[PlaybackSessionManager] Syncing local session \"\" (7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91) (updatedAt: 1700000050000)",
+    "source": "PlaybackSessionManager.js:96",
+    "timestamp": "2026-11-06 00:08:35.944"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[PlaybackSessionManager] Creating new media progress for media item \"All Systems Red\"",
+    "source": "PlaybackSessionManager.js:225",
+    "timestamp": "2026-11-06 00:08:35.953"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[PlaybackSessionManager] Syncing local session \"\" (play_local_parity) (updatedAt: 1700000060000)",
+    "source": "PlaybackSessionManager.js:96",
+    "timestamp": "2026-11-06 00:08:35.957"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItem] Library item not found with id \"00000000-0000-4000-8000-000000000000\"",
+    "source": "LibraryItem.js:188",
+    "timestamp": "2026-11-06 00:08:35.958"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[PlaybackSessionManager] syncLocalSession: Media item not found for session \"\" (play_local_parity)",
+    "source": "PlaybackSessionManager.js:116",
+    "timestamp": "2026-11-06 00:08:35.959"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[PlaybackSessionManager] Not updating progress for \"A Psalm for the Wild-Built\" because it has been updated more recently (1793923715825 > 1700000100000) (incoming currentTime: 7) (current currentTime: 15)",
+    "source": "PlaybackSessionManager.js:207",
+    "timestamp": "2026-11-06 00:08:35.972"
+   },
+   {
+    "level": 3,
+    "levelName": "WARN",
+    "message": "[SessionController] Invalid \"sort\" query string \"nope\" (Must be one of \"displayTitle|duration|playMethod|startTime|currentTime|timeListening|updatedAt|createdAt\")",
+    "source": "SessionController.js:41",
+    "timestamp": "2026-11-06 00:08:35.980"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[SessionController] Unable to find playback session with id=b3c50910-d177-46a6-b440-ff9a8c5a6e98",
+    "source": "SessionController.js:328",
+    "timestamp": "2026-11-06 00:08:36.006"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[SessionController] Invalid request body. \"sessions\" array is required { sessions: [ 'nope' ] }",
+    "source": "SessionController.js:203",
+    "timestamp": "2026-11-06 00:08:36.009"
+   },
+   {
+    "level": 2,
+    "levelName": "INFO",
+    "message": "[SessionController] 2 playback sessions removed by \"root\"",
+    "source": "SessionController.js:219",
+    "timestamp": "2026-11-06 00:08:36.013"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItem] Library item not found with id \"00000000-0000-4000-8000-000000000000\"",
+    "source": "LibraryItem.js:188",
+    "timestamp": "2026-11-06 00:08:36.020"
+   },
+   {
+    "level": 4,
+    "levelName": "ERROR",
+    "message": "[LibraryItemController] startEpisodePlaybackSession invalid media type 0efa2004-97d2-44a2-ba24-8c3134967245",
+    "source": "LibraryItemController.js:417",
+    "timestamp": "2026-11-06 00:08:36.026"
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/logger-data"
+ },
+ "status": 200
+}
