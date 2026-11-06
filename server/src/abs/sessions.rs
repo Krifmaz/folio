@@ -44,7 +44,7 @@ pub fn router() -> Router<AppState> {
 }
 
 /// The audio type the original sets for a file's extension (`getAudioMimeTypeFromExtname`); none for others.
-fn audio_mime(path: &str) -> Option<&'static str> {
+pub fn audio_mime(path: &str) -> Option<&'static str> {
     let ext = std::path::Path::new(path).extension()?.to_str()?.to_uppercase();
     Some(match ext.as_str() {
         "MP3" | "MPEG" | "MPG" => "audio/mpeg",

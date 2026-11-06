@@ -1,0 +1,15 @@
+{
+ "body": "Item is already shared",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "expiresAt": 0,
+   "mediaItemId": "{share_book}",
+   "mediaItemType": "book",
+   "slug": "other"
+  },
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 409
+}

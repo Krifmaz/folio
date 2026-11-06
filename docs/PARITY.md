@@ -216,8 +216,8 @@ repository at the pinned commit.
 | A0176 | endpoint | `GET /api/custom-metadata-providers` (CustomMetadataProviderController.getAll) | `server/routers/ApiRouter.js#L319` | P6 server admin | done | `server/tests/abs_admin.rs::metadata_providers_are_added_and_removed_like_the_original` |
 | A0177 | endpoint | `POST /api/custom-metadata-providers` (CustomMetadataProviderController.create) | `server/routers/ApiRouter.js#L320` | P6 server admin | done | `server/tests/abs_admin.rs::metadata_providers_are_added_and_removed_like_the_original` |
 | A0178 | endpoint | `DELETE /api/custom-metadata-providers/:id` (CustomMetadataProviderController.delete) | `server/routers/ApiRouter.js#L321` | P6 server admin | done | `server/tests/abs_admin.rs::metadata_providers_are_added_and_removed_like_the_original` |
-| A0179 | endpoint | `POST /api/share/mediaitem` (ShareController.createMediaItemShare) | `server/routers/ApiRouter.js#L326` | P6 server admin | todo |  |
-| A0180 | endpoint | `DELETE /api/share/mediaitem/:id` (ShareController.deleteMediaItemShare) | `server/routers/ApiRouter.js#L327` | P6 server admin | todo |  |
+| A0179 | endpoint | `POST /api/share/mediaitem` (ShareController.createMediaItemShare) | `server/routers/ApiRouter.js#L326` | P6 server admin | done | `server/tests/abs_shares.rs` |
+| A0180 | endpoint | `DELETE /api/share/mediaitem/:id` (ShareController.deleteMediaItemShare) | `server/routers/ApiRouter.js#L327` | P6 server admin | done | `server/tests/abs_shares.rs` |
 | A0181 | endpoint | `GET /api/stats/year/:year` (StatsController.getAdminStatsForYear) | `server/routers/ApiRouter.js#L332` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original`, `server/tests/abs_stats.rs::the_year_in_review_counts_like_the_original` |
 | A0182 | endpoint | `GET /api/stats/server` (StatsController.getServerStats) | `server/routers/ApiRouter.js#L333` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original`, `server/tests/abs_stats.rs::the_year_in_review_counts_like_the_original` |
 | A0183 | endpoint | `GET /api/api-keys` (ApiKeyController.getAll) | `server/routers/ApiRouter.js#L338` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
@@ -241,11 +241,11 @@ repository at the pinned commit.
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |
 | A0202 | endpoint | `GET /api/logger-data` (MiscController.getLoggerData) | `server/routers/ApiRouter.js#L361` | P6 server admin | done | `server/tests/abs_logs.rs` |
 | A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
-| A0204 | endpoint | `GET /public/share/:slug` | `server/routers/PublicRouter.js#L16` | P6 server admin | todo |  |
-| A0205 | endpoint | `GET /public/share/:slug/track/:index` | `server/routers/PublicRouter.js#L17` | P6 server admin | todo |  |
-| A0206 | endpoint | `GET /public/share/:slug/cover` | `server/routers/PublicRouter.js#L18` | P6 server admin | todo |  |
-| A0207 | endpoint | `GET /public/share/:slug/download` | `server/routers/PublicRouter.js#L19` | P6 server admin | todo |  |
-| A0208 | endpoint | `PATCH /public/share/:slug/progress` | `server/routers/PublicRouter.js#L20` | P3 playback | todo |  |
+| A0204 | endpoint | `GET /public/share/:slug` | `server/routers/PublicRouter.js#L16` | P6 server admin | done | `server/tests/abs_shares.rs` |
+| A0205 | endpoint | `GET /public/share/:slug/track/:index` | `server/routers/PublicRouter.js#L17` | P6 server admin | done | `server/tests/abs_shares.rs` |
+| A0206 | endpoint | `GET /public/share/:slug/cover` | `server/routers/PublicRouter.js#L18` | P6 server admin | done | `server/tests/abs_shares.rs` |
+| A0207 | endpoint | `GET /public/share/:slug/download` | `server/routers/PublicRouter.js#L19` | P6 server admin | done | `server/tests/abs_shares.rs` |
+| A0208 | endpoint | `PATCH /public/share/:slug/progress` | `server/routers/PublicRouter.js#L20` | P3 playback | done | `server/tests/abs_shares.rs` |
 | A0209 | endpoint | `GET /public/session/:id/track/:index` | `server/routers/PublicRouter.js#L21` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0210 | endpoint | `GET /feed/:slug` | `server/Server.js#L362` | P5 podcasts and feeds | todo |  |
 | A0211 | endpoint | `GET /feed/:slug/cover*` | `server/Server.js#L366` | P5 podcasts and feeds | todo |  |
@@ -300,8 +300,8 @@ repository at the pinned commit.
 | A0260 | socket | server → client `series_added` | `server/scanner/Scanner.js#L316` | P2 users | todo |  |
 | A0261 | socket | server → client `series_removed` | `server/routers/ApiRouter.js#L453` | P2 users | todo |  |
 | A0262 | socket | server → client `series_updated` | `server/controllers/SeriesController.js#L84` | P2 users | todo |  |
-| A0263 | socket | server → client `share_closed` | `server/managers/ShareManager.js#L165` | P2 users | todo |  |
-| A0264 | socket | server → client `share_open` | `server/managers/ShareManager.js#L142` | P2 users | todo |  |
+| A0263 | socket | server → client `share_closed` | `server/managers/ShareManager.js#L165` | P2 users | wip | sent by `abs::shares` (P6); no socket test yet |
+| A0264 | socket | server → client `share_open` | `server/managers/ShareManager.js#L142` | P2 users | wip | sent by `abs::shares` (P6); no socket test yet |
 | A0265 | socket | server → client `stream_reset` | `server/routers/HlsRouter.js#L87` | P2 users | todo |  |
 | A0266 | socket | server → client `task_finished` | `server/managers/TaskManager.js#L35` | P2 users | todo |  |
 | A0267 | socket | server → client `task_progress` | `server/managers/AbMergeManager.js#L148` | P2 users | todo |  |

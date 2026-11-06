@@ -30,6 +30,7 @@ pub mod scanner;
 pub mod series;
 pub mod sessions;
 pub mod settings;
+pub mod shares;
 pub mod socket;
 pub mod stats;
 pub mod tasks;
@@ -89,6 +90,8 @@ pub struct Server {
     pub backups: Arc<backups::Manager>,
     /// The server's logs (`Logger` and its `LogManager`).
     pub logs: Arc<logs::Logs>,
+    /// The open shares and their listening sessions.
+    pub shares: Arc<shares::Manager>,
     /// How the server was installed (`Source`, from `SOURCE`; `docker` by default, like the original's image).
     pub source: String,
 }
@@ -131,6 +134,7 @@ impl Server {
             metadata_path,
             tasks: Arc::new(tasks::TaskManager::default()),
             notifications: Arc::new(notifications::Manager::default()),
+            shares: Arc::new(shares::Manager::default()),
             source: std::env::var("SOURCE").ok().filter(|s| !s.is_empty()).unwrap_or_else(|| "docker".into()),
         })
     }
@@ -282,6 +286,7 @@ pub fn router() -> Router<AppState> {
         .merge(logs::router())
         .merge(stats::router())
         .merge(upload::router())
+        .merge(shares::router())
         .merge(metadata_providers::router())
         .merge(email::router())
         .merge(notifications::router())

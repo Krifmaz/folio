@@ -8,6 +8,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Shares work like Audiobookshelf's: admins share a book under a public link, with an end date and downloads
+  if they like, and anyone with the link can listen, download and come back to where they stopped. Each answer
+  is checked against the original's own.
 - The web app's pages are checked in a browser against Folio holding the original's recorded library: 25 pages
   open without errors, a book starts playing and an EPUB opens in the reader (PARITY W rows).
 - Books open in the web app's ebook reader: the item's ebook file is sent, and an ebook file can be switched

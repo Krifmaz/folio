@@ -260,6 +260,7 @@ pub fn app(st: AppState) -> Router {
     let page = spa.clone();
     kit_server_notices::spawn_rechecks(st.clone());
     abs::backups::spawn_schedule(st.clone());
+    abs::shares::init(&st);
     let sockets = abs::socket::layer(st.clone());
     Router::new()
         .merge(kit_server_health::router(kit_server_health::Health::new(VERSION, web)))

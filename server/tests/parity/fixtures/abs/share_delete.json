@@ -1,0 +1,10 @@
+{
+ "body": "",
+ "content_type": "",
+ "request": {
+  "body": null,
+  "method": "DELETE",
+  "path": "/api/share/mediaitem/{share_id}"
+ },
+ "status": 204
+}

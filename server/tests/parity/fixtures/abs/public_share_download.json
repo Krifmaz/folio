@@ -1,0 +1,15 @@
+{
+ "body": {
+  "bytes": 181894
+ },
+ "content_type": "application/zip",
+ "request": {
+  "body": null,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  },
+  "method": "GET",
+  "path": "/public/share/folio-share/download"
+ },
+ "status": 200
+}

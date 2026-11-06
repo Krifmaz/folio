@@ -1,0 +1,13 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  },
+  "method": "GET",
+  "path": "/public/share/folio-share"
+ },
+ "status": 404
+}
