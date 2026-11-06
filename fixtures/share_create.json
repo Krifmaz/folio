@@ -1,0 +1,25 @@
+{
+ "body": {
+  "createdAt": "2026-11-06T01:53:08.444Z",
+  "expiresAt": null,
+  "id": "903e3424-f07d-4911-ae38-2f6cd3a1aa12",
+  "isDownloadable": true,
+  "mediaItemId": "1308815c-3e1f-4569-baba-61dfd072ec8d",
+  "mediaItemType": "book",
+  "slug": "folio-share",
+  "updatedAt": "2026-11-06T01:53:08.444Z"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "expiresAt": 0,
+   "isDownloadable": true,
+   "mediaItemId": "{share_book}",
+   "mediaItemType": "book",
+   "slug": "folio-share"
+  },
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 201
+}

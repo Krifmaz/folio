@@ -1,0 +1,15 @@
+{
+ "body": "Media item not found",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "expiresAt": 0,
+   "mediaItemId": "nope",
+   "mediaItemType": "book",
+   "slug": "s"
+  },
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 404
+}

@@ -1,0 +1,12 @@
+{
+ "body": {
+  "bytes": 60510
+ },
+ "content_type": "audio/mpeg",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/public/session/{session}/track/1"
+ },
+ "status": 200
+}

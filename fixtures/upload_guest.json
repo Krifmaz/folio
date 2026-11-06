@@ -1,0 +1,17 @@
+{
+ "body": "Forbidden",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "folder": "x",
+   "library": "{library}",
+   "title": "T"
+  },
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "POST",
+  "path": "/api/upload"
+ },
+ "status": 403
+}

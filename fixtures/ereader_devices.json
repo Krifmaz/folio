@@ -1,0 +1,67 @@
+{
+ "body": {
+  "ereaderDevices": [
+   {
+    "availabilityOption": "adminOrUp",
+    "email": "k@kindle.example",
+    "name": "Kindle"
+   },
+   {
+    "availabilityOption": "adminOrUp",
+    "email": "k@kobo.example",
+    "name": "Kobo",
+    "users": []
+   },
+   {
+    "availabilityOption": "guestOrUp",
+    "email": "s@example.org",
+    "name": "Shared",
+    "users": []
+   },
+   {
+    "availabilityOption": "specificUsers",
+    "email": "m@example.org",
+    "name": "Mine",
+    "users": [
+     "a795c15c-d650-436d-be0e-1bf1e451d4ef"
+    ]
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "ereaderDevices": [
+    {
+     "email": "k@kindle.example",
+     "name": "Kindle"
+    },
+    {
+     "availabilityOption": "specificUsers",
+     "email": "k@kobo.example",
+     "name": "Kobo",
+     "users": []
+    },
+    {
+     "availabilityOption": "guestOrUp",
+     "email": "s@example.org",
+     "name": "Shared",
+     "users": [
+      "{guest_id}"
+     ]
+    },
+    {
+     "availabilityOption": "specificUsers",
+     "email": "m@example.org",
+     "name": "Mine",
+     "users": [
+      "{guest_id}"
+     ]
+    }
+   ]
+  },
+  "method": "POST",
+  "path": "/api/emails/ereader-devices"
+ },
+ "status": 200
+}

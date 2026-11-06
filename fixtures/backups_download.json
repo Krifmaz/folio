@@ -1,0 +1,12 @@
+{
+ "body": {
+  "bytes": 20973
+ },
+ "content_type": "application/octet-stream",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/backups/{backup_id}/download"
+ },
+ "status": 200
+}

@@ -1,0 +1,15 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "sessions": [
+    "6c1f8d0e-3a52-4b7e-9d1a-2f4e5b6c7d80",
+    "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91"
+   ]
+  },
+  "method": "POST",
+  "path": "/api/sessions/batch/delete"
+ },
+ "status": 200
+}

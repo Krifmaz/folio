@@ -1,0 +1,54 @@
+{
+ "body": {
+  "success": true,
+  "user": {
+   "bookmarks": [],
+   "createdAt": 1793929986792,
+   "email": "r@example.org",
+   "hasOpenIDLink": false,
+   "id": "aad5a424-1dd8-41a8-9322-94ffd31640f4",
+   "isActive": true,
+   "isLocked": false,
+   "itemTagsSelected": [
+    "kids"
+   ],
+   "lastSeen": null,
+   "librariesAccessible": [
+    "726820bc-77d9-4b5f-a4fe-a87d96c4d7a6"
+   ],
+   "mediaProgress": [],
+   "permissions": {
+    "accessAllLibraries": true,
+    "accessAllTags": false,
+    "accessExplicitContent": false,
+    "createEreader": false,
+    "delete": false,
+    "download": false,
+    "selectedTagsNotAccessible": false,
+    "update": true,
+    "upload": false
+   },
+   "seriesHideFromContinueListening": [],
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYWQ1YTQyNC0xZGQ4LTQxYTgtOTMyMi05NGZmZDMxNjQwZjQiLCJ1c2VybmFtZSI6InJlYWRlciIsImlhdCI6MTc5MzkyOTk4Nn0.8qXNt991HV1OIcHY7ck_lZg_7MXExtzLaTHi5mqG-d8",
+   "type": "user",
+   "username": "reader"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "email": "r@example.org",
+   "permissions": {
+    "accessAllTags": false,
+    "itemTagsSelected": [
+     "kids"
+    ],
+    "nope": true,
+    "update": true
+   }
+  },
+  "method": "PATCH",
+  "path": "/api/users/{user_id}"
+ },
+ "status": 200
+}

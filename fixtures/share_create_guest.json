@@ -1,0 +1,18 @@
+{
+ "body": "Forbidden",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "expiresAt": 0,
+   "mediaItemId": "{share_book}",
+   "mediaItemType": "book",
+   "slug": "g"
+  },
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 403
+}

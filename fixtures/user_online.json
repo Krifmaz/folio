@@ -1,0 +1,13 @@
+{
+ "body": {
+  "openSessions": [],
+  "usersOnline": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/users/online"
+ },
+ "status": 200
+}

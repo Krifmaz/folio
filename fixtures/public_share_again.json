@@ -1,0 +1,155 @@
+{
+ "body": {
+  "createdAt": "2026-11-06T01:53:08.444Z",
+  "expiresAt": null,
+  "id": "903e3424-f07d-4911-ae38-2f6cd3a1aa12",
+  "isDownloadable": true,
+  "mediaItemId": "1308815c-3e1f-4569-baba-61dfd072ec8d",
+  "mediaItemType": "book",
+  "playbackSession": {
+   "audioTracks": [
+    {
+     "codec": "mp3",
+     "contentUrl": "/audiobookshelf/public/share/folio-share/track/1",
+     "duration": 15,
+     "index": 1,
+     "metadata": {
+      "birthtimeMs": 1793929972199,
+      "ctimeMs": 1793929972243,
+      "ext": ".mp3",
+      "filename": "Part 01.mp3",
+      "mtimeMs": 1793929972243,
+      "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3",
+      "relPath": "Part 01.mp3",
+      "size": 60510
+     },
+     "mimeType": "audio/mpeg",
+     "startOffset": 0,
+     "title": "Part 01.mp3"
+    },
+    {
+     "codec": "mp3",
+     "contentUrl": "/audiobookshelf/public/share/folio-share/track/2",
+     "duration": 15,
+     "index": 2,
+     "metadata": {
+      "birthtimeMs": 1793929972277,
+      "ctimeMs": 1793929972319,
+      "ext": ".mp3",
+      "filename": "Part 02.mp3",
+      "mtimeMs": 1793929972319,
+      "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3",
+      "relPath": "Part 02.mp3",
+      "size": 60510
+     },
+     "mimeType": "audio/mpeg",
+     "startOffset": 15,
+     "title": "Part 02.mp3"
+    },
+    {
+     "codec": "mp3",
+     "contentUrl": "/audiobookshelf/public/share/folio-share/track/3",
+     "duration": 15,
+     "index": 3,
+     "metadata": {
+      "birthtimeMs": 1793929972352,
+      "ctimeMs": 1793929972394,
+      "ext": ".mp3",
+      "filename": "Part 03.mp3",
+      "mtimeMs": 1793929972394,
+      "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3",
+      "relPath": "Part 03.mp3",
+      "size": 60510
+     },
+     "mimeType": "audio/mpeg",
+     "startOffset": 30,
+     "title": "Part 03.mp3"
+    }
+   ],
+   "bookId": "1308815c-3e1f-4569-baba-61dfd072ec8d",
+   "chapters": [
+    {
+     "end": 15,
+     "id": 0,
+     "start": 0,
+     "title": "Part 1"
+    },
+    {
+     "end": 30,
+     "id": 1,
+     "start": 15,
+     "title": "Part 2"
+    },
+    {
+     "end": 45,
+     "id": 2,
+     "start": 30,
+     "title": "Part 3"
+    }
+   ],
+   "coverAspectRatio": 1,
+   "coverPath": null,
+   "currentTime": 5,
+   "date": "2026-11-06",
+   "dayOfWeek": "Friday",
+   "deviceInfo": {
+    "clientName": "Abs Web Share",
+    "clientVersion": "2.37.2",
+    "deviceId": "6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c",
+    "id": "c88b37e3-6a77-4fe3-a62f-80c3b690497b",
+    "ipAddress": "::ffff:172.17.0.1"
+   },
+   "displayAuthor": "Becky Chambers",
+   "displayTitle": "A Psalm for the Wild-Built",
+   "duration": 45,
+   "episodeId": null,
+   "id": "418fc31f-ed72-40dd-a1ab-a7e283a6e495",
+   "libraryId": "726820bc-77d9-4b5f-a4fe-a87d96c4d7a6",
+   "libraryItem": null,
+   "libraryItemId": "6a8155a5-d42f-4e10-ad91-8a90309cbb27",
+   "mediaMetadata": {
+    "abridged": false,
+    "asin": null,
+    "authors": [
+     {
+      "id": "bb82cd54-f599-45f9-bfbd-660fdeac4473",
+      "name": "Becky Chambers"
+     }
+    ],
+    "description": null,
+    "explicit": false,
+    "genres": [],
+    "isbn": null,
+    "language": null,
+    "narrators": [],
+    "publishedDate": null,
+    "publishedYear": null,
+    "publisher": null,
+    "series": [],
+    "subtitle": null,
+    "title": "A Psalm for the Wild-Built"
+   },
+   "mediaPlayer": "web-share",
+   "mediaType": "book",
+   "playMethod": 0,
+   "serverVersion": "2.37.2",
+   "startTime": 5,
+   "startedAt": 1793929988458,
+   "timeListening": 0,
+   "updatedAt": 1793929988458,
+   "userId": null
+  },
+  "slug": "folio-share",
+  "updatedAt": "2026-11-06T01:53:08.444Z"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "headers": {
+   "Cookie": "share_session_id=6f1c2b9e-4a3d-4c8e-9b2a-1d2e3f4a5b6c"
+  },
+  "method": "GET",
+  "path": "/public/share/folio-share"
+ },
+ "status": 200
+}

@@ -1,0 +1,43 @@
+{
+ "body": {
+  "limit": 2,
+  "minified": false,
+  "page": 0,
+  "results": [
+   {
+    "addedAt": 1793929982123,
+    "asin": null,
+    "description": null,
+    "id": "fbc5aca5-8238-48ad-9b56-0c04aab692ed",
+    "imagePath": null,
+    "lastFirst": "Leckie, Ann",
+    "libraryId": "726820bc-77d9-4b5f-a4fe-a87d96c4d7a6",
+    "name": "Ann Leckie",
+    "numBooks": 1,
+    "updatedAt": 1793929982123
+   },
+   {
+    "addedAt": 1793929982050,
+    "asin": null,
+    "description": null,
+    "id": "bb82cd54-f599-45f9-bfbd-660fdeac4473",
+    "imagePath": null,
+    "lastFirst": "Chambers, Becky",
+    "libraryId": "726820bc-77d9-4b5f-a4fe-a87d96c4d7a6",
+    "name": "Becky Chambers",
+    "numBooks": 1,
+    "updatedAt": 1793929982050
+   }
+  ],
+  "sortBy": "name",
+  "sortDesc": false,
+  "total": 3
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/authors?limit=2&page=0&sort=name"
+ },
+ "status": 200
+}

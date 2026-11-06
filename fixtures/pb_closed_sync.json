@@ -1,0 +1,13 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "currentTime": 1,
+   "timeListened": 1
+  },
+  "method": "POST",
+  "path": "/api/session/{session}/sync"
+ },
+ "status": 404
+}

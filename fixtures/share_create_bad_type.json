@@ -1,0 +1,15 @@
+{
+ "body": "Invalid media item type",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "expiresAt": 0,
+   "mediaItemId": "x",
+   "mediaItemType": "podcast",
+   "slug": "s"
+  },
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 400
+}

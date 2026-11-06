@@ -1,0 +1,10 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {},
+  "method": "POST",
+  "path": "/api/session/{stream}/close"
+ },
+ "status": 200
+}

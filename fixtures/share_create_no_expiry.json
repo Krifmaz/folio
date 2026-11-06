@@ -1,0 +1,14 @@
+{
+ "body": "Invalid expiration date",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "mediaItemId": "x",
+   "mediaItemType": "book",
+   "slug": "s"
+  },
+  "method": "POST",
+  "path": "/api/share/mediaitem"
+ },
+ "status": 400
+}

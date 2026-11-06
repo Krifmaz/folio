@@ -1,0 +1,12 @@
+{
+ "body": "Invalid cron expression",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "expression": "61 * * * *"
+  },
+  "method": "POST",
+  "path": "/api/validate-cron"
+ },
+ "status": 400
+}

@@ -1,0 +1,81 @@
+{
+ "body": {
+  "itemsPerPage": 2,
+  "numPages": 2,
+  "page": 1,
+  "sessions": [
+   {
+    "bookId": "bdd7a05a-7bd7-4aac-8bda-13c199ec59e3",
+    "chapters": [],
+    "coverPath": null,
+    "currentTime": 3,
+    "date": "2023-11-14",
+    "dayOfWeek": "Tuesday",
+    "deviceInfo": {
+     "clientName": "Abs Android",
+     "clientVersion": "0.9.81-beta",
+     "deviceId": "parity-2",
+     "deviceName": "Google Pixel 8",
+     "id": "3240e96a-25b6-492c-9568-9af3c8007bf4",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "Google",
+     "model": "Pixel 8",
+     "sdkVersion": "34",
+     "userId": "4f0cfe73-4be3-44e3-8440-22faeca38211"
+    },
+    "displayAuthor": "Martha Wells",
+    "displayTitle": "All Systems Red",
+    "duration": 0,
+    "episodeId": null,
+    "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+    "libraryId": "726820bc-77d9-4b5f-a4fe-a87d96c4d7a6",
+    "libraryItemId": "b3caba91-6d1a-4cb2-a8ff-0c24e004917a",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "b6382d38-7fc8-4f99-a208-76dd6fd3e51f",
+       "name": "Martha Wells"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": "en",
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": "2017",
+     "publisher": null,
+     "series": [
+      {
+       "id": "35c5ded1-7e5b-4827-a687-8e413793cfa6",
+       "name": "The Murderbot Diaries",
+       "sequence": "1"
+      }
+     ],
+     "subtitle": null,
+     "title": "All Systems Red"
+    },
+    "mediaPlayer": "exo-player",
+    "mediaType": "book",
+    "playMethod": 3,
+    "serverVersion": "2.37.2",
+    "startTime": 0,
+    "startedAt": 1699999990000,
+    "timeListening": 4.5,
+    "updatedAt": 1700000050000,
+    "userId": "4f0cfe73-4be3-44e3-8440-22faeca38211"
+   }
+  ],
+  "total": 3
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/listening-sessions?itemsPerPage=2&page=1"
+ },
+ "status": 200
+}
