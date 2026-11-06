@@ -3,6 +3,8 @@
 //!
 //! Done so far: `GET /api/items/:id`, plain or `expanded=1` with `include=progress`.
 
+pub mod ebook;
+
 use crate::abs::auth::{send_status, AbsUser};
 use crate::abs::library::util::Sorting;
 use crate::abs::models::{self, book, find, library_item, media_progress, LibraryItem, User};
@@ -18,7 +20,7 @@ use std::collections::HashMap;
 
 /// The item routes.
 pub fn router() -> Router<AppState> {
-    Router::new().route("/api/items/{id}", get(find_one))
+    Router::new().route("/api/items/{id}", get(find_one)).merge(ebook::router())
 }
 
 /// An item with its book loaded (`LibraryItem.getExpandedById`); `None` when there is no such item or it has no

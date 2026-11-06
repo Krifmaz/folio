@@ -90,8 +90,8 @@ repository at the pinned commit.
 | A0050 | endpoint | `GET /api/items/:id/file/:fileid` (LibraryItemController.getLibraryFile) | `server/routers/ApiRouter.js#L124` | P1 library | todo |  |
 | A0051 | endpoint | `DELETE /api/items/:id/file/:fileid` (LibraryItemController.deleteLibraryFile) | `server/routers/ApiRouter.js#L125` | P1 library | todo |  |
 | A0052 | endpoint | `GET /api/items/:id/file/:fileid/download` (LibraryItemController.downloadLibraryFile) | `server/routers/ApiRouter.js#L126` | P1 library | todo |  |
-| A0053 | endpoint | `GET /api/items/:id/ebook/:fileid?` (LibraryItemController.getEBookFile) | `server/routers/ApiRouter.js#L127` | P1 library | todo |  |
-| A0054 | endpoint | `PATCH /api/items/:id/ebook/:fileid/status` (LibraryItemController.updateEbookFileStatus) | `server/routers/ApiRouter.js#L128` | P1 library | todo |  |
+| A0053 | endpoint | `GET /api/items/:id/ebook/:fileid?` (LibraryItemController.getEBookFile) | `server/routers/ApiRouter.js#L127` | P1 library | done | `server/tests/parity_abs_playback.rs::ebook_files_answer_like_the_original` |
+| A0054 | endpoint | `PATCH /api/items/:id/ebook/:fileid/status` (LibraryItemController.updateEbookFileStatus) | `server/routers/ApiRouter.js#L128` | P1 library | done | `server/tests/parity_abs_playback.rs::ebook_files_answer_like_the_original` |
 | A0055 | endpoint | `POST /api/users` (UserController.create) | `server/routers/ApiRouter.js#L133` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0056 | endpoint | `GET /api/users` (UserController.findAll) | `server/routers/ApiRouter.js#L134` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0057 | endpoint | `GET /api/users/online` (UserController.getOnlineUsers) | `server/routers/ApiRouter.js#L135` | P2 users | wip | who is online works; open playback sessions come with P3 playback sessions |
@@ -422,7 +422,7 @@ repository at the pinned commit.
 | A0382 | job | episode download queue | `server/managers/PodcastManager.js` | P5 podcasts and feeds | todo |  |
 | A0383 | job | database migrations on start | `server/managers/MigrationManager.js` | P6 server admin | todo |  |
 | A0384 | job | ffmpeg/ffprobe presence check and download | `server/managers/BinaryManager.js` | P6 server admin | todo |  |
-| A0385 | job | server start: purge (`cleanUserData`, `purgeMetadata`) | `server/Server.js` | P6 server admin | todo |  |
+| A0385 | job | server start: purge (`cleanUserData`, `purgeMetadata`) | `server/Server.js` | P6 server admin | done | `server/tests/abs_start.rs` (the pinned version has no `purgeMetadata`; it cleans user data and makes the cache folders) |
 | A0386 | job | scanner: `AbsMetadataFileScanner` | `server/scanner/AbsMetadataFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 | A0387 | job | scanner: `AudioFileScanner` | `server/scanner/AudioFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 | A0388 | job | scanner: `BookScanner` | `server/scanner/BookScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
@@ -443,46 +443,46 @@ repository at the pinned commit.
 | --- | --- | --- | --- | --- | --- | --- |
 | W0001 | page | `/account` | `client/pages/account.vue` | W web fork | todo |  |
 | W0002 | page | `/config` | `client/pages/config.vue` | W web fork | todo |  |
-| W0003 | page | `/` | `client/pages/index.vue` | W web fork | todo |  |
-| W0004 | page | `/login` | `client/pages/login.vue` | W web fork | todo |  |
-| W0005 | page | `/oops` | `client/pages/oops.vue` | W web fork | todo |  |
+| W0003 | page | `/` | `client/pages/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0003.png` |
+| W0004 | page | `/login` | `client/pages/login.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0004.png` |
+| W0005 | page | `/oops` | `client/pages/oops.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0005.png` |
 | W0006 | page | `/playlist/:id` | `client/pages/playlist/_id.vue` | W web fork | todo |  |
 | W0007 | page | `/collection/:id` | `client/pages/collection/_id.vue` | W web fork | todo |  |
-| W0008 | page | `/config/authentication` | `client/pages/config/authentication.vue` | W web fork | todo |  |
-| W0009 | page | `/config/backups` | `client/pages/config/backups.vue` | W web fork | todo |  |
-| W0010 | page | `/config/email` | `client/pages/config/email.vue` | W web fork | todo |  |
+| W0008 | page | `/config/authentication` | `client/pages/config/authentication.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0008.png` |
+| W0009 | page | `/config/backups` | `client/pages/config/backups.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0009.png` |
+| W0010 | page | `/config/email` | `client/pages/config/email.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0010.png` |
 | W0011 | page | `/config` | `client/pages/config/index.vue` | W web fork | todo |  |
-| W0012 | page | `/config/libraries` | `client/pages/config/libraries.vue` | W web fork | todo |  |
-| W0013 | page | `/config/log` | `client/pages/config/log.vue` | W web fork | todo |  |
-| W0014 | page | `/config/notifications` | `client/pages/config/notifications.vue` | W web fork | todo |  |
+| W0012 | page | `/config/libraries` | `client/pages/config/libraries.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0012.png` |
+| W0013 | page | `/config/log` | `client/pages/config/log.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0013.png` |
+| W0014 | page | `/config/notifications` | `client/pages/config/notifications.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0014.png` |
 | W0015 | page | `/config/rss-feeds` | `client/pages/config/rss-feeds.vue` | W web fork | todo |  |
-| W0016 | page | `/config/sessions` | `client/pages/config/sessions.vue` | W web fork | todo |  |
-| W0017 | page | `/config/stats` | `client/pages/config/stats.vue` | W web fork | todo |  |
-| W0018 | page | `/config/users` | `client/pages/config/users/index.vue` | W web fork | todo |  |
-| W0019 | page | `/config/users/:id` | `client/pages/config/users/_id/index.vue` | W web fork | todo |  |
-| W0020 | page | `/config/users/:id/sessions` | `client/pages/config/users/_id/sessions.vue` | W web fork | todo |  |
-| W0021 | page | `/config/api-keys` | `client/pages/config/api-keys/index.vue` | W web fork | todo |  |
-| W0022 | page | `/config/item-metadata-utils/custom-metadata-providers` | `client/pages/config/item-metadata-utils/custom-metadata-providers.vue` | W web fork | todo |  |
+| W0016 | page | `/config/sessions` | `client/pages/config/sessions.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0016.png` |
+| W0017 | page | `/config/stats` | `client/pages/config/stats.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0017.png` |
+| W0018 | page | `/config/users` | `client/pages/config/users/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0018.png` |
+| W0019 | page | `/config/users/:id` | `client/pages/config/users/_id/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0019.png` |
+| W0020 | page | `/config/users/:id/sessions` | `client/pages/config/users/_id/sessions.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0020.png` |
+| W0021 | page | `/config/api-keys` | `client/pages/config/api-keys/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0021.png` |
+| W0022 | page | `/config/item-metadata-utils/custom-metadata-providers` | `client/pages/config/item-metadata-utils/custom-metadata-providers.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0022.png` |
 | W0023 | page | `/config/item-metadata-utils/genres` | `client/pages/config/item-metadata-utils/genres.vue` | W web fork | todo |  |
-| W0024 | page | `/config/item-metadata-utils` | `client/pages/config/item-metadata-utils/index.vue` | W web fork | todo |  |
+| W0024 | page | `/config/item-metadata-utils` | `client/pages/config/item-metadata-utils/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0024.png` |
 | W0025 | page | `/config/item-metadata-utils/tags` | `client/pages/config/item-metadata-utils/tags.vue` | W web fork | todo |  |
-| W0026 | page | `/library/:library` | `client/pages/library/_library/index.vue` | W web fork | todo |  |
+| W0026 | page | `/library/:library` | `client/pages/library/_library/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0026.png` |
 | W0027 | page | `/library/:library/narrators` | `client/pages/library/_library/narrators.vue` | W web fork | todo |  |
 | W0028 | page | `/library/:library/search` | `client/pages/library/_library/search.vue` | W web fork | todo |  |
 | W0029 | page | `/library/:library/stats` | `client/pages/library/_library/stats.vue` | W web fork | todo |  |
-| W0030 | page | `/library/:library/series/:id` | `client/pages/library/_library/series/_id.vue` | W web fork | todo |  |
+| W0030 | page | `/library/:library/series/:id` | `client/pages/library/_library/series/_id.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0030.png` |
 | W0031 | page | `/library/:library/podcast/download-queue` | `client/pages/library/_library/podcast/download-queue.vue` | W web fork | todo |  |
 | W0032 | page | `/library/:library/podcast/latest` | `client/pages/library/_library/podcast/latest.vue` | W web fork | todo |  |
 | W0033 | page | `/library/:library/podcast/search` | `client/pages/library/_library/podcast/search.vue` | W web fork | todo |  |
-| W0034 | page | `/library/:library/bookshelf/:id` | `client/pages/library/_library/bookshelf/_id.vue` | W web fork | todo |  |
+| W0034 | page | `/library/:library/bookshelf/:id` | `client/pages/library/_library/bookshelf/_id.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0034.png` |
 | W0035 | page | `/share/:slug` | `client/pages/share/_slug.vue` | W web fork | todo |  |
 | W0036 | page | `/upload` | `client/pages/upload/index.vue` | W web fork | todo |  |
-| W0037 | page | `/audiobook/:id/chapters` | `client/pages/audiobook/_id/chapters.vue` | W web fork | todo |  |
-| W0038 | page | `/audiobook/:id/edit` | `client/pages/audiobook/_id/edit.vue` | W web fork | todo |  |
+| W0037 | page | `/audiobook/:id/chapters` | `client/pages/audiobook/_id/chapters.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0037.png` |
+| W0038 | page | `/audiobook/:id/edit` | `client/pages/audiobook/_id/edit.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0038.png` |
 | W0039 | page | `/audiobook/:id/manage` | `client/pages/audiobook/_id/manage.vue` | W web fork | todo |  |
-| W0040 | page | `/item/:id` | `client/pages/item/_id/index.vue` | W web fork | todo |  |
-| W0041 | page | `/author/:id` | `client/pages/author/_id.vue` | W web fork | todo |  |
-| W0042 | page | `/batch` | `client/pages/batch/index.vue` | W web fork | todo |  |
+| W0040 | page | `/item/:id` | `client/pages/item/_id/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0040.png` |
+| W0041 | page | `/author/:id` | `client/pages/author/_id.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0041.png` |
+| W0042 | page | `/batch` | `client/pages/batch/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0042.png` |
 | W0043 | action | menu action `batch-mark-as-finished` | `client/components/tables/podcast/LazyEpisodesTable.vue#L105` | W web fork | todo |  |
 | W0044 | action | menu action `bookmarks` | `client/pages/item/_id/index.vue#L388` | W web fork | todo |  |
 | W0045 | action | menu action `collapse-series` | `client/components/app/BookShelfToolbar.vue#L355` | W web fork | todo |  |
@@ -600,7 +600,7 @@ repository at the pinned commit.
 | R0018 | endpoint | `DELETE /api/v1/blocklist/{id}` (Blocklist) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
 | R0019 | endpoint | `DELETE /api/v1/blocklist/bulk` (Blocklist) | `src/Readarr.Api.V1/openapi.json` | R2 wanted and downloads | todo |  |
 | R0020 | endpoint | `GET /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0021 | endpoint | `POST /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0021 | endpoint | `POST /api/v1/book` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | checks, metadata, author added when missing, manual add and background refresh (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`) |
 | R0022 | endpoint | `GET /api/v1/book/{id}/overview` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0023 | endpoint | `PUT /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
 | R0024 | endpoint | `DELETE /api/v1/book/{id}` (Book) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
@@ -947,7 +947,7 @@ repository at the pinned commit.
 | R0365 | action | command `BulkRefreshAuthorCommand` | `src/NzbDrone.Core/Books/Commands/BulkRefreshAuthorCommand.cs` | R5 system | todo |  |
 | R0366 | action | command `BulkRefreshBookCommand` | `src/NzbDrone.Core/Books/Commands/BulkRefreshBookCommand.cs` | R5 system | todo |  |
 | R0367 | action | command `MoveAuthorCommand` | `src/NzbDrone.Core/Books/Commands/MoveAuthorCommand.cs` | R5 system | todo |  |
-| R0368 | action | command `RefreshAuthorCommand` | `src/NzbDrone.Core/Books/Commands/RefreshAuthorCommand.cs` | R5 system | wip | the refresh of a new author runs after `POST /api/v1/author` (`server/src/readarr/refresh.rs`); merges, refetches and the command itself to do |
+| R0368 | action | command `RefreshAuthorCommand` | `src/NzbDrone.Core/Books/Commands/RefreshAuthorCommand.cs` | R5 system | wip | the refresh of a new author runs after `POST /api/v1/author` and of an existing one after `POST /api/v1/book` (`server/src/readarr/refresh.rs`); merges, refetches and the command itself to do |
 | R0369 | action | command `RefreshBookCommand` | `src/NzbDrone.Core/Books/Commands/RefreshBookCommand.cs` | R5 system | todo |  |
 | R0370 | action | command `BackupCommand` | `src/NzbDrone.Core/Backup/BackupCommand.cs` | R5 system | todo |  |
 | R0371 | action | command `ClearLogCommand` | `src/NzbDrone.Core/Instrumentation/Commands/ClearLogCommand.cs` | R5 system | todo |  |
