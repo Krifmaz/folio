@@ -2586,5 +2586,69 @@
   "name": "p6e_guest_delete",
   "path": "/api/users/{guest_id}",
   "method": "DELETE"
+ },
+ {
+  "name": "p6u_guest_create",
+  "path": "/api/users",
+  "method": "POST",
+  "body": {
+   "username": "viewer7",
+   "password": "pw",
+   "type": "guest",
+   "isActive": true
+  },
+  "save": {
+   "guest_id": "user.id"
+  }
+ },
+ {
+  "name": "p6u_guest_login",
+  "path": "/login",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "x-return-tokens": "true"
+  },
+  "body": {
+   "username": "viewer7",
+   "password": "pw"
+  },
+  "save": {
+   "guest_token": "user.accessToken"
+  }
+ },
+ {
+  "name": "upload_guest",
+  "path": "/api/upload",
+  "method": "POST",
+  "auth": false,
+  "headers": {
+   "Authorization": "Bearer {guest_token}"
+  },
+  "body": {
+   "title": "T",
+   "library": "{library}",
+   "folder": "x"
+  }
+ },
+ {
+  "name": "upload_no_files",
+  "path": "/api/upload",
+  "method": "POST",
+  "body": {
+   "title": "T",
+   "library": "{library}",
+   "folder": "x"
+  }
+ },
+ {
+  "name": "upload_empty",
+  "path": "/api/upload",
+  "method": "POST"
+ },
+ {
+  "name": "p6u_guest_delete",
+  "path": "/api/users/{guest_id}",
+  "method": "DELETE"
  }
 ]

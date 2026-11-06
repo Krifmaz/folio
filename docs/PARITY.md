@@ -224,7 +224,7 @@ repository at the pinned commit.
 | A0184 | endpoint | `POST /api/api-keys` (ApiKeyController.create) | `server/routers/ApiRouter.js#L339` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0185 | endpoint | `PATCH /api/api-keys/:id` (ApiKeyController.update) | `server/routers/ApiRouter.js#L340` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
 | A0186 | endpoint | `DELETE /api/api-keys/:id` (ApiKeyController.delete) | `server/routers/ApiRouter.js#L341` | P6 server admin | done | `server/tests/abs_users.rs::api_keys_sign_in_until_turned_off_like_the_original` |
-| A0187 | endpoint | `POST /api/upload` (MiscController.handleUpload) | `server/routers/ApiRouter.js#L346` | P6 server admin | todo |  |
+| A0187 | endpoint | `POST /api/upload` (MiscController.handleUpload) | `server/routers/ApiRouter.js#L346` | P6 server admin | done | `server/tests/abs_upload.rs` |
 | A0188 | endpoint | `GET /api/tasks` (MiscController.getTasks) | `server/routers/ApiRouter.js#L347` | P6 server admin | done | `server/tests/abs_admin.rs::schedules_and_tasks_answer_like_the_original` |
 | A0189 | endpoint | `PATCH /api/settings` (MiscController.updateServerSettings) | `server/routers/ApiRouter.js#L348` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |
 | A0190 | endpoint | `PATCH /api/sorting-prefixes` (MiscController.updateSortingPrefixes) | `server/routers/ApiRouter.js#L349` | P6 server admin | done | `server/tests/abs_admin.rs::server_settings_change_like_the_original` |

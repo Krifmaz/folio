@@ -10,6 +10,9 @@
   messages, the book and the edition asked for from the metadata server, its author added first when the library
   doesn't have it, and the book kept as added by hand, so the metadata profile never drops it. The author is then
   refreshed in the background. Every answer and the stored rows are checked against Readarr's own.
+- Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
+  browser, and the files are put in the library folder under author, series and title. Each answer is checked
+  against the original's own.
 - The Readarr API can add an author (`POST /api/v1/author`) the way Readarr does: the same checks and messages,
   the author's folder made from the naming settings (and kept apart from a folder already in use), then its books,
   editions and series filled in from the metadata server in the background. The metadata profile decides which
