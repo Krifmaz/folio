@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Fixed
+- A Readarr time test no longer fails now and then: it expected every time to be written with all seven digits
+  of the fraction, but Readarr drops trailing zeros.
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
