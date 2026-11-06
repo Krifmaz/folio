@@ -10,6 +10,7 @@
 pub mod admin;
 pub mod api_keys;
 pub mod auth;
+pub mod authors;
 pub mod backups;
 pub mod bookmarks;
 pub mod cron;
@@ -25,6 +26,7 @@ pub mod notifications;
 pub mod playback;
 pub mod progress;
 pub mod scanner;
+pub mod series;
 pub mod sessions;
 pub mod settings;
 pub mod socket;
@@ -205,6 +207,8 @@ pub fn router() -> Router<AppState> {
         .merge(library::router())
         .merge(items::router())
         .merge(scanner::router())
+        .merge(series::router())
+        .merge(authors::router())
         .merge(users::router())
         .merge(api_keys::router())
         .merge(admin::router())

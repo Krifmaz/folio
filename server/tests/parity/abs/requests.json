@@ -2443,6 +2443,102 @@
   "method": "DELETE"
  },
  {
+  "name": "lib_series",
+  "path": "/api/libraries/{library}/series"
+ },
+ {
+  "name": "lib_series_name",
+  "path": "/api/libraries/{library}/series?limit=10&page=0&sort=name"
+ },
+ {
+  "name": "lib_series_numbooks",
+  "path": "/api/libraries/{library}/series?limit=10&page=0&sort=numBooks&desc=1"
+ },
+ {
+  "name": "lib_series_added",
+  "path": "/api/libraries/{library}/series?limit=10&sort=addedAt"
+ },
+ {
+  "name": "lib_series_duration",
+  "path": "/api/libraries/{library}/series?limit=10&sort=totalDuration&desc=1"
+ },
+ {
+  "name": "lib_series_last_added",
+  "path": "/api/libraries/{library}/series?limit=10&sort=lastBookAdded"
+ },
+ {
+  "name": "lib_series_last_updated",
+  "path": "/api/libraries/{library}/series?limit=10&sort=lastBookUpdated&desc=1"
+ },
+ {
+  "name": "lib_series_page2",
+  "path": "/api/libraries/{library}/series?limit=1&page=1&sort=name"
+ },
+ {
+  "name": "lib_series_by_author",
+  "path": "/api/libraries/{library}/series?limit=10&sort=name&filter=authors.{b64:author}"
+ },
+ {
+  "name": "lib_series_finished",
+  "path": "/api/libraries/{library}/series?limit=10&sort=name&filter=progress.ZmluaXNoZWQ%3D"
+ },
+ {
+  "name": "lib_series_not_started",
+  "path": "/api/libraries/{library}/series?limit=10&sort=name&filter=progress.bm90LXN0YXJ0ZWQ%3D"
+ },
+ {
+  "name": "lib_series_genre",
+  "path": "/api/libraries/{library}/series?limit=10&sort=name&filter=genres.U2NpZW5jZSBGaWN0aW9u"
+ },
+ {
+  "name": "lib_series_one",
+  "path": "/api/libraries/{library}/series/{lseries}?include=progress,rssfeed"
+ },
+ {
+  "name": "lib_series_one_missing",
+  "path": "/api/libraries/{library}/series/00000000-0000-4000-8000-000000000000"
+ },
+ {
+  "name": "lib_series_by_id",
+  "path": "/api/series/{lseries}?include=progress"
+ },
+ {
+  "name": "lib_series_by_id_missing",
+  "path": "/api/series/00000000-0000-4000-8000-000000000000"
+ },
+ {
+  "name": "lib_authors",
+  "path": "/api/libraries/{library}/authors"
+ },
+ {
+  "name": "lib_authors_name",
+  "path": "/api/libraries/{library}/authors?limit=2&page=0&sort=name"
+ },
+ {
+  "name": "lib_authors_last_first",
+  "path": "/api/libraries/{library}/authors?limit=10&page=0&sort=lastFirst&desc=1"
+ },
+ {
+  "name": "lib_authors_num_books",
+  "path": "/api/libraries/{library}/authors?limit=2&page=1&sort=numBooks&desc=1"
+ },
+ {
+  "name": "lib_authors_limit_only",
+  "path": "/api/libraries/{library}/authors?limit=2"
+ },
+ {
+  "name": "lib_author",
+  "path": "/api/authors/{author}?include=items,series"
+ },
+ {
+  "name": "lib_author_plain",
+  "path": "/api/authors/{author}"
+ },
+ {
+  "name": "lib_author_missing",
+  "path": "/api/authors/00000000-0000-4000-8000-000000000000"
+ },
+ {
   "name": "p6e_guest_create",
   "path": "/api/users",
   "method": "POST",

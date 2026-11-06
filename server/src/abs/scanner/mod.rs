@@ -16,7 +16,7 @@ pub mod xml;
 
 use crate::abs::auth::{send_status, AbsUser};
 use crate::abs::library::util::Sorting;
-use crate::abs::models::{self, Author, Library, LibraryItem};
+use crate::abs::models::{self, Library, LibraryItem};
 use crate::abs::{settings::ServerSettings, socket::Sockets, ABS_VERSION};
 use crate::AppState;
 use axum::extract::{Path, Query, State};
@@ -126,14 +126,7 @@ fn iso_now() -> String {
     models::date_text(models::now_ms()).replacen(' ', "T", 1).replace(" +00:00", "Z")
 }
 
-/// An author as the apps get it (`Author.toOldJSON`).
-pub fn author_json(a: &Author) -> Value {
-    json!({
-        "id": a.id, "asin": a.asin, "name": a.name, "description": a.description, "imagePath": a.image_path,
-        "libraryId": a.library_id,
-        "addedAt": a.created_at.as_deref().and_then(models::date_ms), "updatedAt": a.updated_at.as_deref().and_then(models::date_ms),
-    })
-}
+pub use crate::abs::authors::author_json;
 
 /// The libraries being scanned, and the ones asked to stop (`librariesScanning`, `cancelLibraryScan`).
 static SCANNING: LazyLock<Mutex<(HashSet<String>, HashSet<String>)>> = LazyLock::new(|| Mutex::new((HashSet::new(), HashSet::new())));

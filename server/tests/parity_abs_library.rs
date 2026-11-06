@@ -116,10 +116,14 @@ async fn replay(app: &Router, token: &str, ctx: &HashMap<String, String>, m: &mu
     }
     // Without a sort the original returns rows in whatever order SQLite's planner reads them, which changes with
     // the random ids of each recording. A whole unsorted page is compared by content, in folder order.
-    if !path.contains("sort=") && fx.body["limit"].as_i64() == Some(0) {
+    // Series and authors without a sort are compared in id order the same way.
+    if !path.contains("sort=") && fx.body.get("limit").is_none_or(|l| l.as_i64() == Some(0)) {
         for v in [&mut body, &mut fx.body] {
-            if let Some(Value::Array(list)) = v.pointer_mut("/results") {
-                list.sort_by(|a, b| a["relPath"].as_str().cmp(&b["relPath"].as_str()));
+            for list in ["/results", "/authors"] {
+                if let Some(Value::Array(list)) = v.pointer_mut(list) {
+                    let key = |x: &Value| x["relPath"].as_str().or(x["id"].as_str()).unwrap_or_default().to_string();
+                    list.sort_by_key(key);
+                }
             }
         }
     }
@@ -193,6 +197,28 @@ async fn items_answer_like_the_original() {
     let names = recorded("lib_item");
     let names: Vec<_> = names.into_iter().filter(|n| !n.starts_with("lib_items_")).collect();
     assert!(names.len() >= 5, "{names:?}");
+    for name in names {
+        replay(&app, &token, &ctx, &mut matcher(), &name).await;
+    }
+}
+
+#[tokio::test]
+async fn series_answer_like_the_original() {
+    let (app, token) = set_up("abs-lib-series").await;
+    let ctx = context();
+    let names = recorded("lib_series");
+    assert!(names.len() >= 16, "{names:?}");
+    for name in names {
+        replay(&app, &token, &ctx, &mut matcher(), &name).await;
+    }
+}
+
+#[tokio::test]
+async fn authors_answer_like_the_original() {
+    let (app, token) = set_up("abs-lib-authors").await;
+    let ctx = context();
+    let names = recorded("lib_author");
+    assert!(names.len() >= 8, "{names:?}");
     for name in names {
         replay(&app, &token, &ctx, &mut matcher(), &name).await;
     }

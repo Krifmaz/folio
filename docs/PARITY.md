@@ -46,15 +46,15 @@ repository at the pinned commit.
 | A0006 | endpoint | `GET /api/libraries/:id/items` (LibraryController.getLibraryItems) | `server/routers/ApiRouter.js#L75` | P1 library | wip | `server/tests/parity_abs_library.rs::library_pages_filter_and_sort_like_the_original` (books; podcasts with P5, `rssfeed`/`share` includes with P5) |
 | A0007 | endpoint | `DELETE /api/libraries/:id/issues` (LibraryController.removeLibraryItemsWithIssues) | `server/routers/ApiRouter.js#L76` | P1 library | todo |  |
 | A0008 | endpoint | `GET /api/libraries/:id/episode-downloads` (LibraryController.getEpisodeDownloadQueue) | `server/routers/ApiRouter.js#L77` | P1 library | todo |  |
-| A0009 | endpoint | `GET /api/libraries/:id/series` (LibraryController.getAllSeriesForLibrary) | `server/routers/ApiRouter.js#L78` | P1 library | todo |  |
-| A0010 | endpoint | `GET /api/libraries/:id/series/:seriesId` (LibraryController.getSeriesForLibrary) | `server/routers/ApiRouter.js#L79` | P1 library | todo |  |
+| A0009 | endpoint | `GET /api/libraries/:id/series` (LibraryController.getAllSeriesForLibrary) | `server/routers/ApiRouter.js#L78` | P1 library | done | `server/tests/parity_abs_library.rs::series_answer_like_the_original` |
+| A0010 | endpoint | `GET /api/libraries/:id/series/:seriesId` (LibraryController.getSeriesForLibrary) | `server/routers/ApiRouter.js#L79` | P1 library | done | `server/tests/parity_abs_library.rs::series_answer_like_the_original` |
 | A0011 | endpoint | `GET /api/libraries/:id/collections` (LibraryController.getCollectionsForLibrary) | `server/routers/ApiRouter.js#L80` | P1 library | todo |  |
 | A0012 | endpoint | `GET /api/libraries/:id/playlists` (LibraryController.getUserPlaylistsForLibrary) | `server/routers/ApiRouter.js#L81` | P1 library | todo |  |
 | A0013 | endpoint | `GET /api/libraries/:id/personalized` (LibraryController.getUserPersonalizedShelves) | `server/routers/ApiRouter.js#L82` | P1 library | done | `server/tests/parity_abs_library.rs::home_shelves_answer_like_the_original` |
 | A0014 | endpoint | `GET /api/libraries/:id/filterdata` (LibraryController.getLibraryFilterData) | `server/routers/ApiRouter.js#L83` | P1 library | todo |  |
 | A0015 | endpoint | `GET /api/libraries/:id/search` (LibraryController.search) | `server/routers/ApiRouter.js#L84` | P1 library | todo |  |
 | A0016 | endpoint | `GET /api/libraries/:id/stats` (LibraryController.stats) | `server/routers/ApiRouter.js#L85` | P1 library | todo |  |
-| A0017 | endpoint | `GET /api/libraries/:id/authors` (LibraryController.getAuthors) | `server/routers/ApiRouter.js#L86` | P1 library | todo |  |
+| A0017 | endpoint | `GET /api/libraries/:id/authors` (LibraryController.getAuthors) | `server/routers/ApiRouter.js#L86` | P1 library | done | `server/tests/parity_abs_library.rs::authors_answer_like_the_original` |
 | A0018 | endpoint | `GET /api/libraries/:id/narrators` (LibraryController.getNarrators) | `server/routers/ApiRouter.js#L87` | P1 library | todo |  |
 | A0019 | endpoint | `PATCH /api/libraries/:id/narrators/:narratorId` (LibraryController.updateNarrator) | `server/routers/ApiRouter.js#L88` | P1 library | todo |  |
 | A0020 | endpoint | `DELETE /api/libraries/:id/narrators/:narratorId` (LibraryController.removeNarrator) | `server/routers/ApiRouter.js#L89` | P1 library | todo |  |
@@ -152,14 +152,14 @@ repository at the pinned commit.
 | A0112 | endpoint | `PATCH /api/backups/path` (BackupController.updatePath) | `server/routers/ApiRouter.js#L206` | P6 server admin | done | `server/tests/abs_backups.rs::backups_answer_like_the_original` |
 | A0113 | endpoint | `GET /api/filesystem` (FileSystemController.getPaths) | `server/routers/ApiRouter.js#L211` | P1 library | todo |  |
 | A0114 | endpoint | `POST /api/filesystem/pathexists` (FileSystemController.checkPathExists) | `server/routers/ApiRouter.js#L212` | P1 library | todo |  |
-| A0115 | endpoint | `GET /api/authors/:id` (AuthorController.findOne) | `server/routers/ApiRouter.js#L217` | P1 library | todo |  |
+| A0115 | endpoint | `GET /api/authors/:id` (AuthorController.findOne) | `server/routers/ApiRouter.js#L217` | P1 library | done | `server/tests/parity_abs_library.rs::authors_answer_like_the_original` |
 | A0116 | endpoint | `PATCH /api/authors/:id` (AuthorController.update) | `server/routers/ApiRouter.js#L218` | P1 library | todo |  |
 | A0117 | endpoint | `DELETE /api/authors/:id` (AuthorController.delete) | `server/routers/ApiRouter.js#L219` | P1 library | todo |  |
 | A0118 | endpoint | `POST /api/authors/:id/match` (AuthorController.match) | `server/routers/ApiRouter.js#L220` | P1 library | todo |  |
 | A0119 | endpoint | `GET /api/authors/:id/image` (AuthorController.getImage) | `server/routers/ApiRouter.js#L221` | P1 library | todo |  |
 | A0120 | endpoint | `POST /api/authors/:id/image` (AuthorController.uploadImage) | `server/routers/ApiRouter.js#L222` | P1 library | todo |  |
 | A0121 | endpoint | `DELETE /api/authors/:id/image` (AuthorController.deleteImage) | `server/routers/ApiRouter.js#L223` | P1 library | todo |  |
-| A0122 | endpoint | `GET /api/series/:id` (SeriesController.findOne) | `server/routers/ApiRouter.js#L228` | P1 library | todo |  |
+| A0122 | endpoint | `GET /api/series/:id` (SeriesController.findOne) | `server/routers/ApiRouter.js#L228` | P1 library | done | `server/tests/parity_abs_library.rs::series_answer_like_the_original` |
 | A0123 | endpoint | `PATCH /api/series/:id` (SeriesController.update) | `server/routers/ApiRouter.js#L229` | P1 library | todo |  |
 | A0124 | endpoint | `GET /api/sessions` (SessionController.getAllWithUserData) | `server/routers/ApiRouter.js#L234` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0125 | endpoint | `DELETE /api/sessions/:id` (SessionController.delete) | `server/routers/ApiRouter.js#L235` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
