@@ -113,6 +113,8 @@ impl Server {
         if changed {
             st.save(db)?;
         }
+        clean_user_data(db)?;
+        ensure_cache_paths(&metadata_path);
         let backups = Arc::new(backups::Manager::new(st.str("backupPath")));
         let logs = Arc::new(logs::Logs::default());
         logs.apply_settings(&st);
@@ -160,6 +162,67 @@ impl Server {
             Err(e) => *e.into_inner() = new,
         }
         Ok(())
+    }
+}
+
+/// Removes what points at things that are gone, at start (`Server.cleanUserData`): listening progress of books and
+/// podcast episodes that no longer exist, and series that no longer exist from each user's "hidden from continue
+/// listening" list.
+pub fn clean_user_data(db: &dyn Db) -> kit_server_core::Result<()> {
+    let removed = db.execute(
+        "DELETE FROM mediaProgresses WHERE (mediaItemId IS NULL OR mediaItemId NOT IN (SELECT id FROM books)) \
+         AND (mediaItemId IS NULL OR mediaItemId NOT IN (SELECT id FROM podcastEpisodes))",
+        vec![],
+    )?;
+    if removed > 0 {
+        tracing::info!("Removed {removed} media progress for media items that no longer exist in db");
+    }
+    let users = db.query(
+        "SELECT u.id AS id, u.username AS username, u.extraData AS extraData, json_group_array(value) AS gone \
+         FROM users u, json_each(u.extraData->'seriesHideFromContinueListening') \
+         LEFT JOIN series se ON se.id = value WHERE se.id IS NULL GROUP BY u.id",
+        vec![],
+    );
+    let users = match users {
+        Ok(u) => u,
+        Err(e) => {
+            tracing::error!("Failed to cleanup users seriesHideFromContinueListening: {}", e.detail);
+            return Ok(());
+        }
+    };
+    for u in users {
+        let text = |k: &str| u.get(k).and_then(Value::as_str).unwrap_or_default().to_string();
+        let mut extra: serde_json::Map<String, Value> = serde_json::from_str(&text("extraData")).unwrap_or_default();
+        let gone: Vec<Value> = serde_json::from_str(&text("gone")).unwrap_or_default();
+        let names: Vec<String> = gone.iter().map(|v| v.as_str().map(String::from).unwrap_or_else(|| v.to_string())).collect();
+        tracing::info!(
+            "Found {} non-existent series in seriesHideFromContinueListening for user \"{}\" - Removing ({})",
+            gone.len(),
+            text("username"),
+            names.join(",")
+        );
+        let kept: Vec<Value> = extra
+            .get("seriesHideFromContinueListening")
+            .and_then(Value::as_array)
+            .map(|list| list.iter().filter(|s| !gone.contains(s)).cloned().collect())
+            .unwrap_or_default();
+        extra.insert("seriesHideFromContinueListening".into(), Value::Array(kept));
+        db.execute(
+            "UPDATE users SET extraData = ?, updatedAt = ? WHERE id = ?",
+            vec![Value::String(Value::Object(extra).to_string()), models::date_now().into(), text("id").into()],
+        )?;
+    }
+    Ok(())
+}
+
+/// Makes the cache folders (`CacheManager.ensureCachePaths`): `cache/covers`, `cache/images` and `cache/items` in
+/// the metadata folder. A folder that can't be made is logged.
+pub fn ensure_cache_paths(metadata_path: &Path) {
+    for sub in ["covers", "images", "items"] {
+        let dir = metadata_path.join("cache").join(sub);
+        if let Err(e) = std::fs::create_dir_all(&dir) {
+            tracing::error!("Failed to create cache directories at {}: {e}", dir.display());
+        }
     }
 }
 

@@ -6,6 +6,8 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- At start, Folio cleans up like Audiobookshelf: listening progress of books and episodes that are gone is
+  removed, removed series leave the "hide from continue listening" lists, and the cache folders are made.
 - Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
   browser, and the files are put in the library folder under author, series and title. Each answer is checked
   against the original's own.
