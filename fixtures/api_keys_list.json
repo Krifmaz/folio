@@ -1,0 +1,59 @@
+{
+ "body": {
+  "apiKeys": [
+   {
+    "createdAt": "2026-11-06T01:35:08.657Z",
+    "createdByUser": {
+     "id": "acabf040-659a-4a54-9c2f-fc9417552971",
+     "type": "root",
+     "username": "root"
+    },
+    "createdByUserId": "acabf040-659a-4a54-9c2f-fc9417552971",
+    "description": null,
+    "expiresAt": "2026-11-06T02:35:08.656Z",
+    "id": "b47632eb-8177-4d74-91f2-6068c532f598",
+    "isActive": true,
+    "lastUsedAt": null,
+    "name": "Test key",
+    "permissions": null,
+    "updatedAt": "2026-11-06T01:35:08.657Z",
+    "user": {
+     "id": "2a7bb49c-c9d9-4a50-b12c-287cb9db8c68",
+     "type": "user",
+     "username": "reader"
+    },
+    "userId": "2a7bb49c-c9d9-4a50-b12c-287cb9db8c68"
+   },
+   {
+    "createdAt": "2026-11-06T01:35:08.663Z",
+    "createdByUser": {
+     "id": "acabf040-659a-4a54-9c2f-fc9417552971",
+     "type": "root",
+     "username": "root"
+    },
+    "createdByUserId": "acabf040-659a-4a54-9c2f-fc9417552971",
+    "description": null,
+    "expiresAt": null,
+    "id": "e24dd289-b523-4dcd-be65-8db323e29763",
+    "isActive": false,
+    "lastUsedAt": null,
+    "name": "Root key",
+    "permissions": null,
+    "updatedAt": "2026-11-06T01:35:08.663Z",
+    "user": {
+     "id": "acabf040-659a-4a54-9c2f-fc9417552971",
+     "type": "root",
+     "username": "root"
+    },
+    "userId": "acabf040-659a-4a54-9c2f-fc9417552971"
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/api-keys"
+ },
+ "status": 200
+}

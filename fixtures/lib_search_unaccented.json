@@ -1,0 +1,29 @@
+{
+ "body": {
+  "authors": [
+   {
+    "addedAt": 1793928903488,
+    "asin": null,
+    "description": null,
+    "id": "5374252e-95b8-42cd-8a7b-97e915de258a",
+    "imagePath": null,
+    "libraryId": "7676318b-a5c7-4cea-a340-dc0cd7e6cfc1",
+    "name": "Ann Leckie",
+    "numBooks": 1,
+    "updatedAt": 1793928903488
+   }
+  ],
+  "book": [],
+  "genres": [],
+  "narrators": [],
+  "series": [],
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=leck"
+ },
+ "status": 200
+}

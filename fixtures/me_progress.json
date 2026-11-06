@@ -1,0 +1,27 @@
+{
+ "body": {
+  "currentTime": 30,
+  "duration": 60,
+  "ebookLocation": null,
+  "ebookProgress": 0,
+  "episodeId": null,
+  "finishedAt": null,
+  "hideFromContinueListening": false,
+  "id": "32d25892-bc85-487e-9af5-1008bcc1d5c4",
+  "isFinished": false,
+  "lastUpdate": 1793928907713,
+  "libraryItemId": "814d78c9-e2b3-4203-a98f-40f879069652",
+  "mediaItemId": "34428e09-9dcf-4bb0-81e5-38973aae60f4",
+  "mediaItemType": "book",
+  "progress": 0.5,
+  "startedAt": 1793928907712,
+  "userId": "acabf040-659a-4a54-9c2f-fc9417552971"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/progress/{item}"
+ },
+ "status": 200
+}

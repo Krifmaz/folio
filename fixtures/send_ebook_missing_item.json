@@ -1,0 +1,13 @@
+{
+ "body": "Library item not found",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "deviceName": "Kindle",
+   "libraryItemId": "00000000-0000-4000-8000-000000000000"
+  },
+  "method": "POST",
+  "path": "/api/emails/send-ebook-to-device"
+ },
+ "status": 404
+}

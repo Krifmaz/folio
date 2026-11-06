@@ -1,0 +1,293 @@
+{
+ "body": {
+  "authors": [],
+  "book": [
+   {
+    "libraryItem": {
+     "addedAt": 1793928903419,
+     "birthtimeMs": 1793928895757,
+     "ctimeMs": 1793928895783,
+     "folderId": "882df414-5704-4ed3-bc86-6fb4b0494396",
+     "id": "a67cadb2-74ab-4389-8d37-fbe7111e8a19",
+     "ino": "9178349",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "lastScan": 1793928903417,
+     "libraryFiles": [
+      {
+       "addedAt": 1793928903317,
+       "fileType": "ebook",
+       "ino": "9178350",
+       "isSupplementary": false,
+       "metadata": {
+        "birthtimeMs": 1793928895783,
+        "ctimeMs": 1793928895784,
+        "ext": ".epub",
+        "filename": "All Systems Red.epub",
+        "mtimeMs": 1793928895784,
+        "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+        "relPath": "All Systems Red.epub",
+        "size": 1311
+       },
+       "updatedAt": 1793928903317
+      }
+     ],
+     "libraryId": "7676318b-a5c7-4cea-a340-dc0cd7e6cfc1",
+     "media": {
+      "audioFiles": [],
+      "chapters": [],
+      "coverPath": null,
+      "duration": 0,
+      "ebookFile": {
+       "addedAt": 1793928903317,
+       "ebookFormat": "epub",
+       "fileType": "ebook",
+       "ino": "9178350",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793928895783,
+        "ctimeMs": 1793928895784,
+        "ext": ".epub",
+        "filename": "All Systems Red.epub",
+        "mtimeMs": 1793928895784,
+        "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+        "relPath": "All Systems Red.epub",
+        "size": 1311
+       },
+       "updatedAt": 1793928903317
+      },
+      "ebookFormat": "epub",
+      "id": "721658eb-1fe7-4f59-ba06-1150e5620abe",
+      "libraryItemId": "a67cadb2-74ab-4389-8d37-fbe7111e8a19",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Martha Wells",
+       "authorNameLF": "Wells, Martha",
+       "authors": [
+        {
+         "id": "63a6f02c-398e-47f6-8b5b-38999b400de1",
+         "name": "Martha Wells"
+        }
+       ],
+       "description": null,
+       "descriptionPlain": null,
+       "explicit": false,
+       "genres": [],
+       "isbn": null,
+       "language": "en",
+       "narratorName": "",
+       "narrators": [],
+       "publishedDate": null,
+       "publishedYear": "2017",
+       "publisher": null,
+       "series": [
+        {
+         "id": "926f5a96-0185-47dc-91b3-2f854212a79b",
+         "name": "The Murderbot Diaries",
+         "sequence": "1"
+        }
+       ],
+       "seriesName": "The Murderbot Diaries #1",
+       "subtitle": null,
+       "title": "All Systems Red",
+       "titleIgnorePrefix": "All Systems Red"
+      },
+      "numAudioFiles": 0,
+      "numChapters": 0,
+      "numTracks": 0,
+      "size": 1311,
+      "tags": [],
+      "tracks": []
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793928895783,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "scanVersion": "2.37.2",
+     "size": 1311,
+     "updatedAt": 1793928903419
+    }
+   }
+  ],
+  "genres": [],
+  "narrators": [],
+  "series": [
+   {
+    "books": [
+     {
+      "addedAt": 1793928903483,
+      "birthtimeMs": 1793928894307,
+      "ctimeMs": 1793928895388,
+      "folderId": "882df414-5704-4ed3-bc86-6fb4b0494396",
+      "id": "5c437142-569a-4e06-a9a2-c08420964bfa",
+      "ino": "9178342",
+      "isFile": false,
+      "isInvalid": false,
+      "isMissing": false,
+      "lastScan": 1793928903482,
+      "libraryFiles": [
+       {
+        "addedAt": 1793928903317,
+        "fileType": "audio",
+        "ino": "9178329",
+        "isSupplementary": null,
+        "metadata": {
+         "birthtimeMs": 1793928895374,
+         "ctimeMs": 1793928895384,
+         "ext": ".m4b",
+         "filename": "Ancillary Justice.m4b",
+         "mtimeMs": 1793928895384,
+         "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+         "relPath": "Ancillary Justice.m4b",
+         "size": 256184
+        },
+        "updatedAt": 1793928903317
+       }
+      ],
+      "libraryId": "7676318b-a5c7-4cea-a340-dc0cd7e6cfc1",
+      "media": {
+       "audioFiles": [
+        {
+         "addedAt": 1793928903481,
+         "bitRate": 32539,
+         "channelLayout": "mono",
+         "channels": 1,
+         "chapters": [
+          {
+           "end": 20,
+           "id": 0,
+           "start": 0,
+           "title": "Chapter 1"
+          },
+          {
+           "end": 40,
+           "id": 1,
+           "start": 20,
+           "title": "Chapter 2"
+          },
+          {
+           "end": 60,
+           "id": 2,
+           "start": 40,
+           "title": "Chapter 3"
+          }
+         ],
+         "codec": "aac",
+         "discNumFromFilename": null,
+         "discNumFromMeta": null,
+         "duration": 60,
+         "embeddedCoverArt": null,
+         "error": null,
+         "exclude": false,
+         "format": "QuickTime / MOV",
+         "index": 1,
+         "ino": "9178329",
+         "language": "und",
+         "manuallyVerified": false,
+         "metaTags": {
+          "tagAlbum": "Ancillary Justice",
+          "tagArtist": "Ann Leckie",
+          "tagComposer": "Adjoa Andoh",
+          "tagDate": "2013",
+          "tagEncoder": "Lavf60.16.100",
+          "tagGenre": "Science Fiction",
+          "tagTitle": "Ancillary Justice"
+         },
+         "metadata": {
+          "birthtimeMs": 1793928895374,
+          "ctimeMs": 1793928895384,
+          "ext": ".m4b",
+          "filename": "Ancillary Justice.m4b",
+          "mtimeMs": 1793928895384,
+          "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+          "relPath": "Ancillary Justice.m4b",
+          "size": 256184
+         },
+         "mimeType": "audio/mp4",
+         "timeBase": "1/44100",
+         "trackNumFromFilename": null,
+         "trackNumFromMeta": null,
+         "updatedAt": 1793928903481
+        }
+       ],
+       "chapters": [
+        {
+         "end": 20,
+         "id": 0,
+         "start": 0,
+         "title": "Chapter 1"
+        },
+        {
+         "end": 40,
+         "id": 1,
+         "start": 20,
+         "title": "Chapter 2"
+        },
+        {
+         "end": 60,
+         "id": 2,
+         "start": 40,
+         "title": "Chapter 3"
+        }
+       ],
+       "coverPath": null,
+       "ebookFile": null,
+       "id": "8f8d2bbb-3105-45fd-a05e-1c326ff25e1d",
+       "libraryItemId": "5c437142-569a-4e06-a9a2-c08420964bfa",
+       "metadata": {
+        "abridged": false,
+        "asin": null,
+        "authors": [],
+        "description": null,
+        "explicit": false,
+        "genres": [
+         "Science Fiction"
+        ],
+        "isbn": null,
+        "language": null,
+        "narrators": [
+         "Adjoa Andoh"
+        ],
+        "publishedDate": null,
+        "publishedYear": "2013",
+        "publisher": null,
+        "series": [],
+        "subtitle": null,
+        "title": "Ancillary Justice"
+       },
+       "tags": []
+      },
+      "mediaType": "book",
+      "mtimeMs": 1793928895388,
+      "oldLibraryItemId": null,
+      "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+      "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+      "scanVersion": "2.37.2",
+      "updatedAt": 1793928903483
+     }
+    ],
+    "series": {
+     "addedAt": 1793928903488,
+     "description": null,
+     "id": "c1ef2d2f-43da-4a5e-b5ec-95a7c88b0f84",
+     "libraryId": "7676318b-a5c7-4cea-a340-dc0cd7e6cfc1",
+     "name": "Imperial Radch",
+     "nameIgnorePrefix": "Imperial Radch",
+     "updatedAt": 1793928903488
+    }
+   }
+  ],
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=r_d"
+ },
+ "status": 200
+}

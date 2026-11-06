@@ -1,0 +1,25 @@
+{
+ "body": {
+  "provider": {
+   "authHeaderValue": null,
+   "createdAt": "2026-11-06T01:35:08.936Z",
+   "id": "44276dca-d696-4f9b-8237-d1e1fdb84858",
+   "mediaType": "book",
+   "name": "My provider",
+   "updatedAt": "2026-11-06T01:35:08.936Z",
+   "url": "https://meta.example/api"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "authHeaderValue": "",
+   "mediaType": "book",
+   "name": "My provider",
+   "url": "https://meta.example/api"
+  },
+  "method": "POST",
+  "path": "/api/custom-metadata-providers"
+ },
+ "status": 200
+}

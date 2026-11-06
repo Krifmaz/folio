@@ -1,0 +1,12 @@
+{
+ "body": {
+  "backups": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "DELETE",
+  "path": "/api/backups/{backup_id}"
+ },
+ "status": 200
+}
