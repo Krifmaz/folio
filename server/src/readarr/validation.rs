@@ -35,7 +35,7 @@ impl Failures {
         }
         placeholders.insert("propertyName".into(), json!(display_name(property)));
         placeholders.insert("propertyValue".into(), value.clone());
-        self.0.push(json!({
+        let mut failure = json!({
             "propertyName": property,
             "errorMessage": message,
             "attemptedValue": value,
@@ -43,7 +43,14 @@ impl Failures {
             "errorCode": code,
             "formattedMessageArguments": [],
             "formattedMessagePlaceholderValues": placeholders,
-        }));
+        });
+        // Readarr leaves out fields that are null, like every other one in its answers.
+        if value.is_null() {
+            if let Some(o) = failure.as_object_mut() {
+                o.remove("attemptedValue");
+            }
+        }
+        self.0.push(failure);
     }
 
     /// `ValidId`: the number must be greater than 0.

@@ -1,0 +1,82 @@
+{
+ "body": [
+  {
+   "attemptedValue": 0,
+   "errorCode": "GreaterThanValidator",
+   "errorMessage": "'Quality Profile Id' must be greater than '0'.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "comparisonProperty": "",
+    "comparisonValue": 0,
+    "propertyName": "Quality Profile Id",
+    "propertyValue": 0
+   },
+   "propertyName": "QualityProfileId",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": "books/Ann Leckie",
+   "errorCode": "PathValidator",
+   "errorMessage": "Invalid Path: 'books/Ann Leckie'",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "path": "books/Ann Leckie",
+    "propertyName": "Path",
+    "propertyValue": "books/Ann Leckie"
+   },
+   "propertyName": "Path",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": 9,
+   "errorCode": "MetadataProfileExistsValidator",
+   "errorMessage": "Metadata profile does not exist",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Metadata Profile Id",
+    "propertyValue": 9
+   },
+   "propertyName": "MetadataProfileId",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": "books/Ann Leckie",
+   "errorCode": "PathValidator",
+   "errorMessage": "Invalid Path: 'books/Ann Leckie'",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "path": "books/Ann Leckie",
+    "propertyName": "Path",
+    "propertyValue": "books/Ann Leckie"
+   },
+   "propertyName": "Path",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": "",
+   "errorCode": "NotEmptyValidator",
+   "errorMessage": "'Author Name' must not be empty.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Author Name",
+    "propertyValue": ""
+   },
+   "propertyName": "AuthorName",
+   "severity": "error"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "authorName": "",
+   "foreignAuthorId": "5001",
+   "metadataProfileId": 9,
+   "path": "books/Ann Leckie",
+   "qualityProfileId": 0,
+   "rootFolderPath": ""
+  },
+  "method": "POST",
+  "path": "/api/v1/author"
+ },
+ "status": 400
+}

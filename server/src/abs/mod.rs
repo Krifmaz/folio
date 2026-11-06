@@ -33,6 +33,7 @@ pub mod settings;
 pub mod socket;
 pub mod stats;
 pub mod tasks;
+pub mod upload;
 pub mod users;
 
 use crate::AppState;
@@ -217,6 +218,7 @@ pub fn router() -> Router<AppState> {
         .merge(backups::router())
         .merge(logs::router())
         .merge(stats::router())
+        .merge(upload::router())
         .merge(metadata_providers::router())
         .merge(email::router())
         .merge(notifications::router())

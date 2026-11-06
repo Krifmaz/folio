@@ -11,6 +11,7 @@
 //! lookup Readarr's `{message, description}`, a request without the API key a bare 401. Readarr's own clients
 //! read these, so the port answers like the original instead of with Folio's `{"detail"}`.
 
+pub mod add;
 pub mod authors;
 pub mod bookfiles;
 pub mod bookinfo;
@@ -21,7 +22,9 @@ pub mod editions;
 pub mod json;
 pub mod lookup;
 pub mod naming;
+pub mod profiles;
 pub mod quality;
+pub mod refresh;
 pub mod series;
 pub mod text;
 pub mod validation;
