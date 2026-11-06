@@ -193,9 +193,9 @@ repository at the pinned commit.
 | A0153 | endpoint | `GET /api/notifications/:id/test` (NotificationController.sendNotificationTest) | `server/routers/ApiRouter.js#L272` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_reach_apprise_with_their_texts_filled_in` |
 | A0154 | endpoint | `GET /api/emails/settings` (EmailController.getSettings) | `server/routers/ApiRouter.js#L277` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
 | A0155 | endpoint | `PATCH /api/emails/settings` (EmailController.updateSettings) | `server/routers/ApiRouter.js#L278` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
-| A0156 | endpoint | `POST /api/emails/test` (EmailController.sendTest) | `server/routers/ApiRouter.js#L279` | P6 server admin | todo |  |
+| A0156 | endpoint | `POST /api/emails/test` (EmailController.sendTest) | `server/routers/ApiRouter.js#L279` | P6 server admin | done | `server/tests/abs_email.rs` |
 | A0157 | endpoint | `POST /api/emails/ereader-devices` (EmailController.updateEReaderDevices) | `server/routers/ApiRouter.js#L280` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original` |
-| A0158 | endpoint | `POST /api/emails/send-ebook-to-device` (EmailController.sendEBookToDevice) | `server/routers/ApiRouter.js#L281` | P6 server admin | wip | every check answers like the original; sending by mail comes with the mail sender |
+| A0158 | endpoint | `POST /api/emails/send-ebook-to-device` (EmailController.sendEBookToDevice) | `server/routers/ApiRouter.js#L281` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
 | A0159 | endpoint | `GET /api/search/covers` (SearchController.findCovers) | `server/routers/ApiRouter.js#L286` | P1 library | todo |  |
 | A0160 | endpoint | `GET /api/search/books` (SearchController.findBooks) | `server/routers/ApiRouter.js#L287` | P1 library | todo |  |
 | A0161 | endpoint | `GET /api/search/podcast` (SearchController.findPodcasts) | `server/routers/ApiRouter.js#L288` | P1 library | todo |  |
@@ -364,15 +364,15 @@ repository at the pinned commit.
 | A0324 | setting | server `authOpenIDGroupClaim` (default `''`) | `server/objects/settings/ServerSettings.js#L107` | P6 server admin | todo |  |
 | A0325 | setting | server `authOpenIDAdvancedPermsClaim` (default `''`) | `server/objects/settings/ServerSettings.js#L108` | P6 server admin | todo |  |
 | A0326 | setting | server `authOpenIDSubfolderForRedirectURLs` (default `undefined`) | `server/objects/settings/ServerSettings.js#L109` | P6 server admin | todo |  |
-| A0327 | setting | email `host` | `server/objects/settings/EmailSettings.js#L16` | P6 server admin | todo |  |
-| A0328 | setting | email `port` | `server/objects/settings/EmailSettings.js#L17` | P6 server admin | todo |  |
-| A0329 | setting | email `secure` | `server/objects/settings/EmailSettings.js#L18` | P6 server admin | todo |  |
-| A0330 | setting | email `rejectUnauthorized` | `server/objects/settings/EmailSettings.js#L19` | P6 server admin | todo |  |
-| A0331 | setting | email `user` | `server/objects/settings/EmailSettings.js#L20` | P6 server admin | todo |  |
-| A0332 | setting | email `pass` | `server/objects/settings/EmailSettings.js#L21` | P6 server admin | todo |  |
-| A0333 | setting | email `testAddress` | `server/objects/settings/EmailSettings.js#L22` | P6 server admin | todo |  |
-| A0334 | setting | email `fromAddress` | `server/objects/settings/EmailSettings.js#L23` | P6 server admin | todo |  |
-| A0335 | setting | email `ereaderDevices` | `server/objects/settings/EmailSettings.js#L26` | P6 server admin | todo |  |
+| A0327 | setting | email `host` | `server/objects/settings/EmailSettings.js#L16` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0328 | setting | email `port` | `server/objects/settings/EmailSettings.js#L17` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0329 | setting | email `secure` | `server/objects/settings/EmailSettings.js#L18` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0330 | setting | email `rejectUnauthorized` | `server/objects/settings/EmailSettings.js#L19` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0331 | setting | email `user` | `server/objects/settings/EmailSettings.js#L20` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0332 | setting | email `pass` | `server/objects/settings/EmailSettings.js#L21` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0333 | setting | email `testAddress` | `server/objects/settings/EmailSettings.js#L22` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0334 | setting | email `fromAddress` | `server/objects/settings/EmailSettings.js#L23` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
+| A0335 | setting | email `ereaderDevices` | `server/objects/settings/EmailSettings.js#L26` | P6 server admin | done | `server/tests/abs_admin.rs::email_settings_and_ereader_devices_change_like_the_original`, `server/tests/abs_email.rs` |
 | A0336 | setting | notifications `appriseType` | `server/objects/settings/NotificationSettings.js#L8` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
 | A0337 | setting | notifications `appriseApiUrl` | `server/objects/settings/NotificationSettings.js#L9` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
 | A0338 | setting | notifications `notifications` | `server/objects/settings/NotificationSettings.js#L10` | P6 server admin | done | `server/tests/abs_notifications.rs::notifications_are_set_up_fired_and_removed_like_the_original` |
@@ -417,7 +417,7 @@ repository at the pinned commit.
 | A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | wip |  |
 | A0378 | job | embed-metadata queue (Quick Embed) | `server/managers/AudioMetadataManager.js` | P6 server admin | todo |  |
 | A0379 | job | M4B merge tasks | `server/managers/AbMergeManager.js` | P6 server admin | todo |  |
-| A0380 | job | cover and item cache purge | `server/managers/CacheManager.js` | P6 server admin | todo |  |
+| A0380 | job | cover and item cache purge | `server/managers/CacheManager.js` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original` |
 | A0381 | job | open RSS feeds kept in step with items | `server/managers/RssFeedManager.js` | P5 podcasts and feeds | todo |  |
 | A0382 | job | episode download queue | `server/managers/PodcastManager.js` | P5 podcasts and feeds | todo |  |
 | A0383 | job | database migrations on start | `server/managers/MigrationManager.js` | P6 server admin | todo |  |
