@@ -12,6 +12,8 @@
   open without errors, a book starts playing and an EPUB opens in the reader (PARITY W rows).
 - Books open in the web app's ebook reader: the item's ebook file is sent, and an ebook file can be switched
   between main and supplementary, like Audiobookshelf.
+- At start, Folio cleans up like Audiobookshelf: listening progress of books and episodes that are gone is
+  removed, removed series leave the "hide from continue listening" lists, and the cache folders are made.
 - The Readarr API can add a single book (`POST /api/v1/book`) the way Readarr does: the same checks and
   messages, the book and the edition asked for from the metadata server, its author added first when the library
   doesn't have it, and the book kept as added by hand, so the metadata profile never drops it. The author is then
