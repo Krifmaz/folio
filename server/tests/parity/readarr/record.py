@@ -17,7 +17,8 @@ BOOKS_DIR the one mounted at /books, both as this machine sees them.
 4. Writes one JSON file per request to OUT_DIR/fixtures/<name>.json:
    {"request": {...}, "status": 200, "content_type": "...", "body": <JSON or text>}
    An entry with `snapshot` writes what the requests so far left behind to OUT_DIR/state/<name>.json: the rows of
-   the tables they change and the files and folders under BOOKS_DIR.
+   the tables they change (or of its `tables`) and the files and folders under BOOKS_DIR, after waiting its `wait`
+   seconds (3 by default) for the work Readarr does after it answers.
 5. Copies the database schema (sqlite_master) and the rows Readarr makes on first start to OUT_DIR/schema.sql.
 
 Only the standard library is used, so it runs on any CI runner.
@@ -119,13 +120,15 @@ def write_files(files):
             f.write(b"\0" * size)
 
 
-def snapshot(name):
-    """Write the rows of the tables the requests change, and the files and folders under BOOKS_DIR, to
-    OUT_DIR/state/<name>.json. Readarr finishes some of its work after it answers, so this waits a little first."""
-    time.sleep(3)
+def snapshot(name, tables=None, wait=3):
+    """Write the rows of the tables the requests change (or of `tables`), and the files and folders under
+    BOOKS_DIR, to OUT_DIR/state/<name>.json. Readarr finishes some of its work after it answers (an author's
+    refresh after it is added), so this waits `wait` seconds first."""
+    time.sleep(wait)
     con = sqlite3.connect(f"file:{os.path.join(config, 'readarr.db')}?mode=ro", uri=True, timeout=30)
     con.row_factory = sqlite3.Row
-    state = {"tables": {t: [dict(row) for row in con.execute(f'SELECT * FROM "{t}" ORDER BY Id')] for t in STATE_TABLES},
+    state = {"tables": {t: [dict(row) for row in con.execute(f'SELECT * FROM "{t}" ORDER BY Id')]
+                        for t in tables or STATE_TABLES},
              "files": []}
     con.close()
     for root, dirs, files in os.walk(books):
@@ -162,7 +165,7 @@ for r in requests:
         print(f"wrote {r['name']}")
         continue
     if r.get("snapshot"):
-        snapshot(r["name"])
+        snapshot(r["name"], r.get("tables"), r.get("wait", 3))
         print(f"state {r['name']}")
         continue
     missing = [k for k in needed(r) if k not in ctx]

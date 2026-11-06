@@ -142,6 +142,8 @@ pub struct Book {
     pub votes: i64,
     /// the average rating of its editions
     pub value: f64,
+    /// the average as .NET's `decimal` writes it (up to 28 decimals), as Readarr stores it
+    pub value_text: String,
     /// its clean title, for matching
     pub clean_title: String,
     /// whether the library wants it
@@ -181,6 +183,7 @@ impl Default for Book {
             related_books: json!([]),
             votes: 0,
             value: 0.0,
+            value_text: "0".to_string(),
             clean_title: String::new(),
             monitored: false,
             any_edition_ok: false,
@@ -203,7 +206,33 @@ impl Book {
     }
 }
 
-/// An author as the metadata server gives it (`Author` from `MapAuthor`): its metadata and its books.
+/// A book's place in a series (`SeriesBookLink` of `Series.LinkItems`), as the metadata gives it.
+#[derive(Debug, Clone)]
+pub struct SeriesItem {
+    /// the book, shared with the author's books
+    pub book: Shared<Book>,
+    /// the book's place as written ("1", "1-3"), if any
+    pub position: Option<String>,
+    /// the book's place as a number
+    pub series_position: i64,
+    /// whether the book is one of the series' main books
+    pub primary: bool,
+}
+
+/// A series of an author (`Series` from `MapSeries`), with its books among the author's.
+#[derive(Debug, Clone)]
+pub struct SeriesInfo {
+    /// its id at the metadata server
+    pub foreign_series_id: String,
+    /// its name
+    pub title: Option<String>,
+    /// what it is about
+    pub description: Option<String>,
+    /// its books among the author's; nothing (Readarr's unset list) when the metadata lists no books for it
+    pub items: Option<Vec<SeriesItem>>,
+}
+
+/// An author as the metadata server gives it (`Author` from `MapAuthor`): its metadata, books and series.
 #[derive(Debug)]
 pub struct AuthorInfo {
     /// its metadata (`AuthorMetadata` columns)
@@ -212,6 +241,8 @@ pub struct AuthorInfo {
     pub clean_name: String,
     /// its books, shared with every request that uses this author while it is kept
     pub books: Vec<Shared<Book>>,
+    /// its series, in the metadata's order
+    pub series: Vec<SeriesInfo>,
 }
 
 /// What a search found (`SearchForNewEntity`): an author or a book.
@@ -225,7 +256,7 @@ pub enum Found {
 /// Why fetching metadata went wrong, by the .NET exception Readarr throws, so that each step catches what
 /// Readarr's catches.
 #[derive(Debug)]
-enum Failure {
+pub enum Failure {
     /// `AuthorNotFoundException`
     AuthorNotFound,
     /// `BookNotFoundException`
@@ -248,6 +279,30 @@ fn null_reference() -> Failure {
 /// .NET's `InvalidOperationException` for `Single` over several matches.
 fn more_than_one() -> Failure {
     Failure::Other("System.InvalidOperationException", "Sequence contains more than one matching element".into())
+}
+
+impl Failure {
+    /// The failure as Readarr answers an exception it doesn't catch: a `BookInfoException` is 503, a
+    /// `BadRequestException` 400, anything else 500, each with its message.
+    pub fn answer(self) -> Fail {
+        match self {
+            Failure::AuthorNotFound => Fail::exception(404, "NzbDrone.Core.Exceptions.AuthorNotFoundException", "Author not found"),
+            Failure::BookNotFound => Fail::exception(404, "NzbDrone.Core.Exceptions.BookNotFoundException", "Book not found"),
+            Failure::EditionNotFound => Fail::exception(404, "NzbDrone.Core.Exceptions.EditionNotFoundException", "Edition not found"),
+            Failure::BookInfo(m) => Fail::exception(503, "NzbDrone.Core.MetadataSource.BookInfo.BookInfoException", m),
+            Failure::Http(name) => Fail::exception(500, "NzbDrone.Common.Http.HttpException", format!("HTTP request failed: [{name}]")),
+            Failure::Other(kind, m) if kind.ends_with("BadRequestException") => Fail::exception(400, kind, m),
+            Failure::Other(kind, m) => Fail::exception(500, kind, m),
+        }
+    }
+
+    /// The failure in words, for the log.
+    pub fn describe(&self) -> String {
+        match self {
+            Failure::Other(kind, message) => format!("{kind}: {message}"),
+            other => format!("{other:?}"),
+        }
+    }
 }
 
 impl From<kit_server_core::Error> for Failure {
@@ -350,6 +405,62 @@ fn utc(s: Option<String>) -> Option<String> {
 /// A rating as .NET's `decimal` holds a `double`: rounded to 15 significant digits.
 fn decimal(x: f64) -> f64 {
     format!("{x:.14e}").parse().unwrap_or(x)
+}
+
+/// A `double` as .NET's `decimal` holds it: its digits and how many of them are decimals (15 significant
+/// digits, without trailing zeros).
+fn decimal_parts(x: f64) -> (u128, u32) {
+    let s = format!("{:.14e}", x.abs());
+    let (digits, exp) = s.split_once('e').unwrap_or((&s, "0"));
+    let exp: i32 = exp.parse().unwrap_or(0);
+    let mut mantissa: u128 = digits.replace('.', "").parse().unwrap_or(0);
+    let mut scale = 14 - exp;
+    while scale < 0 {
+        mantissa *= 10;
+        scale += 1;
+    }
+    let mut scale = scale as u32;
+    while scale > 0 && mantissa.is_multiple_of(10) {
+        mantissa /= 10;
+        scale -= 1;
+    }
+    (mantissa, scale)
+}
+
+/// The weighted average Σ votes × value / Σ votes worked out in .NET's `decimal` (`MapBook`'s book rating), as
+/// .NET writes it: exact with the values' decimals when it divides evenly, else with as many decimals as the
+/// `decimal` holds (28, fewer for larger numbers), rounded half to even.
+pub fn decimal_average(parts: &[(i64, f64)]) -> String {
+    const MAX: u128 = (1u128 << 96) - 1;
+    let total: u128 = parts.iter().map(|(v, _)| (*v).max(0) as u128).sum();
+    if total == 0 {
+        return "0".to_string();
+    }
+    let decimals: Vec<(u128, u32)> = parts.iter().map(|(_, x)| decimal_parts(*x)).collect();
+    let start = decimals.iter().map(|(_, s)| *s).max().unwrap_or(0);
+    let sum: u128 = parts.iter().zip(&decimals).map(|((v, _), (m, s))| (*v).max(0) as u128 * m * 10u128.pow(start - s)).sum();
+    let (mut q, mut r) = (sum / total, sum % total);
+    let mut scale = start;
+    let mut best = (q, r, scale);
+    while r != 0 && scale < 28 {
+        let next_q = q * 10 + (r * 10) / total;
+        if next_q > MAX {
+            break;
+        }
+        r = (r * 10) % total;
+        q = next_q;
+        scale += 1;
+        best = (q, r, scale);
+    }
+    let (mut q, r, scale) = best;
+    if r * 2 > total || (r * 2 == total && !q.is_multiple_of(2)) {
+        q += 1;
+    }
+    if scale == 0 {
+        return q.to_string();
+    }
+    let p = 10u128.pow(scale);
+    format!("{}.{:0width$}", q / p, q % p, width = scale as usize)
 }
 
 /// Ratings as Readarr sends them: `{votes, value, popularity}`.
@@ -464,6 +575,8 @@ struct SeriesRes {
     foreign_id: i64,
     /// its name
     title: Option<String>,
+    /// what it is about
+    description: Option<String>,
     /// the books in it
     link_items: Option<Vec<LinkRes>>,
 }
@@ -647,7 +760,9 @@ fn map_book(r: &WorkRes) -> Result<Book, Failure> {
     let votes: i64 = editions.iter().map(|e| e.votes).sum();
     if votes > 0 {
         book.votes = votes;
-        book.value = editions.iter().map(|e| e.votes as f64 * e.value).sum::<f64>() / votes as f64;
+        let parts: Vec<(i64, f64)> = editions.iter().map(|e| (e.votes, e.value)).collect();
+        book.value_text = decimal_average(&parts);
+        book.value = book.value_text.parse().unwrap_or(0.0);
     }
     book.editions = editions.into_iter().map(shared).collect();
     Ok(book)
@@ -672,24 +787,43 @@ fn get_author_id(r: &WorkRes) -> Result<i64, Failure> {
 }
 
 /// Links the books to their series (`MapSeriesLinks`): only series with books in them, and only books that are
-/// here.
-fn map_series_links(series: &[SeriesRes], books: &[Shared<Book>]) {
+/// here. Gives the series (`MapSeries`), each with its books here when the metadata lists any.
+fn map_series_links(series: &[SeriesRes], books: &[Shared<Book>]) -> Vec<SeriesInfo> {
     let ids: Vec<String> = books.iter().map(|b| lock(b).foreign_book_id.clone()).collect();
     for b in books {
         lock(b).series_links = Vec::new();
     }
-    for s in series.iter().filter(|s| s.link_items.as_ref().is_some_and(|l| !l.is_empty())) {
-        for l in s.link_items.iter().flatten().filter(|l| l.foreign_work_id != 0) {
-            let Some(i) = ids.iter().position(|id| *id == l.foreign_work_id.to_string()) else { continue };
-            lock(&books[i]).series_links.push(SeriesLink {
-                foreign_series_id: s.foreign_id.to_string(),
-                title: s.title.clone(),
-                position: l.position_in_series.clone(),
-                series_position: l.series_position,
-                primary: l.primary,
-            });
+    let mut out = Vec::new();
+    for s in series {
+        let mut info = SeriesInfo {
+            foreign_series_id: s.foreign_id.to_string(),
+            title: s.title.clone(),
+            description: s.description.clone(),
+            items: None,
+        };
+        if s.link_items.as_ref().is_some_and(|l| !l.is_empty()) {
+            let mut items = Vec::new();
+            for l in s.link_items.iter().flatten().filter(|l| l.foreign_work_id != 0) {
+                let Some(i) = ids.iter().position(|id| *id == l.foreign_work_id.to_string()) else { continue };
+                lock(&books[i]).series_links.push(SeriesLink {
+                    foreign_series_id: s.foreign_id.to_string(),
+                    title: s.title.clone(),
+                    position: l.position_in_series.clone(),
+                    series_position: l.series_position,
+                    primary: l.primary,
+                });
+                items.push(SeriesItem {
+                    book: books[i].clone(),
+                    position: l.position_in_series.clone(),
+                    series_position: l.series_position,
+                    primary: l.primary,
+                });
+            }
+            info.items = Some(items);
         }
+        out.push(info);
     }
+    out
 }
 
 /// An author with its books (`MapAuthor`): only the books it is the main author of.
@@ -703,9 +837,9 @@ fn map_author(r: AuthorRes) -> Result<AuthorInfo, Failure> {
             books.push(shared(b));
         }
     }
-    map_series_links(r.series.as_deref().unwrap_or_default(), &books);
+    let series = map_series_links(r.series.as_deref().unwrap_or_default(), &books);
     let clean_name = clean_author_name(&meta.s("Name"));
-    Ok(AuthorInfo { meta, clean_name, books })
+    Ok(AuthorInfo { meta, clean_name, books, series })
 }
 
 /// The editions of a library book (`GetEditionsByBook`), by their id at the metadata server.
@@ -886,6 +1020,16 @@ impl BookInfo {
         ))
     }
 
+    /// An author from the metadata server (`GetAuthorInfo`): the kept one with `use_cache` (`PollAuthor`), else
+    /// made again (`PollAuthorUncached`, which keeps nothing).
+    pub async fn get_author_info(&self, db: &SqliteDb, id: &str, use_cache: bool) -> Result<Arc<AuthorInfo>, Failure> {
+        if use_cache {
+            self.poll_author(db, id).await
+        } else {
+            Ok(Arc::new(self.poll_author_uncached(db, id).await?))
+        }
+    }
+
     /// An author from the metadata server, made again only when it isn't kept (`PollAuthor`).
     async fn poll_author(&self, db: &SqliteDb, id: &str) -> Result<Arc<AuthorInfo>, Failure> {
         let now = Instant::now();
@@ -982,7 +1126,7 @@ impl BookInfo {
         let book = shared(map_book(&r)?);
         let author_id = get_author_id(&r)?.to_string();
         let metas = r.authors.iter().flatten().map(map_author_metadata).collect::<Result<Vec<_>, _>>()?;
-        map_series_links(r.series.as_deref().unwrap_or_default(), std::slice::from_ref(&book));
+        let _ = map_series_links(r.series.as_deref().unwrap_or_default(), std::slice::from_ref(&book));
         Ok((author_id, book, metas))
     }
 
@@ -1035,6 +1179,7 @@ impl BookInfo {
                 related_books: src.related_books.clone(),
                 votes: src.votes,
                 value: src.value,
+                value_text: src.value_text.clone(),
                 clean_title: src.clean_title.clone(),
                 author_metadata: Some(meta),
                 series_links: src.series_links.clone(),
@@ -1083,7 +1228,7 @@ impl BookInfo {
             add_db_ids(db, &author_id, &book, &metas)?;
             found.push(book);
         }
-        map_series_links(series, &found);
+        let _ = map_series_links(series, &found);
         let ids: Vec<String> = ids.iter().map(i64::to_string).collect();
         let mut keyed = Vec::new();
         for b in found {
@@ -1328,6 +1473,15 @@ fn url_encode(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn book_ratings_average_like_dotnet_decimals() {
+        assert_eq!(decimal_average(&[(300, 4.0), (1500, 4.1)]), "4.0833333333333333333333333333");
+        assert_eq!(decimal_average(&[(2000, 4.0), (10, 4.0)]), "4");
+        assert_eq!(decimal_average(&[(100, 4.5), (100, 3.5)]), "4.0");
+        assert_eq!(decimal_average(&[(200, 4.25), (100, 4.0)]), "4.1666666666666666666666666667");
+        assert_eq!(decimal_average(&[(0, 4.0)]), "0");
+    }
 
     #[test]
     fn metadata_maps_like_readarr() {

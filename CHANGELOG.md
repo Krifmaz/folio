@@ -6,6 +6,12 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The Readarr API can add an author (`POST /api/v1/author`) the way Readarr does: the same checks and messages,
+  the author's folder made from the naming settings (and kept apart from a folder already in use), then its books,
+  editions and series filled in from the metadata server in the background. The metadata profile decides which
+  books and editions are kept (ratings, release date, parts and sets, languages, ISBNs, pages, ignored terms), and
+  the add options decide which books are monitored. Every answer and the stored rows are checked against
+  Readarr's own, recorded with the same stand-in metadata server.
 - The Readarr API can look up books and authors to add (`/api/v1/book/lookup`, `/api/v1/author/lookup`,
   `/api/v1/search`) the way Readarr does: by name, ISBN or ASIN through Goodreads, or by `author:`, `work:` and
   `edition:` ids, with what the library already has filled in. Authors and books come from Readarr's metadata

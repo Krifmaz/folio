@@ -585,7 +585,7 @@ repository at the pinned commit.
 | R0003 | endpoint | `GET /login` (StaticResource) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0004 | endpoint | `GET /logout` (Authentication) | `src/Readarr.Api.V1/openapi.json` | R5 system | todo |  |
 | R0005 | endpoint | `GET /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
-| R0006 | endpoint | `POST /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | todo |  |
+| R0006 | endpoint | `POST /api/v1/author` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | checks, folder, metadata, background refresh and add options (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`) |
 | R0007 | endpoint | `PUT /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | wip | checks and changes done (`server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches`); `moveFiles` and the refresh after a metadata profile change come with commands (R5) |
 | R0008 | endpoint | `DELETE /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` (answers, and the rows and files left behind) |
 | R0009 | endpoint | `GET /api/v1/author/{id}` (Author) | `src/Readarr.Api.V1/openapi.json` | R1 authors and books | done | `server/tests/parity_readarr_books.rs::every_recorded_answer_of_authors_books_and_files_matches` |
@@ -947,7 +947,7 @@ repository at the pinned commit.
 | R0365 | action | command `BulkRefreshAuthorCommand` | `src/NzbDrone.Core/Books/Commands/BulkRefreshAuthorCommand.cs` | R5 system | todo |  |
 | R0366 | action | command `BulkRefreshBookCommand` | `src/NzbDrone.Core/Books/Commands/BulkRefreshBookCommand.cs` | R5 system | todo |  |
 | R0367 | action | command `MoveAuthorCommand` | `src/NzbDrone.Core/Books/Commands/MoveAuthorCommand.cs` | R5 system | todo |  |
-| R0368 | action | command `RefreshAuthorCommand` | `src/NzbDrone.Core/Books/Commands/RefreshAuthorCommand.cs` | R5 system | todo |  |
+| R0368 | action | command `RefreshAuthorCommand` | `src/NzbDrone.Core/Books/Commands/RefreshAuthorCommand.cs` | R5 system | wip | the refresh of a new author runs after `POST /api/v1/author` (`server/src/readarr/refresh.rs`); merges, refetches and the command itself to do |
 | R0369 | action | command `RefreshBookCommand` | `src/NzbDrone.Core/Books/Commands/RefreshBookCommand.cs` | R5 system | todo |  |
 | R0370 | action | command `BackupCommand` | `src/NzbDrone.Core/Backup/BackupCommand.cs` | R5 system | todo |  |
 | R0371 | action | command `ClearLogCommand` | `src/NzbDrone.Core/Instrumentation/Commands/ClearLogCommand.cs` | R5 system | todo |  |

@@ -1002,5 +1002,190 @@
  {
   "name": "state_after_editor_deletes",
   "snapshot": true
+ },
+ {
+  "name": "author_add_empty",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {}
+ },
+ {
+  "name": "author_add_invalid",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 0,
+   "metadataProfileId": 9,
+   "path": "books/Ann Leckie",
+   "rootFolderPath": ""
+  }
+ },
+ {
+  "name": "author_add_folder_as_root",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/media/Ann Lecki",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  }
+ },
+ {
+  "name": "author_add_unknown",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Nobody",
+   "foreignAuthorId": "404",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/books/",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  }
+ },
+ {
+  "name": "author_add",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/books/",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  },
+  "save": {
+   "leckie": "id"
+  },
+  "volatile": [
+   "added"
+  ]
+ },
+ {
+  "name": "author_add_again",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/books/",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  }
+ },
+ {
+  "name": "author_add_namesake",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5002",
+   "qualityProfileId": 1,
+   "metadataProfileId": 2,
+   "rootFolderPath": "/books",
+   "monitored": true,
+   "monitorNewItems": "none",
+   "tags": [],
+   "addOptions": {
+    "monitor": "none",
+    "booksToMonitor": [],
+    "searchForMissingBooks": false
+   }
+  },
+  "save": {
+   "namesake": "id"
+  },
+  "volatile": [
+   "added"
+  ]
+ },
+ {
+  "name": "state_after_add",
+  "snapshot": true,
+  "wait": 15,
+  "tables": [
+   "Authors",
+   "AuthorMetadata",
+   "Books",
+   "Editions",
+   "Series",
+   "SeriesBookLink"
+  ],
+  "during_run": [
+   "Added",
+   "LastInfoSync"
+  ]
+ },
+ {
+  "name": "after_add_authors",
+  "path": "/api/v1/author",
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ]
+ },
+ {
+  "name": "after_add_books",
+  "path": "/api/v1/book?authorId={leckie}",
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ],
+  "save": {
+   "b1": "0.id",
+   "b2": "1.id",
+   "b3": "2.id"
+  }
+ },
+ {
+  "name": "after_add_editions",
+  "path": "/api/v1/edition?bookId={b1}&bookId={b2}&bookId={b3}"
+ },
+ {
+  "name": "after_add_series",
+  "path": "/api/v1/series?authorId={leckie}"
+ },
+ {
+  "name": "after_add_namesake_books",
+  "path": "/api/v1/book?authorId={namesake}"
  }
 ]
