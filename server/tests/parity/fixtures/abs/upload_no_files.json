@@ -1,0 +1,14 @@
+{
+ "body": "Bad Request",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "folder": "x",
+   "library": "{library}",
+   "title": "T"
+  },
+  "method": "POST",
+  "path": "/api/upload"
+ },
+ "status": 400
+}

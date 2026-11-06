@@ -6,6 +6,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
+  browser, and the files are put in the library folder under author, series and title. Each answer is checked
+  against the original's own.
 - Mail works like Audiobookshelf's: admins send a test mail, and e-books go to Kindles and other e-readers
   by mail through the mail server in the email settings. Each answer is checked against the original's own.
 - A library's series and authors pages, one series and one author, like Audiobookshelf's
