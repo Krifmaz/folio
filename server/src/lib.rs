@@ -101,6 +101,13 @@ pub struct AppState {
     pub sockets: abs::socket::Sockets,
     /// The Readarr port's database (`<data>/readarr.db`, the original's schema).
     pub readarr: SqliteDb,
+    /// Where the Readarr port finds its paths on this machine (`READARR_DISK_ROOT`, else as they are).
+    pub readarr_disk: readarr::disk::Disk,
+    /// The Readarr port's metadata client, which keeps answers and authors between lookups
+    /// (`READARR_GOODREADS_URL` says where Goodreads is, else www.goodreads.com).
+    pub readarr_lookup: readarr::bookinfo::BookInfo,
+    /// The Readarr port's background work (an added author's refresh), until its command queue is ported.
+    pub readarr_jobs: readarr::refresh::Jobs,
     /// The Audiobookshelf port's settings, tokens and sign-in limit.
     pub abs_server: abs::Server,
 }
@@ -134,6 +141,8 @@ impl AppState {
         migration::migrate(&db)?;
         let abs = abs::open(data)?;
         let readarr = readarr::open(data)?;
+        let readarr_disk = readarr::disk::Disk::new(env("READARR_DISK_ROOT"));
+        let readarr_lookup = readarr::bookinfo::BookInfo::new(env("READARR_GOODREADS_URL"));
         let abs_server =
             abs::Server::load(&abs, data).map_err(|e| anyhow::anyhow!("The Audiobookshelf settings can't be read: {}", e.detail))?;
         let kit = |e: kit_server_core::Error| anyhow::anyhow!("The kit's tables can't be made: {}", e.detail);
@@ -159,6 +168,9 @@ impl AppState {
             abs,
             sockets: abs::socket::Sockets::default(),
             readarr,
+            readarr_disk,
+            readarr_lookup,
+            readarr_jobs: readarr::refresh::Jobs::default(),
             abs_server,
         })
     }
@@ -247,6 +259,7 @@ pub fn app(st: AppState) -> Router {
     let spa = tower_http::set_header::SetResponseHeader::if_not_present(spa, header::VARY, HeaderValue::from_static("accept-encoding"));
     let page = spa.clone();
     kit_server_notices::spawn_rechecks(st.clone());
+    abs::backups::spawn_schedule(st.clone());
     let sockets = abs::socket::layer(st.clone());
     Router::new()
         .merge(kit_server_health::router(kit_server_health::Health::new(VERSION, web)))

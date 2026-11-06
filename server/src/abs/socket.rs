@@ -146,7 +146,24 @@ async fn on_connect(socket: SocketRef, State(st): State<AppState>) {
     socket.on("ping", async |s: SocketRef| {
         let _ = s.emit("pong", &NoArgs());
     });
+    // the log page follows new messages from a level up (admins only)
+    socket.on("set_log_listener", async |s: SocketRef, Data(level): Data<Value>, State(st): State<AppState>| {
+        let admin = st.sockets.clients.lock().ok().and_then(|c| c.get(&s.id.to_string()).and_then(|c| c.user.clone()));
+        if !admin.as_ref().is_some_and(user::is_admin_or_up) {
+            tracing::warn!("A socket that isn't an admin's asked to follow the logs ({})", s.id);
+            return;
+        }
+        let valid = level.as_f64().filter(|l| l.fract() == 0.0 && (0.0..=6.0).contains(l)).map(|l| l as i64);
+        match valid {
+            Some(l) => st.abs_server.logs.add_listener(s, l),
+            None => tracing::warn!("A socket asked to follow the logs at a level that doesn't exist ({})", s.id),
+        }
+    });
+    socket.on("remove_log_listener", async |s: SocketRef, State(st): State<AppState>| {
+        st.abs_server.logs.remove_listener(&s.id.to_string());
+    });
     socket.on_disconnect(async |s: SocketRef, State(st): State<AppState>| {
+        st.abs_server.logs.remove_listener(&s.id.to_string());
         if let Some(u) = st.sockets.remove(&s.id.to_string()).and_then(|c| c.user) {
             st.sockets.admin_emitter("user_offline", &user::to_json_for_public(&u, None));
         }

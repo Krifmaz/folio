@@ -765,5 +765,427 @@
  {
   "name": "bookfiles_after_changes",
   "path": "/api/v1/bookfile?authorId=1"
+ },
+ {
+  "name": "book_lookup",
+  "path": "/api/v1/book/lookup?term=Small%20Gods"
+ },
+ {
+  "name": "book_lookup_isbn",
+  "path": "/api/v1/book/lookup?term=isbn:9780062237378"
+ },
+ {
+  "name": "book_lookup_edition",
+  "path": "/api/v1/book/lookup?term=edition:7000001"
+ },
+ {
+  "name": "book_lookup_work",
+  "path": "/api/v1/book/lookup?term=work:7000"
+ },
+ {
+  "name": "book_lookup_work_redirect",
+  "path": "/api/v1/book/lookup?term=work:1215958"
+ },
+ {
+  "name": "book_lookup_work_missing",
+  "path": "/api/v1/book/lookup?term=work:404"
+ },
+ {
+  "name": "book_lookup_work_not_a_number",
+  "path": "/api/v1/book/lookup?term=work:abc"
+ },
+ {
+  "name": "book_lookup_author_blank",
+  "path": "/api/v1/book/lookup?term=author:"
+ },
+ {
+  "name": "book_lookup_nothing",
+  "path": "/api/v1/book/lookup?term=nothing"
+ },
+ {
+  "name": "book_lookup_search_fails",
+  "path": "/api/v1/book/lookup?term=broken"
+ },
+ {
+  "name": "book_lookup_no_term",
+  "path": "/api/v1/book/lookup"
+ },
+ {
+  "name": "author_lookup",
+  "path": "/api/v1/author/lookup?term=pratchett"
+ },
+ {
+  "name": "author_lookup_id",
+  "path": "/api/v1/author/lookup?term=author:1654"
+ },
+ {
+  "name": "author_lookup_missing",
+  "path": "/api/v1/author/lookup?term=author:404"
+ },
+ {
+  "name": "author_lookup_nothing",
+  "path": "/api/v1/author/lookup?term=nothing"
+ },
+ {
+  "name": "search",
+  "path": "/api/v1/search?term=small%20gods"
+ },
+ {
+  "name": "search_one",
+  "path": "/api/v1/search?term=mort"
+ },
+ {
+  "name": "search_edition_via_author",
+  "path": "/api/v1/search?term=isbn:9780062237378"
+ },
+ {
+  "name": "search_nothing",
+  "path": "/api/v1/search?term=nothing"
+ },
+ {
+  "name": "search_no_term",
+  "path": "/api/v1/search"
+ },
+ {
+  "name": "more_files",
+  "sql": "INSERT INTO BookFiles (Id, EditionId, CalibreId, Quality, Size, SceneName, DateAdded, ReleaseGroup, MediaInfo, Modified, Path, Part, OriginalFilePath, IndexerFlags) VALUES\n (3, 3, 0, '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', 512, NULL, '2025-05-05 12:00:00Z', 'GRP', NULL, '2025-05-05 11:00:00Z', '/books/Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub', 1, NULL, 0),\n (4, 5, 0, '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', 256, NULL, '2025-05-06 12:00:00Z', NULL, NULL, '2025-05-06 11:00:00Z', '/books/Ursula K. Le Guin/A Wizard of Earthsea (1968)/A Wizard of Earthsea - Ursula K. Le Guin.epub', 1, NULL, 0);\nINSERT INTO History (Id, SourceTitle, Date, Quality, Data, EventType, DownloadId, AuthorId, BookId) VALUES\n (1, 'Earthsea.epub', '2025-05-06 12:00:00Z', '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', '{}', 8, NULL, 2, 4),\n (2, 'Guards.epub', '2025-05-03 12:00:00Z', '{\"quality\":3,\"revision\":{\"version\":1,\"real\":0,\"isRepack\":false}}', '{}', 8, NULL, 1, 1);\nINSERT INTO ExtraFiles (Id, AuthorId, BookId, BookFileId, RelativePath, Extension, Added, LastUpdated) VALUES\n (1, 2, 4, 4, 'A Wizard of Earthsea (1968)/cover.jpg', '.jpg', '2025-05-06 12:00:00Z', '2025-05-06 12:00:00Z');\n",
+  "files": [
+   [
+    "Terry Pratchett/Small Gods (1992)/Small Gods - Terry Pratchett.epub",
+    512
+   ],
+   [
+    "Ursula K. Le Guin/A Wizard of Earthsea (1968)/A Wizard of Earthsea - Ursula K. Le Guin.epub",
+    256
+   ],
+   [
+    "Ursula K. Le Guin/A Wizard of Earthsea (1968)/cover.jpg",
+    64
+   ]
+  ]
+ },
+ {
+  "name": "bookfile_delete_missing",
+  "method": "DELETE",
+  "path": "/api/v1/bookfile/99"
+ },
+ {
+  "name": "bookfile_delete",
+  "method": "DELETE",
+  "path": "/api/v1/bookfile/1"
+ },
+ {
+  "name": "bookfiles_after_delete",
+  "path": "/api/v1/bookfile?authorId=1"
+ },
+ {
+  "name": "bookfile_bulk_missing",
+  "method": "DELETE",
+  "path": "/api/v1/bookfile/bulk",
+  "body": {
+   "bookFileIds": [
+    2,
+    99
+   ]
+  }
+ },
+ {
+  "name": "bookfile_bulk_empty",
+  "method": "DELETE",
+  "path": "/api/v1/bookfile/bulk",
+  "body": {
+   "bookFileIds": []
+  }
+ },
+ {
+  "name": "bookfile_bulk",
+  "method": "DELETE",
+  "path": "/api/v1/bookfile/bulk",
+  "body": {
+   "bookFileIds": [
+    2
+   ]
+  }
+ },
+ {
+  "name": "unmapped_after_bulk",
+  "path": "/api/v1/bookfile?unmapped=true"
+ },
+ {
+  "name": "state_after_file_deletes",
+  "snapshot": true
+ },
+ {
+  "name": "book_delete_missing",
+  "method": "DELETE",
+  "path": "/api/v1/book/99"
+ },
+ {
+  "name": "book_delete",
+  "method": "DELETE",
+  "path": "/api/v1/book/2?deleteFiles=true&addImportListExclusion=true"
+ },
+ {
+  "name": "books_after_delete",
+  "path": "/api/v1/book?authorId=1"
+ },
+ {
+  "name": "series_after_delete",
+  "path": "/api/v1/series?authorId=1"
+ },
+ {
+  "name": "bookfiles_after_book_delete",
+  "path": "/api/v1/bookfile?bookFileIds=3"
+ },
+ {
+  "name": "state_after_book_delete",
+  "snapshot": true
+ },
+ {
+  "name": "book_editor_delete",
+  "method": "DELETE",
+  "path": "/api/v1/book/editor",
+  "body": {
+   "bookIds": [
+    3
+   ]
+  }
+ },
+ {
+  "name": "books_after_editor_delete",
+  "path": "/api/v1/book?authorId=1"
+ },
+ {
+  "name": "author_delete_missing",
+  "method": "DELETE",
+  "path": "/api/v1/author/99"
+ },
+ {
+  "name": "author_delete",
+  "method": "DELETE",
+  "path": "/api/v1/author/2?deleteFiles=true&addImportListExclusion=true"
+ },
+ {
+  "name": "authors_after_delete",
+  "path": "/api/v1/author"
+ },
+ {
+  "name": "books_after_author_delete",
+  "path": "/api/v1/book"
+ },
+ {
+  "name": "state_after_author_delete",
+  "snapshot": true
+ },
+ {
+  "name": "bookfiles_after_author_delete",
+  "path": "/api/v1/bookfile?bookFileIds=4"
+ },
+ {
+  "name": "author_editor_delete",
+  "method": "DELETE",
+  "path": "/api/v1/author/editor",
+  "body": {
+   "authorIds": [
+    1
+   ]
+  }
+ },
+ {
+  "name": "authors_after_editor_delete",
+  "path": "/api/v1/author"
+ },
+ {
+  "name": "books_after_editor_author_delete",
+  "path": "/api/v1/book"
+ },
+ {
+  "name": "state_after_editor_deletes",
+  "snapshot": true
+ },
+ {
+  "name": "author_add_empty",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {}
+ },
+ {
+  "name": "author_add_invalid",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 0,
+   "metadataProfileId": 9,
+   "path": "books/Ann Leckie",
+   "rootFolderPath": ""
+  }
+ },
+ {
+  "name": "author_add_folder_as_root",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/media/Ann Lecki",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  }
+ },
+ {
+  "name": "author_add_unknown",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Nobody",
+   "foreignAuthorId": "404",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/books/",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  }
+ },
+ {
+  "name": "author_add",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/books/",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  },
+  "save": {
+   "leckie": "id"
+  },
+  "volatile": [
+   "added"
+  ]
+ },
+ {
+  "name": "author_add_again",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "qualityProfileId": 1,
+   "metadataProfileId": 1,
+   "rootFolderPath": "/books/",
+   "monitored": true,
+   "monitorNewItems": "all",
+   "tags": [
+    1
+   ],
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   }
+  }
+ },
+ {
+  "name": "author_add_namesake",
+  "method": "POST",
+  "path": "/api/v1/author",
+  "body": {
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5002",
+   "qualityProfileId": 1,
+   "metadataProfileId": 2,
+   "rootFolderPath": "/books",
+   "monitored": true,
+   "monitorNewItems": "none",
+   "tags": [],
+   "addOptions": {
+    "monitor": "none",
+    "booksToMonitor": [],
+    "searchForMissingBooks": false
+   }
+  },
+  "save": {
+   "namesake": "id"
+  },
+  "volatile": [
+   "added"
+  ]
+ },
+ {
+  "name": "state_after_add",
+  "snapshot": true,
+  "wait": 15,
+  "tables": [
+   "Authors",
+   "AuthorMetadata",
+   "Books",
+   "Editions",
+   "Series",
+   "SeriesBookLink"
+  ],
+  "during_run": [
+   "Added",
+   "LastInfoSync"
+  ]
+ },
+ {
+  "name": "after_add_authors",
+  "path": "/api/v1/author",
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ]
+ },
+ {
+  "name": "after_add_books",
+  "path": "/api/v1/book?authorId={leckie}",
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ],
+  "save": {
+   "b1": "0.id",
+   "b2": "1.id",
+   "b3": "2.id"
+  }
+ },
+ {
+  "name": "after_add_editions",
+  "path": "/api/v1/edition?bookId={b1}&bookId={b2}&bookId={b3}"
+ },
+ {
+  "name": "after_add_series",
+  "path": "/api/v1/series?authorId={leckie}"
+ },
+ {
+  "name": "after_add_namesake_books",
+  "path": "/api/v1/book?authorId={namesake}"
  }
 ]

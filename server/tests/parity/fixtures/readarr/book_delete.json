@@ -1,0 +1,10 @@
+{
+ "body": "",
+ "content_type": "",
+ "request": {
+  "body": null,
+  "method": "DELETE",
+  "path": "/api/v1/book/2?deleteFiles=true&addImportListExclusion=true"
+ },
+ "status": 200
+}

@@ -1,0 +1,71 @@
+{
+ "body": [
+  {
+   "addOptions": {
+    "booksToMonitor": [],
+    "monitor": "all",
+    "monitored": true,
+    "searchForMissingBooks": false
+   },
+   "added": "2025-05-01T09:30:00Z",
+   "authorMetadataId": 1,
+   "authorName": "Terry Pratchett",
+   "authorNameLastFirst": "Pratchett, Terry",
+   "cleanName": "terrypratchett",
+   "ended": true,
+   "folder": "Terry Pratchett",
+   "foreignAuthorId": "1654",
+   "genres": [
+    "fantasy",
+    "humor"
+   ],
+   "id": 1,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg",
+     "url": "/MediaCover/1/poster.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/1654.Terry_Pratchett"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": false,
+   "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+   "path": "/books/Terry Pratchett",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 6195000,
+    "value": 4.13,
+    "votes": 1500000
+   },
+   "remotePoster": "https://images.gr-assets.com/authors/1235562205p7/1654.jpg",
+   "sortName": "terry pratchett",
+   "sortNameLastFirst": "pratchett, terry",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "ended",
+   "tags": [],
+   "titleSlug": "1654"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/author/lookup?term=author:1654"
+ },
+ "status": 200
+}

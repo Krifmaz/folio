@@ -1,0 +1,32 @@
+{
+ "body": [
+  {
+   "authorId": 0,
+   "bookId": 0,
+   "dateAdded": "2025-05-06T12:00:00Z",
+   "id": 4,
+   "path": "/books/Ursula K. Le Guin/A Wizard of Earthsea (1968)/A Wizard of Earthsea - Ursula K. Le Guin.epub",
+   "quality": {
+    "quality": {
+     "id": 3,
+     "name": "EPUB"
+    },
+    "revision": {
+     "isRepack": false,
+     "real": 0,
+     "version": 1
+    }
+   },
+   "qualityCutoffNotMet": false,
+   "qualityWeight": 12,
+   "size": 256
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/bookfile?bookFileIds=4"
+ },
+ "status": 200
+}

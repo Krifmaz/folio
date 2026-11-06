@@ -1,0 +1,10 @@
+{
+ "body": "Failed to verify SMTP connection configuration",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "POST",
+  "path": "/api/emails/test"
+ },
+ "status": 400
+}

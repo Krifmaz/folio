@@ -7,6 +7,7 @@
 
 pub mod filters;
 pub mod names;
+pub mod shelves;
 pub mod util;
 
 use crate::abs::auth::{send_status, AbsUser};
@@ -29,6 +30,7 @@ pub fn router() -> Router<AppState> {
         .route("/api/libraries", get(find_all).post(create))
         .route("/api/libraries/{id}", get(find_one))
         .route("/api/libraries/{id}/items", get(library_items))
+        .route("/api/libraries/{id}/personalized", get(personalized))
 }
 
 /// An answer like Express's `res.status(code).send(text)`: the text as HTML.
@@ -627,6 +629,32 @@ async fn library_items(
         Ok(Value::Object(payload))
     };
     run().map(Json).map_err(fail).into_response()
+}
+
+/// `GET /api/libraries/:id/personalized` (A0013, `getUserPersonalizedShelves`): the home page shelves of the
+/// library for the user, `limit` entities each (10 by default).
+async fn personalized(
+    State(st): State<AppState>,
+    AbsUser { user, .. }: AbsUser,
+    Path(id): Path<String>,
+    Query(mut q): Query<HashMap<String, String>>,
+) -> Response {
+    let lib = match library_for(&st, &user, &id, &mut q) {
+        Ok(l) => l,
+        Err(r) => return *r,
+    };
+    let limit = q.get("limit").filter(|v| !v.is_empty()).and_then(|v| v.parse::<i64>().ok()).unwrap_or(10);
+    let include: Vec<String> =
+        q.get("include").map(|i| i.split(',').map(|v| v.trim().to_lowercase()).filter(|v| !v.is_empty()).collect()).unwrap_or_default();
+    let sorting = Sorting::of(&st.abs_server.settings());
+    if lib.media_type.as_deref() != Some("book") {
+        // Podcast shelves come with the podcast port (P5).
+        return Json(json!([])).into_response();
+    }
+    match shelves::book_shelves(&st.abs, &lib, &user, &include, limit, &sorting) {
+        Ok(s) => Json(Value::Array(s)).into_response(),
+        Err(e) => fail(e),
+    }
 }
 
 /// One item of a library page (`LibraryItem.getByFilterAndSort`): minified, with the collapsed series, the

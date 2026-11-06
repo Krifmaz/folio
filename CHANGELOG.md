@@ -10,6 +10,50 @@
   like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
 - The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,
   with jumping (range requests), like Audiobookshelf.
+- Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
+  browser, and the files are put in the library folder under author, series and title. Each answer is checked
+  against the original's own.
+- The Readarr API can add an author (`POST /api/v1/author`) the way Readarr does: the same checks and messages,
+  the author's folder made from the naming settings (and kept apart from a folder already in use), then its books,
+  editions and series filled in from the metadata server in the background. The metadata profile decides which
+  books and editions are kept (ratings, release date, parts and sets, languages, ISBNs, pages, ignored terms), and
+  the add options decide which books are monitored. Every answer and the stored rows are checked against
+  Readarr's own, recorded with the same stand-in metadata server.
+- Mail works like Audiobookshelf's: admins send a test mail, and e-books go to Kindles and other e-readers
+  by mail through the mail server in the email settings. Each answer is checked against the original's own.
+- A library's series and authors pages, one series and one author, like Audiobookshelf's
+  (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
+  `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's
+  books grouped by series.
+- The server log works like Audiobookshelf's: admins read today's messages on the log page and watch them
+  live, messages are kept in one file per day, and the log level and the number of days kept follow the
+  settings. Each answer is checked against the original's own.
+- The Readarr API can look up books and authors to add (`/api/v1/book/lookup`, `/api/v1/author/lookup`,
+  `/api/v1/search`) the way Readarr does: by name, ISBN or ASIN through Goodreads, or by `author:`, `work:` and
+  `edition:` ids, with what the library already has filled in. Authors and books come from Readarr's metadata
+  server setting, or rreading-glasses' public server when it is empty. 20 answers are checked against Readarr's
+  own, recorded against a stand-in metadata server and Goodreads.
+- The mobile app's stats page and home shelves are checked against Folio (PARITY M0002, M0006, M0010, M0017).
+- Server statistics work like Audiobookshelf's: admins see the year in review (books and authors added,
+  listening time, top authors, narrators and genres) and the library's size, and can empty the cover and item
+  cache. Each answer is checked against the original's own.
+- Backups work like Audiobookshelf's: admins make, download, upload, restore and remove backups of the database
+  and the books' and authors' metadata, and move the backup folder. A schedule makes them on its own, only the
+  newest ones you choose to keep stay, and a backup that grows past the size limit is stopped. Each answer is
+  checked against the original's own.
+- Notifications work like Audiobookshelf's: point Folio at an Apprise server, set up notifications for events
+  with their own title and text, test them, and see when each last fired. One that keeps failing is turned off,
+  and events that come while one is being sent wait their turn. Each answer is checked against the original's own.
+- Server settings work like Audiobookshelf's: admins change the settings and the words ignored when sorting
+  titles (sort titles are refreshed), check a schedule before saving it, add and remove their own metadata
+  providers, and set the mail server and e-reader devices with who may use each. The task list the apps show is
+  in place for the jobs that will use it. Each answer is checked against the original's own.
+- The Readarr API can delete authors, books and book files, one or several, with Readarr's options (delete the
+  files, add an import list exclusion). Files go to Readarr's recycling bin when one is set. What a delete leaves
+  behind (rows and files on disk) is checked against Readarr's own, recorded at four points.
+- The home page shelves of a book library (`/api/libraries/:id/personalized`), as Audiobookshelf's apps show them:
+  Continue Listening and Reading, Continue Series, Recently Added, Recent Series, Discover, Listen and Read Again,
+  and Newest Authors, each checked against the original's answer on the same data.
 - Playback sessions work like Audiobookshelf's: starting one when a player opens a book, syncing and closing it,
   sessions phones played offline, the admins' list of open and past sessions (and deleting them), and each user's
   listening sessions and stats. Each answer is checked against the original's recorded one.

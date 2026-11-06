@@ -116,14 +116,44 @@ async fn replay(app: &Router, token: &str, ctx: &HashMap<String, String>, m: &mu
     }
     // Without a sort the original returns rows in whatever order SQLite's planner reads them, which changes with
     // the random ids of each recording. A whole unsorted page is compared by content, in folder order.
-    if !path.contains("sort=") && fx.body["limit"].as_i64() == Some(0) {
+    // Series and authors without a sort are compared in id order the same way.
+    if !path.contains("sort=") && fx.body.get("limit").is_none_or(|l| l.as_i64() == Some(0)) {
         for v in [&mut body, &mut fx.body] {
-            if let Some(Value::Array(list)) = v.pointer_mut("/results") {
-                list.sort_by(|a, b| a["relPath"].as_str().cmp(&b["relPath"].as_str()));
+            for list in ["/results", "/authors"] {
+                if let Some(Value::Array(list)) = v.pointer_mut(list) {
+                    let key = |x: &Value| x["relPath"].as_str().or(x["id"].as_str()).unwrap_or_default().to_string();
+                    list.sort_by_key(key);
+                }
+            }
+        }
+    }
+    // The Discover shelf is in random order on both sides: compared by content, in id order.
+    for v in [&mut body, &mut fx.body] {
+        if let Value::Array(shelves) = v {
+            for shelf in shelves.iter_mut().filter(|s| s["id"] == "discover") {
+                if let Some(Value::Array(list)) = shelf.get_mut("entities") {
+                    list.sort_by(|a, b| a["id"].as_str().cmp(&b["id"].as_str()));
+                }
             }
         }
     }
     assert_like_with(m, status, &body, &fx);
+}
+
+/// Moves the times items, series and authors were added forward by whole days, so the newest is as old as it
+/// was at the recording ("added in the last 60 days" shelves see them as the original did).
+fn shift_to_now(db: &dyn Db) {
+    let newest =
+        db.one("SELECT max(createdAt) AS t FROM libraryItems", vec![]).unwrap().and_then(|r| r["t"].as_str().map(String::from)).unwrap();
+    let newest_ms = server::abs::models::date_ms(&newest).unwrap();
+    let days = (server::abs::models::now_ms() - newest_ms).div_euclid(24 * 60 * 60 * 1000);
+    for table in ["libraryItems", "series", "authors"] {
+        db.execute(
+            &format!("UPDATE `{table}` SET createdAt = strftime('%Y-%m-%d %H:%M:%f', substr(createdAt, 1, 23), ?) || ' +00:00'"),
+            vec![json!(format!("+{days} days"))],
+        )
+        .unwrap();
+    }
 }
 
 /// Every `lib_*` recording of one kind.
@@ -167,6 +197,40 @@ async fn items_answer_like_the_original() {
     let names = recorded("lib_item");
     let names: Vec<_> = names.into_iter().filter(|n| !n.starts_with("lib_items_")).collect();
     assert!(names.len() >= 5, "{names:?}");
+    for name in names {
+        replay(&app, &token, &ctx, &mut matcher(), &name).await;
+    }
+}
+
+#[tokio::test]
+async fn series_answer_like_the_original() {
+    let (app, token) = set_up("abs-lib-series").await;
+    let ctx = context();
+    let names = recorded("lib_series");
+    assert!(names.len() >= 16, "{names:?}");
+    for name in names {
+        replay(&app, &token, &ctx, &mut matcher(), &name).await;
+    }
+}
+
+#[tokio::test]
+async fn authors_answer_like_the_original() {
+    let (app, token) = set_up("abs-lib-authors").await;
+    let ctx = context();
+    let names = recorded("lib_author");
+    assert!(names.len() >= 8, "{names:?}");
+    for name in names {
+        replay(&app, &token, &ctx, &mut matcher(), &name).await;
+    }
+}
+
+#[tokio::test]
+async fn home_shelves_answer_like_the_original() {
+    let (app, st, token) = set_up_with_state("abs-lib-shelves").await;
+    shift_to_now(&st.abs);
+    let ctx = context();
+    let names = recorded("lib_personalized");
+    assert!(names.len() >= 2, "{names:?}");
     for name in names {
         replay(&app, &token, &ctx, &mut matcher(), &name).await;
     }

@@ -10,20 +10,20 @@
   "page": 0,
   "results": [
    {
-    "addedAt": 1793907650573,
-    "birthtimeMs": 1793907641769,
-    "ctimeMs": 1793907642782,
-    "folderId": "e215a515-134a-4dd9-ba20-6db501b5ce10",
-    "id": "2ba15892-1299-467b-86f3-7c0bfe967a51",
-    "ino": "9177792",
+    "addedAt": 1793918572855,
+    "birthtimeMs": 1793918563340,
+    "ctimeMs": 1793918564237,
+    "folderId": "f627aa94-8073-48cc-a8d7-8d249b4694b1",
+    "id": "1a480ba2-0a72-410c-b370-3c031918972f",
+    "ino": "9437192",
     "isFile": false,
     "isInvalid": false,
     "isMissing": false,
-    "libraryId": "41c7c607-9da9-483a-9fd7-94f86887db00",
+    "libraryId": "2cae27a4-5a4a-4a1d-af1f-142ea391150c",
     "media": {
      "coverPath": null,
      "duration": 60,
-     "id": "5debbca8-8402-4c7c-ab52-e367f06922da",
+     "id": "613fef46-6c2c-47e0-b888-a3cca64b0611",
      "metadata": {
       "abridged": false,
       "asin": null,
@@ -52,13 +52,13 @@
      "tags": []
     },
     "mediaType": "book",
-    "mtimeMs": 1793907642782,
+    "mtimeMs": 1793918564237,
     "numFiles": 1,
     "oldLibraryItemId": null,
     "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
     "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
     "size": 256184,
-    "updatedAt": 1793907650573
+    "updatedAt": 1793918572855
    }
   ],
   "sortDesc": false,
