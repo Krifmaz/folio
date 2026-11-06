@@ -1,0 +1,51 @@
+{
+ "body": [
+  {
+   "description": "The Radch trilogy.",
+   "id": 2,
+   "links": [
+    {
+     "bookId": 5,
+     "id": 3,
+     "position": "1",
+     "seriesId": 2,
+     "seriesPosition": 1
+    },
+    {
+     "bookId": 6,
+     "id": 4,
+     "position": "2",
+     "seriesId": 2,
+     "seriesPosition": 2
+    },
+    {
+     "bookId": 7,
+     "id": 5,
+     "position": "3",
+     "seriesId": 2,
+     "seriesPosition": 3
+    }
+   ],
+   "title": "Imperial Radch"
+  },
+  {
+   "id": 3,
+   "links": [
+    {
+     "bookId": 8,
+     "id": 6,
+     "seriesId": 3,
+     "seriesPosition": 0
+    }
+   ],
+   "title": "Radch Universe"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/series?authorId={leckie}"
+ },
+ "status": 200
+}

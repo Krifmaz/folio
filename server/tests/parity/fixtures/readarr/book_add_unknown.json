@@ -1,0 +1,31 @@
+{
+ "body": [
+  {
+   "attemptedValue": "404",
+   "errorMessage": "A book with this ID was not found",
+   "propertyName": "GoodreadsId",
+   "severity": "error"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "author": {
+    "foreignAuthorId": "1654",
+    "metadataProfileId": 1,
+    "qualityProfileId": 1,
+    "rootFolderPath": "/books/"
+   },
+   "editions": [
+    {
+     "foreignEditionId": "404001",
+     "monitored": true
+    }
+   ],
+   "foreignBookId": "404"
+  },
+  "method": "POST",
+  "path": "/api/v1/book"
+ },
+ "status": 400
+}

@@ -4,8 +4,9 @@
 //! once it has scanned the author's folder (`AuthorScannedHandler`): the monitoring chosen when the author was
 //! added (`BookMonitoredService`), after which the add options are cleared.
 //!
-//! Readarr runs this as a command after an author is added. Folio runs it in the background the same way
-//! ([`Jobs`]) until the command queue is ported (R5), and so far only for new authors. Not ported yet (each is
+//! Readarr runs this as a command after an author or a book is added. Folio runs it in the background the same
+//! way ([`Jobs`]) until the command queue is ported (R5): for a new author, and for the author of an added book
+//! ([`refresh_author`], with [`store_added_book`] storing the book first). Not ported yet (each is
 //! logged when it would happen): an author or book that moved to another id at the metadata server (Readarr's
 //! merges), refetching a book the author's metadata no longer lists but the library keeps, writing tags into
 //! files (`SyncTags`), searches, and the folder scan itself.
@@ -117,7 +118,7 @@ fn stored_ratings(v: Option<&Value>) -> (i64, f64) {
 }
 
 /// A stored book as the model (`Book`), for comparing it with the metadata's.
-fn book_from_row(r: &Row) -> Book {
+pub(super) fn book_from_row(r: &Row) -> Book {
     let (votes, value) = stored_ratings(r.get("Ratings"));
     Book {
         id: r.i("Id"),
@@ -159,7 +160,11 @@ fn edition_from_row(r: &Row) -> Edition {
         asin: text("Asin"),
         title: r.s("Title"),
         language: text("Language"),
-        overview: text("Overview"),
+        // `new Edition()` starts with an empty description, which a stored NULL leaves in place.
+        overview: match text("Overview") {
+            Value::Null => json!(""),
+            o => o,
+        },
         format: text("Format"),
         is_ebook: r.i("IsEbook") != 0,
         disambiguation: text("Disambiguation"),
@@ -551,8 +556,9 @@ fn use_edition_metadata(local: &mut Edition, remote: &Edition) {
 }
 
 /// Refreshes one book of the author (`RefreshBookService.RefreshEntityInfo`): its fields from the metadata's
-/// book `remote`, then its editions. `stored` is the library's book (a new one is the metadata's itself).
-fn refresh_book(db: &SqliteDb, disk: &Disk, stored: &Book, remote: Option<&Shared<Book>>, meta_id: i64) -> Result<()> {
+/// book `remote`, then its editions. `stored` is the library's book (a new one is the metadata's itself). Gives
+/// whether anything changed (the book's fields or any of its editions).
+fn refresh_book(db: &SqliteDb, disk: &Disk, stored: &Book, remote: Option<&Shared<Book>>, meta_id: i64) -> Result<bool> {
     let Some(remote) = remote else {
         let manual = super::books::add_options(Some(&stored.add_options))["addType"] == json!("manual");
         if !manual && !book_has_files(db, stored.id)? {
@@ -564,14 +570,15 @@ fn refresh_book(db: &SqliteDb, disk: &Disk, stored: &Book, remote: Option<&Share
                 stored.foreign_book_id
             );
         }
-        return Ok(());
+        return Ok(false);
     };
-    let (book_id, remote_editions) = {
+    let (book_id, remote_editions, book_changed) = {
         let mut b = lock(remote);
+        let changed = !same_book(stored, &b);
         b.id = stored.id;
         b.author_metadata_id = meta_id;
         b.last_info_sync = json!(now_param());
-        (b.id, distinct_editions(&b.editions))
+        (b.id, distinct_editions(&b.editions), changed)
     };
     let ids: Vec<Value> = remote_editions.iter().map(|e| json!(lock(e).foreign_edition_id.clone())).collect();
     let local = db.query(
@@ -611,6 +618,7 @@ fn refresh_book(db: &SqliteDb, disk: &Disk, stored: &Book, remote: Option<&Share
     }
     c.deleted = local;
     monitor_single_edition(db, &mut c)?;
+    let changed = book_changed || !c.added.is_empty() || !c.deleted.is_empty() || !c.updated.is_empty();
     if c.added.iter().any(|e| lock(e).id != 0) {
         bail!("System.InvalidOperationException: Can't insert model with existing ID != 0");
     }
@@ -631,7 +639,8 @@ fn refresh_book(db: &SqliteDb, disk: &Disk, stored: &Book, remote: Option<&Share
         update(db, "Editions", &EDITION_COLUMNS, edition_values(e), e.id)?;
     }
     let b = lock(remote).clone();
-    update(db, "Books", &BOOK_COLUMNS, book_values(&b), b.id)
+    update(db, "Books", &BOOK_COLUMNS, book_values(&b), b.id)?;
+    Ok(changed)
 }
 
 /// The series of the author, refreshed (`RefreshSeriesService.RefreshSeriesInfo`): the series of its books in the
@@ -661,13 +670,17 @@ fn refresh_series(db: &SqliteDb, meta_id: i64, series: &[SeriesInfo], foreign_au
         .map(|b| b.s("ForeignBookId"))
         .collect();
     // The series with links to the author's books in the library, each with only those links.
-    let mut remote: Vec<(&SeriesInfo, Vec<&super::bookinfo::SeriesItem>)> = Vec::new();
+    // Readarr keeps only those links in the metadata's series itself, so the kept author has them too.
+    let mut remote: Vec<(&SeriesInfo, Vec<super::bookinfo::SeriesItem>)> = Vec::new();
     for s in series {
-        let items = s.items.as_ref().ok_or_else(null_reference)?;
-        let links: Vec<_> = items.iter().filter(|l| books.contains(&lock(&l.book).foreign_book_id)).collect();
+        let items = lock(&s.items).clone().ok_or_else(null_reference)?;
+        let links: Vec<_> = items.into_iter().filter(|l| books.contains(&lock(&l.book).foreign_book_id)).collect();
         if !links.is_empty() {
             remote.push((s, links));
         }
+    }
+    for (s, links) in &remote {
+        *lock(&s.items) = Some(links.clone());
     }
     let mut all: Vec<(i64, Row)> = Vec::new();
     let mut added_ids: HashSet<String> = HashSet::new();
@@ -715,10 +728,10 @@ fn refresh_series(db: &SqliteDb, meta_id: i64, series: &[SeriesInfo], foreign_au
                         && stored.i("SeriesPosition") == l.series_position
                         && (stored.i("IsPrimary") != 0) == l.primary;
                     if !same {
-                        changed.push((stored.i("Id"), *l));
+                        changed.push((stored.i("Id"), l.clone()));
                     }
                 }
-                None => added.push((book_id, *l)),
+                None => added.push((book_id, l.clone())),
             }
         }
         for (book_id, l) in added {
@@ -757,8 +770,9 @@ fn remote_books(db: &SqliteDb, data: &AuthorInfo, profile_id: i64) -> Result<Vec
 }
 
 /// Refreshes the author (`RefreshEntityInfo` for an author): its metadata, then its books, then the author, then
-/// its series.
-async fn refresh_author_info(db: &SqliteDb, disk: &Disk, info: &BookInfo, author: &Row) -> Result<()> {
+/// its series. Gives whether anything changed (its metadata or any of its books), which decides whether Readarr
+/// scans the author's folder afterwards.
+async fn refresh_author_info(db: &SqliteDb, disk: &Disk, info: &BookInfo, author: &Row) -> Result<bool> {
     let foreign = author.s("ForeignAuthorId");
     let data = match info.get_author_info(db, &foreign, true).await {
         Ok(d) => d,
@@ -772,11 +786,11 @@ async fn refresh_author_info(db: &SqliteDb, disk: &Disk, info: &BookInfo, author
                 tracing::warn!("Readarr: author {foreign} not found in the metadata, deleting it");
                 super::delete::author(db, disk, author.i("Id"), false, false).map_err(failed)?;
             }
-            return Ok(());
+            return Ok(false);
         }
         Err(e) => bail!("{}", e.describe()),
     };
-    let (meta_id, _) = upsert_metadata(db, &data.meta)?;
+    let (meta_id, mut changed) = upsert_metadata(db, &data.meta)?;
     if author.i("AuthorMetadataId") != meta_id {
         bail!("author {foreign} moved to other metadata; Folio doesn't merge authors yet");
     }
@@ -849,20 +863,21 @@ async fn refresh_author_info(db: &SqliteDb, disk: &Disk, info: &BookInfo, author
         lock(b).id = id;
     }
     for (stored, r) in &up_to_date {
-        refresh_book(db, disk, stored, Some(r), meta_id)?;
+        changed |= refresh_book(db, disk, stored, Some(r), meta_id)?;
     }
     for r in &added {
         let stored = lock(r).clone();
-        refresh_book(db, disk, &stored, Some(r), meta_id)?;
+        changed |= refresh_book(db, disk, &stored, Some(r), meta_id)?;
     }
     for (stored, r) in &updated {
-        refresh_book(db, disk, stored, Some(r), meta_id)?;
+        changed |= refresh_book(db, disk, stored, Some(r), meta_id)?;
     }
     for stored in &deleted {
-        refresh_book(db, disk, stored, None, meta_id)?;
+        changed |= refresh_book(db, disk, stored, None, meta_id)?;
     }
     db.execute("UPDATE Authors SET LastInfoSync = ? WHERE Id = ?", vec![json!(now_param()), json!(author.i("Id"))])?;
-    refresh_series(db, meta_id, &data.series, &foreign)
+    refresh_series(db, meta_id, &data.series, &foreign)?;
+    Ok(changed)
 }
 
 /// `MonitorTypes` from a stored or sent name or number.
@@ -971,6 +986,70 @@ pub async fn new_author(db: SqliteDb, disk: Disk, info: BookInfo, author_id: i64
     if let Err(e) = after_scan(&db, author_id) {
         tracing::error!("Readarr: couldn't apply the add options of author {author_id}: {e:#}");
     }
+}
+
+/// Whether Readarr scans the folders after refreshing an author that is not new (`RescanAfterRefresh`): only
+/// when the setting is "always" (its default), since the refresh queued by an add is not a manual one.
+fn rescan_after_refresh(db: &SqliteDb) -> Result<bool> {
+    let setting = super::disk::config(db, "rescanafterrefresh")?;
+    Ok(setting.is_none_or(|s| s.eq_ignore_ascii_case("always")))
+}
+
+/// Refreshes an author that is already in the library (`RefreshAuthorCommand` without `isNewAuthor`), as Readarr
+/// does after a book is added: when anything changed, the folder scan's follow-up runs too. Failures are logged,
+/// as Readarr logs them.
+pub async fn refresh_author(db: SqliteDb, disk: Disk, info: BookInfo, author_id: i64) {
+    let Ok(Some(author)) = authors::find(&db, author_id) else { return };
+    let changed = match refresh_author_info(&db, &disk, &info, &author).await {
+        Ok(c) => c,
+        Err(e) => {
+            tracing::error!("Readarr: couldn't refresh info for author {}: {e:#}", author.s("ForeignAuthorId"));
+            false
+        }
+    };
+    match rescan_after_refresh(&db) {
+        Ok(true) if changed => {
+            if let Err(e) = after_scan(&db, author_id) {
+                tracing::error!("Readarr: couldn't apply the add options of author {author_id}: {e:#}");
+            }
+        }
+        Ok(_) => {}
+        Err(e) => tracing::error!("Readarr: couldn't read the rescan setting: {e:#}"),
+    }
+}
+
+/// Stores a book added by hand with its editions (`BookService.AddBook`): the book written (a new row, or the
+/// stored one when it has an id), its new editions inserted, and only the chosen edition monitored (the book's
+/// editions written back as Readarr loads them). Gives its id.
+pub fn store_added_book(db: &SqliteDb, book: &mut Book) -> kit_server_core::Result<i64> {
+    let insert_sql = |table: &str, columns: &[&str]| {
+        format!("INSERT INTO {table} ({}) VALUES ({})", columns.join(", "), super::json::marks(columns.len()))
+    };
+    if book.id == 0 {
+        book.id = db.execute(&insert_sql("Books", &BOOK_COLUMNS), book_values(book))?;
+    } else {
+        let set = BOOK_COLUMNS.iter().map(|c| format!("{c} = ?")).collect::<Vec<_>>().join(", ");
+        let mut values = book_values(book);
+        values.push(json!(book.id));
+        db.execute(&format!("UPDATE Books SET {set} WHERE Id = ?"), values)?;
+    }
+    for e in &book.editions {
+        let mut e = lock(e);
+        e.book_id = book.id;
+        if e.id == 0 {
+            e.id = db.execute(&insert_sql("Editions", &EDITION_COLUMNS), edition_values(&e))?;
+        }
+    }
+    let chosen = book.editions.iter().find(|e| lock(e).monitored).or(book.editions.first());
+    if let Some(chosen) = chosen {
+        let id = lock(chosen).id;
+        // `SetMonitored` writes back every edition of the book as loaded, so a missing description becomes empty.
+        db.execute(
+            "UPDATE Editions SET Monitored = (Id = ?), Overview = COALESCE(Overview, '') WHERE BookId = ?",
+            vec![json!(id), json!(book.id)],
+        )?;
+    }
+    Ok(book.id)
 }
 
 #[cfg(test)]
