@@ -1,0 +1,69 @@
+{
+ "body": [
+  {
+   "attemptedValue": "",
+   "errorCode": "NotEmptyValidator",
+   "errorMessage": "'Foreign Book Id' must not be empty.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Foreign Book Id",
+    "propertyValue": ""
+   },
+   "propertyName": "ForeignBookId",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": 9,
+   "errorCode": "MetadataProfileExistsValidator",
+   "errorMessage": "Metadata profile does not exist",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Author. Metadata Profile Id",
+    "propertyValue": 9
+   },
+   "propertyName": "Author.MetadataProfileId",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": "",
+   "errorCode": "PathValidator",
+   "errorMessage": "Invalid Path: ''",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "path": "",
+    "propertyName": "Author. Root Folder Path",
+    "propertyValue": ""
+   },
+   "propertyName": "Author.RootFolderPath",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": "",
+   "errorCode": "NotEmptyValidator",
+   "errorMessage": "'Author. Foreign Author Id' must not be empty.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Author. Foreign Author Id",
+    "propertyValue": ""
+   },
+   "propertyName": "Author.ForeignAuthorId",
+   "severity": "error"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "author": {
+    "foreignAuthorId": "",
+    "metadataProfileId": 9,
+    "path": "",
+    "qualityProfileId": 0,
+    "rootFolderPath": ""
+   },
+   "foreignBookId": ""
+  },
+  "method": "POST",
+  "path": "/api/v1/book"
+ },
+ "status": 400
+}

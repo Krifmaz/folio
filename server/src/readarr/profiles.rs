@@ -318,11 +318,9 @@ fn filter_editions(editions: &mut Vec<Shared<Edition>>, local_editions: &[Row], 
 pub fn filter_books(db: &SqliteDb, info: &AuthorInfo, profile_id: i64) -> Result<Vec<Shared<Book>>> {
     let mut series_links: Vec<(Shared<Book>, Vec<Link>)> = Vec::new();
     for s in &info.series {
-        let items = s
-            .items
-            .as_ref()
-            .ok_or_else(|| anyhow!("System.NullReferenceException: Object reference not set to an instance of an object."))?;
-        for item in items {
+        let items = lock(&s.items).clone();
+        let items = items.ok_or_else(|| anyhow!("System.NullReferenceException: Object reference not set to an instance of an object."))?;
+        for item in &items {
             let link = Link { position: item.position.clone(), primary: item.primary };
             match series_links.iter_mut().find(|(b, _)| Arc::ptr_eq(b, &item.book)) {
                 Some((_, l)) => l.push(link),

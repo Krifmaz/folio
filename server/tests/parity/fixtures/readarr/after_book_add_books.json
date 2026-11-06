@@ -1,0 +1,54 @@
+{
+ "body": [
+  {
+   "added": "2026-11-06T00:45:39Z",
+   "anyEditionOk": true,
+   "authorId": 5,
+   "authorTitle": "pratchett, terry Small Gods",
+   "foreignBookId": "1215958",
+   "foreignEditionId": "1215958001",
+   "genres": [
+    "fantasy",
+    "religion"
+   ],
+   "grabbed": false,
+   "id": 10,
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/1215958"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/1215958001"
+    }
+   ],
+   "monitored": true,
+   "pageCount": 400,
+   "ratings": {
+    "popularity": 2100,
+    "value": 4.2,
+    "votes": 500
+   },
+   "releaseDate": "1992-05-01T00:00:00Z",
+   "seriesTitle": "",
+   "statistics": {
+    "bookCount": 1,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Small Gods",
+   "titleSlug": "1215958"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/book?authorId={pratchett}"
+ },
+ "status": 200
+}
