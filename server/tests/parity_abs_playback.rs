@@ -6,7 +6,7 @@ mod common;
 mod parity;
 
 use axum::body::Body;
-use axum::http::{header, Request};
+use axum::http::{header, Request, StatusCode};
 use axum::Router;
 use kit_server_core::Db;
 use parity::{assert_like_with, fixture, Matcher};
@@ -219,8 +219,8 @@ async fn bookmarks_follow_the_originals_rules() {
 
 /// The original's rows after its recording, loaded into Folio (like `parity_abs_library.rs`), without its
 /// playback sessions and devices, and with the item's progress back where the recording had it before `play`.
-async fn set_up_recorded(name: &str) -> (Router, server::AppState, String, HashMap<String, String>) {
-    let (app, st, _dir) = common::server(name, HashMap::new()).await;
+async fn set_up_recorded(name: &str, env: HashMap<String, String>) -> (Router, server::AppState, String, HashMap<String, String>) {
+    let (app, st, _dir) = common::server(name, env).await;
     let all: HashMap<String, Vec<serde_json::Map<String, Value>>> =
         serde_json::from_str(&std::fs::read_to_string(parity::dir("abs").join("_db_end.json")).unwrap()).unwrap();
     st.abs.execute("PRAGMA foreign_keys = OFF", vec![]).ok();
@@ -286,12 +286,14 @@ fn by_amount(v: &mut Value) {
                     *x = Value::Array(list);
                 } else if k == "contentUrl" {
                     // `/api/items/<item>/file/<ino>`: the recording's item id and file numbers are not the test's.
+                    // A stream's `/hls/<session>/output.m3u8`: the session ids differ too.
                     if let Some(t) = x.as_str() {
                         let parts: Vec<&str> = t.split('/').collect();
+                        let masked: &[usize] = if t.starts_with("/hls/") { &[2] } else { &[3, 5] };
                         *x = json!(parts
                             .iter()
                             .enumerate()
-                            .map(|(i, p)| if i == 3 || i == 5 { "*" } else { p })
+                            .map(|(i, p)| if masked.contains(&i) { "*" } else { p })
                             .collect::<Vec<_>>()
                             .join("/"));
                     }
@@ -307,11 +309,22 @@ fn by_amount(v: &mut Value) {
 
 #[tokio::test]
 async fn playback_sessions_answer_like_the_original() {
-    let (app, _st, token, mut ctx) = set_up_recorded("pb-sessions").await;
+    // The recorded books' files aren't here, so the stream's ffmpeg is a stand-in that waits until it is stopped;
+    // the playlist is written before ffmpeg starts.
+    let fake = std::env::temp_dir().join(format!("folio-fake-ffmpeg-{}", std::process::id()));
+    std::fs::write(&fake, "#!/bin/sh\nexec sleep 60\n").unwrap();
+    let mut perms = std::fs::metadata(&fake).unwrap().permissions();
+    std::os::unix::fs::PermissionsExt::set_mode(&mut perms, 0o755);
+    std::fs::set_permissions(&fake, perms).unwrap();
+    let env = HashMap::from([("APP_FFMPEG".to_string(), fake.display().to_string())]);
+    let (app, st, token, mut ctx) = set_up_recorded("pb-sessions", env).await;
+    // A stream folder left from an earlier run goes when the first stream starts.
+    let leftover = server::abs::hls::streams_path(&st).join("1b2c3d4e-0000-4000-8000-000000000001");
+    std::fs::create_dir_all(&leftover).unwrap();
     let requests: Vec<Value> =
         serde_json::from_str(&std::fs::read_to_string(parity::dir("abs").join("../../abs/requests.json")).unwrap()).unwrap();
     let names: Vec<String> = requests.iter().map(|r| r["name"].as_str().unwrap().to_string()).collect();
-    let (from, to) = (names.iter().position(|n| n == "play").unwrap(), names.iter().position(|n| n == "pb_play_episode_of_book").unwrap());
+    let (from, to) = (names.iter().position(|n| n == "play").unwrap(), names.iter().position(|n| n == "pb_stream_after_close").unwrap());
     let mut m = Matcher::default();
     m.volatile.extend(["date", "dayOfWeek", "ipAddress"].map(String::from));
     for name in &names[from..=to] {
@@ -337,13 +350,40 @@ async fn playback_sessions_answer_like_the_original() {
             Some(v) => b.header(header::CONTENT_TYPE, "application/json").body(Body::from(v.to_string())).unwrap(),
             None => b.body(Body::empty()).unwrap(),
         };
-        let r = app.clone().oneshot(req).await.unwrap();
+        // The recorded book's files aren't here: a track's file is stood in for by one of the recorded size.
+        if let Some(size) = fx.body.get("bytes").and_then(Value::as_u64) {
+            let session = ctx["session"].clone();
+            server::abs::playback::with_open(&st, |list| {
+                let s = list.iter_mut().find(|s| s.id == session).unwrap();
+                let t = &mut s.audio_tracks[0];
+                let ext = t.pointer("/metadata/ext").and_then(Value::as_str).unwrap().to_string();
+                let file = std::env::temp_dir().join(format!("folio-track-{}{ext}", std::process::id()));
+                std::fs::write(&file, vec![0u8; size as usize]).unwrap();
+                t["metadata"]["path"] = json!(file.display().to_string());
+            });
+        }
+        let mut r = app.clone().oneshot(req).await.unwrap();
+        // Like the recorder (Python's urllib), a redirect is followed.
+        if r.status() == StatusCode::FOUND {
+            let to = r.headers()[header::LOCATION].to_str().unwrap().to_string();
+            r = app.clone().oneshot(Request::get(to).body(Body::empty()).unwrap()).await.unwrap();
+        }
         let status = r.status().as_u16();
         let ctype =
             r.headers().get(header::CONTENT_TYPE).and_then(|v| v.to_str().ok()).unwrap_or_default().split(';').next().unwrap().to_string();
         let bytes = axum::body::to_bytes(r.into_body(), 1 << 24).await.unwrap();
-        let mut answer = serde_json::from_slice(&bytes).unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into()));
-        for (key, from) in [("session", "play"), ("session2", "pb_play_firefox"), ("session3", "pb_play_chrome"), ("userid", "pb_me")] {
+        let mut answer = if ctype.starts_with("audio/") {
+            json!({"bytes": bytes.len()})
+        } else {
+            serde_json::from_slice(&bytes).unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into()))
+        };
+        for (key, from) in [
+            ("session", "play"),
+            ("session2", "pb_play_firefox"),
+            ("session3", "pb_play_chrome"),
+            ("userid", "pb_me"),
+            ("stream", "pb_stream_play"),
+        ] {
             if let Some(id) = answer["id"].as_str().filter(|_| name == from) {
                 ctx.insert(key.into(), id.to_string());
             }
@@ -355,5 +395,17 @@ async fn playback_sessions_answer_like_the_original() {
         by_amount(&mut answer);
         by_amount(&mut fx.body);
         assert_like_with(&mut m, status, &answer, &fx);
+    }
+    // Closing the stream's session stopped the conversion and removed the stream's folder.
+    if let Some(stream) = ctx.get("stream") {
+        let dir = server::abs::hls::streams_path(&st).join(stream);
+        for _ in 0..50 {
+            if !dir.exists() {
+                break;
+            }
+            tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+        }
+        assert!(!dir.exists(), "the stream folder {} is still there", dir.display());
+        assert!(!leftover.exists(), "the leftover stream folder is still there");
     }
 }

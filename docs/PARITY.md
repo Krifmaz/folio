@@ -240,13 +240,13 @@ repository at the pinned commit.
 | A0200 | endpoint | `PATCH /api/auth-settings` (MiscController.updateAuthSettings) | `server/routers/ApiRouter.js#L359` | P2 users | done | `server/tests/abs_users.rs::sign_in_settings_are_checked_and_saved_like_the_original` |
 | A0201 | endpoint | `POST /api/watcher/update` (MiscController.updateWatchedPath) | `server/routers/ApiRouter.js#L360` | P6 server admin | todo |  |
 | A0202 | endpoint | `GET /api/logger-data` (MiscController.getLoggerData) | `server/routers/ApiRouter.js#L361` | P6 server admin | done | `server/tests/abs_logs.rs` |
-| A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | todo |  |
+| A0203 | endpoint | `GET /hls/:stream/:file` | `server/routers/HlsRouter.js#L21` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0204 | endpoint | `GET /public/share/:slug` | `server/routers/PublicRouter.js#L16` | P6 server admin | todo |  |
 | A0205 | endpoint | `GET /public/share/:slug/track/:index` | `server/routers/PublicRouter.js#L17` | P6 server admin | todo |  |
 | A0206 | endpoint | `GET /public/share/:slug/cover` | `server/routers/PublicRouter.js#L18` | P6 server admin | todo |  |
 | A0207 | endpoint | `GET /public/share/:slug/download` | `server/routers/PublicRouter.js#L19` | P6 server admin | todo |  |
 | A0208 | endpoint | `PATCH /public/share/:slug/progress` | `server/routers/PublicRouter.js#L20` | P3 playback | todo |  |
-| A0209 | endpoint | `GET /public/session/:id/track/:index` | `server/routers/PublicRouter.js#L21` | P3 playback | todo |  |
+| A0209 | endpoint | `GET /public/session/:id/track/:index` | `server/routers/PublicRouter.js#L21` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0210 | endpoint | `GET /feed/:slug` | `server/Server.js#L362` | P5 podcasts and feeds | todo |  |
 | A0211 | endpoint | `GET /feed/:slug/cover*` | `server/Server.js#L366` | P5 podcasts and feeds | todo |  |
 | A0212 | endpoint | `GET /feed/:slug/item/:episodeId/*` | `server/Server.js#L369` | P5 podcasts and feeds | todo |  |
@@ -414,7 +414,7 @@ repository at the pinned commit.
 | A0374 | job | scheduled backups (`backupSchedule`, `backupsToKeep`, `maxBackupSize`) | `server/managers/BackupManager.js` | P6 server admin | wip | made by `backups::spawn_schedule` (UTC, see DECISIONS); kept and size-limited as A0291 and A0292 show |
 | A0375 | job | daily log files and rotation (`loggerDailyLogsToKeep`, `loggerScannerLogsToKeep`) | `server/managers/LogManager.js` | P6 server admin | todo |  |
 | A0376 | job | folder watcher: rescans changed items (`scannerDisableWatcher`) | `server/Watcher.js` | P1 library | todo |  |
-| A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | wip |  |
+| A0377 | job | stale open sessions closed (`removeOrphanStreams`, idle sessions) | `server/managers/PlaybackSessionManager.js` | P3 playback | done | `server/tests/parity_abs_playback.rs::playback_sessions_answer_like_the_original` |
 | A0378 | job | embed-metadata queue (Quick Embed) | `server/managers/AudioMetadataManager.js` | P6 server admin | todo |  |
 | A0379 | job | M4B merge tasks | `server/managers/AbMergeManager.js` | P6 server admin | todo |  |
 | A0380 | job | cover and item cache purge | `server/managers/CacheManager.js` | P6 server admin | done | `server/tests/abs_stats.rs::stats_and_cache_answer_like_the_original` |
@@ -531,14 +531,14 @@ repository at the pinned commit.
 | M0012 | page | `/collection/:id` | `pages/collection/_id.vue` | M mobile fork | todo |  |
 | M0013 | page | `/media/:id/history` | `pages/media/_id/history.vue` | M mobile fork | todo |  |
 | M0014 | page | `/bookshelf/add-podcast` | `pages/bookshelf/add-podcast.vue` | M mobile fork | todo |  |
-| M0015 | page | `/bookshelf/authors` | `pages/bookshelf/authors.vue` | M mobile fork | todo |  |
+| M0015 | page | `/bookshelf/authors` | `pages/bookshelf/authors.vue` | M mobile fork | done | `docs/parity/screens/M0015.png` (Folio's authors with the original's recorded books) |
 | M0016 | page | `/bookshelf/collections` | `pages/bookshelf/collections.vue` | M mobile fork | todo |  |
 | M0017 | page | `/bookshelf` | `pages/bookshelf/index.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added) |
 | M0018 | page | `/bookshelf/latest` | `pages/bookshelf/latest.vue` | M mobile fork | todo |  |
 | M0019 | page | `/bookshelf/library` | `pages/bookshelf/library.vue` | M mobile fork | done | `docs/parity/screens/M0019.png` (Folio's library with the original's recorded books) |
 | M0020 | page | `/bookshelf/playlists` | `pages/bookshelf/playlists.vue` | M mobile fork | todo |  |
-| M0021 | page | `/bookshelf/series/:id` | `pages/bookshelf/series/_id.vue` | M mobile fork | todo |  |
-| M0022 | page | `/bookshelf/series` | `pages/bookshelf/series/index.vue` | M mobile fork | todo |  |
+| M0021 | page | `/bookshelf/series/:id` | `pages/bookshelf/series/_id.vue` | M mobile fork | done | `docs/parity/screens/M0021.png` (one series from Folio with its books in order) |
+| M0022 | page | `/bookshelf/series` | `pages/bookshelf/series/index.vue` | M mobile fork | done | `docs/parity/screens/M0022.png` (Folio's series with the original's recorded books) |
 | M0023 | page | `/item/:id` | `pages/item/_id/index.vue` | M mobile fork | done | `docs/parity/screens/M0023.png` (a book from Folio: author, series, narrator, genre, chapters, tracks) |
 | M0024 | page | `/item/:id/:episode` | `pages/item/_id/_episode/index.vue` | M mobile fork | todo |  |
 | M0025 | page | `/localMedia/folders/:id` | `pages/localMedia/folders/_id.vue` | M mobile fork | todo |  |
