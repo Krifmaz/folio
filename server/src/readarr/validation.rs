@@ -189,7 +189,7 @@ pub fn profile_exists(db: &SqliteDb, f: &mut Failures, property: &str, id: i64) 
     if id == 0 {
         return Ok(());
     }
-    let (table, code, message) = if property == "QualityProfileId" {
+    let (table, code, message) = if property.ends_with("QualityProfileId") {
         ("QualityProfiles", "QualityProfileExistsValidator", "Quality Profile does not exist")
     } else {
         ("MetadataProfiles", "MetadataProfileExistsValidator", "Metadata profile does not exist")

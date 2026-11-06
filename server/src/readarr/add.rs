@@ -3,11 +3,15 @@
 //! unique), then the author and its metadata stored. Readarr answers 201 with the author right away and fills in
 //! its books afterwards ([`super::refresh`]).
 //!
+//! Adding a book (`BookController.AddBook` and `AddBookService`) fetches the book, adds its author the same
+//! way when the library doesn't have it, and stores the book as added by hand, so later refreshes keep it.
+//!
 //! ```text
 //! POST /api/v1/author   add an author from a lookup (201 with the author)
+//! POST /api/v1/book     add a book from a lookup (201 with the book)
 //! ```
 
-use super::bookinfo::Failure;
+use super::bookinfo::{lock, Failure};
 use super::naming;
 use super::refresh;
 use super::text::clean_author_name;
@@ -199,33 +203,54 @@ fn path_taken(db: &SqliteDb, path: &str) -> kit_server_core::Result<bool> {
     Ok(db.one("SELECT Id FROM Authors WHERE Path = ?", vec![json!(path)])?.is_some())
 }
 
-/// `POST /api/v1/author`: 201 with the author as `GET` sends it; its books follow in the background.
-pub async fn add_author(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+/// A raw `ValidationFailure` answer (400), as Readarr's add services throw it: no error code or arguments.
+fn not_found(property: &str, message: &str, value: &str) -> Fail {
+    Fail {
+        status: StatusCode::BAD_REQUEST,
+        body: Some(json!([{
+            "propertyName": property,
+            "errorMessage": message,
+            "attemptedValue": value,
+            "severity": "error",
+        }])),
+    }
+}
+
+/// .NET's `NullReferenceException`, as a 500.
+fn null_reference() -> Fail {
+    Fail::exception(500, "System.NullReferenceException", "Object reference not set to an instance of an object.")
+}
+
+/// The one item of a list that `Single` takes: Readarr's `InvalidOperationException` when there is none or more.
+fn single<T>(items: Vec<T>) -> Answer<T> {
+    let many = items.len() > 1;
+    match items.into_iter().next() {
+        Some(_) if many => {
+            Err(Fail::exception(500, "System.InvalidOperationException", "Sequence contains more than one matching element"))
+        }
+        Some(i) => Ok(i),
+        None => Err(Fail::exception(500, "System.InvalidOperationException", "Sequence contains no matching element")),
+    }
+}
+
+/// Adds an author (`AddAuthorService.AddAuthor`) from an author as the API sends it (`r`) and its id at the
+/// metadata server: its metadata fetched, its folder made unique, its checks, then the author and its metadata
+/// stored. Gives the new author's id; refreshing it is up to the caller.
+async fn add_new_author(st: &AppState, r: &Value, foreign: &str) -> Answer<i64> {
     let db = &st.readarr;
-    let r = super::body(&bytes)?;
-    check(db, &r)?;
-    let foreign = text(&r, "foreignAuthorId").unwrap_or_default().to_string();
-    let info = match st.readarr_lookup.get_author_info(db, &foreign, false).await {
+    let info = match st.readarr_lookup.get_author_info(db, foreign, false).await {
         Ok(i) => i,
         Err(Failure::AuthorNotFound) => {
             tracing::error!("Readarr: author {foreign} was not found, it may have been removed from Goodreads");
-            return Err(Fail {
-                status: StatusCode::BAD_REQUEST,
-                body: Some(json!([{
-                    "propertyName": "ForeignAuthorId",
-                    "errorMessage": "An author with this ID was not found",
-                    "attemptedValue": foreign,
-                    "severity": "error",
-                }])),
-            });
+            return Err(not_found("ForeignAuthorId", "An author with this ID was not found", foreign));
         }
         Err(e) => return Err(e.answer()),
     };
     let meta = &info.meta;
-    let mut path = text(&r, "path").unwrap_or_default().to_string();
+    let mut path = text(r, "path").unwrap_or_default().to_string();
     if path.trim().is_empty() {
         let folder = naming::author_folder(meta, &naming::config(db)?);
-        path = super::disk::combine(text(&r, "rootFolderPath").unwrap_or_default(), &folder);
+        path = super::disk::combine(text(r, "rootFolderPath").unwrap_or_default(), &folder);
     }
     if path_taken(db, &path)? {
         if let Some(d) = meta.get("Disambiguation").and_then(Value::as_str).filter(|d| !d.trim().is_empty()) {
@@ -243,13 +268,13 @@ pub async fn add_author(State(st): State<AppState>, _: Key, bytes: Bytes) -> Ans
             }
         }
     }
-    let options = add_options(&r);
+    let options = add_options(r);
     let mut monitored = r.get("monitored").and_then(Value::as_bool).unwrap_or(false);
     if options["monitor"] == json!("none") {
         monitored = false;
     }
-    let quality = int(&r, "qualityProfileId");
-    let metadata = int(&r, "metadataProfileId");
+    let quality = int(r, "qualityProfileId");
+    let metadata = int(r, "metadataProfileId");
     check_new_author(db, &path, quality, metadata)?;
     let (meta_id, _) = refresh::upsert_metadata(db, meta)?;
     let tags = match r.get("tags") {
@@ -281,10 +306,109 @@ pub async fn add_author(State(st): State<AppState>, _: Key, bytes: Bytes) -> Ans
         ],
     )?;
     tracing::info!("Readarr: adding author {} at {path}", meta.s("Name"));
+    Ok(id)
+}
+
+/// `POST /api/v1/author`: 201 with the author as `GET` sends it; its books follow in the background.
+pub async fn add_author(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    check(db, &r)?;
+    let foreign = text(&r, "foreignAuthorId").unwrap_or_default().to_string();
+    let id = add_new_author(&st, &r, &foreign).await?;
     let author = authors::get_or_404(db, id)?;
     let mut answer = authors::full(db, &[author], true)?;
     st.readarr_jobs.spawn(refresh::new_author(db.clone(), st.readarr_disk.clone(), st.readarr_lookup.clone(), id));
     Ok((StatusCode::CREATED, Json(answer.remove(0))))
+}
+
+/// The checks of `POST /api/v1/book` (`BookController`'s `PostValidator`): the book's id, then its author's
+/// profiles, root folder (when it has no folder) and id. A request without an author stops them with Readarr's
+/// `NullReferenceException`.
+fn check_book(db: &SqliteDb, r: &Value) -> Answer<()> {
+    let mut f = Failures::default();
+    not_empty(&mut f, "ForeignBookId", r.get("foreignBookId").unwrap_or(&Value::Null));
+    let Some(author) = r.get("author").filter(|a| a.is_object()) else { return Err(null_reference()) };
+    profile_exists(db, &mut f, "Author.QualityProfileId", int(author, "qualityProfileId"))?;
+    profile_exists(db, &mut f, "Author.MetadataProfileId", int(author, "metadataProfileId"))?;
+    if blank(text(author, "path")) {
+        valid_path(&mut f, "Author.RootFolderPath", text(author, "rootFolderPath"));
+    }
+    not_empty(&mut f, "Author.ForeignAuthorId", author.get("foreignAuthorId").unwrap_or(&Value::Null));
+    f.check()
+}
+
+/// `POST /api/v1/book` (`AddBookService.AddBook`): the book from the metadata server with the edition the request
+/// monitors, kept as added by hand, its author added first when the library doesn't have it. 201 with the book
+/// as `GET` sends it; its author is refreshed in the background.
+pub async fn add_book(State(st): State<AppState>, _: Key, bytes: Bytes) -> Answer<(StatusCode, Json<Value>)> {
+    let db = &st.readarr;
+    let r = super::body(&bytes)?;
+    check_book(db, &r)?;
+    let Some(sent) = r.get("editions").and_then(Value::as_array) else {
+        return Err(Fail::exception(500, "System.ArgumentNullException", "Value cannot be null. (Parameter 'source')"));
+    };
+    let wanted = single(sent.iter().filter(|e| e["monitored"] == json!(true)).collect())?;
+    let edition_id = wanted.get("foreignEditionId").and_then(Value::as_str).map(str::to_string);
+    let foreign = text(&r, "foreignBookId").unwrap_or_default().to_string();
+    tracing::debug!("Readarr: adding book {foreign}");
+    let (author_foreign, remote, metas) = match st.readarr_lookup.get_book_info(db, &foreign).await {
+        Ok(t) => t,
+        Err(Failure::BookNotFound) => {
+            tracing::error!("Readarr: book {foreign} was not found, it may have been removed from Goodreads");
+            return Err(not_found("GoodreadsId", "A book with this ID was not found", &foreign));
+        }
+        Err(e) => return Err(e.answer()),
+    };
+    // The request's book with the metadata's fields and editions (`UseMetadataFrom`), only the asked-for edition
+    // monitored. The editions are the metadata's own, changed in place as Readarr does.
+    let mut book = lock(&remote).clone();
+    book.id = int(&r, "id");
+    book.author_metadata_id = 0;
+    book.monitored = r.get("monitored").and_then(Value::as_bool).unwrap_or(false);
+    book.any_edition_ok = r.get("anyEditionOk").and_then(Value::as_bool).unwrap_or(false);
+    book.add_options = r.get("addOptions").filter(|o| o.is_object()).map(|o| json!(o.to_string())).unwrap_or(Value::Null);
+    book.last_info_sync = Value::Null;
+    book.last_search_time = Value::Null;
+    book.added = json!(super::json::now_param());
+    for e in &book.editions {
+        lock(e).monitored = false;
+    }
+    let chosen = single(book.editions.iter().filter(|e| Some(&lock(e).foreign_edition_id) == edition_id.as_ref()).cloned().collect())?;
+    lock(&chosen).monitored = true;
+    book.author_metadata = metas.iter().find(|m| m.s("ForeignAuthorId") == author_foreign).cloned();
+    // A book the library has already keeps its own fields (`UseDbFieldsFrom`).
+    if let Some(stored) = super::books::rows(db, "b.ForeignBookId = ?", vec![json!(book.foreign_book_id)])?.first() {
+        let stored = refresh::book_from_row(stored);
+        book.id = stored.id;
+        book.author_metadata_id = stored.author_metadata_id;
+        book.monitored = stored.monitored;
+        book.any_edition_ok = stored.any_edition_ok;
+        book.last_info_sync = stored.last_info_sync;
+        book.last_search_time = stored.last_search_time;
+        book.added = stored.added;
+        book.add_options = json!(super::books::add_options(Some(&stored.add_options)).to_string());
+    }
+    let meta = book.author_metadata.clone().ok_or_else(null_reference)?;
+    let meta_foreign = meta.s("ForeignAuthorId");
+    db.execute("DELETE FROM ImportListExclusions WHERE ForeignId = ?", vec![json!(book.foreign_book_id)])?;
+    db.execute("DELETE FROM ImportListExclusions WHERE ForeignId = ?", vec![json!(meta_foreign)])?;
+    if book.add_options.is_null() {
+        return Err(null_reference());
+    }
+    let search = super::books::add_options(Some(&book.add_options))["searchForNewBook"].as_bool().unwrap_or(false);
+    book.add_options = json!(json!({ "addType": "manual", "searchForNewBook": search }).to_string());
+    lock(&chosen).manual_add = true;
+    let author_id = match authors::rows(db, "m.ForeignAuthorId = ?", vec![json!(meta_foreign)])?.first() {
+        Some(a) => a.i("Id"),
+        None => add_new_author(&st, &r["author"], &meta_foreign).await?,
+    };
+    let author = authors::get_or_404(db, author_id)?;
+    book.author_metadata_id = author.i("AuthorMetadataId");
+    let id = refresh::store_added_book(db, &mut book)?;
+    let answer = super::books::with_author(db, &super::books::get_or_404(db, id)?)?;
+    st.readarr_jobs.spawn(refresh::refresh_author(db.clone(), st.readarr_disk.clone(), st.readarr_lookup.clone(), author_id));
+    Ok((StatusCode::CREATED, Json(answer)))
 }
 
 #[cfg(test)]
@@ -297,5 +421,14 @@ mod tests {
         assert_eq!(levenshtein("kitten", "sitting"), 3);
         assert_eq!(folder_name("/books/"), "books");
         assert_eq!(folder_name("/media/Ann Lecki"), "Ann Lecki");
+    }
+
+    #[test]
+    fn single_takes_exactly_one_like_dotnet() {
+        assert_eq!(single(vec![7]).ok(), Some(7));
+        let none = single(Vec::<i32>::new()).err().unwrap();
+        assert!(none.body.unwrap()["message"].as_str().unwrap().contains("no matching element"));
+        let many = single(vec![1, 2]).err().unwrap();
+        assert!(many.body.unwrap()["message"].as_str().unwrap().contains("more than one matching element"));
     }
 }
