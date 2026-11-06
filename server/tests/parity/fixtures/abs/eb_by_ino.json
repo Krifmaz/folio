@@ -1,0 +1,12 @@
+{
+ "body": {
+  "bytes": 1311
+ },
+ "content_type": "application/epub+zip",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/items/{item2}/ebook/{ebook_ino}"
+ },
+ "status": 200
+}

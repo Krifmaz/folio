@@ -1,0 +1,10 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "PATCH",
+  "path": "/api/items/{item2}/ebook/123/status"
+ },
+ "status": 404
+}
