@@ -6,6 +6,9 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
+  browser, and the files are put in the library folder under author, series and title. Each answer is checked
+  against the original's own.
 - The Readarr API can add an author (`POST /api/v1/author`) the way Readarr does: the same checks and messages,
   the author's folder made from the naming settings (and kept apart from a folder already in use), then its books,
   editions and series filled in from the metadata server in the background. The metadata profile decides which
