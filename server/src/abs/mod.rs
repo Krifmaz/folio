@@ -16,6 +16,7 @@ pub mod bookmarks;
 pub mod cron;
 pub mod email;
 pub mod file_utils;
+pub mod hls;
 pub mod html;
 pub mod items;
 pub mod library;
@@ -268,6 +269,7 @@ pub fn router() -> Router<AppState> {
         .merge(progress::router())
         .merge(bookmarks::router())
         .merge(sessions::router())
+        .merge(hls::router())
         .merge(library::router())
         .merge(items::router())
         .merge(scanner::router())

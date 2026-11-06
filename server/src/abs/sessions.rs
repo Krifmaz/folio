@@ -40,6 +40,85 @@ pub fn router() -> Router<AppState> {
         .route("/api/me/listening-stats", get(my_stats).fallback(unknown))
         .route("/api/users/{id}/listening-sessions", get(user_sessions).fallback(unknown))
         .route("/api/users/{id}/listening-stats", get(user_stats).fallback(unknown))
+        .route("/public/session/{id}/track/{index}", get(track))
+}
+
+/// The audio type the original sets for a file's extension (`getAudioMimeTypeFromExtname`); none for others.
+fn audio_mime(path: &str) -> Option<&'static str> {
+    let ext = std::path::Path::new(path).extension()?.to_str()?.to_uppercase();
+    Some(match ext.as_str() {
+        "MP3" | "MPEG" | "MPG" => "audio/mpeg",
+        "M4B" | "M4A" | "MP4" => "audio/mp4",
+        "OGG" | "OGA" | "OPUS" => "audio/ogg",
+        "AAC" => "audio/aac",
+        "FLAC" => "audio/flac",
+        "WMA" => "audio/x-ms-wma",
+        "AIFF" | "AIF" => "audio/x-aiff",
+        "WEBM" | "WEBMA" => "audio/webm",
+        "MKA" => "audio/x-matroska",
+        "AWB" => "audio/amr-wb",
+        "CAF" => "audio/x-caf",
+        _ => return None,
+    })
+}
+
+/// `GET /public/session/:id/track/:index` (A0209, `SessionController.getTrack`): one track of an open session's
+/// book, as the phone app plays it. No sign-in: the session id is the key. A streamed session's track sends the
+/// player on to the stream's playlist.
+async fn track(State(st): State<AppState>, Path((id, index)): Path<(String, String)>, req: axum::extract::Request) -> Response {
+    let wanted = to_number(Some(&index), f64::NAN);
+    if wanted.is_nan() {
+        tracing::error!("A track number that isn't a number: \"{index}\"");
+        return send_status(StatusCode::BAD_REQUEST);
+    }
+    let Some(s) = playback::open_session(&st, &id) else {
+        tracing::error!("No open session {id} to play a track of");
+        return send_status(StatusCode::NOT_FOUND);
+    };
+    let index_of = |t: &Value| match t.get("index") {
+        None | Some(Value::Null) => 1.0,
+        Some(v) => js_number(Some(v)).unwrap_or(1.0),
+    };
+    let mut found = s.audio_tracks.iter().find(|t| index_of(t) == wanted);
+    if found.is_none() && s.media_type.as_str() == Some("podcast") && wanted == 0.0 {
+        found = s.audio_tracks.first();
+    }
+    let Some(t) = found else {
+        tracing::error!("Session {id} has no track {index}");
+        return send_status(StatusCode::NOT_FOUND);
+    };
+    let content_url = t.get("contentUrl").and_then(Value::as_str).filter(|u| !u.is_empty());
+    if s.play_method.as_i64() == Some(session::TRANSCODE) {
+        if let Some(url) = content_url {
+            let body = format!("Found. Redirecting to {url}");
+            return (
+                StatusCode::FOUND,
+                [(header::LOCATION, url.to_string()), (header::CONTENT_TYPE, "text/plain; charset=utf-8".into())],
+                body,
+            )
+                .into_response();
+        }
+    }
+    let Some(path) = t.pointer("/metadata/path").and_then(Value::as_str).filter(|p| !p.is_empty()) else {
+        tracing::error!("Track {index} of session {id} has no file");
+        return send_status(StatusCode::INTERNAL_SERVER_ERROR);
+    };
+    if tokio::fs::metadata(path).await.is_err() {
+        tracing::error!("The file of track {index} of session {id} is missing: {path}");
+        return send_status(StatusCode::NOT_FOUND);
+    }
+    use tower::ServiceExt;
+    let mut r = match tower_http::services::ServeFile::new(path).oneshot(req).await {
+        Ok(r) => r.map(axum::body::Body::new),
+        Err(e) => return failed(kit_server_core::err(500, format!("The book's audio file can't be read: {e}"))),
+    };
+    let h = r.headers_mut();
+    if let Some(m) = audio_mime(path) {
+        h.insert(header::CONTENT_TYPE, axum::http::HeaderValue::from_static(m));
+    }
+    // The bytes go as they are: compressing them would break jumping (Range).
+    h.insert(header::CONTENT_ENCODING, axum::http::HeaderValue::from_static("identity"));
+    r
 }
 
 /// Another method on one of these addresses: Express's "Cannot METHOD /path" for a signed-in user, like the

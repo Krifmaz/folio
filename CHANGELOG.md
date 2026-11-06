@@ -9,6 +9,10 @@
 ### Added
 - At start, Folio cleans up like Audiobookshelf: listening progress of books and episodes that are gone is
   removed, removed series leave the "hide from continue listening" lists, and the cache folders are made.
+- Players that can't play a book's files as they are (FLAC, for one) get them converted on the fly into a stream,
+  like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
+- The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,
+  with jumping (range requests), like Audiobookshelf.
 - The mobile app's series, one series and authors pages are checked against Folio (PARITY M0015, M0021, M0022).
 - Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
   browser, and the files are put in the library folder under author, series and title. Each answer is checked

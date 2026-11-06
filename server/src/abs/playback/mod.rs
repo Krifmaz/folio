@@ -34,7 +34,13 @@ pub fn with_open<R>(st: &AppState, f: impl FnOnce(&mut Vec<Session>) -> R) -> R 
     let mut all = OPEN.lock().unwrap_or_else(|p| p.into_inner());
     let list = all.entry(st.abs_server.config_path.clone()).or_default();
     let cutoff = models::now_ms() - STALE_MS;
-    list.retain(|s| session::js_ms(Some(&s.updated_at)).is_none_or(|u| u >= cutoff));
+    list.retain(|s| {
+        let fresh = session::js_ms(Some(&s.updated_at)).is_none_or(|u| u >= cutoff);
+        if !fresh {
+            crate::abs::hls::close(st, &s.id, None);
+        }
+        fresh
+    });
     f(list)
 }
 
@@ -54,6 +60,7 @@ fn put_back(st: &AppState, s: &Session) {
 
 /// Drops an open session (`removeSession`).
 pub fn remove_open(st: &AppState, id: &str) {
+    crate::abs::hls::close(st, id, None);
     with_open(st, |list| list.retain(|s| s.id != id));
 }
 
@@ -151,11 +158,6 @@ pub fn start(st: &AppState, u: &User, device: DeviceInfo, item: &LibraryItem, b:
         close(st, u, &mut s, None)?;
     }
     let direct = options.force_direct_play || (!options.force_transcode && can_direct_play(b, &options.supported_mime_types));
-    if !direct {
-        // Converting audio on the fly (the original's HLS stream) is the next step of the port; until then the
-        // player gets the files as they are.
-        tracing::warn!("The player can't play this book's files as they are; it gets them as they are for now");
-    }
     let book_id = b.book.id.clone().unwrap_or_default();
     let start_time = match progress_of(st, &user_id, &book_id)? {
         Some(mp) if mp.is_finished.unwrap_or(false) => 0.0,
@@ -165,8 +167,28 @@ pub fn start(st: &AppState, u: &User, device: DeviceInfo, item: &LibraryItem, b:
     let now = models::now_ms();
     let (day, weekday) = session::day_of(now);
     let item_id = item.id.clone().unwrap_or_default();
+    let id = models::new_id();
+    let (play_method, audio_tracks) = if direct {
+        (session::DIRECT_PLAY, b.tracks(&item_id).as_array().cloned().unwrap_or_default())
+    } else {
+        tracing::debug!("Starting a stream session {id} for item {item_id} on {}", device.description());
+        let sorting = crate::abs::library::util::Sorting::of(&st.abs_server.settings());
+        let track = crate::abs::hls::open(
+            st,
+            crate::abs::hls::NewStream {
+                session_id: &id,
+                user_id: &user_id,
+                title: json!(b.book.title),
+                duration: b.book.duration.unwrap_or(0.0),
+                tracks: b.tracks(&item_id).as_array().cloned().unwrap_or_default(),
+                library_item: Value::Object(crate::abs::models::library_item::expanded(item, b, &sorting)),
+                start_time,
+            },
+        )?;
+        (session::TRANSCODE, vec![track])
+    };
     let s = Session {
-        id: models::new_id(),
+        id,
         user_id: Some(user_id),
         library_id: item.library_id.clone(),
         library_item_id: Some(item_id.clone()),
@@ -182,7 +204,7 @@ pub fn start(st: &AppState, u: &User, device: DeviceInfo, item: &LibraryItem, b:
         display_author: json!(b.author_name()),
         cover_path: json!(b.book.cover_path),
         duration: json!(b.book.duration),
-        play_method: json!(session::DIRECT_PLAY),
+        play_method: json!(play_method),
         media_player: json!(options.media_player.clone().unwrap_or_else(|| "unknown".into())),
         device_info: Some(device),
         server_version: json!(crate::abs::ABS_VERSION),
@@ -194,7 +216,7 @@ pub fn start(st: &AppState, u: &User, device: DeviceInfo, item: &LibraryItem, b:
         started_at: json!(now),
         updated_at: json!(now),
         last_save: 0,
-        audio_tracks: b.tracks(&item_id).as_array().cloned().unwrap_or_default(),
+        audio_tracks,
     };
     with_open(st, |list| list.push(s.clone()));
     tell_stream_update(st, u);
