@@ -1,0 +1,29 @@
+{
+ "body": {
+  "authors": [
+   {
+    "addedAt": 1793926715438,
+    "asin": null,
+    "description": null,
+    "id": "63d5a29b-e546-4a99-9451-6a99194c1f92",
+    "imagePath": null,
+    "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+    "name": "Martha Wells",
+    "numBooks": 1,
+    "updatedAt": 1793926715438
+   }
+  ],
+  "book": [],
+  "genres": [],
+  "narrators": [],
+  "series": [],
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=wells"
+ },
+ "status": 200
+}

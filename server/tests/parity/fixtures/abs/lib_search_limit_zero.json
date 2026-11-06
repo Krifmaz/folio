@@ -1,0 +1,1067 @@
+{
+ "body": {
+  "authors": [
+   {
+    "addedAt": 1793926715411,
+    "asin": null,
+    "description": null,
+    "id": "4003bace-63cc-44c0-9c50-8fcdf42ad1bf",
+    "imagePath": null,
+    "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+    "name": "Becky Chambers",
+    "numBooks": 1,
+    "updatedAt": 1793926715411
+   },
+   {
+    "addedAt": 1793926715438,
+    "asin": null,
+    "description": null,
+    "id": "63d5a29b-e546-4a99-9451-6a99194c1f92",
+    "imagePath": null,
+    "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+    "name": "Martha Wells",
+    "numBooks": 1,
+    "updatedAt": 1793926715438
+   },
+   {
+    "addedAt": 1793926715486,
+    "asin": null,
+    "description": null,
+    "id": "d35fec8f-5777-434c-9733-c8310458051f",
+    "imagePath": null,
+    "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+    "name": "Ann Leckie",
+    "numBooks": 1,
+    "updatedAt": 1793926715486
+   }
+  ],
+  "book": [
+   {
+    "libraryItem": {
+     "addedAt": 1793926715408,
+     "birthtimeMs": 1793926705087,
+     "ctimeMs": 1793926705323,
+     "folderId": "0de8f15e-0a5f-4d26-8d35-3f4088b22605",
+     "id": "59a16b3e-734d-472e-93f8-85d111a8a1ce",
+     "ino": "9437191",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "lastScan": 1793926715406,
+     "libraryFiles": [
+      {
+       "addedAt": 1793926715360,
+       "fileType": "audio",
+       "ino": "9437192",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793926705120,
+        "ctimeMs": 1793926705186,
+        "ext": ".mp3",
+        "filename": "Part 01.mp3",
+        "mtimeMs": 1793926705186,
+        "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3",
+        "relPath": "Part 01.mp3",
+        "size": 60510
+       },
+       "updatedAt": 1793926715360
+      },
+      {
+       "addedAt": 1793926715360,
+       "fileType": "audio",
+       "ino": "9437193",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793926705222,
+        "ctimeMs": 1793926705286,
+        "ext": ".mp3",
+        "filename": "Part 02.mp3",
+        "mtimeMs": 1793926705286,
+        "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3",
+        "relPath": "Part 02.mp3",
+        "size": 60510
+       },
+       "updatedAt": 1793926715360
+      },
+      {
+       "addedAt": 1793926715360,
+       "fileType": "audio",
+       "ino": "9437194",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793926705323,
+        "ctimeMs": 1793926705388,
+        "ext": ".mp3",
+        "filename": "Part 03.mp3",
+        "mtimeMs": 1793926705388,
+        "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3",
+        "relPath": "Part 03.mp3",
+        "size": 60510
+       },
+       "updatedAt": 1793926715360
+      }
+     ],
+     "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+     "media": {
+      "audioFiles": [
+       {
+        "addedAt": 1793926715398,
+        "bitRate": 32000,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [],
+        "codec": "mp3",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 15,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "MP2/3 (MPEG audio layer 2/3)",
+        "index": 1,
+        "ino": "9437192",
+        "language": null,
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "A Psalm for the Wild-Built",
+         "tagArtist": "Becky Chambers",
+         "tagEncoder": "Lavf60.16.100",
+         "tagTitle": "Part 1",
+         "tagTrack": "1/3"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705120,
+         "ctimeMs": 1793926705186,
+         "ext": ".mp3",
+         "filename": "Part 01.mp3",
+         "mtimeMs": 1793926705186,
+         "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3",
+         "relPath": "Part 01.mp3",
+         "size": 60510
+        },
+        "mimeType": "audio/mpeg",
+        "timeBase": "1/14112000",
+        "trackNumFromFilename": 1,
+        "trackNumFromMeta": 1,
+        "updatedAt": 1793926715398
+       },
+       {
+        "addedAt": 1793926715404,
+        "bitRate": 32000,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [],
+        "codec": "mp3",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 15,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "MP2/3 (MPEG audio layer 2/3)",
+        "index": 2,
+        "ino": "9437193",
+        "language": null,
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "A Psalm for the Wild-Built",
+         "tagArtist": "Becky Chambers",
+         "tagEncoder": "Lavf60.16.100",
+         "tagTitle": "Part 2",
+         "tagTrack": "2/3"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705222,
+         "ctimeMs": 1793926705286,
+         "ext": ".mp3",
+         "filename": "Part 02.mp3",
+         "mtimeMs": 1793926705286,
+         "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3",
+         "relPath": "Part 02.mp3",
+         "size": 60510
+        },
+        "mimeType": "audio/mpeg",
+        "timeBase": "1/14112000",
+        "trackNumFromFilename": 2,
+        "trackNumFromMeta": 2,
+        "updatedAt": 1793926715404
+       },
+       {
+        "addedAt": 1793926715404,
+        "bitRate": 32000,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [],
+        "codec": "mp3",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 15,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "MP2/3 (MPEG audio layer 2/3)",
+        "index": 3,
+        "ino": "9437194",
+        "language": null,
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "A Psalm for the Wild-Built",
+         "tagArtist": "Becky Chambers",
+         "tagEncoder": "Lavf60.16.100",
+         "tagTitle": "Part 3",
+         "tagTrack": "3/3"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705323,
+         "ctimeMs": 1793926705388,
+         "ext": ".mp3",
+         "filename": "Part 03.mp3",
+         "mtimeMs": 1793926705388,
+         "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3",
+         "relPath": "Part 03.mp3",
+         "size": 60510
+        },
+        "mimeType": "audio/mpeg",
+        "timeBase": "1/14112000",
+        "trackNumFromFilename": 3,
+        "trackNumFromMeta": 3,
+        "updatedAt": 1793926715404
+       }
+      ],
+      "chapters": [
+       {
+        "end": 15,
+        "id": 0,
+        "start": 0,
+        "title": "Part 1"
+       },
+       {
+        "end": 30,
+        "id": 1,
+        "start": 15,
+        "title": "Part 2"
+       },
+       {
+        "end": 45,
+        "id": 2,
+        "start": 30,
+        "title": "Part 3"
+       }
+      ],
+      "coverPath": null,
+      "duration": 45,
+      "ebookFile": null,
+      "id": "36b6d6c1-e12a-4637-bf8c-e5bbfaa2dc4e",
+      "libraryItemId": "59a16b3e-734d-472e-93f8-85d111a8a1ce",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Becky Chambers",
+       "authorNameLF": "Chambers, Becky",
+       "authors": [
+        {
+         "id": "4003bace-63cc-44c0-9c50-8fcdf42ad1bf",
+         "name": "Becky Chambers"
+        }
+       ],
+       "description": null,
+       "descriptionPlain": null,
+       "explicit": false,
+       "genres": [],
+       "isbn": null,
+       "language": null,
+       "narratorName": "",
+       "narrators": [],
+       "publishedDate": null,
+       "publishedYear": null,
+       "publisher": null,
+       "series": [],
+       "seriesName": "",
+       "subtitle": null,
+       "title": "A Psalm for the Wild-Built",
+       "titleIgnorePrefix": "Psalm for the Wild-Built, A"
+      },
+      "numAudioFiles": 3,
+      "numChapters": 3,
+      "numTracks": 3,
+      "size": 181530,
+      "tags": [],
+      "tracks": [
+       {
+        "addedAt": 1793926715398,
+        "bitRate": 32000,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [],
+        "codec": "mp3",
+        "contentUrl": "/api/items/59a16b3e-734d-472e-93f8-85d111a8a1ce/file/9437192",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 15,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "MP2/3 (MPEG audio layer 2/3)",
+        "index": 1,
+        "ino": "9437192",
+        "language": null,
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "A Psalm for the Wild-Built",
+         "tagArtist": "Becky Chambers",
+         "tagEncoder": "Lavf60.16.100",
+         "tagTitle": "Part 1",
+         "tagTrack": "1/3"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705120,
+         "ctimeMs": 1793926705186,
+         "ext": ".mp3",
+         "filename": "Part 01.mp3",
+         "mtimeMs": 1793926705186,
+         "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 01.mp3",
+         "relPath": "Part 01.mp3",
+         "size": 60510
+        },
+        "mimeType": "audio/mpeg",
+        "startOffset": 0,
+        "timeBase": "1/14112000",
+        "title": "Part 01.mp3",
+        "trackNumFromFilename": 1,
+        "trackNumFromMeta": 1,
+        "updatedAt": 1793926715398
+       },
+       {
+        "addedAt": 1793926715404,
+        "bitRate": 32000,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [],
+        "codec": "mp3",
+        "contentUrl": "/api/items/59a16b3e-734d-472e-93f8-85d111a8a1ce/file/9437193",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 15,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "MP2/3 (MPEG audio layer 2/3)",
+        "index": 2,
+        "ino": "9437193",
+        "language": null,
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "A Psalm for the Wild-Built",
+         "tagArtist": "Becky Chambers",
+         "tagEncoder": "Lavf60.16.100",
+         "tagTitle": "Part 2",
+         "tagTrack": "2/3"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705222,
+         "ctimeMs": 1793926705286,
+         "ext": ".mp3",
+         "filename": "Part 02.mp3",
+         "mtimeMs": 1793926705286,
+         "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 02.mp3",
+         "relPath": "Part 02.mp3",
+         "size": 60510
+        },
+        "mimeType": "audio/mpeg",
+        "startOffset": 15,
+        "timeBase": "1/14112000",
+        "title": "Part 02.mp3",
+        "trackNumFromFilename": 2,
+        "trackNumFromMeta": 2,
+        "updatedAt": 1793926715404
+       },
+       {
+        "addedAt": 1793926715404,
+        "bitRate": 32000,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [],
+        "codec": "mp3",
+        "contentUrl": "/api/items/59a16b3e-734d-472e-93f8-85d111a8a1ce/file/9437194",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 15,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "MP2/3 (MPEG audio layer 2/3)",
+        "index": 3,
+        "ino": "9437194",
+        "language": null,
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "A Psalm for the Wild-Built",
+         "tagArtist": "Becky Chambers",
+         "tagEncoder": "Lavf60.16.100",
+         "tagTitle": "Part 3",
+         "tagTrack": "3/3"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705323,
+         "ctimeMs": 1793926705388,
+         "ext": ".mp3",
+         "filename": "Part 03.mp3",
+         "mtimeMs": 1793926705388,
+         "path": "/media/Becky Chambers/A Psalm for the Wild-Built/Part 03.mp3",
+         "relPath": "Part 03.mp3",
+         "size": 60510
+        },
+        "mimeType": "audio/mpeg",
+        "startOffset": 30,
+        "timeBase": "1/14112000",
+        "title": "Part 03.mp3",
+        "trackNumFromFilename": 3,
+        "trackNumFromMeta": 3,
+        "updatedAt": 1793926715404
+       }
+      ]
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793926705323,
+     "numFiles": 3,
+     "oldLibraryItemId": null,
+     "path": "/media/Becky Chambers/A Psalm for the Wild-Built",
+     "relPath": "Becky Chambers/A Psalm for the Wild-Built",
+     "scanVersion": "2.37.2",
+     "size": 181530,
+     "updatedAt": 1793926715408
+    }
+   },
+   {
+    "libraryItem": {
+     "addedAt": 1793926715434,
+     "birthtimeMs": 1793926705392,
+     "ctimeMs": 1793926705413,
+     "folderId": "0de8f15e-0a5f-4d26-8d35-3f4088b22605",
+     "id": "fbb889f6-81b1-435f-bdce-397b46f43b0d",
+     "ino": "9437197",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "lastScan": 1793926715433,
+     "libraryFiles": [
+      {
+       "addedAt": 1793926715360,
+       "fileType": "ebook",
+       "ino": "9437198",
+       "isSupplementary": false,
+       "metadata": {
+        "birthtimeMs": 1793926705413,
+        "ctimeMs": 1793926705415,
+        "ext": ".epub",
+        "filename": "All Systems Red.epub",
+        "mtimeMs": 1793926705415,
+        "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+        "relPath": "All Systems Red.epub",
+        "size": 1311
+       },
+       "updatedAt": 1793926715360
+      }
+     ],
+     "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+     "media": {
+      "audioFiles": [],
+      "chapters": [],
+      "coverPath": null,
+      "duration": 0,
+      "ebookFile": {
+       "addedAt": 1793926715360,
+       "ebookFormat": "epub",
+       "fileType": "ebook",
+       "ino": "9437198",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793926705413,
+        "ctimeMs": 1793926705415,
+        "ext": ".epub",
+        "filename": "All Systems Red.epub",
+        "mtimeMs": 1793926705415,
+        "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+        "relPath": "All Systems Red.epub",
+        "size": 1311
+       },
+       "updatedAt": 1793926715360
+      },
+      "ebookFormat": "epub",
+      "id": "4558a08c-59a5-4636-b934-490a545807bc",
+      "libraryItemId": "fbb889f6-81b1-435f-bdce-397b46f43b0d",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Martha Wells",
+       "authorNameLF": "Wells, Martha",
+       "authors": [
+        {
+         "id": "63d5a29b-e546-4a99-9451-6a99194c1f92",
+         "name": "Martha Wells"
+        }
+       ],
+       "description": null,
+       "descriptionPlain": null,
+       "explicit": false,
+       "genres": [],
+       "isbn": null,
+       "language": "en",
+       "narratorName": "",
+       "narrators": [],
+       "publishedDate": null,
+       "publishedYear": "2017",
+       "publisher": null,
+       "series": [
+        {
+         "id": "f283e4d8-d203-4726-b9f0-a4e33ccda571",
+         "name": "The Murderbot Diaries",
+         "sequence": "1"
+        }
+       ],
+       "seriesName": "The Murderbot Diaries #1",
+       "subtitle": null,
+       "title": "All Systems Red",
+       "titleIgnorePrefix": "All Systems Red"
+      },
+      "numAudioFiles": 0,
+      "numChapters": 0,
+      "numTracks": 0,
+      "size": 1311,
+      "tags": [],
+      "tracks": []
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793926705413,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+     "scanVersion": "2.37.2",
+     "size": 1311,
+     "updatedAt": 1793926715434
+    }
+   },
+   {
+    "libraryItem": {
+     "addedAt": 1793926715483,
+     "birthtimeMs": 1793926704236,
+     "ctimeMs": 1793926705086,
+     "folderId": "0de8f15e-0a5f-4d26-8d35-3f4088b22605",
+     "id": "6a2c42e0-4231-4c04-8f91-3b9300accfcf",
+     "ino": "9437188",
+     "isFile": false,
+     "isInvalid": false,
+     "isMissing": false,
+     "lastScan": 1793926715482,
+     "libraryFiles": [
+      {
+       "addedAt": 1793926715361,
+       "fileType": "audio",
+       "ino": "9437190",
+       "isSupplementary": null,
+       "metadata": {
+        "birthtimeMs": 1793926705070,
+        "ctimeMs": 1793926705083,
+        "ext": ".m4b",
+        "filename": "Ancillary Justice.m4b",
+        "mtimeMs": 1793926705083,
+        "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+        "relPath": "Ancillary Justice.m4b",
+        "size": 256184
+       },
+       "updatedAt": 1793926715361
+      }
+     ],
+     "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+     "media": {
+      "audioFiles": [
+       {
+        "addedAt": 1793926715482,
+        "bitRate": 32539,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [
+         {
+          "end": 20,
+          "id": 0,
+          "start": 0,
+          "title": "Chapter 1"
+         },
+         {
+          "end": 40,
+          "id": 1,
+          "start": 20,
+          "title": "Chapter 2"
+         },
+         {
+          "end": 60,
+          "id": 2,
+          "start": 40,
+          "title": "Chapter 3"
+         }
+        ],
+        "codec": "aac",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 60,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "QuickTime / MOV",
+        "index": 1,
+        "ino": "9437190",
+        "language": "und",
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "Ancillary Justice",
+         "tagArtist": "Ann Leckie",
+         "tagComposer": "Adjoa Andoh",
+         "tagDate": "2013",
+         "tagEncoder": "Lavf60.16.100",
+         "tagGenre": "Science Fiction",
+         "tagTitle": "Ancillary Justice"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705070,
+         "ctimeMs": 1793926705083,
+         "ext": ".m4b",
+         "filename": "Ancillary Justice.m4b",
+         "mtimeMs": 1793926705083,
+         "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+         "relPath": "Ancillary Justice.m4b",
+         "size": 256184
+        },
+        "mimeType": "audio/mp4",
+        "timeBase": "1/44100",
+        "trackNumFromFilename": null,
+        "trackNumFromMeta": null,
+        "updatedAt": 1793926715482
+       }
+      ],
+      "chapters": [
+       {
+        "end": 20,
+        "id": 0,
+        "start": 0,
+        "title": "Chapter 1"
+       },
+       {
+        "end": 40,
+        "id": 1,
+        "start": 20,
+        "title": "Chapter 2"
+       },
+       {
+        "end": 60,
+        "id": 2,
+        "start": 40,
+        "title": "Chapter 3"
+       }
+      ],
+      "coverPath": null,
+      "duration": 60,
+      "ebookFile": null,
+      "id": "810e4548-c3a2-41c5-a2b2-20c988b29972",
+      "libraryItemId": "6a2c42e0-4231-4c04-8f91-3b9300accfcf",
+      "metadata": {
+       "abridged": false,
+       "asin": null,
+       "authorName": "Ann Leckie",
+       "authorNameLF": "Leckie, Ann",
+       "authors": [
+        {
+         "id": "d35fec8f-5777-434c-9733-c8310458051f",
+         "name": "Ann Leckie"
+        }
+       ],
+       "description": null,
+       "descriptionPlain": null,
+       "explicit": false,
+       "genres": [
+        "Science Fiction"
+       ],
+       "isbn": null,
+       "language": null,
+       "narratorName": "Adjoa Andoh",
+       "narrators": [
+        "Adjoa Andoh"
+       ],
+       "publishedDate": null,
+       "publishedYear": "2013",
+       "publisher": null,
+       "series": [
+        {
+         "id": "4c9fb1c7-b7fe-42c7-8be7-61d09da33f89",
+         "name": "Imperial Radch",
+         "sequence": "1"
+        }
+       ],
+       "seriesName": "Imperial Radch #1",
+       "subtitle": null,
+       "title": "Ancillary Justice",
+       "titleIgnorePrefix": "Ancillary Justice"
+      },
+      "numAudioFiles": 1,
+      "numChapters": 3,
+      "numTracks": 1,
+      "size": 256184,
+      "tags": [],
+      "tracks": [
+       {
+        "addedAt": 1793926715482,
+        "bitRate": 32539,
+        "channelLayout": "mono",
+        "channels": 1,
+        "chapters": [
+         {
+          "end": 20,
+          "id": 0,
+          "start": 0,
+          "title": "Chapter 1"
+         },
+         {
+          "end": 40,
+          "id": 1,
+          "start": 20,
+          "title": "Chapter 2"
+         },
+         {
+          "end": 60,
+          "id": 2,
+          "start": 40,
+          "title": "Chapter 3"
+         }
+        ],
+        "codec": "aac",
+        "contentUrl": "/api/items/6a2c42e0-4231-4c04-8f91-3b9300accfcf/file/9437190",
+        "discNumFromFilename": null,
+        "discNumFromMeta": null,
+        "duration": 60,
+        "embeddedCoverArt": null,
+        "error": null,
+        "exclude": false,
+        "format": "QuickTime / MOV",
+        "index": 1,
+        "ino": "9437190",
+        "language": "und",
+        "manuallyVerified": false,
+        "metaTags": {
+         "tagAlbum": "Ancillary Justice",
+         "tagArtist": "Ann Leckie",
+         "tagComposer": "Adjoa Andoh",
+         "tagDate": "2013",
+         "tagEncoder": "Lavf60.16.100",
+         "tagGenre": "Science Fiction",
+         "tagTitle": "Ancillary Justice"
+        },
+        "metadata": {
+         "birthtimeMs": 1793926705070,
+         "ctimeMs": 1793926705083,
+         "ext": ".m4b",
+         "filename": "Ancillary Justice.m4b",
+         "mtimeMs": 1793926705083,
+         "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+         "relPath": "Ancillary Justice.m4b",
+         "size": 256184
+        },
+        "mimeType": "audio/mp4",
+        "startOffset": 0,
+        "timeBase": "1/44100",
+        "title": "Ancillary Justice.m4b",
+        "trackNumFromFilename": null,
+        "trackNumFromMeta": null,
+        "updatedAt": 1793926715482
+       }
+      ]
+     },
+     "mediaType": "book",
+     "mtimeMs": 1793926705086,
+     "numFiles": 1,
+     "oldLibraryItemId": null,
+     "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+     "scanVersion": "2.37.2",
+     "size": 256184,
+     "updatedAt": 1793926715483
+    }
+   }
+  ],
+  "genres": [
+   {
+    "name": "Science Fiction",
+    "numItems": 1
+   }
+  ],
+  "narrators": [],
+  "series": [
+   {
+    "books": [
+     {
+      "addedAt": 1793926715434,
+      "birthtimeMs": 1793926705392,
+      "ctimeMs": 1793926705413,
+      "folderId": "0de8f15e-0a5f-4d26-8d35-3f4088b22605",
+      "id": "fbb889f6-81b1-435f-bdce-397b46f43b0d",
+      "ino": "9437197",
+      "isFile": false,
+      "isInvalid": false,
+      "isMissing": false,
+      "lastScan": 1793926715433,
+      "libraryFiles": [
+       {
+        "addedAt": 1793926715360,
+        "fileType": "ebook",
+        "ino": "9437198",
+        "isSupplementary": false,
+        "metadata": {
+         "birthtimeMs": 1793926705413,
+         "ctimeMs": 1793926705415,
+         "ext": ".epub",
+         "filename": "All Systems Red.epub",
+         "mtimeMs": 1793926705415,
+         "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+         "relPath": "All Systems Red.epub",
+         "size": 1311
+        },
+        "updatedAt": 1793926715360
+       }
+      ],
+      "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+      "media": {
+       "audioFiles": [],
+       "chapters": [],
+       "coverPath": null,
+       "ebookFile": {
+        "addedAt": 1793926715360,
+        "ebookFormat": "epub",
+        "fileType": "ebook",
+        "ino": "9437198",
+        "isSupplementary": null,
+        "metadata": {
+         "birthtimeMs": 1793926705413,
+         "ctimeMs": 1793926705415,
+         "ext": ".epub",
+         "filename": "All Systems Red.epub",
+         "mtimeMs": 1793926705415,
+         "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub",
+         "relPath": "All Systems Red.epub",
+         "size": 1311
+        },
+        "updatedAt": 1793926715360
+       },
+       "id": "4558a08c-59a5-4636-b934-490a545807bc",
+       "libraryItemId": "fbb889f6-81b1-435f-bdce-397b46f43b0d",
+       "metadata": {
+        "abridged": false,
+        "asin": null,
+        "authors": [],
+        "description": null,
+        "explicit": false,
+        "genres": [],
+        "isbn": null,
+        "language": "en",
+        "narrators": [],
+        "publishedDate": null,
+        "publishedYear": "2017",
+        "publisher": null,
+        "series": [],
+        "subtitle": null,
+        "title": "All Systems Red"
+       },
+       "tags": []
+      },
+      "mediaType": "book",
+      "mtimeMs": 1793926705413,
+      "oldLibraryItemId": null,
+      "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+      "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+      "scanVersion": "2.37.2",
+      "updatedAt": 1793926715434
+     }
+    ],
+    "series": {
+     "addedAt": 1793926715438,
+     "description": null,
+     "id": "f283e4d8-d203-4726-b9f0-a4e33ccda571",
+     "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+     "name": "The Murderbot Diaries",
+     "nameIgnorePrefix": "Murderbot Diaries, The",
+     "updatedAt": 1793926715438
+    }
+   },
+   {
+    "books": [
+     {
+      "addedAt": 1793926715483,
+      "birthtimeMs": 1793926704236,
+      "ctimeMs": 1793926705086,
+      "folderId": "0de8f15e-0a5f-4d26-8d35-3f4088b22605",
+      "id": "6a2c42e0-4231-4c04-8f91-3b9300accfcf",
+      "ino": "9437188",
+      "isFile": false,
+      "isInvalid": false,
+      "isMissing": false,
+      "lastScan": 1793926715482,
+      "libraryFiles": [
+       {
+        "addedAt": 1793926715361,
+        "fileType": "audio",
+        "ino": "9437190",
+        "isSupplementary": null,
+        "metadata": {
+         "birthtimeMs": 1793926705070,
+         "ctimeMs": 1793926705083,
+         "ext": ".m4b",
+         "filename": "Ancillary Justice.m4b",
+         "mtimeMs": 1793926705083,
+         "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+         "relPath": "Ancillary Justice.m4b",
+         "size": 256184
+        },
+        "updatedAt": 1793926715361
+       }
+      ],
+      "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+      "media": {
+       "audioFiles": [
+        {
+         "addedAt": 1793926715482,
+         "bitRate": 32539,
+         "channelLayout": "mono",
+         "channels": 1,
+         "chapters": [
+          {
+           "end": 20,
+           "id": 0,
+           "start": 0,
+           "title": "Chapter 1"
+          },
+          {
+           "end": 40,
+           "id": 1,
+           "start": 20,
+           "title": "Chapter 2"
+          },
+          {
+           "end": 60,
+           "id": 2,
+           "start": 40,
+           "title": "Chapter 3"
+          }
+         ],
+         "codec": "aac",
+         "discNumFromFilename": null,
+         "discNumFromMeta": null,
+         "duration": 60,
+         "embeddedCoverArt": null,
+         "error": null,
+         "exclude": false,
+         "format": "QuickTime / MOV",
+         "index": 1,
+         "ino": "9437190",
+         "language": "und",
+         "manuallyVerified": false,
+         "metaTags": {
+          "tagAlbum": "Ancillary Justice",
+          "tagArtist": "Ann Leckie",
+          "tagComposer": "Adjoa Andoh",
+          "tagDate": "2013",
+          "tagEncoder": "Lavf60.16.100",
+          "tagGenre": "Science Fiction",
+          "tagTitle": "Ancillary Justice"
+         },
+         "metadata": {
+          "birthtimeMs": 1793926705070,
+          "ctimeMs": 1793926705083,
+          "ext": ".m4b",
+          "filename": "Ancillary Justice.m4b",
+          "mtimeMs": 1793926705083,
+          "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice/Ancillary Justice.m4b",
+          "relPath": "Ancillary Justice.m4b",
+          "size": 256184
+         },
+         "mimeType": "audio/mp4",
+         "timeBase": "1/44100",
+         "trackNumFromFilename": null,
+         "trackNumFromMeta": null,
+         "updatedAt": 1793926715482
+        }
+       ],
+       "chapters": [
+        {
+         "end": 20,
+         "id": 0,
+         "start": 0,
+         "title": "Chapter 1"
+        },
+        {
+         "end": 40,
+         "id": 1,
+         "start": 20,
+         "title": "Chapter 2"
+        },
+        {
+         "end": 60,
+         "id": 2,
+         "start": 40,
+         "title": "Chapter 3"
+        }
+       ],
+       "coverPath": null,
+       "ebookFile": null,
+       "id": "810e4548-c3a2-41c5-a2b2-20c988b29972",
+       "libraryItemId": "6a2c42e0-4231-4c04-8f91-3b9300accfcf",
+       "metadata": {
+        "abridged": false,
+        "asin": null,
+        "authors": [],
+        "description": null,
+        "explicit": false,
+        "genres": [
+         "Science Fiction"
+        ],
+        "isbn": null,
+        "language": null,
+        "narrators": [
+         "Adjoa Andoh"
+        ],
+        "publishedDate": null,
+        "publishedYear": "2013",
+        "publisher": null,
+        "series": [],
+        "subtitle": null,
+        "title": "Ancillary Justice"
+       },
+       "tags": []
+      },
+      "mediaType": "book",
+      "mtimeMs": 1793926705086,
+      "oldLibraryItemId": null,
+      "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+      "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+      "scanVersion": "2.37.2",
+      "updatedAt": 1793926715483
+     }
+    ],
+    "series": {
+     "addedAt": 1793926715486,
+     "description": null,
+     "id": "4c9fb1c7-b7fe-42c7-8be7-61d09da33f89",
+     "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
+     "name": "Imperial Radch",
+     "nameIgnorePrefix": "Imperial Radch",
+     "updatedAt": 1793926715486
+    }
+   }
+  ],
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=e&limit=0"
+ },
+ "status": 200
+}

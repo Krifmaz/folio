@@ -1,0 +1,17 @@
+{
+ "body": {
+  "authors": [],
+  "book": [],
+  "genres": [],
+  "narrators": [],
+  "series": [],
+  "tags": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/search?q=zzzz"
+ },
+ "status": 200
+}

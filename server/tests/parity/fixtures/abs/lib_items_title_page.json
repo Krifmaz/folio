@@ -9,21 +9,21 @@
   "page": 1,
   "results": [
    {
-    "addedAt": 1793918572808,
-    "birthtimeMs": 1793918564486,
-    "ctimeMs": 1793918564504,
-    "folderId": "f627aa94-8073-48cc-a8d7-8d249b4694b1",
-    "id": "9d8b5a7c-34ec-4cc7-a140-8eb67f2973c8",
-    "ino": "9437201",
+    "addedAt": 1793926715434,
+    "birthtimeMs": 1793926705392,
+    "ctimeMs": 1793926705413,
+    "folderId": "0de8f15e-0a5f-4d26-8d35-3f4088b22605",
+    "id": "fbb889f6-81b1-435f-bdce-397b46f43b0d",
+    "ino": "9437197",
     "isFile": false,
     "isInvalid": false,
     "isMissing": false,
-    "libraryId": "2cae27a4-5a4a-4a1d-af1f-142ea391150c",
+    "libraryId": "5f991281-a141-44b7-a86a-8c3bbc0c812e",
     "media": {
      "coverPath": null,
      "duration": 0,
      "ebookFormat": "epub",
-     "id": "1df861c2-f2d5-4938-8684-f0e8ef10371e",
+     "id": "4558a08c-59a5-4636-b934-490a545807bc",
      "metadata": {
       "abridged": false,
       "asin": null,
@@ -50,13 +50,13 @@
      "tags": []
     },
     "mediaType": "book",
-    "mtimeMs": 1793918564504,
+    "mtimeMs": 1793926705413,
     "numFiles": 1,
     "oldLibraryItemId": null,
     "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
     "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
     "size": 1311,
-    "updatedAt": 1793918572808
+    "updatedAt": 1793926715434
    }
   ],
   "sortBy": "media.metadata.title",

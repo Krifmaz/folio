@@ -1,0 +1,10 @@
+{
+ "body": "Library not found",
+ "content_type": "text/html",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/00000000-0000-4000-8000-000000000000/search?q=a"
+ },
+ "status": 404
+}
