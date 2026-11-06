@@ -1,0 +1,138 @@
+{
+ "body": {
+  "added": "2026-11-06T00:45:39Z",
+  "anyEditionOk": true,
+  "author": {
+   "addOptions": {
+    "booksToMonitor": [],
+    "monitor": "existing",
+    "monitored": false,
+    "searchForMissingBooks": false
+   },
+   "added": "2026-11-06T00:45:39Z",
+   "authorMetadataId": 1,
+   "authorName": "Terry Pratchett",
+   "authorNameLastFirst": "Pratchett, Terry",
+   "cleanName": "terrypratchett",
+   "ended": false,
+   "foreignAuthorId": "1654",
+   "genres": [],
+   "id": 5,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "url": "https://images.example/1654.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/1654"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "none",
+   "monitored": true,
+   "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+   "path": "/books/Terry Pratchett",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 6195000,
+    "value": 4.13,
+    "votes": 1500000
+   },
+   "sortName": "terry pratchett",
+   "sortNameLastFirst": "pratchett, terry",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "continuing",
+   "tags": [
+    1
+   ],
+   "titleSlug": "1654"
+  },
+  "authorId": 5,
+  "authorTitle": "pratchett, terry Small Gods",
+  "foreignBookId": "1215958",
+  "foreignEditionId": "1215958001",
+  "genres": [
+   "fantasy",
+   "religion"
+  ],
+  "grabbed": false,
+  "id": 10,
+  "images": [],
+  "links": [
+   {
+    "name": "Goodreads Editions",
+    "url": "https://www.goodreads.com/work/editions/1215958"
+   },
+   {
+    "name": "Goodreads Book",
+    "url": "https://www.goodreads.com/book/show/1215958001"
+   }
+  ],
+  "monitored": true,
+  "pageCount": 400,
+  "ratings": {
+   "popularity": 2100,
+   "value": 4.2,
+   "votes": 500
+  },
+  "releaseDate": "1992-05-01T00:00:00Z",
+  "seriesTitle": "",
+  "statistics": {
+   "bookCount": 1,
+   "bookFileCount": 0,
+   "percentOfBooks": 0,
+   "sizeOnDisk": 0,
+   "totalBookCount": 1
+  },
+  "title": "Small Gods",
+  "titleSlug": "1215958"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "addOptions": {
+    "searchForNewBook": true
+   },
+   "anyEditionOk": true,
+   "author": {
+    "addOptions": {
+     "monitor": "existing",
+     "searchForMissingBooks": false
+    },
+    "authorName": "Terry Pratchett",
+    "foreignAuthorId": "1654",
+    "metadataProfileId": 1,
+    "monitorNewItems": "none",
+    "monitored": true,
+    "qualityProfileId": 1,
+    "rootFolderPath": "/books/",
+    "tags": [
+     1
+    ]
+   },
+   "editions": [
+    {
+     "foreignEditionId": "1215958001",
+     "monitored": true
+    }
+   ],
+   "foreignBookId": "1215958",
+   "monitored": true,
+   "title": "Small Gods"
+  },
+  "method": "POST",
+  "path": "/api/v1/book"
+ },
+ "status": 201
+}

@@ -1,0 +1,125 @@
+{
+ "body": {
+  "added": "2026-11-06T00:45:55Z",
+  "anyEditionOk": false,
+  "author": {
+   "addOptions": {
+    "booksToMonitor": [],
+    "monitor": "existing",
+    "monitored": false,
+    "searchForMissingBooks": false
+   },
+   "added": "2026-11-06T00:45:39Z",
+   "authorMetadataId": 1,
+   "authorName": "Terry Pratchett",
+   "authorNameLastFirst": "Pratchett, Terry",
+   "cleanName": "terrypratchett",
+   "ended": false,
+   "foreignAuthorId": "1654",
+   "genres": [],
+   "id": 5,
+   "images": [
+    {
+     "coverType": "poster",
+     "extension": ".jpg",
+     "url": "https://images.example/1654.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads",
+     "url": "https://www.goodreads.com/author/show/1654"
+    }
+   ],
+   "metadataProfileId": 1,
+   "monitorNewItems": "none",
+   "monitored": true,
+   "overview": "Sir Terry Pratchett wrote the Discworld novels.",
+   "path": "/books/Terry Pratchett",
+   "qualityProfileId": 1,
+   "ratings": {
+    "popularity": 6195000,
+    "value": 4.13,
+    "votes": 1500000
+   },
+   "sortName": "terry pratchett",
+   "sortNameLastFirst": "pratchett, terry",
+   "statistics": {
+    "availableBookCount": 0,
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 0
+   },
+   "status": "continuing",
+   "tags": [
+    1
+   ],
+   "titleSlug": "1654"
+  },
+  "authorId": 5,
+  "authorTitle": "pratchett, terry Mort (Discworld, #4)",
+  "foreignBookId": "7000",
+  "foreignEditionId": "7000002",
+  "genres": [
+   "fantasy"
+  ],
+  "grabbed": false,
+  "id": 12,
+  "images": [],
+  "links": [
+   {
+    "name": "Goodreads Editions",
+    "url": "https://www.goodreads.com/work/editions/7000"
+   },
+   {
+    "name": "Goodreads Book",
+    "url": "https://www.goodreads.com/book/show/7000002"
+   }
+  ],
+  "monitored": true,
+  "pageCount": 256,
+  "ratings": {
+   "popularity": 400,
+   "value": 4,
+   "votes": 100
+  },
+  "releaseDate": "1987-11-12T00:00:00Z",
+  "seriesTitle": "",
+  "statistics": {
+   "bookCount": 1,
+   "bookFileCount": 0,
+   "percentOfBooks": 0,
+   "sizeOnDisk": 0,
+   "totalBookCount": 1
+  },
+  "title": "Mort (Discworld, #4)",
+  "titleSlug": "7000"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "addOptions": {
+    "searchForNewBook": false
+   },
+   "author": {
+    "foreignAuthorId": "1654",
+    "metadataProfileId": 1,
+    "qualityProfileId": 1,
+    "rootFolderPath": "/books/"
+   },
+   "editions": [
+    {
+     "foreignEditionId": "7000002",
+     "monitored": true
+    }
+   ],
+   "foreignBookId": "7000",
+   "monitored": true
+  },
+  "method": "POST",
+  "path": "/api/v1/book"
+ },
+ "status": 201
+}

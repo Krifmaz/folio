@@ -228,8 +228,10 @@ pub struct SeriesInfo {
     pub title: Option<String>,
     /// what it is about
     pub description: Option<String>,
-    /// its books among the author's; nothing (Readarr's unset list) when the metadata lists no books for it
-    pub items: Option<Vec<SeriesItem>>,
+    /// its books among the author's; nothing (Readarr's unset list) when the metadata lists no books for it.
+    /// Shared like the books: refreshing the author cuts it down to the books the library has, in the kept
+    /// author too, as Readarr does.
+    pub items: Shared<Option<Vec<SeriesItem>>>,
 }
 
 /// An author as the metadata server gives it (`Author` from `MapAuthor`): its metadata, books and series.
@@ -799,7 +801,7 @@ fn map_series_links(series: &[SeriesRes], books: &[Shared<Book>]) -> Vec<SeriesI
             foreign_series_id: s.foreign_id.to_string(),
             title: s.title.clone(),
             description: s.description.clone(),
-            items: None,
+            items: shared(None),
         };
         if s.link_items.as_ref().is_some_and(|l| !l.is_empty()) {
             let mut items = Vec::new();
@@ -819,7 +821,7 @@ fn map_series_links(series: &[SeriesRes], books: &[Shared<Book>]) -> Vec<SeriesI
                     primary: l.primary,
                 });
             }
-            info.items = Some(items);
+            info.items = shared(Some(items));
         }
         out.push(info);
     }
@@ -1028,6 +1030,16 @@ impl BookInfo {
         } else {
             Ok(Arc::new(self.poll_author_uncached(db, id).await?))
         }
+    }
+
+    /// A book from the metadata server (`GetBookInfo`): its author's id, the book and its authors' metadata.
+    /// A failure other than "not found" is logged, as Readarr logs it.
+    pub async fn get_book_info(&self, db: &SqliteDb, id: &str) -> Result<(String, Shared<Book>, Vec<Row>), Failure> {
+        let found = self.poll_book(db, id).await;
+        if let Err(e @ Failure::BookInfo(_)) = &found {
+            tracing::warn!("Readarr: unexpected error getting book info {id}: {}", e.describe());
+        }
+        found
     }
 
     /// An author from the metadata server, made again only when it isn't kept (`PollAuthor`).
