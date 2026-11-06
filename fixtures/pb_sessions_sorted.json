@@ -1,0 +1,231 @@
+{
+ "body": {
+  "itemsPerPage": 10,
+  "numPages": 1,
+  "page": 0,
+  "sessions": [
+   {
+    "audioTracks": [],
+    "bookId": "21945778-0bee-4787-9529-53ac6c8b0218",
+    "chapters": [],
+    "coverAspectRatio": null,
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-06",
+    "dayOfWeek": "Friday",
+    "deviceInfo": {
+     "browserName": "Firefox",
+     "browserVersion": "132.0",
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "Linux x86_64 Firefox",
+     "id": "8437fafe-75e3-4d53-9daf-aa30c5b5ba2b",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "osName": "Linux",
+     "osVersion": "x86_64",
+     "sdkVersion": "",
+     "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "63386c44-fa33-4a41-8866-a9868022b94c",
+    "lastSave": 0,
+    "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+    "libraryItemId": "0daa4d99-61dd-421b-a80f-cd956250a853",
+    "mediaItemShareId": null,
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "8011f568-ca93-4b36-830e-a8b5a61fe8f3",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "shareSessionId": null,
+    "startTime": 30,
+    "startedAt": 1793929255769,
+    "stream": null,
+    "timeListening": 15,
+    "updatedAt": 1793929255796,
+    "user": {
+     "id": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1",
+     "username": "root"
+    },
+    "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+   },
+   {
+    "audioTracks": [],
+    "bookId": "21945778-0bee-4787-9529-53ac6c8b0218",
+    "chapters": [],
+    "coverAspectRatio": null,
+    "coverPath": null,
+    "currentTime": 7,
+    "date": "2023-11-14",
+    "dayOfWeek": "Tuesday",
+    "deviceInfo": {
+     "clientName": "Abs Android",
+     "clientVersion": "0.9.81-beta",
+     "deviceId": "parity-2",
+     "deviceName": "Google Pixel 8",
+     "id": "20133b35-c26b-4de0-84b2-0d841f34acb4",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "Google",
+     "model": "Pixel 8",
+     "sdkVersion": "34",
+     "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "6c1f8d0e-3a52-4b7e-9d1a-2f4e5b6c7d80",
+    "lastSave": 0,
+    "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+    "libraryItemId": "0daa4d99-61dd-421b-a80f-cd956250a853",
+    "mediaItemShareId": null,
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "8011f568-ca93-4b36-830e-a8b5a61fe8f3",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "exo-player",
+    "mediaType": "book",
+    "playMethod": 3,
+    "serverVersion": "2.37.2",
+    "shareSessionId": null,
+    "startTime": 0,
+    "startedAt": 1699999940000,
+    "stream": null,
+    "timeListening": 8,
+    "updatedAt": 1700000100000,
+    "user": {
+     "id": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1",
+     "username": "root"
+    },
+    "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+   },
+   {
+    "audioTracks": [],
+    "bookId": "121c9120-3621-401f-9831-dfec53ef0e8d",
+    "chapters": [],
+    "coverAspectRatio": null,
+    "coverPath": null,
+    "currentTime": 3,
+    "date": "2023-11-14",
+    "dayOfWeek": "Tuesday",
+    "deviceInfo": {
+     "clientName": "Abs Android",
+     "clientVersion": "0.9.81-beta",
+     "deviceId": "parity-2",
+     "deviceName": "Google Pixel 8",
+     "id": "20133b35-c26b-4de0-84b2-0d841f34acb4",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "Google",
+     "model": "Pixel 8",
+     "sdkVersion": "34",
+     "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+    },
+    "displayAuthor": "Martha Wells",
+    "displayTitle": "All Systems Red",
+    "duration": 0,
+    "episodeId": null,
+    "id": "7d2a9e1f-4b63-4c8f-8e2b-3a5f6c7d8e91",
+    "lastSave": 0,
+    "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+    "libraryItemId": "544b12a3-2653-443f-b816-7a6df4247474",
+    "mediaItemShareId": null,
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "ddab099b-d7fe-4f5c-9dab-dd9d77c7a448",
+       "name": "Martha Wells"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": "en",
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": "2017",
+     "publisher": null,
+     "series": [
+      {
+       "id": "1e7a7648-adc0-437b-be0e-2e2357a9d0a0",
+       "name": "The Murderbot Diaries",
+       "sequence": "1"
+      }
+     ],
+     "subtitle": null,
+     "title": "All Systems Red"
+    },
+    "mediaPlayer": "exo-player",
+    "mediaType": "book",
+    "playMethod": 3,
+    "serverVersion": "2.37.2",
+    "shareSessionId": null,
+    "startTime": 0,
+    "startedAt": 1699999990000,
+    "stream": null,
+    "timeListening": 4.5,
+    "updatedAt": 1700000050000,
+    "user": {
+     "id": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1",
+     "username": "root"
+    },
+    "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+   }
+  ],
+  "total": 3
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/sessions?sort=timeListening&desc=1"
+ },
+ "status": 200
+}

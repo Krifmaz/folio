@@ -1,0 +1,26 @@
+{
+ "body": {
+  "addedAt": 1793929251390,
+  "description": null,
+  "id": "1e7a7648-adc0-437b-be0e-2e2357a9d0a0",
+  "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+  "name": "The Murderbot Diaries",
+  "nameIgnorePrefix": "Murderbot Diaries, The",
+  "progress": {
+   "isFinished": false,
+   "libraryItemIds": [
+    "544b12a3-2653-443f-b816-7a6df4247474"
+   ],
+   "libraryItemIdsFinished": []
+  },
+  "rssFeed": null,
+  "updatedAt": 1793929251390
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/series/{lseries}?include=progress,rssfeed"
+ },
+ "status": 200
+}

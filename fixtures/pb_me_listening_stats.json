@@ -1,0 +1,107 @@
+{
+ "body": {
+  "dayOfWeek": {
+   "Friday": 15
+  },
+  "days": {
+   "2026-11-06": 15
+  },
+  "items": {
+   "0daa4d99-61dd-421b-a80f-cd956250a853": {
+    "id": "0daa4d99-61dd-421b-a80f-cd956250a853",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "8011f568-ca93-4b36-830e-a8b5a61fe8f3",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "timeListening": 15
+   }
+  },
+  "recentSessions": [
+   {
+    "bookId": "21945778-0bee-4787-9529-53ac6c8b0218",
+    "chapters": [],
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-06",
+    "dayOfWeek": "Friday",
+    "deviceInfo": {
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "",
+     "id": "8437fafe-75e3-4d53-9daf-aa30c5b5ba2b",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "sdkVersion": "",
+     "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "63386c44-fa33-4a41-8866-a9868022b94c",
+    "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+    "libraryItemId": "0daa4d99-61dd-421b-a80f-cd956250a853",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "8011f568-ca93-4b36-830e-a8b5a61fe8f3",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "startTime": 30,
+    "startedAt": 1793929255769,
+    "timeListening": 15,
+    "updatedAt": 1793929255796,
+    "userId": "51e37a57-7fda-47ba-a3a1-04fb3db7a0f1"
+   }
+  ],
+  "today": 15,
+  "totalTime": 15
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/listening-stats"
+ },
+ "status": 200
+}

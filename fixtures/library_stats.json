@@ -1,0 +1,74 @@
+{
+ "body": {
+  "authorsWithCount": [
+   {
+    "count": 1,
+    "id": "642c27c4-b502-41bf-b729-4722648b2c5c",
+    "name": "Ann Leckie"
+   },
+   {
+    "count": 1,
+    "id": "8011f568-ca93-4b36-830e-a8b5a61fe8f3",
+    "name": "Becky Chambers"
+   },
+   {
+    "count": 1,
+    "id": "ddab099b-d7fe-4f5c-9dab-dd9d77c7a448",
+    "name": "Martha Wells"
+   }
+  ],
+  "genresWithCount": [
+   {
+    "count": 1,
+    "genre": "Science Fiction"
+   }
+  ],
+  "largestItems": [
+   {
+    "id": "1cf9fa13-a54a-408b-a831-2697faf58600",
+    "size": 256184,
+    "title": "Ancillary Justice"
+   },
+   {
+    "id": "0daa4d99-61dd-421b-a80f-cd956250a853",
+    "size": 181530,
+    "title": "A Psalm for the Wild-Built"
+   },
+   {
+    "id": "544b12a3-2653-443f-b816-7a6df4247474",
+    "size": 1311,
+    "title": "All Systems Red"
+   }
+  ],
+  "longestItems": [
+   {
+    "duration": 60,
+    "id": "1cf9fa13-a54a-408b-a831-2697faf58600",
+    "title": "Ancillary Justice"
+   },
+   {
+    "duration": 45,
+    "id": "0daa4d99-61dd-421b-a80f-cd956250a853",
+    "title": "A Psalm for the Wild-Built"
+   },
+   {
+    "duration": 0,
+    "id": "544b12a3-2653-443f-b816-7a6df4247474",
+    "title": "All Systems Red"
+   }
+  ],
+  "numAudioTracks": 4,
+  "totalAuthors": 3,
+  "totalDuration": 105,
+  "totalGenres": 1,
+  "totalItems": 3,
+  "totalSize": 439025
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/stats"
+ },
+ "status": 200
+}

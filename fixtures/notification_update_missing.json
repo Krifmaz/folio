@@ -1,0 +1,13 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "enabled": true,
+   "id": "00000000-0000-4000-8000-000000000000"
+  },
+  "method": "PATCH",
+  "path": "/api/notifications/00000000-0000-4000-8000-000000000000"
+ },
+ "status": 404
+}

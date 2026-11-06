@@ -1,0 +1,21 @@
+{
+ "body": {
+  "app": "audiobookshelf",
+  "authFormData": {
+   "authLoginCustomMessage": "<b>Hi</b>"
+  },
+  "authMethods": [
+   "local"
+  ],
+  "isInit": true,
+  "language": "en-us",
+  "serverVersion": "2.37.2"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/status"
+ },
+ "status": 200
+}

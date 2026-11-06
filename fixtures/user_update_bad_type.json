@@ -1,0 +1,12 @@
+{
+ "body": "Invalid account type",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "type": "root"
+  },
+  "method": "PATCH",
+  "path": "/api/users/{user_id}"
+ },
+ "status": 400
+}

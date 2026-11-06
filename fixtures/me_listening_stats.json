@@ -1,0 +1,17 @@
+{
+ "body": {
+  "dayOfWeek": {},
+  "days": {},
+  "items": {},
+  "recentSessions": [],
+  "today": 0,
+  "totalTime": 0
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/me/listening-stats"
+ },
+ "status": 200
+}

@@ -1,0 +1,10 @@
+{
+ "body": "Invalid payload. ereaderDevices array required",
+ "content_type": "text/html",
+ "request": {
+  "body": {},
+  "method": "POST",
+  "path": "/api/emails/ereader-devices"
+ },
+ "status": 400
+}

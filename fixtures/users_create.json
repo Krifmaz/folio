@@ -1,0 +1,55 @@
+{
+ "body": {
+  "user": {
+   "bookmarks": [],
+   "createdAt": 1793929256353,
+   "email": "reader@example.org",
+   "hasOpenIDLink": false,
+   "id": "0282594d-f7c1-41a3-bdc8-000c8bb1d907",
+   "isActive": true,
+   "isLocked": false,
+   "itemTagsSelected": [],
+   "lastSeen": null,
+   "librariesAccessible": [
+    "726c3320-47ec-45f0-9e31-a645dcddadb5"
+   ],
+   "mediaProgress": [],
+   "permissions": {
+    "accessAllLibraries": true,
+    "accessAllTags": true,
+    "accessExplicitContent": false,
+    "createEreader": false,
+    "delete": false,
+    "download": false,
+    "selectedTagsNotAccessible": false,
+    "update": false,
+    "upload": false
+   },
+   "seriesHideFromContinueListening": [],
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMjgyNTk0ZC1mN2MxLTQxYTMtYmRjOC0wMDBjOGJiMWQ5MDciLCJ1c2VybmFtZSI6InJlYWRlciIsImlhdCI6MTc5MzkyOTI1Nn0.Pmxq1XX3iBMbb4EDcg8fwkDqYxZnTxBuvUoU1BkZFvE",
+   "type": "user",
+   "username": "reader"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "email": "reader@example.org",
+   "isActive": true,
+   "librariesAccessible": [
+    "{library}"
+   ],
+   "password": "pw",
+   "permissions": {
+    "bogus": true,
+    "download": false,
+    "upload": "yes"
+   },
+   "type": "user",
+   "username": "reader"
+  },
+  "method": "POST",
+  "path": "/api/users"
+ },
+ "status": 200
+}

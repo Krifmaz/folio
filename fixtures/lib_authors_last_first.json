@@ -1,0 +1,55 @@
+{
+ "body": {
+  "limit": 10,
+  "minified": false,
+  "page": 0,
+  "results": [
+   {
+    "addedAt": 1793929251391,
+    "asin": null,
+    "description": null,
+    "id": "ddab099b-d7fe-4f5c-9dab-dd9d77c7a448",
+    "imagePath": null,
+    "lastFirst": "Wells, Martha",
+    "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+    "name": "Martha Wells",
+    "numBooks": 1,
+    "updatedAt": 1793929251391
+   },
+   {
+    "addedAt": 1793929251444,
+    "asin": null,
+    "description": null,
+    "id": "642c27c4-b502-41bf-b729-4722648b2c5c",
+    "imagePath": null,
+    "lastFirst": "Leckie, Ann",
+    "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+    "name": "Ann Leckie",
+    "numBooks": 1,
+    "updatedAt": 1793929251444
+   },
+   {
+    "addedAt": 1793929251360,
+    "asin": null,
+    "description": null,
+    "id": "8011f568-ca93-4b36-830e-a8b5a61fe8f3",
+    "imagePath": null,
+    "lastFirst": "Chambers, Becky",
+    "libraryId": "726c3320-47ec-45f0-9e31-a645dcddadb5",
+    "name": "Becky Chambers",
+    "numBooks": 1,
+    "updatedAt": 1793929251360
+   }
+  ],
+  "sortBy": "lastFirst",
+  "sortDesc": true,
+  "total": 3
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/authors?limit=10&page=0&sort=lastFirst&desc=1"
+ },
+ "status": 200
+}

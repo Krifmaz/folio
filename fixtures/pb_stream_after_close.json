@@ -1,0 +1,10 @@
+{
+ "body": "Not Found",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/hls/{stream}/output.m3u8"
+ },
+ "status": 404
+}

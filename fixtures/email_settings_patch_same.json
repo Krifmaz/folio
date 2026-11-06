@@ -1,0 +1,26 @@
+{
+ "body": {
+  "settings": {
+   "ereaderDevices": [],
+   "fromAddress": "f@example.org",
+   "host": "smtp.example",
+   "id": "email-settings",
+   "pass": "p",
+   "port": 587,
+   "rejectUnauthorized": false,
+   "secure": false,
+   "testAddress": null,
+   "user": "u"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "host": "smtp.example",
+   "port": 587
+  },
+  "method": "PATCH",
+  "path": "/api/emails/settings"
+ },
+ "status": 200
+}

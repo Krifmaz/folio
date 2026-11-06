@@ -1,0 +1,10 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/backups/{backup_id}/apply"
+ },
+ "status": 200
+}

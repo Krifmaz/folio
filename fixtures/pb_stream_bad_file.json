@@ -1,0 +1,10 @@
+{
+ "body": "Bad Request",
+ "content_type": "text/plain",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/hls/{stream}/notes.txt"
+ },
+ "status": 400
+}
