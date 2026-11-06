@@ -6,6 +6,8 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The web app's pages are checked in a browser against Folio holding the original's recorded library: 25 pages
+  open without errors, and a book starts playing (PARITY W rows).
 - Players that can't play a book's files as they are (FLAC, for one) get them converted on the fly into a stream,
   like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
 - The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,

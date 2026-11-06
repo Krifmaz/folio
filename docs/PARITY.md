@@ -443,46 +443,46 @@ repository at the pinned commit.
 | --- | --- | --- | --- | --- | --- | --- |
 | W0001 | page | `/account` | `client/pages/account.vue` | W web fork | todo |  |
 | W0002 | page | `/config` | `client/pages/config.vue` | W web fork | todo |  |
-| W0003 | page | `/` | `client/pages/index.vue` | W web fork | todo |  |
-| W0004 | page | `/login` | `client/pages/login.vue` | W web fork | todo |  |
-| W0005 | page | `/oops` | `client/pages/oops.vue` | W web fork | todo |  |
+| W0003 | page | `/` | `client/pages/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0003.png` |
+| W0004 | page | `/login` | `client/pages/login.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0004.png` |
+| W0005 | page | `/oops` | `client/pages/oops.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0005.png` |
 | W0006 | page | `/playlist/:id` | `client/pages/playlist/_id.vue` | W web fork | todo |  |
 | W0007 | page | `/collection/:id` | `client/pages/collection/_id.vue` | W web fork | todo |  |
-| W0008 | page | `/config/authentication` | `client/pages/config/authentication.vue` | W web fork | todo |  |
-| W0009 | page | `/config/backups` | `client/pages/config/backups.vue` | W web fork | todo |  |
-| W0010 | page | `/config/email` | `client/pages/config/email.vue` | W web fork | todo |  |
+| W0008 | page | `/config/authentication` | `client/pages/config/authentication.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0008.png` |
+| W0009 | page | `/config/backups` | `client/pages/config/backups.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0009.png` |
+| W0010 | page | `/config/email` | `client/pages/config/email.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0010.png` |
 | W0011 | page | `/config` | `client/pages/config/index.vue` | W web fork | todo |  |
-| W0012 | page | `/config/libraries` | `client/pages/config/libraries.vue` | W web fork | todo |  |
-| W0013 | page | `/config/log` | `client/pages/config/log.vue` | W web fork | todo |  |
-| W0014 | page | `/config/notifications` | `client/pages/config/notifications.vue` | W web fork | todo |  |
+| W0012 | page | `/config/libraries` | `client/pages/config/libraries.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0012.png` |
+| W0013 | page | `/config/log` | `client/pages/config/log.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0013.png` |
+| W0014 | page | `/config/notifications` | `client/pages/config/notifications.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0014.png` |
 | W0015 | page | `/config/rss-feeds` | `client/pages/config/rss-feeds.vue` | W web fork | todo |  |
-| W0016 | page | `/config/sessions` | `client/pages/config/sessions.vue` | W web fork | todo |  |
-| W0017 | page | `/config/stats` | `client/pages/config/stats.vue` | W web fork | todo |  |
-| W0018 | page | `/config/users` | `client/pages/config/users/index.vue` | W web fork | todo |  |
-| W0019 | page | `/config/users/:id` | `client/pages/config/users/_id/index.vue` | W web fork | todo |  |
-| W0020 | page | `/config/users/:id/sessions` | `client/pages/config/users/_id/sessions.vue` | W web fork | todo |  |
-| W0021 | page | `/config/api-keys` | `client/pages/config/api-keys/index.vue` | W web fork | todo |  |
-| W0022 | page | `/config/item-metadata-utils/custom-metadata-providers` | `client/pages/config/item-metadata-utils/custom-metadata-providers.vue` | W web fork | todo |  |
+| W0016 | page | `/config/sessions` | `client/pages/config/sessions.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0016.png` |
+| W0017 | page | `/config/stats` | `client/pages/config/stats.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0017.png` |
+| W0018 | page | `/config/users` | `client/pages/config/users/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0018.png` |
+| W0019 | page | `/config/users/:id` | `client/pages/config/users/_id/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0019.png` |
+| W0020 | page | `/config/users/:id/sessions` | `client/pages/config/users/_id/sessions.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0020.png` |
+| W0021 | page | `/config/api-keys` | `client/pages/config/api-keys/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0021.png` |
+| W0022 | page | `/config/item-metadata-utils/custom-metadata-providers` | `client/pages/config/item-metadata-utils/custom-metadata-providers.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0022.png` |
 | W0023 | page | `/config/item-metadata-utils/genres` | `client/pages/config/item-metadata-utils/genres.vue` | W web fork | todo |  |
-| W0024 | page | `/config/item-metadata-utils` | `client/pages/config/item-metadata-utils/index.vue` | W web fork | todo |  |
+| W0024 | page | `/config/item-metadata-utils` | `client/pages/config/item-metadata-utils/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0024.png` |
 | W0025 | page | `/config/item-metadata-utils/tags` | `client/pages/config/item-metadata-utils/tags.vue` | W web fork | todo |  |
-| W0026 | page | `/library/:library` | `client/pages/library/_library/index.vue` | W web fork | todo |  |
+| W0026 | page | `/library/:library` | `client/pages/library/_library/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0026.png` |
 | W0027 | page | `/library/:library/narrators` | `client/pages/library/_library/narrators.vue` | W web fork | todo |  |
 | W0028 | page | `/library/:library/search` | `client/pages/library/_library/search.vue` | W web fork | todo |  |
 | W0029 | page | `/library/:library/stats` | `client/pages/library/_library/stats.vue` | W web fork | todo |  |
-| W0030 | page | `/library/:library/series/:id` | `client/pages/library/_library/series/_id.vue` | W web fork | todo |  |
+| W0030 | page | `/library/:library/series/:id` | `client/pages/library/_library/series/_id.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0030.png` |
 | W0031 | page | `/library/:library/podcast/download-queue` | `client/pages/library/_library/podcast/download-queue.vue` | W web fork | todo |  |
 | W0032 | page | `/library/:library/podcast/latest` | `client/pages/library/_library/podcast/latest.vue` | W web fork | todo |  |
 | W0033 | page | `/library/:library/podcast/search` | `client/pages/library/_library/podcast/search.vue` | W web fork | todo |  |
-| W0034 | page | `/library/:library/bookshelf/:id` | `client/pages/library/_library/bookshelf/_id.vue` | W web fork | todo |  |
+| W0034 | page | `/library/:library/bookshelf/:id` | `client/pages/library/_library/bookshelf/_id.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0034.png` |
 | W0035 | page | `/share/:slug` | `client/pages/share/_slug.vue` | W web fork | todo |  |
 | W0036 | page | `/upload` | `client/pages/upload/index.vue` | W web fork | todo |  |
-| W0037 | page | `/audiobook/:id/chapters` | `client/pages/audiobook/_id/chapters.vue` | W web fork | todo |  |
-| W0038 | page | `/audiobook/:id/edit` | `client/pages/audiobook/_id/edit.vue` | W web fork | todo |  |
+| W0037 | page | `/audiobook/:id/chapters` | `client/pages/audiobook/_id/chapters.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0037.png` |
+| W0038 | page | `/audiobook/:id/edit` | `client/pages/audiobook/_id/edit.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0038.png` |
 | W0039 | page | `/audiobook/:id/manage` | `client/pages/audiobook/_id/manage.vue` | W web fork | todo |  |
-| W0040 | page | `/item/:id` | `client/pages/item/_id/index.vue` | W web fork | todo |  |
-| W0041 | page | `/author/:id` | `client/pages/author/_id.vue` | W web fork | todo |  |
-| W0042 | page | `/batch` | `client/pages/batch/index.vue` | W web fork | todo |  |
+| W0040 | page | `/item/:id` | `client/pages/item/_id/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0040.png` |
+| W0041 | page | `/author/:id` | `client/pages/author/_id.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0041.png` |
+| W0042 | page | `/batch` | `client/pages/batch/index.vue` | W web fork | done | `abs-web/folio/e2e/pages.cjs` (abs-web.yml), `docs/parity/screens/W0042.png` |
 | W0043 | action | menu action `batch-mark-as-finished` | `client/components/tables/podcast/LazyEpisodesTable.vue#L105` | W web fork | todo |  |
 | W0044 | action | menu action `bookmarks` | `client/pages/item/_id/index.vue#L388` | W web fork | todo |  |
 | W0045 | action | menu action `collapse-series` | `client/components/app/BookShelfToolbar.vue#L355` | W web fork | todo |  |

@@ -1,0 +1,81 @@
+name: abs-web
+
+# The web fork's pages, proven against Folio (PARITY W rows): Folio's server runs with the library the parity
+# recorder made in the original (abs-web/folio/e2e/seed.py over the same test media), and Chromium opens each proven
+# page, the ebook reader and the player, signed in as root (abs-web/folio/e2e/pages.cjs). A page fails on a script
+# error or a failed call to Folio. The screenshots are kept as the run's artifact.
+on:
+  pull_request:
+    paths:
+      - "abs-web/**"
+      - "server/src/abs/**"
+      - "server/tests/parity/fixtures/abs/_db_end.json"
+      - ".github/workflows/abs-web.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: abs-web-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The rows whose pages are proven; a row joins once every call its page makes is ported.
+  ROWS: >-
+    W0003 W0004 W0005 W0008 W0009 W0010 W0012 W0013 W0014 W0016 W0017 W0018 W0019 W0020 W0021 W0022 W0024 W0026
+    W0030 W0034 W0037 W0038 W0040 W0041 W0042 player
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ffmpeg
+        timeout-minutes: 10
+        run: sudo apt-get update -q && sudo apt-get install -yq --no-install-recommends ffmpeg
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: server
+      - name: Build the server
+        run: cargo build --manifest-path server/Cargo.toml --bin folio
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: abs-web/package-lock.json
+      - name: Build the web fork
+        working-directory: abs-web
+        run: |
+          npm ci --no-audit --no-fund
+          ROUTER_BASE_PATH= npm run generate
+      - name: Playwright and Chromium
+        working-directory: abs-web
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: Folio with the recorded library
+        run: |
+          w="$RUNNER_TEMP/w"
+          mkdir -p "$w/data" "$w/shots"
+          server/tests/parity/abs/make_media.sh "$w/media"
+          export APP_DATA_DIR="$w/data" APP_PORT=13380 APP_STATIC_DIR="$PWD/abs-web/dist"
+          server/target/debug/folio > "$w/first.log" 2>&1 &
+          for _ in $(seq 1 60); do curl -sf http://localhost:13380/api/health > /dev/null && break; sleep 1; done
+          kill %1 && wait %1 || true
+          python3 -I abs-web/folio/e2e/seed.py server/tests/parity/fixtures/abs/_db_end.json "$w/data" "$w/media"
+          nohup server/target/debug/folio > "$w/server.log" 2>&1 &
+          for _ in $(seq 1 60); do curl -sf http://localhost:13380/api/health > /dev/null && break; sleep 1; done
+      - name: Pages
+        working-directory: abs-web
+        run: BASE_URL=http://localhost:13380 SHOTS_DIR="$RUNNER_TEMP/w/shots" node folio/e2e/pages.cjs $ROWS
+      - name: Server log on failure
+        if: failure()
+        run: tail -200 "$RUNNER_TEMP/w/server.log" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: abs-web-pages
+          path: ${{ runner.temp }}/w/shots
