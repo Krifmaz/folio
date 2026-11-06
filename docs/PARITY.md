@@ -531,14 +531,14 @@ repository at the pinned commit.
 | M0012 | page | `/collection/:id` | `pages/collection/_id.vue` | M mobile fork | todo |  |
 | M0013 | page | `/media/:id/history` | `pages/media/_id/history.vue` | M mobile fork | todo |  |
 | M0014 | page | `/bookshelf/add-podcast` | `pages/bookshelf/add-podcast.vue` | M mobile fork | todo |  |
-| M0015 | page | `/bookshelf/authors` | `pages/bookshelf/authors.vue` | M mobile fork | todo |  |
+| M0015 | page | `/bookshelf/authors` | `pages/bookshelf/authors.vue` | M mobile fork | done | `docs/parity/screens/M0015.png` (Folio's authors with the original's recorded books) |
 | M0016 | page | `/bookshelf/collections` | `pages/bookshelf/collections.vue` | M mobile fork | todo |  |
 | M0017 | page | `/bookshelf` | `pages/bookshelf/index.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added) |
 | M0018 | page | `/bookshelf/latest` | `pages/bookshelf/latest.vue` | M mobile fork | todo |  |
 | M0019 | page | `/bookshelf/library` | `pages/bookshelf/library.vue` | M mobile fork | done | `docs/parity/screens/M0019.png` (Folio's library with the original's recorded books) |
 | M0020 | page | `/bookshelf/playlists` | `pages/bookshelf/playlists.vue` | M mobile fork | todo |  |
-| M0021 | page | `/bookshelf/series/:id` | `pages/bookshelf/series/_id.vue` | M mobile fork | todo |  |
-| M0022 | page | `/bookshelf/series` | `pages/bookshelf/series/index.vue` | M mobile fork | todo |  |
+| M0021 | page | `/bookshelf/series/:id` | `pages/bookshelf/series/_id.vue` | M mobile fork | done | `docs/parity/screens/M0021.png` (one series from Folio with its books in order) |
+| M0022 | page | `/bookshelf/series` | `pages/bookshelf/series/index.vue` | M mobile fork | done | `docs/parity/screens/M0022.png` (Folio's series with the original's recorded books) |
 | M0023 | page | `/item/:id` | `pages/item/_id/index.vue` | M mobile fork | done | `docs/parity/screens/M0023.png` (a book from Folio: author, series, narrator, genre, chapters, tracks) |
 | M0024 | page | `/item/:id/:episode` | `pages/item/_id/_episode/index.vue` | M mobile fork | todo |  |
 | M0025 | page | `/localMedia/folders/:id` | `pages/localMedia/folders/_id.vue` | M mobile fork | todo |  |
