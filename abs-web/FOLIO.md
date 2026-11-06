@@ -13,6 +13,7 @@ Folio makes is listed here and marked `Folio:` in the file, and kept small so up
 | `components/app/Appbar.vue`, `pages/login.vue`, `layouts/error.vue` | The name Folio next to the icon. |
 | `pages/config/index.vue` | "Report bugs" links to Folio's repository; upstream's Discord invite is gone (it is upstream's community). |
 | `components/app/SideRail.vue` | Links to Folio's own pages (Wanted, Downloads, Review, Move in) at `/folio/`. |
+| `folio/e2e/` | The pages' check against Folio (`pages.cjs`, run by `.github/workflows/abs-web.yml`) and the script that fills Folio with the original's recorded library (`seed.py`). |
 | `.gitignore` | What `npm ci` and `npm run generate` make here. |
 
 Help links to upstream's documentation, issue references in code comments and the changelog's links to upstream

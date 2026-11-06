@@ -2724,6 +2724,72 @@
   "method": "DELETE"
  },
  {
+  "name": "eb_item",
+  "path": "/api/items/{item2}",
+  "save": {
+   "ebook_ino": "libraryFiles.0.ino"
+  }
+ },
+ {
+  "name": "eb_audio_item",
+  "path": "/api/items/{item}",
+  "save": {
+   "audio_ino": "libraryFiles.0.ino"
+  }
+ },
+ {
+  "name": "eb_main",
+  "path": "/api/items/{item2}/ebook"
+ },
+ {
+  "name": "eb_by_ino",
+  "path": "/api/items/{item2}/ebook/{ebook_ino}"
+ },
+ {
+  "name": "eb_unknown_ino",
+  "path": "/api/items/{item2}/ebook/123"
+ },
+ {
+  "name": "eb_not_ebook",
+  "path": "/api/items/{item}/ebook/{audio_ino}"
+ },
+ {
+  "name": "eb_none",
+  "path": "/api/items/{item}/ebook"
+ },
+ {
+  "name": "eb_status_not_ebook",
+  "method": "PATCH",
+  "path": "/api/items/{item}/ebook/{audio_ino}/status"
+ },
+ {
+  "name": "eb_status_unknown",
+  "method": "PATCH",
+  "path": "/api/items/{item2}/ebook/123/status"
+ },
+ {
+  "name": "eb_status_off",
+  "method": "PATCH",
+  "path": "/api/items/{item2}/ebook/{ebook_ino}/status"
+ },
+ {
+  "name": "eb_after_off",
+  "path": "/api/items/{item2}"
+ },
+ {
+  "name": "eb_main_after_off",
+  "path": "/api/items/{item2}/ebook"
+ },
+ {
+  "name": "eb_status_on",
+  "method": "PATCH",
+  "path": "/api/items/{item2}/ebook/{ebook_ino}/status"
+ },
+ {
+  "name": "eb_after_on",
+  "path": "/api/items/{item2}"
+ },
+ {
   "name": "p6h_guest_create",
   "path": "/api/users",
   "method": "POST",
