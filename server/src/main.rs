@@ -16,9 +16,19 @@ async fn main() -> anyhow::Result<()> {
         Some("healthcheck") => std::process::exit(if server::healthcheck(server::port()).await { 0 } else { 1 }),
         _ => {}
     }
-    tracing_subscriber::fmt()
-        .with_env_filter(tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()))
-        .init();
+    {
+        use tracing_subscriber::layer::SubscriberExt;
+        use tracing_subscriber::util::SubscriberInitExt;
+        use tracing_subscriber::Layer;
+        let console = tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into());
+        // the console follows RUST_LOG; the Audiobookshelf log files and log page get Folio's own messages at
+        // the level the server settings choose
+        let own = tracing_subscriber::filter::filter_fn(|m| m.target().starts_with("server"));
+        tracing_subscriber::registry()
+            .with(tracing_subscriber::fmt::layer().with_filter(console))
+            .with(server::abs::logs::Layer.with_filter(own))
+            .init();
+    }
     let st = server::AppState::from_env().await?;
     server::wanted::follow::spawn(st.clone());
     server::lantern::grabs::spawn(st.clone());

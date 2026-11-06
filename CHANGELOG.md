@@ -12,6 +12,13 @@
   books and editions are kept (ratings, release date, parts and sets, languages, ISBNs, pages, ignored terms), and
   the add options decide which books are monitored. Every answer and the stored rows are checked against
   Readarr's own, recorded with the same stand-in metadata server.
+- A library's series and authors pages, one series and one author, like Audiobookshelf's
+  (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
+  `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's
+  books grouped by series.
+- The server log works like Audiobookshelf's: admins read today's messages on the log page and watch them
+  live, messages are kept in one file per day, and the log level and the number of days kept follow the
+  settings. Each answer is checked against the original's own.
 - The Readarr API can look up books and authors to add (`/api/v1/book/lookup`, `/api/v1/author/lookup`,
   `/api/v1/search`) the way Readarr does: by name, ISBN or ASIN through Goodreads, or by `author:`, `work:` and
   `edition:` ids, with what the library already has filled in. Authors and books come from Readarr's metadata

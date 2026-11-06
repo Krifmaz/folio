@@ -4,15 +4,15 @@
    "authorCount": 0,
    "authors": [
     {
-     "id": "a14d95c0-6aa2-40cf-8205-2a631fe94807",
+     "id": "3f8369dc-86e5-4d4a-8214-93d25ee38e46",
      "name": "Becky Chambers"
     },
     {
-     "id": "0e718aa0-5cca-4a99-86d4-d7ef9ebf3640",
+     "id": "85d4a62d-72cd-4608-a258-d47946f6e310",
      "name": "Martha Wells"
     },
     {
-     "id": "2865baf7-e6bd-46dc-ad2d-8bebba2a2935",
+     "id": "dfb9aebe-a60f-41c4-a168-20c2be5c1a06",
      "name": "Ann Leckie"
     }
    ],
@@ -23,7 +23,7 @@
    "languages": [
     "en"
    ],
-   "loadedAt": 1793915239834,
+   "loadedAt": 1793918572731,
    "narrators": [
     "Adjoa Andoh"
    ],
@@ -35,11 +35,11 @@
    "publishers": [],
    "series": [
     {
-     "id": "d4b3083a-537b-4789-b6f7-cc290d51980f",
+     "id": "ea9f35d3-5cea-4418-81f8-26978c289f71",
      "name": "The Murderbot Diaries"
     },
     {
-     "id": "a478fb10-4c84-494a-ba88-f0c7ab43d131",
+     "id": "35b9fcad-ed0f-425f-9c50-a231c7a6b0c9",
      "name": "Imperial Radch"
     }
    ],
@@ -48,21 +48,21 @@
   },
   "issues": 0,
   "library": {
-   "createdAt": 1793915239801,
+   "createdAt": 1793918572697,
    "displayOrder": 1,
    "folders": [
     {
-     "addedAt": 1793915239803,
+     "addedAt": 1793918572700,
      "fullPath": "/media",
-     "id": "9121fa09-c3e0-4661-b8ad-43cdb091c3b7",
-     "libraryId": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99"
+     "id": "f627aa94-8073-48cc-a8d7-8d249b4694b1",
+     "libraryId": "2cae27a4-5a4a-4a1d-af1f-142ea391150c"
     }
    ],
    "icon": "database",
-   "id": "a966d2b4-3458-4fb2-a8b5-11f826ed1f99",
-   "lastScan": 1793915239991,
+   "id": "2cae27a4-5a4a-4a1d-af1f-142ea391150c",
+   "lastScan": 1793918572869,
    "lastScanVersion": "2.37.2",
-   "lastUpdate": 1793915239991,
+   "lastUpdate": 1793918572869,
    "mediaType": "book",
    "name": "Books",
    "provider": "google",

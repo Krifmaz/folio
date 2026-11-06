@@ -3,10 +3,10 @@
 //! Continue Series, Recently Added, Recent Series, Discover, Listen and Read Again, and Newest Authors.
 
 use super::filters::{self, permission_conditions, PageItem};
-use super::util::{natural_cmp, title_prefix_at_end, Sorting};
+use super::util::{natural_cmp, Sorting};
 use crate::abs::models::{book, date_text, from_row, library_item, now_ms, Author, Library, LibraryItem, Series, User};
 use kit_server_core::{Db, Result, RowExt};
-use serde_json::{json, Map, Value};
+use serde_json::{json, Value};
 
 /// Sixty days, the age limit of the "recent" shelves.
 const RECENT_MS: i64 = 60 * 24 * 60 * 60 * 1000;
@@ -196,20 +196,6 @@ fn continue_series(db: &dyn Db, library_id: &str, u: &User, later_only: bool, li
     Ok((out, count))
 }
 
-/// A series as the apps get it (`Series.toOldJSON`).
-pub fn series_json(se: &Series, sorting: &Sorting) -> Map<String, Value> {
-    let name = se.name.clone().unwrap_or_default();
-    let mut m = Map::new();
-    m.insert("id".into(), json!(se.id));
-    m.insert("name".into(), json!(se.name));
-    m.insert("nameIgnorePrefix".into(), json!(title_prefix_at_end(&name, sorting)));
-    m.insert("description".into(), json!(se.description));
-    m.insert("addedAt".into(), super::util::ms0(&se.created_at));
-    m.insert("updatedAt".into(), super::util::ms0(&se.updated_at));
-    m.insert("libraryId".into(), json!(se.library_id));
-    m
-}
-
 /// The "Recent Series" shelf (`getSeriesMostRecentlyAdded`): series added in the last 60 days, newest first,
 /// each with its books in order.
 fn recent_series(db: &dyn Db, library_id: &str, u: &User, hide_single: bool, limit: i64, sorting: &Sorting) -> Result<(Vec<Value>, i64)> {
@@ -262,7 +248,7 @@ fn recent_series(db: &dyn Db, library_id: &str, u: &User, hide_single: bool, lim
             b.series.clear();
             books.push(Value::Object(library_item::minified(&item, &b, sorting)));
         }
-        let mut j = series_json(&se, sorting);
+        let mut j = crate::abs::series::series_json(&se, sorting);
         j.insert("books".into(), Value::Array(books));
         out.push(Value::Object(j));
     }
@@ -344,7 +330,7 @@ fn newest_authors(db: &dyn Db, library_id: &str, u: &User, limit: i64) -> Result
     for mut row in rows {
         let n = row.remove("numBooks").and_then(|v| v.as_i64()).unwrap_or(0);
         let a: Author = from_row(row)?;
-        let mut j = crate::abs::scanner::author_json(&a);
+        let mut j = crate::abs::authors::author_json(&a);
         j["numBooks"] = json!(n);
         out.push(j);
     }
