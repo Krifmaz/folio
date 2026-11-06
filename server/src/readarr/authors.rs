@@ -4,6 +4,7 @@
 //! ```text
 //! GET /api/v1/author        every author, in the order they were added
 //! GET /api/v1/author/{id}   one author; ASP.NET's "Not Found" when there is none
+//! POST /api/v1/author       add an author (see [`super::add`])
 //! PUT /api/v1/author/{id}   change an author's folder, profiles, tags and monitoring (202 with the author)
 //! PUT /api/v1/author/editor change several authors at once (202 with them)
 //! ```
@@ -26,7 +27,7 @@ use std::collections::HashMap;
 /// The author routes.
 pub fn router() -> Router<AppState> {
     Router::new()
-        .route("/api/v1/author", get(all).put(update_unrouted))
+        .route("/api/v1/author", get(all).put(update_unrouted).post(super::add::add_author))
         .route("/api/v1/author/{id}", get(one).put(update).delete(remove))
         .route("/api/v1/author/editor", put(editor).delete(remove_many))
 }

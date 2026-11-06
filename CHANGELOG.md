@@ -6,6 +6,12 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The Readarr API can add an author (`POST /api/v1/author`) the way Readarr does: the same checks and messages,
+  the author's folder made from the naming settings (and kept apart from a folder already in use), then its books,
+  editions and series filled in from the metadata server in the background. The metadata profile decides which
+  books and editions are kept (ratings, release date, parts and sets, languages, ISBNs, pages, ignored terms), and
+  the add options decide which books are monitored. Every answer and the stored rows are checked against
+  Readarr's own, recorded with the same stand-in metadata server.
 - Mail works like Audiobookshelf's: admins send a test mail, and e-books go to Kindles and other e-readers
   by mail through the mail server in the email settings. Each answer is checked against the original's own.
 - A library's series and authors pages, one series and one author, like Audiobookshelf's

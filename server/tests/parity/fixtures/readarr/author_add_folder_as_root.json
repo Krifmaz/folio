@@ -1,0 +1,40 @@
+{
+ "body": [
+  {
+   "attemptedValue": "/media/Ann Lecki",
+   "errorCode": "AuthorFolderAsRootFolderValidator",
+   "errorMessage": "Root folder path '/media/Ann Lecki' contains author folder 'Ann Leckie'",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "authorFolder": "Ann Leckie",
+    "propertyName": "Root Folder Path",
+    "propertyValue": "/media/Ann Lecki",
+    "rootFolderPath": "/media/Ann Lecki"
+   },
+   "propertyName": "RootFolderPath",
+   "severity": "error"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "addOptions": {
+    "monitor": "latest",
+    "searchForMissingBooks": false
+   },
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5001",
+   "metadataProfileId": 1,
+   "monitorNewItems": "all",
+   "monitored": true,
+   "qualityProfileId": 1,
+   "rootFolderPath": "/media/Ann Lecki",
+   "tags": [
+    1
+   ]
+  },
+  "method": "POST",
+  "path": "/api/v1/author"
+ },
+ "status": 400
+}
