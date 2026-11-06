@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Fixed
+- A Readarr time test no longer fails now and then when the current time ends in zeros.
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
