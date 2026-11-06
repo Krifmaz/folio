@@ -1,0 +1,83 @@
+{
+ "body": [
+  {
+   "attemptedValue": 0,
+   "errorCode": "GreaterThanValidator",
+   "errorMessage": "'Quality Profile Id' must be greater than '0'.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "comparisonProperty": "",
+    "comparisonValue": 0,
+    "propertyName": "Quality Profile Id",
+    "propertyValue": 0
+   },
+   "propertyName": "QualityProfileId",
+   "severity": "error"
+  },
+  {
+   "attemptedValue": 0,
+   "errorCode": "GreaterThanValidator",
+   "errorMessage": "'Metadata Profile Id' must be greater than '0'.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "comparisonProperty": "",
+    "comparisonValue": 0,
+    "propertyName": "Metadata Profile Id",
+    "propertyValue": 0
+   },
+   "propertyName": "MetadataProfileId",
+   "severity": "error"
+  },
+  {
+   "errorCode": "PathValidator",
+   "errorMessage": "Invalid Path: '{path}'",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Path",
+    "propertyValue": null
+   },
+   "propertyName": "Path",
+   "severity": "error"
+  },
+  {
+   "errorCode": "PathValidator",
+   "errorMessage": "Invalid Path: '{path}'",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Root Folder Path",
+    "propertyValue": null
+   },
+   "propertyName": "RootFolderPath",
+   "severity": "error"
+  },
+  {
+   "errorCode": "NotEmptyValidator",
+   "errorMessage": "'Author Name' must not be empty.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Author Name",
+    "propertyValue": null
+   },
+   "propertyName": "AuthorName",
+   "severity": "error"
+  },
+  {
+   "errorCode": "NotEmptyValidator",
+   "errorMessage": "'Foreign Author Id' must not be empty.",
+   "formattedMessageArguments": [],
+   "formattedMessagePlaceholderValues": {
+    "propertyName": "Foreign Author Id",
+    "propertyValue": null
+   },
+   "propertyName": "ForeignAuthorId",
+   "severity": "error"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": {},
+  "method": "POST",
+  "path": "/api/v1/author"
+ },
+ "status": 400
+}

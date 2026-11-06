@@ -106,6 +106,8 @@ pub struct AppState {
     /// The Readarr port's metadata client, which keeps answers and authors between lookups
     /// (`READARR_GOODREADS_URL` says where Goodreads is, else www.goodreads.com).
     pub readarr_lookup: readarr::bookinfo::BookInfo,
+    /// The Readarr port's background work (an added author's refresh), until its command queue is ported.
+    pub readarr_jobs: readarr::refresh::Jobs,
     /// The Audiobookshelf port's settings, tokens and sign-in limit.
     pub abs_server: abs::Server,
 }
@@ -168,6 +170,7 @@ impl AppState {
             readarr,
             readarr_disk,
             readarr_lookup,
+            readarr_jobs: readarr::refresh::Jobs::default(),
             abs_server,
         })
     }

@@ -41,13 +41,18 @@ pub fn date_or_min(v: Option<&Value>) -> Value {
     }
 }
 
-/// Now as Readarr passes it to SQLite (`2026-11-05 18:38:30.6860766Z`), for comparing with stored times.
+/// Now as Readarr passes it to SQLite (`2026-11-05 18:38:30.686076Z`, up to seven decimals), for comparing with
+/// stored times.
 pub fn now_param() -> String {
     let t = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default();
     let secs = t.as_secs() as i64;
     let (days, rem) = (secs.div_euclid(86400), secs.rem_euclid(86400));
     let (y, m, d) = civil(days);
-    format!("{y:04}-{m:02}-{d:02} {:02}:{:02}:{:02}.{:07}Z", rem / 3600, rem % 3600 / 60, rem % 60, t.subsec_nanos() / 100)
+    // .NET's `FFFFFFF`: the fraction without its trailing zeros, and without the point when it is zero.
+    let fraction = format!("{:07}", t.subsec_nanos() / 100);
+    let fraction = fraction.trim_end_matches('0');
+    let fraction = if fraction.is_empty() { String::new() } else { format!(".{fraction}") };
+    format!("{y:04}-{m:02}-{d:02} {:02}:{:02}:{:02}{fraction}Z", rem / 3600, rem % 3600 / 60, rem % 60)
 }
 
 /// The calendar date of a day number since 1970-01-01 (Howard Hinnant's `civil_from_days`).

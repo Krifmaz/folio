@@ -1,0 +1,71 @@
+{
+ "body": {
+  "addOptions": {
+   "booksToMonitor": [],
+   "monitor": "none",
+   "monitored": false,
+   "searchForMissingBooks": false
+  },
+  "added": "2026-11-05T23:51:30Z",
+  "authorMetadataId": 4,
+  "authorName": "Ann Leckie",
+  "authorNameLastFirst": "Leckie, Ann",
+  "cleanName": "annleckie",
+  "ended": false,
+  "foreignAuthorId": "5002",
+  "genres": [],
+  "id": 4,
+  "images": [],
+  "links": [
+   {
+    "name": "Goodreads",
+    "url": "https://www.goodreads.com/author/show/5002"
+   }
+  ],
+  "metadataProfileId": 2,
+  "monitorNewItems": "none",
+  "monitored": false,
+  "path": "/books/Ann Leckie (1)",
+  "qualityProfileId": 1,
+  "ratings": {
+   "popularity": 0,
+   "value": 0,
+   "votes": 0
+  },
+  "rootFolderPath": "/books/",
+  "sortName": "ann leckie",
+  "sortNameLastFirst": "leckie, ann",
+  "statistics": {
+   "availableBookCount": 0,
+   "bookCount": 0,
+   "bookFileCount": 0,
+   "percentOfBooks": 0,
+   "sizeOnDisk": 0,
+   "totalBookCount": 0
+  },
+  "status": "continuing",
+  "tags": [],
+  "titleSlug": "5002"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "addOptions": {
+    "booksToMonitor": [],
+    "monitor": "none",
+    "searchForMissingBooks": false
+   },
+   "authorName": "Ann Leckie",
+   "foreignAuthorId": "5002",
+   "metadataProfileId": 2,
+   "monitorNewItems": "none",
+   "monitored": true,
+   "qualityProfileId": 1,
+   "rootFolderPath": "/books",
+   "tags": []
+  },
+  "method": "POST",
+  "path": "/api/v1/author"
+ },
+ "status": 201
+}

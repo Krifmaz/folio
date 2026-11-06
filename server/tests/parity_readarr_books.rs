@@ -6,10 +6,12 @@
 //! The lookups ask a stand-in for Readarr's metadata server and Goodreads, served here from the same fixed answers
 //! the recording used (`parity/readarr/stub/routes.json`, which `stub.py` served to Readarr).
 //!
-//! The deletes are also checked by what they leave behind: at each `snapshot` entry the rows of the tables they
-//! change and the files under the books folder must be Readarr's (`parity/readarr/state/<name>.json`), except the
-//! times of the history rows written during the run and the layout of the JSON documents in the rows (compared by
-//! what they hold).
+//! The deletes and adds are also checked by what they leave behind: at each `snapshot` entry (once the work Folio
+//! does after answering is done) the rows of the tables they change and the files under the books folder must be
+//! Readarr's (`parity/readarr/state/<name>.json`), except the times of the history rows and of the columns the
+//! entry's `during_run` names, written during the run, and the layout of the JSON documents in the rows (compared
+//! by what they hold). A request's `volatile` fields (times set during the run) only need the same type, and its
+//! `save` keeps values of its answer for the `{placeholders}` of later requests, as the recorder does.
 
 mod common;
 mod parity;
@@ -101,8 +103,8 @@ fn read_documents(rows: &mut Value) {
 }
 
 /// The differences between Folio's state and Readarr's at a snapshot, leaving out the times of history rows
-/// written during the run.
-fn state_diffs(name: &str, ours: &Value, theirs: &Value) -> Vec<String> {
+/// written during the run and the columns `during_run` names (times like `Added`, set when the row is written).
+fn state_diffs(name: &str, ours: &Value, theirs: &Value, during_run: &[String]) -> Vec<String> {
     let mut out = Vec::new();
     if ours["files"] != theirs["files"] {
         out.push(format!("files {} where Readarr has {}", ours["files"], theirs["files"]));
@@ -112,6 +114,15 @@ fn state_diffs(name: &str, ours: &Value, theirs: &Value) -> Vec<String> {
         let mut got = ours["tables"][table].clone();
         read_documents(&mut want);
         read_documents(&mut got);
+        for rows in [&mut want, &mut got] {
+            for r in rows.as_array_mut().into_iter().flatten() {
+                for col in during_run {
+                    if r[col.as_str()].as_str().is_some_and(|t| !t.starts_with("0001-")) {
+                        r[col.as_str()] = json!("(during the run)");
+                    }
+                }
+            }
+        }
         if table == "History" {
             for rows in [&mut want, &mut got] {
                 for r in rows.as_array_mut().into_iter().flatten() {
@@ -126,6 +137,19 @@ fn state_diffs(name: &str, ours: &Value, theirs: &Value) -> Vec<String> {
         }
     }
     out.into_iter().map(|d| format!("{name}: {d}")).collect()
+}
+
+/// Follows a dotted path like `0.id` through lists and objects (the recorder's `dig`).
+fn dig<'a>(v: &'a Value, path: &str) -> Option<&'a Value> {
+    path.split('.').try_fold(v, |v, part| match v {
+        Value::Array(a) => a.get(part.parse::<usize>().ok()?),
+        _ => v.get(part),
+    })
+}
+
+/// Fills in the `{placeholders}` saved from earlier answers.
+fn fill(text: &str, saved: &HashMap<String, String>) -> String {
+    saved.iter().fold(text.to_string(), |t, (k, v)| t.replace(&format!("{{{k}}}"), v))
 }
 
 /// The stand-in's answer to a request for `host` (`metadata` or `goodreads`): the route of routes.json with the
@@ -186,6 +210,7 @@ async fn every_recorded_answer_of_authors_books_and_files_matches() {
     write_files(&books, &serde_json::from_str(&std::fs::read_to_string(recorder().join("seed-files.json")).unwrap()).unwrap());
     let requests: Vec<Value> = serde_json::from_str(&std::fs::read_to_string(recorder().join("requests.json")).unwrap()).unwrap();
     let mut failed = Vec::new();
+    let mut saved: HashMap<String, String> = HashMap::new();
     for r in &requests {
         let name = r["name"].as_str().unwrap();
         if let Some(sql) = r["sql"].as_str() {
@@ -194,14 +219,18 @@ async fn every_recorded_answer_of_authors_books_and_files_matches() {
             continue;
         }
         if r["snapshot"] == json!(true) {
+            // Readarr finishes some work after it answers (an added author's books); so does Folio.
+            st.readarr_jobs.idle().await;
+            let during_run: Vec<String> =
+                r["during_run"].as_array().into_iter().flatten().filter_map(Value::as_str).map(str::to_string).collect();
             let theirs: Value =
                 serde_json::from_str(&std::fs::read_to_string(recorder().join(format!("state/{name}.json"))).unwrap()).unwrap();
             let tables: Vec<String> = theirs["tables"].as_object().unwrap().keys().cloned().collect();
-            failed.extend(state_diffs(name, &state(&st.readarr, &books, &tables), &theirs));
+            failed.extend(state_diffs(name, &state(&st.readarr, &books, &tables), &theirs, &during_run));
             continue;
         }
         let fx = fixture("readarr", name);
-        let path = fx.request["path"].as_str().unwrap().replace("{apikey}", "test-key");
+        let path = fill(&fx.request["path"].as_str().unwrap().replace("{apikey}", "test-key"), &saved);
         let mut req = Request::builder().method(fx.request["method"].as_str().unwrap_or("GET")).uri(&path);
         if r.get("auth") != Some(&Value::Bool(false)) {
             req = req.header("x-api-key", "test-key");
@@ -221,8 +250,14 @@ async fn every_recorded_answer_of_authors_books_and_files_matches() {
         } else {
             Value::String(String::from_utf8_lossy(&bytes).into_owned())
         };
+        for (key, at) in r["save"].as_object().into_iter().flatten() {
+            if let Some(v) = dig(&body, at.as_str().unwrap()) {
+                saved.insert(key.clone(), v.as_str().map(str::to_string).unwrap_or_else(|| v.to_string()));
+            }
+        }
         let mut m = Matcher::default();
         m.volatile = vec!["traceId".into(), "description".into()];
+        m.volatile.extend(r["volatile"].as_array().into_iter().flatten().filter_map(Value::as_str).map(str::to_string));
         let mut diffs = m.diff(&body, &fx.body);
         diffs.retain(|d| !DIFFERENT_ON_PURPOSE.iter().any(|(n, p)| *n == name && d.starts_with(p)));
         if status != fx.status {
