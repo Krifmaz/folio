@@ -1613,5 +1613,97 @@
    ],
    "Series": []
   }
+ },
+ {
+  "host": "metadata",
+  "method": "GET",
+  "path": "/work/5104",
+  "status": 200,
+  "body": {
+   "ForeignId": 5104,
+   "Title": "Imperial Radch Boxed Trilogy",
+   "Url": "https://www.goodreads.com/work/editions/5104",
+   "ReleaseDate": "2016-11-01T00:00:00Z",
+   "Genres": [
+    "science fiction"
+   ],
+   "RelatedWorks": [],
+   "Books": [
+    {
+     "ForeignId": 5104001,
+     "Asin": null,
+     "Description": null,
+     "Isbn13": null,
+     "Title": "Imperial Radch Boxed Trilogy",
+     "Language": "eng",
+     "Format": "Paperback",
+     "EditionInformation": null,
+     "Publisher": "Orbit",
+     "ImageUrl": null,
+     "IsEbook": false,
+     "NumPages": 1100,
+     "RatingCount": 1000,
+     "AverageRating": 4.5,
+     "Url": "https://www.goodreads.com/book/show/5104001",
+     "ReleaseDate": "2016-11-01T00:00:00Z",
+     "Contributors": [
+      {
+       "ForeignId": 5001,
+       "Role": "Author"
+      }
+     ]
+    }
+   ],
+   "Series": [
+    {
+     "ForeignId": 6001,
+     "Title": "Imperial Radch",
+     "Description": "The Radch trilogy.",
+     "LinkItems": [
+      {
+       "ForeignWorkId": 5101,
+       "PositionInSeries": "1",
+       "SeriesPosition": 1,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 5102,
+       "PositionInSeries": "2",
+       "SeriesPosition": 2,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 5103,
+       "PositionInSeries": "3",
+       "SeriesPosition": 3,
+       "Primary": true
+      },
+      {
+       "ForeignWorkId": 5104,
+       "PositionInSeries": "1-3",
+       "SeriesPosition": 0,
+       "Primary": false
+      },
+      {
+       "ForeignWorkId": 5199,
+       "PositionInSeries": "4",
+       "SeriesPosition": 4,
+       "Primary": true
+      }
+     ]
+    }
+   ],
+   "Authors": [
+    {
+     "ForeignId": 5001,
+     "Name": "Ann Leckie",
+     "Description": "Ann Leckie writes space opera.",
+     "ImageUrl": "https://images.example/5001.jpg",
+     "Url": "https://www.goodreads.com/author/show/5001",
+     "RatingCount": 90000,
+     "AverageRating": 4.05
+    }
+   ]
+  }
  }
 ]

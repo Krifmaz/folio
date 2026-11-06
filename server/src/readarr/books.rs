@@ -25,7 +25,7 @@ use std::collections::HashMap;
 /// The book routes.
 pub fn router() -> Router<AppState> {
     Router::new()
-        .route("/api/v1/book", get(all).put(update_unrouted))
+        .route("/api/v1/book", get(all).put(update_unrouted).post(super::add::add_book))
         .route("/api/v1/book/{id}", get(one).put(update).delete(remove))
         .route("/api/v1/book/{id}/overview", get(overview))
         .route("/api/v1/book/monitor", put(monitor))
@@ -224,7 +224,7 @@ async fn one(State(st): State<AppState>, _: Key, Path(id): Path<String>) -> Answ
 }
 
 /// A book as `GET /api/v1/book/{id}` sends it: with its author and statistics.
-fn with_author(db: &SqliteDb, b: &Row) -> Answer<Value> {
+pub(super) fn with_author(db: &SqliteDb, b: &Row) -> Answer<Value> {
     let id = b.i("Id");
     let cx = Context::of(db, std::slice::from_ref(b))?;
     let mut v = resource(b, &cx, true)?;

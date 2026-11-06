@@ -1187,5 +1187,238 @@
  {
   "name": "after_add_namesake_books",
   "path": "/api/v1/book?authorId={namesake}"
+ },
+ {
+  "name": "book_add_empty",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {}
+ },
+ {
+  "name": "book_add_invalid",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {
+   "foreignBookId": "",
+   "author": {
+    "qualityProfileId": 0,
+    "metadataProfileId": 9,
+    "rootFolderPath": "",
+    "path": "",
+    "foreignAuthorId": ""
+   }
+  }
+ },
+ {
+  "name": "book_add_unknown",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {
+   "foreignBookId": "404",
+   "editions": [
+    {
+     "foreignEditionId": "404001",
+     "monitored": true
+    }
+   ],
+   "author": {
+    "qualityProfileId": 1,
+    "metadataProfileId": 1,
+    "rootFolderPath": "/books/",
+    "foreignAuthorId": "1654"
+   }
+  }
+ },
+ {
+  "name": "book_add_no_edition",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {
+   "foreignBookId": "7000",
+   "editions": [],
+   "author": {
+    "qualityProfileId": 1,
+    "metadataProfileId": 1,
+    "rootFolderPath": "/books/",
+    "foreignAuthorId": "1654"
+   }
+  }
+ },
+ {
+  "name": "book_add_wrong_edition",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {
+   "foreignBookId": "7000",
+   "editions": [
+    {
+     "foreignEditionId": "999",
+     "monitored": true
+    }
+   ],
+   "author": {
+    "qualityProfileId": 1,
+    "metadataProfileId": 1,
+    "rootFolderPath": "/books/",
+    "foreignAuthorId": "1654"
+   }
+  }
+ },
+ {
+  "name": "book_add_new_author",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {
+   "foreignBookId": "1215958",
+   "title": "Small Gods",
+   "monitored": true,
+   "anyEditionOk": true,
+   "addOptions": {
+    "searchForNewBook": true
+   },
+   "editions": [
+    {
+     "foreignEditionId": "1215958001",
+     "monitored": true
+    }
+   ],
+   "author": {
+    "authorName": "Terry Pratchett",
+    "foreignAuthorId": "1654",
+    "qualityProfileId": 1,
+    "metadataProfileId": 1,
+    "rootFolderPath": "/books/",
+    "monitored": true,
+    "monitorNewItems": "none",
+    "tags": [
+     1
+    ],
+    "addOptions": {
+     "monitor": "existing",
+     "searchForMissingBooks": false
+    }
+   }
+  },
+  "save": {
+   "smallgods": "id",
+   "pratchett": "authorId"
+  },
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ]
+ },
+ {
+  "name": "book_add_filtered",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {
+   "foreignBookId": "5104",
+   "monitored": false,
+   "anyEditionOk": false,
+   "addOptions": {
+    "searchForNewBook": false
+   },
+   "editions": [
+    {
+     "foreignEditionId": "5104001",
+     "monitored": true
+    }
+   ],
+   "author": {
+    "foreignAuthorId": "5001",
+    "qualityProfileId": 2,
+    "metadataProfileId": 2,
+    "rootFolderPath": "/books/"
+   }
+  },
+  "save": {
+   "boxed": "id"
+  },
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ]
+ },
+ {
+  "name": "state_after_book_add",
+  "snapshot": true,
+  "wait": 15,
+  "tables": [
+   "Authors",
+   "AuthorMetadata",
+   "Books",
+   "Editions",
+   "Series",
+   "SeriesBookLink",
+   "ImportListExclusions"
+  ],
+  "during_run": [
+   "Added",
+   "LastInfoSync"
+  ]
+ },
+ {
+  "name": "after_book_add_books",
+  "path": "/api/v1/book?authorId={pratchett}",
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ]
+ },
+ {
+  "name": "after_book_add_leckie_books",
+  "path": "/api/v1/book?authorId={leckie}",
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ]
+ },
+ {
+  "name": "after_book_add_series",
+  "path": "/api/v1/series?authorId={leckie}"
+ },
+ {
+  "name": "book_add_again",
+  "method": "POST",
+  "path": "/api/v1/book",
+  "body": {
+   "foreignBookId": "7000",
+   "monitored": true,
+   "addOptions": {
+    "searchForNewBook": false
+   },
+   "editions": [
+    {
+     "foreignEditionId": "7000002",
+     "monitored": true
+    }
+   ],
+   "author": {
+    "qualityProfileId": 1,
+    "metadataProfileId": 1,
+    "rootFolderPath": "/books/",
+    "foreignAuthorId": "1654"
+   }
+  },
+  "volatile": [
+   "added",
+   "lastInfoSync"
+  ]
+ },
+ {
+  "name": "state_after_book_add_again",
+  "snapshot": true,
+  "wait": 15,
+  "tables": [
+   "Authors",
+   "Books",
+   "Editions",
+   "ImportListExclusions"
+  ],
+  "during_run": [
+   "Added",
+   "LastInfoSync"
+  ]
  }
 ]

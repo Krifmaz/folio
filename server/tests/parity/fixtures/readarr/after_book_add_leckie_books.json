@@ -1,0 +1,270 @@
+{
+ "body": [
+  {
+   "added": "2026-11-06T00:45:24Z",
+   "anyEditionOk": true,
+   "authorId": 3,
+   "authorTitle": "leckie, ann Ancillary Justice",
+   "foreignBookId": "5101",
+   "foreignEditionId": "5101001",
+   "genres": [
+    "science fiction"
+   ],
+   "grabbed": false,
+   "id": 5,
+   "images": [
+    {
+     "coverType": "cover",
+     "extension": ".jpg",
+     "remoteUrl": "https://images.example/5101001.jpg",
+     "url": "/MediaCover/Books/5/cover.jpg"
+    }
+   ],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/5101"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5101001"
+    }
+   ],
+   "monitored": false,
+   "pageCount": 386,
+   "ratings": {
+    "popularity": 8000,
+    "value": 4,
+    "votes": 2000
+   },
+   "releaseDate": "2013-10-01T00:00:00Z",
+   "seriesTitle": "Imperial Radch #1",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Ancillary Justice",
+   "titleSlug": "5101"
+  },
+  {
+   "added": "2026-11-06T00:45:24Z",
+   "anyEditionOk": true,
+   "authorId": 3,
+   "authorTitle": "leckie, ann Ancillary Sword",
+   "foreignBookId": "5102",
+   "foreignEditionId": "5102002",
+   "genres": [
+    "science fiction"
+   ],
+   "grabbed": false,
+   "id": 6,
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/5102"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5102002"
+    }
+   ],
+   "monitored": false,
+   "pageCount": 368,
+   "ratings": {
+    "popularity": 1200,
+    "value": 4,
+    "votes": 300
+   },
+   "releaseDate": "2014-10-07T00:00:00Z",
+   "seriesTitle": "Imperial Radch #2",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Ancillary Sword",
+   "titleSlug": "5102"
+  },
+  {
+   "added": "2026-11-06T00:45:24Z",
+   "anyEditionOk": true,
+   "authorId": 3,
+   "authorTitle": "leckie, ann Ancillary Mercy",
+   "foreignBookId": "5103",
+   "foreignEditionId": "5103001",
+   "genres": [
+    "science fiction"
+   ],
+   "grabbed": false,
+   "id": 7,
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/5103"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5103001"
+    }
+   ],
+   "monitored": false,
+   "pageCount": 330,
+   "ratings": {
+    "popularity": 3780,
+    "value": 4.2,
+    "votes": 900
+   },
+   "releaseDate": "2015-10-06T00:00:00Z",
+   "seriesTitle": "Imperial Radch #3",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Ancillary Mercy",
+   "titleSlug": "5103"
+  },
+  {
+   "added": "2026-11-06T00:45:24Z",
+   "anyEditionOk": true,
+   "authorId": 3,
+   "authorTitle": "leckie, ann Provenance",
+   "foreignBookId": "5105",
+   "foreignEditionId": "5105001",
+   "genres": [
+    "science fiction"
+   ],
+   "grabbed": false,
+   "id": 8,
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/5105"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5105001"
+    }
+   ],
+   "monitored": false,
+   "pageCount": 448,
+   "ratings": {
+    "popularity": 390,
+    "value": 3.9,
+    "votes": 100
+   },
+   "releaseDate": "2017-09-26T00:00:00Z",
+   "seriesTitle": "Radch Universe",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Provenance",
+   "titleSlug": "5105"
+  },
+  {
+   "added": "2026-11-06T00:45:24Z",
+   "anyEditionOk": true,
+   "authorId": 3,
+   "authorTitle": "leckie, ann Untitled Radch Novel",
+   "foreignBookId": "5107",
+   "foreignEditionId": "5107001",
+   "genres": [
+    "science fiction"
+   ],
+   "grabbed": false,
+   "id": 9,
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/5107"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5107001"
+    }
+   ],
+   "monitored": true,
+   "pageCount": 0,
+   "ratings": {
+    "popularity": 0,
+    "value": 0,
+    "votes": 0
+   },
+   "releaseDate": "2030-01-01T00:00:00Z",
+   "seriesTitle": "",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Untitled Radch Novel",
+   "titleSlug": "5107"
+  },
+  {
+   "added": "2026-11-06T00:45:40Z",
+   "anyEditionOk": false,
+   "authorId": 3,
+   "authorTitle": "leckie, ann Imperial Radch Boxed Trilogy",
+   "foreignBookId": "5104",
+   "foreignEditionId": "5104001",
+   "genres": [
+    "science fiction"
+   ],
+   "grabbed": false,
+   "id": 11,
+   "images": [],
+   "links": [
+    {
+     "name": "Goodreads Editions",
+     "url": "https://www.goodreads.com/work/editions/5104"
+    },
+    {
+     "name": "Goodreads Book",
+     "url": "https://www.goodreads.com/book/show/5104001"
+    }
+   ],
+   "monitored": false,
+   "pageCount": 1100,
+   "ratings": {
+    "popularity": 4500,
+    "value": 4.5,
+    "votes": 1000
+   },
+   "releaseDate": "2016-11-01T00:00:00Z",
+   "seriesTitle": "",
+   "statistics": {
+    "bookCount": 0,
+    "bookFileCount": 0,
+    "percentOfBooks": 0,
+    "sizeOnDisk": 0,
+    "totalBookCount": 1
+   },
+   "title": "Imperial Radch Boxed Trilogy",
+   "titleSlug": "5104"
+  }
+ ],
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/v1/book?authorId={leckie}"
+ },
+ "status": 200
+}

@@ -225,9 +225,12 @@ mod tests {
         assert_eq!(date_or_min(None), json!("0001-01-01T00:00:00Z"));
         assert_eq!(civil(0), (1970, 1, 1));
         assert_eq!(civil(20_397), (2025, 11, 5));
-        // the fraction loses its trailing zeros, so the length is 20 (no fraction) to 28 (seven decimals)
+        // .NET's `FFFFFFF` drops trailing zeros of the fraction (and the dot when nothing is left), so the length
+        // varies from 20 (`2026-11-06 01:02:03Z`) to 28 characters.
         let now = now_param();
-        assert!(now.ends_with('Z') && (20..=28).contains(&now.len()) && now.as_bytes()[10] == b' ', "{now}");
+        let fraction = now.get(19..now.len() - 1).unwrap_or_default();
+        assert!(now.ends_with('Z') && (20..=28).contains(&now.len()), "{now}");
+        assert!(fraction.is_empty() || (fraction.starts_with('.') && !fraction.ends_with('0')), "{now}");
         assert_eq!(percent(1, 2), json!(50.0));
         assert_eq!(percent(1, 1), json!(100));
         assert_eq!(percent(0, 0), json!(0));
