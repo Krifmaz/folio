@@ -422,7 +422,7 @@ repository at the pinned commit.
 | A0382 | job | episode download queue | `server/managers/PodcastManager.js` | P5 podcasts and feeds | todo |  |
 | A0383 | job | database migrations on start | `server/managers/MigrationManager.js` | P6 server admin | todo |  |
 | A0384 | job | ffmpeg/ffprobe presence check and download | `server/managers/BinaryManager.js` | P6 server admin | todo |  |
-| A0385 | job | server start: purge (`cleanUserData`, `purgeMetadata`) | `server/Server.js` | P6 server admin | todo |  |
+| A0385 | job | server start: purge (`cleanUserData`, `purgeMetadata`) | `server/Server.js` | P6 server admin | done | `server/tests/abs_start.rs` (the pinned version has no `purgeMetadata`; it cleans user data and makes the cache folders) |
 | A0386 | job | scanner: `AbsMetadataFileScanner` | `server/scanner/AbsMetadataFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 | A0387 | job | scanner: `AudioFileScanner` | `server/scanner/AudioFileScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
 | A0388 | job | scanner: `BookScanner` | `server/scanner/BookScanner.js` | P1 library | done | `server/tests/parity_abs_scanner.rs::a_scan_writes_the_originals_rows` |
