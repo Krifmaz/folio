@@ -6,6 +6,7 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The mobile app's series, one series and authors pages are checked against Folio (PARITY M0015, M0021, M0022).
 - A library's series and authors pages, one series and one author, like Audiobookshelf's
   (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
   `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's
