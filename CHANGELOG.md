@@ -7,7 +7,9 @@
 
 ### Added
 - The web app's pages are checked in a browser against Folio holding the original's recorded library: 25 pages
-  open without errors, and a book starts playing (PARITY W rows).
+  open without errors, a book starts playing and an EPUB opens in the reader (PARITY W rows).
+- Books open in the web app's ebook reader: the item's ebook file is sent, and an ebook file can be switched
+  between main and supplementary, like Audiobookshelf.
 - Players that can't play a book's files as they are (FLAC, for one) get them converted on the fly into a stream,
   like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
 - The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,

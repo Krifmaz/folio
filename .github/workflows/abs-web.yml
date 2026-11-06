@@ -24,7 +24,7 @@ env:
   # The rows whose pages are proven; a row joins once every call its page makes is ported.
   ROWS: >-
     W0003 W0004 W0005 W0008 W0009 W0010 W0012 W0013 W0014 W0016 W0017 W0018 W0019 W0020 W0021 W0022 W0024 W0026
-    W0030 W0034 W0037 W0038 W0040 W0041 W0042 player
+    W0030 W0034 W0037 W0038 W0040 W0041 W0042 player reader
 
 jobs:
   pages:

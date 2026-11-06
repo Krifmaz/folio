@@ -90,8 +90,8 @@ repository at the pinned commit.
 | A0050 | endpoint | `GET /api/items/:id/file/:fileid` (LibraryItemController.getLibraryFile) | `server/routers/ApiRouter.js#L124` | P1 library | todo |  |
 | A0051 | endpoint | `DELETE /api/items/:id/file/:fileid` (LibraryItemController.deleteLibraryFile) | `server/routers/ApiRouter.js#L125` | P1 library | todo |  |
 | A0052 | endpoint | `GET /api/items/:id/file/:fileid/download` (LibraryItemController.downloadLibraryFile) | `server/routers/ApiRouter.js#L126` | P1 library | todo |  |
-| A0053 | endpoint | `GET /api/items/:id/ebook/:fileid?` (LibraryItemController.getEBookFile) | `server/routers/ApiRouter.js#L127` | P1 library | todo |  |
-| A0054 | endpoint | `PATCH /api/items/:id/ebook/:fileid/status` (LibraryItemController.updateEbookFileStatus) | `server/routers/ApiRouter.js#L128` | P1 library | todo |  |
+| A0053 | endpoint | `GET /api/items/:id/ebook/:fileid?` (LibraryItemController.getEBookFile) | `server/routers/ApiRouter.js#L127` | P1 library | done | `server/tests/parity_abs_playback.rs::ebook_files_answer_like_the_original` |
+| A0054 | endpoint | `PATCH /api/items/:id/ebook/:fileid/status` (LibraryItemController.updateEbookFileStatus) | `server/routers/ApiRouter.js#L128` | P1 library | done | `server/tests/parity_abs_playback.rs::ebook_files_answer_like_the_original` |
 | A0055 | endpoint | `POST /api/users` (UserController.create) | `server/routers/ApiRouter.js#L133` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0056 | endpoint | `GET /api/users` (UserController.findAll) | `server/routers/ApiRouter.js#L134` | P2 users | done | `server/tests/abs_users.rs::users_are_added_read_changed_and_removed_like_the_original` |
 | A0057 | endpoint | `GET /api/users/online` (UserController.getOnlineUsers) | `server/routers/ApiRouter.js#L135` | P2 users | wip | who is online works; open playback sessions come with P3 playback sessions |

@@ -409,3 +409,87 @@ async fn playback_sessions_answer_like_the_original() {
         assert!(!leftover.exists(), "the leftover stream folder is still there");
     }
 }
+
+/// The ebook routes (A0053, A0054) answer like the original: the book's EPUB (stood in for by a file of the
+/// recorded size, since the recorded files aren't here), a file that isn't an ebook or isn't there, and switching
+/// the EPUB to supplementary and back.
+#[tokio::test]
+async fn ebook_files_answer_like_the_original() {
+    let (app, st, token, mut ctx) = set_up_recorded("pb-ebook", HashMap::new()).await;
+    let media = std::env::temp_dir().join(format!("folio-ebook-media-{}", std::process::id()));
+    let local = format!("{}/", media.display());
+    for (table, col) in [("libraryItems", "libraryFiles"), ("libraryItems", "path"), ("books", "ebookFile")] {
+        st.abs.execute(&format!("UPDATE `{table}` SET `{col}` = REPLACE(`{col}`, '/media/', ?)"), vec![json!(local)]).unwrap();
+    }
+    let requests: Vec<Value> =
+        serde_json::from_str(&std::fs::read_to_string(parity::dir("abs").join("../../abs/requests.json")).unwrap()).unwrap();
+    let mut m = Matcher::default();
+    for name in requests.iter().filter_map(|r| r["name"].as_str()).filter(|n| n.starts_with("eb_")) {
+        if !parity::dir("abs").join(format!("{name}.json")).exists() {
+            continue;
+        }
+        let fx = fixture("abs", name);
+        let path = fill_value(&fx.request["path"], &ctx).as_str().unwrap().to_string();
+        let method = fx.request["method"].as_str().unwrap_or("GET").to_string();
+        if let Some(size) = fx.body.get("bytes").and_then(Value::as_u64) {
+            // The stand-in for the recorded EPUB, where the item's ebook file now points.
+            let row = st.abs.one("SELECT `ebookFile` FROM `books` WHERE `ebookFile` IS NOT NULL", vec![]).unwrap().unwrap();
+            let ebook: Value = match &row["ebookFile"] {
+                Value::String(s) => serde_json::from_str(s).unwrap(),
+                v => v.clone(),
+            };
+            let file = std::path::PathBuf::from(ebook["metadata"]["path"].as_str().unwrap());
+            std::fs::create_dir_all(file.parent().unwrap()).unwrap();
+            std::fs::write(&file, vec![0u8; size as usize]).unwrap();
+        }
+        let req = Request::builder()
+            .method(method.as_str())
+            .uri(&path)
+            .header(header::AUTHORIZATION, format!("Bearer {token}"))
+            .body(Body::empty())
+            .unwrap();
+        let r = app.clone().oneshot(req).await.unwrap();
+        let status = r.status().as_u16();
+        let ctype =
+            r.headers().get(header::CONTENT_TYPE).and_then(|v| v.to_str().ok()).unwrap_or_default().split(';').next().unwrap().to_string();
+        let bytes = axum::body::to_bytes(r.into_body(), 1 << 24).await.unwrap();
+        let mut answer = if ctype.starts_with("application/epub") {
+            json!({"bytes": bytes.len()})
+        } else {
+            serde_json::from_slice(&bytes).unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into()))
+        };
+        for (key, from, at) in [("ebook_ino", "eb_item", "/libraryFiles/0/ino"), ("audio_ino", "eb_audio_item", "/libraryFiles/0/ino")] {
+            if let Some(v) = answer.pointer(at).and_then(Value::as_str).filter(|_| name == from) {
+                ctx.insert(key.into(), v.to_string());
+            }
+        }
+        assert_eq!(ctype, fx.content_type, "{name}: content type");
+        // The recorded paths and file numbers are the original's; the rest must be the same.
+        let mut fx = fx;
+        for v in [&mut answer, &mut fx.body] {
+            mask_files(v);
+        }
+        assert_like_with(&mut m, status, &answer, &fx);
+    }
+    let _ = std::fs::remove_dir_all(media);
+}
+
+/// Masks file paths, folder paths and inode numbers, which differ between the recording and the test.
+fn mask_files(v: &mut Value) {
+    match v {
+        Value::Object(m) => {
+            for (k, x) in m.iter_mut() {
+                if ["path", "relPath", "ino", "inode", "mtimeMs", "ctimeMs", "birthtimeMs", "addedAt", "updatedAt"].contains(&k.as_str())
+                    && !x.is_object()
+                    && !x.is_array()
+                {
+                    *x = json!("*");
+                } else {
+                    mask_files(x);
+                }
+            }
+        }
+        Value::Array(a) => a.iter_mut().for_each(mask_files),
+        _ => {}
+    }
+}
