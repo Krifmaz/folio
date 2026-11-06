@@ -12,6 +12,8 @@
   books and editions are kept (ratings, release date, parts and sets, languages, ISBNs, pages, ignored terms), and
   the add options decide which books are monitored. Every answer and the stored rows are checked against
   Readarr's own, recorded with the same stand-in metadata server.
+- Mail works like Audiobookshelf's: admins send a test mail, and e-books go to Kindles and other e-readers
+  by mail through the mail server in the email settings. Each answer is checked against the original's own.
 - A library's series and authors pages, one series and one author, like Audiobookshelf's
   (`/api/libraries/:id/series`, `/api/libraries/:id/series/:seriesId`, `/api/series/:id`,
   `/api/libraries/:id/authors`, `/api/authors/:id`): every sort and filter, progress per series, and an author's

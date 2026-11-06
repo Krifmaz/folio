@@ -58,6 +58,9 @@ socketioxide = { version = "0.18", features = ["state"] }
 # Core (the Audiobookshelf port): its HTML cleaning (sanitize-html), form bodies and cookie dates
 ammonia = "4"
 serde_urlencoded = "0.7"
+# Core (the Audiobookshelf port): its mail sender (nodemailer) and the attachments' types
+lettre = { version = "0.11", default-features = false, features = ["smtp-transport", "builder", "tokio1", "tokio1-rustls", "ring", "webpki-roots"] }
+mime_guess = "2"
 httpdate = "1"
 # P6 backups: a restore copies the backup's tables on a connection of its own (the kit's own rusqlite)
 rusqlite = { version = "0.39", features = ["bundled"] }
