@@ -1,0 +1,176 @@
+{
+ "body": {
+  "sessions": [
+   {
+    "bookId": "bdb6f42e-94a5-4b95-b7ec-f58a7f924b39",
+    "chapters": [
+     {
+      "end": 15,
+      "id": 0,
+      "start": 0,
+      "title": "Part 1"
+     },
+     {
+      "end": 30,
+      "id": 1,
+      "start": 15,
+      "title": "Part 2"
+     },
+     {
+      "end": 45,
+      "id": 2,
+      "start": 30,
+      "title": "Part 3"
+     }
+    ],
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-05",
+    "dayOfWeek": "Thursday",
+    "deviceInfo": {
+     "browserName": "Firefox",
+     "browserVersion": "132.0",
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "Linux x86_64 Firefox",
+     "id": "4faed104-e449-4bf7-843d-e3b4ee4c3999",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "osName": "Linux",
+     "osVersion": "x86_64",
+     "sdkVersion": "",
+     "userId": "d9000d12-7f49-4a30-af6c-be9d90b91fdd"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "699b4d99-4fa3-45c0-914e-f58367e24c23",
+    "libraryId": "d0af90a0-6e57-4b9a-af9d-33457fa1feef",
+    "libraryItemId": "52e7d7ab-90ba-4382-8fd0-a7d3404db443",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "f29b4921-23c2-43c9-81ee-e6ea110b9a4f",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "startTime": 15,
+    "startedAt": 1793918191228,
+    "timeListening": 0,
+    "updatedAt": 1793918191228,
+    "user": {
+     "id": "d9000d12-7f49-4a30-af6c-be9d90b91fdd",
+     "username": "root"
+    },
+    "userId": "d9000d12-7f49-4a30-af6c-be9d90b91fdd"
+   },
+   {
+    "bookId": "bdb6f42e-94a5-4b95-b7ec-f58a7f924b39",
+    "chapters": [
+     {
+      "end": 15,
+      "id": 0,
+      "start": 0,
+      "title": "Part 1"
+     },
+     {
+      "end": 30,
+      "id": 1,
+      "start": 15,
+      "title": "Part 2"
+     },
+     {
+      "end": 45,
+      "id": 2,
+      "start": 30,
+      "title": "Part 3"
+     }
+    ],
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-05",
+    "dayOfWeek": "Thursday",
+    "deviceInfo": {
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-stream",
+     "id": "ee58d1ad-0c2e-4d91-8e25-fef2c8f28886",
+     "ipAddress": "::ffff:172.17.0.1",
+     "userId": "d9000d12-7f49-4a30-af6c-be9d90b91fdd"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "91605b22-f0ae-4103-9244-c6ae88fd27c0",
+    "libraryId": "d0af90a0-6e57-4b9a-af9d-33457fa1feef",
+    "libraryItemId": "52e7d7ab-90ba-4382-8fd0-a7d3404db443",
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "f29b4921-23c2-43c9-81ee-e6ea110b9a4f",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 2,
+    "serverVersion": "2.37.2",
+    "startTime": 15,
+    "startedAt": 1793918191377,
+    "timeListening": 0,
+    "updatedAt": 1793918191377,
+    "user": {
+     "id": "d9000d12-7f49-4a30-af6c-be9d90b91fdd",
+     "username": "root"
+    },
+    "userId": "d9000d12-7f49-4a30-af6c-be9d90b91fdd"
+   }
+  ],
+  "shareSessions": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/sessions/open"
+ },
+ "status": 200
+}
