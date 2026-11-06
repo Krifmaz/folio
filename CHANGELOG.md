@@ -18,6 +18,7 @@
   messages, the book and the edition asked for from the metadata server, its author added first when the library
   doesn't have it, and the book kept as added by hand, so the metadata profile never drops it. The author is then
   refreshed in the background. Every answer and the stored rows are checked against Readarr's own.
+- The mobile app is tested against a real Folio server on every change to either: sign-in, the library pages, reading an EPUB and streaming a book (`abs-app/folio/e2e/server.cjs`).
 - Players that can't play a book's files as they are (FLAC, for one) get them converted on the fly into a stream,
   like Audiobookshelf: it follows jumps far ahead or back and is removed when the session closes.
 - The phone app plays books again: each track of an open session is sent from `/public/session/<id>/track/<n>`,

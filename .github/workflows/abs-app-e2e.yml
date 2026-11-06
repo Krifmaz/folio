@@ -1,0 +1,67 @@
+name: abs-app-e2e
+
+# The mobile app (abs-app/) driven in Chromium against a real Folio server built from this commit, filled with the
+# original Audiobookshelf's recorded library: sign-in, the library pages, the ebook reader and
+# streaming (abs-app/folio/e2e/server.cjs).
+# It runs when either side changes, so a server change that breaks the phone app shows here. Track B (mobile) owns
+# this file (docs/TRACKS.md).
+on:
+  pull_request:
+    paths:
+      - "abs-app/**"
+      - "server/**"
+      - "abs-web/folio/e2e/seed.py"
+      - ".github/workflows/abs-app-e2e.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: abs-app-e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -yq ffmpeg
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: server
+      - name: Folio server
+        working-directory: server
+        run: cargo build --locked --bin folio
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: abs-app/package-lock.json
+      - name: Web build of the app
+        working-directory: abs-app
+        run: |
+          npm ci --no-audit --no-fund
+          npx nuxt generate
+      - name: Playwright and Chromium
+        working-directory: abs-app
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: Folio with the recorded library
+        run: |
+          media="$RUNNER_TEMP/media"
+          bash server/tests/parity/abs/make_media.sh "$media"
+          python3 -I abs-app/folio/e2e/make_epub.py "$media/Martha Wells/The Murderbot Diaries/1 - All Systems Red/All Systems Red.epub"
+          abs-app/folio/e2e/seed_folio.sh "$PWD/server/target/debug/folio" "$RUNNER_TEMP/folio-data" 8091 "$media"
+      - name: Sign-in, library pages, ebook reader and streaming against Folio
+        working-directory: abs-app
+        run: |
+          python3 -m http.server 8765 --directory dist > /dev/null 2>&1 &
+          for _ in $(seq 1 30); do curl -sf http://localhost:8765/ > /dev/null && break; sleep 1; done
+          BASE_URL=http://localhost:8765 FOLIO_URL=http://localhost:8091 node folio/e2e/server.cjs
+      - name: Folio's log
+        if: failure()
+        run: cat "$RUNNER_TEMP/folio-data/folio.log" || true

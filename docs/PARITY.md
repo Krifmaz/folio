@@ -517,29 +517,29 @@ repository at the pinned commit.
 
 | ID | Kind | Item | Upstream source | Track | Status | Proof |
 | --- | --- | --- | --- | --- | --- | --- |
-| M0001 | page | `/account` | `pages/account.vue` | M mobile fork | done | `docs/parity/screens/M0001.png` (signed in to Folio: its address, the user and the server version) |
-| M0002 | page | `/bookshelf` | `pages/bookshelf.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added) |
-| M0003 | page | `/connect` | `pages/connect.vue` | M mobile fork | done | `docs/parity/screens/M0003.png` (connect and sign in to a Folio server, then its bookshelf) |
+| M0001 | page | `/account` | `pages/account.vue` | M mobile fork | done | `docs/parity/screens/M0001.png` (signed in to Folio: its address, the user and the server version); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
+| M0002 | page | `/bookshelf` | `pages/bookshelf.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
+| M0003 | page | `/connect` | `pages/connect.vue` | M mobile fork | done | `docs/parity/screens/M0003.png` (connect and sign in to a Folio server, then its bookshelf); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
 | M0004 | page | `/downloading` | `pages/downloading.vue` | M mobile fork | todo |  |
 | M0005 | page | `/downloads` | `pages/downloads.vue` | M mobile fork | todo |  |
-| M0006 | page | `/` | `pages/index.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added) (`/` opens the home shelves) |
-| M0007 | page | `/logs` | `pages/logs.vue` | M mobile fork | done | `docs/parity/screens/M0007.png` (the app's own log after signing in to Folio) |
+| M0006 | page | `/` | `pages/index.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added) (`/` opens the home shelves); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
+| M0007 | page | `/logs` | `pages/logs.vue` | M mobile fork | done | `docs/parity/screens/M0007.png` (the app's own log after signing in to Folio); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
 | M0008 | page | `/search` | `pages/search.vue` | M mobile fork | todo |  |
 | M0009 | page | `/settings` | `pages/settings.vue` | M mobile fork | done | `abs-app/folio/e2e/settings.cjs` (changed on the page, saved, kept after a restart), `docs/parity/screens/M0009.png` |
-| M0010 | page | `/stats` | `pages/stats.vue` | M mobile fork | done | `docs/parity/screens/M0010.png` (Folio's listening stats for the original's recorded sessions) |
+| M0010 | page | `/stats` | `pages/stats.vue` | M mobile fork | done | `docs/parity/screens/M0010.png` (Folio's listening stats for the original's recorded sessions); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
 | M0011 | page | `/playlist/:id` | `pages/playlist/_id.vue` | M mobile fork | todo |  |
 | M0012 | page | `/collection/:id` | `pages/collection/_id.vue` | M mobile fork | todo |  |
 | M0013 | page | `/media/:id/history` | `pages/media/_id/history.vue` | M mobile fork | todo |  |
 | M0014 | page | `/bookshelf/add-podcast` | `pages/bookshelf/add-podcast.vue` | M mobile fork | todo |  |
-| M0015 | page | `/bookshelf/authors` | `pages/bookshelf/authors.vue` | M mobile fork | done | `docs/parity/screens/M0015.png` (Folio's authors with the original's recorded books) |
+| M0015 | page | `/bookshelf/authors` | `pages/bookshelf/authors.vue` | M mobile fork | done | `docs/parity/screens/M0015.png` (Folio's authors with the original's recorded books); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
 | M0016 | page | `/bookshelf/collections` | `pages/bookshelf/collections.vue` | M mobile fork | todo |  |
-| M0017 | page | `/bookshelf` | `pages/bookshelf/index.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added) |
+| M0017 | page | `/bookshelf` | `pages/bookshelf/index.vue` | M mobile fork | done | `docs/parity/screens/M0017.png` (Folio's home shelves: Continue Listening, Continue Reading, Recently Added); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
 | M0018 | page | `/bookshelf/latest` | `pages/bookshelf/latest.vue` | M mobile fork | todo |  |
-| M0019 | page | `/bookshelf/library` | `pages/bookshelf/library.vue` | M mobile fork | done | `docs/parity/screens/M0019.png` (Folio's library with the original's recorded books) |
+| M0019 | page | `/bookshelf/library` | `pages/bookshelf/library.vue` | M mobile fork | done | `docs/parity/screens/M0019.png` (Folio's library with the original's recorded books); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
 | M0020 | page | `/bookshelf/playlists` | `pages/bookshelf/playlists.vue` | M mobile fork | todo |  |
-| M0021 | page | `/bookshelf/series/:id` | `pages/bookshelf/series/_id.vue` | M mobile fork | done | `docs/parity/screens/M0021.png` (one series from Folio with its books in order) |
-| M0022 | page | `/bookshelf/series` | `pages/bookshelf/series/index.vue` | M mobile fork | done | `docs/parity/screens/M0022.png` (Folio's series with the original's recorded books) |
-| M0023 | page | `/item/:id` | `pages/item/_id/index.vue` | M mobile fork | done | `docs/parity/screens/M0023.png` (a book from Folio: author, series, narrator, genre, chapters, tracks) |
+| M0021 | page | `/bookshelf/series/:id` | `pages/bookshelf/series/_id.vue` | M mobile fork | done | `docs/parity/screens/M0021.png` (one series from Folio with its books in order); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
+| M0022 | page | `/bookshelf/series` | `pages/bookshelf/series/index.vue` | M mobile fork | done | `docs/parity/screens/M0022.png` (Folio's series with the original's recorded books); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
+| M0023 | page | `/item/:id` | `pages/item/_id/index.vue` | M mobile fork | done | `docs/parity/screens/M0023.png` (a book from Folio: author, series, narrator, genre, chapters, tracks); `abs-app/folio/e2e/server.cjs` (against a running Folio in CI) |
 | M0024 | page | `/item/:id/:episode` | `pages/item/_id/_episode/index.vue` | M mobile fork | todo |  |
 | M0025 | page | `/localMedia/folders/:id` | `pages/localMedia/folders/_id.vue` | M mobile fork | todo |  |
 | M0026 | page | `/localMedia/folders` | `pages/localMedia/folders/index.vue` | M mobile fork | todo |  |
@@ -574,7 +574,7 @@ repository at the pinned commit.
 | M0055 | action | sleep timer with shake to reset | `android/, plugins/` | M mobile fork | todo |  |
 | M0056 | action | Chromecast | `android/, plugins/` | M mobile fork | todo |  |
 | M0057 | action | local progress sync with the server | `android/, plugins/` | M mobile fork | todo |  |
-| M0058 | action | ebook reader (EPUB, PDF, comic) | `android/, plugins/` | M mobile fork | todo |  |
+| M0058 | action | ebook reader (EPUB, PDF, comic) | `android/, plugins/` | M mobile fork | wip | EPUB done: `abs-app/folio/e2e/server.cjs` (against a running Folio in CI), `docs/parity/screens/M0058.png`; PDF and comic books next |
 
 ### Readarr
 
