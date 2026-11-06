@@ -1,0 +1,14 @@
+{
+ "body": "Invalid url",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "mediaType": "podcast",
+   "name": "x",
+   "url": "not a url"
+  },
+  "method": "POST",
+  "path": "/api/custom-metadata-providers"
+ },
+ "status": 400
+}

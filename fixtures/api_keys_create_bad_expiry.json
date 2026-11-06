@@ -1,0 +1,14 @@
+{
+ "body": "Bad Request",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "expiresIn": -1,
+   "name": "x",
+   "userId": "{user_id}"
+  },
+  "method": "POST",
+  "path": "/api/api-keys"
+ },
+ "status": 400
+}

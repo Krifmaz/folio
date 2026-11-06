@@ -1,0 +1,104 @@
+{
+ "body": {
+  "success": true,
+  "user": {
+   "bookmarks": [
+    {
+     "createdAt": 1793925525314,
+     "libraryItemId": "df958cf2-c175-484b-ba00-35f2bb0e276c",
+     "time": 12,
+     "title": "A mark"
+    }
+   ],
+   "createdAt": 1793925520869,
+   "email": null,
+   "hasOpenIDLink": false,
+   "id": "008386d1-34da-4291-a6f8-56a51fb0a771",
+   "isActive": true,
+   "isLocked": false,
+   "itemTagsSelected": [],
+   "lastSeen": null,
+   "librariesAccessible": [],
+   "mediaProgress": [
+    {
+     "currentTime": 15,
+     "duration": 60,
+     "ebookLocation": null,
+     "ebookProgress": 0,
+     "episodeId": null,
+     "finishedAt": null,
+     "hideFromContinueListening": false,
+     "id": "d4277cf0-83e1-4a89-b12e-4d97e81c12e3",
+     "isFinished": false,
+     "lastUpdate": 1793925525415,
+     "libraryItemId": "df958cf2-c175-484b-ba00-35f2bb0e276c",
+     "mediaItemId": "62986c4b-ca9e-47e4-9304-12ea3190ab59",
+     "mediaItemType": "book",
+     "progress": 0.3333333333333333,
+     "startedAt": 1793925525293,
+     "userId": "008386d1-34da-4291-a6f8-56a51fb0a771"
+    },
+    {
+     "currentTime": 3,
+     "duration": 0,
+     "ebookLocation": "epubcfi(/6/2!/4/1:0)",
+     "ebookProgress": 0.25,
+     "episodeId": null,
+     "finishedAt": null,
+     "hideFromContinueListening": false,
+     "id": "b3fd0ee7-d086-4739-8bb8-c83fa66b7f5e",
+     "isFinished": false,
+     "lastUpdate": 1793925525639,
+     "libraryItemId": "9d0ff64c-8e12-4028-b6cd-d7ff2628b549",
+     "mediaItemId": "b9be2ac1-4cea-4533-abcc-21b732645c86",
+     "mediaItemType": "book",
+     "progress": 0,
+     "startedAt": 1793925525511,
+     "userId": "008386d1-34da-4291-a6f8-56a51fb0a771"
+    },
+    {
+     "currentTime": 0,
+     "duration": 0,
+     "ebookLocation": null,
+     "ebookProgress": 0,
+     "episodeId": null,
+     "finishedAt": 1793925525625,
+     "hideFromContinueListening": false,
+     "id": "e9af0ee1-d275-4a64-aac8-bc6568999399",
+     "isFinished": true,
+     "lastUpdate": 1793925525625,
+     "libraryItemId": "0aab309c-e609-4a94-843a-6e4e58c1fed2",
+     "mediaItemId": "4f367244-5652-4e6c-836e-54268d3cc640",
+     "mediaItemType": "book",
+     "progress": 1,
+     "startedAt": 1793925525625,
+     "userId": "008386d1-34da-4291-a6f8-56a51fb0a771"
+    }
+   ],
+   "permissions": {
+    "accessAllLibraries": true,
+    "accessAllTags": true,
+    "accessExplicitContent": true,
+    "createEreader": true,
+    "delete": true,
+    "download": true,
+    "selectedTagsNotAccessible": false,
+    "update": true,
+    "upload": true
+   },
+   "seriesHideFromContinueListening": [],
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMDgzODZkMS0zNGRhLTQyOTEtYTZmOC01NmE1MWZiMGE3NzEiLCJ1c2VybmFtZSI6InJvb3QiLCJpYXQiOjE3OTM5MjU1MjB9.U_UJ13BQPHTautUpjN9eTMG_PiGY2s8VS5ijBOeAV6I",
+   "type": "root",
+   "username": "root"
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "type": "user"
+  },
+  "method": "PATCH",
+  "path": "/api/users/{root_id}"
+ },
+ "status": 200
+}

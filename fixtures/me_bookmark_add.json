@@ -1,0 +1,18 @@
+{
+ "body": {
+  "createdAt": 1793925525314,
+  "libraryItemId": "df958cf2-c175-484b-ba00-35f2bb0e276c",
+  "time": 12,
+  "title": "A mark"
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": {
+   "time": 12,
+   "title": "A mark"
+  },
+  "method": "POST",
+  "path": "/api/me/item/{item}/bookmark"
+ },
+ "status": 200
+}

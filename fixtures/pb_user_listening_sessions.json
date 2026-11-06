@@ -1,0 +1,85 @@
+{
+ "body": {
+  "itemsPerPage": 10,
+  "numPages": 1,
+  "page": 0,
+  "sessions": [
+   {
+    "audioTracks": [],
+    "bookId": "62986c4b-ca9e-47e4-9304-12ea3190ab59",
+    "chapters": [],
+    "coverAspectRatio": null,
+    "coverPath": null,
+    "currentTime": 15,
+    "date": "2026-11-06",
+    "dayOfWeek": "Friday",
+    "deviceInfo": {
+     "clientName": "parity",
+     "clientVersion": "2.37.2",
+     "deviceId": "parity-1",
+     "deviceName": "",
+     "id": "0af89dbc-7ea9-43d1-a902-babe4e2fe2d0",
+     "ipAddress": "::ffff:172.17.0.1",
+     "manufacturer": "",
+     "model": "",
+     "sdkVersion": "",
+     "userId": "008386d1-34da-4291-a6f8-56a51fb0a771"
+    },
+    "displayAuthor": "Becky Chambers",
+    "displayTitle": "A Psalm for the Wild-Built",
+    "duration": 45,
+    "episodeId": null,
+    "id": "bde0baa0-7017-4ece-908d-03408debe4b7",
+    "lastSave": 0,
+    "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+    "libraryItemId": "df958cf2-c175-484b-ba00-35f2bb0e276c",
+    "mediaItemShareId": null,
+    "mediaMetadata": {
+     "abridged": false,
+     "asin": null,
+     "authors": [
+      {
+       "id": "8d9bf2a4-27d4-44fe-aaf1-40503cb79660",
+       "name": "Becky Chambers"
+      }
+     ],
+     "description": null,
+     "explicit": false,
+     "genres": [],
+     "isbn": null,
+     "language": null,
+     "narrators": [],
+     "publishedDate": null,
+     "publishedYear": null,
+     "publisher": null,
+     "series": [],
+     "subtitle": null,
+     "title": "A Psalm for the Wild-Built"
+    },
+    "mediaPlayer": "html5",
+    "mediaType": "book",
+    "playMethod": 0,
+    "serverVersion": "2.37.2",
+    "shareSessionId": null,
+    "startTime": 30,
+    "startedAt": 1793925525397,
+    "stream": null,
+    "timeListening": 15,
+    "updatedAt": 1793925525414,
+    "user": {
+     "id": "008386d1-34da-4291-a6f8-56a51fb0a771",
+     "username": "root"
+    },
+    "userId": "008386d1-34da-4291-a6f8-56a51fb0a771"
+   }
+  ],
+  "total": 1
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/users/{userid}/listening-sessions"
+ },
+ "status": 200
+}

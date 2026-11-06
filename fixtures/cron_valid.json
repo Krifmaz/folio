@@ -1,0 +1,12 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "expression": "30 1 * * *"
+  },
+  "method": "POST",
+  "path": "/api/validate-cron"
+ },
+ "status": 200
+}

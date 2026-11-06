@@ -1,0 +1,144 @@
+{
+ "body": {
+  "include": "",
+  "limit": 10,
+  "minified": false,
+  "page": 0,
+  "results": [
+   {
+    "addedAt": 1793925521088,
+    "books": [
+     {
+      "addedAt": 1793925521085,
+      "birthtimeMs": 1793925509891,
+      "ctimeMs": 1793925510594,
+      "folderId": "facadb70-b8a9-4898-8ff3-007b890ff904",
+      "id": "0aab309c-e609-4a94-843a-6e4e58c1fed2",
+      "ino": "9437891",
+      "isFile": false,
+      "isInvalid": false,
+      "isMissing": false,
+      "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+      "media": {
+       "coverPath": null,
+       "duration": 60,
+       "id": "4f367244-5652-4e6c-836e-54268d3cc640",
+       "metadata": {
+        "abridged": false,
+        "asin": null,
+        "authorName": "Ann Leckie",
+        "authorNameLF": "Leckie, Ann",
+        "description": null,
+        "explicit": false,
+        "genres": [
+         "Science Fiction"
+        ],
+        "isbn": null,
+        "language": null,
+        "narratorName": "Adjoa Andoh",
+        "publishedDate": null,
+        "publishedYear": "2013",
+        "publisher": null,
+        "seriesName": "Imperial Radch #1",
+        "subtitle": null,
+        "title": "Ancillary Justice",
+        "titleIgnorePrefix": "Ancillary Justice"
+       },
+       "numAudioFiles": 1,
+       "numChapters": 3,
+       "numTracks": 1,
+       "size": 256184,
+       "tags": []
+      },
+      "mediaType": "book",
+      "mtimeMs": 1793925510594,
+      "numFiles": 1,
+      "oldLibraryItemId": null,
+      "path": "/media/Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+      "relPath": "Ann Leckie/Imperial Radch/1 - Ancillary Justice",
+      "size": 256184,
+      "updatedAt": 1793925521085
+     }
+    ],
+    "description": null,
+    "id": "8f0bb69a-c0e7-4f0c-aef5-93ce7c3b4019",
+    "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+    "name": "Imperial Radch",
+    "nameIgnorePrefix": "Imperial Radch",
+    "totalDuration": 60,
+    "updatedAt": 1793925521088
+   },
+   {
+    "addedAt": 1793925521040,
+    "books": [
+     {
+      "addedAt": 1793925521037,
+      "birthtimeMs": 1793925510889,
+      "ctimeMs": 1793925510909,
+      "folderId": "facadb70-b8a9-4898-8ff3-007b890ff904",
+      "id": "9d0ff64c-8e12-4028-b6cd-d7ff2628b549",
+      "ino": "9437900",
+      "isFile": false,
+      "isInvalid": false,
+      "isMissing": false,
+      "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+      "media": {
+       "coverPath": null,
+       "duration": 0,
+       "ebookFormat": "epub",
+       "id": "b9be2ac1-4cea-4533-abcc-21b732645c86",
+       "metadata": {
+        "abridged": false,
+        "asin": null,
+        "authorName": "Martha Wells",
+        "authorNameLF": "Wells, Martha",
+        "description": null,
+        "explicit": false,
+        "genres": [],
+        "isbn": null,
+        "language": "en",
+        "narratorName": "",
+        "publishedDate": null,
+        "publishedYear": "2017",
+        "publisher": null,
+        "seriesName": "The Murderbot Diaries #1",
+        "subtitle": null,
+        "title": "All Systems Red",
+        "titleIgnorePrefix": "All Systems Red"
+       },
+       "numAudioFiles": 0,
+       "numChapters": 0,
+       "numTracks": 0,
+       "size": 1311,
+       "tags": []
+      },
+      "mediaType": "book",
+      "mtimeMs": 1793925510909,
+      "numFiles": 1,
+      "oldLibraryItemId": null,
+      "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+      "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+      "size": 1311,
+      "updatedAt": 1793925521037
+     }
+    ],
+    "description": null,
+    "id": "eecd71db-7055-40d0-8e15-456bd120eb60",
+    "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+    "name": "The Murderbot Diaries",
+    "nameIgnorePrefix": "Murderbot Diaries, The",
+    "updatedAt": 1793925521040
+   }
+  ],
+  "sortBy": "totalDuration",
+  "sortDesc": true,
+  "total": 2
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/series?limit=10&sort=totalDuration&desc=1"
+ },
+ "status": 200
+}

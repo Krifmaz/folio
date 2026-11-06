@@ -1,0 +1,177 @@
+{
+ "body": {
+  "data": {
+   "events": [
+    {
+     "defaults": {
+      "body": "{{episodeTitle}} has been added to {{libraryName}} library.",
+      "title": "New {{podcastTitle}} Episode!"
+     },
+     "description": "Triggered when a podcast episode is auto-downloaded",
+     "descriptionKey": "NotificationOnEpisodeDownloadedDescription",
+     "libraryMediaType": "podcast",
+     "name": "onPodcastEpisodeDownloaded",
+     "requiresLibrary": true,
+     "testData": {
+      "episodeDescription": "Some description of the podcast episode.",
+      "episodeId": "ep_notification_test",
+      "episodeSubtitle": "Episode Subtitle",
+      "episodeTitle": "Successful Test Episode",
+      "libraryId": "lib_test",
+      "libraryItemId": "li_notification_test",
+      "libraryName": "Podcasts",
+      "mediaTags": "TestTag1, TestTag2",
+      "podcastAuthor": "Audiobookshelf",
+      "podcastDescription": "Description of the Abs Test Podcast belongs here.",
+      "podcastGenres": "TestGenre1, TestGenre2",
+      "podcastTitle": "Abs Test Podcast"
+     },
+     "variables": [
+      "libraryItemId",
+      "libraryId",
+      "podcastTitle",
+      "podcastAuthor",
+      "podcastDescription",
+      "podcastGenres",
+      "episodeTitle",
+      "episodeSubtitle",
+      "episodeDescription",
+      "libraryName",
+      "episodeId",
+      "mediaTags"
+     ]
+    },
+    {
+     "defaults": {
+      "body": "Backup has been completed successfully.\n\nPath: {{backupPath}}\nSize: {{backupSize}} bytes\nCount: {{backupCount}}\nRemoved Oldest: {{removedOldest}}",
+      "title": "Backup Completed"
+     },
+     "description": "Triggered when a backup is completed",
+     "descriptionKey": "NotificationOnBackupCompletedDescription",
+     "name": "onBackupCompleted",
+     "requiresLibrary": false,
+     "testData": {
+      "backupCount": "1",
+      "backupPath": "path/to/backup",
+      "backupSize": "1.23 MB",
+      "completionTime": "12:00 AM",
+      "removedOldest": "false"
+     },
+     "variables": [
+      "completionTime",
+      "backupPath",
+      "backupSize",
+      "backupCount",
+      "removedOldest"
+     ]
+    },
+    {
+     "defaults": {
+      "body": "Backup failed, check ABS logs for more information.\nError message: {{errorMsg}}",
+      "title": "Backup Failed"
+     },
+     "description": "Triggered when a backup fails",
+     "descriptionKey": "NotificationOnBackupFailedDescription",
+     "name": "onBackupFailed",
+     "requiresLibrary": false,
+     "testData": {
+      "errorMsg": "Example error message"
+     },
+     "variables": [
+      "errorMsg"
+     ]
+    },
+    {
+     "defaults": {
+      "body": "Failed to request RSS feed for {{title}}.\nFeed URL: {{feedUrl}}\nNumber of failed attempts: {{numFailed}}",
+      "title": "RSS Feed Request Failed"
+     },
+     "description": "Triggered when the RSS feed request fails for an automatic episode download",
+     "descriptionKey": "NotificationOnRSSFeedFailedDescription",
+     "name": "onRSSFeedFailed",
+     "requiresLibrary": true,
+     "testData": {
+      "feedUrl": "https://example.com/rss",
+      "numFailed": 3,
+      "title": "Test RSS Feed"
+     },
+     "variables": [
+      "feedUrl",
+      "numFailed",
+      "title"
+     ]
+    },
+    {
+     "defaults": {
+      "body": "Automatic episode downloads for {{title}} have been disabled due to too many failed RSS feed requests.\nFeed URL: {{feedUrl}}\nNumber of failed attempts: {{numFailed}}",
+      "title": "Podcast Episode Download Schedule Disabled"
+     },
+     "description": "Triggered when automatic episode downloads are disabled due to too many failed attempts",
+     "descriptionKey": "NotificationOnRSSFeedDisabledDescription",
+     "name": "onRSSFeedDisabled",
+     "requiresLibrary": true,
+     "testData": {
+      "feedUrl": "https://example.com/rss",
+      "numFailed": 5,
+      "title": "Test RSS Feed"
+     },
+     "variables": [
+      "feedUrl",
+      "numFailed",
+      "title"
+     ]
+    },
+    {
+     "defaults": {
+      "body": "Test notification body for abs {{version}}.",
+      "title": "Test Notification on Abs {{version}}"
+     },
+     "description": "Event for testing the notification system",
+     "descriptionKey": "NotificationOnTestDescription",
+     "name": "onTest",
+     "requiresLibrary": false,
+     "testData": {
+      "version": "v2.37.2"
+     },
+     "variables": [
+      "version"
+     ]
+    }
+   ]
+  },
+  "settings": {
+   "appriseApiUrl": "http://127.0.0.1:9/notify",
+   "appriseType": "api",
+   "id": "notification-settings",
+   "maxFailedAttempts": 2,
+   "maxNotificationQueue": 20,
+   "notificationDelay": 1000,
+   "notifications": [
+    {
+     "bodyTemplate": "Body {{ version}} {{podcastTitle}} {{ version }}",
+     "createdAt": 1793925526408,
+     "enabled": true,
+     "eventName": "onTest",
+     "id": "2f990ae7-d459-49d2-8564-395420be0c45",
+     "lastAttemptFailed": true,
+     "lastFiredAt": 1793925526421,
+     "libraryId": null,
+     "numConsecutiveFailedAttempts": 1,
+     "numTimesFired": 1,
+     "titleTemplate": "Test {{ version }}",
+     "type": null,
+     "urls": [
+      "json://localhost"
+     ]
+    }
+   ]
+  }
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/notifications"
+ },
+ "status": 200
+}

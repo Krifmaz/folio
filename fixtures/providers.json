@@ -1,0 +1,12 @@
+{
+ "body": {
+  "providers": []
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/custom-metadata-providers"
+ },
+ "status": 200
+}

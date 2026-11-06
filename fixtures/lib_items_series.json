@@ -1,0 +1,79 @@
+{
+ "body": {
+  "collapseseries": false,
+  "filterBy": "series.ZWVjZDcxZGItNzA1NS00MGQwLThlMTUtNDU2YmQxMjBlYjYw",
+  "include": "",
+  "limit": 0,
+  "mediaType": "book",
+  "minified": true,
+  "offset": 0,
+  "page": 0,
+  "results": [
+   {
+    "addedAt": 1793925521037,
+    "birthtimeMs": 1793925510889,
+    "ctimeMs": 1793925510909,
+    "folderId": "facadb70-b8a9-4898-8ff3-007b890ff904",
+    "id": "9d0ff64c-8e12-4028-b6cd-d7ff2628b549",
+    "ino": "9437900",
+    "isFile": false,
+    "isInvalid": false,
+    "isMissing": false,
+    "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+    "media": {
+     "coverPath": null,
+     "duration": 0,
+     "ebookFormat": "epub",
+     "id": "b9be2ac1-4cea-4533-abcc-21b732645c86",
+     "metadata": {
+      "abridged": false,
+      "asin": null,
+      "authorName": "Martha Wells",
+      "authorNameLF": "Wells, Martha",
+      "description": null,
+      "explicit": false,
+      "genres": [],
+      "isbn": null,
+      "language": "en",
+      "narratorName": "",
+      "publishedDate": null,
+      "publishedYear": "2017",
+      "publisher": null,
+      "series": {
+       "id": "eecd71db-7055-40d0-8e15-456bd120eb60",
+       "name": "The Murderbot Diaries",
+       "sequence": "1"
+      },
+      "seriesName": "The Murderbot Diaries #1",
+      "subtitle": null,
+      "title": "All Systems Red",
+      "titleIgnorePrefix": "All Systems Red"
+     },
+     "numAudioFiles": 0,
+     "numChapters": 0,
+     "numTracks": 0,
+     "size": 1311,
+     "tags": []
+    },
+    "mediaType": "book",
+    "mtimeMs": 1793925510909,
+    "numFiles": 1,
+    "oldLibraryItemId": null,
+    "path": "/media/Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+    "relPath": "Martha Wells/The Murderbot Diaries/1 - All Systems Red",
+    "size": 1311,
+    "updatedAt": 1793925521037
+   }
+  ],
+  "sortBy": "sequence",
+  "sortDesc": false,
+  "total": 1
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/items?minified=1&filter=series.{b64:lseries}&sort=sequence"
+ },
+ "status": 200
+}

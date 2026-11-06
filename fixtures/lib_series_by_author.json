@@ -1,0 +1,20 @@
+{
+ "body": {
+  "filterBy": "authors.OGQ5YmYyYTQtMjdkNC00NGZlLWFhZjEtNDA1MDNjYjc5NjYw",
+  "include": "",
+  "limit": 10,
+  "minified": false,
+  "page": 0,
+  "results": [],
+  "sortBy": "name",
+  "sortDesc": false,
+  "total": 0
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/series?limit=10&sort=name&filter=authors.{b64:author}"
+ },
+ "status": 200
+}

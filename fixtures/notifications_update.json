@@ -1,0 +1,15 @@
+{
+ "body": "OK",
+ "content_type": "text/plain",
+ "request": {
+  "body": {
+   "appriseApiUrl": "http://127.0.0.1:9/notify",
+   "maxFailedAttempts": "2",
+   "maxNotificationQueue": null,
+   "notificationDelay": 5
+  },
+  "method": "PATCH",
+  "path": "/api/notifications"
+ },
+ "status": 200
+}

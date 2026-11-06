@@ -1,0 +1,12 @@
+{
+ "body": "Backup path unchanged",
+ "content_type": "text/html",
+ "request": {
+  "body": {
+   "path": "{backup_location}/"
+  },
+  "method": "PATCH",
+  "path": "/api/backups/path"
+ },
+ "status": 200
+}

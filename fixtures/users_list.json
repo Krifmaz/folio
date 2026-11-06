@@ -1,0 +1,67 @@
+{
+ "body": {
+  "users": [
+   {
+    "createdAt": 1793925520869,
+    "email": null,
+    "hasOpenIDLink": false,
+    "id": "008386d1-34da-4291-a6f8-56a51fb0a771",
+    "isActive": true,
+    "isLocked": false,
+    "itemTagsSelected": [],
+    "lastSeen": null,
+    "librariesAccessible": [],
+    "permissions": {
+     "accessAllLibraries": true,
+     "accessAllTags": true,
+     "accessExplicitContent": true,
+     "createEreader": true,
+     "delete": true,
+     "download": true,
+     "selectedTagsNotAccessible": false,
+     "update": true,
+     "upload": true
+    },
+    "seriesHideFromContinueListening": [],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMDgzODZkMS0zNGRhLTQyOTEtYTZmOC01NmE1MWZiMGE3NzEiLCJ1c2VybmFtZSI6InJvb3QiLCJpYXQiOjE3OTM5MjU1MjB9.U_UJ13BQPHTautUpjN9eTMG_PiGY2s8VS5ijBOeAV6I",
+    "type": "root",
+    "username": "root"
+   },
+   {
+    "createdAt": 1793925525894,
+    "email": "reader@example.org",
+    "hasOpenIDLink": false,
+    "id": "c4c30ced-3d9e-441d-a5b6-78f596c3e854",
+    "isActive": true,
+    "isLocked": false,
+    "itemTagsSelected": [],
+    "lastSeen": null,
+    "librariesAccessible": [
+     "b2241396-023a-4039-97fc-5a111cd73edd"
+    ],
+    "permissions": {
+     "accessAllLibraries": true,
+     "accessAllTags": true,
+     "accessExplicitContent": false,
+     "createEreader": false,
+     "delete": false,
+     "download": false,
+     "selectedTagsNotAccessible": false,
+     "update": false,
+     "upload": false
+    },
+    "seriesHideFromContinueListening": [],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNGMzMGNlZC0zZDllLTQ0MWQtYTViNi03OGY1OTZjM2U4NTQiLCJ1c2VybmFtZSI6InJlYWRlciIsImlhdCI6MTc5MzkyNTUyNX0.Jrr7qIuAs4FVipklwiEghzBJNnQx1r6QDpGai_4MlQE",
+    "type": "user",
+    "username": "reader"
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/users"
+ },
+ "status": 200
+}

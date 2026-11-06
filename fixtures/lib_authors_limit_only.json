@@ -1,0 +1,49 @@
+{
+ "body": {
+  "authors": [
+   {
+    "addedAt": 1793925521011,
+    "asin": null,
+    "description": null,
+    "id": "8d9bf2a4-27d4-44fe-aaf1-40503cb79660",
+    "imagePath": null,
+    "lastFirst": "Chambers, Becky",
+    "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+    "name": "Becky Chambers",
+    "numBooks": 1,
+    "updatedAt": 1793925521011
+   },
+   {
+    "addedAt": 1793925521040,
+    "asin": null,
+    "description": null,
+    "id": "86aa5503-177a-4ad7-a817-d70afa018df9",
+    "imagePath": null,
+    "lastFirst": "Wells, Martha",
+    "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+    "name": "Martha Wells",
+    "numBooks": 1,
+    "updatedAt": 1793925521040
+   },
+   {
+    "addedAt": 1793925521088,
+    "asin": null,
+    "description": null,
+    "id": "4a80c87b-2818-49a9-b1a8-a4f72503341d",
+    "imagePath": null,
+    "lastFirst": "Leckie, Ann",
+    "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+    "name": "Ann Leckie",
+    "numBooks": 1,
+    "updatedAt": 1793925521088
+   }
+  ]
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/libraries/{library}/authors?limit=2"
+ },
+ "status": 200
+}

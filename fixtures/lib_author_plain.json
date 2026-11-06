@@ -1,0 +1,19 @@
+{
+ "body": {
+  "addedAt": 1793925521011,
+  "asin": null,
+  "description": null,
+  "id": "8d9bf2a4-27d4-44fe-aaf1-40503cb79660",
+  "imagePath": null,
+  "libraryId": "b2241396-023a-4039-97fc-5a111cd73edd",
+  "name": "Becky Chambers",
+  "updatedAt": 1793925521011
+ },
+ "content_type": "application/json",
+ "request": {
+  "body": null,
+  "method": "GET",
+  "path": "/api/authors/{author}"
+ },
+ "status": 200
+}
