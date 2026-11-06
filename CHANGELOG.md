@@ -6,6 +6,7 @@
 - The mobile app shows its saved language again after a restart; it came back in English before.
 
 ### Added
+- The mobile app's series, one series and authors pages are checked against Folio (PARITY M0015, M0021, M0022).
 - Uploads work like Audiobookshelf's: people allowed to upload send books and podcast episodes from the
   browser, and the files are put in the library folder under author, series and title. Each answer is checked
   against the original's own.
